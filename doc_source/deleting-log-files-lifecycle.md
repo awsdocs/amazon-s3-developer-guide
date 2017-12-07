@@ -1,0 +1,5 @@
+# Deleting Log Files<a name="deleting-log-files-lifecycle"></a>
+
+A logging enabled bucket \(see [Server Access Logging](ServerLogs.md)\) can have many server log objects created over time\. Your application might need these access logs for a specific period after creation, and after that you may want to delete them\. You can use Amazon S3 lifecycle configuration to set rules so that Amazon S3 automatically queues these objects for deletion at the end of their life\. 
+
+If you specified a prefix in your logging configuration, you can set lifecycle configuration rule to delete log objects with that prefix\. For example, if you log objects have prefix `logs/` after a specified time, you can set lifecycle configuration rule to delete objects with prefix `/logs`\. For more information about lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.

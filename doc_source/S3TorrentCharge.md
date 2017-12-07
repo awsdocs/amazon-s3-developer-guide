@@ -1,0 +1,8 @@
+# How You are Charged for BitTorrent Delivery<a name="S3TorrentCharge"></a>
+
+There is no extra charge for use of BitTorrent with Amazon S3\. Data transfer via the BitTorrent protocol is metered at the same rate as client/server delivery\. To be precise, whenever a downloading BitTorrent client requests a "piece" of an object from the Amazon S3 "seeder," charges accrue just as if an anonymous request for that piece had been made using the REST or SOAP protocol\. These charges will appear on your Amazon S3 bill and usage reports in the same way\. The difference is that if a lot of clients are requesting the same object simultaneously via BitTorrent, then the amount of data Amazon S3 must serve to satisfy those clients will be lower than with client/server delivery\. This is because the BitTorrent clients are simultaneously uploading and downloading amongst themselves\.
+
+**Note**  
+ SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\. 
+
+The data transfer savings achieved from use of BitTorrent can vary widely depending on how popular your object is\. Less popular objects require heavier use of the "seeder" to serve clients, and thus the difference between BitTorrent distribution costs and client/server distribution costs might be small for such objects\. In particular, if only one client is ever downloading a particular object at a time, the cost of BitTorrent delivery will be the same as direct download\.

@@ -1,0 +1,3 @@
+# Managing ACLs in the AWS Management Console<a name="manage-acls-using-console"></a>
+
+AWS Management Console provides a UI for you to grant ACL\-based access permissions to your buckets and objects\. For information on setting ACL\-based access permissions in the console, see [How Do I Set ACL Bucket Permissions?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/set-bucket-permissions.html) and [How Do I Set Permissions on an Object?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide//set-object-permissions.html) in the *Amazon Simple Storage Service Console User Guide*\. 

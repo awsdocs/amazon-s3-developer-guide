@@ -1,0 +1,3 @@
+# Listing Keys Using the REST API<a name="ListingObjectKeysUsingREST"></a>
+
+You can use the AWS SDK to list the object keys in a bucket\. However, if your application requires it, you can send REST requests directly\. You can send a GET request to return some or all of the objects in a bucket or you can use selection criteria to return a subset of the objects in a bucket\. For more information, go to [GET Bucket \(List Objects\) Version 2](http://docs.aws.amazon.com/AmazonS3/latest/API/v2-RESTBucketGET.html)\.

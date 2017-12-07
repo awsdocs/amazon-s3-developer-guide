@@ -1,0 +1,3 @@
+# Deleting Multiple Objects Using the REST API<a name="DeletingMultipleObjectsUsingREST"></a>
+
+You can use the AWS SDKs to delete multiple objects using the Multi\-Object Delete API\. However, if your application requires it, you can send REST requests directly\. For more information, go to [Delete Multiple Objects](http://docs.aws.amazon.com/AmazonS3/latest/API/multiobjectdeleteapi.html) in the *Amazon Simple Storage Service API Reference*\. 

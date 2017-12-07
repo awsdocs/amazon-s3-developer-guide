@@ -1,0 +1,3 @@
+# Manage an Object's Lifecycle Using the AWS SDK for Ruby<a name="manage-lifecycle-using-ruby"></a>
+
+You can use the AWS SDK for Ruby to manage lifecycle configuration on a bucket by using the class [ AWS::S3::BucketLifecycleConfiguration](http://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/BucketLifecycle.html)\. For more information about using the AWS SDK for Ruby with Amazon S3, see [Using the AWS SDK for Ruby \- Version 3](UsingTheMPRubyAPI.md)\. For more information about managing lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\. 

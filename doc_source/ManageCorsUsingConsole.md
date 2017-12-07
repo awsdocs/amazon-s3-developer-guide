@@ -1,0 +1,3 @@
+# Enabling Cross\-Origin Resource Sharing \(CORS\) Using the AWS Management Console<a name="ManageCorsUsingConsole"></a>
+
+You can use the AWS Management Console to set a CORS configuration on your bucket\. For instructions, see [How Do I Allow Cross\-Domain Resource Sharing with CORS?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-cors-configuration.html) in the *Amazon Simple Storage Service Console User Guide*\. 

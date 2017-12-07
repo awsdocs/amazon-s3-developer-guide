@@ -1,0 +1,3 @@
+# TCP Selective Acknowledgement<a name="TCPSelectiveAcknowledgement"></a>
+
+ TCP selective acknowledgement is designed to improve recovery time after a large number of packet losses\. TCP selective acknowledgement is supported by most newer operating systems, but might have to be enabled\. For more information about TCP selective acknowledgements, refer to the documentation that accompanied your operating system and go to [RFC 2018](http://www.ietf.org/rfc/rfc2018.txt)\. 

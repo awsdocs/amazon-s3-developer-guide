@@ -1,0 +1,3 @@
+# Get an Object Using the REST API<a name="RetrieveObjSingleOpREST"></a>
+
+You can use the AWS SDK to retrieve object keys from a bucket\. However, if your application requires it, you can send REST requests directly\. You can send a GET request to retrieve object keys\. For more information about the request and response format, go to [Get Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html)\.
