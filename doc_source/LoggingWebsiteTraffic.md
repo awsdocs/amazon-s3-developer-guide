@@ -10,7 +10,7 @@ If you want to track the number of visitors who access your website, enable logg
 
 1. Create two folders in the `logs.example.com` bucket; one named `root`, and the other named `cdn`\. If you configure Amazon CloudFront to speed up your website, you will use the `cdn` folder\.
 
-1. In the **Buckets** pane, choose your root domain bucket, choose **Properties**, and then choose **Logging**\.
+1. In the **Buckets** pane, choose your root domain bucket, choose **Properties**, and then choose **Server access logging**\.
 
 1. In the **Logging** pane, complete the following steps:
 
