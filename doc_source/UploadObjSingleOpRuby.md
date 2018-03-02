@@ -9,7 +9,7 @@ The AWS SDK for Ruby \- Version 3 has two ways of uploading an object to Amazon 
 | --- |--- |
 | 1 | Create an instance of the `Aws::S3::Resource` class\. | 
 | 2 |  Reference the target object by bucket name and key\. Objects live in a bucket and have unique keys that identify the object\.  | 
-| 2 |  Call`#upload_file` on the object\.  | 
+| 3 |  Call`#upload_file` on the object\.  | 
 
 **Example**  
 
@@ -30,7 +30,7 @@ The second way that AWS SDK for Ruby \- Version 3 can upload an object is to use
 | --- |--- |
 | 1 | Create an instance of the `Aws::S3::Resource` class\. | 
 | 2 |  Reference the target object by bucket name and key\.  | 
-| 2 |  Call`#put` passing in the string or IO object\.  | 
+| 3 |  Call`#put` passing in the string or IO object\.  | 
 
 **Example**  
 
