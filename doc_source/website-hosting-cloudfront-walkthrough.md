@@ -57,11 +57,11 @@ To verify that your CloudFront distribution is working, type the domain name of 
 
 ## Update the Record Sets for Your Domain and Subdomain<a name="update-record-sets"></a>
 
-Now that you have successfully created a CloudFront distribution, update the A records in Amazon Route 53 to point to the new CloudFront distribution\.
+Now that you have successfully created a CloudFront distribution, update the A records in Route 53 to point to the new CloudFront distribution\.
 
 **To update A records to point to a CloudFront distribution**
 
-1. Open the Amazon Route 53 console at [https://console\.aws\.amazon\.com/route53/](https://console.aws.amazon.com/route53/)\.
+1. Open the Route 53 console at [https://console\.aws\.amazon\.com/route53/](https://console.aws.amazon.com/route53/)\.
 
 1. On the **Hosted Zones** page, choose the hosted zone that you created for your domain\.
 

@@ -15,9 +15,9 @@ This section provides an overview of CORS\. The subtopics describe how you can e
 
 The following are example scenarios for using CORS:
 
-+ Scenario 1: Suppose you are hosting a website in an Amazon S3 bucket named `website` as described in [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\. Your users load the website endpoint `http://website.s3-website-us-east-1.amazonaws.com`\. Now you want to use JavaScript on the web pages that are stored in this bucket to be able to make authenticated GET and PUT requests against the same bucket by using the Amazon S3's API endpoint for the bucket, `website.s3.amazonaws.com`\. A browser would normally block JavaScript from allowing those requests, but with CORS, you can configure your bucket to explicitly enable cross\-origin requests from `website.s3-website-us-east-1.amazonaws.com`\.
++ Scenario 1: Suppose that you are hosting a website in an Amazon S3 bucket named `website` as described in [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\. Your users load the website endpoint `http://website.s3-website-us-east-1.amazonaws.com`\. Now you want to use JavaScript on the webpages that are stored in this bucket to be able to make authenticated GET and PUT requests against the same bucket by using the Amazon S3 API endpoint for the bucket, `website.s3.amazonaws.com`\. A browser would normally block JavaScript from allowing those requests, but with CORS, you can configure your bucket to explicitly enable cross\-origin requests from `website.s3-website-us-east-1.amazonaws.com`\.
 
-+ Scenario 2: Suppose you want to host a web font from your S3 bucket\. Again, browsers require a CORS check \(also referred as a preflight check\) for loading web fonts, so you would configure the bucket that is hosting the web font to allow any origin to make these requests\.
++ Scenario 2: Suppose that you want to host a web font from your S3 bucket\. Again, browsers require a CORS check \(also referred as a preflight check\) for loading web fonts, so you would configure the bucket that is hosting the web font to allow any origin to make these requests\.
 
 ## How Do I Configure CORS on My Bucket?<a name="how-do-i-enable-cors"></a>
 
@@ -27,9 +27,9 @@ You can add up to 100 rules to the configuration\. You add the XML document as t
 
 Instead of accessing a website by using an Amazon S3 website endpoint, you can use your own domain, such as `example1.com` to serve your content\. For information about using your own domain, see [Example: Setting up a Static Website Using a Custom Domain](website-hosting-custom-domain-walkthrough.md)\. The following example `cors` configuration has three rules, which are specified as `CORSRule` elements:
 
-+ The first rule allows cross\-origin PUT, POST, and DELETE requests from the `https://www.example1.com` origin\. The rule also allows all headers in a preflight OPTIONS request through the `Access-Control-Request-Headers` header\. In response to any preflight OPTIONS request, Amazon S3 will return any requested headers\.
++ The first rule allows cross\-origin PUT, POST, and DELETE requests from the `http://www.example1.com` origin\. The rule also allows all headers in a preflight OPTIONS request through the `Access-Control-Request-Headers` header\. In response to any preflight OPTIONS request, Amazon S3 will return any requested headers\.
 
-+ The second rule allows same cross\-origin requests as the first rule but the rule applies to another origin, `https://www.example2.com`\. 
++ The second rule allows same cross\-origin requests as the first rule but the rule applies to another origin, `http://www.example2.com`\. 
 
 + The third rule allows cross\-origin GET requests from all origins\. The '\*' wildcard character refers to all origins\. 
 
@@ -60,7 +60,7 @@ Instead of accessing a website by using an Amazon S3 website endpoint, you can u
 </CORSConfiguration>
 ```
 
-The CORS configuration also allows optional configuration parameters, as shown in the following CORS configuration\. In this example, the following CORS configuration allows cross\-origin PUT, POST and DELETE requests from the `http://www.example.com` origin\. 
+The CORS configuration also allows optional configuration parameters, as shown in the following CORS configuration\. In this example, the following CORS configuration allows cross\-origin PUT, POST, and DELETE requests from the `http://www.example.com` origin\. 
 
 ```
 <CORSConfiguration>

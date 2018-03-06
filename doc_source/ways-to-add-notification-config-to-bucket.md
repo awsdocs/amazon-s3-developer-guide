@@ -45,7 +45,7 @@ Follow the steps to create and subscribe to an Amazon Simple Notification Servic
 
    You will get email requesting you to confirm your subscription to the topic\. Confirm the subscription\. 
 
-1. Replace the access policy attached to the topic by the following policy\. You must update the policy by providing the your SNS topic ARN and bucket name\.:
+1. Replace the access policy attached to the topic by the following policy\. You must update the policy by providing your SNS topic ARN and bucket name:
 
    ```
    {
@@ -110,6 +110,29 @@ Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Ama
       }
      }
     ]
+   }
+   ```
+
+1. \(Optional\) If the SQS queue is SSE enabled, add the following policy to the associated KMS key\.
+
+   ```
+   {
+       "Version": "2012-10-17",
+       "Id": "example-ID",
+       "Statement": [
+           {
+               "Sid": "example-statement-ID",
+               "Effect": "Allow",
+               "Principal": {
+                   "Service": "s3.amazonaws.com"
+               },
+               "Action": [
+                   "kms:GenerateDataKey",
+                   "kms:Decrypt"
+               ],
+               "Resource": "*"
+           }
+       ]
    }
    ```
 

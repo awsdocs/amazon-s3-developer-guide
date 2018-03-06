@@ -4,7 +4,7 @@
 + [Amazon S3 Resources](#access-control-resources-basics)
 + [Resource Operations](#access-control-resource-operations-basics)
 + [Managing Access to Resources \(Access Policy Options\)](#access-control-resources-manage-permissions-basics)
-+ [So Which Access Control Method Should I Use?](#so-which-one-should-i-use)
++ [Which Access Control Method Should I Use?](#so-which-one-should-i-use)
 + [Related Topics](#access-control-overview-related-topics)
 
 When granting permissions, you decide who is getting them, which Amazon S3 resources they are getting permissions for, and specific actions you want to allow on those resources\. 
@@ -19,9 +19,9 @@ Buckets and objects are primary Amazon S3 resources, and both have associated su
 
 + `versioning` – Stores versioning configuration \(see [PUT Bucket versioning](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)\)\. 
 
-+ `policy` and `acl` \(Access Control List\) – Store access permission information for the bucket\. 
++ `policy` and `acl` \(access control list\) – Store access permission information for the bucket\. 
 
-+ `cors` \(Cross\-Origin Resource Sharing\) – Supports configuring your bucket to allow cross\-origin requests \(see [Cross\-Origin Resource Sharing \(CORS\)](cors.md)\)\. 
++ `cors` \(cross\-origin resource sharing\) – Supports configuring your bucket to allow cross\-origin requests \(see [Cross\-Origin Resource Sharing \(CORS\)](cors.md)\)\. 
 
 + `logging` – Enables you to request Amazon S3 to save bucket access logs\.
 
@@ -50,7 +50,7 @@ AWS recommends not using the root credentials of your AWS account to make reques
 
 The following diagram shows an AWS account owning resources, the IAM users, buckets, and objects\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/account-owns-all-resources.png)
+![\[Diagram showing an AWS account that owns resources, IAM users, buckets, and objects.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/account-owns-all-resources.png)
 
 ## Resource Operations<a name="access-control-resource-operations-basics"></a>
 
@@ -63,7 +63,7 @@ Managing access refers to granting others \(AWS accounts and users\) permission 
 Access policy describes who has access to what\. You can associate an access policy with a resource \(bucket and object\) or a user\. Accordingly, you can categorize the available Amazon S3 access policies as follows:
 
 + **Resource\-based policies ** – Bucket policies and access control lists \(ACLs\) are resource\-based because you attach them to your Amazon S3 resources\.   
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/resource-based-policy.png)
+![\[Diagram depicting AWS account resources, including an S3 bucket with a bucket ACL and bucket policy, and S3 objects with object ACLs.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/resource-based-policy.png)
 
   + ACL – Each bucket and object has an ACL associated with it\. An ACL is a list of grants identifying grantee and permission granted\. You use ACLs to grant basic read/write permissions to other AWS accounts\. ACLs use an Amazon S3–specific XML schema\. 
 
@@ -109,27 +109,37 @@ Access policy describes who has access to what\. You can associate an access pol
     }
     ```
 
-+ **User policies** – You can use AWS Identity and Access Management \(IAM\) to manage access to your Amazon S3 resources\. Using IAM, you can create IAM users, groups, and roles in your account and attach access policies to them granting them access to AWS resources including Amazon S3\.   
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/user-policy.png)
++ **User policies** – You can use IAM to manage access to your Amazon S3 resources\. You can create IAM users, groups, and roles in your account and attach access policies to them granting them access to AWS resources, including Amazon S3\.   
+![\[Diagram depicting the AWS account admin and other users with attached user policies.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/user-policy.png)
 
-  For more information about IAM, go to [AWS Identity and Access Management \(IAM\)](https://aws.amazon.com/iam/) product detail page\. 
+  For more information about IAM, see the [AWS Identity and Access Management \(IAM\)](https://aws.amazon.com/iam/) product detail page\. 
 
   The following is an example of a user policy\. You cannot grant anonymous permissions in an IAM user policy, because the policy is attached to a user\. The example policy allows the associated user that it's attached to perform six different Amazon S3 actions on a bucket and the objects in it\. You can attach this policy to a specific IAM user, group, or role\.
 
   ```
   {
+      "Version": "2012-10-17",
       "Statement": [
           {
-              "Effect":"Allow",
-              "Action": [ 
+              "Sid": "ExampleStatement1",
+              "Effect": "Allow",
+              "Action": [
                   "s3:PutObject",
                   "s3:GetObject",
+                  "s3:ListBucket",
                   "s3:DeleteObject",
-                  "s3:ListAllMyBuckets",
-                  "s3:GetBucketLocation",
-                  "s3:ListBucket"
+                  "s3:GetBucketLocation"
               ],
-              "Resource":"arn:aws:s3:::examplebucket/*"
+              "Resource": [
+                   "Resource":"arn:aws:s3:::examplebucket/*",
+                   "Resource":"arn:aws:s3:::examplebucket"
+              ]
+          },
+          {
+              "Sid": "ExampleStatement2",
+              "Effect": "Allow",
+              "Action": "s3:ListAllMyBuckets",
+              "Resource": "*"
           }
       ]
   }
@@ -137,17 +147,17 @@ Access policy describes who has access to what\. You can associate an access pol
 
 When Amazon S3 receives a request, it must evaluate all the access policies to determine whether to authorize or deny the request\. For more information about how Amazon S3 evaluates these policies, see [How Amazon S3 Authorizes a Request](how-s3-evaluates-access-control.md)\.
 
-## So Which Access Control Method Should I Use?<a name="so-which-one-should-i-use"></a>
+## Which Access Control Method Should I Use?<a name="so-which-one-should-i-use"></a>
 
  With the options available to write an access policy, the following questions arise:
 
-+ When should I use which access control method? For example, to grant bucket permissions, should I use bucket policy or bucket ACL? I own a bucket and the objects in the bucket\. Should I use a resource\-based access policy or an IAM user policy? If I use a resource\-based access policy, should I use a bucket policy or an object ACL to manage object permissions?
++ When should I use which access control method? For example, to grant bucket permissions, should I use a bucket policy or bucket ACL? I own a bucket and the objects in the bucket\. Should I use a resource\-based access policy or an IAM user policy? If I use a resource\-based access policy, should I use a bucket policy or an object ACL to manage object permissions?
 
 + I own a bucket, but I don't own all of the objects in it\. How are access permissions managed for the objects that somebody else owns? 
 
 + If I grant access by using a combination of these access policy options, how does Amazon S3 determine if a user has permission to perform a requested operation? 
 
- The following sections explains these access control alternatives, how Amazon S3 evaluates access control mechanisms, when to use which access control method, and also provide example walkthroughs\.
+ The following sections explain these access control alternatives, how Amazon S3 evaluates access control mechanisms, and when to use which access control method\. They also provide example walkthroughs\.
 
  [How Amazon S3 Authorizes a Request](how-s3-evaluates-access-control.md) 
 

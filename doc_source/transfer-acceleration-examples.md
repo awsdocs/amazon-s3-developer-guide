@@ -17,7 +17,7 @@ For information about enabling Transfer Acceleration on a bucket using the Amazo
 
 ## Using Transfer Acceleration from the AWS Command Line Interface \(AWS CLI\)<a name="transfer-acceleration-examples-aws-cli"></a>
 
-This section provides examples of AWS CLI commands used for Transfer Acceleration\. For instructions on setting up the AWS CLI, see [Set Up the AWS CLI](setup-aws-cli.md)\.
+This section provides examples of AWS CLI commands used for Transfer Acceleration\. For instructions on setting up the AWS CLI, see [Setting Up the AWS CLI](setup-aws-cli.md)\.
 
 ### Enabling Transfer Acceleration on a Bucket Using the AWS CLI<a name="transfer-acceleration-examples-aws-cli-1"></a>
 

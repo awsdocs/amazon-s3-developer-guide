@@ -34,17 +34,15 @@ All the preceding storage classes are designed to sustain the concurrent loss of
 
 In addition to the performance requirements of your application scenario, there is also price/performance considerations\. For the Amazon S3 storage classes and pricing, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
 
-Amazon S3 also offers the following storage class that enables you to save costs by maintaining fewer redundant copies of your data\. 
+Amazon S3 also offers the following storage class that maintains fewer redundant copies of your data\.
 
-+ **REDUCED\_REDUNDANCY** – The Reduced Redundancy Storage \(RRS\) storage class is designed for noncritical, reproducible data stored at lower levels of redundancy than the STANDARD storage class, which reduces storage costs\. For example, if you upload an image and use STANDARD storage class for it, you might compute a thumbnail and save it as an object of the RRS storage class\.
++ **REDUCED\_REDUNDANCY** – The Reduced Redundancy Storage \(RRS\) storage class is designed for noncritical, reproducible data stored at lower levels of redundancy than the STANDARD storage class\.
 
   The durability level \(see the following table\) corresponds to an average annual expected loss of 0\.01% of objects\. For example, if you store 10,000 objects using the RRS option, you can, on average, expect to incur an annual loss of a single object per year \(0\.01% of 10,000 objects\)\. 
 **Note**  
- This annual loss represents an expected average and does not guarantee the loss of less than 0\.01% of objects in a given year\. 
+This annual loss represents an expected average and does not guarantee the loss of less than 0\.01% of objects in a given year\. 
 
-  RRS provides a cost\-effective, highly available solution for distributing or sharing content that is durably stored elsewhere, or for storing thumbnails, transcoded media, or other processed data that can be easily reproduced\. 
-
-   If an RRS object is lost, Amazon S3 returns a 405 error on requests made to that object\. 
+  If an RRS object is lost, Amazon S3 returns a 405 error on requests made to that object\. 
 
   Amazon S3 can send an event notification to alert a user or start a workflow when it detects that an RRS object is lost\. To receive notifications, you need to add notification configuration to your bucket\. For more information, see [ Configuring Amazon S3 Event Notifications](NotificationHowTo.md)\.
 

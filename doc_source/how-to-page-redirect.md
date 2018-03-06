@@ -59,13 +59,11 @@ Using advanced redirection rules, you can route requests conditionally according
 
 When configuring a bucket for website hosting, you have the option of specifying advanced redirection rules\.
 
-![\[Static website hosting screen showing optional redirection
-							rules\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/staticwebsitehosting30.png)
+![\[Static website hosting screen showing optional redirection rules\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/staticwebsitehosting30.png)
 
 To redirect all requests to the bucket's website endpoint to another host, you only need to provide the host name\.
 
-![\[Static website hosting screen with redirect requests
-							selected\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/staticwebsitehosting40.png)
+![\[Static website hosting screen with redirect requests selected\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/staticwebsitehosting40.png)
 
 You describe the rules using XML\. The following section provides general syntax and examples of specifying redirection rules\.
 

@@ -1,7 +1,7 @@
 # Amazon Simple Storage Service Developer Guide
 
 -----
-*****Copyright &copy; 2017 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -24,6 +24,8 @@ Amazon's trademarks and trade dress may not be used in
          + [Making Requests Using AWS Account or IAM User Credentials - AWS SDK for Java](AuthUsingAcctOrUserCredJava.md)
          + [Making Requests Using AWS Account or IAM User Credentials - AWS SDK for .NET](AuthUsingAcctOrUserCredDotNet.md)
          + [Making Requests Using AWS Account or IAM User Credentials - AWS SDK for PHP](AuthUsingAcctOrUserCredPHP.md)
+            + [Making Requests Using AWS Account or IAM User Credentials - Version 3 of the AWS SDK for PHP](AuthUsingAcctOrUserCredPHP3.md)
+            + [Making Requests Using AWS Account or IAM User Credentials - Version 2 of the AWS SDK for PHP](AuthUsingAcctOrUserCredPHP2.md)
          + [Making Requests Using AWS Account or IAM User Credentials - AWS SDK for Ruby](AuthUsingAcctOrUserCredRuby.md)
       + [Making Requests Using IAM User Temporary Credentials](AuthUsingTempSessionToken.md)
          + [Making Requests Using IAM User Temporary Credentials - AWS SDK for Java](AuthUsingTempSessionTokenJava.md)
@@ -329,12 +331,14 @@ Amazon's trademarks and trade dress may not be used in
    + [Server Access Log Format](LogFormat.md)
    + [Deleting Log Files](deleting-log-files-lifecycle.md)
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)
-   + [Set Up the AWS CLI](setup-aws-cli.md)
+   + [Setting Up the AWS CLI](setup-aws-cli.md)
    + [Using the AWS SDK for Java](UsingTheMPDotJavaAPI.md)
    + [Using the AWS SDK for .NET](UsingTheMPDotNetAPI.md)
    + [Using the AWS SDK for PHP and Running PHP Examples](UsingTheMPphpAPI.md)
    + [Using the AWS SDK for Ruby - Version 3](UsingTheMPRubyAPI.md)
    + [Using the AWS SDK for Python (Boto)](UsingTheBotoAPI.md)
+   + [Using the AWS Mobile SDKs for iOS and Android](using-mobile-sdks.md)
+   + [Using the AWS Amplify JavaScript Library](using-aws-amplify.md)
 + [Appendices](Appendices.md)
    + [Appendix A: Using the SOAP API](SOAPAPI3.md)
       + [Common SOAP API Elements](UsingSOAPOperations.md)

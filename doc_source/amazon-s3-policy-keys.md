@@ -1,6 +1,6 @@
 # Specifying Conditions in a Policy<a name="amazon-s3-policy-keys"></a>
 
-The access policy language allows you to specify conditions when granting permissions\. The `Condition`  element \(or  `Condition` block\) lets you specify conditions for when a policy is in effect\. In the `Condition` element, which is optional, you build expressions in which you use Boolean operators \(equal, less than, etc\.\) to match your condition against values in the request\. For example, when granting a user permission to upload an object, the bucket owner can require the object be publicly readable by adding the `StringEquals` condition as shown here:
+The access policy language allows you to specify conditions when granting permissions\. The `Condition`  element \(or `Condition` block\) lets you specify conditions for when a policy is in effect\. In the `Condition` element, which is optional, you build expressions in which you use Boolean operators \(equal, less than, etc\.\) to match your condition against values in the request\. For example, when granting a user permission to upload an object, the bucket owner can require the object be publicly readable by adding the `StringEquals` condition as shown here:
 
 ```
 { 
@@ -76,7 +76,7 @@ The `IPAddress` and `NotIpAddress` key values specified in the condition uses CI
   }
   ```
 
-+ **Amazon S3–specific keys** – In addition to the AWS\-wide keys the following are the condition keys that are applicable only in the context of granting Amazon S3 specific permissions\. These Amazon S3–specific keys use the prefix `s3:`\. 
++ **Amazon S3–specific keys** – In addition to the AWS\-wide keys, the following are the condition keys that are applicable only in the context of granting Amazon S3 specific permissions\. These Amazon S3–specific keys use the prefix `s3:`\. 
 
   + `s3:x-amz-acl`
 
@@ -132,7 +132,7 @@ The `IPAddress` and `NotIpAddress` key values specified in the condition uses CI
   }
   ```
 
-  The `Condition` block uses the `StringEquals` condition and it is provided a key\-value pair, `"s3:x-amz-acl":["public-read"`, for evaluation\. In the key\-value pair, the `s3:x-amz-acl` is an Amazon S3–specific key, as indicated by the prefix `s3:`\. 
+  The `Condition` block uses the `StringEquals` condition, and it is provided a key\-value pair, `"s3:x-amz-acl":["public-read"`, for evaluation\. In the key\-value pair, the `s3:x-amz-acl` is an Amazon S3–specific key, as indicated by the prefix `s3:`\. 
 
 **Important**  
  Not all conditions make sense for all actions\. For example, it makes sense to include an `s3:LocationConstraint` condition on a policy that grants the `s3:CreateBucket` Amazon S3 permission, but not for the `s3:GetObject` permission\. Amazon S3 can test for semantic errors of this type that involve Amazon S3–specific conditions\. However, if you are creating a policy for an IAM user and you include a semantically invalid Amazon S3 condition, no error is reported, because IAM cannot validate Amazon S3 conditions\. 
@@ -155,7 +155,7 @@ The following section describes the condition keys that can be used to grant con
 
 ### Example 1: Granting s3:PutObject permission with a condition requiring the bucket owner to get full control<a name="grant-putobject-conditionally-1"></a>
 
-Suppose Account A owns a bucket and the account administrator wants to grant Dave, a user in Account B, permissions to upload objects\. By default, objects that Dave uploads are owned by Account B, and Account A has no permissions on these objects\. Because the bucket owner is paying the bills, it wants full permissions on the objects that Dave uploads\. The Account A administrator can accomplish this by granting the `s3:PutObject` permission to Dave, with a condition that the request include ACL\-specific headers, that either grants full permission explicitly or uses a canned ACL \(see [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\)\.
+Suppose that Account A owns a bucket and the account administrator wants to grant Dave, a user in Account B, permissions to upload objects\. By default, objects that Dave uploads are owned by Account B, and Account A has no permissions on these objects\. Because the bucket owner is paying the bills, it wants full permissions on the objects that Dave uploads\. The Account A administrator can do this by granting the `s3:PutObject` permission to Dave, with a condition that the request include ACL\-specific headers, that either grants full permission explicitly or uses a canned ACL \(see [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\)\.
 
 + Require the `x-amz-full-control` header in the request with full control permission to the bucket owner\.
 
@@ -183,9 +183,9 @@ Suppose Account A owns a bucket and the account administrator wants to grant Dav
   }
   ```
 **Note**  
-This example is about cross\-account permission\. However, if Dave, who is getting the permission, belongs to the AWS account that owns the bucket, then this conditional permission is not necessary, because the parent account to which Dave belongs owns objects the user uploads\.
+This example is about cross\-account permission\. However, if Dave, who is getting the permission, belongs to the AWS account that owns the bucket, then this conditional permission is not necessary, because the parent account to which Dave belongs owns objects that the user uploads\.
 
-  The preceding bucket policy grants conditional permission to user Dave in Account B\. While this policy is in effect, it is possible for Dave to get the same permission without any condition via some other policy\. For example, Dave can belong to a group and you grant the group `s3:PutObject` permission without any condition\. To avoid such permission loopholes, you can write a stricter access policy by adding explicit deny\. In this example, we explicitly deny user Dave upload permission if he does not include the necessary headers in the request granting full permissions to the bucket owner\. Explicit deny always supersedes any other permission granted\. The following is the revised access policy example\.
+  The preceding bucket policy grants conditional permission to user Dave in Account B\. While this policy is in effect, it is possible for Dave to get the same permission without any condition via some other policy\. For example, Dave can belong to a group and you grant the group `s3:PutObject` permission without any condition\. To avoid such permission loopholes, you can write a stricter access policy by adding explicit deny\. In this example, you explicitly deny the user Dave upload permission if he does not include the necessary headers in the request granting full permissions to the bucket owner\. Explicit deny always supersedes any other permission granted\. The following is the revised access policy example\.
 
   ```
   {
@@ -223,7 +223,7 @@ This example is about cross\-account permission\. However, if Dave, who is getti
   }
   ```
 
-  If you have two AWS accounts, you can test the policy using the AWS CLI\. You attach the policy and, using Dave's credentials, test the permission using the following AWS CLI `put-object` command\. You provide Dave's credentials by adding the `--profile ` parameter\. You grant full control permission to the bucket owner by adding the `--grant-full-control` parameter\. For more information about setting up and using the AWS CLI, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
+  If you have two AWS accounts, you can test the policy using the AWS Command Line Interface \(AWS CLI\)\. You attach the policy and, using Dave's credentials, test the permission using the following AWS CLI `put-object` command\. You provide Dave's credentials by adding the `--profile` parameter\. You grant full control permission to the bucket owner by adding the `--grant-full-control` parameter\. For more information about setting up and using the AWS CLI, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
 
   ```
   aws s3api put-object --bucket examplebucket --key HappyFace.jpg --body c:\HappyFace.jpg --grant-full-control id="AccountA-CanonicalUserID" --profile AccountBUserProfile
@@ -248,7 +248,7 @@ This example is about cross\-account permission\. However, if Dave, who is getti
 
 ### Example 2: Granting s3:PutObject permission requiring objects stored using server\-side encryption<a name="putobject-require-sse"></a>
 
-Suppose Account A owns a bucket and the account administrator wants to grant Jane, a user in Account A, permission to upload objects with a condition that Jane always request server\-side encryption so that Amazon S3 saves objects encrypted\. The Account A administrator can accomplish using the `s3:x-amz-server-side-encryption` condition key as shown\. The key\-value pair in the `Condition` block specifies the `s3:x-amz-server-side-encryption` key\.
+Suppose that Account A owns a bucket\. The account administrator wants to grant Jane, a user in Account A, permission to upload objects with a condition that Jane always request server\-side encryption so that Amazon S3 saves objects encrypted\. The Account A administrator can accomplish using the `s3:x-amz-server-side-encryption` condition key as shown\. The key\-value pair in the `Condition` block specifies the `s3:x-amz-server-side-encryption` key\.
 
 ```
 "Condition": {
@@ -257,7 +257,7 @@ Suppose Account A owns a bucket and the account administrator wants to grant Jan
      }
 ```
 
-When testing the permission using AWS CLI, you will need to add the required parameter using the `--server-side-encryption` parameter\.
+When testing the permission using the AWS CLI, you must add the required parameter using the `--server-side-encryption` parameter\.
 
 ```
 aws s3api put-object --bucket example1bucket --key HappyFace.jpg --body c:\HappyFace.jpg --server-side-encryption "AES256" --profile AccountBadmin
@@ -267,11 +267,11 @@ aws s3api put-object --bucket example1bucket --key HappyFace.jpg --body c:\Happy
 
 In the PUT Object request, when you specify a source object, it is a copy operation \(see [PUT Object \- Copy](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\)\. Accordingly, the bucket owner can grant a user permission to copy objects with restrictions on the source\. For example:
 
-+ allow copying objects only from the `sourcebucket` bucket\.
++ Allow copying objects only from the `sourcebucket` bucket\.
 
-+ allow copying objects from the `sourcebucket` bucket, and only the objects whose key name prefix start with `public/` f\. For example, `sourcebucket/public/*`
++ Allow copying objects from the `sourcebucket` bucket, and only the objects whose key name prefix starts with `public/` f\. For example, `sourcebucket/public/*`
 
-+ allow copying only a specific object from the `sourcebucket`\. For example, `sourcebucket/example.jpg`\.
++ Allow copying only a specific object from the `sourcebucket`; for example, `sourcebucket/example.jpg`\.
 
 The following bucket policy grants user Dave `s3:PutObject` permission that allows him to copy only objects with a condition that the request include the `s3:x-amz-copy-source` header and the header value specify the `/examplebucket/public/*` key name prefix\. 
 
@@ -306,14 +306,14 @@ The following bucket policy grants user Dave `s3:PutObject` permission that allo
 }
 ```
 
-You can test the permission using the AWS CLI `copy-object` command\. You specify the source by adding the `--copy-source` parameter, the key name prefix must match that the prefix allowed in the policy\. You will need to provide user Dave credentials using the `--profile` parameter\. For more information about setting up AWS CLI, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
+You can test the permission using the AWS CLI `copy-object` command\. You specify the source by adding the `--copy-source` parameter, and the key name prefix must match the prefix allowed in the policy\. You need to provide the user Dave credentials using the `--profile` parameter\. For more information about setting up the AWS CLI, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
 
 ```
 aws s3api copy-object --bucket examplebucket --key HappyFace.jpg 
 --copy-source examplebucket/public/PublicHappyFace1.jpg --profile AccountADave
 ```
 
-Note that the preceding policy uses the `StringNotLike` condition\. To grant permission to copy only a specific object you will need to change the condition from `StringNotLike` to `StringNotEquals` and then specify the exact object key as shown\. 
+Note that the preceding policy uses the `StringNotLike` condition\. To grant permission to copy only a specific object, you must change the condition from `StringNotLike` to `StringNotEquals` and then specify the exact object key as shown\. 
 
 ```
 "Condition": {
@@ -325,7 +325,7 @@ Note that the preceding policy uses the `StringNotLike` condition\. To grant per
 
 ### Example 4: Granting access to a specific version of an object<a name="getobjectversion-limit-access-to-specific-version-3"></a>
 
-Suppose Account A owns a version\-enabled bucket\. The bucket has several versions of the `HappyFace.jpg` object\. The account administrator now wants to grant its user \(Dave\) permission to get only a specific version of the object\. The account administrator can accomplish this by granting Dave `s3:GetObjectVersion` permission conditionally as shown\. The key\-value pair in the `Condition` block specifies the `s3:VersionId` condition key\. 
+Suppose that Account A owns a version\-enabled bucket\. The bucket has several versions of the `HappyFace.jpg` object\. The account administrator now wants to grant its user \(Dave\) permission to get only a specific version of the object\. The account administrator can accomplish this by granting Dave `s3:GetObjectVersion` permission conditionally as shown\. The key\-value pair in the `Condition` block specifies the `s3:VersionId` condition key\. 
 
 ```
 {
@@ -358,9 +358,9 @@ Suppose Account A owns a version\-enabled bucket\. The bucket has several versio
 }
 ```
 
-In this case, Dave will need to know the exact object version ID to retrieve the object\. 
+In this case, Dave needs to know the exact object version ID to retrieve the object\. 
 
-You can test the permissions using the AWS CLI `get-object` command with the `--version-id ` parameter identifying the specific object version\. The command retrieves the object and saves it to the `OutputFile.jpg` file\.
+You can test the permissions using the AWS CLI `get-object` command with the `--version-id` parameter identifying the specific object version\. The command retrieves the object and saves it to the `OutputFile.jpg` file\.
 
 ```
 aws s3api get-object --bucket examplebucketversionenabled --key HappyFace.jpg OutputFile.jpg --version-id AaaHbAQitwiL_h47_44lRO2DDfLlBO5e --profile AccountADave
@@ -368,7 +368,7 @@ aws s3api get-object --bucket examplebucketversionenabled --key HappyFace.jpg Ou
 
 ### Example 5: Restrict object uploads to objects with a specific storage class<a name="example-storage-class-condition-key"></a>
 
-Suppose Account A owns a bucket and the account administrator wants to restrict Dave, a user in Account A, to be able to only upload objects to the bucket that will be stored with the `STANDARD_IA` storage class\. The Account A administrator can accomplish this by using the `s3:x-amz-storage-class` condition key as shown in the following example bucket policy\. 
+Suppose that Account A owns a bucket\. The account administrator wants to restrict Dave, a user in Account A, to be able to only upload objects to the bucket that are stored with the `STANDARD_IA` storage class\. The Account A administrator can do this by using the `s3:x-amz-storage-class` condition key as shown in the following example bucket policy\. 
 
 ```
 {
@@ -404,12 +404,12 @@ The following table shows list of bucket operation–specific permissions you ca
 
 ### Example 1: Allow a user to create a bucket but only in a specific region<a name="condition-key-bucket-ops-1"></a>
 
-Suppose an AWS account administrator wants to grant its user \(Dave\), permission to create a bucket in the South America \(São Paulo\) region only\. The account administrator can attach the following user policy granting the `s3:CreateBucket` permission with a condition as shown\. The key\-value pair in the `Condition` block specifies the `s3:LocationConstraint` key and the `sa-east-1` region as its value\.
+Suppose that an AWS account administrator wants to grant its user \(Dave\) permission to create a bucket in the South America \(São Paulo\) Region only\. The account administrator can attach the following user policy granting the `s3:CreateBucket` permission with a condition as shown\. The key\-value pair in the `Condition` block specifies the `s3:LocationConstraint` key and the `sa-east-1` region as its value\.
 
 **Note**  
 In this example, the bucket owner is granting permission to one of its users, so either a bucket policy or a user policy can be used\. This example shows a user policy\.
 
-For a list of Amazon S3 regions, go to [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *Amazon Web Services General Reference*\. 
+For a list of Amazon S3 Regions, go to [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *Amazon Web Services General Reference*\. 
 
 ```
 {
@@ -434,7 +434,7 @@ For a list of Amazon S3 regions, go to [Regions and Endpoints](http://docs.aws.a
 }
 ```
 
-This policy restricts the user from creating a bucket in any other region except `sa-east-1`\. However, it is possible some other policy will grant this user permission to create buckets in another region\. For example, if the user belongs to a group, the group may have a policy attached to it allowing all users in the group permission to create buckets in some other region\. To ensure the user does not get permission to create buckets in any other region, you can add an explicit deny statement in this policy\. 
+This policy restricts the user from creating a bucket in any other Region except `sa-east-1`\. However, it is possible some other policy will grant this user permission to create buckets in another Region\. For example, if the user belongs to a group, the group may have a policy attached to it allowing all users in the group permission to create buckets in some other Region\. To ensure that the user does not get permission to create buckets in any other Region, you can add an explicit deny statement in this policy\. 
 
 ```
 {
@@ -474,15 +474,15 @@ This policy restricts the user from creating a bucket in any other region except
 }
 ```
 
-The `Deny` statement uses the `StringNotLike` condition\. That is, a create bucket request will be denied if the location constraint is not "sa\-east\-1"\. The explicit deny will not allow the user to create a bucket in any other region, no matter what other permission the user gets\. 
+The `Deny` statement uses the `StringNotLike` condition\. That is, a create bucket request is denied if the location constraint is not "sa\-east\-1"\. The explicit deny does not allow the user to create a bucket in any other Region, no matter what other permission the user gets\. 
 
-You can test the policy using the following `create-bucket` AWS CLI command\. This example uses the `bucketconfig.txt` file to specify the location constraint\. Note the Windows file path\. You will need to update the bucket name and path as appropriate\. You must provide user credentials using the `--profile` parameter\. For more information about setting up and using the AWS CLI, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
+You can test the policy using the following `create-bucket` AWS CLI command\. This example uses the `bucketconfig.txt` file to specify the location constraint\. Note the Windows file path\. You need to update the bucket name and path as appropriate\. You must provide user credentials using the `--profile` parameter\. For more information about setting up and using the AWS CLI, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
 
 ```
 aws s3api create-bucket --bucket examplebucket --profile AccountADave --create-bucket-configuration file://c:/Users/someUser/bucketconfig.txt
 ```
 
-The `bucketconfig.txt` file specifies the configuration as follows
+The `bucketconfig.txt` file specifies the configuration as follows:
 
 ```
 {"LocationConstraint": "sa-east-1"}
@@ -490,7 +490,7 @@ The `bucketconfig.txt` file specifies the configuration as follows
 
 ### Example 2: Allow a user to get a list of objects in a bucket according to a specific prefix<a name="condition-key-bucket-ops-2"></a>
 
-A bucket owner can restrict a user to list content of a specific folder in the bucket\. This is useful if objects in the bucket are organized by key name prefixes, the Amazon S3 console then uses the prefixes to show a folder hierarchy \(only the console supports the concept of folders; the Amazon S3 API supports only buckets and objects\)\. 
+A bucket owner can restrict a user to list the contents of a specific folder in the bucket\. This is useful if objects in the bucket are organized by key name prefixes\. The Amazon S3 console then uses the prefixes to show a folder hierarchy \(only the console supports the concept of folders; the Amazon S3 API supports only buckets and objects\)\. 
 
 In this example, the bucket owner and the parent account to which the user belongs are the same\. So the bucket owner can use either a bucket policy or a user policy\. First, we show a user policy\.
 
@@ -534,7 +534,7 @@ The following user policy grants the `s3:ListBucket` permission \(see [GET Bucke
 }
 ```
 
-The condition restricts the user to listing object keys with the `projects` prefix\. The added explicit deny will deny user request for listing keys with any other prefix no matter what other permissions the user might have\. For example, it is possible that the user gets permission to list object keys without any restriction, for example either by updates to the preceding user policy or via a bucket policy\. But because explicit deny always supersedes, the user request to list keys other than the `project` prefix will be denied\. 
+The condition restricts the user to listing object keys with the `projects` prefix\. The added explicit deny denies the user request for listing keys with any other prefix no matter what other permissions the user might have\. For example, it is possible that the user gets permission to list object keys without any restriction; for example, either by updates to the preceding user policy or via a bucket policy\. But because explicit deny always supersedes, the user request to list keys other than the `project` prefix is denied\. 
 
 The preceding policy is a user policy\. If you add the `Principal` element to the policy, identifying the user, you now have a bucket policy as shown\.
 

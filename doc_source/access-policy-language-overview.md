@@ -19,34 +19,34 @@ In its most basic sense, a policy contains the following elements:
 
   If you do not explicitly grant access to \(allow\) a resource, access is implicitly denied\. You can also explicitly deny access to a resource, which you might do in order to make sure that a user cannot access it, even if a different policy grants access\.
 
-+ **Principal** – The account or user who is allowed access to the actions and resources in the statement\. You specify a principal only in a bucket policy\. It is the user, account, service, or other entity who is the recipient of this permission\. In a user policy, the user to which the policy is attached is the implicit principal\.
++ **Principal** – The account or user who is allowed access to the actions and resources in the statement\. In a bucket policy, the principal is the user, account, service, or other entity who is the recipient of this permission\.
 
-The following example bucket policy shows the preceding common policy elements\. The policy allows Dave, a user in account *Account\-ID*, `s3:GetBucketLocation`, `s3:ListBucket` and `s3:GetObject` Amazon S3 permissions on the `examplebucket` bucket\.
+The following example bucket policy shows the preceding common policy elements\. The policy allows Dave, a user in account *Account\-ID*, `s3:GetObject`, `s3:GetBucketLocation`, and `s3:ListBucket` Amazon S3 permissions on the `examplebucket` bucket\.
 
 ```
 {
-   "Version": "2012-10-17",
-   "Statement": [
-      {
-         "Sid": "ExampleStatement1",
-         "Effect": "Allow",
-         "Principal": {
-            "AWS": "arn:aws:iam::Account-ID:user/Dave"
-         },
-         "Action": [
-            "s3:GetBucketLocation",
-            "s3:ListBucket",
-            "s3:GetObject"
-         ],
-         "Resource": [
-            "arn:aws:s3:::examplebucket"
-         ]
-      }
-   ]
+    "Version": "2012-10-17",
+    "Id": "ExamplePolicy01",
+    "Statement": [
+        {
+            "Sid": "ExampleStatement01",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::Account-ID:user/Dave"
+            },
+            "Action": [
+                "s3:GetObject",
+                "s3:GetBucketLocation",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::examplebucket/*",
+                "arn:aws:s3:::examplebucket"
+            ]
+        }
+    ]
 }
 ```
-
- Because this is a bucket policy, it includes the `Principal`  element, which specifies who gets the permission\. 
 
 For more information about the access policy elements, see the following topics:
 

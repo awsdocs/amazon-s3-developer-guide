@@ -11,7 +11,9 @@ This section describes how to troubleshoot Amazon S3 and explains how to get req
 
 The following topics lists symptoms to help you troubleshoot some of the issues that you might encounter when working with Amazon S3\.
 
-Symptoms
+
++ [Significant Increases in HTTP 503 Responses to Requests to Buckets with Versioning Enabled](#troubleshooting-by-symptom-increase-503-reponses)
++ [Unexpected Behavior When Accessing Buckets Set with CORS](#troubleshooting-by-symptom-increase)
 
 ### Significant Increases in HTTP 503 Responses to Amazon S3 Requests to Buckets with Versioning Enabled<a name="troubleshooting-by-symptom-increase-503-reponses"></a>
 

@@ -35,7 +35,7 @@ When using the AWS Command Line Interface \(AWS CLI\) and AWS SDKs, you can use 
 
 ## Using Dual\-Stack Endpoints from the AWS CLI<a name="dual-stack-endpoints-cli"></a>
 
-This section provides examples of AWS CLI commands used to make requests to a dual\-stack endpoint\. For instructions on setting up the AWS CLI, see [Set Up the AWS CLI](setup-aws-cli.md)\.
+This section provides examples of AWS CLI commands used to make requests to a dual\-stack endpoint\. For instructions on setting up the AWS CLI, see [Setting Up the AWS CLI](setup-aws-cli.md)\.
 
 You set the configuration value `use_dualstack_endpoint` to `true` in a profile in your AWS Config file to direct all Amazon S3 requests made by the `s3` and `s3api` AWS CLI commands to the dual\-stack endpoint for the specified region\. You specify the region in the config file or in a command using the `--region` option\. 
 

@@ -12,7 +12,7 @@ A user\-defined cost allocation tag has the following components:
 
 + The tag key\. The tag key is the name of the tag\. For example, in the tag project/Trinity, project is the key\. The tag key is a case\-sensitive string that can contain 1 to 128 Unicode characters\. 
 
-+ The tag value\. The tag value is a required string\. For example, in the tag project/Trinity, Trinity is the value\. The tag value is a case\-sensitive string that can contain from 1 to 256 Unicode characters\.
++ The tag value\. The tag value is a required string\. For example, in the tag project/Trinity, Trinity is the value\. The tag value is a case\-sensitive string that can contain from 0 to 256 Unicode characters\.
 
 For details on the allowed characters for user\-defined tags and other restrictions, see [User\-Defined Tag Restrictions](http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2//allocation-tag-restrictions.html) in the *AWS Billing and Cost Management User Guide*\.
 
@@ -22,7 +22,7 @@ Within a bucket, if you add a tag that has the same key as an existing tag, the 
 
 AWS doesn't apply any semantic meaning to your tags\. We interpret tags strictly as character strings\. 
 
-To add, list, edit, or delete tags, you can use the Amazon S3 console, the AWS command line interface \(AWS CLI\), or the Amazon S3 API\. 
+To add, list, edit, or delete tags, you can use the Amazon S3 console, the AWS Command Line Interface \(AWS CLI\), or the Amazon S3 API\. 
 
 For more information about creating tags, see the appropriate topic: 
 
@@ -30,7 +30,7 @@ For more information about creating tags, see the appropriate topic:
 
 + To create tags using the Amazon S3 API, see [PUT Bucket tagging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTtagging.html) in the *Amazon Simple Storage Service API Reference*\.
 
-+ To create tags using the AWS CLI, see [put\-bucket\-tagging](http://docs.aws.amazon.com/cli/latest/reference/s3api/put-bucket-tagging.html) in the AWS Command Line Interface Reference\.
++ To create tags using the AWS CLI, see [put\-bucket\-tagging](http://docs.aws.amazon.com/cli/latest/reference/s3api/put-bucket-tagging.html) in the AWS CLI Command Reference\.
 
 For more information about user\-defined tags, see [User\-Defined Cost Allocation Tags](http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2//custom-tags.html) in the *AWS Billing and Cost Management User Guide*\.
 

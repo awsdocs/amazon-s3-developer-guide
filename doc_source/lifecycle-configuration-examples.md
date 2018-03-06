@@ -479,7 +479,7 @@ For current object versions, you have the following options to manage their life
   </LifecycleConfiguration>
   ```
 
-By setting the `ExpiredObjectDeleteMarker` element to true in the `Expiration` action, you direct Amazon S3 to remove expired object delete markers\. Amazon S3 removes an expired object delete marker no sooner than 48 hours after the object expired\.
+By setting the `ExpiredObjectDeleteMarker` element to true in the `Expiration` action, you direct Amazon S3 to remove expired object delete markers\.
 
 **Note**  
 When specifying the `ExpiredObjectDeleteMarker` lifecycle action, the rule cannot specify a tag\-based filter\.

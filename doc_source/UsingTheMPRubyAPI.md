@@ -1,6 +1,6 @@
 # Using the AWS SDK for Ruby \- Version 3<a name="UsingTheMPRubyAPI"></a>
 
-The AWS SDK for Ruby provides an API for Amazon S3 bucket and object operations\. For object operations, you can use the API to upload objects in a single operation or upload large objects in parts \(see [Using the AWS SDK for Ruby for Multipart Upload](uploadobjusingmpu-ruby-sdk.md)\)\. However, the API for a single operation upload can accept large objects as well and behind the scenes manage the upload in parts for you thereby reducing the amount of script you need to write\.
+The AWS SDK for Ruby provides an API for Amazon S3 bucket and object operations\. For object operations, you can use the API to upload objects in a single operation or upload large objects in parts \(see [Using the AWS SDK for Ruby for Multipart Upload](uploadobjusingmpu-ruby-sdk.md)\)\. However, the API for a single operation upload can also accept large objects and behind the scenes manage the upload in parts for you, thereby reducing the amount of script you need to write\.
 
 ## The Ruby API Organization<a name="RubyAPIOrganization"></a>
 
@@ -29,18 +29,11 @@ The easiest way to get started with the Ruby script examples is to install the l
 
 |  |  | 
 | --- |--- |
-| 1 |  To access AWS, you must provide a set of credentials for your SDK for Ruby application\. For more information, see [ Configuring the AWS SDK for Ruby](http://docs.aws.amazon.com//sdk-for-ruby/v2/developer-guide/setup-config.html)\.   | 
-| 2 |  Create a new SDK for Ruby script and add the following lines to the top of the script\.  
-
-```
-1. #!/usr/bin/env ruby
-2. 
-3. require 'rubygems'
-4. require 'aws-sdk-s3'
-``` The first line is the interpreter directive and the two `require` statements import two required gems into your script\.  | 
-| 3 | Copy the code from the section you are reading to your script\.  | 
-| 4 | Update the code by providing any required data\. For example, if uploading a file, provide the file path and the bucket name\. | 
-| 5 | Run the script\. Verify changes to buckets and objects by using the AWS Management Console\. For more information about the AWS Management Console, go to [https://aws\.amazon\.com/console/](https://aws.amazon.com/console/)\. | 
+|  1  |  To access AWS, you must provide a set of credentials for your SDK for Ruby application\. For more information, see [ Configuring the AWS SDK for Ruby](http://docs.aws.amazon.com//sdk-for-ruby/v2/developer-guide/setup-config.html)\.   | 
+|  2  |  Create a new SDK for Ruby script and add the following lines to the top of the script\.  <pre>#!/usr/bin/env ruby<br /><br />require 'rubygems'<br />require 'aws-sdk-s3'<br />								</pre> The first line is the interpreter directive and the two `require` statements import two required gems into your script\.  | 
+|  3  |  Copy the code from the section you are reading to your script\.   | 
+|  4  | Update the code by providing any required data\. For example, if uploading a file, provide the file path and the bucket name\. | 
+|  5  |  Run the script\. Verify changes to buckets and objects by using the AWS Management Console\. For more information about the AWS Management Console, go to [https://aws\.amazon\.com/console/](https://aws.amazon.com/console/)\.  | 
 
 **Ruby Samples**
 

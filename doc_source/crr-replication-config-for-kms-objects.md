@@ -192,7 +192,7 @@ Objects created with server\-side encryption using customer\-provided \(SSE\-C\)
 
 In a cross\-account scenario, the destination AWS KMS key must be a customer master key \(CMK\)\. The key owner must grant the source bucket owner permission to use the key, using one of the following methods:
 
-+ Use the IAM console\.
++ Use the IAM console\.<a name="cross-acct-kms-key-permission"></a>
 
   1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 

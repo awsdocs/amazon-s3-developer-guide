@@ -51,7 +51,9 @@ With tagging, you now have another dimension\. If you want photo1 in project x c
 
 + Object tags enable fine\-grained object lifecycle management in which you can specify tag\-based filter, in addition to key name prefix, in a lifecycle rule\.
 
-+ You can also customize Amazon CloudWatch metrics and AWS CloudTrail logs to display information by specific tag filters\. The following sections provide details\.
++ When using Amazon S3 analytics, you can configure filters to group objects together for analysis by object tags, by key name prefix, or by both prefix and tags\.
+
++ You can also customize Amazon CloudWatch metrics  to display information by specific tag filters\. The following sections provide details\.
 
 **Important**  
 While it is acceptable to use tags to label objects containing confidential data \(such as, personally identifiable information \(PII\) or protected health information \(PHI\)\), the tags themselves shouldn't contain any confidential information\. 
@@ -78,7 +80,7 @@ Amazon S3 supports the following API operations that are specifically for object
 
 **Other API Operations that Support Tagging**
 
-+  [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) – You can specify tags when you create objects\. You specify tags using the `x-amz-tagging` request header\. 
++  [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) and [Initiate Multipart Upload](http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)– You can specify tags when you create objects\. You specify tags using the `x-amz-tagging` request header\. 
 
    
 
@@ -121,10 +123,6 @@ For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md
 ### Object Tagging and Cross\-Region Replication \(CRR\)<a name="tagging-and-crr"></a>
 
 If you configured cross\-region replication \(CRR\) on your bucket, Amazon S3 replicates tags, provided you grant S3 permission to read the tags\. For more information, see [Setting Up Cross\-Region Replication](crr-how-setup.md)\.
-
-### Object Tagging and Multipart Upload<a name="tagging-and-mpu"></a>
-
-When you create objects using the multipart upload API operation, you can add tags to an object only after you complete the multipart upload \(that is, after the object is created\)\. You can then use the PUT Object tagging API operation to add tags to the existing object\. 
 
 ### Object Tagging and Access Control Policies<a name="tagging-and-policies"></a>
 

@@ -32,7 +32,7 @@ Amazon S3 billing and usage reports use codes and abbreviations\. For example, f
 
 + **USW2:** US West \(Oregon\)
 
-For information about pricing by region, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
+For information about pricing by AWS Region, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
 
 The first column in the following table lists usage types that appear in your billing and usage reports\.
 
@@ -53,7 +53,7 @@ The first column in the following table lists usage types that appear in your bi
 |  *region*\-CloudFront\-Out\-Bytes  |  Bytes  |  Hourly  |  The amount of data transferred from an AWS Region to a CloudFront distribution  | 
 |  *region*\-EarlyDelete\-ByteHrs  |  Byte\-Hours1  |  Hourly  |  Prorated storage usage for objects deleted from GLACIER storage before the 90\-day minimum commitment ends2  | 
 |  *region*\-EarlyDelete\-SIA  |  Byte\-Hours  |  Hourly  |  Prorated storage usage for objects deleted from STANDARD\_IA before the 30\-day minimum commitment ends3  | 
-|  *region*\-EarlyDelete\-SIA\-SmObjects  |  Byte\-Hours  |  Hourly  |  Prorated storage usage for small objects \(smaller than 128KB\) that were deleted from STANDARD\_IA before the 30\-day minimum commitment ended4  | 
+|  *region*\-EarlyDelete\-SIA\-SmObjects  |  Byte\-Hours  |  Hourly  |  Prorated storage usage for small objects \(smaller than 128 KB\) that were deleted from STANDARD\_IA before the 30\-day minimum commitment ended4  | 
 |  *region*\-Inventory\-ObjectsListed  |  Objects  |  Hourly  |  The number of objects listed for an object group \(objects are grouped by bucket or prefix\) with an inventory list  | 
 |  *region*\-Requests\-SIA\-Tier1  |  Count  |  Hourly  |  The number of PUT, COPY, POST, or LIST requests on STANDARD\_IA objects  | 
 |  *region*\-Requests\-SIA\-Tier2  |  Count  |  Hourly  |  The number of GET and all other non\-SIA\-Tier1 requests on STANDARD\_IA objects  | 
@@ -79,11 +79,11 @@ The first column in the following table lists usage types that appear in your bi
 
 1. For more information on the byte\-hours unit, see [Converting Usage Byte\-Hours to Billed GB\-Months](#aws-usage-report-understand-converting-byte-hours)\.
 
-1. For objects that are archived to the GLACIER storage class, when they are deleted prior to 90 days there is a prorated charge per gigabyte for the remaining days\.
+1. For objects that are archived to the GLACIER storage class, when they are deleted prior to 90 days, there is a prorated charge per gigabyte for the remaining days\.
 
-1. For objects that are in STANDARD\_IA storage, when they are deleted, overwritten, or transitioned to a different storage class prior to 30 days there is a prorated charge per gigabyte for the remaining days\.
+1. For objects that are in STANDARD\_IA storage, when they are deleted, overwritten, or transitioned to a different storage class prior to 30 days, there is a prorated charge per gigabyte for the remaining days\.
 
-1. For small objects that are in STANDARD\_IA storage, when they are deleted, overwritten, or transitioned to a different storage class prior to 30 days there is a prorated charge per gigabyte for the remaining days\.
+1. For small objects that are in STANDARD\_IA storage, when they are deleted, overwritten, or transitioned to a different storage class prior to 30 days, there is a prorated charge per gigabyte for the remaining days\.
 
 ## Tracking Operations in Your Usage Reports<a name="aws-usage-report-understand-operations"></a>
 
@@ -93,13 +93,25 @@ Operations describe the action taken on your AWS object or bucket by the specifi
 
 The volume of storage that we bill you for each month is based on the average amount of storage you used throughout the month\. You are billed for all of the object data and metadata stored in buckets that you created under your AWS account\. For more information about metadata, see [Object Key and Metadata](UsingMetadata.md)\. 
 
-We measure your storage usage in TimedStorage\-ByteHrs, which are totaled up at the end of the month to generate your monthly charges\. The usage report reports your storage usage in byte\-hours and the billing reports report storage usage in GB\-months\. To correlate your usage report to your billing reports you need to convert byte\-hours into GB\-months\.
+We measure your storage usage in TimedStorage\-ByteHrs, which are totaled up at the end of the month to generate your monthly charges\. The usage report reports your storage usage in byte\-hours and the billing reports report storage usage in GB\-months\. To correlate your usage report to your billing reports, you need to convert byte\-hours into GB\-months\.
 
 For example, if you store 100 GB \(107,374,182,400 bytes\) of Standard Amazon S3 storage data in your bucket for the first 15 days in March, and 100 TB \(109,951,162,777,600 bytes\) of Standard Amazon S3 storage data for the final 16 days in March, you will have used 42,259,901,212,262,400 byte\-hours\.
 
 First, calculate the total byte\-hour usage:
 
+```
+[107,374,182,400 bytes x 15 days x (24 hours/day)] 
+    + [109,951,162,777,600 bytes x 16 days x (24 hours/day)]
+    = 42,259,901,212,262,400 byte-hours
+```
+
 Then convert the byte\-hours to GB\-Months:
+
+```
+42,259,901,212,262,400 byte-hours/1,073,741,824 bytes per GB/24 hours per day
+     /31 days in March 
+     =52,900 GB-Months
+```
 
 ## More Info<a name="aws-usage-report-understand-more-info"></a>
 

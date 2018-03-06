@@ -1,6 +1,6 @@
 # Billing and Usage Reporting for S3 Buckets<a name="BucketBilling"></a>
 
-When using Amazon Simple Storage Service \(Amazon S3\), you don't have to pay any up\-front fees or commit to how much content you'll store\. As with the other Amazon Web Services \(AWS\) services, you pay as you go and pay only for what you use\.
+When using Amazon Simple Storage Service \(Amazon S3\), you don't have to pay any upfront fees or commit to how much content you'll store\. As with the other Amazon Web Services \(AWS\) services, you pay as you go and pay only for what you use\.
 
 AWS provides the following reports for Amazon S3:
 

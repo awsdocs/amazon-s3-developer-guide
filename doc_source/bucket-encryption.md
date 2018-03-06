@@ -77,7 +77,7 @@ You can track default encryption configuration requests through AWS CloudTrail e
 
 You can use CloudTrail logs for object\-level Amazon S3 actions to track `PUT` and `POST` requests to Amazon S3 to verify whether default encryption is being used to encrypt objects when incoming `PUT` requests don't have encryption headers\. 
 
-When Amazon S3 encrypts an object using the default encryption settings, the log includes the following field as the name/value pair: `"SSE Applied":"Default_SSE_S3" or "SSE Applied":"Default_SSE_KMS"`\. 
+When Amazon S3 encrypts an object using the default encryption settings, the log includes the following field as the name/value pair: `"SSEApplied":"Default_SSE_S3" or "SSEApplied":"Default_SSE_KMS"`\. 
 
 When Amazon S3 encrypts an object using the `PUT` encryption headers, the log includes the following field as the name/value pair: `"SSEApplied":"SSE_S3", "SSEApplied":"SSE_KMS`, or `"SSEApplied":"SSE_C"`\. For multipart uploads, this information is included in the `InitiateMultipartUpload` API requests\. For more information about using CloudTrail and CloudWatch, see [Monitoring Amazon S3](monitoring-overview.md)\.
 

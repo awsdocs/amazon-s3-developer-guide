@@ -29,7 +29,7 @@ For a list of the Amazon S3 website endpoints by Region, see [Amazon Simple Stor
  In order for your customers to access content at the website endpoint, you must make all your content publicly readable\. To do so, you can use a bucket policy or an ACL on an object to grant the necessary permissions\. 
 
 **Note**  
-Requester Pays buckets or DevPay buckets do not allow access through the website endpoint\. Any request to such a bucket receives a `403 Access Denied` response\. For more information, see [Requester Pays Buckets](RequesterPaysBuckets.md)\.
+Requester Pays buckets   do not allow access through the website endpoint\. Any request to such a bucket receives a `403 Access Denied` response\. For more information, see [Requester Pays Buckets](RequesterPaysBuckets.md)\.
 
 If you have a registered domain, you can add a DNS CNAME entry to point to the Amazon S3 website endpoint\. For example, if you have registered domain, `www.example-bucket.com`, you could create a bucket `www.example-bucket.com`, and add a DNS CNAME record that points to `www.example-bucket.com.s3-website-<region>.amazonaws.com`\. All requests to `http://www.example-bucket.com` are routed to `www.example-bucket.com.s3-website-<region>.amazonaws.com`\. For more information, see [Virtual Hosting of Buckets](VirtualHosting.md)\. 
 

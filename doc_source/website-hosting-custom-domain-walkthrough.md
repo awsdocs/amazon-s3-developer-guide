@@ -22,7 +22,7 @@ As you walk through the steps in this example, you work with the following servi
 
 We recommend that you have basic familiarity with domains, DNS, CNAME records, and A records\. A detailed explanation of these concepts is beyond the scope of this guide\. Your domain registrar should provide any basic information that you need\.
 
-In this example, we use Amazon Route 53\. However, you can use most registrars to define a CNAME record that points to an Amazon S3 bucket\.
+In this example, we use Route 53\. However, you can use most registrars to define a CNAME record that points to an Amazon S3 bucket\.
 
 **Note**  
 All the steps in this example use `example.com` as a domain name\. Replace this domain name with the one that you registered\.
@@ -132,7 +132,9 @@ Now that you have configured your bucket for website hosting, configure the `www
 
 1. Choose **Static website hosting**\.
 
-1. Choose **Redirect requests**\. In the **Target bucket or domain** box, type *example\.com*\.  
+1. Choose **Redirect requests**\. In the **Target bucket or domain** box, type *example\.com*\.
+
+1. Choose **Save**\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/swsRootDomainWebsiteEndpoint12.png)
 
 ### Step 2\.4: Configure Logging for Website Traffic<a name="root-domain-walkthrough-configure-logging"></a>
@@ -142,12 +144,6 @@ Optionally, you can configure logging to track the number of visitors accessing 
 ### Step 2\.5: Test Your Endpoint and Redirect<a name="root-domain-walkthrough-test-website"></a>
 
 To test the website, type the URL of the endpoint in your browser\. Your request is redirected, and the browser displays the index document for *example\.com*\. 
-
-You have now successfully redirected requests from one bucket to another, and the following Amazon S3 bucket website endpoints are accessible to any internet user:
-
-+ `example.com.s3-website-us-east-1.amazonaws.com`
-
-+ `http://www.example.com.s3-website-us-east-1.amazonaws.com`
 
  In the next step, you use Amazon Route 53 to enable customers to use all of the URLs to navigate to your site\.
 
@@ -163,7 +159,7 @@ You have now successfully redirected requests from one bucket to another, and th
 
 Go to the Amazon Route 53 console at [https://console\.aws\.amazon\.com/route53](https://console.aws.amazon.com/route53/home) and then create a hosted zone for your domain\. For instructions, go to [Creating a Hosted Zone](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html#Step_CreateHostedZone) in the *http://docs\.aws\.amazon\.com/Route53/latest/DeveloperGuide/*\. 
 
-The following example shows the hosted zone created for the `example.com` domain\. Write down the Amazon Route 53 name servers \(NS\) for this domain\. You will need them later\. 
+The following example shows the hosted zone created for the `example.com` domain\. Write down the Route 53 name servers \(NS\) for this domain\. You will need them later\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/RootDomainR53NameServers.png)
 
@@ -180,9 +176,9 @@ The following screenshot shows the alias record for `example.com` as an illustra
 To enable this hosted zone, you must use Amazon Route 53 as the DNS server for your domain **example\.com**\. If you are moving an existing website to Amazon S3, first you must transfer DNS records associated with your domain **example\.com** to the hosted zone that you created in Amazon Route 53 for your domain\. If you are creating a new website, you can go directly to step 4\.
 
 **Note**  
-Creating, changing, and deleting resource record sets take time to propagate to the Amazon Route 53 DNS servers\. Changes generally propagate to all Amazon Route 53 name servers in a couple of minutes\. In rare circumstances, propagation can take up to 30 minutes\.
+Creating, changing, and deleting resource record sets take time to propagate to the Route 53 DNS servers\. Changes generally propagate to all Route 53 name servers in a couple of minutes\. In rare circumstances, propagation can take up to 30 minutes\.
 
-### Step 3\.3: Transfer Other DNS Records from Your Current DNS Provider to Amazon Route 53<a name="root-domain-walkthrough-migrate-dns-records"></a>
+### Step 3\.3: Transfer Other DNS Records from Your Current DNS Provider to Route 53<a name="root-domain-walkthrough-migrate-dns-records"></a>
 
 Before you switch to Amazon Route 53 as your DNS provider, you must transfer the remaining DNS records—including MX records, CNAME records, and A records—from your DNS provider to Amazon Route 53\. You don't need to transfer the following records:
 
@@ -199,9 +195,9 @@ If you're not transferring your website from another existing website, you need 
 **Note**  
 If you've already transferred A type records for this website from a different DNS provider, you can skip the rest of this step\.
 
-**To create A type DNS records in the Amazon Route 53 console**
+**To create A type DNS records in the Route 53 console**
 
-1. Open the Amazon Route 53 console in your web browser\.
+1. Open the Route 53 console in your web browser\.
 
 1. On the **Dashboard**, choose **Hosted zones**\.
 
@@ -227,7 +223,7 @@ On your DNS provider's site, update the NS record with the delegation set values
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/RootDomainR53NameServers.png)
 
-When the transfer to Amazon Route 53 is complete, verify that the name server for your domain has indeed changed\. On a Linux computer, use the `dig` DNS lookup utility\. For example, use this `dig` command:
+When the transfer to Route 53 is complete, verify that the name server for your domain has indeed changed\. On a Linux computer, use the `dig` DNS lookup utility\. For example, use this `dig` command:
 
 ```
 dig +recurse +trace www.example.com any

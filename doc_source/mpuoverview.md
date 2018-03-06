@@ -80,7 +80,7 @@ $ aws s3api put-bucket-lifecycle  \
 
 To test the CLI command, do the following:
 
-1.  Set up the AWS CLI\. For instructions, see [Set Up the AWS CLI](setup-aws-cli.md)\. 
+1.  Set up the AWS CLI\. For instructions, see [Setting Up the AWS CLI](setup-aws-cli.md)\. 
 
 1.  Save the following example lifecycle configuration in a file \(lifecycle\.json\)\. The example configuration specifies empty prefix and therefore it applies to all objects in the bucket\. You can specify a prefix to restrict the policy to a subset of objects\.
 

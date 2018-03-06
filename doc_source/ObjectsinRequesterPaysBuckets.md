@@ -10,7 +10,7 @@ If the request succeeds and the requester is charged, the response includes the 
 
 **Note**  
 Bucket owners do not need to add `x-amz-request-payer` to their requests\.  
-Ensure that you have included `x-amz-request-payer` and its value in your signature calculation\. For more information, see Constructing the CanonicalizedAmzHeaders Element\.
+Ensure that you have included `x-amz-request-payer` and its value in your signature calculation\. For more information, see [Constructing the CanonicalizedAmzHeaders Element](RESTAuthentication.md#RESTAuthenticationConstructingCanonicalizedAmzHeaders)\.
 
 **To download objects from a Requester Pays bucket**
 

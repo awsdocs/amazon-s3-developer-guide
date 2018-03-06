@@ -147,24 +147,7 @@ This example gets an object from the johnsmith bucket\.
 
 | Request | StringToSign | 
 | --- | --- | 
-|  
-
-```
-1. GET /photos/puppy.jpg HTTP/1.1
-2. Host: johnsmith.s3.amazonaws.com
-3. Date: Tue, 27 Mar 2007 19:36:42 +0000
-4. 
-5. Authorization: AWS AKIAIOSFODNN7EXAMPLE:
-6. bWq2s1WEIj+Ydj0vQ697zp+IXMU=
-```  |  
-
-```
-1. GET\n
-2. \n
-3. \n
-4. Tue, 27 Mar 2007 19:36:42 +0000\n
-5. /johnsmith/photos/puppy.jpg
-```  | 
+|  <pre>GET /photos/puppy.jpg HTTP/1.1<br />Host: johnsmith.s3.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:36:42 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />bWq2s1WEIj+Ydj0vQ697zp+IXMU=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:36:42 +0000\n<br />/johnsmith/photos/puppy.jpg</pre>  | 
 
  Note that the CanonicalizedResource includes the bucket name, but the HTTP Request\-URI does not\. \(The bucket is specified by the Host header\.\) 
 
@@ -175,26 +158,7 @@ This example puts an object into the johnsmith bucket\.
 
 | Request | StringToSign | 
 | --- | --- | 
-|  
-
-```
-1. PUT /photos/puppy.jpg HTTP/1.1
-2. Content-Type: image/jpeg
-3. Content-Length: 94328
-4. Host: johnsmith.s3.amazonaws.com
-5. Date: Tue, 27 Mar 2007 21:15:45 +0000
-6. 
-7. Authorization: AWS AKIAIOSFODNN7EXAMPLE:
-8. MyyxeRY7whkBe+bq8fHCL/2kKUg=
-```  |  
-
-```
-1. PUT\n
-2. \n
-3. image/jpeg\n
-4. Tue, 27 Mar 2007 21:15:45 +0000\n
-5. /johnsmith/photos/puppy.jpg
-```  | 
+|  <pre>PUT /photos/puppy.jpg HTTP/1.1<br />Content-Type: image/jpeg<br />Content-Length: 94328<br />Host: johnsmith.s3.amazonaws.com<br />Date: Tue, 27 Mar 2007 21:15:45 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />MyyxeRY7whkBe+bq8fHCL/2kKUg=<br /></pre>  |  <pre>PUT\n<br />\n<br />image/jpeg\n<br />Tue, 27 Mar 2007 21:15:45 +0000\n<br />/johnsmith/photos/puppy.jpg</pre>  | 
 
  Note the Content\-Type header in the request and in the StringToSign\. Also note that the Content\-MD5 is left blank in the StringToSign, because it is not present in the request\. 
 
@@ -205,25 +169,7 @@ This example lists the content of the johnsmith bucket\.
 
 | Request | StringToSign | 
 | --- | --- | 
-|  
-
-```
-1. GET /?prefix=photos&max-keys=50&marker=puppy HTTP/1.1
-2. User-Agent: Mozilla/5.0
-3. Host: johnsmith.s3.amazonaws.com
-4. Date: Tue, 27 Mar 2007 19:42:41 +0000
-5. 
-6. Authorization: AWS AKIAIOSFODNN7EXAMPLE:
-7. htDYFYduRNen8P9ZfE/s9SuKy0U=
-```  |  
-
-```
-1. GET\n
-2. \n
-3. \n
-4. Tue, 27 Mar 2007 19:42:41 +0000\n
-5. /johnsmith/
-```  | 
+|  <pre>GET /?prefix=photos&max-keys=50&marker=puppy HTTP/1.1<br />User-Agent: Mozilla/5.0<br />Host: johnsmith.s3.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:42:41 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />htDYFYduRNen8P9ZfE/s9SuKy0U=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:42:41 +0000\n<br />/johnsmith/</pre>  | 
 
  Note the trailing slash on the CanonicalizedResource and the absence of query string parameters\. 
 
@@ -234,24 +180,7 @@ This example fetches the access control policy subresource for the 'johnsmith' b
 
 | Request | StringToSign | 
 | --- | --- | 
-|  
-
-```
-1. GET /?acl HTTP/1.1
-2. Host: johnsmith.s3.amazonaws.com
-3. Date: Tue, 27 Mar 2007 19:44:46 +0000
-4. 
-5. Authorization: AWS AKIAIOSFODNN7EXAMPLE:
-6. c2WLPFtWHVgbEmeEG93a4cG37dM=
-```  |  
-
-```
-1. GET\n
-2. \n
-3. \n
-4. Tue, 27 Mar 2007 19:44:46 +0000\n
-5. /johnsmith/?acl
-```  | 
+|  <pre>GET /?acl HTTP/1.1<br />Host: johnsmith.s3.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:44:46 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />c2WLPFtWHVgbEmeEG93a4cG37dM=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:44:46 +0000\n<br />/johnsmith/?acl</pre>  | 
 
  Notice how the subresource query string parameter is included in the CanonicalizedResource\. 
 
@@ -262,25 +191,7 @@ This example deletes an object from the 'johnsmith' bucket using the path\-style
 
 | Request | StringToSign | 
 | --- | --- | 
-|  
-
-```
-1. DELETE /johnsmith/photos/puppy.jpg HTTP/1.1
-2. User-Agent: dotnet
-3. Host: s3.amazonaws.com
-4. Date: Tue, 27 Mar 2007 21:20:27 +0000
-5. 
-6. x-amz-date: Tue, 27 Mar 2007 21:20:26 +0000
-7. Authorization: AWS AKIAIOSFODNN7EXAMPLE:lx3byBScXR6KzyMaifNkardMwNk=
-```  |  
-
-```
-1. DELETE\n
-2. \n
-3. \n
-4. Tue, 27 Mar 2007 21:20:26 +0000\n
-5. /johnsmith/photos/puppy.jpg
-```  | 
+|  <pre>DELETE /johnsmith/photos/puppy.jpg HTTP/1.1<br />User-Agent: dotnet<br />Host: s3.amazonaws.com<br />Date: Tue, 27 Mar 2007 21:20:27 +0000<br /><br />x-amz-date: Tue, 27 Mar 2007 21:20:26 +0000<br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:lx3byBScXR6KzyMaifNkardMwNk=</pre>  |  <pre>DELETE\n<br />\n<br />\n<br />Tue, 27 Mar 2007 21:20:26 +0000\n<br />/johnsmith/photos/puppy.jpg</pre>  | 
 
  Note how we used the alternate 'x\-amz\-date' method of specifying the date \(because our client library prevented us from setting the date, say\)\. In this case, the `x-amz-date` takes precedence over the `Date` header\. Therefore, date entry in the signature must contain the value of the `x-amz-date` header\. 
 
@@ -291,42 +202,7 @@ This example uploads an object to a CNAME style virtual hosted bucket with metad
 
 | Request | StringToSign | 
 | --- | --- | 
-|  
-
-```
- 1. PUT /db-backup.dat.gz HTTP/1.1
- 2. User-Agent: curl/7.15.5
- 3. Host: static.johnsmith.net:8080
- 4. Date: Tue, 27 Mar 2007 21:06:08 +0000
- 5. 
- 6. x-amz-acl: public-read
- 7. content-type: application/x-download
- 8. Content-MD5: 4gJE4saaMU4BqNR0kLY+lw==
- 9. X-Amz-Meta-ReviewedBy: joe@johnsmith.net
-10. X-Amz-Meta-ReviewedBy: jane@johnsmith.net
-11. X-Amz-Meta-FileChecksum: 0x02661779
-12. X-Amz-Meta-ChecksumAlgorithm: crc32
-13. Content-Disposition: attachment; filename=database.dat
-14. Content-Encoding: gzip
-15. Content-Length: 5913339
-16. 
-17. Authorization: AWS AKIAIOSFODNN7EXAMPLE:
-18. ilyl83RwaSoYIEdixDQcA4OnAnc=
-```  |  
-
-```
- 1. PUT\n
- 2. 4gJE4saaMU4BqNR0kLY+lw==\n
- 3. application/x-download\n
- 4. Tue, 27 Mar 2007 21:06:08 +0000\n
- 5. 
- 6. x-amz-acl:public-read\n
- 7. x-amz-meta-checksumalgorithm:crc32\n
- 8. x-amz-meta-filechecksum:0x02661779\n
- 9. x-amz-meta-reviewedby:
-10. joe@johnsmith.net,jane@johnsmith.net\n
-11. /static.johnsmith.net/db-backup.dat.gz
-```  | 
+|  <pre>PUT /db-backup.dat.gz HTTP/1.1<br />User-Agent: curl/7.15.5<br />Host: static.johnsmith.net:8080<br />Date: Tue, 27 Mar 2007 21:06:08 +0000<br /><br />x-amz-acl: public-read<br />content-type: application/x-download<br />Content-MD5: 4gJE4saaMU4BqNR0kLY+lw==<br />X-Amz-Meta-ReviewedBy: joe@johnsmith.net<br />X-Amz-Meta-ReviewedBy: jane@johnsmith.net<br />X-Amz-Meta-FileChecksum: 0x02661779<br />X-Amz-Meta-ChecksumAlgorithm: crc32<br />Content-Disposition: attachment; filename=database.dat<br />Content-Encoding: gzip<br />Content-Length: 5913339<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />ilyl83RwaSoYIEdixDQcA4OnAnc=</pre>  |  <pre>PUT\n<br />4gJE4saaMU4BqNR0kLY+lw==\n<br />application/x-download\n<br />Tue, 27 Mar 2007 21:06:08 +0000\n<br /><br />x-amz-acl:public-read\n<br />x-amz-meta-checksumalgorithm:crc32\n<br />x-amz-meta-filechecksum:0x02661779\n<br />x-amz-meta-reviewedby:<br />joe@johnsmith.net,jane@johnsmith.net\n<br />/static.johnsmith.net/db-backup.dat.gz</pre>  | 
 
  Notice how the 'x\-amz\-' headers are sorted, trimmed of whitespace, and converted to lowercase\. Note also that multiple headers with the same name have been joined using commas to separate values\. 
 
@@ -339,45 +215,14 @@ This example uploads an object to a CNAME style virtual hosted bucket with metad
 
 | Request | StringToSign | 
 | --- | --- | 
-|  
-
-```
-1. GET / HTTP/1.1
-2. Host: s3.amazonaws.com
-3. Date: Wed, 28 Mar 2007 01:29:59 +0000
-4. 
-5. Authorization: AWS AKIAIOSFODNN7EXAMPLE:qGdzdERIC03wnaRNKh6OqZehG9s=
-```  |  
-
-```
-1. GET\n
-2. \n
-3. \n
-4. Wed, 28 Mar 2007 01:29:59 +0000\n
-5. /
-```  | 
+|  <pre>GET / HTTP/1.1<br />Host: s3.amazonaws.com<br />Date: Wed, 28 Mar 2007 01:29:59 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:qGdzdERIC03wnaRNKh6OqZehG9s=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Wed, 28 Mar 2007 01:29:59 +0000\n<br />/</pre>  | 
 
 ### Unicode Keys<a name="RESTAuthenticationExamples-8"></a>
 
 
 | Request | StringToSign | 
 | --- | --- | 
-|  
-
-```
-1. GET /dictionary/fran%C3%A7ais/pr%c3%a9f%c3%a8re HTTP/1.1
-2. Host: s3.amazonaws.com
-3. Date: Wed, 28 Mar 2007 01:49:49 +0000
-4. Authorization: AWS AKIAIOSFODNN7EXAMPLE:DNEZGsoieTZ92F3bUfSPQcbGmlM=
-```  |  
-
-```
-1. GET\n
-2. \n
-3. \n
-4. Wed, 28 Mar 2007 01:49:49 +0000\n
-5. /dictionary/fran%C3%A7ais/pr%c3%a9f%c3%a8re
-```  | 
+|  <pre>GET /dictionary/fran%C3%A7ais/pr%c3%a9f%c3%a8re HTTP/1.1<br />Host: s3.amazonaws.com<br />Date: Wed, 28 Mar 2007 01:49:49 +0000<br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:DNEZGsoieTZ92F3bUfSPQcbGmlM=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Wed, 28 Mar 2007 01:49:49 +0000\n<br />/dictionary/fran%C3%A7ais/pr%c3%a9f%c3%a8re</pre>  | 
 
 **Note**  
 The elements in `StringToSign` that were derived from the Request\-URI are taken literally, including URL\-Encoding and capitalization\. 
@@ -438,24 +283,7 @@ In the query string authentication method, you do not use the `Date` or the `x-a
 
 | Request | StringToSign | 
 | --- | --- | 
-|  
-
-```
-1. GET /photos/puppy.jpg?AWSAccessKeyId=AKIAIOSFODNN7EXAMPLE&
-2.     Signature=NpgCjnDzrM%2BWFzoENXmpNDUsSn8%3D&
-3.     Expires=1175139620 HTTP/1.1
-4. 
-5. Host: johnsmith.s3.amazonaws.com
-```  |  
-
-```
-1. GET\n
-2. \n
-3. \n
-4. 1175139620\n
-5. 
-6. /johnsmith/photos/puppy.jpg
-```  | 
+|  <pre>GET /photos/puppy.jpg?AWSAccessKeyId=AKIAIOSFODNN7EXAMPLE&<br />    Signature=NpgCjnDzrM%2BWFzoENXmpNDUsSn8%3D&<br />    Expires=1175139620 HTTP/1.1<br /><br />Host: johnsmith.s3.amazonaws.com</pre>  |  <pre>GET\n<br />\n<br />\n<br />1175139620\n<br /><br />/johnsmith/photos/puppy.jpg</pre>  | 
 
 We assume that when a browser makes the GET request, it won't provide a Content\-MD5 or a Content\-Type header, nor will it set any x\-amz\- headers, so those parts of the `StringToSign` are left blank\. 
 

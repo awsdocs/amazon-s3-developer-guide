@@ -10,7 +10,7 @@ Amazon S3 replicates the following:
 
    
 
-+ In addition to unencrypted objects, Amazon S3 replicates objects created with server\-side encryption using the Amazon S3\-managed encryption key\. The replicated copy of the object is also encrypted using server\-side encryption with the Amazon S3\-managed encryption key\. 
++ In addition to unencrypted objects, Amazon S3 replicates objects encrypted using Amazon S3 managed keys \(SSE\-S3\) or AWS KMS managed keys \(SSE\-KMS\)\. The replicated copy of the object is also encrypted using the same type of server\-side encryption that was used for the source object, SSE\-S3, or SSE\-KMS\. For more information about sever\-side encryption\. see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.
 
    
 

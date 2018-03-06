@@ -107,7 +107,7 @@ Instead of attaching policies to individual users, though, you can write a singl
 ```
 
 **Note**  
-When using policy variables you must explicitly specify version 2012\-10\-17 in the policy\. The default version of the access policy language, 2008\-10\-17, does not support policy variables\. 
+When using policy variables, you must explicitly specify version `2012-10-17` in the policy\. The default version of the access policy language, 2008\-10\-17, does not support policy variables\. 
 
  If you want to test the preceding policy on the Amazon S3 console, the console requires permission for additional Amazon S3 permissions, as shown in the following policy\. For information about how the console uses these permissions, see [An Example Walkthrough: Using user policies to control access to your bucket](walkthrough1.md)\. 
 
@@ -159,7 +159,7 @@ When using policy variables you must explicitly specify version 2012\-10\-17 in 
 **Note**  
 In the 2012\-10\-17 version of the policy, policy variables start with `$`\. This change in syntax can potentially create a conflict if your object key includes a `$`\. For example, to include an object key `my$file` in a policy, you specify the `$` character with `${$}`, `my${$}file`\.
 
-Although IAM user names are friendly, human\-readable identifiers, they are not required to be globally unique\. For example, if user Bob leaves the organization and another Bob joins, then new Bob could access old Bob's information\. Instead of using user names, you could create folders based on user IDs\. Each user ID is unique\. In this case, you will need to modify the preceding policy to use the `${aws:userid}` policy variable\. For more information about user identifiers, see [IAM Identifiers](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in the *IAM User Guide*\.
+Although IAM user names are friendly, human\-readable identifiers, they are not required to be globally unique\. For example, if user Bob leaves the organization and another Bob joins, then new Bob could access old Bob's information\. Instead of using user names, you could create folders based on user IDs\. Each user ID is unique\. In this case, you must modify the preceding policy to use the `${aws:userid}` policy variable\. For more information about user identifiers, see [IAM Identifiers](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in the *IAM User Guide*\.
 
 ```
 {
@@ -182,7 +182,7 @@ Although IAM user names are friendly, human\-readable identifiers, they are not 
 
 ### Allow non\-IAM users \(mobile app users\) access to folders in a bucket<a name="non-iam-mobile-app-user-access"></a>
 
-Suppose you want to develop a mobile app, a game that stores users' data in an S3 bucket\. For each app user, you want to create a folder in your bucket\. You also want to limit each user’s access to his or her own folder\.  But you cannot create folders before someone downloads your app and starts playing the game, because you don’t have a user ID\. 
+Suppose that you want to develop a mobile app, a game that stores users' data in an S3 bucket\. For each app user, you want to create a folder in your bucket\. You also want to limit each user’s access to his or her own folder\.  But you cannot create folders before someone downloads your app and starts playing the game, because you don’t have a user ID\. 
 
 In this case, you can require users to sign in to your app by using public identity providers such as Login with Amazon, Facebook, or Google\. After users have signed in to your app through one of these providers, they have a user ID that you can use to create user\-specific folders at run time\. 
 
@@ -213,7 +213,7 @@ You can then use web identity federation in AWS Security Token Service to integr
 
 ## Example: Allow all your users to read objects in a portion of the corporate bucket<a name="iam-policy-ex3"></a>
 
- In this example, we create a group called `AllUsers`, which contains all the IAM users that are owned by the AWS account\. We then attach a policy that gives the group access to `GetObject` and `GetObjectVersion`, but only for objects in the `my_corporate_bucket/readonly` folder\. 
+ In this example, you create a group called `AllUsers`, which contains all the IAM users that are owned by the AWS account\. You then attach a policy that gives the group access to `GetObject` and `GetObjectVersion`, but only for objects in the `my_corporate_bucket/readonly` folder\. 
 
 ```
  1. {
@@ -233,11 +233,11 @@ You can then use web identity federation in AWS Security Token Service to integr
 
 ## Example: Allow a partner to drop files into a specific portion of the corporate bucket<a name="iam-policy-ex4"></a>
 
- In this example, we create a group called `WidgetCo` that represents a partner company\. We create an IAM user for the specific person or application at the partner company that needs access, and then we put the user in the group\. 
+ In this example, you create a group called `WidgetCo` that represents a partner company\. You create an IAM user for the specific person or application at the partner company that needs access, and then you put the user in the group\. 
 
-We then attach a policy that gives the group `PutObject` access to the following folder in the corporate bucket: `my_corporate_bucket/uploads/widgetco`\. 
+You then attach a policy that gives the group `PutObject` access to the following folder in the corporate bucket: `my_corporate_bucket/uploads/widgetco`\. 
 
-We want to prevent the `WidgetCo` group from doing anything else with the bucket, so we add a statement that explicitly denies permission to any Amazon S3 permissions except `PutObject` on any Amazon S3 resource in the AWS account\. This step is necessary only if there's a broad policy in use elsewhere in your AWS account that gives users wide access to Amazon S3 resources\.
+You want to prevent the `WidgetCo` group from doing anything else with the bucket, so you add a statement that explicitly denies permission to any Amazon S3 permissions except `PutObject` on any Amazon S3 resource in the AWS account\. This step is necessary only if there's a broad policy in use elsewhere in your AWS account that gives users wide access to Amazon S3 resources\.
 
 ```
  1. {

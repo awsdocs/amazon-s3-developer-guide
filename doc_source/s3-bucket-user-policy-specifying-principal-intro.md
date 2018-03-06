@@ -1,6 +1,6 @@
 # Specifying a Principal in a Policy<a name="s3-bucket-user-policy-specifying-principal-intro"></a>
 
-The `Principal` element specifies the user, account, service, or other entity that is allowed or denied access to a resource\. The `Principal` element is relevant only in a bucket policy; you don't specify it in a user policy because you attach user policy directly to a specific user\. The following are examples of specifying `Principal`\. For more information, see [Principal](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Principal) in the *IAM User Guide*\. 
+The `Principal` element specifies the user, account, service, or other entity that is allowed or denied access to a resource\. The following are examples of specifying `Principal`\. For more information, see [Principal](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Principal) in the *IAM User Guide*\. 
 
 + To grant permissions to an AWS account, identify the account using the following format\.
 
@@ -14,7 +14,7 @@ The `Principal` element specifies the user, account, service, or other entity th
   "Principal":{"AWS":"arn:aws:iam::AccountNumber-WithoutHyphens:root"}
   ```
 
-  Amazon S3 also supports canonical user ID, which is an obfuscated form of the AWS account ID\. You can specify this ID using the following format\.
+  Amazon S3 also supports a canonical user ID, which is an obfuscated form of the AWS account ID\. You can specify this ID using the following format\.
 
   ```
   "CanonicalUser":"64-digit-alphanumeric-value"
@@ -27,6 +27,8 @@ The `Principal` element specifies the user, account, service, or other entity th
   ```
 
   For information about how to find the canonical user ID for your account, see [Finding Your Account Canonical User ID](http://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)\.
+**Important**  
+When you use a canonical user ID in a policy, Amazon S3 might change the canonical ID to the corresponding AWS account ID\. This will not impact the policy because both of these IDs identify the same account\. 
 
 + To grant permission to an IAM user within your account, you must provide an `"AWS":"user-ARN"` name\-value pair\.
 

@@ -59,6 +59,10 @@ Using lifecycle configuration, you can transition objects to the GLACIER storage
 
 The following are the general considerations for you to consider before you archive objects:
 
++ Encrypted objects remain encrypted throughout the storage class transition process\.
+
+   
+
 + Objects in the GLACIER storage class are not available in real time\.
 
    

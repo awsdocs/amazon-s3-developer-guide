@@ -21,11 +21,11 @@ This section provides a list of the permissions for object operations that you c
 | `s3:DeleteObjectTagging` | [DELETE Object tagging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html)  | 
 | s3:DeleteObjectVersion | [DELETE Object \(a Specific Version of the Object\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html) | 
 | `s3:DeleteObjectVersionTagging` | [DELETE Object tagging \(for a Specific Version of the Object\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html) | 
-| s3:GetObject |   [GET Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html), [HEAD Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html), [GET Object torrent](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtorrent.html)  When you grant this permission on a version\-enabled bucket, you always get the latest version data\.   | 
+| s3:GetObject |   [GET Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html), [HEAD Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html) When you grant this permission on a version\-enabled bucket, you always get the latest version data\.   | 
 | s3:GetObjectAcl | [GET Object ACL](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETacl.html) | 
 | `s3:GetObjectTagging` | [GET Object tagging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html)  | 
 | s3:GetObjectTorrent | [GET Object torrent](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtorrent.html) | 
-| s3:GetObjectVersion |   [GET Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html), [HEAD Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html), [GET Object torrent](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtorrent.html)  To grant permission for version\-specific object data, you must grant this permission\. That is, when you specify version number when making any of these requests, you need this Amazon S3 permission\.  | 
+| s3:GetObjectVersion |   [GET Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html), [HEAD Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html) To grant permission for version\-specific object data, you must grant this permission\. That is, when you specify version number when making any of these requests, you need this Amazon S3 permission\.  | 
 | s3:GetObjectVersionAcl | [GET ACL ](http://docs.aws.amazon.com/AmazonS3/latest/API/objectGetAclVersions.html) \(for a Specific Version of the Object\) | 
 | `s3:GetObjectVersionTagging` | [GET Object tagging \(for a Specific Version of the Object\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html)  | 
 | s3:GetObjectVersionTorrent | [GET Object Torrent versioning](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtorrent.html) | 
@@ -98,7 +98,7 @@ The following example user policy grants the `s3:CreateBucket`, `s3:ListAllMyBuc
 }
 ```
 
-Note that, if your user is going to use the console to view buckets, and see content of any of these buckets, the console will need the user to have the `s3:ListAllMyBuckets` and `s3:GetBucketLocation` permissions\. For an example walkthrough, see [An Example Walkthrough: Using user policies to control access to your bucket](walkthrough1.md)\.
+If your user is going to use the console to view buckets and see the contents of any of these buckets, the user must have the `s3:ListAllMyBuckets` and `s3:GetBucketLocation` permissions\. For an example, see [An Example Walkthrough: Using user policies to control access to your bucket](walkthrough1.md)\.
 
 ## Permissions Related to Bucket Subresource Operations<a name="using-with-s3-actions-related-to-bucket-subresources"></a>
 
@@ -132,7 +132,7 @@ This section provides a list of the permissions related to bucket subresource op
 | s3:PutAccelerateConfiguration | [PUT Bucket accelerate ](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTaccelerate.html) | 
 | s3:PutAnalyticsConfiguration | [PUT Bucket analytics](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTAnalyticsConfig.html), [DELETE Bucket analytics ](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEAnalyticsConfiguration.html) | 
 | s3:PutBucketAcl | [PUT Bucket acl](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTacl.html) | 
-| s3:PutBucketCORS | [PUT Bucket cors](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTcors.html) | 
+| s3:PutBucketCORS | [PUT Bucket cors](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTcors.html), [DELETE Bucket cors](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEcors.html) | 
 | s3:PutBucketLogging | [PUT Bucket logging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html) | 
 | s3:PutBucketNotification | [PUT Bucket notification](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTnotification.html) | 
 | s3:PutBucketPolicy | [PUT Bucket policy](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html) | 
@@ -168,4 +168,4 @@ The following user policy grants the `s3:GetBucketAcl` permission on the `exampl
 }
 ```
 
-You can delete objects either by explicitly calling the DELETE Object API or by configuring its lifecycle \(see [Object Lifecycle Management](object-lifecycle-mgmt.md)\) so that Amazon S3 can remove the objects when their lifetime expires\. To explicitly block users or accounts from deleting objects, you must explicitly deny them `s3:DeleteObject`, `s3:DeleteObjectVersion`, and `s3:PutLifecycleConfiguration` permissions\. Note that, by default, users have no permissions\. But as you create users, add users to groups, and grant them permissions, it is possible for users to get certain permissions that you did not intend to give\. That is where you can use explicit deny, which supersedes all other permissions a user might have and denies the user permissions for specific actions\.
+You can delete objects either by explicitly calling the DELETE Object API or by configuring its lifecycle \(see [Object Lifecycle Management](object-lifecycle-mgmt.md)\) so that Amazon S3 can remove the objects when their lifetime expires\. To explicitly block users or accounts from deleting objects, you must explicitly deny them `s3:DeleteObject`, `s3:DeleteObjectVersion`, and `s3:PutLifecycleConfiguration` permissions\. By default, users have no permissions\. But as you create users, add users to groups, and grant them permissions, it is possible for users to get certain permissions that you did not intend to give\. That is where you can use explicit deny, which supersedes all other permissions a user might have and denies the user permissions for specific actions\.

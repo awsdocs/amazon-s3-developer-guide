@@ -6,7 +6,7 @@ Amazon S3 inventory provides comma\-separated values \(CSV\) or [Apache optimize
 
 You can configure multiple inventory lists for a bucket\. You can configure what object metadata to include in the inventory, whether to list all object versions or only current versions, where to store the inventory list file output, and whether to generate the inventory on a daily or weekly basis\. You can also specify that the inventory list file be encrypted\.
 
-You can query Amazon S3 inventory using standard SQL by using Amazon Athena, Amazon Redshift Spectrum, and other tools such as [Presto](https://prestodb.io/), [Apache Hive](https://hive.apache.org/), and [Apache Spark](https://databricks.com/spark/about/)\. It's easy to use Athena to run queries on your inventory files\. You can use Athena for S3 inventory queries in all Regions where Athena is available\. 
+You can query Amazon S3 inventory using standard SQL by using Amazon Athena, Amazon Redshift Spectrum, and other tools such as [Presto](https://prestodb.io/), [Apache Hive](https://hive.apache.org/), and [Apache Spark](https://databricks.com/spark/about/)\. It's easy to use Athena to run queries on your inventory files\. You can use Athena for Amazon S3 inventory queries in all Regions where Athena is available\. 
 
 
 + [How Do I Set Up Amazon S3 Inventory?](#storage-inventory-how-to-set-up)
@@ -120,7 +120,7 @@ The inventory list contains a list of the objects in an S3 bucket and the follow
 
 + **Bucket name** – The name of the bucket that the inventory is for\.
 
-+ **Key name** – Object key name \(or key\) that uniquely identifies the object in the bucket\.
++ **Key name** – Object key name \(or key\) that uniquely identifies the object in the bucket\. When using the CSV file format, the key name is URL\-encoded and must be decoded before you can use it\.
 
 + **Version ID** – Object version ID\. When you enable versioning on a bucket, Amazon S3 assigns a version number to objects that are added to the bucket\. For more information, see [Object Versioning](ObjectVersioning.md)\. \(This field is not included if the list is only for the current version of objects\.\)
 
@@ -144,8 +144,7 @@ The inventory list contains a list of the objects in an S3 bucket and the follow
 
 The following is an example CSV inventory list opened in a spreadsheet application\. The heading row is shown only to help clarify the example; it is not included in the actual list\.
 
-![\[Screenshot of an example inventory list opened in a spreadsheet
-          application.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/inventory-list.png)
+![\[Screenshot of an example inventory list opened in a spreadsheet application.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/inventory-list.png)
 
 We recommend that you create a lifecycle policy that deletes old inventory lists\. For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
@@ -171,7 +170,7 @@ When an inventory list is published, the manifest files are published to the fol
 
 + *config\-ID* is added to prevent collisions with multiple inventory reports from the same source bucket that are sent to the same destination bucket\.
 
-+ *YYYY\-MM\-DDTHH\-MMZ* is the date when the inventory list is generated\. For example, `2016-11-06T21-32Z`\.
++ *YYYY\-MM\-DDTHH\-MMZ* is the time stamp that consists of the start time and the date when the inventory report generation begins scanning the bucket; for example, `2016-11-06T21-32Z`\. Storage added after the time stamp will not be in the report\.
 
 + `manifest.json` is the manifest file\. 
 
@@ -197,15 +196,30 @@ The inventory lists are published daily or weekly to the following location in t
 
 The manifest files `manifest.json` and `symlink.txt` describe where the inventory files are located\. Whenever a new inventory list is delivered, it is accompanied by a new set of manifest files\.
 
-Each manifest contained in the `manifest.json` file provides metadata and other basic information about an inventory\. This information includes source bucket name, destination bucket name, version of the inventory, format and schema of the inventory files, and the actual list of the inventory files that are in the destination bucket\. Whenever a `manifest.json` file is written, it is accompanied by a `manifest.checksum` file that is the MD5 of the content of `manifest.json` file\. 
+Each manifest contained in the `manifest.json` file provides metadata and other basic information about an inventory\. This information includes the following:
 
-The following is an example of a manifest in a `manifest.json` file for a CSV formatted inventory\.
++ Source bucket name
+
++ Destination bucket name
+
++ Version of the inventory
+
++ Creation time stamp in the epoch date format that consists of the start time and the date when the inventory report generation begins scanning the bucket
+
++ Format and schema of the inventory files
+
++ Actual list of the inventory files that are in the destination bucket
+
+Whenever a `manifest.json` file is written, it is accompanied by a `manifest.checksum` file that is the MD5 of the content of `manifest.json` file\. 
+
+The following is an example of a manifest in a `manifest.json` file for a CSV\-formatted inventory\.
 
 ```
 {
     "sourceBucket": "example-source-bucket",
     "destinationBucket": "example-inventory-destination-bucket",
     "version": "2016-11-30",
+    "creationTimestamp" : "1514944800000",
     "fileFormat": "CSV",
     "fileSchema": "Bucket, Key, VersionId, IsLatest, IsDeleteMarker, Size, LastModifiedDate, ETag, StorageClass, MultipartUploaded, ReplicationStatus",
     "files": [
@@ -219,13 +233,14 @@ The following is an example of a manifest in a `manifest.json` file for a CSV fo
 }
 ```
 
-The following is an example of a manifest in a `manifest.json` file for a ORC formatted inventory\.
+The following is an example of a manifest in a `manifest.json` file for an ORC\-formatted inventory\.
 
 ```
 {
     "sourceBucket": "example-source-bucket",
     "destinationBucket": "arn:aws:s3:::example-destination-bucket",
     "version": "2016-11-30",
+    "creationTimestamp" : "1514944800000",
     "fileFormat": "ORC",
     "fileSchema": "struct<bucket:string,key:string,version_id:string,is_latest:boolean,is_delete_marker:boolean,size:bigint,last_modified_date:timestamp,e_tag:string,storage_class:string,is_multipart_uploaded:boolean,replication_status:string,encryption_status:string>",
     "files": [
@@ -274,7 +289,7 @@ For more information, see [Using AWS Lambda with Amazon S3](http://docs.aws.amaz
 
 ## Querying Inventory with Amazon Athena<a name="storage-inventory-athena-query"></a>
 
-You can query Amazon S3 inventory using standard SQL by using Amazon Athena in all Regions where Athena is available\. To check for AWS Region availability, see the [AWS Region Table\.](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) 
+You can query Amazon S3 inventory using standard SQL by using Amazon Athena in all Regions where Athena is available\. To check for AWS Region availability, see the [AWS Region Table](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/)\. 
 
 Athena can query Amazon S3 inventory files in ORC or CSV format\. When you use Athena to query inventory, we recommend that you use ORC\-formatted inventory files instead of CSV\. ORC provides faster query performance and lower query costs\. ORC is a self\-describing type\-aware columnar file format designed for [Apache Hadoop](http://hadoop.apache.org/)\. The columnar format lets the reader read, decompress, and process only the columns that are required for the current query\. The ORC format for Amazon S3 inventory is available in all AWS Regions\.
 
@@ -282,7 +297,7 @@ Athena can query Amazon S3 inventory files in ORC or CSV format\. When you use A
 
 1. Create an Athena table\. For information about creating a table, see [Getting Started](http://docs.aws.amazon.com/athena/latest/ug/getting-started.html) in the *Amazon Athena User Guide*\.
 
-   The following sample query includes all optional fields in the inventory report\. Drop any optional field that you did not choose for your inventory so that the query corresponds to the fields chosen for your inventory\. Also, you must use your bucket name and the location\. The location points to your inventory destination path; for example, `destination-prefix/source-bucket/config-ID/hive`\.
+   The following sample query includes all optional fields in the inventory report\. Drop any optional field that you did not choose for your inventory so that the query corresponds to the fields chosen for your inventory\. Also, you must use your bucket name and the location\. The location points to your inventory destination path; for example, `s3://destination-prefix/source-bucket/config-ID/hive`\.
 
    ```
    CREATE EXTERNAL TABLE your-table-name(

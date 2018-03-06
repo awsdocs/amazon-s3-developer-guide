@@ -1,21 +1,23 @@
 # Using the AWS SDK for \.NET<a name="UsingTheMPDotNetAPI"></a>
 
+The AWS SDK for \.NET provides the API for the Amazon S3 bucket and object operations\. For object operations, in addition to providing the API to upload objects in a single operation, the SDK provides the API to upload large objects in parts \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\)\. 
+
 
 + [The \.NET API Organization](#DotNetAPIOrg)
 + [Running the Amazon S3 \.NET Code Examples](#TestingDotNetApiSamples)
 
-The AWS SDK for \.NET provides the API for the Amazon S3 bucket and object operations\. For object operations, in addition to providing the API to upload objects in a single operation, the SDK provides the API to upload large objects in parts \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\)\. The API gives you the option of using a high\-level or low\-level API\. 
+The AWS SDK for \.NET gives you the option of using a high\-level or low\-level API\. 
 
 **Low\-Level API**  
-The low\-level APIs correspond to the underlying Amazon S3 REST operations, including the create, update, and delete operations that apply to buckets and objects\. When you upload large objects using the low\-level multipart upload API \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\) it provides greater control, such as letting you pause and resume multipart uploads, vary part sizes during the upload, or to begin uploads when you do not know the size of the data in advance\. If you do not have these requirements, use the high\-level API for uploading objects\.
+The low\-level APIs correspond to the underlying Amazon S3 REST operations, including the create, update, and delete operations that apply to buckets and objects\. When you upload large objects using the low\-level multipart upload API \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\), it provides greater control\. For example, it lets you pause and resume multipart uploads, vary part sizes during the upload, or begin uploads when you don't know the size of the data in advance\. If you do not have these requirements, use the high\-level API for uploading objects\.
 
 **High\-Level API**  
-For uploading objects, the SDK provides a higher level of abstraction by providing the `TransferUtility` class\. The high\-level API is a simpler API, where in just a few lines of code you can upload files and streams to Amazon S3\. You should use this API to upload data unless you need to control the upload as described in the preceding Low\-Level API section\.
+For uploading objects, the SDK provides a higher level of abstraction by providing the `TransferUtility` class\. The high\-level API is a simpler API, where in just a few lines of code, you can upload files and streams to Amazon S3\. You should use this API to upload data unless you need to control the upload as described in the preceding Low\-Level API section\.
 
-For smaller data size the `TransferUtility` API uploads data in a single operation\. However, the `TransferUtility` switches to using the multipart upload API when data size reaches certain threshold\. By default, it uses multiple threads to concurrently upload the parts\. If a part upload fails, the API retries the failed part upload up to three times\. However, these are configurable options\. 
+For smaller data size, the `TransferUtility` API uploads data in a single operation\. However, the `TransferUtility` switches to using the multipart upload API when the data size reaches a certain threshold\. By default, it uses multiple threads to concurrently upload the parts\. If a part upload fails, the API retries the failed part upload up to three times\. However, these are configurable options\. 
 
 **Note**  
-When using a stream for the source of data, the `TransferUtility` class will not do concurrent uploads\.
+When you're using a stream for the source of data, the `TransferUtility` class does not do concurrent uploads\.
 
 ## The \.NET API Organization<a name="DotNetAPIOrg"></a>
 
@@ -23,7 +25,7 @@ When writing Amazon S3 applications using the AWS SDK for \.NET, you use the `AW
 
 + **Amazon\.S3\.Transfer—**Provides the high\-level API to upload your data in parts\. 
 
-  It includes the `TransferUtility` class that enables you to specify a file, directory, or stream for uploading your data\. It also includes the `TransferUtilityUploadRequest` and `TransferUtilityUploadDirectoryRequest` classes to configure advanced settings such as the number of concurrent threads, part size, object metadata, the storage class \(STANDARD, REDUCED\_REDUNDANCY\) and object ACL\.
+  It includes the `TransferUtility` class that enables you to specify a file, directory, or stream for uploading your data\. It also includes the `TransferUtilityUploadRequest` and `TransferUtilityUploadDirectoryRequest` classes to configure advanced settings, such as the number of concurrent threads, part size, object metadata, the storage class \(STANDARD, REDUCED\_REDUNDANCY\), and object access control list \(ACL\)\.
 
 + **Amazon\.S3—**Provides the implementation for the low\-level APIs\. 
 
@@ -33,11 +35,11 @@ When writing Amazon S3 applications using the AWS SDK for \.NET, you use the `AW
 
    For example, it provides the `InitiateMultipartUploadRequest` and `InitiateMultipartUploadResponse` classes you can use when initiating a multipart upload, and the `UploadPartRequest` and `UploadPartResponse` classes when uploading parts\. 
 
-For more information about the AWS SDK for \.NET API, go to [AWS SDK for \.NET Reference](http://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html)\.
+For more information about the AWS SDK for \.NET API, see [AWS SDK for \.NET Reference](http://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html)\.
 
 ## Running the Amazon S3 \.NET Code Examples<a name="TestingDotNetApiSamples"></a>
 
-The easiest way to get started with the \.NET code examples is to install the AWS SDK for \.NET\. For more information, go to [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)\. 
+The easiest way to get started with the \.NET code examples is to install the AWS SDK for \.NET\. For more information, see [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)\. 
 
 **Note**  
 The examples in this guide are AWS SDK for \.NET version 2\.0 compliant\.
@@ -49,7 +51,7 @@ The following tasks guide you through creating and testing the C\# code examples
 
 |  |  | 
 | --- |--- |
-| 1 | Create a credentials profile for your AWS credentials as described in the AWS SDK for \.NET topic [Configuring AWS Credentials](http://docs.aws.amazon.com/AWSSdkDocsNET/latest/DeveloperGuide/net-dg-config-creds.html)\.  | 
-| 2 |  Create a new Visual Studio project using the *AWS Empty Project* template\.   | 
-| 3 | Replace the code in the project file, `Program.cs`, with the code in the section you are reading\.  | 
-| 4 |   Run the code\. Verify that the object is created using the AWS Management Console\. For more information about AWS Management Console, go to [https://aws\.amazon\.com/console/](https://aws.amazon.com/console/)\.  | 
+|  1  |  Create a credentials profile for your AWS credentials as described in the AWS SDK for \.NET topic [Configuring AWS Credentials](http://docs.aws.amazon.com/AWSSdkDocsNET/latest/DeveloperGuide/net-dg-config-creds.html)\.  | 
+|  2  |  Create a new Visual Studio project using the *AWS Empty Project* template\.   | 
+|  3  |  Replace the code in the project file, `Program.cs`, with the code in the section you are reading\.   | 
+|  4  |   Run the code\. Verify that the object is created using the AWS Management Console\. For more information about AWS Management Console, go to [https://aws\.amazon\.com/console/](https://aws.amazon.com/console/)\.  | 

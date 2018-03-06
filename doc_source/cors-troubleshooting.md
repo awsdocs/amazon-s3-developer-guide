@@ -1,6 +1,6 @@
 # Troubleshooting CORS Issues<a name="cors-troubleshooting"></a>
 
-When you are accessing buckets set with the CORS configuration, if you encounter unexpected behavior the following are some troubleshooting actions you can take:
+When you are accessing buckets set with the CORS configuration, if you encounter unexpected behavior, the following are some troubleshooting actions you can take:
 
 1. Verify that the CORS configuration is set on the bucket\. 
 
@@ -16,6 +16,6 @@ When you are accessing buckets set with the CORS configuration, if you encounter
 
       The scheme, the host, and the port values in the Origin request header must match the `AllowedOrigin` in the `CORSRule`\. For example, if you set the `CORSRule` to allow the origin `http://www.example.com`, then both `https://www.example.com` and `http://www.example.com:80` origins in your request do not match the allowed origin in your configuration\.
 
-   1.  Verify that the Method in your request \(or the method specified in the `Access-Control-Request-Method` in case of a preflight request\) is one of the `AllowedMethod` elements in the same `CORSRule`\. 
+   1.  Verify that the method in your request \(or the method specified in the `Access-Control-Request-Method` in the case of a preflight request\) is one of the `AllowedMethod` elements in the same `CORSRule`\. 
 
    1. For a preflight request, if the request includes an `Access-Control-Request-Headers` header, verify that the `CORSRule` includes the `AllowedHeader` entries for each value in the `Access-Control-Request-Headers` header\. 

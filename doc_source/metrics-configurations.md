@@ -14,7 +14,7 @@ Keep the following in mind when using metrics configurations:
 
 + Metrics configurations are necessary only to enable request metrics\. Bucket\-level daily storage metrics are always turned on, and are provided at no additional cost\. Currently, it's not possible to get daily storage metrics for a filtered subset of objects\.
 
-+ Each metrics configuration enables the full set of available request metrics\. Operation\-specific metrics \(such as `PostRequests`\) will only be reported if there are requests of that type for your bucket or your filter\.
++ Each metrics configuration enables the full set of [available request metrics](cloudwatch-monitoring.md#s3-request-cloudwatch-metrics)\. Operation\-specific metrics \(such as `PostRequests`\) will only be reported if there are requests of that type for your bucket or your filter\.
 
 + Request metrics are reported for object\-level operations, and are also reported for operations that list bucket contents, like [GET Bucket \(List Objects\)](http://docs.aws.amazon.com/AmazonS3/latest/API/v2-RESTBucketGET.html), [GET Bucket Object Versions](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETVersion.html), and [List Multipart Uploads](http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadListMPUpload.html), but are not reported for other operations on buckets\.
 

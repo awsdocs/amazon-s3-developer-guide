@@ -143,7 +143,7 @@ Amazon S3 can send event notification messages to the following destinations\. Y
 
 + Publish event messages to an Amazon Simple Queue Service \(Amazon SQS\) queue
 **Note**  
-At this time S3 supports only standard SQS queues that are not server\-side encryption \(SSE\) enabled\.
+If the destination queue is SSE enabled, Amazon S3 will need access to the associated KMS key to enable message encryption\.
 
 + Publish event messages to AWS Lambda by invoking a Lambda function and providing the event message as an argument
 
@@ -468,6 +468,31 @@ Note that for both the Amazon SNS and Amazon SQS IAM policies, you can specify t
   }
   }
 ```
+
+Example of a key policy that you attach to the associated KMS key if the SQS queue is SSE enabled\. 
+
+```
+{
+    "Version": "2012-10-17",
+    "Id": "example-ID",
+    "Statement": [
+        {
+            "Sid": "example-statement-ID",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "s3.amazonaws.com"
+            },
+            "Action": [
+                "kms:GenerateDataKey",
+                "kms:Decrypt"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+The policy grants Amazon S3 service principal permission for specific KMS actions that are necessary to encrypt messages added to the queue\.
 
 For an example of how to attach a policy to a SNS topic or an SQS queue, see [Example Walkthrough 1: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)](ways-to-add-notification-config-to-bucket.md)\.
 

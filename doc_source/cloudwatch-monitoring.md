@@ -107,8 +107,8 @@ This example produces the following output:
 
 + [Amazon CloudWatch User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)
 
-+ [list\-metrics](http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/list-metrics.html) action in the *AWS Command Line Interface Reference*\.
++ [list\-metrics](http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/list-metrics.html) action in the *AWS CLI Command Reference*\.
 
-+ [get\-metric\-statistics](http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html) action in the *AWS Command Line Interface Reference*\.
++ [get\-metric\-statistics](http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html) action in the *AWS CLI Command Reference*\.
 
 +  [Metrics Configurations for Buckets](metrics-configurations.md)\.

@@ -6,7 +6,7 @@ This introduction to Amazon Simple Storage Service is intended to give you a det
 + [Overview of Amazon S3 and This Guide](#overview)
 + [Advantages to Amazon S3](#features)
 + [Amazon S3 Concepts](#CoreConcepts)
-+ [Features](#S3Features)
++ [Amazon S3 Features](#S3Features)
 + [Amazon S3 Application Programming Interfaces \(API\)](#API)
 + [Paying for Amazon S3](#PayingforStorage)
 + [Related Services](#RelatedAmazonWebServices)
@@ -50,7 +50,7 @@ This section describes key concepts and terminology you need to understand to us
 
  Buckets serve several purposes: they organize the Amazon S3 namespace at the highest level, they identify the account responsible for storage and data transfer charges, they play a role in access control, and they serve as the unit of aggregation for usage reporting\. 
 
-You can configure buckets so that they are created in a specific region\. For more information, see Buckets and Regions\. You can also configure a bucket so that every time an object is added to it, Amazon S3 generates a unique version ID and assigns it to the object\. For more information, see Versioning\.
+You can configure buckets so that they are created in a specific region\. For more information, see [Buckets and Regions](UsingBucket.md#access-bucket-intro)\. You can also configure a bucket so that every time an object is added to it, Amazon S3 generates a unique version ID and assigns it to the object\. For more information, see [Versioning](Versioning.md)\.
 
  For more information about buckets, see [Working with Amazon S3 Buckets](UsingBucket.md)\. 
 
@@ -58,7 +58,7 @@ You can configure buckets so that they are created in a specific region\. For mo
 
 Objects are the fundamental entities stored in Amazon S3\. Objects consist of object data and metadata\. The data portion is opaque to Amazon S3\. The metadata is a set of name\-value pairs that describe the object\. These include some default metadata, such as the date last modified, and standard HTTP metadata, such as Content\-Type\. You can also specify custom metadata at the time the object is stored\.
 
-An object is uniquely identified within a bucket by a key \(name\) and a version ID\. For more information, see Keys and Versioning\.
+An object is uniquely identified within a bucket by a key \(name\) and a version ID\. For more information, see [Keys](#BasicsKeys) and [Versioning](Versioning.md)\.
 
 ### Keys<a name="BasicsKeys"></a>
 
@@ -66,37 +66,9 @@ A key is the unique identifier for an object within a bucket\. Every object in a
 
 ### Regions<a name="Regions"></a>
 
-You can choose the geographical region where Amazon S3 will store the buckets you create\. You might choose a region to optimize latency, minimize costs, or address regulatory requirements\. Amazon S3 currently supports the following regions:
+You can choose the geographical region where Amazon S3 will store the buckets you create\. You might choose a region to optimize latency, minimize costs, or address regulatory requirements\. Objects stored in a region never leave the region unless you explicitly transfer them to another region\. For example, objects stored in the EU \(Ireland\) region never leave it\. 
 
-+ **US East \(N\. Virginia\) Region** Uses Amazon S3 servers in Northern Virginia
-
-+ **US East \(Ohio\) Region** Uses Amazon S3 servers in Columbus Ohio
-
-+ **US West \(N\. California\) Region** Uses Amazon S3 servers in Northern California
-
-+ **US West \(Oregon\) Region** Uses Amazon S3 servers in Oregon
-
-+ **Canada \(Central\) Region** Uses Amazon S3 servers in Montreal
-
-+ **Asia Pacific \(Mumbai\) Region** Uses Amazon S3 servers in Mumbai
-
-+ **Asia Pacific \(Seoul\) Region** Uses Amazon S3 servers in Seoul
-
-+ **Asia Pacific \(Singapore\) Region** Uses Amazon S3 servers in Singapore
-
-+ **Asia Pacific \(Sydney\) Region** Uses Amazon S3 servers in Sydney
-
-+ **Asia Pacific \(Tokyo\) Region** Uses Amazon S3 servers in Tokyo
-
-+ **EU \(Frankfurt\) Region** Uses Amazon S3 servers in Frankfurt
-
-+ **EU \(Ireland\) Region** Uses Amazon S3 servers in Ireland
-
-+ **EU \(London\) Region** Uses Amazon S3 servers in London
-
-+ **South America \(São Paulo\) Region** Uses Amazon S3 servers in Sao Paulo
-
-Objects stored in a region never leave the region unless you explicitly transfer them to another region\. For example, objects stored in the EU \(Ireland\) region never leave it\. For more information about Amazon S3 regions and endpoints, go to [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
+ For a list of Amazon S3 regions and endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\. 
 
 ### Amazon S3 Data Consistency Model<a name="ConsistencyModel"></a>
 
@@ -147,10 +119,10 @@ In the last example, Client 2 performs W2 before Amazon S3 returns a success for
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/consistency3.png)
 
-## Features<a name="S3Features"></a>
+## Amazon S3 Features<a name="S3Features"></a>
 
 
-+ [Reduced Redundancy Storage](#RRS)
++ [Storage Classes](#RRS)
 + [Bucket Policies](#BucketPolicies)
 + [AWS Identity and Access Management](#AWSIdentityandAccessManagement)
 + [Access Control Lists](#S3_ACLs)
@@ -159,13 +131,9 @@ In the last example, Client 2 performs W2 before Amazon S3 returns a success for
 
 This section describes important Amazon S3 features\.
 
-### Reduced Redundancy Storage<a name="RRS"></a>
+### Storage Classes<a name="RRS"></a>
 
-Customers can store their data using the Amazon S3 Reduced Redundancy Storage \(RRS\) option\. RRS enables customers to reduce their costs by storing non\-critical, reproducible data at lower levels of redundancy than Amazon S3 standard storage\. RRS provides a cost\-effective, highly available solution for distributing or sharing content that is durably stored elsewhere, or for storing thumbnails, transcoded media, or other processed data that can be easily reproduced\. The RRS option stores objects on multiple devices across multiple facilities, providing 400 times the durability of a typical disk drive, but does not replicate objects as many times as standard Amazon S3 storage, and thus is even more cost effective\.
-
-RRS provides 99\.99% durability of objects over a given year\. This durability level corresponds to an average expected loss of 0\.01% of objects annually\.
-
-AWS charges less for using RRS than for standard Amazon S3 storage\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
+ Amazon S3 offers a range of storage classes designed for different use cases\. These include Amazon S3 STANDARD for general\-purpose storage of frequently accessed data, Amazon S3 STANDARD\_IA for long\-lived, but less frequently accessed data, and GLACIER for long\-term archive\.
 
 For more information, see [Storage Classes](storage-class-intro.md)\.
 

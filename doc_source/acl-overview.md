@@ -43,7 +43,16 @@ An ACL can have up to 100 grants\.
 A grantee can be an AWS account or one of the predefined Amazon S3 groups\. You grant permission to an AWS account using the email address or the canonical user ID\. However, if you provide an email address in your grant request, Amazon S3 finds the canonical user ID for that account and adds it to the ACL\. The resulting ACLs always contain the canonical user ID for the AWS account, not the AWS account's email address\.
 
 **Important**  
-You cannot use an email address to specify a grantee for any AWS Region that was created after 12/8/2014\. The following Regions were created after 12/8/2014: US East \(Ohio\), Canada \(Central\), Asia Pacific \(Mumbai\), Asia Pacific \(Seoul\), EU \(Frankfurt\), EU \(London\), China \(Beijing\), and AWS GovCloud \(US\)\. 
+Using email addresses to specify a grantee is only supported in the following AWS Regions:  
+US East \(N\. Virginia\)
+US West \(N\. California\)
+US West \(Oregon\)
+Asia Pacific \(Singapore\)
+Asia Pacific \(Sydney\)
+Asia Pacific \(Tokyo\)
+EU \(Ireland\)
+South America \(São Paulo\)
+For a list of all the Amazon S3 supported regions and endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
 
 **Warning**  
 When you grant other AWS accounts access to your resources, be aware that the AWS accounts can delegate their permissions to users under their accounts\. This is known as *cross\-account access*\. For information about using cross\-account access, see [ Creating a Role to Delegate Permissions to an IAM User](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\. 
@@ -165,7 +174,7 @@ The following sample ACL on a bucket identifies the resource owner and a set of 
 
 ## Canned ACL<a name="canned-acl"></a>
 
-Amazon S3 supports a set of predefined grants, known as canned ACLs\. Each canned ACL has a predefined a set of grantees and permissions\. The following table lists the set of canned ACLs and the associated predefined grants\. 
+Amazon S3 supports a set of predefined grants, known as canned ACLs\. Each canned ACL has a predefined set of grantees and permissions\. The following table lists the set of canned ACLs and the associated predefined grants\. 
 
 
 | Canned ACL | Applies to | Permissions added to ACL | 

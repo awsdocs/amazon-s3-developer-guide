@@ -202,8 +202,7 @@ If you have an object expiration lifecycle policy in your non\-versioned bucket 
      + In object properties, notice the **Replication Status** is set to "Replica" \(identifying this as a replica object\)\.
 
      + In object properties, the permission section shows no permissions \(the replica is still owned by the source bucket owner, and the destination bucket owner has no permission on the object replica\)\. You can add optional configuration to direct Amazon S3 to change the replica ownership\. For example, see [Walkthrough 3: Change Replica Owner to Destination Bucket Owner](crr-walkthrough-3.md)\.   
-![\[Screenshot of object properties showing replication status (replica)
-                        and permissions for a text file.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/crr-wt2-10.png)
+![\[Screenshot of object properties showing replication status (replica) and permissions for a text file.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/crr-wt2-10.png)
 
      The amount of time it takes for Amazon S3 to replicate an object depends on the object size\. For information about finding replication status, see [Finding the Cross\-Region Replication Status ](crr-status.md)\. 
 

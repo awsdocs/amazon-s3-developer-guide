@@ -4,7 +4,7 @@ Amazon S3 is a simple key, value store designed to store as many objects as you 
 
 + **Key** – The name that you assign to an object\. You use the object key to retrieve the object\.
 
-  For more information, see Object Key and Metadata
+  For more information, see [Object Key and Metadata](UsingMetadata.md)
 
 + **Version ID** – Within a bucket, a key and version ID uniquely identify an object\. 
 
@@ -16,7 +16,7 @@ Amazon S3 is a simple key, value store designed to store as many objects as you 
 
 + **Metadata** – A set of name\-value pairs with which you can store information regarding the object\.
 
-  You can assign metadata, referred to as user\-defined metadata, to your objects in Amazon S3\. Amazon S3 also assigns system\-metadata to these objects, which it uses for managing objects\. For more information, see Object Key and Metadata\.
+  You can assign metadata, referred to as user\-defined metadata, to your objects in Amazon S3\. Amazon S3 also assigns system\-metadata to these objects, which it uses for managing objects\. For more information, see [Object Key and Metadata](UsingMetadata.md)\.
 
 + **Subresources** – Amazon S3 uses the subresource mechanism to store object\-specific additional information\. 
 

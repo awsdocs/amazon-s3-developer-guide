@@ -82,7 +82,7 @@ The variable `${filename}` is automatically replaced with the name of the file p
 | Cache\-Control, Content\-Type, Content\-Disposition, Content\-Encoding, Expires |  REST\-specific headers\. For more information, see [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\.  |  No  | 
 | key |  The name of the uploaded key\. To use the filename provided by the user, use the $\{filename\} variable\. For example, if user Betty uploads the file lolcatz\.jpg and you specify /user/betty/$\{filename\}, the file is stored as /user/betty/lolcatz\.jpg\. For more information, see [Object Key and Metadata](UsingMetadata.md)\.  |  Yes  | 
 | policy |  Security policy describing what is permitted in the request\. Requests without a security policy are considered anonymous and will succeed only on publicly writable buckets\.   |  No  | 
-| success\_action\_redirect, redirect |  The URL to which the client is redirected upon successful upload\. Amazon S3 appends the bucket, key, and etag values as query string parameters to the URL\. If success\_action\_redirect is not specified, Amazon S3 returns the empty document type specified in the success\_action\_status field\. If Amazon S3 cannot interpret the URL, it ignores the field\. If the upload fails, Amazon S3 displays an error and does not redirect the user to a URL\. For more information, see Redirection\.    The redirect field name is deprecated and support for the redirect field name will be removed in the future\.    |  No  | 
+| success\_action\_redirect, redirect |  The URL to which the client is redirected upon successful upload\. Amazon S3 appends the bucket, key, and etag values as query string parameters to the URL\. If success\_action\_redirect is not specified, Amazon S3 returns the empty document type specified in the success\_action\_status field\. If Amazon S3 cannot interpret the URL, it ignores the field\. If the upload fails, Amazon S3 displays an error and does not redirect the user to a URL\. For more information, see [Redirection](#HTTPPOSTConstructingPolicyRedirection)\.    The redirect field name is deprecated and support for the redirect field name will be removed in the future\.    |  No  | 
 | success\_action\_status |  The status code returned to the client upon successful upload if success\_action\_redirect is not specified\. Valid values are 200, 201, or 204 \(default\)\. If the value is set to 200 or 204, Amazon S3 returns an empty document with a 200 or 204 status code\. If the value is set to 201, Amazon S3 returns an XML document with a 201 status code\. For information about the content of the XML document, see [POST Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html)\. If the value is not set or if it is set to an invalid value, Amazon S3 returns an empty document with a 204 status code\.   Some versions of the Adobe Flash player do not properly handle HTTP responses with an empty body\. To support uploads through Adobe Flash, we recommend setting `success_action_status` to 201\.   |  No  | 
 | signature |   The HMAC signature constructed by using the secret access key that corresponds to the provided AWSAccessKeyId\. This field is required if a policy document is included with the request\.  For more information, see [Using Auth Access](http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) \.  |  Conditional  | 
 | x\-amz\-security\-token |  A security token used by Amazon DevPay and session credentials  If the request is using Amazon DevPay then it requires two `x-amz-security-token` form fields: one for the product token and one for the user token\. For more information, go to [Using DevPay](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingDevPay.html)\. If the request is using session credentials, then it requires one `x-amz-security-token` form\. For more information, see [Temporary Security Credentials](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) in the *IAM User Guide*\.  |  No  | 
@@ -158,30 +158,10 @@ The following table describes condition matching types\. Although you must speci
 
 |  Condition  |  Description  | 
 | --- | --- | 
-|  Exact Matches  |  Exact matches verify that fields match specific values\. This example indicates that the ACL must be set to public\-read: 
-
-```
-1. {"acl": "public-read" }
-``` This example is an alternate way to indicate that the ACL must be set to public\-read: 
-
-```
-1. [ "eq", "$acl", "public-read" ]
-```  | 
-|  Starts With  |  If the value must start with a certain value, use starts\-with\. This example indicates that the key must start with user/betty: 
-
-```
-1. ["starts-with", "$key", "user/betty/"]
-```  | 
-|  Matching Any Content  |  To configure the policy to allow any content within a field, use starts\-with with an empty value\. This example allows any success\_action\_redirect: 
-
-```
-1. ["starts-with", "$success_action_redirect", ""]
-```  | 
-|  Specifying Ranges  |  For fields that accept ranges, separate the upper and lower ranges with a comma\. This example allows a file size from 1 to 10 megabytes: 
-
-```
-1. ["content-length-range", 1048579, 10485760]
-```  | 
+|  Exact Matches  |  Exact matches verify that fields match specific values\. This example indicates that the ACL must be set to public\-read: <pre>{"acl": "public-read" }</pre> This example is an alternate way to indicate that the ACL must be set to public\-read: <pre>[ "eq", "$acl", "public-read" ]</pre>  | 
+|  Starts With  |  If the value must start with a certain value, use starts\-with\. This example indicates that the key must start with user/betty: <pre>["starts-with", "$key", "user/betty/"]</pre>  | 
+|  Matching Any Content  |  To configure the policy to allow any content within a field, use starts\-with with an empty value\. This example allows any success\_action\_redirect: <pre>["starts-with", "$success_action_redirect", ""]</pre>  | 
+|  Specifying Ranges  |  For fields that accept ranges, separate the upper and lower ranges with a comma\. This example allows a file size from 1 to 10 megabytes: <pre>["content-length-range", 1048579, 10485760]</pre>  | 
 
 ### Character Escaping<a name="HTTPPOSTEscaping"></a>
 

@@ -54,7 +54,7 @@ The request with HTTP 1\.0 and omitting the `host` header is as follows:
 1. GET /johnsmith.net/homepage.html HTTP/1.0
 ```
 
-For information about DNS\-compatible names, see Limitations\. For more information about keys, see Keys\.
+For information about DNS\-compatible names, see [Limitations](#VirtualHostingLimitations)\. For more information about keys, see [Keys](Introduction.md#BasicsKeys)\.
 
 **Example Virtual Hosted–Style Method**  
 This example uses `johnsmith.net` as the bucket name and `homepage.html` as the key name\.  
@@ -139,7 +139,7 @@ Amazon S3 uses the host name to determine the bucket name\. For example, suppose
 
 Because Amazon S3 sees only the original host name `www.example.com` and is unaware of the CNAME mapping used to resolve the request, the CNAME and the bucket name must be the same\.
 
-Any Amazon S3 endpoint can be used in a CNAME\. For example, `s3-ap-southeast-1.amazonaws.com` can be used in CNAMEs\. For more information about endpoints, see Request Endpoints\.
+Any Amazon S3 endpoint can be used in a CNAME\. For example, `s3-ap-southeast-1.amazonaws.com` can be used in CNAMEs\. For more information about endpoints, see [Request Endpoints](MakingRequests.md#RequestEndpoints)\.
 
 **To associate a host name with an Amazon S3 bucket using CNAMEs**
 

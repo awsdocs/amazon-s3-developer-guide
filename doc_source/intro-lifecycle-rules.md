@@ -178,7 +178,7 @@ You can direct Amazon S3 to perform specific actions in an object's lifetime by 
 
   For a versioned bucket \(versioning\-enabled or versioning\-suspended bucket\), the `Transition` action applies to the current object version\. To manage noncurrent versions, Amazon S3 defines the `NoncurrentVersionTransition` action \(described below\)\.
 
-+ **Expiration action element** – The `Expiration` action expires objects identified in the rule\. Amazon S3 makes all expired objects unavailable\. Whether the objects are permanently removed depends on the versioning state of the bucket\. 
++ **Expiration action element** – The `Expiration` action expires objects identified in the rule and applies to eligible objects in any of the Amazon S3 storage classes\. For mor information about storage classes, [Storage Classes](storage-class-intro.md)\. \. Amazon S3 makes all expired objects unavailable\. Whether the objects are permanently removed depends on the versioning state of the bucket\. 
 **Important**  
 Object expiration lifecycle polices do not remove incomplete multipart uploads\. To remove incomplete multipart uploads you must use the **AbortIncompleteMultipartUpload** lifecycle configuration action that is described later in this section\. 
 
@@ -191,8 +191,6 @@ Object expiration lifecycle polices do not remove incomplete multipart uploads\.
     + Amazon S3 won't take any action if there are one or more object versions and the delete marker is the current version\.
 
     + If the current object version is the only object version and it is also a delete marker \(also referred as an *expired object delete marker*, where all object versions are deleted and you only have a delete marker remaining\), Amazon S3 removes the expired object delete marker\. You can also use the expiration action to direct Amazon S3 to remove any expired object delete markers\. For an example, see [Example 7: Removing Expired Object Delete Markers](lifecycle-configuration-examples.md#lifecycle-config-conceptual-ex7)\. 
-**Important**  
- Amazon S3 removes an expired object delete marker no sooner than 48 hours after the object expired\.
 
     The additional considerations for Amazon S3 to manage expiration are as follows:
 
@@ -224,7 +222,8 @@ You cannot specify this lifecycle action in a rule that specifies a filter based
 **Note**  
 You cannot specify this lifecycle action in a rule that specifies a filter based on object tags\. 
 
-**How Amazon S3 Calculates How Long an Object Has Been Noncurrent**  
+### How Amazon S3 Calculates How Long an Object Has Been Noncurrent<a name="non-current-days-calculations"></a>
+
  In a versioning\-enabled bucket, you can have multiple versions of an object, there is always one current version, and zero or more noncurrent versions\. Each time you upload an object, the current version is retained as the noncurrent version and the newly added version, the successor, becomes the current version\. To determine the number of days an object is noncurrent, Amazon S3 looks at when its successor was created\. Amazon S3 uses the number of days since its successor was created as the number of days an object is noncurrent\. 
 
 **Restoring Previous Versions of an Object When Using Lifecycle Configurations**  

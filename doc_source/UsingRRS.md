@@ -4,9 +4,7 @@
 + [Setting the Storage Class of an Object You Upload](SetStoClsOfObjUploaded.md)
 + [Changing the Storage Class of an Object in Amazon S3](ChgStoClsOfObj.md)
 
-Amazon S3 stores objects according to their storage class\. It assigns the storage class to an object when it is written to Amazon S3\. You can assign objects a specific storage class \(`standard` or `reduced redundancy`\) only when you write the objects to an Amazon S3 bucket or when you copy objects that are already stored in Amazon S3\. Standard is the default storage class\. For information about storage classes, see [Object Key and Metadata](UsingMetadata.md)\.
-
- In order to reduce storage costs, you can use reduced redundancy storage for noncritical, reproducible data at lower levels of redundancy than Amazon S3 provides with standard storage\. The lower level of redundancy results in less durability and availability, but in many cases, the lower costs can make reduced redundancy storage an acceptable storage solution\. For example, it can be a cost\-effective solution for sharing media content that is durably stored elsewhere\. It can also make sense if you are storing thumbnails and other resized images that can be easily reproduced from an original image\.
+Amazon S3 stores objects according to their storage class\. It assigns the storage class to an object when it is written to Amazon S3\. You can assign objects a specific storage class \(`STANDARD`, `STANDARD_IA`, `REDUCED_REDUNDANCY`\) only when you write the objects to an Amazon S3 bucket or when you copy objects that are already stored in Amazon S3\. Standard is the default storage class\. For information about storage classes, see [Storage Classes](storage-class-intro.md)\.
 
  Reduced redundancy storage is designed to provide 99\.99% durability of objects over a given year\. This durability level corresponds to an average annual expected loss of 0\.01% of objects\. For example, if you store 10,000 objects using the RRS option, you can, on average, expect to incur an annual loss of a single object per year \(0\.01% of 10,000 objects\)\. 
 
