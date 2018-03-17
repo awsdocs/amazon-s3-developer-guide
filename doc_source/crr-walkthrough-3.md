@@ -38,6 +38,7 @@ In this exercise, you update replication configuration in exercise 2 \([Walkthro
            "Prefix": "Tax",
            "Status": "Enabled",
            "Destination": {
+             "Account": "AWS-ID-Account-B",
              "Bucket": "arn:aws:s3:::destination-bucket",
              "AccessControlTranslation" : {
      		   "Owner" : "Destination"
