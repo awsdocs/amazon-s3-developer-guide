@@ -49,7 +49,7 @@ Amazon S3 also supports the `s3:x-amz-server-side-encryption-aws-kms-key-id` con
 When you upload an object, you can specify the KMS key using the `x-amz-server-side-encryption-aws-kms-key-id` header\. If the header is not present in the request, Amazon S3 assumes the default KMS key\. Regardless, the KMS key ID that Amazon S3 uses for object encryption must match the KMS key ID in the policy, otherwise Amazon S3 denies the request\.
 
 **Important**  
-All GET and PUT requests for an object protected by AWS KMS will fail if they are not made via SSL or by using SigV4\. 
+All GET and PUT requests for an object protected by AWS KMS will fail if they are not made via SSL or by using AWS Signature Version 4\. 
 
 SSE\-KMS encrypts only the object data\. Any object metadata is not encrypted\.
 
