@@ -2,7 +2,7 @@
 
 When you configure a bucket as a website, you must make the objects that you want to serve publicly readable\. To do this, you write a bucket policy that grants everyone `s3:GetObject` permission\. On the website endpoint, if a user requests an object that doesn't exist, Amazon S3 returns HTTP response code `404 (Not Found)`\. If the object exists but you haven't granted read permission on it, the website endpoint returns HTTP response code `403 (Access Denied)`\. The user can use the response code to infer whether a specific object exists\. If you don't want this behavior, you should not enable website support for your bucket\. 
 
-The following sample bucket policy grants everyone access to the objects in the specified folder\. For more information about bucket policies, see [Using Bucket Policies and User Policies](using-iam-policies.md)\.
+The following sample bucket policy grants everyone access to the objects in the specified bucket\. For more information about bucket policies, see [Using Bucket Policies and User Policies](using-iam-policies.md)\.
 
 ```
  1. {
