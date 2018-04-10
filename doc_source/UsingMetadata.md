@@ -35,7 +35,7 @@ The following are examples of valid object key names:
 
 Note that the Amazon S3 data model is a flat structure: you create a bucket, and the bucket stores objects\. There is no hierarchy of subbuckets or subfolders; however, you can infer logical hierarchy using key name prefixes and delimiters as the Amazon S3 console does\. The Amazon S3 console supports a concept of folders\. Suppose that your bucket \(`admin-created`\) has four objects with the following object keys:
 
-`Development/Projects1.xls`
+`Development/Projects.xls`
 
 `Finance/statement1.pdf`
 
