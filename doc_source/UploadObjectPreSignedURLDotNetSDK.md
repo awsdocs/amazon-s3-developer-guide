@@ -27,7 +27,7 @@ The following C\# code example demonstrates the preceding tasks\.
  9.         Expires    = DateTime.Now.AddMinutes(5)
 10.     };
 11. string url = null;
-12.  url = s3Client.GetPreSignedURL(request);
+12.  url = client.GetPreSignedURL(request);
 13. 
 14. // Upload a file using the pre-signed URL.
 15. HttpWebRequest httpRequest = WebRequest.Create(url) as HttpWebRequest;
