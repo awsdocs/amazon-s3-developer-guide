@@ -12,7 +12,7 @@ The server access log files consist of a sequence of new\-line delimited log rec
 ```
 
 **Note**  
-Any field can be set to `-` to indicate that the data was unknown or unavailable, or that the field was not applicable to this request\. 
+Any field can be set to `-` or `"-"` to indicate that the data was unknown or unavailable, or that the field was not applicable to this request\. 
 
 The following list describes the log record fields\.
 
