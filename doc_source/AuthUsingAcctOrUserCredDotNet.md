@@ -104,5 +104,4 @@ For working examples, see [Working with Amazon S3 Objects](UsingObjects.md) and 
 For example, to list all the object keys in your bucket, see [Listing Keys Using the AWS SDK for \.NET](ListingObjectKeysUsingNetSDK.md)\. 
 
 ## Related Resources<a name="RelatedResources003"></a>
-
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

@@ -2,7 +2,7 @@
 
 The AWS SDK for Java provides an API for the Amazon S3 bucket and object operations\. For object operations, in addition to providing the API to upload objects in a single operation, the SDK provides an API to upload large objects in parts\. For more information, see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\. 
 
-
+**Topics**
 + [The Java API Organization](#JavaAPIOrganization)
 + [Testing the Java Code Examples](#TestingJavaSamples)
 
@@ -22,15 +22,12 @@ When you're using a stream for the source of data, the `TransferManager` class d
 ## The Java API Organization<a name="JavaAPIOrganization"></a>
 
 The following packages in the AWS SDK for Java provide the API:
-
 + **com\.amazonaws\.services\.s3—**Provides the implementation APIs for Amazon S3 bucket and object operations\. 
 
   For example, it provides methods to create buckets, upload objects, get objects, delete objects, and list keys\. 
-
 + **com\.amazonaws\.services\.s3\.transfer—**Provides the high\-level API data upload\.
 
   This high\-level API is designed to further simplify uploading objects to Amazon S3\. It includes the `TransferManager` class\. It is particularly useful when uploading large objects in parts\. It also includes the `TransferManagerConfiguration` class, which you can use to configure the minimum part size for uploading parts and the threshold in bytes of when to use multipart uploads\.
-
 + **com\.amazonaws\.services\.s3\.model—**Provides the low\-level API classes to create requests and process responses\.
 
   For example, it includes the `GetObjectRequest` class to describe your get object request, the `ListObjectRequest` class to describe your list keys requests, and the `InitiateMultipartUploadRequest` and `InitiateMultipartUploadResult` classes when initiating a multipart upload\. 

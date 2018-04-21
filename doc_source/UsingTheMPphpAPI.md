@@ -7,7 +7,7 @@ The SDK is available at [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/), 
 **Note**  
 The setup for using the AWS SDK for PHP depends on your environment and how you want to run your application\. To set up your environment to run the examples in this documentation, see the [AWS SDK for PHP Getting Started Guide](http://docs.aws.amazon.com/aws-sdk-php/v2/guide/index.html#getting-started)\.
 
-
+**Topics**
 + [AWS SDK for PHP Levels](#TheMPphpAPI)
 + [Running PHP Examples](#running-php-samples)
 + [Related Resources](#RelatedResources-UsingTheMPphpAPI)
@@ -42,7 +42,5 @@ The following procedure describes how to run the PHP code examples in this guide
 |  5  |  Test the example according to your setup\.  | 
 
 ## Related Resources<a name="RelatedResources-UsingTheMPphpAPI"></a>
-
 + [AWS SDK for PHP for Amazon S3](http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/service-s3.html)
-
 + [AWS SDK for PHP Documentation](http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/index.html)

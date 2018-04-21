@@ -2,7 +2,7 @@
 
 This introduction to Amazon Simple Storage Service is intended to give you a detailed summary of this web service\. After reading this section, you should have a good idea of what it offers and how it can fit in with your business\.
 
-
+**Topics**
 + [Overview of Amazon S3 and This Guide](#overview)
 + [Advantages to Amazon S3](#features)
 + [Amazon S3 Concepts](#CoreConcepts)
@@ -20,22 +20,17 @@ This guide describes how you send requests to create buckets, store and retrieve
 ## Advantages to Amazon S3<a name="features"></a>
 
 Amazon S3 is intentionally built with a minimal feature set that focuses on simplicity and robustness\. Following are some of advantages of the Amazon S3 service:
-
 + **Create Buckets** – Create and name a bucket that stores data\. Buckets are the fundamental container in Amazon S3 for data storage\.
-
 + **Store data in Buckets** – Store an infinite amount of data in a bucket\. Upload as many objects as you like into an Amazon S3 bucket\. Each object can contain up to 5 TB of data\. Each object is stored and retrieved using a unique developer\-assigned key\.
-
 + **Download data** – Download your data or enable others to do so\. Download your data any time you like or allow others to do the same\.
-
 + **Permissions** – Grant or deny access to others who want to upload or download data into your Amazon S3 bucket\. Grant upload and download permissions to three types of users\. Authentication mechanisms can help keep data secure from unauthorized access\.
-
 + **Standard interfaces** – Use standards\-based REST and SOAP interfaces designed to work with any Internet\-development toolkit\.
 **Note**  
  SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\. 
 
 ## Amazon S3 Concepts<a name="CoreConcepts"></a>
 
-
+**Topics**
 + [Buckets](#BasicsBucket)
 + [Objects](#BasicsObjects)
 + [Keys](#BasicsKeys)
@@ -79,13 +74,9 @@ Amazon S3 offers eventual consistency for overwrite PUTS and DELETES in all regi
  Updates to a single key are atomic\. For example, if you PUT to an existing key, a subsequent read might return the old data or the updated data, but it will never write corrupted or partial data\. 
 
 Amazon S3 achieves high availability by replicating data across multiple servers within Amazon's data centers\. If a PUT request is successful, your data is safely stored\. However, information about the changes must replicate across Amazon S3, which can take some time, and so you might observe the following behaviors:
-
 +  A process writes a new object to Amazon S3 and immediately lists keys within its bucket\. Until the change is fully propagated, the object might not appear in the list\. 
-
 +  A process replaces an existing object and immediately attempts to read it\. Until the change is fully propagated, Amazon S3 might return the prior data\. 
-
 +  A process deletes an existing object and immediately attempts to read it\. Until the deletion is fully propagated, Amazon S3 might return the deleted data\. 
-
 +  A process deletes an existing object and immediately lists keys within its bucket\. Until the deletion is fully propagated, Amazon S3 might list the deleted object\. 
 
 **Note**  
@@ -121,7 +112,7 @@ In the last example, Client 2 performs W2 before Amazon S3 returns a success for
 
 ## Amazon S3 Features<a name="S3Features"></a>
 
-
+**Topics**
 + [Storage Classes](#RRS)
 + [Bucket Policies](#BucketPolicies)
 + [AWS Identity and Access Management](#AWSIdentityandAccessManagement)
@@ -142,11 +133,8 @@ For more information, see [Storage Classes](storage-class-intro.md)\.
 Bucket policies provide centralized access control to buckets and objects based on a variety of conditions, including Amazon S3 operations, requesters, resources, and aspects of the request \(e\.g\., IP address\)\. The policies are expressed in our *access policy language* and enable centralized management of permissions\. The permissions attached to a bucket apply to all of the objects in that bucket\. 
 
 Individuals as well as companies can use bucket policies\. When companies register with Amazon S3 they create an *account*\. Thereafter, the company becomes synonymous with the account\. Accounts are financially responsible for the Amazon resources they \(and their employees\) create\. Accounts have the power to grant bucket policy permissions and assign employees permissions based on a variety of conditions\. For example, an account could create a policy that gives a user write access:
-
 + To a particular S3 bucket
-
 + From an account's corporate network
-
 + During business hours
 
 An account can grant one user limited read and write access, but allow another to create and delete buckets as well\. An account could allow several field offices to store their daily reports in a single bucket, allowing each office to write only to a certain set of names \(e\.g\., "Nevada/\*" or "Utah/\*"\) and only from the office's IP address range\.
@@ -154,11 +142,8 @@ An account can grant one user limited read and write access, but allow another t
 Unlike access control lists \(described below\), which can add \(grant\) permissions only on individual objects, policies can either add or deny permissions across all \(or a subset\) of objects within a bucket\. With one request an account can set the permissions of any number of objects in a bucket\. An account can use wildcards \(similar to regular expression operators\) on Amazon resource names \(ARNs\) and other values, so that an account can control access to groups of objects that begin with a common prefix or end with a given extension such as \.*html*\.
 
 Only the bucket owner is allowed to associate a policy with a bucket\. Policies, written in the access policy language, *allow* or *deny* requests based on:
-
 + Amazon S3 bucket operations \(such as `PUT ?acl)`, and object operations \(such as `PUT Object`, or `GET Object`\)
-
 + Requester
-
 + Conditions specified in the policy
 
 An account can control access based on specific Amazon S3 operations, such as `GetObject`, `GetObjectVersion`, `DeleteObject`, or `DeleteBucket`\.
@@ -172,16 +157,13 @@ For more information, see [Using Bucket Policies and User Policies](using-iam-po
 For example, you can use IAM with Amazon S3 to control the type of access a user or group of users has to specific parts of an Amazon S3 bucket your AWS account owns\. 
 
 For more information about IAM, see the following:
-
 + [AWS Identity and Access Management \(IAM\)](https://aws.amazon.com/iam/)
-
 + [Getting Started](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started.html)
-
 + [IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/)
 
 ### Access Control Lists<a name="S3_ACLs"></a>
 
-For more information, see [Managing Access with ACLs ](S3_ACLs_UsingACLs.md)
+For more information, see [Managing Access with ACLs](S3_ACLs_UsingACLs.md)
 
 ### Versioning<a name="Versions"></a>
 
@@ -192,15 +174,10 @@ For more information, see [Object Versioning](ObjectVersioning.md)\.
 Following are the most common operations you'll execute through the API\.
 
 **Common Operations**
-
 + **Create a Bucket** – Create and name your own bucket in which to store your objects\.
-
 + **Write an Object** – Store data by creating or overwriting an object\. When you write an object, you specify a unique key in the namespace of your bucket\. This is also a good time to specify any access control you want on the object\.
-
 + **Read an Object** – Read data back\. You can download the data via HTTP or BitTorrent\.
-
 + **Deleting an Object** – Delete some of your data\.
-
 + **Listing Keys** – List the keys contained in one of your buckets\. You can filter the key list based on a prefix\.
 
 Details on this and all other functionality are described in detail later in this guide\.
@@ -242,9 +219,6 @@ For information about paying for Amazon S3 storage, see [Amazon S3 Pricing](http
 ## Related Services<a name="RelatedAmazonWebServices"></a>
 
 Once you load your data into Amazon S3, you can use it with other services that we provide\. The following services are the ones you might use most frequently:
-
 + **Amazon Elastic Compute Cloud** – This web service provides virtual compute resources in the cloud\. For more information, go to the [Amazon EC2 product details page](https://aws.amazon.com/ec2/)\.
-
 + **Amazon EMR** – This web service enables businesses, researchers, data analysts, and developers to easily and cost\-effectively process vast amounts of data\. It utilizes a hosted Hadoop framework running on the web\-scale infrastructure of Amazon EC2 and Amazon S3\. For more information, go to the [Amazon EMR product details page](https://aws.amazon.com/elasticmapreduce/)\.
-
 + **AWS Import/Export** – AWS Import/Export enables you to mail a storage device, such as a RAID drive, to Amazon so that we can upload your \(terabytes\) of data into Amazon S3\. For more information, go to the [AWS Import/Export Developer Guide](http://docs.aws.amazon.com/AWSImportExport/latest/DG/)\. 

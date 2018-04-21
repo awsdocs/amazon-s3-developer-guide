@@ -1,6 +1,6 @@
 # Appendix B: Authenticating Requests \(AWS Signature Version 2\)<a name="auth-request-sig-v2"></a>
 
-
+**Topics**
 + [Authenticating Requests Using the REST API](S3_Authentication2.md)
 + [Signing and Authenticating REST Requests](RESTAuthentication.md)
 + [Browser\-Based Uploads Using POST \(AWS Signature Version 2\)](UsingHTTPPOST.md)

@@ -31,7 +31,5 @@ For working examples, see [Operations on Objects](ObjectOperations.md)\. You can
 For an example of listing object keys in a bucket, see [Listing Keys Using the AWS SDK for PHP](ListingObjectKeysUsingPHP.md)\. 
 
 ## Related Resources<a name="RelatedResources-AuthUsingAcctOrUserCredPHP3-related-resources"></a>
-
 + [ AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client Class](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html) 
-
 + [AWS SDK for PHP Documentation](http://aws.amazon.com/documentation/sdk-for-php/)

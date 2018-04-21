@@ -2,7 +2,7 @@
 
 This section contains information on how to make requests to Amazon S3 endpoints by using the REST API\. For a list of Amazon S3 endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
 
-
+**Topics**
 + [Making Requests to Dual\-Stack Endpoints by Using the REST API](#rest-api-dual-stack)
 + [Virtual Hosting of Buckets](VirtualHosting.md)
 + [Request Redirection and the REST API](RESTRedirect.md)
@@ -34,9 +34,7 @@ Following is an example of a path\-style version of the same request\.
  Amazon S3 supports virtual hosted\-style and path\-style access in all regions\. The path\-style syntax, however, requires that you use the region\-specific endpoint when attempting to access a bucket\. For example, if you have a bucket called `mybucket` that resides in the EU \(Ireland\) region, you want to use path\-style syntax, and the object is named `puppy.jpg`, the correct URI is `http://s3-eu-west-1.amazonaws.com/mybucket/puppy.jpg`\. 
 
 You will receive an HTTP response code 307 Temporary Redirect error and a message indicating what the correct URI is for your resource if you try to access a bucket outside the US East \(N\. Virginia\) region with path\-style syntax that uses either of the following: 
-
 +  `http://s3.amazonaws.com` 
-
 +  An endpoint for a region different from the one where the bucket resides\. For example, if you use `http://s3-eu-west-1.amazonaws.com` for a bucket that was created in the US West \(N\. California\) region\.
 
 ## Making Requests to Dual\-Stack Endpoints by Using the REST API<a name="rest-api-dual-stack"></a>

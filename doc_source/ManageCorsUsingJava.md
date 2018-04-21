@@ -3,11 +3,8 @@
 You can use the AWS SDK for Java to manage cross\-origin resource sharing \(CORS\) for a bucket\. For more information about CORS, see [Cross\-Origin Resource Sharing \(CORS\)](cors.md)\.
 
 This section provides sample code snippets for following tasks, followed by a complete example program demonstrating all tasks\.
-
 + Creating an instance of the Amazon S3 client class
-
 + Creating and adding a CORS configuration to a bucket
-
 + Updating an existing CORS configuration
 
 

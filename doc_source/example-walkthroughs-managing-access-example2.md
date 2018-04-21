@@ -1,6 +1,6 @@
 # Example 2: Bucket Owner Granting Cross\-Account Bucket Permissions<a name="example-walkthroughs-managing-access-example2"></a>
 
-
+**Topics**
 + [Step 0: Preparing for the Walkthrough](#cross-acct-access-step0)
 + [Step 1: Do the Account A Tasks](#access-policies-walkthrough-cross-account-permissions-acctA-tasks)
 + [Step 2: Do the Account B Tasks](#access-policies-walkthrough-cross-account-permissions-acctB-tasks)
@@ -59,9 +59,7 @@ All the tasks of creating users and granting permissions are done in the AWS Man
    1. Repeat the preceding step using Account B credentials and create administrator user AccountBadmin\.
 
 1. Set up either the AWS Command Line Interface \(CLI\) or the AWS Tools for Windows PowerShell\. Make sure you save administrator user credentials as follows:
-
    + If using the AWS CLI, create two profiles, AccountAadmin and AccountBadmin, in the config file\.
-
    + If using the AWS Tools for Windows PowerShell, make sure you store credentials for the session as AccountAadmin and AccountBadmin\.
 
    For instructions, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
@@ -136,14 +134,12 @@ The bucket policy grants the `s3:GetBucketLocation` and `s3:ListBucket` permissi
    ```
 
 1. Verify Account B \(and thus its administrator user\) can perform the operations\.
-
    + Using the AWS CLI
 
      ```
      aws s3 ls s3://examplebucket --profile AccountBadmin
      aws s3api get-bucket-location --bucket examplebucket --profile AccountBadmin
      ```
-
    + Using the AWS Tools for Windows PowerShell
 
      ```
@@ -168,7 +164,6 @@ Using the IAM user sign\-in URL for Account B, first sign in to the AWS Manageme
 1. Note down the UserDave credentials\.
 
 ### Step 2\.3: Delegate Permissions to User Dave<a name="access-policies-walkthrough-example2-delegate-perm-userdave"></a>
-
 + Create an inline policy for the user Dave by using the following policy\. You will need to update the policy by providing your bucket name\.
 
   It is assumed you are signed in to the console using AccountBadmin user credentials\.
@@ -282,13 +277,11 @@ You can have permissions granted via an ACL, a bucket policy, and a user policy\
    ```
 
 1. Now if you try to get a bucket list using AccountBadmin credentials, you will get access denied\.
-
    + Using the AWS CLI:
 
      ```
      aws s3 ls s3://examplebucket --profile AccountBadmin
      ```
-
    + Using the AWS Tools for Windows PowerShell:
 
      ```
@@ -300,11 +293,8 @@ You can have permissions granted via an ACL, a bucket policy, and a user policy\
 1. After you are done testing, you can do the following to clean up\.
 
    1. Sign in to the AWS Management Console \([AWS Management Console](https://console.aws.amazon.com/)\) using Account A credentials, and do the following:
-
      + In the Amazon S3 console, remove the bucket policy attached to *examplebucket*\. In the bucket **Properties**, delete the policy in the **Permissions** section\. 
-
      + If the bucket is created for this exercise, in the Amazon S3 console, delete the objects and then delete the bucket\. 
-
      + In the IAM console, remove the AccountAadmin user\.
 
 1. Sign in to the AWS Management Console \([AWS Management Console](https://console.aws.amazon.com/)\) using Account B credentials\. In the IAM console, delete user AccountBadmin\.

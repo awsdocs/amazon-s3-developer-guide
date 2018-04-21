@@ -1,6 +1,6 @@
 # Making Requests Using Federated User Temporary Credentials<a name="AuthUsingTempFederationToken"></a>
 
-
+**Topics**
 + [Making Requests Using Federated User Temporary Credentials \- AWS SDK for Java](AuthUsingTempFederationTokenJava.md)
 + [Making Requests Using Federated User Temporary Credentials \- AWS SDK for \.NET](AuthUsingTempFederationTokenDotNet.md)
 + [Making Requests Using Federated User Temporary Credentials \- AWS SDK for PHP](AuthUsingTempFederationTokenPHP.md)

@@ -16,19 +16,13 @@ For more information about Amazon S3 website endpoints, see [Website Endpoints](
 ## Index Documents and Folders<a name="IndexDocumentsandFolders"></a>
 
  In Amazon S3, a bucket is a flat container of objects; it does not provide any hierarchical organization as the file system on your computer does\. You can create a logical hierarchy by using object key names that imply a folder structure\. For example, consider a bucket with three objects and the following key names\. 
-
 + `sample1.jpg`
-
 + `photos/2006/Jan/sample2.jpg`
-
 + `photos/2006/Feb/sample3.jpg`
 
 Although these are stored with no physical hierarchical organization, you can infer the following logical folder structure from the key names\.
-
 + `sample1.jpg` object is at the root of the bucket\.
-
 + `sample2.jpg` object is in the `photos/2006/Jan` subfolder\.
-
 + `sample3.jpg` object is in the `photos/2006/Feb` subfolder\. 
 
  The folder concept that Amazon S3 console supports is based on object key names\. To continue the previous example, the console displays the `examplebucket` with a `photos` folder\. 

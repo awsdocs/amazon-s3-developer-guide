@@ -22,9 +22,7 @@ In response, Amazon S3 returns the encryption algorithm used for encrypting your
 For a working sample that shows how to upload an object, see [Upload an Object Using the AWS SDK for Java](UploadObjSingleOpJava.md)\. For server\-side encryption, add the `ObjectMetadata` property to your request\. 
 
 When uploading large objects using multipart upload API, you can request server\-side encryption for the object that you are uploading\. 
-
 + When using the low\-level multipart upload API \(see [Upload a File](llJavaUploadFile.md)\) to upload a large object, you can specify server\-side encryption when you initiate the multipart upload\. That is, you add the `ObjectMetadata` property by calling the `InitiateMultipartUploadRequest.setObjectMetadata` method\. 
-
 + When using the high\-level multipart upload API \(see [Using the AWS Java SDK for Multipart Upload \(High\-Level API\)](usingHLmpuJava.md)\), the `TransferManager` class provides methods to upload objects\. You can call any of the upload methods that take `ObjectMetadata` as a parameter\.
 
 ## Determining the Encryption Algorithm Used<a name="DeterminingEncryptionAlgorithmUsed01"></a>

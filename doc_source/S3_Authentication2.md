@@ -3,15 +3,11 @@
 When accessing Amazon S3 using REST, you must provide the following items in your request so the request can be authenticated: 
 
 **Request Elements**
-
 + **AWS Access Key Id** – Each request must contain the access key ID of the identity you are using to send your request\. 
-
 + **Signature** – Each request must contain a valid request signature, or the request is rejected\. 
 
   A request signature is calculated using your secret access key, which is a shared secret known only to you and AWS\.
-
 + **Time stamp** – Each request must contain the date and time the request was created, represented as a string in UTC\. 
-
 + **Date** – Each request must contain the time stamp of the request\. 
 
   Depending on the API action you're using, you can provide an expiration date and time for the request instead of or in addition to the time stamp\. See the authentication topic for the particular action to determine what it requires\.

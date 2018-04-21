@@ -163,5 +163,4 @@ You must update the following sample and provide the bucket name that you specif
 ```
 
 ## Related Resources<a name="RelatedResources005"></a>
-
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

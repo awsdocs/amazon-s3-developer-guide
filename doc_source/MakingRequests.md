@@ -1,6 +1,6 @@
 # Making Requests<a name="MakingRequests"></a>
 
-
+**Topics**
 + [About Access Keys](#TypesofSecurityCredentials)
 + [Request Endpoints](#RequestEndpoints)
 + [Making Requests to Amazon S3 over IPv6](ipv6-access.md)
@@ -20,9 +20,7 @@ The following sections review the types of access keys that you can use to make 
 ### AWS Account Access Keys<a name="requestsUsingAcctCred"></a>
 
 The account access keys provide full access to the AWS resources owned by the account\. The following are examples of access keys:
-
 + Access key ID \(a 20\-character, alphanumeric string\)\. For example: AKIAIOSFODNN7EXAMPLE
-
 + Secret access key \(a 40\-character string\)\. For example: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
 The access key ID uniquely identifies an AWS account\. You can use these access keys to send authenticated requests to Amazon S3\. 
@@ -33,11 +31,11 @@ You can create one AWS account for your company; however, there may be several e
 
 In such scenarios, you can use AWS Identity and Access Management \(IAM\) to create users under your AWS account with their own access keys and attach IAM user policies granting appropriate resource access permissions to them\. To better manage these users, IAM enables you to create groups of users and grant group\-level permissions that apply to all users in that group\. 
 
-These users are referred as IAM users that you create and manage within AWS\. The parent account controls a user's ability to access AWS\. Any resources an IAM user creates are under the control of and paid for by the parent AWS account\. These IAM users can send authenticated requests to Amazon S3 using their own security credentials\. For more information about creating and managing users under your AWS account, go to the [AWS Identity and Access Management product details page](https://aws.amazon.com/iam/)\. 
+These users are referred to as IAM users that you create and manage within AWS\. The parent account controls a user's ability to access AWS\. Any resources an IAM user creates are under the control of and paid for by the parent AWS account\. These IAM users can send authenticated requests to Amazon S3 using their own security credentials\. For more information about creating and managing users under your AWS account, go to the [AWS Identity and Access Management product details page](https://aws.amazon.com/iam/)\. 
 
 ### Temporary Security Credentials<a name="requestsUsingTempCred"></a>
 
-In addition to creating IAM users with their own access keys, IAM also enables you to grant temporary security credentials \(temporary access keys and a security token\) to any IAM user to enable them to access your AWS services and resources\. You can also manage users in your system outside AWS\. These are referred as federated users\. Additionally, users can be applications that you create to access your AWS resources\.
+In addition to creating IAM users with their own access keys, IAM also enables you to grant temporary security credentials \(temporary access keys and a security token\) to any IAM user to enable them to access your AWS services and resources\. You can also manage users in your system outside AWS\. These are referred to as federated users\. Additionally, users can be applications that you create to access your AWS resources\.
 
 IAM provides the AWS Security Token Service API for you to request temporary security credentials\. You can use either the AWS STS API or the AWS SDK to request these credentials\. The API returns temporary security credentials \(access key ID and secret access key\), and a security token\. These credentials are valid only for the duration you specify when you request them\. You use the access key ID and secret key the same way you use them when sending requests using your AWS account or IAM user access keys\. In addition, you must include the token in each request you send to Amazon S3\. 
 

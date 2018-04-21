@@ -1,6 +1,6 @@
 # Handling REST and SOAP Errors<a name="HandlingErrors"></a>
 
-
+**Topics**
 + [The REST Error Response](UsingRESTError.md)
 + [The SOAP Error Response](UsingSOAPError.md)
 + [Amazon S3 Error Best Practices](ErrorBestPractices.md)

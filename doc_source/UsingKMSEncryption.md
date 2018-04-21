@@ -10,15 +10,10 @@ For more information, see [What is AWS Key Management Service?](http://docs.aws.
 If you are uploading or accessing objects encrypted by SSE\-KMS, you need to use AWS Signature Version 4 for added security\. For more information on how to do this using an AWS SDK, see [Specifying Signature Version in Request Authentication](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version)\.
 
 The highlights of SSE\-KMS are:
-
 + You can choose to create and manage encryption keys yourself, or you can choose to use your default service key uniquely generated on a customer by service by region level\. 
-
 + The ETag in the response is not the MD5 of the object data\.
-
 + The data keys used to encrypt your data are also encrypted and stored alongside the data they protect\. 
-
 + Auditable master keys can be created, rotated, and disabled from the IAM console\. 
-
 + The security controls in AWS KMS can help you meet encryption\-related compliance requirements\.
 
 Amazon S3 supports bucket policies that you can use if you require server\-side encryption for all objects that are stored in your bucket\. For example, the following bucket policy denies upload object \(`s3:PutObject`\) permission to everyone if the request does not include the `x-amz-server-side-encryption` header requesting server\-side encryption with SSE\-KMS\.
@@ -68,13 +63,9 @@ Also, Amazon S3 may append a predefined key of aws:s3:arn with the value equal t
 Having this predefined key as a part of your encryption context means that you can track relevant requests in CloudTrail, so you’ll always be able to see which S3 object's ARN was used with which encryption key\. In addition, this predefined key as a part of your encryption context guarantees that the encryption context is not identical between different S3 objects, which provides additional security for your objects\. Your full encryption context will be validated to have the value equal to the object's ARN\.
 
 The following Amazon S3 APIs support these request headers\.
-
 + PUT operation — When uploading data using the PUT API \(see [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\), you can specify these request headers\. 
-
 + Initiate Multipart Upload — When uploading large objects using the multipart upload API, you can specify these headers\. You specify these headers in the initiate request \(see [Initiate Multipart Upload](http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)\)\.
-
 + POST operation — When using a POST operation to upload an object \(see [POST Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html)\), instead of the request headers, you provide the same information in the form fields\.
-
 + COPY operation — When you copy an object \(see [PUT Object \- Copy](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\), you have both a source object and a target object\. When you pass SSE\-KMS headers with the COPY operation, they will be applied only to the target object\.
 
 The AWS SDKs also provide wrapper APIs for you to request SSE\-KMS with Amazon S3\. 

@@ -1,9 +1,7 @@
 # Monitoring Metrics with Amazon CloudWatch<a name="cloudwatch-monitoring"></a>
 
 Amazon CloudWatch metrics for Amazon S3 can help you understand and improve the performance of applications that use Amazon S3\. There are two ways that you can use CloudWatch with Amazon S3\.
-
 + **Daily Storage Metrics for Buckets** ‐ You can monitor bucket storage using CloudWatch, which collects and processes storage data from Amazon S3 into readable, daily metrics\. These storage metrics for Amazon S3 are reported once per day and are provided to all customers at no additional cost\.
-
 + **Request metrics** ‐ You can choose to monitor Amazon S3 requests to quickly identify and act on operational issues\. The metrics are available at 1 minute intervals after some latency to process\. These CloudWatch metrics are billed at the same rate as the Amazon CloudWatch Custom Metrics\. For information on CloudWatch pricing, see [Amazon CloudWatch Pricing](https://aws.amazon.com/cloudwatch/pricing/)\. To learn more about how to opt\-in to getting these metrics, see [Metrics Configurations for Buckets](metrics-configurations.md)\.
 
   When enabled, request metrics are reported for all object operations\. By default, these 1\-minute metrics are available at the Amazon S3 bucket level\. You can also define a filter for the metrics collected –using a shared prefix or object tag– allowing you to align metrics filters to specific business applications, workflows, or internal organizations\.
@@ -58,7 +56,7 @@ The following dimensions are used to filter Amazon S3 metrics\.
 
 ## Accessing CloudWatch Metrics<a name="cloudwatch-monitoring-accessing"></a>
 
- You can use the following procedures to view the storage metrics for Amazon S3\. Note that the in order to get the Amazon S3 metrics involved, you must set a start and end timestamps\. For metrics for any given 24\-hour period, set the time period to 86400 seconds, the number of seconds in a day\. Also, remember to set the `BucketName` and `StorageType` dimensions\.
+ You can use the following procedures to view the storage metrics for Amazon S3\. Note that to get the Amazon S3 metrics involved, you must set a start and end time stamp\. For metrics for any given 24\-hour period, set the time period to 86400 seconds, the number of seconds in a day\. Also, remember to set the `BucketName` and `StorageType` dimensions\.
 
 For example, if you use the AWS CLI to get the average of a specific bucket's size, in bytes, you could use the following command:
 
@@ -94,7 +92,6 @@ This example produces the following output:
 1. \(Optional\) To filter by the **StorageType** dimension, type the name of the storage class in the search field\.
 
 **To view a list of valid metrics stored for your AWS account using the AWS CLI**
-
 + At a command prompt, use the following command:
 
   ```
@@ -102,13 +99,8 @@ This example produces the following output:
   ```
 
 ## Related Resources<a name="cloudwatch-monitoring-related-resources"></a>
-
 + [Amazon CloudWatch Logs API Reference](http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/)
-
 + [Amazon CloudWatch User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)
-
 + [list\-metrics](http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/list-metrics.html) action in the *AWS CLI Command Reference*\.
-
 + [get\-metric\-statistics](http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html) action in the *AWS CLI Command Reference*\.
-
 +  [Metrics Configurations for Buckets](metrics-configurations.md)\.

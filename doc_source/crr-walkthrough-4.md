@@ -33,7 +33,6 @@ Although this example uses an existing walkthrough to set up CRR in a cross\-acc
    ```
 
    In this example, you can use either the AWS CLI or the AWS SDK to add the replication configuration\. 
-
    + Using AWS CLI\. 
 
      The AWS CLI requires you to specify the replication configuration as JSON\. Save the following JSON in a file \(`replication.json`\)\. 
@@ -79,7 +78,6 @@ Although this example uses an existing walkthrough to set up CRR in a cross\-acc
      --bucket source-bucket \
      --profile accountA
      ```
-
    + Using the AWS SDK for Java\.
 
      For a code example, see [Setting Up Cross\-Region Replication Using the AWS SDK for Java](crr-using-java.md)\. 

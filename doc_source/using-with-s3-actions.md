@@ -2,7 +2,7 @@
 
 Amazon S3 defines a set of permissions that you can specify in a policy\. These are keywords, each of which maps to specific Amazon S3 operations \(see [Operations on Buckets](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketOps.html), and [Operations on Objects](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectOps.html) in the *Amazon Simple Storage Service API Reference*\)\. 
 
-
+**Topics**
 + [Permissions for Object Operations](#using-with-s3-actions-related-to-objects)
 + [Permissions Related to Bucket Operations](#using-with-s3-actions-related-to-buckets)
 + [Permissions Related to Bucket Subresource Operations](#using-with-s3-actions-related-to-bucket-subresources)
@@ -21,7 +21,7 @@ This section provides a list of the permissions for object operations that you c
 | `s3:DeleteObjectTagging` | [DELETE Object tagging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html)  | 
 | s3:DeleteObjectVersion | [DELETE Object \(a Specific Version of the Object\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html) | 
 | `s3:DeleteObjectVersionTagging` | [DELETE Object tagging \(for a Specific Version of the Object\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html) | 
-| s3:GetObject |   [GET Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html), [HEAD Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html) When you grant this permission on a version\-enabled bucket, you always get the latest version data\.   | 
+| s3:GetObject |   [GET Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html), [HEAD Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html), [SELECT Object Content](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html) When you grant this permission on a version\-enabled bucket, you always get the latest version data\.   | 
 | s3:GetObjectAcl | [GET Object ACL](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETacl.html) | 
 | `s3:GetObjectTagging` | [GET Object tagging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html)  | 
 | s3:GetObjectTorrent | [GET Object torrent](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtorrent.html) | 

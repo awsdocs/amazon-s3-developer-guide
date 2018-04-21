@@ -2,7 +2,7 @@
 
 You can use your AWS account or IAM user security credentials to send authenticated requests to Amazon S3\. This section provides examples of how you can send authenticated requests using the AWS SDK for Java, AWS SDK for \.NET, and AWS SDK for PHP\. For a list of available AWS SDKs, go to [Sample Code and Libraries](https://aws.amazon.com/code/)\. 
 
-
+**Topics**
 + [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for Java](AuthUsingAcctOrUserCredJava.md)
 + [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for \.NET](AuthUsingAcctOrUserCredDotNet.md)
 + [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for PHP](AuthUsingAcctOrUserCredPHP.md)
@@ -44,4 +44,4 @@ The easiest way to configure credentials for your AWS SDKs is to use an AWS cred
 
 1. Save the `credentials` file, and delete the \.csv file that you downloaded in step 3\.
 
-Your shared credentials file is now configured on your local computer, and it's ready to be used with the AWK SDKs\.
+Your shared credentials file is now configured on your local computer, and it's ready to be used with the AWS SDKs\.

@@ -1,6 +1,6 @@
 # Example 1: Bucket Owner Granting Its Users Bucket Permissions<a name="example-walkthroughs-managing-access-example1"></a>
 
-
+**Topics**
 + [Step 0: Preparing for the Walkthrough](#grant-permissions-to-user-in-your-account-step0)
 + [Step 1: Create Resources \(a Bucket and an IAM User\) in Account A and Grant Permissions](#grant-permissions-to-user-in-your-account-step1)
 + [Step 2: Test Permissions](#grant-permissions-to-user-in-your-account-test)
@@ -51,9 +51,7 @@ All the tasks of creating users and granting permissions are done in the AWS Man
       1. Note down the **IAM User Sign\-In URL** for AccountAadmin\. You will need to use this URL when signing in to the AWS Management Console\. For more information about where to find it, see [How Users Sign in to Your Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_how-users-sign-in.html) in *IAM User Guide*\. Note down the URL for each of the accounts\.
 
 1. Set up either the AWS Command Line Interface \(CLI\) or the AWS Tools for Windows PowerShell\. Make sure you save administrator user credentials as follows:
-
    + If using the AWS CLI, create two profiles, AccountAadmin and AccountBadmin, in the config file\.
-
    + If using the AWS Tools for Windows PowerShell, make sure you store credentials for the session as AccountAadmin and AccountBadmin\.
 
    For instructions, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
@@ -83,9 +81,7 @@ Using the credentials of user AccountAadmin in Account A, and the special IAM us
    1. In the Amazon S3 console, attach the following bucket policy to *examplebucket*\. 
 
       The policy has two statements\. 
-
       + The first statement grants Dave the bucket operation permissions `s3:GetBucketLocation` and `s3:ListBucket`\.
-
       + The second statement grants the `s3:GetObject` permission\. Because Account A also owns the object, the account administrator is able to grant the `s3:GetObject` permission\. 
 
       In the `Principal` statement, Dave is identified by his user ARN\. For more information about policy elements, see [Access Policy Language Overview](access-policy-language-overview.md)\.

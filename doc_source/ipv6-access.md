@@ -2,7 +2,7 @@
 
 Amazon Simple Storage Service \(Amazon S3\) supports the ability to access S3 buckets using the Internet Protocol version 6 \(IPv6\), in addition to the IPv4 protocol\. Amazon S3 dual\-stack endpoints support requests to S3 buckets over IPv6 and IPv4\. There are no additional charges for accessing Amazon S3 over IPv6\. For more information about pricing, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
 
-
+**Topics**
 + [Getting Started Making Requests over IPv6](#ipv6-access-getting-started)
 + [Using IPv6 Addresses in IAM Policies](#ipv6-access-iam)
 + [Testing IP Address Compatibility](#ipv6-access-test-compatabilty)
@@ -13,13 +13,9 @@ Amazon Simple Storage Service \(Amazon S3\) supports the ability to access S3 bu
 To make a request to an S3 bucket over IPv6, you need to use a dual\-stack endpoint\. The next section describes how to make requests over IPv6 by using dual\-stack endpoints\. 
 
 The following are some things you should know before trying to access a bucket over IPv6: 
-
 + The client and the network accessing the bucket must be enabled to use IPv6\. 
-
 + Both virtual hosted\-style and path style requests are supported for IPv6 access\. For more information, see [Amazon S3 Dual\-Stack Endpoints](dual-stack-endpoints.md#dual-stack-endpoints-description)\.
-
 + If you use source IP address filtering in your AWS Identity and Access Management \(IAM\) user or bucket policies, you need to update the policies to include IPv6 address ranges\. For more information, see [Using IPv6 Addresses in IAM Policies](#ipv6-access-iam)\.
-
 + When using IPv6, server access log files output IP addresses in an IPv6 format\. You need to update existing tools, scripts, and software that you use to parse Amazon S3 log files so that they can parse the IPv6 formatted `Remote IP` addresses\. For more information, see [Server Access Log Format](LogFormat.md) and [Server Access Logging](ServerLogs.md)\. 
 **Note**  
 If you experience issues related to the presence of IPv6 addresses in log files, contact [AWS Support](https://aws.amazon.com/premiumsupport/)\.
@@ -33,19 +29,14 @@ When using the REST API, you access a dual\-stack endpoint directly\. For more i
 When using the AWS Command Line Interface \(AWS CLI\) and AWS SDKs, you can use a parameter or flag to change to a dual\-stack endpoint\. You can also specify the dual\-stack endpoint directly as an override of the Amazon S3 endpoint in the config file\.
 
 You can use a dual\-stack endpoint to access a bucket over IPv6 from any of the following:
-
 + The AWS CLI, see [Using Dual\-Stack Endpoints from the AWS CLI](dual-stack-endpoints.md#dual-stack-endpoints-cli)\.
-
 + The AWS SDKs, see [Using Dual\-Stack Endpoints from the AWS SDKs](dual-stack-endpoints.md#dual-stack-endpoints-sdks)\.
-
 + The REST API, see [Making Requests to Dual\-Stack Endpoints by Using the REST API](RESTAPI.md#rest-api-dual-stack)\.
 
 ### Features Not Available over IPv6<a name="ipv6-not-supported"></a>
 
 The following features are not currently supported when accessing an S3 bucket over IPv6:
-
 + Static website hosting from an S3 bucket
-
 + BitTorrent
 
 ## Using IPv6 Addresses in IAM Policies<a name="ipv6-access-iam"></a>

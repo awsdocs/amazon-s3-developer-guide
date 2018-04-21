@@ -6,7 +6,7 @@ After you receive a temporary copy of the restored object, the object's storage 
 
 The following topics provide more information\.
 
-
+**Topics**
 + [Archive Retrieval Options](#restoring-objects-retrieval-options)
 + [Restore an Archived Object Using the Amazon S3 Console](restoring-objects-console.md)
 + [Restore an Archived Object Using the AWS SDK for Java](restoring-objects-java.md)
@@ -16,11 +16,8 @@ The following topics provide more information\.
 ## Archive Retrieval Options<a name="restoring-objects-retrieval-options"></a>
 
 You can specify one of the following when restoring an archived object: 
-
 + **`Expedited`** \- Expedited retrievals allow you to quickly access your data when occasional urgent requests for a subset of archives are required\. For all but the largest archived objects \(250 MB\+\), data accessed using Expedited retrievals are typically made available within 1–5 minutes\. There are two types of Expedited retrievals: On\-Demand and Provisioned\. On\-Demand requests are similar to EC2 On\-Demand instances and are available most of the time\. Provisioned requests are guaranteed to be available when you need them\. For more information, see [Provisioned Capacity](#restoring-objects-expedited-capacity)\. 
-
 + **`Standard`** \- Standard retrievals allow you to access any of your archived objects within several hours\. Standard retrievals typically complete within 3–5 hours\. This is the default option for retrieval requests that do not specify the retrieval option\.
-
 + **`Bulk`** \- Bulk retrievals are Amazon Glacier’s lowest\-cost retrieval option, enabling you to retrieve large amounts, even petabytes, of data inexpensively in a day\. Bulk retrievals typically complete within 5–12 hours\.
 
 To make an `Expedited`, `Standard`, or `Bulk` retrieval, set the `Tier` request element in the [POST Object restore](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html) REST API request to the option you want, or the equivalent in the AWS CLI, or AWS SDKs\. For Expedited retrievals, there is no need to designate whether an expedited retrieval is On\-Demand or Provisioned\. If you have purchased provisioned capacity, all Expedited retrievals are automatically served through your provisioned capacity\. 

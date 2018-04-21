@@ -2,7 +2,7 @@
 
 This walkthrough explains how user permissions work with Amazon S3\. We will create a bucket with folders, and then we'll create AWS Identity and Access Management users in your AWS account and grant those users incremental permissions on your Amazon S3 bucket and the folders in it\. 
 
-
+**Topics**
 + [Background: Basics of Buckets and Folders](#walkthrough-background1)
 + [Walkthrough Example](#walkthrough-scenario)
 + [Step 0: Preparing for the Walkthrough](#walkthrough-what-you-need)
@@ -23,9 +23,7 @@ The Amazon S3 data model is a flat structure: you create a bucket, and the bucke
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/walkthrough-10.png)
 
 The console shows that a bucket named **companybucket** has three folders, **Private**, **Development**, and **Finance**, and an object, **s3\-dg\.pdf**\. The console uses the object names \(keys\) to create a logical hierarchy with folders and subfolders\. Consider the following examples:
-
 + When you create the **Development** folder, the console creates an object with the key `Development/`\. Note the trailing '/' delimiter\.
-
 + When you upload an object named **Projects1\.xls** in the **Development** folder, the console uploads the object and gives it the key **Development/Projects1\.xls**\. 
 
   In the key, `Development` is the prefix and `'/'` is the delimiter\. The Amazon S3 API supports prefixes and delimiters in its operations\. For example, you can get a list of all objects from a bucket with a specific prefix and delimiter\. In the console, when you double\-click the **Development** folder, the console lists the objects in that folder\. In the following example, the **Development** folder contains one object\.   
@@ -60,9 +58,7 @@ These object keys create a logical hierarchy with `Private`, `Development` and t
 ## Walkthrough Example<a name="walkthrough-scenario"></a>
 
 The example for this walkthrough is as follows:
-
 + You create a bucket and then add three folders \(Private, Development, and Finance\) to it\. 
-
 + You have two users, Alice and Bob\. You want Alice to access only the Development folder and Bob to access only the Finance folder, and you want to keep the Private folder content private\. In the walkthrough, you manage access by creating AWS Identity and Access Management \(IAM\) users \(we will use the same user names, Alice and Bob\) and grant them the necessary permissions\. 
 
   IAM also supports creating user groups and granting group\-level permissions that apply to all users in the group\. This helps you better manage permissions\. For this exercise, both Alice and Bob will need some common permissions\. So you will also create a group named Consultants and then add both Alice and Bob to the group\. You will first grant permissions by attaching a group policy to the group\. Then you will add user\-specific permissions by attaching policies to specific users\.
@@ -149,11 +145,9 @@ Now, let's begin granting incremental permissions to the users\. First, you will
 ## Step 4: Grant Group\-Level Permissions<a name="walkthrough-group-policy"></a>
 
 We want all our users to be able to do the following:
-
 + List all buckets owned by the parent account
 
   To do so, Bob and Alice must have permission for the `s3:ListAllMyBuckets` action\.
-
 + List root\-level items, folders, and objects, in the `companybucket` bucket\.
 
   To do so, Bob and Alice must have permission for the `s3:ListBucket` action on the `companybucket` bucket\. 
@@ -220,9 +214,7 @@ Remember, we are using `companybucket` for illustration\. You must use the name 
 To understand what request the console sends to Amazon S3 when you click a bucket name, the response Amazon S3 returns, and how the console interprets the response, it is necessary to take a little deep dive\.
 
 When you click a bucket name, the console sends the [GET Bucket \(List Objects\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html) request to Amazon S3\. This request includes the following parameters:
-
 + `prefix` parameter with an empty string as its value\. 
-
 + `delimiter` parameter with `/` as its value\. 
 
 The following is an example request:
@@ -265,9 +257,7 @@ The console interprets this result and displays the root\-level items as three f
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/walkthrough-10.png)
 
 Now, if Bob or Alice double\-clicks the **Development** folder, the console sends the [GET Bucket \(List Objects\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html) request to Amazon S3 with the `prefix` and the `delimiter` parameters set to the following values:
-
 + `prefix` parameter with value `Development/`\.
-
 + `delimiter` parameter with` '/'` value\. 
 
 In response, Amazon S3 returns the object keys that start with the specified prefix\. 
@@ -369,15 +359,11 @@ This test succeeds when users use the Amazon S3 console because when you click a
 ### Step 4\.3: Summary of the Group Policy<a name="walkthrough-group-policy-summary"></a>
 
 The net effect of the group policy that you added is to grant the IAM users Alice and Bob the following minimum permissions:
-
 + List all buckets owned by the parent account\.
-
 + See root\-level items in the `companybucket` bucket\. 
 
 However, the users still cannot do much\. Let's grant user\-specific permissions, as follows:
-
 + Permit Alice to get and put objects in the Development folder\.
-
 + Permit Bob to get and put objects in the Finance folder\.
 
 For user\-specific permissions, you attach a policy to the specific user, not to the group\. In the following section, you grant Alice permission to work in the Development folder\. You can repeat the steps to grant similar permission to Bob to work in the Finance folder\.
@@ -517,13 +503,11 @@ You can add the following statement to the user Alice policy that requires all r
 ```
 
 Note that there are two conditional expressions in the `Condition` block\. The result of these conditional expressions is combined by using the logical AND\. If both conditions are true, the result of the combined condition is true\. 
-
 + The `Null` conditional expression ensures that requests from Alice include the `prefix` parameter\. 
 
   The `prefix` parameter requires folder\-like access\. If you send a request without the `prefix` parameter, Amazon S3 returns all the object keys\. 
 
   If the request includes the `prefix` parameter with a null value, the expression will evaluate to true, and so the entire `Condition` will evaluate to true\. You must allow an empty string as value of the `prefix` parameter\. You recall from the preceding discussion, allowing the null string allows Alice to retrieve root\-level bucket items as the console does in the preceding discussion\. For more information, see [Step 4\.2: Enable Users to List Root\-Level Content of a Bucket](#walkthrough1-grant-permissions-step2)\. 
-
 + The `StringNotLike` conditional expression ensures that if the value of the `prefix` parameter is specified and is not `Development/*`, the request will fail\. 
 
 Follow the steps in the preceding section and again update the inline policy you created for user Alice\.
@@ -569,7 +553,6 @@ Now you want to grant Bob permission to the Finance folder\. Follow the steps yo
 ## Step 7: Secure the Private Folder<a name="walkthrough-secure-private-folder-explicit-deny"></a>
 
 In this example, you have only two users\. You granted all the minimum required permissions at the group level and granted user\-level permissions only when you really need to permissions at the individual user level\. This approach helps minimize the effort of managing permissions\. As the number of users increases, managing permissions can become cumbersome\. For example, we don't want any of the users in this example to access the content of the Private folder\. How do you ensure you don't accidentally grant a user permission to it? You add a policy that explicitly denies access to the folder\. An explicit deny overrides any other permissions\. To ensure that the Private folder remains private, you can add the follow two deny statements to the group policy:
-
 + Add the following statement to explicitly deny any action on resources in the `Private` folder \(`companybucket/Private/*`\)\.
 
   ```
@@ -580,7 +563,6 @@ In this example, you have only two users\. You granted all the minimum required 
     "Resource":["arn:aws:s3:::companybucket/Private/*"]
   }
   ```
-
 + You also deny permission for the list objects action when the request specifies the `Private/` prefix\. In the console, if Bob or Alice double\-clicks the Private folder, this policy causes Amazon S3 to return an error response\.
 
   ```
@@ -658,5 +640,4 @@ In order to clean up, go to the IAM console and remove the users Alice and Bob\.
 To ensure that you aren't charged further for storage, you should also delete the objects and the bucket that you created for this exercise \.
 
 ## Related Resources<a name="RelatedResources-walkthrough1"></a>
-
 + [Working with Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\.

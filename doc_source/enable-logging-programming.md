@@ -2,7 +2,7 @@
 
 You can enable or disable logging programmatically by using either the Amazon S3 API or the AWS SDKs\. To do so, you both enable logging on the bucket and grant the Log Delivery group permission to write logs to the target bucket\.
 
-
+**Topics**
 + [Enabling Logging](#enabling-logging-general)
 + [Granting the Log Delivery Group WRITE and READ\_ACP Permissions](#grant-log-delivery-permissions-general)
 + [Example: AWS SDK for \.NET](#enable-logging-dotnetsdk-exmaple)
@@ -39,7 +39,7 @@ Amazon S3 writes the log files to the target bucket as a member of the predefine
 http://acs.amazonaws.com/groups/s3/LogDelivery
 ```
 
- To grant `WRITE` and `READ_ACP` permissions, add the following grants\. For information about ACLs, see [Managing Access with ACLs ](S3_ACLs_UsingACLs.md)\.
+ To grant `WRITE` and `READ_ACP` permissions, add the following grants\. For information about ACLs, see [Managing Access with ACLs](S3_ACLs_UsingACLs.md)\.
 
 ```
 <Grant>

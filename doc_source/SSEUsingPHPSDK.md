@@ -32,9 +32,7 @@ To add the `x-amz-server-side-encryption` request header \(see [Specifying Serve
 In response, Amazon S3 returns the `x-amz-server-side-encryption` header with the value of the encryption algorithm used to encrypt your object data\. 
 
 To upload large objects using the multipart upload API, you can specify server\-side encryption for the objects that you are uploading\. 
-
 +  When using the low\-level multipart upload API \(see [Using the AWS PHP SDK for Multipart Upload \(Low\-Level API\)](usingLLmpuPHP.md)\), you can specify server\-side encryption when you call the [ Aws\\S3\\S3Client::createMultipartUpload\(\)](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html#_createMultipartUpload()) method\. To add the `x-amz-server-side-encryption` request header to your request, specify the `array` parameter's `ServerSideEncryption` key with the value `AES256`\. 
-
 + When using the high\-level multipart upload, you can specify server\-side encryption using the [Aws\\S3\\Model\\MultipartUpload\\UploadBuilder:setOption\(\)](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.Model.MultipartUpload.UploadBuilder.html#_setOption) method like `setOption('ServerSideEncryption','AES256')`\. For an example of using the `setOption()` method with the high\-level UploadBuilder, see [Using the AWS PHP SDK for Multipart Upload \(High\-Level API\)](usingHLmpuPHP.md)\. 
 
 ## Determining Encryption Algorithm Used<a name="DeterminingEncryptionAlgorithmUsed04"></a>
@@ -86,21 +84,12 @@ To change the encryption state of an existing object, make a copy of the object 
 For a working sample of how to copy an object, see [Copy an Object Using the AWS SDK for PHP](CopyingObjectUsingPHP.md)\. 
 
 ### Related Resources<a name="RelatedResources-ChangingServer-SideEncryptionofanExistingObjectCopyOperation04"></a>
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client Class](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client::factory\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html#_factory)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client::copyObject\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html#_copyObject)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client::createMultipartUpload\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html#_createMultipartUpload)
-
 + [ AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client::headObject\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html#_headObject)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client::putObject\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html#_putObject)
-
 + [Aws\\S3\\Model\\MultipartUpload\\UploadBuilder:setOption\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.Model.MultipartUpload.UploadBuilder.html#_setOption)
-
 + [AWS SDK for PHP for Amazon S3](http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/service-s3.html)
-
 + [AWS SDK for PHP Documentation](http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/index.html)

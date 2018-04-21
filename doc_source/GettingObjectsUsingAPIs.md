@@ -1,6 +1,6 @@
 # Getting Objects<a name="GettingObjectsUsingAPIs"></a>
 
-
+**Topics**
 + [Related Resources](#RelatedResources013)
 + [Get an Object Using the AWS SDK for Java](RetrievingObjectUsingJava.md)
 + [Get an Object Using the AWS SDK for \.NET](RetrievingObjectUsingNetSDK.md)
@@ -9,9 +9,7 @@
 + [Share an Object with Others](ShareObjectPreSignedURL.md)
 
  You can retrieve objects directly from Amazon S3\. You have the following options when retrieving an object: 
-
 + **Retrieve an entire object—**A single GET operation can return you the entire object stored in Amazon S3\. 
-
 + **Retrieve object in parts—**Using the `Range` HTTP header in a GET request, you can retrieve a specific range of bytes in an object stored in Amazon S3\. 
 
   You resume fetching other parts of the object whenever your application is ready\. This resumable download is useful when you need only portions of your object data\. It is also useful where network connectivity is poor and you need to react to failures\.
@@ -25,5 +23,4 @@ The AWS SDK for Java, \.NET and PHP also provide necessary objects you can use t
 When retrieving objects that are stored encrypted using server\-side encryption you will need to provide appropriate request headers\. For more information, see [Protecting Data Using Encryption](UsingEncryption.md)\.
 
 ## Related Resources<a name="RelatedResources013"></a>
-
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

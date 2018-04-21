@@ -1,12 +1,10 @@
-# Manage Object Lifecycle Using the AWS SDK for \.NET<a name="manage-lifecycle-using-dot-net"></a>
+# Manage an Object's Lifecycle Using the AWS SDK for \.NET<a name="manage-lifecycle-using-dot-net"></a>
 
 You can use the AWS SDK for \.NET to manage lifecycle configuration on a bucket\. For more information about managing lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\. 
 
 **Example \.NET Code Example**  
 The following C\# code example adds lifecycle configuration to a bucket\. The example shows two lifecycle configurations:  
-
 + Lifecycle configuration that uses only prefix to select a subset of objects to which the rule applies\.
-
 + Lifecycle configuration that uses a prefix and object tags to select a subset of objects to which the rule applies\.
 The lifecycle rule transitions objects to the GLACIER storage class soon after the objects are created\.  
 The following code works with the latest version of the \.NET SDK\.  

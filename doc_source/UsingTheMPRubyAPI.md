@@ -5,15 +5,12 @@ The AWS SDK for Ruby provides an API for Amazon S3 bucket and object operations\
 ## The Ruby API Organization<a name="RubyAPIOrganization"></a>
 
 When creating Amazon S3 applications using the AWS SDK for Ruby, you must install the SDK for Ruby gem\. For more information, see the [AWS SDK for Ruby \- Version 3](http://docs.aws.amazon.com/sdkforruby/api/index.html)\. Once installed, you can access the API, including the following key classes: 
-
 + **Aws::S3::Resource—**Represents the interface to Amazon S3 for the Ruby SDK and provides methods for creating and enumerating buckets\. 
 
   The `S3` class provides the `#buckets` instance method for accessing existing buckets or creating new ones\.
-
 + **Aws::S3::Bucket—**Represents an Amazon S3 bucket\.  
 
   The `Bucket` class provides the `#object(key)` and `#objects` methods for accessing the objects in a bucket, as well as methods to delete a bucket and return information about a bucket, like the bucket policy\.
-
 + **Aws::S3::Object—**Represents an Amazon S3 object identified by its key\.
 
   The `Object` class provides methods for getting and setting properties of an object, specifying the storage class for storing objects, and setting object permissions using access control lists\. The `Object` class also has methods for deleting, uploading and copying objects\. When uploading objects in parts, this class provides options for you to specify the order of parts uploaded and the part size\.
@@ -38,7 +35,5 @@ The easiest way to get started with the Ruby script examples is to install the l
 **Ruby Samples**
 
 The following links contain samples to help get you started with the SDK for Ruby \- Version 3:
-
 + [Using the AWS SDK for Ruby Version 3](create-bucket-get-location-example.md#create-bucket-get-location-ruby)
-
 + [Upload an Object Using the AWS SDK for Ruby](UploadObjSingleOpRuby.md)

@@ -14,5 +14,5 @@ Following is a table that lists related resources that you'll find useful as you
 |   [AWS Support Center](https://aws.amazon.com/support)   |   The home page for AWS Technical Support, including access to our Developer Forums, Technical FAQs, Service Status page, and Premium Support\.   | 
 |  [AWS Premium Support](https://aws.amazon.com/premiumsupport/)  |  The primary web page for information about AWS Premium Support, a one\-on\-one, fast\-response support channel to help you build and run applications on AWS Infrastructure Services\.  | 
 |  [Amazon S3 product information](https://aws.amazon.com/s3/)  | The primary web page for information about Amazon S3\.  | 
-|  [Contact Us](https://aws.amazon.com/contact-us/)  |  A central contact point for inquiries concerning AWS billing, account, events, abuse etc\.   | 
+|  [Contact Us](https://aws.amazon.com/contact-us/)  |  A central contact point for inquiries concerning AWS billing, account, events, abuse, etc\.   | 
 |   [Conditions of Use](https://aws.amazon.com/legal)   |  Detailed information about the copyright and trademark usage at Amazon\.com and other topics\.   | 

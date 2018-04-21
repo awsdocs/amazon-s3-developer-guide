@@ -2,7 +2,7 @@
 
 This section discusses Amazon S3 best practices for optimizing performance in the following topics\.
 
-
+**Topics**
 + [Request Rate and Performance Considerations](request-rate-perf-considerations.md)
 + [TCP Window Scaling](TCPWindowScaling.md)
 + [TCP Selective Acknowledgement](TCPSelectiveAcknowledgement.md)

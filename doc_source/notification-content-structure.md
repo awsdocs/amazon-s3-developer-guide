@@ -1,19 +1,14 @@
 # Event Message Structure<a name="notification-content-structure"></a>
 
 The notification message Amazon S3 sends to publish an event is a JSON message with the following structure\. Note the following:
-
 + The `responseElements` key value is useful if you want to trace the request by following up with Amazon S3 support\. Both `x-amz-request-id` and `x-amz-id-2` help Amazon S3 to trace the individual request\. These values are the same as those that Amazon S3 returned in the response to your original PUT request, which initiated the event\.
-
 + The `s3` key provides information about the bucket and object involved in the event\. Note that the object keyname value is URL encoded\. For example "red flower\.jpg" becomes "red\+flower\.jpg"\. 
-
 + The `sequencer` key provides a way to determine the sequence of events\. Event notifications are not guaranteed to arrive in the order that the events occurred\. However, notifications from events that create objects \(`PUT`s\) and delete objects contain a `sequencer`, which can be used to determine the order of events for a given object key\. 
 
   If you compare the `sequencer` strings from two event notifications on the same object key, the event notification with the greater `sequencer` hexadecimal value is the event that occurred later\. If you are using event notifications to maintain a separate database or index of your Amazon S3 objects, you will probably want to compare and store the `sequencer` values as you process each event notification\. 
 
   Note that:
-
   + `sequencer` cannot be used to determine order for events on different object keys\.
-
   + The sequencers can be of different lengths\. So to compare these values, you first right pad the shorter value with zeros and then do lexicographical comparison\.
 
 ```
@@ -63,7 +58,6 @@ The notification message Amazon S3 sends to publish an event is a JSON message w
 ```
 
 The following are example messages:
-
 + Test message—When you configure an event notification on a bucket, Amazon S3 sends the following test message:
 
   ```
@@ -76,7 +70,6 @@ The following are example messages:
   7.    "HostId":"8cLeGAmw098X5cv4Zkwcmo8vvZa3eH3eKxsPzbB9wrR+YstdA6Knx4Ip8EXAMPLE"
   8. }
   ```
-
 + Example message when an object is created using the PUT request—The following message is an example of a message Amazon S3 sends to publish an `s3:ObjectCreated:Put` event:
 
   ```

@@ -5,17 +5,13 @@ You can use the Amazon S3 inventory feature to get replication status of all obj
 If you want to get CRR status of a single object, read the following:
 
 In cross\-region replication, you have a source bucket on which you configure replication and a destination bucket where Amazon S3 replicates objects\. When you request an object \(`GET` object\) or object metadata \(`HEAD` object\) from these buckets, Amazon S3 returns the `x-amz-replication-status` header in the response as follows: 
-
 + If requesting an object from the source bucket – Amazon S3 returns the `x-amz-replication-status` header if the object in your request is eligible for replication\. 
 
   For example, suppose that in your replication configuration, you specify the object prefix `TaxDocs` requesting Amazon S3 to replicate objects with the key name prefix `TaxDocs`\. Then, any objects you upload with this key name prefix—for example, `TaxDocs/document1.pdf`—are eligible for replication\. For any object request with this key name prefix, Amazon S3 returns the `x-amz-replication-status` header with one of the following values for the object's replication status: `PENDING`, `COMPLETED`, or `FAILED`\.
-
 + If requesting an object from the destination bucket – Amazon S3 returns the `x-amz-replication-status` header with value `REPLICA` if the object in your request is a replica that Amazon S3 created\.
 
 You can find the object replication state in the console using the AWS CLI, or programmatically using the AWS SDK\. 
-
 + In the console, you choose the object and choose **Properties** to view object properties, including the replication status\. 
-
 + You can use the `head-object` AWS CLI command as shown to retrieve object metadata information:
 
   ```
@@ -38,9 +34,7 @@ You can find the object replication state in the console using the AWS CLI, or p
      }
   }
   ```
-
 + You can use the AWS SDKs to retrieve the replication state of an object\. Following are code fragments using AWS SDK for Java and AWS SDK for \.NET\. 
-
   + AWS SDK for Java
 
     ```
@@ -50,7 +44,6 @@ You can find the object replication state in the console using the AWS CLI, or p
     
     System.out.println("Replication Status : " + metadata.getRawMetadataValue(Headers.OBJECT_REPLICATION_STATUS));
     ```
-
   + AWS SDK for \.NET
 
     ```

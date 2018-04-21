@@ -10,9 +10,6 @@ Most users will interact with Amazon S3 using a SOAP toolkit tailored for their 
 ## Common Elements<a name="SOAPCommon"></a>
 
 You can include the following authorization\-related elements with any SOAP request:
-
 + `AWSAccessKeyId:` The AWS Access Key ID of the requester
-
 + `Timestamp:` The current time on your system
-
 + `Signature:` The signature for the request

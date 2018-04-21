@@ -2,7 +2,7 @@
 
 This section provides the following example walkthroughs to set up cross\-region replication\.
 
-
+**Topics**
 + [Walkthrough 1: Configure Cross\-Region Replication Where Source and Destination Buckets Are Owned by the Same AWS Account](crr-walkthrough1.md)
 + [Walkthrough 2: Configure Cross\-Region Replication Where Source and Destination Buckets Are Owned by Different AWS Accounts](crr-walkthrough-2.md)
 + [Cross\-Region Replication: Additional Walkthroughs](crr-addtional-walkthroughs.md)

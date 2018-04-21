@@ -1,6 +1,6 @@
 # Signing and Authenticating REST Requests<a name="RESTAuthentication"></a>
 
-
+**Topics**
 + [Using Temporary Security Credentials](#UsingTemporarySecurityCredentials)
 + [The Authentication Header](#ConstructingTheAuthenticationHeader)
 + [Request Canonicalization for Signing](#RESTAuthenticationRequestCanonicalization)

@@ -1,6 +1,6 @@
 # Example Walkthroughs \- Hosting Websites on Amazon S3<a name="hosting-websites-on-s3-examples"></a>
 
-
+**Topics**
 + [Example: Setting up a Static Website](HostingWebsiteOnS3Setup.md)
 + [Example: Setting up a Static Website Using a Custom Domain](website-hosting-custom-domain-walkthrough.md)
 + [Example: Speed Up Your Website with Amazon CloudFront](website-hosting-cloudfront-walkthrough.md)

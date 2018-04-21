@@ -8,19 +8,15 @@ To track requests for access to your bucket, you can enable access logging\. Eac
 There is no extra charge for enabling server access logging on an Amazon S3 bucket; however, any log files that the system delivers to you accrue the usual charges for storage\. \(You can delete the log files at any time\.\) No data transfer charges are assessed for log file delivery, but access to the delivered log files is charged the same as any other data transfer\. 
 
  By default, logging is disabled\. When logging is enabled, logs are saved to a bucket in the same AWS Region as the source bucket\. To enable access logging, you must do the following: 
-
 +  Turn on the log delivery by adding logging configuration on the bucket for which you want Amazon S3 to deliver access logs\. We refer to this bucket as the *source bucket*\. 
-
 +  Grant the Amazon S3 Log Delivery group write permission on the bucket where you want the access logs saved\. We refer to this bucket as the *target bucket*\. 
 
 To turn on log delivery, you provide the following logging configuration information:
-
 +  Name of the target bucket where you want Amazon S3 to save the access logs as objects\. You can have logs delivered to any bucket that you own, including the source bucket\. We recommend that you save access logs in a different bucket so you can easily manage the logs\. If you choose to save access logs in the same bucket as the source bucket, we recommend that you specify a prefix to all log object keys so that you can easily identify the log objects\. 
 
   Your logging source bucket and the destination bucket where your logs are written can be the same bucket\. However, this requires the creation of additional logs for the logs that are written to the bucket\. This behavior might not be ideal for your use case because it could result in a small increase in your storage billing, and the extra logs about logs might make it harder to find the correct log\.
 **Note**  
 Both the source and target buckets must be owned by the same AWS account\.
-
 +  \(Optional\) A prefix for Amazon S3 to assign to all log object keys\. The prefix makes it simpler for you to locate the log objects\. 
 
    For example, if you specify the prefix value `logs/`, each log object that Amazon S3 creates begins with the `logs/` prefix in its key, as in this example:
@@ -30,7 +26,6 @@ Both the source and target buckets must be owned by the same AWS account\.
   ```
 
    The key prefix can help when you delete the logs\. For example, you can set a lifecycle configuration rule for Amazon S3 to delete objects with a specific key prefix\. For more information, see [Deleting Log Files](deleting-log-files-lifecycle.md)\.
-
 +  \(Optional\) Permissions so that others can access the generated logs\. By default, the bucket owner always has full access to the log objects\. You can optionally grant access to other users\. 
 
 ### Log Object Key Format<a name="server-log-keyname-format"></a>
@@ -68,11 +63,7 @@ It follows from the best\-effort nature of the server logging feature that the u
 ## Related Topics<a name="related-topics"></a>
 
 For more information about server access logging, see the following topics\.
-
 + [Enabling Logging Using the Console](enable-logging-console.md)
-
 + [Enabling Logging Programmatically](enable-logging-programming.md)
-
 +  [Server Access Log Format](LogFormat.md) 
-
 +  [Deleting Log Files](deleting-log-files-lifecycle.md) 

@@ -3,9 +3,7 @@
 This section provides example code using the AWS SDK for Java to first create a 1024\-bit RSA key pair\. The example then uses that key pair as the client\-side master key for the purpose of encrypting and upload a file\.
 
 This is how it works:
-
 + First create a 1024\-bit RSA key pair \(asymmetric master key\) and save it to a file\.
-
 + Upload an object to Amazon S3using an S3 encryption client that encrypts sample data on the client\-side\. The example also downloads the object and verifies that the data is the same\.
 
 ## Example 2a: Creating a 1024\-bit RSA Key Pair<a name="rsa-key-pair"></a>

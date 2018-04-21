@@ -1,12 +1,10 @@
 # CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using AWS KMS\-Managed Encryption Keys<a name="crr-replication-config-for-kms-objects"></a>
 
 You might have objects in your source bucket that are created using server\-side encryption using AWS KMS\-managed keys\. By default, Amazon S3 does not replicate AWS KMS\-encrypted objects\. If you want Amazon S3 to replicate these objects, in addition to the [basic replication configuration](http://docs.aws.amazon.com/AmazonS3/latest/dev/crr-how-setup.html), you must do the following:
-
 + Provide the AWS KMS\-managed key for the destination bucket Region that you want Amazon S3 to use to encrypt object replicas\.
-
 + Grant additional permissions to the IAM role so that Amazon S3 can access the objects using the AWS KMS key\.
 
-
+**Topics**
 + [Specifying Additional Information in the Replication Configuration](#crr-kms-extra-config)
 + [IAM Role Additional Permissions](#crr-kms-extra-permissions)
 + [Cross\-Account Scenario: Additional Permissions](#crr-kms-cross-acct-scenario)
@@ -15,7 +13,6 @@ You might have objects in your source bucket that are created using server\-side
 ## Specifying Additional Information in the Replication Configuration<a name="crr-kms-extra-config"></a>
 
 In the [basic replication configuration](http://docs.aws.amazon.com/AmazonS3/latest/dev/crr-how-setup.html), add the following additional information\.
-
 + This feature \(for Amazon S3 to replicate objects that are encrypted using AWS KMS\-managed keys\) requires customer must explicitly opt in by adding the `<SourceSelectionCriteria>` element\.
 
   ```
@@ -25,7 +22,6 @@ In the [basic replication configuration](http://docs.aws.amazon.com/AmazonS3/lat
      </SseKmsEncryptedObjects>
   </SourceSelectionCriteria>
   ```
-
 + Provide the AWS KMS key that you want Amazon S3 to use to encrypt object replicas by adding the `<EncryptionConfiguration>` element:
 
   ```
@@ -64,17 +60,13 @@ This replication configuration has one rule\. The rule applies to objects with t
 ## IAM Role Additional Permissions<a name="crr-kms-extra-permissions"></a>
 
 Amazon S3 needs additional permissions to replicate objects created using server\-side encryption using AWS KMS\-managed keys\. You must grant the following additional permissions to the IAM role:
-
 + Grant permission for the `s3:GetObjectVersionForReplication` action for source objects\. Permission for this action allows Amazon S3 to replicate the unencrypted object and the objects created with server\-side encryption using SSE\-S3 \(Amazon S3\-managed encryption key\) or AWS KMS–managed encryption \(SSE\-KMS\) keys\.
 **Note**  
 The permission for the `s3:GetObjectVersion` action allows replication of unencrypted and SSE\-S3 encrypted objects\. However, it does not allow replication of objects created using an AWS KMS\-managed encryption key\. 
 **Note**  
 We recommend that you use the `s3:GetObjectVersionForReplication` action instead of the `s3:GetObjectVersion` action because it provides Amazon S3 with only the minimum permissions necessary for cross\-region replication\.
-
 + Grant permissions for the following AWS KMS actions:
-
   + `kms:Decrypt` permissions for the AWS KMS key that was used to encrypt the source object\.
-
   + `kms:Encrypt` permissions for the AWS KMS key used to encrypt the object replica\.
 
   We recommend that you restrict these permissions to specific buckets and objects using the AWS KMS condition keys as shown in the following example policy statements: 
@@ -191,7 +183,6 @@ Objects created with server\-side encryption using customer\-provided \(SSE\-C\)
 ## Cross\-Account Scenario: Additional Permissions<a name="crr-kms-cross-acct-scenario"></a>
 
 In a cross\-account scenario, the destination AWS KMS key must be a customer master key \(CMK\)\. The key owner must grant the source bucket owner permission to use the key, using one of the following methods:
-
 + Use the IAM console\.<a name="cross-acct-kms-key-permission"></a>
 
   1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
@@ -205,7 +196,6 @@ In a cross\-account scenario, the destination AWS KMS key must be a customer mas
   1. Specify source bucket account ID in the **arn:aws:iam::** box\.
 
   1. Choose **Save Changes**\.
-
 + Use the AWS CLI\. For more information, see [put\-key\-policy](http://docs.aws.amazon.com/cli/latest/reference/kms/put-key-policy.html) in the AWS CLI Command Reference\. For information about the underlying API, see [PutKeyPolicy](http://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html) in the [AWS Key Management Service API Reference](http://docs.aws.amazon.com/kms/latest/APIReference/)\. 
 
 ## Related Considerations<a name="crr-kms-considerations"></a>

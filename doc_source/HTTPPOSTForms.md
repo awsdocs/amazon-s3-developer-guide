@@ -1,6 +1,6 @@
 # HTML Forms \(AWS Signature Version 2\)<a name="HTTPPOSTForms"></a>
 
-
+**Topics**
 + [HTML Form Encoding](#HTTPPOSTFormEncoding)
 + [HTML Form Declaration](#HTTPPOSTFormDeclaration)
 + [HTML Form Fields](#HTTPPOSTFormFields)
@@ -78,20 +78,20 @@ The variable `${filename}` is automatically replaced with the name of the file p
 | Field Name | Description | Required | 
 | --- | --- | --- | 
 | AWSAccessKeyId |  The AWS Access Key ID of the owner of the bucket who grants an anonymous user access for a request that satisfies the set of constraints in the policy\. This field is required if the request includes a policy document\.  |  Conditional  | 
-| acl |  An Amazon S3 access control list \(ACL\)\. If an invalid access control list is specified, an error is generated\. For more information on ACLs, see [Access Control Lists](Introduction.md#S3_ACLs)\. Type: String Default: private  Valid Values: `private | public-read | public-read-write | aws-exec-read | authenticated-read | bucket-owner-read | bucket-owner-full-control `   |  No  | 
+| acl |  An Amazon S3 access control list \(ACL\)\. If an invalid access control list is specified, an error is generated\. For more information on ACLs, see [Access Control Lists](Introduction.md#S3_ACLs)\. Type: String Default: private  Valid Values: `private \| public-read \| public-read-write \| aws-exec-read \| authenticated-read \| bucket-owner-read \| bucket-owner-full-control `   |  No  | 
 | Cache\-Control, Content\-Type, Content\-Disposition, Content\-Encoding, Expires |  REST\-specific headers\. For more information, see [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\.  |  No  | 
 | key |  The name of the uploaded key\. To use the filename provided by the user, use the $\{filename\} variable\. For example, if user Betty uploads the file lolcatz\.jpg and you specify /user/betty/$\{filename\}, the file is stored as /user/betty/lolcatz\.jpg\. For more information, see [Object Key and Metadata](UsingMetadata.md)\.  |  Yes  | 
 | policy |  Security policy describing what is permitted in the request\. Requests without a security policy are considered anonymous and will succeed only on publicly writable buckets\.   |  No  | 
 | success\_action\_redirect, redirect |  The URL to which the client is redirected upon successful upload\. Amazon S3 appends the bucket, key, and etag values as query string parameters to the URL\. If success\_action\_redirect is not specified, Amazon S3 returns the empty document type specified in the success\_action\_status field\. If Amazon S3 cannot interpret the URL, it ignores the field\. If the upload fails, Amazon S3 displays an error and does not redirect the user to a URL\. For more information, see [Redirection](#HTTPPOSTConstructingPolicyRedirection)\.    The redirect field name is deprecated and support for the redirect field name will be removed in the future\.    |  No  | 
 | success\_action\_status |  The status code returned to the client upon successful upload if success\_action\_redirect is not specified\. Valid values are 200, 201, or 204 \(default\)\. If the value is set to 200 or 204, Amazon S3 returns an empty document with a 200 or 204 status code\. If the value is set to 201, Amazon S3 returns an XML document with a 201 status code\. For information about the content of the XML document, see [POST Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html)\. If the value is not set or if it is set to an invalid value, Amazon S3 returns an empty document with a 204 status code\.   Some versions of the Adobe Flash player do not properly handle HTTP responses with an empty body\. To support uploads through Adobe Flash, we recommend setting `success_action_status` to 201\.   |  No  | 
 | signature |   The HMAC signature constructed by using the secret access key that corresponds to the provided AWSAccessKeyId\. This field is required if a policy document is included with the request\.  For more information, see [Using Auth Access](http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) \.  |  Conditional  | 
-| x\-amz\-security\-token |  A security token used by Amazon DevPay and session credentials  If the request is using Amazon DevPay then it requires two `x-amz-security-token` form fields: one for the product token and one for the user token\. For more information, go to [Using DevPay](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingDevPay.html)\. If the request is using session credentials, then it requires one `x-amz-security-token` form\. For more information, see [Temporary Security Credentials](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) in the *IAM User Guide*\.  |  No  | 
+| x\-amz\-security\-token |  A security token used by  session credentials  If the request is using Amazon DevPay then it requires two `x-amz-security-token` form fields: one for the product token and one for the user token\.  If the request is using session credentials, then it requires one `x-amz-security-token` form\. For more information, see [Temporary Security Credentials](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) in the *IAM User Guide*\.  |  No  | 
 | Other field names prefixed with x\-amz\-meta\- |  User\-specified metadata\.  Amazon S3 does not validate or use this data\. For more information, see [ PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\.  |  No  | 
 | file |  File or text content\.  The file or content must be the last field in the form\. Any fields below it are ignored\. You cannot upload more than one file at a time\.  |  Yes  | 
 
 ## Policy Construction<a name="HTTPPOSTConstructPolicy"></a>
 
-
+**Topics**
 + [Expiration](#HTTPPOSTExpiration)
 + [Conditions](#PolicyConditions)
 + [Condition Matching](#ConditionMatching)
@@ -145,7 +145,7 @@ The following table describes policy document conditions\.
 | key |  The name of the uploaded key\. Supports exact matching and `starts-with`\.   | 
 | success\_action\_redirect, redirect  |  The URL to which the client is redirected upon successful upload\. Supports exact matching and `starts-with`\.   | 
 | success\_action\_status |  The status code returned to the client upon successful upload if success\_action\_redirect is not specified\. Supports exact matching\.   | 
-| x\-amz\-security\-token |  Amazon DevPay security token\.  Each request that uses Amazon DevPay requires two `x-amz-security-token` form fields: one for the product token and one for the user token\. As a result, the values must be separated by commas\. For example, if the user token is `eW91dHViZQ==` and the product token is `b0hnNVNKWVJIQTA=`, you set the policy entry to: `{ "x-amz-security-token": "eW91dHViZQ==,b0hnNVNKWVJIQTA=" }`\. For more information about Amazon DevPay, see [Using DevPay](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingDevPay.html) \.  | 
+| x\-amz\-security\-token |  Amazon DevPay security token\.  Each request that uses Amazon DevPay requires two `x-amz-security-token` form fields: one for the product token and one for the user token\. As a result, the values must be separated by commas\. For example, if the user token is `eW91dHViZQ==` and the product token is `b0hnNVNKWVJIQTA=`, you set the policy entry to: `{ "x-amz-security-token": "eW91dHViZQ==,b0hnNVNKWVJIQTA=" }`\.   | 
 | Other field names prefixed with x\-amz\-meta\- |  User\-specified metadata\.  Supports exact matching and `starts-with`\.   | 
 
 **Note**  

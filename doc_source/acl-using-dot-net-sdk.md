@@ -168,13 +168,9 @@ PutBucketResponse response = client.PutBucket(request);
 ## An Example<a name="set-acl-dot-net-create-resource-example"></a>
 
 The following C\# code example performs the following tasks:
-
 + Create a bucket\. In the request, it specifies a `log-delivery-write` canned ACL, granting write permission to the `LogDelivery` Amazon S3 group\.
-
 + Read the ACL on the bucket\.
-
 + Clear existing permissions and add new the permission to the ACL\.
-
 + Call `PutACL` request to add the new ACL to the bucket\.
 
  For instructions on how to create and test a working example, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\. 

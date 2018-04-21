@@ -1,6 +1,6 @@
 # Specifying the AWS Key Management Service in Amazon S3 Using the AWS SDKs<a name="kms-using-sdks"></a>
 
-
+**Topics**
 + [AWS SDK for Java](#kms-using-sdks-java)
 + [AWS SDK for \.NET](#kms-using-sdks-dotnet)
 
@@ -29,13 +29,9 @@ PutObjectRequest putRequest = new PutObjectRequest(bucketName,
 For more information about creating keys, go to [Programming the AWS KMS API](http://docs.aws.amazon.com/kms/latest/developerguide/programming-top.html) in the *AWS Key Management Service Developer Guide*\.
 
 For working code examples of uploading an object, see the following topics\. You will need to update those code examples and provide encryption information as shown in the preceding code fragment\.
-
 + For uploading an object in a single operation, see [Upload an Object Using the AWS SDK for Java](UploadObjSingleOpJava.md)
-
 + For a multipart upload, see the following topics:
-
   + Using high\-level multipart upload API, see [Upload a File](HLuploadFileJava.md) 
-
   + If you are using the low\-level multipart upload API, see [Upload a File](llJavaUploadFile.md)
 
 ### Copy Operation<a name="kms-using-sdks-java-copy"></a>
@@ -90,13 +86,9 @@ PutObjectRequest putRequest1 = new PutObjectRequest
 For more information about creating keys, see [Programming the AWS KMS API](http://docs.aws.amazon.com/kms/latest/developerguide/programming-top.html) in the *AWS Key Management Service Developer Guide*\. 
 
 For working code examples of uploading an object, see the following topics\. You will need to update these code examples and provide encryption information as shown in the preceding code fragment\.
-
 + For uploading an object in a single operation, see [Upload an Object Using the AWS SDK for \.NET](UploadObjSingleOpNET.md)
-
 + For multipart upload see the following topics:
-
   + Using high\-level multipart upload API, see [Upload a File](HLuploadFileDotNet.md) 
-
   + Using low\-level multipart upload API, see [Upload a File](LLuploadFileDotNet.md)
 
 ### Copy Operation<a name="kms-using-sdks-dotnet-copy"></a>

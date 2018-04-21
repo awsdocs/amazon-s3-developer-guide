@@ -25,7 +25,6 @@ In this exercise, you update replication configuration in exercise 2 \([Walkthro
    ```
 
    In this example, you can use either the AWS CLI or the AWS SDK to add the replication configuration\. You cannot use the console because the console does not support specifying a destination bucket that is in different AWS account\. 
-
    + Using the AWS CLI\. 
 
      The AWS CLI requires you to specify the replication configuration as JSON\. Save the following JSON in a file \(`replication.json`\)\. 
@@ -66,7 +65,6 @@ In this exercise, you update replication configuration in exercise 2 \([Walkthro
      --bucket source-bucket \
      --profile accountA
      ```
-
    + Using the AWS SDK for Java\.
 
      For a code example, see [Setting Up Cross\-Region Replication Using the AWS SDK for Java](crr-using-java.md)\. 
@@ -113,9 +111,7 @@ In this exercise, you update replication configuration in exercise 2 \([Walkthro
    ```
 
 1. In the Amazon S3 console, select the destination bucket, and update the bucket policy as follows:
-
    + Grant the source object owner permission for the `s3:ObjectOwnerOverrideToBucketOwner` action\.
-
    + Grant the source bucket owner permission for the `s3:ListBucket` and the `s3:ListBucketVersions` actions\. 
 
    The following bucket policy shows the additional permissions\.

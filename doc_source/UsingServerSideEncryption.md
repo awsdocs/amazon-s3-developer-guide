@@ -44,13 +44,9 @@ Server\-side encryption encrypts only the object data\. Any object metadata is n
 The object creation REST APIs \(see [Specifying Server\-Side Encryption Using the REST API](SSEUsingRESTAPI.md)\) provide a request header, `x-amz-server-side-encryption`, which you can use to request server\-side encryption\.
 
 The following Amazon S3 APIs support these headers\.
-
 + PUT operation — When uploading data using the PUT API \(see [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\), you can specify these request headers\. 
-
 + Initiate Multipart Upload — When uploading large objects using the multipart upload API, you can specify these headers\. You specify these headers in the initiate request \(see [Initiate Multipart Upload](http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)\)\.
-
 + POST operation — When using a POST operation to upload an object \(see [POST Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html)\), instead of the request headers, you provide the same information in the form fields\.
-
 + COPY operation — When you copy an object \(see [PUT Object \- Copy](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\), you have both a source object and a target object\.
 
 The AWS SDKs also provide wrapper APIs for you to request server\-side encryption\. You can also use the AWS Management Console to upload objects and request server\-side encryption\.

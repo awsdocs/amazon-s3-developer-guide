@@ -1,11 +1,9 @@
 # Deleting Objects from Versioning\-Suspended Buckets<a name="DeletingObjectsfromVersioningSuspendedBuckets"></a>
 
 If versioning is suspended, a `DELETE` request:
-
 + Can only remove an object whose version ID is `null`
 
   Doesn't remove anything if there isn't a null version of the object in the bucket\.
-
 + Inserts a delete marker into the bucket\.
 
 The following figure shows how a simple `DELETE` removes a null version and Amazon S3 inserts a delete marker in its place with a version ID of `null`\.

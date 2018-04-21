@@ -2,7 +2,7 @@
 
 You can configure an Amazon S3 bucket to function like a website\. This example walks you through the steps of hosting a website on Amazon S3\.
 
-
+**Topics**
 + [Step 1: Creating a Bucket and Configuring It as a Website](#step1-create-bucket-config-as-website)
 + [Step 2: Adding a Bucket Policy That Makes Your Bucket Content Publicly Available](#step2-add-bucket-policy-make-content-public)
 + [Step 3: Uploading an Index Document](#step3-upload-index-doc)

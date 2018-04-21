@@ -18,14 +18,11 @@ List performance is not substantially affected by the total number of keys in yo
 
 ## Iterating Through Multi\-Page Results<a name="ListingKeysPaginated"></a>
 
-As buckets can contain a virtually unlimited number of keys, the complete results of a list query can be extremely large\. To manage large result sets, Amazon S3 API support pagination to split them into multiple responses\. Each list keys response returns a page of up to 1,000 keys with an indicator indicating if the response is truncated\. You send a series of list keys requests until you have received all the keys\. AWS SDK wrapper libraries provide the same pagination\. 
+As buckets can contain a virtually unlimited number of keys, the complete results of a list query can be extremely large\. To manage large result sets, the Amazon S3 API supports pagination to split them into multiple responses\. Each list keys response returns a page of up to 1,000 keys with an indicator indicating if the response is truncated\. You send a series of list keys requests until you have received all the keys\. AWS SDK wrapper libraries provide the same pagination\. 
 
 The following Java and \.NET SDK examples show how to use pagination when listing keys in a bucket:
-
 + [Listing Keys Using the AWS SDK for Java](ListingObjectKeysUsingJava.md)
-
 + [Listing Keys Using the AWS SDK for \.NET](ListingObjectKeysUsingNetSDK.md)
 
 ### Related Resources<a name="RelatedResources016"></a>
-
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

@@ -1,13 +1,9 @@
 # Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the \.NET SDK<a name="sse-c-using-dot-net-sdk"></a>
 
 The following C\# code example illustrates server\-side encryption with customer\-provided keys \(SSE\-C\) \(see [Protecting Data Using Server\-Side Encryption with Customer\-Provided Encryption Keys \(SSE\-C\)](ServerSideEncryptionCustomerKeys.md)\)\. The example performs the following operations, each operation shows how you specify SSE\-C–related headers in the request:
-
 + **Put object** – upload an object requesting server\-side encryption using customer\-provided encryption keys\.
-
 + **Get object** – download the object uploaded in the previous step\. It shows that the request must provide the same encryption information for Amazon S3 to decrypt the object so that it can return it to you\.
-
 + **Get object metadata** – The request shows that the same encryption information you specified when creating the object is required to retrieve the object metadata\.
-
 + **Copy object** – This example makes a copy of the previously uploaded object\. Because the source object is stored using SSE\-C, you must provide encryption information in your copy request\. By default, the object copy will not be encrypted\. But in this example, you request that Amazon S3 store the object copy encrypted using SSE\-C, and therefore you provide encryption\-related information for the target as well\. 
 
 **Note**  
@@ -160,7 +156,6 @@ namespace s3.amazon.com.docsamples
 The example in the preceding section shows how to request server\-side encryption with customer\-provided key \(SSE\-C\) in the PUT, GET, Head, and Copy operations\. This section describes other APIs that support SSE\-C\.
 
 To upload large objects, you can use multipart upload API \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\)\. You can use either high\-level or low\-level APIs to upload large objects\. These APIs support encryption\-related headers in the request\.
-
 + When using high\-level Transfer\-Utility API, you provide the encryption\-specific headers in the `TransferUtilityUploadRequest` as shown\. For code examples, see [Using the AWS \.NET SDK for Multipart Upload \(High\-Level API\)](usingHLmpuDotNet.md)\.
 
   ```
@@ -174,17 +169,12 @@ To upload large objects, you can use multipart upload API \(see [Uploading Objec
       ServerSideEncryptionCustomerProvidedKey = base64Key,
   };
   ```
-
 + When using the low\-level API, you provide encryption\-related information in the initiate multipart upload request, followed by identical encryption information in the subsequent upload part requests\. You do not need to provide any encryption\-specific headers in your complete multipart upload request\. For examples, see [Using the AWS \.NET SDK for Multipart Upload \(Low\-Level API\)](usingLLmpuDotNet.md)\.
 
   The following is a low\-level multipart upload example that makes a copy of an existing large object\. In the example, the object to be copied is stored in Amazon S3 using SSE\-C, and you want to save the target object also using SSE\-C\. In the example, you do the following:
-
   + Initiate a multipart upload request by providing an encryption key and related information\.
-
   + Provide source and target object encryption keys and related information in the `CopyPartRequest`\.
-
   + Obtain the size of the source object to be copied by retrieving the object metadata\.
-
   + Upload the objects in 5 MB parts\.  
 **Example**  
 

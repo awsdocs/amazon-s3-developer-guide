@@ -2,7 +2,7 @@
 
 The AWS SDK for \.NET provides the API for the Amazon S3 bucket and object operations\. For object operations, in addition to providing the API to upload objects in a single operation, the SDK provides the API to upload large objects in parts \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\)\. 
 
-
+**Topics**
 + [The \.NET API Organization](#DotNetAPIOrg)
 + [Running the Amazon S3 \.NET Code Examples](#TestingDotNetApiSamples)
 
@@ -22,15 +22,12 @@ When you're using a stream for the source of data, the `TransferUtility` class d
 ## The \.NET API Organization<a name="DotNetAPIOrg"></a>
 
 When writing Amazon S3 applications using the AWS SDK for \.NET, you use the `AWSSDK.dll`\. The following namespaces in this assembly provide the multipart upload API:
-
 + **Amazon\.S3\.Transfer—**Provides the high\-level API to upload your data in parts\. 
 
   It includes the `TransferUtility` class that enables you to specify a file, directory, or stream for uploading your data\. It also includes the `TransferUtilityUploadRequest` and `TransferUtilityUploadDirectoryRequest` classes to configure advanced settings, such as the number of concurrent threads, part size, object metadata, the storage class \(STANDARD, REDUCED\_REDUNDANCY\), and object access control list \(ACL\)\.
-
 + **Amazon\.S3—**Provides the implementation for the low\-level APIs\. 
 
   It provides methods that correspond to the Amazon S3 REST multipart upload API \(see [Using the REST API for Multipart Upload](UsingRESTAPImpUpload.md)\)\.
-
 + **Amazon\.S3\.Model—**Provides the low\-level API classes to create requests and process responses\.
 
    For example, it provides the `InitiateMultipartUploadRequest` and `InitiateMultipartUploadResponse` classes you can use when initiating a multipart upload, and the `UploadPartRequest` and `UploadPartResponse` classes when uploading parts\. 

@@ -1,6 +1,6 @@
 # Upload Examples \(AWS Signature Version 2\)****<a name="HTTPPOSTExamples"></a>
 
-
+**Topics**
 + [File Upload](#HTTPPOSTExamplesFileUpload)
 + [Text Area Upload](#HTTPPOSTExamplesTextArea)
 
@@ -31,21 +31,13 @@ The following policy supports uploads to Amazon S3 for the johnsmith bucket\.
 ```
 
 This policy requires the following:
-
 + The upload must occur before 12:00 UTC on December 1, 2007\.
-
 + The content must be uploaded to the johnsmith bucket\.
-
 + The key must start with "user/eric/"\.
-
 + The ACL is set to public\-read\.
-
 + The success\_action\_redirect is set to http://johnsmith\.s3\.amazonaws\.com/successful\_upload\.html\.
-
 + The object is an image file\.
-
 + The x\-amz\-meta\-uuid tag must be set to 14365123651274\. 
-
 + The x\-amz\-meta\-tag can contain any value\.
 
 The following is a Base64\-encoded version of this policy\.
@@ -165,7 +157,7 @@ This request assumes that the image uploaded is 117,108 bytes; the image data is
 
 ## Text Area Upload<a name="HTTPPOSTExamplesTextArea"></a>
 
-
+**Topics**
 + [Policy and Form Construction](#HTTPPOSTExamplesTextAreaPolicy)
 + [Sample Request](#HTTPPOSTExamplesTextAreaRequest)
 + [Sample Response](#HTTPPOSTExamplesTextAreaResponse)
@@ -191,21 +183,13 @@ The following policy supports text area uploads to Amazon S3 for the johnsmith b
 ```
 
 This policy requires the following:
-
 + The upload must occur before 12:00 GMT on 2007\-12\-01\.
-
 + The content must be uploaded to the johnsmith bucket\.
-
 + The key must start with "user/eric/"\.
-
 + The ACL is set to public\-read\.
-
 + The success\_action\_redirect is set to http://johnsmith\.s3\.amazonaws\.com/new\_post\.html\.
-
 + The object is HTML text\.
-
 + The x\-amz\-meta\-uuid tag must be set to 14365123651274\. 
-
 + The x\-amz\-meta\-tag can contain any value\.
 
 Following is a Base64\-encoded version of this policy\.

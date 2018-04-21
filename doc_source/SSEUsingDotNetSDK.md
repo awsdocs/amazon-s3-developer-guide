@@ -23,9 +23,7 @@ In response, Amazon S3 returns the encryption algorithm that is used to encrypt 
 For a working sample of how to upload an object, see [Upload an Object Using the AWS SDK for \.NET](UploadObjSingleOpNET.md)\. For server\-side encryption, set the `ServerSideEncryptionMethod` property by calling the `WithServerSideEncryptionMethod` method\. 
 
 To upload large objects using the multipart upload API, you can specify server\-side encryption for the objects that you are uploading\. 
-
 + When using the low\-level multipart upload API \(see [Using the AWS \.NET SDK for Multipart Upload \(Low\-Level API\)](usingLLmpuDotNet.md)\) to upload a large object, you can specify server\-side encryption in your `InitiateMultipartUpload` request\. That is, you set the `ServerSideEncryptionMethod` property to your `InitiateMultipartUploadRequest` by calling the `WithServerSideEncryptionMethod` method\. 
-
 + When using the high\-level multipart upload API \(see [Using the AWS \.NET SDK for Multipart Upload \(High\-Level API\)](usingHLmpuDotNet.md)\), the `TransferUtility` class provides methods \(`Upload` and `UploadDirectory`\) to upload objects\. In this case, you can request server\-side encryption using the `TransferUtilityUploadRequest` and `TransferUtilityUploadDirectoryRequest` objects\. 
 
 ## Determining the Encryption Algorithm Used<a name="DeterminingEncryptionAlgorithmUsed02"></a>

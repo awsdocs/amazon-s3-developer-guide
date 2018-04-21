@@ -1,11 +1,9 @@
 # Restoring Previous Versions<a name="RestoringPreviousVersions"></a>
 
 One of the value propositions of versioning is the ability to retrieve previous versions of an object\. There are two approaches to doing so:
-
 + Copy a previous version of the object into the same bucket
 
   The copied object becomes the current version of that object and all object versions are preserved\.
-
 + Permanently delete the current version of the object
 
   When you delete the current object version, you, in effect, turn the previous version into the current version of that object\.

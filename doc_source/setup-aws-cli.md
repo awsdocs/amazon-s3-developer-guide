@@ -8,9 +8,7 @@ Services in AWS, such as Amazon S3, require that you provide credentials when yo
 **To set up the AWS CLI**
 
 1.  Download and configure the AWS CLI\. For instructions, see the following topics in the *AWS Command Line Interface User Guide*: 
-
    +  [Getting Set Up with the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html) 
-
    +  [Configuring the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) 
 
 1.  Add a named profile for the administrator user in the AWS CLI config file\. You use this profile when executing the AWS CLI commands\. 
@@ -25,13 +23,11 @@ Services in AWS, such as Amazon S3, require that you provide credentials when yo
     For a list of available AWS Regions, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html) in the *AWS General Reference*\. 
 
 1.  Verify the setup by typing the following commands at the command prompt\. 
-
    +  Try the `help` command to verify that the AWS CLI is installed on your computer: 
 
      ```
      aws help  
      ```
-
    +  Try an `S3` command to verify that the user can reach Amazon S3\. This command lists buckets in your account\. The AWS CLI uses the `adminuser` credentials to authenticate the request\. 
 
      ```

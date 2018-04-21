@@ -1,8 +1,8 @@
-# Lifecycle Configuration: Additional Considerations<a name="lifecycle-additional-considerations"></a>
+# Additional Considerations for Lifecycle Configuration<a name="lifecycle-additional-considerations"></a>
 
-The following sections describe additional considerations relevant to lifecycle configuration\.
+When configuring the lifecycle of objects, you need to understand the following guidelines for transitioning objects, setting expiration dates, and other object configurations\.
 
-
-+ [Transitioning Objects: General Considerations](lifecycle-transition-general-considerations.md)
-+ [Expiring Objects: General Considerations](lifecycle-expire-general-considerations.md)
+**Topics**
++ [Transitioning Objects](lifecycle-transition-general-considerations.md)
++ [Configuring Object Expiration](lifecycle-expire-general-considerations.md)
 + [Lifecycle and Other Bucket Configurations](lifecycle-and-other-bucket-config.md)

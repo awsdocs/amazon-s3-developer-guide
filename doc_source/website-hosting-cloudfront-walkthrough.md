@@ -6,7 +6,7 @@ CloudFront caches content at edge locations for a period of time that you specif
 
 To speed up your website, use CloudFront to complete the following tasks\.
 
-
+**Topics**
 + [Create a CloudFront Distribution](#create-distribution)
 + [Update the Record Sets for Your Domain and Subdomain](#update-record-sets)
 + [\(Optional\) Check the Log Files](#check-log-files)

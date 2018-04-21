@@ -1,15 +1,12 @@
 # Example Walkthroughs: Managing Access to Your Amazon S3 Resources<a name="example-walkthroughs-managing-access"></a>
 
 This topic provides the following introductory walkthrough examples for granting access to Amazon S3 resources\. These examples use the AWS Management Console to create resources \(buckets, objects, users\) and grant them permissions\. The examples then show you how to verify permissions using the command line tools, so you don't have to write any code\. We provide commands using both the AWS Command Line Interface \(CLI\) and the AWS Tools for Windows PowerShell\.
-
 + [Example 1: Bucket Owner Granting Its Users Bucket Permissions ](example-walkthroughs-managing-access-example1.md)
 
   The IAM users you create in your account have no permissions by default\. In this exercise, you grant a user permission to perform bucket and object operations\.
-
 + [Example 2: Bucket Owner Granting Cross\-Account Bucket Permissions ](example-walkthroughs-managing-access-example2.md)
 
   In this exercise, a bucket owner, Account A, grants cross\-account permissions to another AWS account, Account B\. Account B then delegates those permissions to users in its account\. 
-
 + **Managing object permissions when the object and bucket owners are not the same**
 
   The example scenarios in this case are about a bucket owner granting object permissions to others, but not all objects in the bucket are owned by the bucket owner\. What permissions does the bucket owner need, and how can it delegate those permissions?
@@ -17,11 +14,9 @@ This topic provides the following introductory walkthrough examples for granting
   The AWS account that creates a bucket is called the bucket owner\. The owner can grant other AWS accounts permission to upload objects, and the AWS accounts that create objects own them\. The bucket owner has no permissions on those objects created by other AWS accounts\. If the bucket owner writes a bucket policy granting access to objects, the policy does not apply to objects that are owned by other accounts\. 
 
   In this case, the object owner must first grant permissions to the bucket owner using an object ACL\. The bucket owner can then delegate those object permissions to others, to users in its own account, or to another AWS account, as illustrated by the following examples\.
-
   + [Example 3: Bucket Owner Granting Its Users Permissions to Objects It Does Not Own ](example-walkthroughs-managing-access-example3.md)
 
     In this exercise, the bucket owner first gets permissions from the object owner\. The bucket owner then delegates those permissions to users in its own account\.
-
   + [Example 4: Bucket Owner Granting Cross\-account Permission to Objects It Does Not Own](example-walkthroughs-managing-access-example4.md)
 
     After receiving permissions from the object owner, the bucket owner cannot delegate permission to other AWS accounts because cross\-account delegation is not supported \(see [Permission Delegation](access-policy-alternatives-guidelines.md#permission-delegation)\)\. Instead, the bucket owner can create an IAM role with permissions to perform specific operations \(such as get object\) and allow another AWS account to assume that role\. Anyone who assumes the role can then access objects\. This example shows how a bucket owner can use an IAM role to enable this cross\-account delegation\. 

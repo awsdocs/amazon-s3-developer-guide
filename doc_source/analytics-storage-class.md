@@ -4,11 +4,14 @@ By using Amazon S3 analytics *storage class analysis* you can analyze storage ac
 
 After storage class analysis observes the infrequent access patterns of a filtered set of data over a period of time, you can use the analysis results to help you improve your lifecycle policies\. You can configure storage class analysis to analyze all the objects in a bucket\. Or, you can configure filters to group objects together for analysis by common prefix \(that is, objects that have names that begin with a common string\), by object tags, or by both prefix and tags\. You'll most likely find that filtering by object groups is the best way to benefit from storage class analysis\. 
 
+**Important**  
+Storage class analysis does not give recommendations for transitions to the ONEZONE\_IA or GLACIER storage classes\.
+
 You can have multiple storage class analysis filters per bucket, up to 1,000, and will receive a separate analysis for each filter\. Multiple filter configurations allow you analyze specific groups of objects to improve your lifecycle policies that transition objects to STANDARD\_IA\. 
 
 Storage class analysis shows storage usage visualizations in the Amazon S3 console that are updated daily\. The storage usage data can also be exported daily to a file in an S3 bucket\. You can open the exported usage report file in a spreadsheet application or use it with the business intelligence tools of your choice such as Amazon QuickSight\.
 
-
+**Topics**
 + [How Do I Set Up Storage Class Analysis?](#analytics-storage-class-how-to-set-up)
 + [How Do I Use Storage Class Analysis?](#analytics-storage-class-contents)
 + [How Can I Export Storage Class Analysis Data?](#analytics-storage-class-export-to-file)
@@ -17,23 +20,18 @@ Storage class analysis shows storage usage visualizations in the Amazon S3 conso
 ## How Do I Set Up Storage Class Analysis?<a name="analytics-storage-class-how-to-set-up"></a>
 
 You set up storage class analysis by configuring what object data you want to analyze\. You can configure storage class analysis to do the following:
-
 + **Analyze the entire contents of a bucket\.**
 
   You'll receive an analysis for all the objects in the bucket\.
-
 + **Analyze objects grouped together by prefix and tags\.**
 
   You can configure filters that group objects together for analysis by prefix, or by object tags, or by a combination of prefix and tags\. You receive a separate analysis for each filter you configure\. You can have multiple filter configurations per bucket, up to 1,000\. 
-
 + **Export analysis data\.** 
 
   When you configure storage class analysis for a bucket or filter, you can choose to have the analysis data exported to a file each day\. The analysis for the day is added to the file to form a historic analysis log for the configured filter\. The file is updated daily at the destination of your choice\. When selecting data to export, you specify a destination bucket and optional destination prefix where the file is written\.
 
 You can use the Amazon S3 console, the REST API, or the AWS CLI or AWS SDKs to configure storage class analysis\.
-
 + For information about how to configure storage class analysis in the Amazon S3 console, see [ How Do I Configure Storage Class Analysis?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-analytics-storage-class.html)\.
-
 + To use the Amazon S3 API, use the [PutBucketAnalyticsConfiguration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTAnalyticsConfig.html) REST API, or the equivalent, from the AWS CLI or AWS SDKs\. 
 
 ## How Do I Use Storage Class Analysis?<a name="analytics-storage-class-contents"></a>
@@ -49,15 +47,10 @@ Storage class analysis observes the access patterns of a filtered object data se
 ![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/storage-class-analysis-observe-bar.png)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
 
 When performing the analysis for infrequently accessed objects storage class analysis looks at the filtered set of objects grouped together based on age since they were uploaded to Amazon S3\. Storage class analysis determines if the age group is infrequently accessed by looking at the following factors for the filtered data set:
-
 + Objects in the STANDARD storage class that are larger than 128K\.
-
 + How much average total storage you have per age group\.
-
 + Average number of bytes transferred out \(not frequency\) per age group\.
-
 + Analytics export data only includes requests with data relevant to storage class analysis\. This might cause differences in the number of requests, and the total upload and request bytes compared to what are shown in storage metrics or tracked by your own internal systems\.
-
 + Failed GET and PUT requests are not counted for the analysis\. However, you will see failed requests in storage metrics\. 
 
 **How Much of My Storage did I Retrieve?**
@@ -73,29 +66,17 @@ The Amazon S3 console also graphs what percentage of the storage in the filtered
 ![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/storage-class-analysis-percentage-retrieved.png)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
 
 As stated earlier in this topic, when you are performing the analysis for infrequently accessed objects, storage class analysis looks at the filtered set of objects grouped together based on the age since they were uploaded to Amazon S3\. The storage class analysis uses the following predefined object age groups: 
-
 + Amazon S3 Objects less than 15 days old
-
 + Amazon S3 Objects 15\-29 days old
-
 + Amazon S3 Objects 30\-44 days old
-
 + Amazon S3 Objects 45\-59 days old
-
 + Amazon S3 Objects 60\-74 days old
-
 + Amazon S3 Objects 75\-89 days old
-
 + Amazon S3 Objects 90\-119 days old
-
 + Amazon S3 Objects 120\-149 days old
-
 + Amazon S3 Objects 150\-179 days old
-
 + Amazon S3 Objects 180\-364 days old
-
 + Amazon S3 Objects 365\-729 days old
-
 + Amazon S3 Objects 730 days and older
 
 Usually it takes about 30 days of observing access patterns to gather enough information for an analysis result\. It might take longer than 30 days, depending on the unique access pattern of your data\. However, after you configure a filter you'll start seeing data analysis based on the filter in the Amazon S3 console in 24 to 48 hours\. You can see analysis on a daily basis of object access broken down by object age group in the Amazon S3 console\. 
@@ -158,11 +139,7 @@ If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, 
 ## Amazon S3 Analytics REST APIs<a name="analytics-storage-class-related-resources"></a>
 
 The following are the REST operations used for storage inventory\.
-
 +  [ DELETE Bucket analytics configuration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEAnalyticsConfiguration.html) 
-
 +  [ GET Bucket analytics configuration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETAnalyticsConfig.html) 
-
 +  [ List Bucket Analytics Configuration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketListAnalyticsConfigs.html) 
-
 +  [ PUT Bucket analytics configuration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTAnalyticsConfig.html) 

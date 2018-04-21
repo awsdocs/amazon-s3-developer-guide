@@ -28,5 +28,4 @@ You can create the AmazonS3Client class without providing your security credenti
 To see how to make requests using your AWS credentials within the context of an example of listing all the object keys in your bucket, see [Listing Keys Using the AWS SDK for Java](ListingObjectKeysUsingJava.md)\. For more examples, see [Working with Amazon S3 Objects](UsingObjects.md) and [Working with Amazon S3 Buckets](UsingBucket.md)\. You can test these examples using your AWS Account or IAM user credentials\. 
 
 ## Related Resources<a name="RelatedResources002"></a>
-
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

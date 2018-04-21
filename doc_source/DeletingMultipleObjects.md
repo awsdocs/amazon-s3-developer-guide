@@ -1,6 +1,6 @@
 # Deleting Multiple Objects Per Request<a name="DeletingMultipleObjects"></a>
 
-
+**Topics**
 + [Deleting Multiple Objects Using the AWS SDK for Java](DeletingMultipleObjectsUsingJava.md)
 + [Deleting Multiple Objects Using the AWS SDK for \.NET](DeletingMultipleObjectsUsingNetSDK.md)
 + [Deleting Multiple Objects Using the AWS SDK for PHP](DeletingMultipleObjectsUsingPHPSDK.md)

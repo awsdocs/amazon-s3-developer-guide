@@ -1,6 +1,6 @@
 # Example Walkthrough 1: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)<a name="ways-to-add-notification-config-to-bucket"></a>
 
-
+**Topics**
 + [Walkthrough Summary](#notification-walkthrough-summary)
 + [Step 1: Create an Amazon SNS Topic](#step1-create-sns-topic-for-notification)
 + [Step 2: Create an Amazon SQS Queue](#step1-create-sqs-queue-for-notification)
@@ -10,9 +10,7 @@
 ## Walkthrough Summary<a name="notification-walkthrough-summary"></a>
 
 In this walkthrough you add notification configuration on a bucket requesting Amazon S3 to:
-
 + Publish events of the `s3:ObjectCreated:*` type to an Amazon SQS queue\.
-
 + Publish events of the `s3:ReducedRedundancyLostObject` type to an Amazon SNS topic\.
 
 For information about notification configuration, see [ Configuring Amazon S3 Event Notifications](NotificationHowTo.md)\.
@@ -151,9 +149,7 @@ You can enable bucket notifications either by using the Amazon S3 console or pro
 ### Step 3 \(option a\): Enable Notifications on a Bucket Using the Console<a name="step2-enable-notification-using-console"></a>
 
 Using the Amazon S3 console, add a notification configuration requesting Amazon S3 to:
-
 + Publish events of the `s3:ObjectCreated:*` type to your Amazon SQS queue\.
-
 + Publish events of the `s3:ReducedRedundancyLostObject` type to your Amazon SNS topic\.
 
 After you save the notification configuration, Amazon S3 will post a test message, which you will get via email\. 
@@ -320,4 +316,4 @@ public class NotificationConfigurationOnABucket {
 
 ## Step 4: Test the Setup<a name="notification-walkthrough-1-test"></a>
 
-Now you can test the setup by uploading an object to your bucket and verify the event notification in the Amazon SQS console\. For instructions, see [Receiving a Message](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide//sqs-getting-started.htmlReceiveMessage.html) in the *Amazon Simple Queue Service Developer Guide "Getting Started" section*\. 
+Now you can test the setup by uploading an object to your bucket and verify the event notification in the Amazon SQS console\. For instructions, see [Receiving a Message](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-getting-started.htmlReceiveMessage.html) in the *Amazon Simple Queue Service Developer Guide "Getting Started" section*\. 

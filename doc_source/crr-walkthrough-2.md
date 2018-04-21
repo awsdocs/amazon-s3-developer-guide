@@ -5,9 +5,7 @@ In this walkthrough, you set up cross\-region replication where source and desti
 Because buckets are owned by different AWS accounts, you have to perform one extra step to set up cross\-region replication—the destination bucket owner must create a bucket policy granting the source bucket owner permissions for replication actions\.
 
 In this exercise, you perform all the steps using the console, except the creation of an IAM role and adding replication configuration to the source bucket for the following reasons:
-
 + The Amazon S3 console supports setting replication configuration when both buckets are owned by same AWS account\. However, in a cross\-account scenario, you must specify a destination bucket that is owned by another AWS account, and the Amazon S3 console UI shows only buckets in your account\.
-
 + In the IAM console, Amazon S3 is not in the list of **AWS Service Roles**\. You can optionally create an IAM role but select another service role type \(such as AWS Lambda\)\. After the role is created, you can modify the trust policy to specify Amazon S3 service principal \(instead of Lambda service principal\) who can assume the role\. For this exercise, you use the AWS CLI to create the role\. 
 
 1. Create two buckets using two different AWS accounts\. In accordance with cross\-region replication requirements, you create these buckets in different AWS Regions and enable versioning on both buckets\.
@@ -148,7 +146,6 @@ If you have an object expiration lifecycle policy in your non\-versioned bucket 
    ```
 
    In this example, you can use either the AWS CLI or the AWS SDK to add the replication configuration\. You can't use the console because the console doesn't support specifying a destination bucket that is in different AWS account\. 
-
    + Using AWS CLI\. 
 
      The AWS CLI requires you to specify the replication configuration as JSON\. Save the following JSON in a file \(`replication.json`\)\. 
@@ -186,30 +183,22 @@ If you have an object expiration lifecycle policy in your non\-versioned bucket 
      --bucket source-bucket \
      --profile accountA
      ```
-
    + Using the AWS SDK for Java\.
 
      For a code example, see [Setting Up Cross\-Region Replication Using the AWS SDK for Java](crr-using-java.md)\. 
 
 1. Test the setup\. In the console, do the following:
-
    + In the source bucket, create a folder named `Tax`\. 
-
    + Add objects to the folder in the source bucket\.
-
      + Verify that Amazon S3 replicated objects in the destination bucket owned by account B\.
-
      + In object properties, notice the **Replication Status** is set to "Replica" \(identifying this as a replica object\)\.
-
      + In object properties, the permission section shows no permissions \(the replica is still owned by the source bucket owner, and the destination bucket owner has no permission on the object replica\)\. You can add optional configuration to direct Amazon S3 to change the replica ownership\. For example, see [Walkthrough 3: Change Replica Owner to Destination Bucket Owner](crr-walkthrough-3.md)\.   
 ![\[Screenshot of object properties showing replication status (replica) and permissions for a text file.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/crr-wt2-10.png)
 
      The amount of time it takes for Amazon S3 to replicate an object depends on the object size\. For information about finding replication status, see [Finding the Cross\-Region Replication Status ](crr-status.md)\. 
-
    + Update an object's ACL in the source bucket and verify that changes appear in the destination bucket\.
 
      For instructions, see [How Do I Set Permissions on an Object?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/set-object-permissions.html) in the *Amazon Simple Storage Service Console User Guide*\.
-
    + Update the object's metadata\. For example, make changes to the storage class\. Verify that the changes appear in the destination bucket\.
 
      For instructions, see [How Do I Add Metadata to an S3 Object?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-object-metadata.html) in the *Amazon Simple Storage Service Console User Guide*\.

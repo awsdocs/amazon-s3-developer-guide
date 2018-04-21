@@ -2,7 +2,7 @@
 
 If you created your static website as a learning exercise only, be sure to delete the AWS resources that you allocated so that you no longer accrue charges\. After you delete your AWS resources, your website is no longer available\.
 
-
+**Topics**
 + [Delete the Amazon CloudFront Distribution](#getting-started-cleanup-cloudfront)
 + [Delete the Route 53 Hosted Zone](#getting-started-cleanup-route53)
 + [Delete the S3 Bucket](#getting-started-cleanup-s3)

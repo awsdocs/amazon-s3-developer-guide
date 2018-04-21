@@ -22,7 +22,7 @@ The following sample bucket policy grants everyone access to the objects in the 
 **Note**  
 The bucket policy applies only to objects owned by the bucket owner\. If your bucket contains objects that aren't owned by the bucket owner, public READ permission on those objects should be granted using the object access control list \(ACL\)\. 
 
-You can grant public read permission to your objects by using either a bucket policy or an object ACL\. To make an object publicly readable using an ACL, grant READ permission to the AllUsers group, as shown in the following grant element\. Add this grant element to the object ACL\. For information about managing ACLs, see [Managing Access with ACLs ](S3_ACLs_UsingACLs.md)\.
+You can grant public read permission to your objects by using either a bucket policy or an object ACL\. To make an object publicly readable using an ACL, grant READ permission to the AllUsers group, as shown in the following grant element\. Add this grant element to the object ACL\. For information about managing ACLs, see [Managing Access with ACLs](S3_ACLs_UsingACLs.md)\.
 
 ```
 1. <Grant>

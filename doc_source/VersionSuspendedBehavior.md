@@ -1,6 +1,6 @@
 # Managing Objects in a Versioning\-Suspended Bucket<a name="VersionSuspendedBehavior"></a>
 
-
+**Topics**
 + [Adding Objects to Versioning\-Suspended Buckets](AddingObjectstoVersionSuspendedBuckets.md)
 + [Retrieving Objects from Versioning\-Suspended Buckets](RetrievingObjectsfromVersioningSuspendedBuckets.md)
 + [Deleting Objects from Versioning\-Suspended Buckets](DeletingObjectsfromVersioningSuspendedBuckets.md)

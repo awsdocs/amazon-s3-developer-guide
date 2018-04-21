@@ -24,13 +24,11 @@ The introductory examples \(see [Example Walkthroughs: Managing Access to Your A
    ```
 
 1. Verify the setup by entering the following command at the command prompt\. Both these commands don't provide credentials explicitly, so the credentials of the default profile are used\.
-
    + Try the help command
 
      ```
      aws help
      ```
-
    + Use `aws s3 ls` to get a list of buckets on the configured account\.
 
      ```
@@ -76,13 +74,11 @@ $ export AWS_DEFAULT_PROFILE=AccountAadmin
    ```
 
 1. Verify the setup\.
-
    + Execute the `Get-Command` to retrieve a list of available commands you can use for Amazon S3 operations\. 
 
      ```
      Get-Command -module awspowershell -noun s3* -StoredCredentials string
      ```
-
    + Execute the `Get-S3Object` command to retrieve a list of objects in a bucket\.
 
      ```

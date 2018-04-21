@@ -1,6 +1,6 @@
 # Request Routing<a name="UsingRouting"></a>
 
-
+**Topics**
 + [Request Redirection and the REST API](Redirects.md)
 + [DNS Considerations](DNSConsiderations.md)
 

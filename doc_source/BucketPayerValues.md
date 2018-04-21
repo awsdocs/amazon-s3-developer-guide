@@ -3,7 +3,6 @@
 You can determine the `Payer` value that is set on a bucket by requesting the resource `requestPayment`\.
 
 **To return the requestPayment resource**
-
 + Use a GET request to obtain the `requestPayment` resource, as shown in the following request\.
 
   ```

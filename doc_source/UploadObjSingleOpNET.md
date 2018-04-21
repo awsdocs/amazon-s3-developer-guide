@@ -28,9 +28,7 @@ The following C\# code example demonstrates the preceding tasks\.
 
 **Example**  
 The following C\# code example uploads an object\. The object data is provided as a text string in the code\. The example uploads the object twice\.   
-
 + The first `PutObjectRequest` specifies only the bucket name, key name, and a text string embedded in the code as sample object data\. 
-
 + The second `PutObjectRequest` provides additional information including the optional object metadata and a ContentType header\. The request specifies a file name to upload\.
 Each successive call to `AmazonS3.PutObject` replaces the previous upload\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 

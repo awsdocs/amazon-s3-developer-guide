@@ -104,29 +104,16 @@ try {
 ```
 
 ### Related Resources<a name="RelatedResources-HLuploadFilePHP"></a>
-
 + [AWS SDK for PHP Aws\\Common\\Model\\MultipartUpload\\AbstractUploadBuilder Class](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.Common.Model.MultipartUpload.AbstractUploadBuilder.html)
-
 + [AWS SDK for PHP Aws\\Common\\Model\\MultipartUpload\\AbstractUploadBuilder::newInstance\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.Common.Model.MultipartUpload.AbstractUploadBuilder.html#_newInstance)
-
 + [AWS SDK for PHP Aws\\Common\\Model\\MultipartUpload\\AbstractUploadBuilder::SetSource\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.Common.Model.MultipartUpload.AbstractUploadBuilder.html#_setSource)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\Model\\MultipartUpload\\UploadBuilder Class](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.Model.MultipartUpload.UploadBuilder.html)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\Model\\MultipartUpload\\UploadBuilder::build\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.Model.MultipartUpload.UploadBuilder.html)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\Model\\MultipartUpload\\UploadBuilder:setMinPartSize\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.Model.MultipartUpload.UploadBuilder.html#_setMinPartSize)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\Model\\MultipartUpload\\UploadBuilder:setOption\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.Model.MultipartUpload.UploadBuilder.html#_setOption)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\Model\\MultipartUpload\\UploadBuilder:setConcurrency\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.Model.MultipartUpload.UploadBuilder.html#_setConcurrency)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client Class](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html) 
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client::factory\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html#_factory) 
-
 + [AWS SDK for PHP for Amazon S3 \- Uploading Large Files Using Multipart Uploads](http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/service-s3.html#uploading-large-files-using-multipart-uploads)
-
 + [AWS SDK for PHP for Amazon S3](http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/service-s3.html)
-
 + [AWS SDK for PHP Documentation](http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/index.html)

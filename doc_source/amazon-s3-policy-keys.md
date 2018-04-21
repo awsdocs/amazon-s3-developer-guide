@@ -33,7 +33,7 @@ For more information about specifying conditions in an access policy language, s
 
 The following topics describe AWS\-wide and Amazon S3–specific condition keys and provide example policies\. 
 
-
+**Topics**
 + [Available Condition Keys](#AvailableKeys-iamV2)
 + [Amazon S3 Condition Keys for Object Operations](#object-keys-in-amazon-s3-policies)
 + [Amazon S3 Condition Keys for Bucket Operations](#bucket-keys-in-amazon-s3-policies)
@@ -41,7 +41,6 @@ The following topics describe AWS\-wide and Amazon S3–specific condition keys 
 ## Available Condition Keys<a name="AvailableKeys-iamV2"></a>
 
 The predefined keys available for specifying conditions in an Amazon S3 access policy can be classified as follows:
-
 + **AWS\-wide keys** – AWS provides a set of common keys that are supported by all AWS services that support policies\. These keys that are common to all services are called AWS\-wide keys and use the prefix `aws:`\. For a list of AWS\-wide keys, see [Available Keys for Conditions](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\. There are also keys that are specific to Amazon S3, which use the prefix `s3:`\. Amazon S3–specific keys are discussed in the next bulleted item\.
 
    
@@ -75,35 +74,21 @@ The `IPAddress` and `NotIpAddress` key values specified in the condition uses CI
       ]
   }
   ```
-
 + **Amazon S3–specific keys** – In addition to the AWS\-wide keys, the following are the condition keys that are applicable only in the context of granting Amazon S3 specific permissions\. These Amazon S3–specific keys use the prefix `s3:`\. 
-
   + `s3:x-amz-acl`
-
   + `s3:x-amz-copy-source`
-
   + `s3:x-amz-metadata-directive`
-
   + `s3:x-amz-server-side-encryption`
-
   + `s3:VersionId`
-
   + `s3:LocationConstraint`
-
   + `s3:delimiter`
-
   + `s3:max-keys`
-
   + `s3:prefix`
-
   + `s3:x-amz-server-side-encryption-aws-kms-key-id`
-
   + `s3:ExistingObjectTag/<tag-key>` 
 
     For example policies using object tags related condition keys, see [Object Tagging and Access Control Policies](object-tagging.md#tagging-and-policies)\.
-
   + `s3:RequestObjectTagKeys`
-
   + `s3:RequestObjectTag/<tag-key>`
 
    
@@ -142,13 +127,9 @@ The following section describes the condition keys that can be used to grant con
 ## Amazon S3 Condition Keys for Object Operations<a name="object-keys-in-amazon-s3-policies"></a>
 
  The following table shows which Amazon S3 conditions you can use with which Amazon S3 actions\. Example policies are provided following the table\. Note the following about the Amazon S3–specific condition keys described in the following table:
-
 + The condition key names are preceded by the prefix `s3:`\. For example, `s3:x-amz-acl`\.
-
 + Each condition key maps to the same name request header allowed by the API on which the condition can be set\. That is, these condition keys dictate behavior of the same name request headers\. For example:
-
   + The condition key `s3:x-amz-acl` that you can use to grant condition permission for the `s3:PutObject` permission defines behavior of the `x-amz-acl` request header that the PUT Object API supports\. 
-
   + The condition key `s3:VersionId` that you can use to grant conditional permission for the `s3:GetObjectVersion` permission defines behavior of the `versionId` query parameter that you set in a GET Object request\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html)
@@ -156,7 +137,6 @@ The following section describes the condition keys that can be used to grant con
 ### Example 1: Granting s3:PutObject permission with a condition requiring the bucket owner to get full control<a name="grant-putobject-conditionally-1"></a>
 
 Suppose that Account A owns a bucket and the account administrator wants to grant Dave, a user in Account B, permissions to upload objects\. By default, objects that Dave uploads are owned by Account B, and Account A has no permissions on these objects\. Because the bucket owner is paying the bills, it wants full permissions on the objects that Dave uploads\. The Account A administrator can do this by granting the `s3:PutObject` permission to Dave, with a condition that the request include ACL\-specific headers, that either grants full permission explicitly or uses a canned ACL \(see [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\)\.
-
 + Require the `x-amz-full-control` header in the request with full control permission to the bucket owner\.
 
   The following bucket policy grants the `s3:PutObject` permission to user Dave with a condition using the `s3:x-amz-grant-full-control` condition key, which requires the request to include the `x-amz-full-control` header\.
@@ -228,7 +208,6 @@ This example is about cross\-account permission\. However, if Dave, who is getti
   ```
   aws s3api put-object --bucket examplebucket --key HappyFace.jpg --body c:\HappyFace.jpg --grant-full-control id="AccountA-CanonicalUserID" --profile AccountBUserProfile
   ```
-
 + Require the `x-amz-acl` header with a canned ACL granting full control permission to the bucket owner\.
 
   To require the `x-amz-acl` header in the request, you can replace the key\-value pair in the `Condition` block and specify the `s3:x-amz-acl` condition key as shown below\.
@@ -266,11 +245,8 @@ aws s3api put-object --bucket example1bucket --key HappyFace.jpg --body c:\Happy
 ### Example 3: Granting s3:PutObject permission to copy objects with a restriction on the copy source<a name="putobject-limit-copy-source-2"></a>
 
 In the PUT Object request, when you specify a source object, it is a copy operation \(see [PUT Object \- Copy](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\)\. Accordingly, the bucket owner can grant a user permission to copy objects with restrictions on the source\. For example:
-
 + Allow copying objects only from the `sourcebucket` bucket\.
-
 + Allow copying objects from the `sourcebucket` bucket, and only the objects whose key name prefix starts with `public/` f\. For example, `sourcebucket/public/*`
-
 + Allow copying only a specific object from the `sourcebucket`; for example, `sourcebucket/example.jpg`\.
 
 The following bucket policy grants user Dave `s3:PutObject` permission that allows him to copy only objects with a condition that the request include the `s3:x-amz-copy-source` header and the header value specify the `/examplebucket/public/*` key name prefix\. 

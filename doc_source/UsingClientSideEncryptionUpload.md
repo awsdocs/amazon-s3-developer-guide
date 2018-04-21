@@ -2,7 +2,7 @@
 
 This section provides code examples of client\-side encryption\. As described in the overview \(see [Protecting Data Using Client\-Side Encryption](UsingClientSideEncryption.md)\) the client\-side master key you provide can be either a symmetric key or a public/private key pair\. This section provides examples of both types of master keys, symmetric master key \(256\-bit Advanced Encryption Standard \(AES\) secret key\) and asymmetric master key \(1024\-bit RSA key pair\)\. 
 
-
+**Topics**
 + [Example 1: Encrypt and Upload a File Using a Client\-Side Symmetric Master Key](encrypt-client-side-symmetric-master-key.md)
 + [Example 2: Encrypt and Upload a File to Amazon S3 Using a Client\-Side Asymmetric Master Key](encrypt-client-side-asymmetric-master-key.md)
 

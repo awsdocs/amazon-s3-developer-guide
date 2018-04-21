@@ -4,7 +4,7 @@ This section shows several IAM user policies for controlling user access to Amaz
 
 The following example policies will work if you test them programmatically; however, in order to use them with the Amazon S3 console, you will need to grant additional permissions that are required by the console\. For information about using policies such as these with the Amazon S3 console, see [An Example Walkthrough: Using user policies to control access to your bucket](walkthrough1.md)\. 
 
-
+**Topics**
 + [Example: Allow an IAM user access to one of your buckets](#iam-policy-ex0)
 + [Example: Allow each IAM user access to a folder in a bucket](#iam-policy-ex1)
 + [Example: Allow a group to have a shared folder in Amazon S3](#iam-policy-ex2)

@@ -101,5 +101,4 @@ If you want to test the sample using IAM user credentials, you will need to crea
 ```
 
 ## Related Resources<a name="RelatedResources008"></a>
-
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

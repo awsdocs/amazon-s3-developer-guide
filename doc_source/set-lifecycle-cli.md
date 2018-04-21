@@ -1,17 +1,13 @@
-# Set Lifecycle Configuration Using the AWS CLI<a name="set-lifecycle-cli"></a>
+# Set Lifecycle Configurations Using the AWS CLI<a name="set-lifecycle-cli"></a>
 
 You can use the following AWS CLI commands to manage lifecycle configurations:
-
 + put\-bucket\-lifecycle\-configuration
-
 + get\-bucket\-lifecycle\-configuration
-
 + delete\-bucket\-lifecycle
 
 For instructions to set up the AWS CLI, see [Setting Up the AWS CLI](setup-aws-cli.md)\.
 
 Note that the Amazon S3 lifecycle configuration is an XML file\. But when using CLI, you cannot specify the XML, you must specify JSON instead\. The following are examples XML lifecycle configurations and equivalent JSON that you can specify in AWS CLI command:
-
 + Consider the following example lifecycle configuration:
 
   ```
@@ -57,7 +53,6 @@ Note that the Amazon S3 lifecycle configuration is an XML file\. But when using 
       ]
   }
   ```
-
 + Consider the following example lifecycle configuration:
 
   ```

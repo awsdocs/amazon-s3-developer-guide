@@ -7,9 +7,7 @@ In one bucket, for example, you can have two objects with the same key, but diff
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/versioning_Enabled.png)
 
 Versioning\-enabled buckets enable you to recover objects from accidental deletion or overwrite\. For example:
-
 + If you delete an object, instead of removing it permanently, Amazon S3 inserts a delete marker, which becomes the current object version\. You can always restore the previous version\. For more information, see [Deleting Object Versions](DeletingObjectVersions.md)\.
-
 + If you overwrite an object, it results in a new object version in the bucket\. You can always restore the previous version\.
 
 **Important**  
@@ -21,17 +19,13 @@ Buckets can be in one of three states: unversioned \(the default\), versioning\-
 Once you version\-enable a bucket, it can never return to an unversioned state\. You can, however, suspend versioning on that bucket\.
 
 The versioning state applies to all \(never some\) of the objects in that bucket\. The first time you enable a bucket for versioning, objects in it are thereafter always versioned and given a unique version ID\. Note the following:
-
 + Objects stored in your bucket before you set the versioning state have a version ID of `null`\. When you enable versioning, existing objects in your bucket do not change\. What changes is how Amazon S3 handles the objects in future requests\. For more information, see [Managing Objects in a Versioning\-Enabled Bucket](manage-objects-versioned-bucket.md)\.
-
 + The bucket owner \(or any user with appropriate permissions\) can suspend versioning to stop accruing object versions\. When you suspend versioning, existing objects in your bucket do not change\. What changes is how Amazon S3 handles objects in future requests\. For more information, see [Managing Objects in a Versioning\-Suspended Bucket](VersionSuspendedBehavior.md)\.
 
 ## How to Configure Versioning on a Bucket<a name="how-to-enable-disable-versioning-intro"></a>
 
 You can configure bucket versioning using any of the following methods:
-
 + Configure versioning using the Amazon S3 console\.
-
 + Configure versioning programmatically using the AWS SDKs
 
   Both the console and the SDKs call the REST API Amazon S3 provides to manage versioning\. 
@@ -62,15 +56,11 @@ For an example of configuring versioning, see [Examples of Enabling Bucket Versi
 ## MFA Delete<a name="MultiFactorAuthenticationDelete"></a>
 
 You can optionally add another layer of security by configuring a bucket to enable MFA \(Multi\-Factor Authentication\) Delete, which requires additional authentication for either of the following operations\.
-
 + Change the versioning state of your bucket
-
 + Permanently delete an object version
 
  MFA Delete requires two forms of authentication together:
-
 + Your security credentials
-
 + The concatenation of a valid serial number, a space, and the six\-digit code displayed on an approved authentication device
 
 MFA Delete thus provides added security in the event, for example, your security credentials are compromised\. 
@@ -99,11 +89,7 @@ The bucket owner, the AWS account that created the bucket \(root account\), and 
 ## Related Topics<a name="versioning-related-topics"></a>
 
 For more information, see the following topics:
-
 + [Examples of Enabling Bucket Versioning](manage-versioning-examples.md)
-
 + [Managing Objects in a Versioning\-Enabled Bucket](manage-objects-versioned-bucket.md)
-
 + [Managing Objects in a Versioning\-Suspended Bucket](VersionSuspendedBehavior.md)
-
 + [Significant Increases in HTTP 503 Responses to Amazon S3 Requests to Buckets with Versioning Enabled](troubleshooting.md#troubleshooting-by-symptom-increase-503-reponses) 

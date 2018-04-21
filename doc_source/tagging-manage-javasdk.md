@@ -1,11 +1,8 @@
 # Managing Tags Using SDK \(AWS SDK for Java\)<a name="tagging-manage-javasdk"></a>
 
 The following Java code example does the following:
-
 + Create an object with tags\.
-
 + Retrieve tag set\.
-
 + Update the tag set \(replace the existing tag set\)\.
 
 For instructions on how to create and test a working sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\.

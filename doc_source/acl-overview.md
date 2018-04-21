@@ -1,6 +1,6 @@
 # Access Control List \(ACL\) Overview<a name="acl-overview"></a>
 
-
+**Topics**
 + [Who Is a Grantee?](#specifying-grantee)
 + [What Permissions Can I Grant?](#permissions)
 + [Sample ACL](#sample-acl)
@@ -66,19 +66,16 @@ You can also look up the canonical user ID of an AWS account by reading the ACL 
 ### Amazon S3 Predefined Groups<a name="specifying-grantee-predefined-groups"></a>
 
 Amazon S3 has a set of predefined groups\. When granting account access to a group, you specify one of our URIs instead of a canonical user ID\. We provide the following predefined groups:
-
 + **Authenticated Users group** – Represented by `http://acs.amazonaws.com/groups/global/AuthenticatedUsers`\.
 
   This group represents all AWS accounts\. **Access permission to this group allows any AWS account to access the resource\.** However, all requests must be signed \(authenticated\)\.
 **Warning**  
 When you grant access to the **Authenticated Users group** any AWS authenticated user in the world can access your resource\.
-
 + **All Users group** – Represented by `http://acs.amazonaws.com/groups/global/AllUsers`\.
 
   **Access permission to this group allows anyone in the world access to the resource\.** The requests can be signed \(authenticated\) or unsigned \(anonymous\)\. Unsigned requests omit the Authentication header in the request\.
 **Warning**  
 We highly recommend that you never grant the **All Users group** `WRITE`, `WRITE_ACP`, or `FULL_CONTROL` permissions\. For example, `WRITE` permissions allow anyone to store objects in your bucket, for which you are billed\. It also allows others to delete objects that you might want to keep\. For more details about these permissions, see the following section [What Permissions Can I Grant?](#permissions)\.
-
 + **Log Delivery group** – Represented by `http://acs.amazonaws.com/groups/s3/LogDelivery`\.
 
   WRITE permission on a bucket enables this group to write server access logs \(see [Server Access Logging](ServerLogs.md)\) to the bucket\.
@@ -196,9 +193,7 @@ You specify a canned ACL in your request using the `x-amz-acl` request header\. 
 ## How to Specify an ACL<a name="setting-acls"></a>
 
 Amazon S3 APIs enable you to set an ACL when you create a bucket or an object\. Amazon S3 also provides API to set an ACL on an existing bucket or an object\. These APIs provide the following methods to set an ACL:
-
 + **Set ACL using request headers—** When you send a request to create a resource \(bucket or object\), you set an ACL using the request headers\. Using these headers, you can either specify a canned ACL or specify grants explicitly \(identifying grantee and permissions explicitly\)\. 
-
 + **Set ACL using request body—** When you send a request to set an ACL on an existing resource, you can set the ACL either in the request header or in the body\. 
 
  For more information, see [Managing ACLs](managing-acls.md)\.

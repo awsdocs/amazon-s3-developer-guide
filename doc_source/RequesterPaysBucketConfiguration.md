@@ -5,7 +5,6 @@ Only the bucket owner can set the `RequestPaymentConfiguration.payer` configurat
 To revert a Requester Pays bucket to a regular bucket, you use the value `BucketOwner`\. Typically, you would use `BucketOwner` when uploading data to the Amazon S3 bucket, and then you would set the value to `Requester` before publishing the objects in the bucket\.
 
 **To set requestPayment**
-
 + Use a `PUT` request to set the `Payer` value to `Requester` on a specified bucket\.
 
   ```

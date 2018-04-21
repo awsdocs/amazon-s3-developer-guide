@@ -5,13 +5,9 @@
  The purpose of the prefix and delimiter parameters is to help you organize and then browse your keys hierarchically\. To do this, first pick a delimiter for your bucket, such as slash \(/\), that doesn't occur in any of your anticipated key names\. Next, construct your key names by concatenating all containing levels of the hierarchy, separating each level with the delimiter\. 
 
  For example, if you were storing information about cities, you might naturally organize them by continent, then by country, then by province or state\. Because these names don't usually contain punctuation, you might select slash \(/\) as the delimiter\. The following examples use a slash \(/\) delimiter\.
-
 + Europe/France/Aquitaine/Bordeaux
-
 + North America/Canada/Quebec/Montreal
-
 + North America/USA/Washington/Bellevue
-
 + North America/USA/Washington/Seattle
 
  If you stored data for every city in the world in this manner, it would become awkward to manage a flat key namespace\. By using `Prefix` and `Delimiter` with the list operation, you can use the hierarchy you've created to list your data\. For example, to list all the states in USA, set `Delimiter`='/' and `Prefix`='North America/USA/'\. To list all the provinces in Canada for which you have data, set `Delimiter`='/' and `Prefix`='North America/Canada/'\.

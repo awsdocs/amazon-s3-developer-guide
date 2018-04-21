@@ -8,7 +8,7 @@ You can configure multiple inventory lists for a bucket\. You can configure what
 
 You can query Amazon S3 inventory using standard SQL by using Amazon Athena, Amazon Redshift Spectrum, and other tools such as [Presto](https://prestodb.io/), [Apache Hive](https://hive.apache.org/), and [Apache Spark](https://databricks.com/spark/about/)\. It's easy to use Athena to run queries on your inventory files\. You can use Athena for Amazon S3 inventory queries in all Regions where Athena is available\. 
 
-
+**Topics**
 + [How Do I Set Up Amazon S3 Inventory?](#storage-inventory-how-to-set-up)
 + [What's Included in an Amazon S3 Inventory?](#storage-inventory-contents)
 + [Where Are Inventory Lists Located?](#storage-inventory-location)
@@ -29,9 +29,7 @@ The bucket that the inventory lists the objects for is called the *source bucket
 The inventory lists the objects that are stored in the source bucket\. You can get inventory lists for an entire bucket or filtered by \(object key name\) prefix\.
 
 The source bucket:
-
 + Contains the objects that are listed in the inventory\.
-
 + Contains the configuration for the inventory\.
 
 **Destination Bucket**
@@ -39,17 +37,11 @@ The source bucket:
 Amazon S3 inventory list files are written to the destination bucket\. To group all the inventory list files in a common location in the destination bucket, you can specify a destination \(object key name\) prefix in the inventory configuration\.
 
 The destination bucket:
-
 + Contains the inventory file lists\. 
-
 + Contains the manifest files that list all the file inventory lists that are stored in the destination bucket\. For more information, see [What Is an Inventory Manifest?](#storage-inventory-location-manifest)
-
 + Must have a bucket policy to give Amazon S3 permission to verify ownership of the bucket and permission to write files to the bucket\. 
-
 + Must be in the same AWS Region as the source bucket\.
-
 + Can be the same as the source bucket\.
-
 + Can be owned by a different AWS account than the account that owns the source bucket\.
 
 ### Setting Up Amazon S3 Inventory<a name="storage-inventory-setting-up"></a>
@@ -69,9 +61,7 @@ The easiest way to set up an inventory is by using the AWS Management Console, b
    When you configure an inventory list for a source bucket, you specify the destination bucket where you want the list to be stored, and whether you want to generate the list daily or weekly\. You can also configure what object metadata to include and whether to list all object versions or only current versions\. 
 
    You can specify that the inventory list file be encrypted by using Amazon S3\-managed keys \(SSE\-S3\) or AWS KMS\-managed keys \(SSE\-KMS\)\. For more information about SSE\-S3 and SSE\-KMS, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. If you plan to use SSE\-KMS encryption, see Step 3\.
-
    + For information about how to use the console to configure an inventory list, see [How Do I Configure Amazon S3 Inventory?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-inventory.html) in the *Amazon Simple Storage Service Console User Guide*\.
-
    + To use the Amazon S3 API to configure an inventory list, use the [PUT Bucket inventory configuration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTInventoryConfig.html) REST API, or the equivalent from the AWS CLI or AWS SDKs\. 
 
 1. **To encrypt the inventory list file with SSE\-KMS, grant Amazon S3 permission to use the AWS KMS key\.**
@@ -117,29 +107,17 @@ You can also use the AWS KMS PUT key policy API [PutKeyPolicy](http://docs.aws.a
 An inventory list file contains a list of the objects in the source bucket and metadata for each object\. The inventory lists are stored in the destination bucket as a CSV file compressed with GZIP or as an Apache optimized row columnar \(ORC\) file\. 
 
 The inventory list contains a list of the objects in an S3 bucket and the following metadata for each listed object: 
-
 + **Bucket name** – The name of the bucket that the inventory is for\.
-
 + **Key name** – Object key name \(or key\) that uniquely identifies the object in the bucket\. When using the CSV file format, the key name is URL\-encoded and must be decoded before you can use it\.
-
 + **Version ID** – Object version ID\. When you enable versioning on a bucket, Amazon S3 assigns a version number to objects that are added to the bucket\. For more information, see [Object Versioning](ObjectVersioning.md)\. \(This field is not included if the list is only for the current version of objects\.\)
-
 + **IsLatest** – Set to `True` if the object is the current version of the object\. \(This field is not included if the list is only for the current version of objects\.\)
-
 + **Size** – Object size in bytes\.
-
 + **Last modified date** – Object creation date or the last modified date, whichever is the latest\.
-
 + **ETag** – The entity tag is a hash of the object\. The ETag reflects changes only to the contents of an object, not its metadata\. The ETag may or may not be an MD5 digest of the object data\. Whether it is depends on how the object was created and how it is encrypted\.
-
 + **Storage class** – Storage class used for storing the object\. For more information, see [Storage Classes](storage-class-intro.md)\.
-
 + **Multipart upload flag** – Set to `True` if the object was uploaded as a multipart upload\. For more information, see [Multipart Upload Overview](mpuoverview.md)\.
-
 + **Delete marker** – Set to `True`, if the object is a delete marker\. For more information, see [Object Versioning](ObjectVersioning.md)\. \(This field is not included if the list is only for the current version of objects\.\)
-
 + **Replication status** – Set to `PENDING`, `COMPLETED`, `FAILED`, or `REPLICA.` For more information, see [Finding the Cross\-Region Replication Status ](crr-status.md)\.
-
 + **Encryption status** – Set to `SSE-S3`, `SSE-C`, `SSE-KMS`, or `NOT-SSE`\. The server\-side encryption status for SSE\-S3, SSE\-KMS, and SSE with customer\-provided keys \(SSE\-C\)\. A status of `NOT-SSE` means that the object is not encrypted with server\-side encryption\. For more information, see [Protecting Data Using Encryption](UsingEncryption.md)\.
 
 The following is an example CSV inventory list opened in a spreadsheet application\. The heading row is shown only to help clarify the example; it is not included in the actual list\.
@@ -163,19 +141,12 @@ When an inventory list is published, the manifest files are published to the fol
  destination-prefix/source-bucket/config-ID/YYYY-MM-DDTHH-MMZ/manifest.checksum
  destination-prefix/source-bucket/config-ID/hive/dt=YYYY-MM-DD-HH-MM/symlink.txt
 ```
-
 + *destination\-prefix* is the \(object key name\) prefix set in the inventory configuration, which can be used to group all the inventory list files in a common location within the destination bucket\.
-
 + *source\-bucket* is the source bucket that the inventory list is for\. It is added to prevent collisions when multiple inventory reports from different source buckets are sent to the same destination bucket\.
-
 + *config\-ID* is added to prevent collisions with multiple inventory reports from the same source bucket that are sent to the same destination bucket\.
-
 + *YYYY\-MM\-DDTHH\-MMZ* is the time stamp that consists of the start time and the date when the inventory report generation begins scanning the bucket; for example, `2016-11-06T21-32Z`\. Storage added after the time stamp will not be in the report\.
-
 + `manifest.json` is the manifest file\. 
-
 + `manifest.checksum` is the MD5 of the content of the `manifest.json` file\. 
-
 + `symlink.txt` is the Apache Hive\-compatible manifest file\. 
 
 The inventory lists are published daily or weekly to the following location in the destination bucket\.
@@ -185,11 +156,8 @@ The inventory lists are published daily or weekly to the following location in t
       ...
       destination-prefix/source-bucket/data/example-file-name-1.csv.gz
 ```
-
 + *destination\-prefix* is the \(object key name\) prefix set in the inventory configuration\. It can be used to group all the inventory list files in a common location in the destination bucket\.
-
 + *source\-bucket* is the source bucket that the inventory list is for\. It is added to prevent collisions when multiple inventory reports from different source buckets are sent to the same destination bucket\.
-
 + *example\-file\-name*`.csv.gz` is one of the CSV inventory files\. ORC inventory names end with the file name extension `.orc`\.
 
 ### What Is an Inventory Manifest?<a name="storage-inventory-location-manifest"></a>
@@ -197,17 +165,11 @@ The inventory lists are published daily or weekly to the following location in t
 The manifest files `manifest.json` and `symlink.txt` describe where the inventory files are located\. Whenever a new inventory list is delivered, it is accompanied by a new set of manifest files\.
 
 Each manifest contained in the `manifest.json` file provides metadata and other basic information about an inventory\. This information includes the following:
-
 + Source bucket name
-
 + Destination bucket name
-
 + Version of the inventory
-
 + Creation time stamp in the epoch date format that consists of the start time and the date when the inventory report generation begins scanning the bucket
-
 + Format and schema of the inventory files
-
 + Actual list of the inventory files that are in the destination bucket
 
 Whenever a `manifest.json` file is written, it is accompanied by a `manifest.checksum` file that is the MD5 of the content of `manifest.json` file\. 
@@ -338,11 +300,7 @@ For more information about using Athena, see [Amazon Athena User Guide](http://d
 ## Amazon S3 Inventory REST APIs<a name="storage-inventory-related-resources"></a>
 
 The following are the REST operations used for Amazon S3 inventory\.
-
 +  [ DELETE Bucket inventory configuration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEInventoryConfiguration.html) 
-
 +  [ GET Bucket inventory configuration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) 
-
 +  [ List Bucket Inventory Configuration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketListInventoryConfigs.html) 
-
 +  [ PUT Bucket inventory configuration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTInventoryConfig.html) 

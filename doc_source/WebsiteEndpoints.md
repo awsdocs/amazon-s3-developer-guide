@@ -12,10 +12,10 @@ The two general forms of an Amazon S3 website endpoint are as follows:
 1. bucket-name.s3-website.region.amazonaws.com
 ```
 
-Which form is used for the endpoint depends on what Region the bucket is in\. For example, if your bucket is named `example-bucket` and it resides in the US East \(N\. Virginia\) region, the website is available at the following Amazon S3 website endpoint: 
+Which form is used for the endpoint depends on what Region the bucket is in\. For example, if your bucket is named `example-bucket` and it resides in the US West \(Oregon\) region, the website is available at the following Amazon S3 website endpoint: 
 
 ```
-1. http://example-bucket.s3-website-us-east-1.amazonaws.com/
+1. http://example-bucket.s3-website-us-west-2.amazonaws.com/
 ```
 
 Or, if your bucket is named `example-bucket` and it resides in the EU \(Frankfurt\) region, the website is available at the following Amazon S3 website endpoint: 
@@ -29,7 +29,7 @@ For a list of the Amazon S3 website endpoints by Region, see [Amazon Simple Stor
  In order for your customers to access content at the website endpoint, you must make all your content publicly readable\. To do so, you can use a bucket policy or an ACL on an object to grant the necessary permissions\. 
 
 **Note**  
-Requester Pays buckets   do not allow access through the website endpoint\. Any request to such a bucket receives a `403 Access Denied` response\. For more information, see [Requester Pays Buckets](RequesterPaysBuckets.md)\.
+Requester Pays buckets  do not allow access through the website endpoint\. Any request to such a bucket receives a `403 Access Denied` response\. For more information, see [Requester Pays Buckets](RequesterPaysBuckets.md)\.
 
 If you have a registered domain, you can add a DNS CNAME entry to point to the Amazon S3 website endpoint\. For example, if you have registered domain, `www.example-bucket.com`, you could create a bucket `www.example-bucket.com`, and add a DNS CNAME record that points to `www.example-bucket.com.s3-website-<region>.amazonaws.com`\. All requests to `http://www.example-bucket.com` are routed to `www.example-bucket.com.s3-website-<region>.amazonaws.com`\. For more information, see [Virtual Hosting of Buckets](VirtualHosting.md)\. 
 

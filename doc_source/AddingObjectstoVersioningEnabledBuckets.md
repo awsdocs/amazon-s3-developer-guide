@@ -6,7 +6,7 @@ The following figure shows that Amazon S3 adds a unique version ID to an object 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/versioning_PUT_versionEnabled.png)
 
-
+**Topics**
 + [Using the Console](#add-obj-versioning-enabled-bucket-console)
 + [Using the AWS SDKs](#add-obj-versioning-enabled-bucket-sdk)
 + [Using the REST API](#add-obj-versioning-enabled-bucket-rest)

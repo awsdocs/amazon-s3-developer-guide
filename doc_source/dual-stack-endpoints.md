@@ -2,7 +2,7 @@
 
 Amazon S3 dual\-stack endpoints support requests to S3 buckets over IPv6 and IPv4\. This section describes how to use dual\-stack endpoints\.
 
-
+**Topics**
 + [Amazon S3 Dual\-Stack Endpoints](#dual-stack-endpoints-description)
 + [Using Dual\-Stack Endpoints from the AWS CLI](#dual-stack-endpoints-cli)
 + [Using Dual\-Stack Endpoints from the AWS SDKs](#dual-stack-endpoints-sdks)
@@ -15,13 +15,11 @@ When you make a request to a dual\-stack endpoint, the bucket URL resolves to an
 When using the REST API, you directly access an Amazon S3 endpoint by using the endpoint name \(URI\)\. You can access an S3 bucket through a dual\-stack endpoint by using a virtual hosted\-style or a path\-style endpoint name\. Amazon S3 supports only regional dual\-stack endpoint names, which means that you must specify the region as part of the name\. 
 
 Use the following naming conventions for the dual\-stack virtual hosted\-style and path\-style endpoint names:
-
 + Virtual hosted\-style dual\-stack endpoint: 
 
    *bucketname*\.s3\.dualstack\.*aws\-region*\.amazonaws\.com
 
    
-
 + Path\-style dual\-stack endpoint: 
 
   s3\.dualstack\.*aws\-region*\.amazonaws\.com/*bucketname*
@@ -49,13 +47,11 @@ $ aws configure set default.s3.addressing_style virtual
 ```
 
 If you want to use a dual\-stack endpoint for specified AWS CLI commands only \(not all commands\), you can use either of the following methods: 
-
 + You can use the dual\-stack endpoint per command by setting the `--endpoint-url` parameter to `https://s3.dualstack.aws-region.amazonaws.com` or `http://s3.dualstack.aws-region.amazonaws.com` for any `s3` or `s3api` command\.
 
   ```
   $ aws s3api list-objects --bucket bucketname --endpoint-url https://s3.dualstack.aws-region.amazonaws.com
   ```
-
 + You can set up separate profiles in your AWS Config file\. For example, create one profile that sets `use_dualstack_endpoint` to `true` and a profile that does not set `use_dualstack_endpoint`\. When you run a command, specify which profile you want to use, depending upon whether or not you want to use the dual\-stack endpoint\. 
 
 **Note**  

@@ -1,6 +1,6 @@
 # Managing Objects in a Versioning\-Enabled Bucket<a name="manage-objects-versioned-bucket"></a>
 
-
+**Topics**
 + [Adding Objects to Versioning\-Enabled Buckets](AddingObjectstoVersioningEnabledBuckets.md)
 + [Listing Objects in a Versioning\-Enabled Bucket](list-obj-version-enabled-bucket.md)
 + [Retrieving Object Versions](RetrievingObjectVersions.md)

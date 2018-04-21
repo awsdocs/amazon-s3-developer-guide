@@ -6,6 +6,6 @@ Note that when you restore an archive you are paying for both the archive and a 
 
 Amazon S3 restores a temporary copy of the object only for the specified duration\. After that Amazon S3 deletes the restored object copy\. You can modify the expiration period of a restored copy, by reissuing a restore, in which case Amazon S3 updates the expiration period, relative to the current time\. 
 
-Amazon S3 calculates expiration time of the restored object copy by adding the number of days specified in the restoration request to the current time and rounding the resulting time to the next day midnight UTC\. For example, if an object was created on 10/15/2012 10:30 am UTC and the restoration period was specified as 3 days, then the restored copy expires on 10/19/2012 00:00 UTC at which time Amazon S3 delete the object copy\. 
+Amazon S3 calculates expiration time of the restored object copy by adding the number of days specified in the restoration request to the current time and rounding the resulting time to the next day midnight UTC\. For example, if an object was created on 10/15/2012 10:30 am UTC and the restoration period was specified as 3 days, then the restored copy expires on 10/19/2012 00:00 UTC, at which time Amazon S3 deletes the object copy\. 
 
 You can restore an object copy for any number of days\. However you should restore objects only for the duration you need because of the storage costs associated with the object copy\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.

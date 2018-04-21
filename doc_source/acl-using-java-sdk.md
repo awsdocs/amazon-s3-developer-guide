@@ -78,13 +78,9 @@ s3client.setObjectAcl(bucketName, keyName, CannedAccessControlList.Authenticated
 The following Java code example first creates a bucket\. In the create request, it specifies a `public-read` canned ACL\. It then retrieves the ACL in an `AccessControlList` instance, clears grants, and adds new grants to the `AccessControlList`\. Finally, it saves the updated `AccessControlList`, that is, it replaces the bucket ACL subresource\.
 
 The following Java code example performs the following tasks:
-
 + Create a bucket\. In the request, it specifies a `log-delivery-write` canned ACL, granting write permission to the `LogDelivery` Amazon S3 group\.
-
 + Read the ACL on the bucket\.
-
 + Clear existing permissions and add the new permission to the ACL\.
-
 + Call `setBucketAcl` to add the new ACL to the bucket\. 
 
 **Note**  

@@ -1,17 +1,12 @@
-# Manage Object Lifecycle Using the AWS SDK for Java<a name="manage-lifecycle-using-java"></a>
+# Manage an Object's Lifecycle Using the AWS SDK for Java<a name="manage-lifecycle-using-java"></a>
 
 You can use the AWS SDK for Java to manage lifecycle configuration on a bucket\. For more information about managing lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
 The example code in this topic does the following: 
-
 + Add lifecycle configuration with the following two rules:
-
   + A rule that applies to objects with the `glacierobjects/` key name prefix\. The rule specifies a transition action that directs Amazon S3 to transition these objects to the GLACIER storage class\. Because the number of days specified is 0, the objects become eligible for archival immediately\.
-
   + A rule that applies to objects having tags with tag key `archive` and value `true`\. The rule specifies two transition actions, directing Amazon S3 to first transition objects to the STANDARD\_IA \(IA, for infrequent access\) storage class 30 days after creation, and then transition to the GLACIER storage class 365 days after creation\. The rule also specifies expiration action directing Amazon S3 to delete these objects 3650 days after creation\.
-
 + Retrieves the lifecycle configuration\.
-
 + Updates the configuration by adding another rule that applies to objects with the `YearlyDocuments/` key name prefix\. The expiration action in this rule directs Amazon S3 to delete these objects 3650 days after creation\.
 **Note**  
 When you add a lifecycle configuration to a bucket, any existing lifecycle configuration is replaced\. To update existing lifecycle configuration, you must first retrieve the existing lifecycle configuration, make changes and then add the revised lifecycle configuration to the bucket\.

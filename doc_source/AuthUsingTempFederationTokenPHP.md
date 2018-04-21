@@ -143,17 +143,10 @@ try {
 ```
 
 ## Related Resources<a name="RelatedResources-AuthUsingTempFederationTokenPHP"></a>
-
 +  [AWS SDK for PHP for Amazon S3 Aws\\Sts\\StsClient Class](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.Sts.StsClient.html)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\Sts\\StsClient::factory\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.Sts.StsClient.html#_factory)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\Sts\\StsClient::getSessionToken\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.Sts.StsClient.html#_getSessionToken)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client Class](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html) 
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client::factory\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html#_factory) 
-
 + [AWS SDK for PHP for Amazon S3](http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/service-s3.html)
-
 + [AWS SDK for PHP Documentation](http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/index.html)

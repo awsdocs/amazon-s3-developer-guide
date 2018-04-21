@@ -9,12 +9,10 @@ The Amazon S3 best practice guidelines in this topic apply only if you are routi
 If your workload in Amazon S3 uses server\-side encryption with AWS Key Management Service \(SSE\-KMS\), go to [Limits](http://docs.aws.amazon.com/kms/latest/developerguide/limits.html) in the *AWS Key Management Service Developer Guide* to get more information on the request rates supported for your use case\. 
 
 The Amazon S3 best practice guidance given in this topic is based on two types of workloads:
-
 + **Workloads that include a mix of request types –** If your requests are typically a mix of GET, PUT, DELETE, or GET Bucket \(list objects\), choosing appropriate key names for your objects ensures better performance by providing low\-latency access to the Amazon S3 index\. It also ensures scalability regardless of the number of requests you send per second\.
-
 + **Workloads that are GET\-intensive –** If the bulk of your workload consists of GET requests, we recommend using the Amazon CloudFront content delivery service\. 
 
-
+**Topics**
 + [Workloads with a Mix of Request Types](#workloads-with-mix-request-types)
 + [GET\-Intensive Workloads](#get-workload-considerations)
 
@@ -68,9 +66,7 @@ examplebucket/c34a-2013-26-05-15-00-01/cust1248473/photo7.jpg
 ```
 
 Note that this randomness does introduce some interesting challenges\. Amazon S3 provides a [GET Bucket \(List Objects\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html) operation, which returns a UTF\-8 binary ordered list of key names\. Here are some side\-effects:
-
 + Because of the hashed prefixes, however, the listing will appear randomly ordered\.
-
 + The problem gets compounded if you want to list object keys with specific date in the key name\. The preceding example uses a four\-character hex hash, so there are 65536 possible character combinations \(four character prefix, and each character can be any of the hex characters 0\-f\)\. So you will be sending 65536 List Bucket requests each with a specific prefix that is a combination of 4\-digit hash and the date\. For example, suppose that you want to find all keys with 2013\-26\-05 in the key name\. Then you will send List Bucket requests with prefixes such `[0-f][0-f][0-f][0-f]2013-26-05`\.
 
 You can optionally add more prefixes in your key name, before the hash string, to group objects\. The following example adds `animations/` and `videos/` prefixes to the key names\. 

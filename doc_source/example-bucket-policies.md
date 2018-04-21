@@ -10,7 +10,7 @@ You can use the [AWS Policy Generator](https://awspolicygen.s3.amazonaws.com/pol
 **Important**  
 When testing permissions using the Amazon S3 console, you will need to grant additional permissions that the console requires—`s3:ListAllMyBuckets`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions\. For an example walkthrough that grants permissions to users and tests them using the console, see [An Example Walkthrough: Using user policies to control access to your bucket](walkthrough1.md)\.
 
-
+**Topics**
 + [Granting Permissions to Multiple Accounts with Added Conditions](#example-bucket-policies-use-case-1)
 + [Granting Read\-Only Permission to an Anonymous User](#example-bucket-policies-use-case-2)
 + [Restricting Access to Specific IP Addresses](#example-bucket-policies-use-case-3)

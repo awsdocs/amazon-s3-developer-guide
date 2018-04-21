@@ -37,13 +37,8 @@ The following PHP code example demonstrates how you can abort a multipart upload
 ```
 
 ## Related Resources<a name="RelatedResources-LLAbortMPUphp"></a>
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client Class](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client::factory\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html#_factory)
-
 + [AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client::abortMultipartUpload\(\) Method](http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.S3.S3Client.html#_abortMultipartUpload)
-
 + [AWS SDK for PHP for Amazon S3](http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/service-s3.html)
-
 + [AWS SDK for PHP Documentation](http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/index.html)

@@ -1,6 +1,6 @@
 # Working with Amazon S3 Buckets<a name="UsingBucket"></a>
 
-Amazon S3 is cloud storage for the Internet\. To upload your data \(photos, videos, documents etc\.\), you first create a bucket in one of the AWS Regions\. You can then upload any number of objects to the bucket\. 
+Amazon S3 is cloud storage for the internet\. To upload your data \(photos, videos, documents etc\.\), you first create a bucket in one of the AWS Regions\. You can then upload any number of objects to the bucket\. 
 
 In terms of implementation, buckets and objects are resources, and Amazon S3 provides APIs for you to manage them\. For example, you can create a bucket and upload objects using the Amazon S3 API\. You can also use the Amazon S3 console to perform these operations\. The console internally uses the Amazon S3 APIs to send requests to Amazon S3\. 
 
@@ -13,7 +13,7 @@ Amazon S3 creates buckets in a region you specify\. You can choose any AWS Regio
 **Note**  
  Objects belonging to a bucket that you create in a specific AWS Region never leave that region, unless you explicitly transfer them to another region\. For example, objects stored in the EU \(Ireland\) region never leave it\. 
 
-
+**Topics**
 + [Creating a Bucket](#create-bucket-intro)
 + [Accessing a Bucket](#access-bucket-intro)
 + [Bucket Configuration Options](#bucket-config-options-intro)
@@ -34,15 +34,12 @@ Amazon S3 provides APIs for you to create and manage buckets\. By default, you c
 When you create a bucket, you provide a name and AWS Region where you want the bucket created\. For information about naming buckets, see [Rules for Bucket Naming](BucketRestrictions.md#bucketnamingrules)\.
 
 Within each bucket, you can store any number of objects\. You can create a bucket using any of the following methods:
-
 + Create the bucket using the console\.
-
 + Create the bucket programmatically using the AWS SDKs\.
 **Note**  
 If you need to, you can also make the Amazon S3 REST API calls directly from your code\. However, this can be cumbersome because it requires you to write code to authenticate your requests\. For more information, see [PUT Bucket](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html) in the *Amazon Simple Storage Service API Reference*\.
 
    When using AWS SDKs you first create a client and then send a request to create a bucket using the client\.  You can specify an AWS Region when you create the client\. US East \(N\. Virginia\) is the default Region\. You can also specify a Region in your create bucket request\.  Note the following: 
-
   + If you create a client by specifying the US East \(N\. Virginia\) Region, it uses the following endpoint to communicate with Amazon S3\. 
 
     ```
@@ -50,11 +47,8 @@ If you need to, you can also make the Amazon S3 REST API calls directly from you
     ```
 
      You can use this client to create a bucket in any AWS Region\. In your create bucket request:
-
     +  If you don’t specify a Region, Amazon S3 creates the bucket in the US East \(N\. Virginia\) Region\.
-
     +  If you specify an AWS Region, Amazon S3 creates the bucket in the specified Region\. 
-
   +  If you create a client by specifying any other AWS Region, each of these Regions maps to the Region\-specific endpoint: 
 
     ```
@@ -68,7 +62,6 @@ If you need to, you can also make the Amazon S3 REST API calls directly from you
     ```
 
     In this case, you can use the client to create a bucket only in the eu\-west\-1 Region\. Amazon S3 returns an error if you specify any other Region in your create bucket request\.
-
   +  If you create a client to access a dual\-stack endpoint, you must specify an AWS Region\. For more information, see [Dual\-Stack Endpoints](dual-stack-endpoints.md#dual-stack-endpoints-description)\.
 
   For a list of available AWS Regions, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
@@ -90,11 +83,8 @@ You can access your bucket using the Amazon S3 console\. Using the console UI, y
 If you access a bucket programmatically, note that Amazon S3 supports RESTful architecture in which your buckets and objects are resources, each with a resource URI that uniquely identifies the resource\. 
 
 Amazon S3 supports both virtual\-hosted–style and path\-style URLs to access a bucket\. 
-
 + In a virtual\-hosted–style URL, the bucket name is part of the domain name in the URL\. For example:  
-
   + `http://bucket.s3.amazonaws.com`
-
   + `http://bucket.s3-aws-region.amazonaws.com`\.
 
   In a virtual\-hosted–style URL, you can use either of these endpoints\. If you make a request to the `http://bucket.s3.amazonaws.com` endpoint, the DNS has sufficient information to route your request directly to the Region where your bucket resides\. 
@@ -102,11 +92,8 @@ Amazon S3 supports both virtual\-hosted–style and path\-style URLs to access a
   For more information, see [Virtual Hosting of Buckets](VirtualHosting.md)\.
 
    
-
 +  In a path\-style URL, the bucket name is not part of the domain \(unless you use a Region\-specific endpoint\)\. For example:
-
   + US East \(N\. Virginia\) Region endpoint, `http://s3.amazonaws.com/bucket `
-
   + Region\-specific endpoint, `http://s3-aws-region.amazonaws.com/bucket`
 
    In a path\-style URL, the endpoint you use must match the Region in which the bucket resides\. For example, if your bucket is in the South America \(São Paulo\) Region, you must use the `http://s3-sa-east-1.amazonaws.com/bucket` endpoint\. If your bucket is in the US East \(N\. Virginia\) Region, you must use the `http://s3.amazonaws.com/bucket` endpoint\.

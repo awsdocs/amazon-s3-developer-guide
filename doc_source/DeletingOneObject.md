@@ -1,6 +1,6 @@
 # Deleting One Object Per Request<a name="DeletingOneObject"></a>
 
-
+**Topics**
 + [Deleting an Object Using the AWS SDK for Java](DeletingOneObjectUsingJava.md)
 + [Deleting an Object Using the AWS SDK for \.NET](DeletingOneObjectUsingNetSDK.md)
 + [Deleting an Object Using the AWS SDK for PHP](DeletingOneObjectUsingPHPSDK.md)

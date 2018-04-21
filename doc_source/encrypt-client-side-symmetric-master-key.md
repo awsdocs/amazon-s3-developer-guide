@@ -1,9 +1,7 @@
 # Example 1: Encrypt and Upload a File Using a Client\-Side Symmetric Master Key<a name="encrypt-client-side-symmetric-master-key"></a>
 
 This section provides example code using the AWS SDK for Java to do the following:
-
 + First create a 256\-bit AES symmetric master key and save it to a file\.
-
 + Upload an object to Amazon S3 using an S3 encryption client that first encrypts sample data on the client\-side\. The example also downloads the object and verifies that the data is the same\.
 
 ## Example 1a: Creating a Symmetric Master Key<a name="ClientSideEncryptionExample-AESKey"></a>

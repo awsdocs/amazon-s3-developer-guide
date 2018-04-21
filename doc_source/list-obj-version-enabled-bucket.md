@@ -1,6 +1,6 @@
 # Listing Objects in a Versioning\-Enabled Bucket<a name="list-obj-version-enabled-bucket"></a>
 
-
+**Topics**
 + [Using the Console](#list-obj-version-enabled-bucket-console)
 + [Using the AWS SDKs](#list-obj-version-enabled-bucket-sdk-examples)
 + [Using the REST API](#ListingtheObjectsinaVersioningEnabledBucket)
@@ -181,7 +181,6 @@ To list all of the versions of all of the objects in a bucket, you use the `vers
 Amazon S3 returns object versions in the order in which they were stored, with the most recently stored returned first\.
 
 **To list all object versions in a bucket**
-
 + In a `GET Bucket` request, include the `versions` sub\-resource\.
 
   ```
@@ -194,9 +193,7 @@ Amazon S3 returns object versions in the order in which they were stored, with t
 ### Retrieving a Subset of Objects in a Bucket<a name="RetBucObjSubset"></a>
 
 This section discusses the following two example scenarios:
-
 + You want to retrieve a subset of all object versions in a bucket, for example, retrieve all versions of a specific object\.
-
 + The number of object versions in the response exceeds the value for `max-key` \(1000 by default\), so that you have to submit a second request to retrieve the remaining object versions\.
 
  To retrieve a subset of object versions, you use the request parameters for GET Bucket\. For more information, see [GET Bucket](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html)\. 

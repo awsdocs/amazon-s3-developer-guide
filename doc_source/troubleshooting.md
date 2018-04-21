@@ -2,7 +2,7 @@
 
 This section describes how to troubleshoot Amazon S3 and explains how to get request IDs that you'll need when you contact AWS Support\.
 
-
+**Topics**
 + [Troubleshooting Amazon S3 by Symptom](#troubleshooting-by-symptom)
 + [Getting Amazon S3 Request IDs for AWS Support](#get-request-ids)
 + [Related Topics](#related-troubleshooting-topics)
@@ -11,7 +11,7 @@ This section describes how to troubleshoot Amazon S3 and explains how to get req
 
 The following topics lists symptoms to help you troubleshoot some of the issues that you might encounter when working with Amazon S3\.
 
-
+**Topics**
 + [Significant Increases in HTTP 503 Responses to Requests to Buckets with Versioning Enabled](#troubleshooting-by-symptom-increase-503-reponses)
 + [Unexpected Behavior When Accessing Buckets Set with CORS](#troubleshooting-by-symptom-increase)
 
@@ -33,7 +33,7 @@ Whenever you need to contact AWS Support due to encountering errors or unexpecte
 
 After you've recovered these logs, copy and retain those two values, because you'll need them when you contact AWS Support\. For information about contacting AWS Support, see [Contact Us](https://aws.amazon.com/contact-us/)\.
 
-
+**Topics**
 + [Using HTTP to Obtain Request IDs](#http-request-id)
 + [Using a Web Browser to Obtain Request IDs](#browser-request-id)
 + [Using AWS SDKs to Obtain Request IDs](#sdk-request-ids)
@@ -118,13 +118,11 @@ If you’re using the Boto Python interface for AWS, you can set the debug level
 #### Using the SDK for Ruby to Obtain Request IDs<a name="ruby-request-id"></a>
 
 You can get your request IDs using either the SDK for Ruby \- Version 1, Version 2, or Version 3\.
-
 + **Using the SDK for Ruby \- Version 1**– You can enable HTTP wire logging globally with the following line of code\.
 
   ```
   s3 = AWS::S3.new(:logger => Logger.new($stdout), :http_wire_trace => true)
   ```
-
 + **Using the SDK for Ruby \- Version 2 or Version 3**– You can enable HTTP wire logging globally with the following line of code\.
 
   ```
@@ -138,11 +136,8 @@ You can get your request IDs in the AWS CLI by adding `--debug` to your command\
 ## Related Topics<a name="related-troubleshooting-topics"></a>
 
 For other troubleshooting and support topics, see the following:
-
 + [Troubleshooting CORS Issues](cors-troubleshooting.md)
-
 + [Handling REST and SOAP Errors](HandlingErrors.md)
-
 + [AWS Support Documentation](https://aws.amazon.com/documentation/aws-support/)
 
 For troubleshooting information regarding third\-party tools, see [Getting Amazon S3 request IDs](https://forums.aws.amazon.com/thread.jspa?threadID=182409) in the AWS Developer Forums\.

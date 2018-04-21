@@ -1,11 +1,8 @@
 # Managing Tags Using SDK \(AWS SDK for \.NET\)<a name="tagging-manage-dotnet"></a>
 
 The following C\# code example does the following:
-
 + Create an object with tags\.
-
 + Retrieve tag set\.
-
 + Update the tag set \(replace the existing tag set\)\.
 
 For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.

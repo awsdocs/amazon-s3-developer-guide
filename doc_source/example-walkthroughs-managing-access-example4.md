@@ -1,6 +1,6 @@
 # Example 4: Bucket Owner Granting Cross\-account Permission to Objects It Does Not Own<a name="example-walkthroughs-managing-access-example4"></a>
 
-
+**Topics**
 + [Background: Cross\-Account Permissions and Using IAM Roles](#access-policies-walkthrough-example4-overview)
 + [Step 0: Preparing for the Walkthrough](#access-policies-walkthrough-example4-step0)
 + [Step 1: Do the Account A Tasks](#access-policies-walkthrough-example4-step1)
@@ -12,9 +12,7 @@
  In this example scenario, you own a bucket and you have enabled other AWS accounts to upload objects\. That is, your bucket can have objects that other AWS accounts own\. 
 
 Now, suppose as a bucket owner, you need to grant cross\-account permission on objects, regardless of who the owner is, to a user in another account\. For example, that user could be a billing application that needs to access object metadata\. There are two core issues:
-
 + The bucket owner has no permissions on those objects created by other AWS accounts\. So for the bucket owner to grant permissions on objects it does not own, the object owner, the AWS account that created the objects, must first grant permission to the bucket owner\. The bucket owner can then delegate those permissions\.
-
 + Bucket owner account can delegate permissions to users in its own account \(see [Example 3: Bucket Owner Granting Its Users Permissions to Objects It Does Not Own ](example-walkthroughs-managing-access-example3.md)\), but it cannot delegate permissions to other AWS accounts, because cross\-account delegation is not supported\. 
 
 In this scenario, the bucket owner can create an AWS Identity and Access Management \(IAM\) role with permission to access objects, and grant another AWS account permission to assume the role temporarily enabling it to access objects in the bucket\. 
@@ -22,15 +20,11 @@ In this scenario, the bucket owner can create an AWS Identity and Access Managem
 ## Background: Cross\-Account Permissions and Using IAM Roles<a name="access-policies-walkthrough-example4-overview"></a>
 
  IAM roles enable several scenarios to delegate access to your resources, and cross\-account access is one of the key scenarios\. In this example, the bucket owner, Account A, uses an IAM role to temporarily delegate object access cross\-account to users in another AWS account, Account C\. Each IAM role you create has two policies attached to it:
-
 + A trust policy identifying another AWS account that can assume the role\.
-
 + An access policy defining what permissions—for example, `s3:GetObject`—are allowed when someone assumes the role\. For a list of permissions you can specify in a policy, see [Specifying Permissions in a Policy](using-with-s3-actions.md)\.
 
 The AWS account identified in the trust policy then grants its user permission to assume the role\. The user can then do the following to access objects:
-
 + Assume the role and, in response, get temporary security credentials\. 
-
 + Using the temporary security credentials, access the objects in the bucket\.
 
 For more information about IAM roles, go to [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in *IAM User Guide*\. 
@@ -74,11 +68,8 @@ You may want to open a text editor and write down some of the information as you
          AWS will notify you by email when your account is active and available for you to use\.
 
    1. Using Account A credentials, sign in to the [IAM console](https://console.aws.amazon.com/iam/home?#home) and do the following to create an administrator user:
-
       + Create user AccountAadmin and note down security credentials\. For more information about adding users, see [Creating an IAM User in Your AWS Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *IAM User Guide*\. 
-
       + Grant AccountAadmin administrator privileges by attaching a user policy giving full access\. For instructions, see [Working with Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\. 
-
       + In the IAM Console **Dashboard**, note down the** IAM User Sign\-In URL**\. Users in this account must use this URL when signing in to the AWS Management Console\. For more information, go to [How Users Sign In to Your Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_how-users-sign-in.html) in *IAM User Guide*\. 
 
    1. Repeat the preceding step to create administrator users in Account B and Account C\.
@@ -94,11 +85,9 @@ You may want to open a text editor and write down some of the information as you
    1. Click **Account Identifiers** and note down the **AWS Account ID** and the **Canonical User ID**\.
 
 1. When creating a bucket policy, you will need the following information\. Note down these values:
-
    + **Canonical user ID of Account A** – When the Account A administrator grants conditional upload object permission to the Account B administrator, the condition specifies the canonical user ID of the Account A user that must get full\-control of the objects\. 
 **Note**  
 The canonical user ID is the Amazon S3–only concept\. It is a 64\-character obfuscated version of the account ID\. 
-
    + **User ARN for Account B administrator** – You can find the user ARN in the IAM console\. You will need to select the user and find the user's ARN in the **Summary** tab\.
 
      In the bucket policy, you grant AccountBadmin permission to upload objects and you specify the user using the ARN\. Here's an example ARN value:
@@ -108,9 +97,7 @@ The canonical user ID is the Amazon S3–only concept\. It is a 64\-character ob
      ```
 
 1. Set up either the AWS Command Line Interface \(CLI\) or the AWS Tools for Windows PowerShell\. Make sure you save administrator user credentials as follows:
-
    + If using the AWS CLI, create profiles, AccountAadmin and AccountBadmin, in the config file\.
-
    + If using the AWS Tools for Windows PowerShell, make sure you store credentials for the session as AccountAadmin and AccountBadmin\.
 
    For instructions, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
@@ -248,7 +235,6 @@ In the IAM console, create an IAM role \("examplerole"\) that grants Account C p
 ## Step 2: Do the Account B Tasks<a name="access-policies-walkthrough-example4-step2"></a>
 
 The examplebucket owned by Account A needs objects owned by other accounts\. In this step, the Account B administrator uploads an object using the command line tools\.
-
 + Using the put\-object AWS CLI command, upload an object to the `examplebucket`\. 
 
   ```
@@ -256,11 +242,8 @@ The examplebucket owned by Account A needs objects owned by other accounts\. In 
   ```
 
   Note the following:
-
   + The `--Profile` parameter specifies AccountBadmin profile, so the object is owned by Account B\.
-
   + The parameter `grant-full-control` grants the bucket owner full\-control permission on the object as required by the bucket policy\.
-
   + The `--body` parameter identifies the source file to upload\. For example, if the file is on the C: drive of a Windows computer, you specify `c:\HappyFace.jpg`\. 
 
 ## Step 3: Do the Account C Tasks<a name="access-policies-walkthrough-example4-step3"></a>
@@ -322,9 +305,7 @@ In the preceding steps, Account A has already created a role, `examplerole`, est
 ### Step 3\.2: Assume Role \(examplerole\) and Access Objects<a name="cross-acct-access-using-role-step3-2"></a>
 
 Now Dave can access objects in the bucket owned by Account A as follows:
-
 + Dave first assumes the `examplerole` using his own credentials\. This will return temporary credentials\.
-
 + Using the temporary credentials, Dave will then access objects in Account A's bucket\.
 
 1. At the command prompt, execute the following AWS CLI `assume-role` command using the AccountCDave profile\. 
@@ -368,13 +349,9 @@ Now Dave can access objects in the bucket owned by Account A as follows:
 1. After you are done testing, you can do the following to clean up\.
 
    1. Sign in to the AWS Management Console \([AWS Management Console](https://console.aws.amazon.com/)\) using account A credentials, and do the following:
-
      + In the Amazon S3 console, remove the bucket policy attached to *examplebucket*\. In the bucket **Properties**, delete the policy in the **Permissions** section\. 
-
      + If the bucket is created for this exercise, in the Amazon S3 console, delete the objects and then delete the bucket\. 
-
      + In the IAM console, remove the `examplerole` you created in Account A\. 
-
      + In the IAM console, remove the AccountAadmin user\.
 
 1. Sign in to the AWS Management Console \([AWS Management Console](https://console.aws.amazon.com/)\) using Account B credentials\. In the IAM console, delete user AccountBadmin\.
@@ -382,9 +359,6 @@ Now Dave can access objects in the bucket owned by Account A as follows:
 1. Sign in to the AWS Management Console \([AWS Management Console](https://console.aws.amazon.com/)\) using Account C credentials\. In the IAM console, delete user AccountCadmin and user Dave\.
 
 ## Related Resources<a name="RelatedResources-managing-access-example4"></a>
-
 + [Creating a Role to Delegate Permissions to an IAM User](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
-
 + [Tutorial: Delegate Access Across AWS Accounts Using IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial-cross-account-with-roles.html) in the *IAM User Guide*\.
-
 + [Working with Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\.

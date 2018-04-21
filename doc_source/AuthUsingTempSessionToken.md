@@ -1,6 +1,6 @@
 # Making Requests Using IAM User Temporary Credentials<a name="AuthUsingTempSessionToken"></a>
 
-
+**Topics**
 + [Making Requests Using IAM User Temporary Credentials \- AWS SDK for Java](AuthUsingTempSessionTokenJava.md)
 + [Making Requests Using IAM User Temporary Credentials \- AWS SDK for \.NET](AuthUsingTempSessionTokenDotNet.md)
 + [Making Requests Using AWS Account or IAM User Temporary Credentials \- AWS SDK for PHP](AuthUsingTempSessionTokenPHP.md)

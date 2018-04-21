@@ -1,6 +1,6 @@
 # Making Requests Using the AWS SDKs<a name="MakingAuthenticatedRequests"></a>
 
-
+**Topics**
 + [Making Requests Using AWS Account or IAM User Credentials](AuthUsingAcctOrUserCredentials.md)
 + [Making Requests Using IAM User Temporary Credentials](AuthUsingTempSessionToken.md)
 + [Making Requests Using Federated User Temporary Credentials](AuthUsingTempFederationToken.md)

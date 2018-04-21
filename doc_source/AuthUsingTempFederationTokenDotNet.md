@@ -182,5 +182,4 @@ namespace s3.amazon.com.docsamples
 ```
 
 ## Related Resources<a name="RelatedResources006"></a>
-
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

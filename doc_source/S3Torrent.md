@@ -1,6 +1,6 @@
 # Using BitTorrent with Amazon S3<a name="S3Torrent"></a>
 
-
+**Topics**
 + [How You are Charged for BitTorrent Delivery](S3TorrentCharge.md)
 + [Using BitTorrent to Retrieve Objects Stored in Amazon S3](S3TorrentRetrieve.md)
 + [Publishing Content Using Amazon S3 and BitTorrent](S3TorrentPublish.md)
