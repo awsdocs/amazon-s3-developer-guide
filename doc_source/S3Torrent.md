@@ -11,5 +11,5 @@ Amazon S3 supports the BitTorrent protocol so that developers can save costs whe
 
 BitTorrent addresses this problem by recruiting the very clients that are downloading the object as distributors themselves: Each client downloads some pieces of the object from Amazon S3 and some from other clients, while simultaneously uploading pieces of the same object to other interested "peers\." The benefit for publishers is that for large, popular files the amount of data actually supplied by Amazon S3 can be substantially lower than what it would have been serving the same clients via client/server download\. Less data transferred means lower costs for the publisher of the object\.
 
-**Note**  
-You can get torrent only for objects that are less than 5 GB in size\.
+**Note:**  
+You can only get a torrent file for objects that are less than 5 GBs in size\.
