@@ -36,7 +36,7 @@ Amazon S3 uses the following object key format for the log objects it uploads in
 TargetPrefixYYYY-mm-DD-HH-MM-SS-UniqueString 
 ```
 
- In the key, `YYYY`, `mm`, `DD`, `HH`, `MM`, and `SS` are the digits of the year, month, day, hour, minute, and seconds \(respectively\) when the log file was delivered\. 
+ In the key, `YYYY`, `mm`, `DD`, `HH`, `MM`, and `SS` are the digits of the year, month, day, hour, minute, and seconds \(respectively\) when the log file was delivered, these dates and times are in Coordinated Universal time (UTC)\. 
 
 A log file delivered at a specific time can contain records written at any point before that time\. There is no way to know whether all log records for a certain time interval have been delivered or not\. 
 
