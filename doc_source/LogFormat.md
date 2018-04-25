@@ -33,7 +33,7 @@ mybucket
 ```
 
 **Time**  
-The time at which the request was received\. The format, using `strftime()` terminology, is as follows: `[%d/%b/%Y:%H:%M:%S %z]`  
+The time at which the request was received; these dates and times are in Coordinated Universal time (UTC)\. The format, using `strftime()` terminology, is as follows: `[%d/%b/%Y:%H:%M:%S %z]`  
 **Example Entry**  
 
 ```
