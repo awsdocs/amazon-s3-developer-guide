@@ -1,92 +1,65 @@
-# Track Multipart Upload Progress<a name="HLTrackProgressMPUDotNet"></a>
+# Track the Progress of a Multipart Upload to an S3 Bucket Using the AWS SDK for \.NET \(High\-level API\)<a name="HLTrackProgressMPUDotNet"></a>
 
-The high\-level multipart upload API provides an event, `TransferUtilityUploadRequest.UploadProgressEvent`, to track the upload progress when uploading data using the `TransferUtility` class\. 
-
-The event occurs periodically and returns multipart upload progress information such as the total number of bytes to transfer, and the number of bytes transferred at the time event occurred\. 
-
-The following C\# code sample demonstrates how you can subscribe to the `UploadProgressEvent` event and write a handler\.
-
-**Example**  
+The following C\# example uploads a file to an S3 bucket using the `TransferUtility` class, and tracks the progress of the upload\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions for creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
- 1. TransferUtility fileTransferUtility =
- 2.      new TransferUtility(new AmazonS3Client(Amazon.RegionEndpoint.USEast1));
- 3. 
- 4. // Use TransferUtilityUploadRequest to configure options.
- 5. // In this example we subscribe to an event.
- 6. TransferUtilityUploadRequest uploadRequest =
- 7.     new TransferUtilityUploadRequest
- 8.     {
- 9.         BucketName = existingBucketName,
-10.         FilePath = filePath, 
-11.         Key = keyName
-12.     };
-13.               
-14. uploadRequest.UploadProgressEvent +=
-15.     new EventHandler<UploadProgressArgs>
-16.         (uploadRequest_UploadPartProgressEvent);
-17. 
-18. fileTransferUtility.Upload(uploadRequest);
-19. 
-20. static void uploadRequest_UploadPartProgressEvent(object sender, UploadProgressArgs e)
-21. {
-22.     // Process event.
-23.     Console.WriteLine("{0}/{1}", e.TransferredBytes, e.TotalBytes);
-24. }
-```
-
-**Example**  
-The following C\# code example uploads a file to an Amazon S3 bucket and tracks the progress by subscribing to the `TransferUtilityUploadRequest.UploadProgressEvent` event\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
-
-```
-using System;
-using System.Collections.Specialized;
-using System.Configuration;
 using Amazon.S3;
 using Amazon.S3.Transfer;
+using System;
+using System.Threading.Tasks;
 
-
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class TrackMPUUsingHighLevelAPI
+    class TrackMPUUsingHighLevelAPITest
     {
-        static string existingBucketName = "*** Provide bucket name ***";
-        static string keyName            = "*** Provide key name ***";
-        static string filePath           = "*** Provide file to upload ***";
+        private const string bucketName = "*** provide the bucket name ***";
+        private const string keyName = "*** provide the name for the uploaded object ***";
+        private const string filePath = " *** provide the full path name of the file to upload **";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 s3Client;
 
-        static void Main(string[] args)
+
+        public static void Main()
+        {
+            s3Client = new AmazonS3Client(bucketRegion);
+            TrackMPUAsync().Wait();
+        }
+
+        private static async Task TrackMPUAsync()
         {
             try
             {
-                TransferUtility fileTransferUtility =
-                    new TransferUtility(new AmazonS3Client(Amazon.RegionEndpoint.USEast1));
+                var fileTransferUtility = new TransferUtility(s3Client);
 
                 // Use TransferUtilityUploadRequest to configure options.
                 // In this example we subscribe to an event.
-                TransferUtilityUploadRequest uploadRequest =
+                var uploadRequest =
                     new TransferUtilityUploadRequest
                     {
-                        BucketName = existingBucketName,
-                        FilePath = filePath, 
+                        BucketName = bucketName,
+                        FilePath = filePath,
                         Key = keyName
                     };
-              
+
                 uploadRequest.UploadProgressEvent +=
                     new EventHandler<UploadProgressArgs>
                         (uploadRequest_UploadPartProgressEvent);
 
-                fileTransferUtility.Upload(uploadRequest);
+                await fileTransferUtility.UploadAsync(uploadRequest);
                 Console.WriteLine("Upload completed");
             }
-
             catch (AmazonS3Exception e)
             {
-                Console.WriteLine(e.Message, e.InnerException);
+                Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
             }
         }
 
-        static void uploadRequest_UploadPartProgressEvent(
-            object sender, UploadProgressArgs e)
+        static void uploadRequest_UploadPartProgressEvent(object sender, UploadProgressArgs e)
         {
             // Process event.
             Console.WriteLine("{0}/{1}", e.TransferredBytes, e.TotalBytes);
@@ -94,3 +67,7 @@ namespace s3.amazon.com.docsamples
     }
 }
 ```
+
+## More Info<a name="HLTrackProgressMPUDotNet-more-info"></a>
+
+[AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)

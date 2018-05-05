@@ -5,7 +5,7 @@ For more detail about your Amazon S3 storage usage, download dynamically generat
 When you download a usage report, you can choose to aggregate usage data by hour, day, or month\. The Amazon S3 usage report lists operations by usage type and AWS Region, for example, the amount of data transferred out of the Asia Pacific \(Sydney\) Region\.
 
 The Amazon S3 usage report includes the following information:
-+ **Service** –  `Amazon Simple Storage Service`
++ **Service** – `Amazon Simple Storage Service`
 + **Operation** – The operation performed on your bucket or object\. For a detailed explanation of Amazon S3 operations, see [Tracking Operations in Your Usage Reports](aws-usage-report-understand.md#aws-usage-report-understand-operations)\.
 + **UsageType** – One of the following values:
   + A code that identifies the type of storage

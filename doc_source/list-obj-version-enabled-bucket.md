@@ -19,7 +19,7 @@ The code examples in this section retrieve an object listing from a version\-ena
 
 ### Using the AWS SDK for Java<a name="list-obj-version-enabled-bucket-java"></a>
 
-For information about how to create and test a working sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\. 
+For information about how to create and test a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 **Example**  
 
@@ -91,30 +91,27 @@ For information about how to create and test a working sample, see [Running the 
 **Example**  
 
 ```
-using System;
 using Amazon.S3;
 using Amazon.S3.Model;
+using System;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class ListObjectsVersioningEnabledBucket
+    class ListObjectsVersioningEnabledBucketTest
     {
         static string bucketName = "*** bucket name ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 s3Client;
 
         public static void Main(string[] args)
         {
-            using (var client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1))
-            {
-                Console.WriteLine("Listing objects stored in a bucket");
-
-                GetObjectListWithAllVersions(client);
-            }
-
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            s3Client = new AmazonS3Client(bucketRegion);
+            GetObjectListWithAllVersionsAsync().Wait();
         }
 
-        static void GetObjectListWithAllVersions(IAmazonS3 client)
+        static async Task GetObjectListWithAllVersionsAsync()
         {
             try
             {
@@ -129,7 +126,7 @@ namespace s3.amazon.com.docsamples
                 };
                 do
                 {
-                    ListVersionsResponse response = client.ListVersions(request);
+                    ListVersionsResponse response = await s3Client.ListVersionsAsync(request); 
                     // Process response.
                     foreach (S3ObjectVersion entry in response.Versions)
                     {
@@ -149,25 +146,14 @@ namespace s3.amazon.com.docsamples
                         request = null;
                     }
                 } while (request != null);
-
             }
-            catch (AmazonS3Exception amazonS3Exception)
+            catch (AmazonS3Exception e)
             {
-                if (amazonS3Exception.ErrorCode != null &&
-                    (amazonS3Exception.ErrorCode.Equals("InvalidAccessKeyId")
-                    ||
-                    amazonS3Exception.ErrorCode.Equals("InvalidSecurity")))
-                {
-                    Console.WriteLine("Check the provided AWS Credentials.");
-                    Console.WriteLine(
-                    "To sign up for service, go to http://aws.amazon.com/s3");
-                }
-                else
-                {
-                    Console.WriteLine(
-                     "Error occurred. Message:'{0}' when listing objects",
-                     amazonS3Exception.Message);
-                }
+                Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
             }
         }
     }

@@ -3,7 +3,7 @@
 **Topics**
 + [Manage an Object's Lifecycle Using the Amazon S3 Console](manage-lifecycle-using-console.md)
 + [Set Lifecycle Configurations Using the AWS CLI](set-lifecycle-cli.md)
-+ [Manage an Object's Lifecycle Using the AWS SDK for Java](manage-lifecycle-using-java.md)
++ [Managing Object Lifecycles Using the AWS SDK for Java](manage-lifecycle-using-java.md)
 + [Manage an Object's Lifecycle Using the AWS SDK for \.NET](manage-lifecycle-using-dot-net.md)
 + [Manage an Object's Lifecycle Using the AWS SDK for Ruby](manage-lifecycle-using-ruby.md)
 + [Manage an Object's Lifecycle Using the REST API](manage-lifecycle-using-rest.md)

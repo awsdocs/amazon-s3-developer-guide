@@ -2,7 +2,7 @@
 
 **Topics**
 + [Upload an Object Using a Pre\-Signed URL \(AWS SDK for Java\)](PresignedUrlUploadObjectJavaSDK.md)
-+ [Upload an Object Using a Pre\-Signed URL \(AWS SDK for \.NET\)](UploadObjectPreSignedURLDotNetSDK.md)
++ [Upload an Object to an S3 Bucket Using a Pre\-Signed URL \(AWS SDK for \.NET\)](UploadObjectPreSignedURLDotNetSDK.md)
 + [Upload an Object Using a Pre\-Signed URL \(AWS SDK for Ruby\)](UploadObjectPreSignedURLRubySDK.md)
 
 A pre\-signed URL gives you access to the object identified in the URL, provided that the creator of the pre\-signed URL has permissions to access that object\. That is, if you receive a pre\-signed URL to upload an object, you can upload the object only if the creator of the pre\-signed URL has the necessary permissions to upload that object\. 

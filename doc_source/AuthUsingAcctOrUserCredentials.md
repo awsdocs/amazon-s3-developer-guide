@@ -5,7 +5,7 @@ You can use your AWS account or IAM user security credentials to send authentica
 **Topics**
 + [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for Java](AuthUsingAcctOrUserCredJava.md)
 + [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for \.NET](AuthUsingAcctOrUserCredDotNet.md)
-+ [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for PHP](AuthUsingAcctOrUserCredPHP.md)
++ [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for PHP](AuthUsingAcctOrUserCredPHP3.md)
 + [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for Ruby](AuthUsingAcctOrUserCredRuby.md)
 
 Each of these AWS SDKs uses an SDK\-specific credentials provider chain to find and use credentials and perform actions on behalf of the credentials owner\. What all these credentials provider chains have in common is that they all look for your local AWS credentials file\. 

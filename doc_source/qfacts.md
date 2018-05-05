@@ -1,4 +1,4 @@
-# Quick Facts<a name="qfacts"></a>
+# Amazon S3 Multipart Upload Limits<a name="qfacts"></a>
 
 The following table provides multipart upload core specifications\. For more information, see [Multipart Upload Overview](mpuoverview.md)\.
 

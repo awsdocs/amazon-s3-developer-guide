@@ -24,7 +24,7 @@ For information on understanding codes and abbreviations used in the billing and
 
 ## More Info<a name="aws-billing-reports-more-info"></a>
 + [AWS Usage Report for Amazon S3](aws-usage-report.md)
-+ [Using Cost Allocation Tags for S3 Buckets](CostAllocTagging.md)
++ [Using Cost Allocation S3 Bucket Tags](CostAllocTagging.md)
 + [AWS Billing and Cost Management](http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2//billing-what-is.html)
 + [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)
 + [Amazon S3 FAQ](https://aws.amazon.com/s3/faqs/#billing)

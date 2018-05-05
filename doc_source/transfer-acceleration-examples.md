@@ -5,7 +5,7 @@ This section provides examples of how to enable Amazon S3 Transfer Acceleration 
 **Topics**
 + [Using the Amazon S3 Console](#transfer-acceleration-examples-console)
 + [Using Transfer Acceleration from the AWS Command Line Interface \(AWS CLI\)](#transfer-acceleration-examples-aws-cli)
-+ [Using Transfer Acceleration from the AWS SDK for Java](#transfer-acceleration-examples-java)
++ [Using Transfer Acceleration with the AWS SDK for Java](#transfer-acceleration-examples-java)
 + [Using Transfer Acceleration from the AWS SDK for \.NET](#transfer-acceleration-examples-dotnet)
 + [Using Transfer Acceleration from the AWS SDK for JavaScript](#transfer-acceleration-examples-javascript)
 + [Using Transfer Acceleration from the AWS SDK for Python \(Boto\)](#transfer-acceleration-examples-python)
@@ -66,195 +66,68 @@ $ aws configure set s3.addressing_style virtual
 $ aws s3 cp file.txt s3://bucketname/keyname --region region --endpoint-url http://s3-accelerate.amazonaws.com
 ```
 
-## Using Transfer Acceleration from the AWS SDK for Java<a name="transfer-acceleration-examples-java"></a>
+## Using Transfer Acceleration with the AWS SDK for Java<a name="transfer-acceleration-examples-java"></a>
 
-This section provides examples of using the AWS SDK for Java for Transfer Acceleration\. For information about how to create and test a working Java sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\. 
-
-### Enabling Amazon S3 Transfer Acceleration on a Bucket from the AWS SDK for Java<a name="transfer-acceleration-examples-java-1"></a>
-
-The following Java example shows how to enable Transfer Acceleration on a bucket\. 
+### <a name="transfer-acceleration-examples-java-uploads"></a>
 
 **Example**  
+The following example shows how to use an accelerate endpoint to upload an object to Amazon S3\. The example does the following:  
++ Creates an `AmazonS3Client` that is configured to use accelerate endpoints\. All buckets that the client accesses must have transfer acceleration enabled\.
++ Enables transfer acceleration on a specified bucket\. This step is necessary only if the bucket you specify doesn't already have transfer acceleration enabled\.
++ Verifies that transfer acceleration is enabled for the specified bucket\.
++ Uploads a new object to the specified bucket using the bucket's accelerate endpoint\.
+For more information about using Transfer Acceleration, see [Getting Started with Amazon S3 Transfer Acceleration](transfer-acceleration.md#transfer-acceleration-getting-started)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
-import java.io.IOException;
-
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.regions.Region;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.BucketAccelerateConfiguration;
 import com.amazonaws.services.s3.model.BucketAccelerateStatus;
 import com.amazonaws.services.s3.model.GetBucketAccelerateConfigurationRequest;
 import com.amazonaws.services.s3.model.SetBucketAccelerateConfigurationRequest;
 
-public class BucketAccelertionConfiguration {
-
-    public static String bucketName = "*** Provide bucket name ***"; 
-    public static AmazonS3Client s3Client;
-    
-    public static void main(String[] args) throws IOException {
-       
-        s3Client = new AmazonS3Client(new ProfileCredentialsProvider());
-        s3Client.setRegion(Region.getRegion(Regions.US_WEST_2));
+public class TransferAcceleration {
+    public static void main(String[] args) {
+        String clientRegion = "*** Client region ***";
+        String bucketName = "*** Bucket name ***";
+        String keyName = "*** Key name ***";
         
-		// 1. Enable bucket for Amazon S3 Transfer Acceleration.
-        s3Client.setBucketAccelerateConfiguration(new SetBucketAccelerateConfigurationRequest(bucketName,
-				new BucketAccelerateConfiguration(BucketAccelerateStatus.Enabled)));
-      		
-        // 2. Get the acceleration status of the bucket.
-        String accelerateStatus = s3Client.getBucketAccelerateConfiguration(new GetBucketAccelerateConfigurationRequest(bucketName)).getStatus();
-    
-        System.out.println("Acceleration status = " + accelerateStatus);
-            
-    }
-}
-```
-
-### Creating an Amazon S3 Client to Use a Amazon S3 Transfer Acceleration Endpoint from the AWS SDK for Java<a name="transfer-acceleration-examples-java-client"></a>
-
-You use the `setS3ClientOptions` method from the AWS Java SDK to use a transfer acceleration endpoint when creating an instance of `AmazonS3Client`\. 
-
-#### Creating an Amazon S3 Java Client to Use the Transfer Acceleration Endpoint<a name="transfer-acceleration-examples-java-client-accelerate"></a>
-
-The following example shows how to use the `setS3ClientOptions` method from the AWS Java SDK to use a transfer acceleration endpoint when creating an instance of `AmazonS3Client`\. 
-
-```
-AmazonS3 s3Client = new AmazonS3Client(new ProfileCredentialsProvider());
-s3Client.setRegion(Region.getRegion(Regions.US_WEST_2));
-s3Client.setS3ClientOptions(S3ClientOptions.builder().setAccelerateModeEnabled(true).build());
-```
-
-#### Creating an Amazon S3 Java Client to Use the Transfer Acceleration Dual\-Stack Endpoint<a name="transfer-acceleration-examples-java-client-dual-stack"></a>
-
-The following example shows how to use the `setS3ClientOptions` method from the AWS Java SDK to use a Transfer Acceleration dual\-stack endpoint when creating an instance of `AmazonS3Client`\. 
-
-```
-AmazonS3 s3Client = new AmazonS3Client(new ProfileCredentialsProvider());
-s3Client.setRegion(Region.getRegion(Regions.US_WEST_2));
-s3Client.setS3ClientOptions(S3ClientOptions.builder().enableDualstack().setAccelerateModeEnabled(true).build());
-```
-
- If you are using the AWS Java SDK on Microsoft Windows to use a Transfer Acceleration dual\-stack endpoint, you might have to set the following Java virtual machine \(JVM\) property\. 
-
-```
-java.net.preferIPv6Addresses=true
-```
-
-### Uploading Objects to a Bucket Enabled for Transfer Acceleration Using the AWS SDK for Java<a name="transfer-acceleration-examples-java-uploads"></a>
-
-The Java examples in this section show how to use the accelerate endpoint to upload objects\. You can use the examples with the Transfer Acceleration dual\-stack endpoint by changing the code that creates an instance of `AmazonS3Client` as described in [Creating an Amazon S3 Java Client to Use the Transfer Acceleration Dual\-Stack Endpoint](#transfer-acceleration-examples-java-client-dual-stack)\. 
-
-For information about how to create and test a working Java sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\. 
-
-#### Java Example: Uploading a Single Object to a Bucket Enabled for Transfer Acceleration<a name="transfer-acceleration-examples-java-2"></a>
-
-The following Java example shows how to use the accelerate endpoint to upload a single object\.
-
-**Example**  
-
-```
-import java.io.File;
-import java.io.IOException;
-
-import com.amazonaws.AmazonClientException;
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.regions.Region;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.S3ClientOptions;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-
-public class AcceleratedUploadSingleObject {
-
-    	private static String bucketName     = "*** Provide bucket name ***";
-    	private static String keyName        = "*** Provide key name ***";
-    	private static String uploadFileName = "*** Provide file name with full path ***";
-    	 	
-    	public static void main(String[] args) throws IOException {
-            AmazonS3 s3Client = new AmazonS3Client(new ProfileCredentialsProvider()); 
-            s3Client.setRegion(Region.getRegion(Regions.US_WEST_2));
-            
-            // Use Amazon S3 Transfer Acceleration endpoint.           
-            s3Client.setS3ClientOptions(S3ClientOptions.builder().setAccelerateModeEnabled(true).build());
-            
-            try {
-            	System.out.println("Uploading a new object to S3 from a file\n");
-                File file = new File(uploadFileName);
-                s3Client.putObject(new PutObjectRequest(
-                		                 bucketName, keyName, file));
-
-             } catch (AmazonServiceException ase) {
-                System.out.println("Caught an AmazonServiceException, which " +
-                		"means your request made it " +
-                        "to Amazon S3, but was rejected with an error response" +
-                        " for some reason.");
-                System.out.println("Error Message:    " + ase.getMessage());
-                System.out.println("HTTP Status Code: " + ase.getStatusCode());
-                System.out.println("AWS Error Code:   " + ase.getErrorCode());
-                System.out.println("Error Type:       " + ase.getErrorType());
-                System.out.println("Request ID:       " + ase.getRequestId());
-            } catch (AmazonClientException ace) {
-                System.out.println("Caught an AmazonClientException, which " +
-                		"means the client encountered " +
-                        "an internal error while trying to " +
-                        "communicate with S3, " +
-                        "such as not being able to access the network.");
-                System.out.println("Error Message: " + ace.getMessage());
-            }  
-    }
-}
-```
-
-#### Java Example: Multipart Upload to a Bucket Enabled for Transfer Acceleration<a name="transfer-acceleration-examples-java-3"></a>
-
-The following Java example shows how to use the accelerate endpoint for a multipart upload\.
-
-**Example**  
-
-```
-import java.io.File;
-
-import com.amazonaws.AmazonClientException;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.S3ClientOptions;
-
-import com.amazonaws.services.s3.transfer.TransferManager;
-import com.amazonaws.services.s3.transfer.Upload;
-
-public class AccelerateMultipartUploadUsingHighLevelAPI {
- 
-    private static String EXISTING_BUCKET_NAME = "*** Provide bucket name ***";
-    private static String KEY_NAME  = "*** Provide key name ***";
-    private static String FILE_PATH = "*** Provide file name with full path ***";
-	
-    public static void main(String[] args) throws Exception {
-        
-        AmazonS3Client s3Client = new AmazonS3Client(new ProfileCredentialsProvider());
-        s3Client.configureRegion(Regions.US_WEST_2);
-           
-        // Use Amazon S3 Transfer Acceleration endpoint.           
-        s3Client.setS3ClientOptions(S3ClientOptions.builder().setAccelerateModeEnabled(true).build());
-       
-    	TransferManager tm = new TransferManager(s3Client);        
-        System.out.println("TransferManager");
-        // TransferManager processes all transfers asynchronously, 
-        // so this call will return immediately.
-        Upload upload = tm.upload(
-        		EXISTING_BUCKET_NAME, KEY_NAME, new File(FILE_PATH));
-        System.out.println("Upload");
-
         try {
-        	// Or you can block and wait for the upload to finish
-        	upload.waitForCompletion();
-        	System.out.println("Upload complete");
-        } catch (AmazonClientException amazonClientException) {
-        	System.out.println("Unable to upload file, upload was aborted.");
-        	amazonClientException.printStackTrace();
+            // Create an Amazon S3 client that is configured to use the accelerate endpoint.
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withRegion(clientRegion)
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .enableAccelerateMode()
+                    .build();
+
+            // Enable Transfer Acceleration for the specified bucket.
+            s3Client.setBucketAccelerateConfiguration(
+                    new SetBucketAccelerateConfigurationRequest(bucketName,
+                                                                new BucketAccelerateConfiguration(
+                                                                        BucketAccelerateStatus.Enabled)));
+    
+            // Verify that transfer acceleration is enabled for the bucket.
+            String accelerateStatus = s3Client.getBucketAccelerateConfiguration(
+                                                    new GetBucketAccelerateConfigurationRequest(bucketName))
+                                              .getStatus();
+            System.out.println("Bucket accelerate status: " + accelerateStatus);
+            
+            // Upload a new object using the accelerate endpoint.
+            s3Client.putObject(bucketName, keyName, "Test object for transfer acceleration");
+            System.out.println("Object \"" + keyName + "\" uploaded with transfer acceleration.");
+        }
+        catch(AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        }
+        catch(SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
         }
     }
 }
@@ -262,241 +135,71 @@ public class AccelerateMultipartUploadUsingHighLevelAPI {
 
 ## Using Transfer Acceleration from the AWS SDK for \.NET<a name="transfer-acceleration-examples-dotnet"></a>
 
-This section provides examples of using the AWS SDK for \.NET for Transfer Acceleration\. For information about how to create and test a working \.NET sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\. 
-
-### \.NET Example 1: Enable Transfer Acceleration on a Bucket<a name="transfer-acceleration-examples-examples-dotnet-1"></a>
-
-The following \.NET example shows how to enable Transfer Acceleration on a bucket\. 
+The following example shows how to use the AWS SDK for \.NET to enable Transfer Acceleration on a bucket\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 **Example**  
 
 ```
-using System;
-using System.Collections.Generic;
 using Amazon.S3;
 using Amazon.S3.Model;
-using Amazon.S3.Util;
+using System;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-
-    class SetTransferAccelerateState
+    class TransferAccelerationTest
     {
-        private static string bucketName = "Provide bucket name";
-            
-        public static void Main(string[] args)
+        private const string bucketName = "*** bucket name ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 s3Client;
+        public static void Main()
         {
-            using (var s3Client = new AmazonS3Client(Amazon.RegionEndpoint.USWest2))
-      
-            try
-            {
-                EnableTransferAcclerationOnBucket(s3Client);
-                BucketAccelerateStatus bucketAcclerationStatus = GetBucketAccelerateState(s3Client);
-
-                Console.WriteLine("Acceleration state = '{0}' ", bucketAcclerationStatus);
-            }
-            catch (AmazonS3Exception amazonS3Exception)
-            {
-                if (amazonS3Exception.ErrorCode != null &&
-                    (amazonS3Exception.ErrorCode.Equals("InvalidAccessKeyId")
-                    ||
-                    amazonS3Exception.ErrorCode.Equals("InvalidSecurity")))
-                {
-                    Console.WriteLine("Check the provided AWS Credentials.");
-                    Console.WriteLine(
-                    "To sign up for the service, go to http://aws.amazon.com/s3");
-                }
-                else
-                {
-                    Console.WriteLine(
-                     "Error occurred. Message:'{0}' when setting transfer acceleration",
-                     amazonS3Exception.Message);
-                }
-            }
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            s3Client = new AmazonS3Client(bucketRegion);
+            EnableAccelerationAsync().Wait();
         }
 
-        static void EnableTransferAcclerationOnBucket(IAmazonS3 s3Client)
+        static async Task EnableAccelerationAsync()
         {
-            PutBucketAccelerateConfigurationRequest request = new PutBucketAccelerateConfigurationRequest
-            {
-                BucketName = bucketName,
-                AccelerateConfiguration = new AccelerateConfiguration
+                try
                 {
-                    Status = BucketAccelerateStatus.Enabled
+                    var putRequest = new PutBucketAccelerateConfigurationRequest
+                    {
+                        BucketName = bucketName,
+                        AccelerateConfiguration = new AccelerateConfiguration
+                        {
+                            Status = BucketAccelerateStatus.Enabled
+                        }
+                    };
+                    await s3Client.PutBucketAccelerateConfigurationAsync(putRequest);
+
+                    var getRequest = new GetBucketAccelerateConfigurationRequest
+                    {
+                        BucketName = bucketName
+                    };
+                    var response = await s3Client.GetBucketAccelerateConfigurationAsync(getRequest);
+
+                    Console.WriteLine("Acceleration state = '{0}' ", response.Status);
                 }
-            };
-
-            PutBucketAccelerateConfigurationResponse response = s3Client.PutBucketAccelerateConfiguration(request);
-        }
-
-        static BucketAccelerateStatus GetBucketAccelerateState(IAmazonS3 s3Client)
-        {
-            GetBucketAccelerateConfigurationRequest request = new GetBucketAccelerateConfigurationRequest
-            {
-                BucketName = bucketName
-            };
-
-            GetBucketAccelerateConfigurationResponse response = s3Client.GetBucketAccelerateConfiguration(request);
-            return response.Status;
+                catch (AmazonS3Exception amazonS3Exception)
+                {
+                    Console.WriteLine(
+                        "Error occurred. Message:'{0}' when setting transfer acceleration",
+                        amazonS3Exception.Message);
+                }
         }
     }
 }
 ```
 
-### \.NET Example 2: Uploading a Single Object to a Bucket Enabled for Transfer Acceleration<a name="transfer-acceleration-examples-examples-dotnet-2"></a>
-
-The following \.NET example shows how to use the accelerate endpoint to upload a single object\.
-
-**Example**  
+When uploading an object to a bucket that has Transfer Acceleration enabled, you specify using acceleration endpoint at the time of creating a client as shown:
 
 ```
-using System;
-using System.Collections.Generic;
-using Amazon;
-using Amazon.S3;
-using Amazon.S3.Model;
-using Amazon.S3.Util;
-
-namespace s3.amazon.com.docsamples
-{
-
-     public class UploadtoAcceleratedBucket
-    {
-        private static RegionEndpoint TestRegionEndpoint = RegionEndpoint.USWest2; 
-        private static string bucketName = "Provide bucket name";
-        static string keyName  = "*** Provide key name ***";
-        static string filePath = "*** Provide filename of file to upload with the full path ***";
-   
-        public static void  Main(string[] args)
-        {
-            using (var client = new AmazonS3Client(new AmazonS3Config
+var client = new AmazonS3Client(new AmazonS3Config
             {
                 RegionEndpoint = TestRegionEndpoint,
                 UseAccelerateEndpoint = true
-            }))
-         
-            {
-                WriteObject(client);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
             }
-        }
-
-        static void WriteObject(IAmazonS3 client)
-        {   
-            try
-            {
-                PutObjectRequest putRequest = new PutObjectRequest
-                {
-                    BucketName = bucketName,
-                    Key = keyName,
-                    FilePath = filePath,
-                };
-            client.PutObject(putRequest);
-           }
-             catch (AmazonS3Exception amazonS3Exception)
-            {
-                if (amazonS3Exception.ErrorCode != null &&
-                    (amazonS3Exception.ErrorCode.Equals("InvalidAccessKeyId")
-                    ||
-                    amazonS3Exception.ErrorCode.Equals("InvalidSecurity")))
-                {
-                    Console.WriteLine("Check the provided AWS Credentials.");
-                    Console.WriteLine(
-                        "For service sign up go to http://aws.amazon.com/s3");
-                }
-                else
-                {
-                    Console.WriteLine(
-                        "Error occurred. Message:'{0}' when writing an object"
-                        , amazonS3Exception.Message);
-                }
-            }
-        }
-    }
-}
-```
-
-### \.NET Example 3: Multipart Upload to a Bucket Enabled for Transfer Acceleration<a name="transfer-acceleration-examples-examples-java-3"></a>
-
-The following \.NET example shows how to use the accelerate endpoint for a multipart upload\.
-
-**Example**  
-
-```
-using System;
-using System.IO;
-using Amazon;
-using Amazon.S3;
-using Amazon.S3.Model;
-using Amazon.S3.Transfer;
-
-namespace s3.amazon.com.docsamples
-{
-    class AcceleratedUploadFileMPUHAPI
-    {
-        private static RegionEndpoint TestRegionEndpoint = RegionEndpoint.USWest2; 
-        private static string existingBucketName = "Provide bucket name";
-        private static string keyName    = "*** Provide your object key ***";
-        private static string filePath   = "*** Provide file name with full path ***";
-      
-        static void Main(string[] args)
-        {
-            try
-            {
-                var client = new AmazonS3Client(new AmazonS3Config
-                {
-                    RegionEndpoint = TestRegionEndpoint,
-                    UseAccelerateEndpoint = true
-                });
-                using (TransferUtility fileTransferUtility = new
-                 TransferUtility(client))
-                {
-
-                    // 1. Upload a file, file name is used as the object key name.
-                    fileTransferUtility.Upload(filePath, existingBucketName);
-                    Console.WriteLine("Upload 1 completed");
-
-                    // 2. Specify object key name explicitly.
-                    fileTransferUtility.Upload(filePath,
-                                              existingBucketName, keyName);
-                    Console.WriteLine("Upload 2 completed");
-
-                    // 3. Upload data from a type of System.IO.Stream.
-                    using (FileStream fileToUpload =
-                        new FileStream(filePath, FileMode.Open, FileAccess.Read))
-                    {
-                        fileTransferUtility.Upload(fileToUpload,
-                                                   existingBucketName, keyName);
-                    }
-                    Console.WriteLine("Upload 3 completed");
-
-                    // 4.Specify advanced settings/options.
-                    TransferUtilityUploadRequest fileTransferUtilityRequest = new TransferUtilityUploadRequest
-                    {
-                        BucketName = existingBucketName,
-                        FilePath = filePath,
-                        StorageClass = S3StorageClass.ReducedRedundancy,
-                        PartSize = 6291456, // 6 MB.
-                        Key = keyName,
-                        CannedACL = S3CannedACL.PublicRead
-                    };
-                    fileTransferUtilityRequest.Metadata.Add("param1", "Value1");
-                    fileTransferUtilityRequest.Metadata.Add("param2", "Value2");
-                    fileTransferUtility.Upload(fileTransferUtilityRequest);
-                    Console.WriteLine("Upload 4 completed");
-                }
-            }
-            catch (AmazonS3Exception s3Exception)
-            {
-                Console.WriteLine("{0} {1}", s3Exception.Message,
-                                  s3Exception.InnerException);
-            }
-        }
-    }
-}
 ```
 
 ## Using Transfer Acceleration from the AWS SDK for JavaScript<a name="transfer-acceleration-examples-javascript"></a>

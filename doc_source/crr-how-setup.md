@@ -105,6 +105,9 @@ As you learn more about additional CRR configurations, you might grant Amazon S3
 
 When you add a replication configuration to a bucket, Amazon S3 stores the configuration as XML\. The following are sample configurations\. For more information about the XML structure, see [PUT Bucket replication](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) in the *Amazon Simple Storage Service API Reference*\.
 
+**Important**  
+When you add a replication configuration to a bucket, you must have the `iam:PassRole` permission to be able to pass the IAM role that grants Amazon S3 replication permissions\. The IAM role is specified by the Amazon Resource Name \(ARN\) that is used in the `<Role>` element in the replication configuration XML\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\.
+
 **Example 1: Replication Configuration with One Rule**  
 Consider the following replication configuration:  
 

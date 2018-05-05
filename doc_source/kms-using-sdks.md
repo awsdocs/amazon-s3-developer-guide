@@ -50,7 +50,7 @@ AmazonS3Client s3client = new AmazonS3Client(
 ...
 ```
 
-For a code example, see [Generate a Pre\-signed Object URL using AWS SDK for Java](ShareObjectPreSignedURLJavaSDK.md)\. 
+For a code example, see [Generate a Pre\-signed Object URL Using the AWS SDK for Java](ShareObjectPreSignedURLJavaSDK.md)\. 
 
 ## AWS SDK for \.NET<a name="kms-using-sdks-dotnet"></a>
 
@@ -88,8 +88,8 @@ For more information about creating keys, see [Programming the AWS KMS API](http
 For working code examples of uploading an object, see the following topics\. You will need to update these code examples and provide encryption information as shown in the preceding code fragment\.
 + For uploading an object in a single operation, see [Upload an Object Using the AWS SDK for \.NET](UploadObjSingleOpNET.md)
 + For multipart upload see the following topics:
-  + Using high\-level multipart upload API, see [Upload a File](HLuploadFileDotNet.md) 
-  + Using low\-level multipart upload API, see [Upload a File](LLuploadFileDotNet.md)
+  + Using high\-level multipart upload API, see [Upload a File to an S3 Bucket Using the AWS SDK for \.NET \(High\-Level API\)](HLuploadFileDotNet.md) 
+  + Using low\-level multipart upload API, see [Upload a File to an S3 Bucket Using the AWS SDK for \.NET \(Low\-Level API\)](LLuploadFileDotNet.md)
 
 ### Copy Operation<a name="kms-using-sdks-dotnet-copy"></a>
 
@@ -103,4 +103,4 @@ When creating a pre\-signed URL for an object encrypted using an AWS KMS–manag
 AWSConfigs.S3Config.UseSignatureVersion4 = true;
 ```
 
-For a code example, see [Generate a Pre\-signed Object URL using AWS SDK for \.NET](ShareObjectPreSignedURLDotNetSDK.md)\.
+For a code example, see [Generate a Pre\-signed Object URL Using AWS SDK for \.NET](ShareObjectPreSignedURLDotNetSDK.md)\.

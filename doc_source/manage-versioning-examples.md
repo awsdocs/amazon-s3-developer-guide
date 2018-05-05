@@ -15,7 +15,7 @@ For more information about enabling versioning on a bucket using the Amazon S3 c
 ## Using the AWS SDK for Java<a name="manage-versioning-examples-java"></a>
 
 **Example**  
-For instructions on how to create and test a working sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\.   
+For instructions on how to create and test a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
 import java.io.IOException;

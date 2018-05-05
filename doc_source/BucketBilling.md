@@ -12,4 +12,4 @@ The following topics provide information about billing and usage reporting for A
 + [AWS Billing Reports for Amazon S3](aws-billing-reports.md)
 + [AWS Usage Report for Amazon S3](aws-usage-report.md)
 + [Understanding Your AWS Billing and Usage Reports for Amazon S3](aws-usage-report-understand.md)
-+ [Using Cost Allocation Tags for S3 Buckets](CostAllocTagging.md)
++ [Using Cost Allocation S3 Bucket Tags](CostAllocTagging.md)

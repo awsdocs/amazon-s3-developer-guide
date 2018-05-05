@@ -163,79 +163,61 @@ The following C\# code example provides a complete code listing that adds a noti
 **Example**  
 
 ```
-using System;
-using System.Collections.Generic;
 using Amazon.S3;
 using Amazon.S3.Model;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class EnableNotifications
+    class EnableNotificationsTest
     {
-        static string bucketName = "***bucket name***";
-        static string snsTopic = "***SNS topic ARN***";
-        static string sqsQueue = "***SQS queue ARN***";
-        
-        static string putEventType = "s3:ObjectCreated:Put";
-        static string rrsObjectLostType = "s3:ObjectCreated:Copy";
+        private const string bucketName = "*** bucket name ***";
+        private const string snsTopic = "*** SNS topic ARN ***";
+        private const string sqsQueue = "*** SQS topic ARN ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 client;
 
-        public static void Main(string[] args)
+        public static void Main()
         {
-            using (var client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1))
-            {
-                Console.WriteLine("Enabling Notification on a bucket");
-                EnableNotification(client);
-            }
-
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            client = new AmazonS3Client(bucketRegion);
+            EnableNotificationAsync().Wait();
         }
 
-        static void EnableNotification(IAmazonS3 client)
+        static async Task EnableNotificationAsync()
         {
             try
             {
-                List<Amazon.S3.Model.TopicConfiguration> topicConfigurations = new List<TopicConfiguration>();
-
-                topicConfigurations.Add(new TopicConfiguration()
-                {
-                    Event = rrsObjectLostType,
-                    Topic = snsTopic
-                });
-
-                List<Amazon.S3.Model.QueueConfiguration> queueConfigurations = new List<QueueConfiguration>();
-                queueConfigurations.Add(new QueueConfiguration()
-                {
-                    Events = new List<string> { putEventType },
-                     Queue = sqsQueue
-                });
-
                 PutBucketNotificationRequest request = new PutBucketNotificationRequest
                 {
-                    BucketName = bucketName,
-                    TopicConfigurations = topicConfigurations,
-                    QueueConfigurations = queueConfigurations
+                    BucketName = bucketName
                 };
 
-                PutBucketNotificationResponse response = client.PutBucketNotification(request);
+                TopicConfiguration c = new TopicConfiguration
+                {
+                    Events = new List<EventType> { EventType.ObjectCreatedCopy },
+                    Topic = snsTopic
+                };
+                request.TopicConfigurations = new List<TopicConfiguration>();
+                request.TopicConfigurations.Add(c);
+                request.QueueConfigurations = new List<QueueConfiguration>();
+                request.QueueConfigurations.Add(new QueueConfiguration()
+                {
+                    Events = new List<EventType> { EventType.ObjectCreatedPut },
+                    Queue = sqsQueue
+                });
+                
+                PutBucketNotificationResponse response = await client.PutBucketNotificationAsync(request);
             }
-            catch (AmazonS3Exception amazonS3Exception)
+            catch (AmazonS3Exception e)
             {
-                if (amazonS3Exception.ErrorCode != null &&
-                    (amazonS3Exception.ErrorCode.Equals("InvalidAccessKeyId")
-                    ||
-                    amazonS3Exception.ErrorCode.Equals("InvalidSecurity")))
-                {
-                    Console.WriteLine("Check the provided AWS Credentials.");
-                    Console.WriteLine(
-                    "To sign up for service, go to http://aws.amazon.com/s3");
-                }
-                else
-                {
-                    Console.WriteLine(
-                     "Error occurred. Message:'{0}' when enabling notifications.",
-                     amazonS3Exception.Message);
-                }
+                Console.WriteLine("Error encountered on server. Message:'{0}' ", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown error encountered on server. Message:'{0}' ", e.Message);
             }
         }
     }
@@ -244,71 +226,62 @@ namespace s3.amazon.com.docsamples
 
 ### Step 3 \(option c\): Enable Notifications on a Bucket Using the AWS SDK for Java<a name="step2-enable-notification-using-java"></a>
 
-The following Java code example provides a complete code listing that adds a notification configuration to a bucket\. You will need to update the code and provide your bucket name and SNS topic ARN\. For instructions on how to create and test a working sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\.
+The following example shows how to add a notification configuration to a bucket\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.
 
 **Example**  
 
 ```
 import java.io.IOException;
-import java.util.Collection;
 import java.util.EnumSet;
-import java.util.LinkedList;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.AmazonS3Exception;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.BucketNotificationConfiguration;
 import com.amazonaws.services.s3.model.TopicConfiguration;
 import com.amazonaws.services.s3.model.QueueConfiguration;
 import com.amazonaws.services.s3.model.S3Event;
 import com.amazonaws.services.s3.model.SetBucketNotificationConfigurationRequest;
 
-public class NotificationConfigurationOnABucket {
-    private static String bucketName = "*** bucket name ***";
-    private static String snsTopicARN = "*** SNS Topic ARN ***";
-    private static String sqsQueueARN = "*** SQS Queue ARN ***";
+public class EnableNotificationOnABucket {
 
     public static void main(String[] args) throws IOException {
-        AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
+        String bucketName = "*** Bucket name ***";
+        String clientRegion = "*** Client region ***";
+        String snsTopicARN = "*** SNS Topic ARN ***";
+        String sqsQueueARN = "*** SQS Queue ARN ***";
+
         try {
-            System.out.println("Setting notification configuration on a bucket.\n");
-
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .withRegion(clientRegion)
+                    .build();
             BucketNotificationConfiguration notificationConfiguration = new BucketNotificationConfiguration();
-            notificationConfiguration.addConfiguration(
-                    "snsTopicConfig",
-                    new TopicConfiguration(snsTopicARN, EnumSet
-                            .of(S3Event.ReducedRedundancyLostObject)));
 
-            notificationConfiguration.addConfiguration(
-                    "sqsQueueConfig",
-                    new QueueConfiguration(sqsQueueARN, EnumSet
-                            .of(S3Event.ObjectCreated)));
+            // Add an SNS topic notification.
+            notificationConfiguration.addConfiguration("snsTopicConfig",
+                    new TopicConfiguration(snsTopicARN, EnumSet.of(S3Event.ObjectCreated)));
 
-            SetBucketNotificationConfigurationRequest request = 
-                    new SetBucketNotificationConfigurationRequest(bucketName, notificationConfiguration);
-
-            s3client.setBucketNotificationConfiguration(request);
-
-        } catch (AmazonS3Exception ase) {
-            System.out.println("Caught an AmazonServiceException, which "
-                    + "means your request made it "
-                    + "to Amazon S3, but was rejected with an error response"
-                    + " for some reason.");
-            System.out.println("Error Message:    " + ase.getMessage());
-            System.out.println("HTTP Status Code: " + ase.getStatusCode());
-            System.out.println("AWS Error Code:   " + ase.getErrorCode());
-            System.out.println("Error Type:       " + ase.getErrorType());
-            System.out.println("Request ID:       " + ase.getRequestId());
-            System.out.println("Error XML" + ase.getErrorResponseXml());
-        } catch (AmazonClientException ace) {
-            System.out.println("Caught an AmazonClientException, which "
-                    + "means the client encountered "
-                    + "an internal error while trying to "
-                    + "communicate with S3, "
-                    + "such as not being able to access the network.");
-            System.out.println("Error Message: " + ace.getMessage());
+            // Add an SQS queue notification.
+            notificationConfiguration.addConfiguration("sqsQueueConfig",
+                    new QueueConfiguration(sqsQueueARN, EnumSet.of(S3Event.ObjectCreated)));
+            
+            // Create the notification configuration request and set the bucket notification configuration.
+            SetBucketNotificationConfigurationRequest request = new SetBucketNotificationConfigurationRequest(
+                    bucketName, notificationConfiguration);
+            s3Client.setBucketNotificationConfiguration(request);
+        }
+        catch(AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        }
+        catch(SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
         }
     }
 }

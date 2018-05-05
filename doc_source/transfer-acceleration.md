@@ -35,7 +35,7 @@ You can access the Speed Comparison tool using either of the following methods:
 
 ## Getting Started with Amazon S3 Transfer Acceleration<a name="transfer-acceleration-getting-started"></a>
 
-To get started using Amazon S3 Transfer Acceleration perform the following steps:
+To get started using Amazon S3 Transfer Acceleration, perform the following steps:
 
 1. **Enable Transfer Acceleration on a bucket** – For your bucket to work with transfer acceleration, the bucket name must conform to DNS naming requirements and must not contain periods \("\."\)\. 
 
@@ -48,7 +48,7 @@ To get started using Amazon S3 Transfer Acceleration perform the following steps
    + `bucketname.s3-accelerate.amazonaws.com` – to access an acceleration\-enabled bucket\. 
    + `bucketname.s3-accelerate.dualstack.amazonaws.com` – to access an acceleration\-enabled bucket over IPv6\. Amazon S3 dual\-stack endpoints support requests to S3 buckets over IPv6 and IPv4\. The Transfer Acceleration dual\-stack endpoint only uses the virtual hosted\-style type of endpoint name\. For more information, see [Getting Started Making Requests over IPv6](ipv6-access.md#ipv6-access-getting-started) and [Using Amazon S3 Dual\-Stack Endpoints](dual-stack-endpoints.md)\. 
 **Important**  
-Currently support for the dual\-stack accelerated endpoint is only available from the AWS Java SDK\. For an example, see [Creating an Amazon S3 Java Client to Use the Transfer Acceleration Dual\-Stack Endpoint](transfer-acceleration-examples.md#transfer-acceleration-examples-java-client-dual-stack)\. Support for the AWS CLI and other AWS SDKs is coming soon\.
+Support for the dual\-stack accelerated endpoint currently is only available from the AWS Java SDK\. Support for the AWS CLI and other AWS SDKs is coming soon\.
 **Note**  
 You can continue to use the regular endpoint in addition to the accelerate endpoints\.
 

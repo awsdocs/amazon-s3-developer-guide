@@ -1,63 +1,62 @@
 # Listing Keys Using the AWS SDK for Java<a name="ListingObjectKeysUsingJava"></a>
 
-The following Java code example lists object keys in a bucket\. If the response is truncated \(`<IsTruncated>` is true in the response\), the code loop continues\. Each subsequent request specifies the `continuation-token` in the request and sets its value to the `<NextContinuationToken>` returned by Amazon S3 in the previous response\. 
-
 **Example**  
-For instructions on how to create and test a working sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\.   
+The following example lists the object keys in a bucket\. The example uses pagination to retrieve a set of object keys\. If there are more keys to return after the first page, Amazon S3 includes a continuation token in the response\. The example uses the continuation token in the subsequent request to fetch the next set of object keys\.   
+For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
 import java.io.IOException;
 
-import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.ListObjectsRequest;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ListObjectsV2Request;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
-import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 public class ListKeys {
-	private static String bucketName = "***bucket name***";
-	
-	public static void main(String[] args) throws IOException {
-        AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
-        try {
+
+    public static void main(String[] args) throws IOException {
+        String clientRegion = "*** Client region ***";
+        String bucketName = "*** Bucket name ***";
+        
+        try {    
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .withRegion(clientRegion)
+                    .build();
+    
             System.out.println("Listing objects");
-            final ListObjectsV2Request req = new ListObjectsV2Request().withBucketName(bucketName).withMaxKeys(2);
+    
+            // maxKeys is set to 2 to demonstrate the use of
+            // ListObjectsV2Result.getNextContinuationToken()
+            ListObjectsV2Request req = new ListObjectsV2Request().withBucketName(bucketName).withMaxKeys(2);
             ListObjectsV2Result result;
-            do {               
-               result = s3client.listObjectsV2(req);
-               
-               for (S3ObjectSummary objectSummary : 
-                   result.getObjectSummaries()) {
-                   System.out.println(" - " + objectSummary.getKey() + "  " +
-                           "(size = " + objectSummary.getSize() + 
-                           ")");
-               }
-               System.out.println("Next Continuation Token : " + result.getNextContinuationToken());
-               req.setContinuationToken(result.getNextContinuationToken());
-            } while(result.isTruncated() == true ); 
-            
-         } catch (AmazonServiceException ase) {
-            System.out.println("Caught an AmazonServiceException, " +
-            		"which means your request made it " +
-                    "to Amazon S3, but was rejected with an error response " +
-                    "for some reason.");
-            System.out.println("Error Message:    " + ase.getMessage());
-            System.out.println("HTTP Status Code: " + ase.getStatusCode());
-            System.out.println("AWS Error Code:   " + ase.getErrorCode());
-            System.out.println("Error Type:       " + ase.getErrorType());
-            System.out.println("Request ID:       " + ase.getRequestId());
-        } catch (AmazonClientException ace) {
-            System.out.println("Caught an AmazonClientException, " +
-            		"which means the client encountered " +
-                    "an internal error while trying to communicate" +
-                    " with S3, " +
-                    "such as not being able to access the network.");
-            System.out.println("Error Message: " + ace.getMessage());
+
+            do {
+                result = s3Client.listObjectsV2(req);
+    
+                for (S3ObjectSummary objectSummary : result.getObjectSummaries()) {
+                    System.out.printf(" - %s (size: %d)\n", objectSummary.getKey(), objectSummary.getSize());
+                }
+                // If there are more than maxKeys keys in the bucket, get a continuation token
+                // and list the next objects.
+                String token = result.getNextContinuationToken();
+                System.out.println("Next Continuation Token: " + token);
+                req.setContinuationToken(token);
+            } while (result.isTruncated());
+        }
+        catch(AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        }
+        catch(SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
         }
     }
 }

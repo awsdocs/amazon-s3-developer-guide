@@ -55,6 +55,6 @@ You can generate a presigned URL that can be used for operations such as upload 
 + When using the presigned URL to upload a new object, retrieve an existing object, or retrieve only object metadata, you must provide all the encryption headers in your client application\. 
 
 For more information, see the following topics:
-+ [Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the AWS Java SDK](sse-c-using-java-sdk.md)
-+ [Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the \.NET SDK](sse-c-using-dot-net-sdk.md)
++ [Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the AWS SDK for Java](sse-c-using-java-sdk.md)
++ [Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the AWS SDK for \.NET](sse-c-using-dot-net-sdk.md)
 + [Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the REST API](ServerSideEncryptionCustomerKeysSSEUsingRESTAPI.md)

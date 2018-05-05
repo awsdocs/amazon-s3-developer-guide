@@ -61,23 +61,54 @@ When using the AWS CLI you currently cannot use transfer acceleration with dual\
 
 This section provides examples of how to access a dual\-stack endpoint by using the AWS SDKs\. 
 
-### AWS Java SDK Dual\-Stack Endpoint Example<a name="dual-stack-endpoints-examples-java"></a>
+### AWS SDK for Java Dual\-Stack Endpoint Example<a name="dual-stack-endpoints-examples-java"></a>
 
-You use the `setS3ClientOptions` method in the AWS Java SDK to enable the use of a dual\-stack endpoint when creating an instance of `AmazonS3Client`, as shown in the following example\. 
+The following example shows how to enable dual\-stack endpoints when creating an Amazon S3 client using the AWS SDK for Java\.
+
+For instructions on creating and testing a working Java sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 ```
-AmazonS3 s3Client = new AmazonS3Client(new ProfileCredentialsProvider());
-s3Client.setRegion(Region.getRegion(Regions.US_WEST_2));
-s3Client.setS3ClientOptions(S3ClientOptions.builder().enableDualstack().build());
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+
+public class DualStackEndpoints {
+
+    public static void main(String[] args) {
+        String clientRegion = "*** Client region ***";
+        String bucketName = "*** Bucket name ***";
+
+        try {
+            // Create an Amazon S3 client with dual-stack endpoints enabled.
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .withRegion(clientRegion)
+                    .withDualstackEnabled(true)
+                    .build();
+
+            s3Client.listObjects(bucketName);
+        }
+        catch(AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        }
+        catch(SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
+        }
+    }
+}
 ```
 
-If you are using the AWS Java SDK on Microsoft Windows, you might have to set the following Java virtual machine \(JVM\) property\. 
+If you are using the AWS SDK for Java on Windows, you might have to set the following Java virtual machine \(JVM\) property: 
 
 ```
 java.net.preferIPv6Addresses=true
 ```
-
-For information about how to create and test a working Java sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\. 
 
 ### AWS \.NET SDK Dual\-Stack Endpoint Example<a name="dual-stack-endpoints-examples-dotnet"></a>
 
@@ -97,7 +128,7 @@ using (var s3Client = new AmazonS3Client(config))
         BucketName = “myBucket”
     };
 
-    var response = s3Client.ListObjects(request);
+    var response = await s3Client.ListObjectsAsync(request);
 }
 ```
 

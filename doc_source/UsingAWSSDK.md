@@ -7,7 +7,7 @@ This section provides an overview of using AWS SDKs for developing Amazon S3 app
 **Topics**
 + [Specifying Signature Version in Request Authentication](#specify-signature-version)
 + [Setting Up the AWS CLI](setup-aws-cli.md)
-+ [Using the AWS SDK for Java](UsingTheMPDotJavaAPI.md)
++ [Using the AWS SDK for Java](UsingTheMPJavaAPI.md)
 + [Using the AWS SDK for \.NET](UsingTheMPDotNetAPI.md)
 + [Using the AWS SDK for PHP and Running PHP Examples](UsingTheMPphpAPI.md)
 + [Using the AWS SDK for Ruby \- Version 3](UsingTheMPRubyAPI.md)
@@ -43,7 +43,7 @@ For all AWS Regions, AWS SDKs use Signature Version 4 by default to authenticate
 | AWS CLI |  For the default profile, run the following command: <pre>$ aws configure set default.s3.signature_version s3v4</pre> For a custom profile, run the following command: <pre>$ aws configure set profile.your_profile_name.s3.signature_version s3v4</pre>  | 
 | Java SDK |  Add the following in your code: <pre>System.setProperty(SDKGlobalConfiguration.ENABLE_S3_SIGV4_SYSTEM_PROPERTY, "true");</pre> Or, on the command line, specify the following: <pre>-Dcom.amazonaws.services.s3.enableV4</pre>  | 
 |  JavaScript SDK |  Set the `signatureVersion` parameter to `v4` when constructing the client: <pre>var s3 = new AWS.S3({signatureVersion: 'v4'});</pre>  | 
-| PHP SDK |  Set the `signature` parameter to `v4` when constructing the Amazon S3 service client: <pre><?php <br />									<br />$s3 = \Aws\S3\S3Client::factory(array('signature' => 'v4'));</pre>  | 
+| PHP SDK |  Set the `signature` parameter to `v4` when constructing the Amazon S3 service client: <pre><?php <br />									<br />$s3 = new S3Client(['signature' => 'v4']);</pre>  | 
 | Python\-Boto SDK |  Specify the following in the boto default config file: <pre>[s3] use-sigv4 = True</pre>  | 
 | Ruby SDK |  Ruby SDK \- Version 1: Set the `:s3_signature_version` parameter to `:v4` when constructing the client: <pre>s3 = AWS::S3::Client.new(:s3_signature_version => :v4)</pre> Ruby SDK \- Version 3: Set the `signature_version` parameter to `v4` when constructing the client: <pre>s3 = Aws::S3::Client.new(signature_version: 'v4')</pre>  | 
 | \.NET SDK |  Add the following to the code before creating the Amazon S3 client: <pre>AWSConfigs.S3UseSignatureVersion4 = true;</pre> Or, add the following to the config file: <pre><appSettings><br />   <add key="AWS.S3.UseSignatureVersion4" value="true" /><br /></appSettings></pre>  | 

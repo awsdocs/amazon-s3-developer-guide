@@ -56,7 +56,7 @@ http://acs.amazonaws.com/groups/s3/LogDelivery
 </Grant>
 ```
 
-For examples of adding ACL grants programmatically using the AWS SDKs, see [Managing ACLs Using the AWS SDK for Java](acl-using-java-sdk.md) and [Managing ACLs Using the AWS SDK for \.NET ](acl-using-dot-net-sdk.md)\.
+For examples of adding ACL grants programmatically using the AWS SDKs, see [Managing ACLs Using the AWS SDK for JavaConfiguring ACL Grants on an Existing Object](acl-using-java-sdk.md) and [Managing ACLs Using the AWS SDK for \.NET ](acl-using-dot-net-sdk.md)\.
 
 ## Example: AWS SDK for \.NET<a name="enable-logging-dotnetsdk-exmaple"></a>
 
@@ -65,85 +65,77 @@ The following C\# example enables logging on a bucket\. You need to create two b
 **Example**  
 
 ```
-using System;
 using Amazon.S3;
 using Amazon.S3.Model;
+using System;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class ServerAccesLogging
+    class ServerAccesLoggingTest
     {
-        static string sourceBucket = "*** Provide bucket name ***"; // On which to enable logging.
-        static string targetBucket = "*** Provide bucket name ***"; // Where access logs can be stored.
-        static string logObjectKeyPrefix = "Logs";
-        static IAmazonS3 client;
+        private const string bucketName = "*** bucket name for which to enable logging ***"; 
+        private const string targetBucketName = "*** bucket name where you want access logs stored ***"; 
+        private const string logObjectKeyPrefix = "Logs";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 client;
 
-        public static void Main(string[] args)
+        public static void Main()
         {
-            using (client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1))
-            {
-                Console.WriteLine("Enabling logging on source bucket...");
-                try
-                {
-                    // Step 1 - Grant Log Delivery group permission to write log to the target bucket.
-                    GrantLogDeliveryPermissionToWriteLogsInTargetBucket();
-                    // Step 2 - Enable logging on the source bucket.
-                    EnableDisableLogging();
-                }
-                catch (AmazonS3Exception amazonS3Exception)
-                {
-                    if (amazonS3Exception.ErrorCode != null &&
-                        (amazonS3Exception.ErrorCode.Equals("InvalidAccessKeyId")
-                        ||
-                        amazonS3Exception.ErrorCode.Equals("InvalidSecurity")))
-                    {
-                        Console.WriteLine("Check the provided AWS Credentials.");
-                        Console.WriteLine(
-                        "To sign up for service, go to http://aws.amazon.com/s3");
-                    }
-                    else
-                    {
-                        Console.WriteLine(
-                         "Error occurred. Message:'{0}' when enabling logging",
-                         amazonS3Exception.Message);
-                    }
-                }
-            }
-
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            client = new AmazonS3Client(bucketRegion);
+            EnableLoggingAsync().Wait();
         }
 
-        static void GrantLogDeliveryPermissionToWriteLogsInTargetBucket()
+        private static async Task EnableLoggingAsync()
         {
-            S3AccessControlList bucketACL = new S3AccessControlList();
-            GetACLResponse aclResponse = client.GetACL(new GetACLRequest { BucketName = targetBucket });
+            try
+            {
+                // Step 1 - Grant Log Delivery group permission to write log to the target bucket.
+                await GrantPermissionsToWriteLogsAsync();
+                // Step 2 - Enable logging on the source bucket.
+                await EnableDisableLoggingAsync();
+            }
+            catch (AmazonS3Exception e)
+            {
+                Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
+        }
+
+        private static async Task GrantPermissionsToWriteLogsAsync()
+        {
+            var bucketACL = new S3AccessControlList();
+            var aclResponse = client.GetACL(new GetACLRequest { BucketName = targetBucketName });
             bucketACL = aclResponse.AccessControlList;
             bucketACL.AddGrant(new S3Grantee { URI = "http://acs.amazonaws.com/groups/s3/LogDelivery" }, S3Permission.WRITE);
             bucketACL.AddGrant(new S3Grantee { URI = "http://acs.amazonaws.com/groups/s3/LogDelivery" }, S3Permission.READ_ACP);
-            PutACLRequest setACLRequest = new PutACLRequest
+            var setACLRequest = new PutACLRequest
             {
                 AccessControlList = bucketACL,
-                BucketName = targetBucket
+                BucketName = targetBucketName
             };
-            client.PutACL(setACLRequest);
+            await client.PutACLAsync(setACLRequest);
         }
 
-        static void EnableDisableLogging()
+        private static async Task EnableDisableLoggingAsync()
         {
-            S3BucketLoggingConfig loggingConfig = new S3BucketLoggingConfig
+            var loggingConfig = new S3BucketLoggingConfig
             {
-                TargetBucketName = targetBucket,
+                TargetBucketName = targetBucketName,
                 TargetPrefix = logObjectKeyPrefix
             };
 
             // Send request.
-            PutBucketLoggingRequest putBucketLoggingRequest = new PutBucketLoggingRequest
+            var putBucketLoggingRequest = new PutBucketLoggingRequest
             {
-                BucketName = sourceBucket,
+                BucketName = bucketName,
                 LoggingConfig = loggingConfig
             };
-            PutBucketLoggingResponse response = client.PutBucketLogging(putBucketLoggingRequest);
+            await client.PutBucketLoggingAsync(putBucketLoggingRequest);
         }
     }
 }

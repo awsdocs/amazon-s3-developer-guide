@@ -4,7 +4,7 @@
 + [Concurrent Multipart Upload Operations](#distributedmpupload)
 + [Multipart Upload and Pricing](#mpuploadpricing)
 + [Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Policy](#mpu-abort-incomplete-mpu-lifecycle-config)
-+ [Quick Facts](qfacts.md)
++ [Amazon S3 Multipart Upload Limits](qfacts.md)
 + [API Support for Multipart Upload](sdksupportformpu.md)
 + [Multipart Upload API and Permissions](mpuAndPermissions.md)
 

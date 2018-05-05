@@ -54,8 +54,8 @@ Requirements for cross\-region replication:
    
 
   You can grant these permissions by creating an IAM role\. For more information about IAM roles, see [Create an IAM Role](crr-how-setup.md#replication-iam-role-intro)\.
-
-   
+**Important**  
+To pass the IAM role that you create that grants Amazon S3 replication permissions, you must have the `iam:PassRole` permission\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\.
 + If the source bucket owner also owns the object, the bucket owner has full permissions to replicate the object\. If not, the object owner must grant the bucket owner the `READ`  and `READ_ACP`  permissions via the object ACL\. For more information about Amazon S3 actions, see [Specifying Permissions in a Policy](using-with-s3-actions.md)\. For more information about resources and ownership, see [Amazon S3 Resources](access-control-overview.md#access-control-resources-basics)\.
 
 If you are setting replication configuration in a cross\-account scenario, where source and destination buckets are owned by different AWS accounts, the following additional requirements apply:

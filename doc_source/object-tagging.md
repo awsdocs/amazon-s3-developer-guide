@@ -43,7 +43,7 @@ With tagging, you now have another dimension\. If you want photo1 in project x c
 + Object tags enable fine\-grained access control of permissions\. For example, you could grant an IAM user permissions to read only objects with specific tags\.
 + Object tags enable fine\-grained object lifecycle management in which you can specify tag\-based filter, in addition to key name prefix, in a lifecycle rule\.
 + When using Amazon S3 analytics, you can configure filters to group objects together for analysis by object tags, by key name prefix, or by both prefix and tags\.
-+ You can also customize Amazon CloudWatch metrics  to display information by specific tag filters\. The following sections provide details\.
++ You can also customize Amazon CloudWatch metrics to display information by specific tag filters\. The following sections provide details\.
 
 **Important**  
 While it is acceptable to use tags to label objects containing confidential data \(such as, personally identifiable information \(PII\) or protected health information \(PHI\)\), the tags themselves shouldn't contain any confidential information\. 

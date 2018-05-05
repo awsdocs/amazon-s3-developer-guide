@@ -1,63 +1,61 @@
-# Managing Tags Using SDK \(AWS SDK for \.NET\)<a name="tagging-manage-dotnet"></a>
+# Managing Tags Using the AWS SDK for \.NET<a name="tagging-manage-dotnet"></a>
 
-The following C\# code example does the following:
-+ Create an object with tags\.
-+ Retrieve tag set\.
-+ Update the tag set \(replace the existing tag set\)\.
+The following example shows how to use the AWS SDK for \.NET to set the tags for a new object and retrieve or replace the tags for an existing object\. For more information about object tagging, see [Object Tagging](object-tagging.md)\. 
 
 For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
-using System;
 using Amazon.S3;
 using Amazon.S3.Model;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class ObjectTaggingTest
+    public class ObjectTagsTest
     {
-        static string bucketName = "*** bucket ****";
-        static string keyName = "*** object key name ****";
-        static string filePath = "***file to upload ***";
+        private const string bucketName = "*** bucket name ***";
+        private const string keyName = "*** key name for the new object ***";
+        private const string filePath = @"*** file path ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 client;
 
-        static IAmazonS3 client;
-
-        public static void Main(string[] args)
+        public static void Main()
         {
-            using (client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1))
-            {
-                Console.WriteLine("Uploading an object");
-                PutObjectWithTagsTest();
-            }
-
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            client = new AmazonS3Client(bucketRegion);
+            PutObjectWithTagsTestAsync().Wait();
         }
 
-        static void PutObjectWithTagsTest()
+        static async Task PutObjectWithTagsTestAsync()
         {
             try
             {
-                // 1. Put object with tags.
-                PutObjectRequest putRequest = new PutObjectRequest
+                // 1. Put an object with tags.
+                var putRequest = new PutObjectRequest
                 {
                     BucketName = bucketName,
                     Key = keyName,
                     FilePath = filePath,
                     TagSet = new List<Tag>{
-                    new Tag { Key = "Key1", Value = "Value1"},
-                    new Tag { Key = "Key2", Value = "Value2" }
+                        new Tag { Key = "Keyx1", Value = "Value1"},
+                        new Tag { Key = "Keyx2", Value = "Value2" }
                     }
                 };
 
-                PutObjectResponse response = client.PutObject(putRequest);
-                // 2. Retrieve object tags.
-                GetObjectTaggingRequest getTagsRequest = new GetObjectTaggingRequest();
-                getTagsRequest.BucketName = bucketName;
-                getTagsRequest.Key = keyName;
+                PutObjectResponse response = await client.PutObjectAsync(putRequest);
+                // 2. Retrieve the object's tags.
+                GetObjectTaggingRequest getTagsRequest = new GetObjectTaggingRequest
+                {
+                    BucketName = bucketName,
+                    Key = keyName
+                };
 
-                GetObjectTaggingResponse objectTags = client.GetObjectTagging(getTagsRequest);
+                GetObjectTaggingResponse objectTags = await client.GetObjectTaggingAsync(getTagsRequest);
+                for (int i = 0; i < objectTags.Tagging.Count; i++)
+                    Console.WriteLine("Key: {0}, Value: {1}", objectTags.Tagging[i].Key, objectTags.Tagging[0].Value);
+
 
                 // 3. Replace the tagset.
 
@@ -68,37 +66,34 @@ namespace s3.amazon.com.docsamples
                 };
 
 
-                PutObjectTaggingRequest putObjTagsRequest = new PutObjectTaggingRequest();
-                putObjTagsRequest.BucketName = bucketName;
-                putObjTagsRequest.Key = keyName;
-                putObjTagsRequest.Tagging = newTagSet;
+                PutObjectTaggingRequest putObjTagsRequest = new PutObjectTaggingRequest()
+                {
+                    BucketName = bucketName,
+                    Key = keyName,
+                    Tagging = newTagSet
+                };
+                PutObjectTaggingResponse response2 = await client.PutObjectTaggingAsync(putObjTagsRequest);
 
-                PutObjectTaggingResponse response2 = client.PutObjectTagging(putObjTagsRequest);
-
-                // 4. Retrieve object tags.
+                // 4. Retrieve the object's tags.
                 GetObjectTaggingRequest getTagsRequest2 = new GetObjectTaggingRequest();
                 getTagsRequest2.BucketName = bucketName;
                 getTagsRequest2.Key = keyName;
-                GetObjectTaggingResponse objectTags2 = client.GetObjectTagging(getTagsRequest2);
+                GetObjectTaggingResponse objectTags2 = await client.GetObjectTaggingAsync(getTagsRequest2);
+                for (int i = 0; i < objectTags2.Tagging.Count; i++)
+                    Console.WriteLine("Key: {0}, Value: {1}", objectTags2.Tagging[i].Key, objectTags2.Tagging[0].Value);
 
             }
-            catch (AmazonS3Exception amazonS3Exception)
+            catch (AmazonS3Exception e)
             {
-                if (amazonS3Exception.ErrorCode != null &&
-                    (amazonS3Exception.ErrorCode.Equals("InvalidAccessKeyId")
-                    ||
-                    amazonS3Exception.ErrorCode.Equals("InvalidSecurity")))
-                {
-                    Console.WriteLine("Check the provided AWS Credentials.");
-                    Console.WriteLine(
-                        "For service sign up go to http://aws.amazon.com/s3");
-                }
-                else
-                {
-                    Console.WriteLine(
-                        "Error occurred. Message:'{0}' when writing an object"
-                        , amazonS3Exception.Message);
-                }
+                Console.WriteLine(
+                        "Error encountered ***. Message:'{0}' when writing an object"
+                        , e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(
+                    "Encountered an error. Message:'{0}' when writing an object"
+                    , e.Message);
             }
         }
     }

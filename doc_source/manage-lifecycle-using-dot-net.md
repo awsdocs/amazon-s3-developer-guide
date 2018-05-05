@@ -1,190 +1,177 @@
 # Manage an Object's Lifecycle Using the AWS SDK for \.NET<a name="manage-lifecycle-using-dot-net"></a>
 
-You can use the AWS SDK for \.NET to manage lifecycle configuration on a bucket\. For more information about managing lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\. 
+You can use the AWS SDK for \.NET to manage the lifecycle configuration on a bucket\. For more information about managing lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\. 
+
+**Note**  
+When you add a lifecycle configuration, Amazon S3 replaces the existing lifecycle configuration on the specified bucket\. To update a configuration, you must first retrieve the lifecycle configuration, make the changes, and then add the revised lifecycle configuration to the bucket\.
 
 **Example \.NET Code Example**  
-The following C\# code example adds lifecycle configuration to a bucket\. The example shows two lifecycle configurations:  
-+ Lifecycle configuration that uses only prefix to select a subset of objects to which the rule applies\.
-+ Lifecycle configuration that uses a prefix and object tags to select a subset of objects to which the rule applies\.
-The lifecycle rule transitions objects to the GLACIER storage class soon after the objects are created\.  
-The following code works with the latest version of the \.NET SDK\.  
+The following example shows how to use the AWS SDK for \.NET to add, update, and delete a bucket's lifecycle configuration\. The code example does the following:  
++ Adds a lifecycle configuration to a bucket\. 
++ Retrieves the lifecyle configuration and updates it by adding another rule\. 
++ Adds the modified lifecycle configuration to the bucket\. Amazon S3 replaces the existing lifecycle configuration\.
++ Retrieves the configuration again and verifies it by printing the number of rules in the configuration\.
++ Deletes the lifecyle configuration\.and verifies the deletion
 For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```
-  1. using System;
-  2. using System.Collections.Generic;
-  3. using System.Diagnostics;
-  4. using Amazon.S3;
-  5. using Amazon.S3.Model;
-  6. 
-  7. namespace aws.amazon.com.s3.documentation
-  8. {
-  9.     class LifeCycleTest
- 10.     {
- 11.         static string bucketName = "*** bucket name ***";
- 12. 
- 13.         public static void Main(string[] args)
- 14.         {
- 15.             try
- 16.             {
- 17.                 using (var client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1))
- 18.                 {
- 19.                     // 1. Add lifecycle config with prefix only.
- 20.                     var lifeCycleConfigurationA = LifecycleConfig1();
- 21. 
- 22.                     // Add the configuration to the bucket 
- 23.                     PutLifeCycleConfiguration(client, lifeCycleConfigurationA);
- 24. 
- 25.                     // Retrieve an existing configuration 
- 26.                     var lifeCycleConfiguration = GetLifeCycleConfiguration(client);
- 27. 
- 28. 
- 29.                     // 2. Add lifecycle config with prefix and tags.
- 30.                     var lifeCycleConfigurationB = LifecycleConfig2();
- 31. 
- 32.                     // Add the configuration to the bucket 
- 33.                     PutLifeCycleConfiguration(client, lifeCycleConfigurationB);
- 34. 
- 35.                     // Retrieve an existing configuration 
- 36.                     lifeCycleConfiguration = GetLifeCycleConfiguration(client);
- 37. 
- 38.                     // 3. Delete lifecycle config.
- 39.                     DeleteLifecycleConfiguration(client);
- 40. 
- 41.                     // 4. Retrieve a nonexistent configuration
- 42.                     lifeCycleConfiguration = GetLifeCycleConfiguration(client);
- 43.                     Debug.Assert(lifeCycleConfiguration == null);
- 44.                 }
- 45. 
- 46.                 Console.WriteLine("Example complete. To continue, click Enter...");
- 47.                 Console.ReadKey();
- 48.             }
- 49.             catch (AmazonS3Exception amazonS3Exception)
- 50.             {
- 51.                 Console.WriteLine("S3 error occurred. Exception: " + amazonS3Exception.ToString());
- 52.             }
- 53.             catch (Exception e)
- 54.             {
- 55.                 Console.WriteLine("Exception: " + e.ToString());
- 56.             }
- 57.         }
- 58. 
- 59.         private static LifecycleConfiguration LifecycleConfig1()
- 60.         {
- 61.             var lifeCycleConfiguration = new LifecycleConfiguration()
- 62.             {
- 63.                 Rules = new List<LifecycleRule>
- 64.                         {
- 65.                              new LifecycleRule
- 66.                             {
- 67.                                 Id = "Rule-1",
- 68.                                 Filter = new LifecycleFilter()
- 69.                                 {
- 70.                                     LifecycleFilterPredicate = new LifecyclePrefixPredicate
- 71.                                     { 
- 72.                                         Prefix = "glacier/"
- 73.                                     }
- 74.                                 },
- 75.                                 Status = LifecycleRuleStatus.Enabled,
- 76.                                 Transitions = new List<LifecycleTransition>
- 77.                                 {
- 78.                                     new LifecycleTransition
- 79.                                     {
- 80.                                         Days = 0,
- 81.                                         StorageClass = S3StorageClass.Glacier
- 82.                                     }
- 83.                                 },
- 84.                             }
- 85.                         }
- 86.             };
- 87.             return lifeCycleConfiguration;
- 88.         }
- 89. 
- 90.         private static LifecycleConfiguration LifecycleConfig2()
- 91.         {
- 92.             var lifeCycleConfiguration = new LifecycleConfiguration()
- 93.             {
- 94.                 Rules = new List<LifecycleRule>
- 95.                         {
- 96.                              new LifecycleRule
- 97.                             {
- 98.                                 Id = "Rule-1",
- 99.                                 Filter = new LifecycleFilter()
-100.                                 {
-101.                                     LifecycleFilterPredicate  = new LifecycleAndOperator
-102.                                     {
-103.                                         Operands = new List<LifecycleFilterPredicate>
-104.                                         {
-105.                                             new LifecyclePrefixPredicate
-106.                                             {
-107.                                                 Prefix = "glacierobjects/"
-108.                                             },
-109.                                             new LifecycleTagPredicate
-110.                                             {
-111.                                                 Tag = new Tag()
-112.                                                 {
-113.                                                     Key = "tagKey1",
-114.                                                     Value = "tagValue1"
-115.                                                 }
-116.                                             },
-117.                                              new LifecycleTagPredicate
-118.                                             {
-119.                                                 Tag = new Tag()
-120.                                                 {
-121.                                                     Key = "tagKey2",
-122.                                                     Value = "tagValue2"
-123.                                                 }
-124.                                             }
-125.                                         }
-126.                                     }
-127.                                 },
-128.                                 Status = LifecycleRuleStatus.Enabled,
-129.                                 Transitions = new List<LifecycleTransition>
-130.                                                  {
-131.                                                       new LifecycleTransition
-132.                                                       {
-133.                                                            Days = 0,
-134.                                                            StorageClass = S3StorageClass.Glacier
-135.                                                       }
-136.                                                   },
-137.                             }
-138.                         }
-139.             };
-140.             return lifeCycleConfiguration;
-141.         }
-142. 
-143.         static void PutLifeCycleConfiguration(IAmazonS3 client, LifecycleConfiguration configuration)
-144.         {
-145. 
-146.             PutLifecycleConfigurationRequest request = new PutLifecycleConfigurationRequest
-147.             {
-148.                 BucketName = bucketName,
-149.                 Configuration = configuration
-150.             };
-151. 
-152.             var response = client.PutLifecycleConfiguration(request);
-153.         }
-154. 
-155.         static LifecycleConfiguration GetLifeCycleConfiguration(IAmazonS3 client)
-156.         {
-157.             GetLifecycleConfigurationRequest request = new GetLifecycleConfigurationRequest
-158.             {
-159.                 BucketName = bucketName
-160. 
-161.             };
-162.             var response = client.GetLifecycleConfiguration(request);
-163.             var configuration = response.Configuration;
-164.             return configuration;
-165.         }
-166. 
-167.         static void DeleteLifecycleConfiguration(IAmazonS3 client)
-168.         {
-169.             DeleteLifecycleConfigurationRequest request = new DeleteLifecycleConfigurationRequest
-170.             {
-171.                 BucketName = bucketName
-172.             };
-173.             client.DeleteLifecycleConfiguration(request);
-174.         }
-175.     }
-176. }
+using Amazon.S3;
+using Amazon.S3.Model;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Amazon.DocSamples.S3
+{
+    class LifecycleTest
+    {
+        private const string bucketName = "*** bucket name ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 client;
+        public static void Main()
+        {
+            client = new AmazonS3Client(bucketRegion);
+            AddUpdateDeleteLifecycleConfigAsync().Wait();
+        }
+
+        private static async Task AddUpdateDeleteLifecycleConfigAsync()
+        {
+            try
+            {
+                var lifeCycleConfiguration = new LifecycleConfiguration()
+                {
+                    Rules = new List<LifecycleRule>
+                        {
+                            new LifecycleRule
+                            {
+                                 Id = "Archive immediately rule",
+                                 Filter = new LifecycleFilter()
+                                 {
+                                     LifecycleFilterPredicate = new LifecyclePrefixPredicate()
+                                     {
+                                         Prefix = "glacierobjects/"
+                                     }
+                                 },
+                                 Status = LifecycleRuleStatus.Enabled,
+                                 Transitions = new List<LifecycleTransition>
+                                 {
+                                      new LifecycleTransition
+                                      {
+                                           Days = 0,
+                                           StorageClass = S3StorageClass.Glacier
+                                      }
+                                  },
+                            },
+                            new LifecycleRule
+                            {
+                                 Id = "Archive and then delete rule",
+                                  Filter = new LifecycleFilter()
+                                 {
+                                     LifecycleFilterPredicate = new LifecyclePrefixPredicate()
+                                     {
+                                         Prefix = "projectdocs/"
+                                     }
+                                 },
+                                 Status = LifecycleRuleStatus.Enabled,
+                                 Transitions = new List<LifecycleTransition>
+                                 {
+                                      new LifecycleTransition
+                                      {
+                                           Days = 30,
+                                           StorageClass = S3StorageClass.StandardInfrequentAccess
+                                      },
+                                      new LifecycleTransition
+                                      {
+                                        Days = 365,
+                                        StorageClass = S3StorageClass.Glacier
+                                      }
+                                 },
+                                 Expiration = new LifecycleRuleExpiration()
+                                 {
+                                       Days = 3650
+                                 }
+                            }
+                        }
+                };
+
+                // Add the configuration to the bucket. 
+                await AddExampleLifecycleConfigAsync(client, lifeCycleConfiguration);
+
+                // Retrieve an existing configuration. 
+                lifeCycleConfiguration = await RetrieveLifecycleConfigAsync(client);
+
+                // Add a new rule.
+                lifeCycleConfiguration.Rules.Add(new LifecycleRule
+                {
+                    Id = "NewRule",
+                    Filter = new LifecycleFilter()
+                    {
+                        LifecycleFilterPredicate = new LifecyclePrefixPredicate()
+                        {
+                            Prefix = "YearlyDocuments/"
+                        }
+                    },
+                    Expiration = new LifecycleRuleExpiration()
+                    {
+                        Days = 3650
+                    }
+                });
+
+                // Add the configuration to the bucket. 
+                await AddExampleLifecycleConfigAsync(client, lifeCycleConfiguration);
+
+                // Verify that there are now three rules.
+                lifeCycleConfiguration = await RetrieveLifecycleConfigAsync(client);
+                Console.WriteLine("Expected # of rulest=3; found:{0}", lifeCycleConfiguration.Rules.Count);
+
+                // Delete the configuration.
+                await RemoveLifecycleConfigAsync(client);
+
+                // Retrieve a nonexistent configuration.
+                lifeCycleConfiguration = await RetrieveLifecycleConfigAsync(client);
+
+            }
+            catch (AmazonS3Exception e)
+            {
+                Console.WriteLine("Error encountered ***. Message:'{0}' when writing an object", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
+        }
+
+        static async Task AddExampleLifecycleConfigAsync(IAmazonS3 client, LifecycleConfiguration configuration)
+        {
+
+            PutLifecycleConfigurationRequest request = new PutLifecycleConfigurationRequest
+            {
+                BucketName = bucketName,
+                Configuration = configuration
+            };
+            var response = await client.PutLifecycleConfigurationAsync(request);
+        }
+
+        static async Task<LifecycleConfiguration> RetrieveLifecycleConfigAsync(IAmazonS3 client)
+        {
+            GetLifecycleConfigurationRequest request = new GetLifecycleConfigurationRequest
+            {
+                BucketName = bucketName
+            };
+            var response = await client.GetLifecycleConfigurationAsync(request);
+            var configuration = response.Configuration;
+            return configuration;
+        }
+
+        static async Task RemoveLifecycleConfigAsync(IAmazonS3 client)
+        {
+            DeleteLifecycleConfigurationRequest request = new DeleteLifecycleConfigurationRequest
+            {
+                BucketName = bucketName
+            };
+            await client.DeleteLifecycleConfigurationAsync(request);
+        }
+    }
+}
 ```

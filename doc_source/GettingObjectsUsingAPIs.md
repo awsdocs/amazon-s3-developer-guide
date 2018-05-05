@@ -18,7 +18,7 @@ Amazon S3 doesn't support retrieving multiple ranges of data per GET request\.
 
  When you retrieve an object, its metadata is returned in the response headers\. There are times when you want to override certain response header values returned in a GET response\. For example, you might override the `Content-Disposition` response header value in your GET request\. The REST GET Object API \(see [GET Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html)\) allows you to specify query string parameters in your GET request to override these values\. 
 
-The AWS SDK for Java, \.NET and PHP also provide necessary objects you can use to specify values for these response headers in your GET request\. 
+The AWS SDKs for Java, \.NET, and PHP also provide necessary objects you can use to specify values for these response headers in your GET request\. 
 
 When retrieving objects that are stored encrypted using server\-side encryption you will need to provide appropriate request headers\. For more information, see [Protecting Data Using Encryption](UsingEncryption.md)\.
 

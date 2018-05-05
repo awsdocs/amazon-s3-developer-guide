@@ -6,6 +6,8 @@
 
  There is no limit to the number of objects that can be stored in a bucket and no difference in performance whether you use many buckets or just a few\. You can store all of your objects in a single bucket, or you can organize them across several buckets\.
 
+If you explicitly specify an AWS Region in your create bucket request that is different from the Region that you specifed when you created the client, you might get an error\.
+
 You cannot create a bucket within another bucket\.
 
 The high\-availability engineering of Amazon S3 is focused on get, put, list, and delete operations\. Because bucket operations work against a centralized, global resource space, it is not appropriate to create or delete buckets on the high\-availability code path of your application\. It is better to create or delete buckets in a separate initialization or setup routine that you run less often\. 

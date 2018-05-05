@@ -132,7 +132,9 @@ If you have an object expiration lifecycle policy in your non\-versioned bucket 
 
       Now you have an IAM role in account A that Amazon S3 can assume\. It has permissions for necessary Amazon S3 actions so that Amazon S3 can replicate objects from a specific source bucket to a destination bucket\. You specify this role when you add cross\-region replication to the source bucket in account A\.
 
-1. Add replication configuration on the source bucket in account A directing Amazon S3 to replicate objects with prefix `Tax/` to a destination bucket as shown in the following example configuration:
+1. Add replication configuration on the source bucket in account A directing Amazon S3 to replicate objects with prefix `Tax/` to a destination bucket as shown in the following example configuration\.
+**Important**  
+When you add a replication configuration to a bucket, you must have the `iam:PassRole` permission to be able to pass the IAM role that grants Amazon S3 replication permissions\. The IAM role is specified by the Amazon Resource Name \(ARN\) that is used in the `<Role>` element in the replication configuration XML\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\.
 
    ```
    <ReplicationConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
@@ -145,7 +147,7 @@ If you have an object expiration lifecycle policy in your non\-versioned bucket 
    </ReplicationConfiguration>
    ```
 
-   In this example, you can use either the AWS CLI or the AWS SDK to add the replication configuration\. You can't use the console because the console doesn't support specifying a destination bucket that is in different AWS account\. 
+   In this example, you can use either the AWS CLI, the Amazon S3 console or the AWS SDK to add the replication configuration\. 
    + Using AWS CLI\. 
 
      The AWS CLI requires you to specify the replication configuration as JSON\. Save the following JSON in a file \(`replication.json`\)\. 
@@ -183,6 +185,9 @@ If you have an object expiration lifecycle policy in your non\-versioned bucket 
      --bucket source-bucket \
      --profile accountA
      ```
+   + Using the Amazon S3 console\. 
+
+     For instructions on using the console, see [How Do I Enable and Configure Cross\-Region Replication for an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-crr.html) in the *Amazon Simple Storage Service Console User Guide*\.
    + Using the AWS SDK for Java\.
 
      For a code example, see [Setting Up Cross\-Region Replication Using the AWS SDK for Java](crr-using-java.md)\. 

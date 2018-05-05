@@ -28,27 +28,12 @@ When writing Amazon S3 applications using the AWS SDK for \.NET, you use the `AW
 + **Amazon\.S3—**Provides the implementation for the low\-level APIs\. 
 
   It provides methods that correspond to the Amazon S3 REST multipart upload API \(see [Using the REST API for Multipart Upload](UsingRESTAPImpUpload.md)\)\.
-+ **Amazon\.S3\.Model—**Provides the low\-level API classes to create requests and process responses\.
++ **Amazon\.S3\.Model—**Provides the low\-level API classes to create requests and process responses\. For example, it provides the `InitiateMultipartUploadRequest` and `InitiateMultipartUploadResponse` classes you can use when initiating a multipart upload, and the `UploadPartRequest` and `UploadPartResponse` classes when uploading parts\. 
++ **Amazon\.S3\.Encryption—** Provides `AmazonS3EncryptionClient`\.
++ **Amazon\.S3\.Util—** Provides various utility classes such as `AmazonS3Util` and `BucketRegionDetector`\.
 
-   For example, it provides the `InitiateMultipartUploadRequest` and `InitiateMultipartUploadResponse` classes you can use when initiating a multipart upload, and the `UploadPartRequest` and `UploadPartResponse` classes when uploading parts\. 
-
-For more information about the AWS SDK for \.NET API, see [AWS SDK for \.NET Reference](http://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html)\.
+For more information about the AWS SDK for \.NET API, see [AWS SDK for \.NET Version 3 API Reference](http://docs.aws.amazon.com/sdkfornet/v3/apidocs/Index.html)\. 
 
 ## Running the Amazon S3 \.NET Code Examples<a name="TestingDotNetApiSamples"></a>
 
-The easiest way to get started with the \.NET code examples is to install the AWS SDK for \.NET\. For more information, see [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)\. 
-
-**Note**  
-The examples in this guide are AWS SDK for \.NET version 2\.0 compliant\.
-
-The following tasks guide you through creating and testing the C\# code examples provided in this section\. 
-
-
-**General Process of Creating \.NET Code Examples**  
-
-|  |  | 
-| --- |--- |
-|  1  |  Create a credentials profile for your AWS credentials as described in the AWS SDK for \.NET topic [Configuring AWS Credentials](http://docs.aws.amazon.com/AWSSdkDocsNET/latest/DeveloperGuide/net-dg-config-creds.html)\.  | 
-|  2  |  Create a new Visual Studio project using the *AWS Empty Project* template\.   | 
-|  3  |  Replace the code in the project file, `Program.cs`, with the code in the section you are reading\.   | 
-|  4  |   Run the code\. Verify that the object is created using the AWS Management Console\. For more information about AWS Management Console, go to [https://aws\.amazon\.com/console/](https://aws.amazon.com/console/)\.  | 
+The \.NET code examples in this guide are compatible with the AWS SDK for \.NET version 3\.0\. For information about setting up and running the code examples, see [Getting Started with the AWS SDK for \.NET](http://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-setup.html) in the *AWS SDK for \.NET Developer Guide*\. 

@@ -19,7 +19,7 @@ For more information about multipart uploads, see [Multipart Upload Overview](mp
 + [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)
 + [Uploading Objects Using Pre\-Signed URLs](PresignedUrlUploadObject.md)
 
-When uploading an object, you can optionally request that Amazon S3 encrypt it before saving it on disks in its data centers and decrypt it when you download it\. For more information, see [Protecting Data Using Encryption](UsingEncryption.md)\. 
+When uploading an object, you can optionally request that Amazon S3 encrypt it before saving it to disk, and decrypt it when you download it\. For more information, see [Protecting Data Using Encryption](UsingEncryption.md)\. 
 
 **Related Topics**  
 [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)
