@@ -20,6 +20,12 @@ Then the ARN format for Amazon S3 resources reduces to the following:
 ```
 
 The following are examples of Amazon S3 resource ARNs\. 
++ This ARN identifies the bucket `examplebucket` for bucket level-only actions\.
+
+  ```
+  1. arn:aws:s3:::examplebucket
+  ```
+
 + This ARN identifies the `/developers/design_info.doc` object in the `examplebucket` bucket\.
 
   ```
