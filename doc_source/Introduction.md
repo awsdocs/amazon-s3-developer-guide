@@ -69,9 +69,11 @@ You can choose the geographical region where Amazon S3 will store the buckets yo
 
 Amazon S3 provides read\-after\-write consistency for PUTS of new objects in your S3 bucket in all regions with one caveat\. The caveat is that if you make a HEAD or GET request to the key name \(to find if the object exists\) before creating the object, Amazon S3 provides eventual consistency for read\-after\-write\. 
 
+PUTS of new objects are atomic\. For example, as you PUT to a new key, a concurrent read will either not find the key or it will return the complete data, but it will never read corrupted or partial data\.  
+
 Amazon S3 offers eventual consistency for overwrite PUTS and DELETES in all regions\. 
 
- Updates to a single key are atomic\. For example, if you PUT to an existing key, a subsequent read might return the old data or the updated data, but it will never write corrupted or partial data\. 
+ Updates to a single key are atomic\. For example, if you PUT to an existing key, a subsequent read might return the old data or the updated data, but it will never read corrupted or partial data\.  
 
 Amazon S3 achieves high availability by replicating data across multiple servers within Amazon's data centers\. If a PUT request is successful, your data is safely stored\. However, information about the changes must replicate across Amazon S3, which can take some time, and so you might observe the following behaviors:
 +  A process writes a new object to Amazon S3 and immediately lists keys within its bucket\. Until the change is fully propagated, the object might not appear in the list\. 
