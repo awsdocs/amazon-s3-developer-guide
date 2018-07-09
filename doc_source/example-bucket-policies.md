@@ -197,7 +197,7 @@ The following example bucket policy grants a CloudFront Origin Identity permissi
  5.      {
  6.        "Sid":" Grant a CloudFront Origin Identity access to support private content",
  7.        "Effect":"Allow",
- 8.        "Principal":{"CanonicalUser":"79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be"},
+ 8.        "Principal":{"CanonicalUser":"79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be4d501a94b759d54c10c75084ae82391e"},
  9.        "Action":"s3:GetObject",
 10.        "Resource":"arn:aws:s3:::example-bucket/*"
 11.      }
