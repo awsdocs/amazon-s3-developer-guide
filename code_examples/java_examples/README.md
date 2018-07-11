@@ -21,26 +21,26 @@ Prerequisites
 
 To build and run these examples, you'll need:
 
-* [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/>) (downloaded and extracted somewhere on
+* [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/) (downloaded and extracted somewhere on
   your machine)
 * AWS credentials, either configured in a local AWS credentials file or by setting the
   ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` environment variables.
 
 For information about how to set AWS credentials for use with the AWS SDK for Java,
-see [Set up AWS Credentials and Region for Development](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html>) in the *AWS
+see [Set up AWS Credentials and Region for Development](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html) in the *AWS
 Java Developer Guide*.
 
 Running the Examples
 ====================
 
 To run the Java examples, you will need to create a Java project in your preferred Java development environment.
-For more information, see [Getting Started](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/getting-started.html>). You can also use the
-[AWS Toolkit for Eclipse](https://docs.aws.amazon.com/toolkit-for-eclipse/v1/user-guide/welcome.html>).
+For more information, see [Getting Started](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/getting-started.html). You can also use the
+[AWS Toolkit for Eclipse](https://docs.aws.amazon.com/toolkit-for-eclipse/v1/user-guide/welcome.html).
 
 **IMPORTANT**
 
    The examples perform AWS operations for the account and region for which you've specified
-   credentials, and you may incur AWS service charges by running them. Please visit the [AWS Pricing](https://aws.amazon.com/pricing/>) page for details about the charges you can
+   credentials, and you may incur AWS service charges by running them. Please visit the [AWS Pricing](https://aws.amazon.com/pricing/) page for details about the charges you can
    expect for a given service and operation.
 
    Some of these examples perform *destructive* operations on AWS resources, such as deleting an
