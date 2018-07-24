@@ -50,5 +50,5 @@ For more information, see [Getting Started](https://docs.aws.amazon.com/sdk-for-
 
 All of the examples require replacing certain configuration values in the source code. These values
 are specified as String variables at the beginning of each example, and begin and end with three stars
-(for example, "\*\*\* Client region \*\*\*"). The source code comments and developer guide provide
+(for example, "\*\*\* Client region \*\*\*"). The source-code comments and developer guide provide
 further information.
