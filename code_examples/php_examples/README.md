@@ -21,25 +21,25 @@ Prerequisites
 
 To build and run these examples, you'll need:
 
-* [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/>) (downloaded and extracted somewhere on
+* [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/) (downloaded and extracted somewhere on
   your machine)
 * AWS credentials, either configured in a local AWS credentials file or by setting the
   ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` environment variables.
 
 For information about how to set AWS credentials for use with the AWS SDK for PHP,
-see [Credentials for the AWS SDK for PHP Version 3 ](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/guide_credentials.html>) in the *AWS
+see [Credentials for the AWS SDK for PHP Version 3 ](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/guide_credentials.html) in the *AWS
 SDK for PHP Developer Guide*.
 
 Running the Examples
 ====================
 
 To run the PHP examples, you will need to create a PHP page in your preferred development environment.
-For more information, see [Getting Started](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/getting-started_index.html>). 
+For more information, see [Getting Started](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/getting-started_index.html). 
 
 **IMPORTANT**
 
    The examples perform AWS operations for the account and region for which you've specified
-   credentials, and you may incur AWS service charges by running them. Please visit the [AWS Pricing](https://aws.amazon.com/pricing/>) page for details about the charges you can
+   credentials, and you may incur AWS service charges by running them. Please visit the [AWS Pricing](https://aws.amazon.com/pricing/) page for details about the charges you can
    expect for a given service and operation.
 
    Some of these examples perform *destructive* operations on AWS resources, such as deleting an
@@ -49,5 +49,5 @@ For more information, see [Getting Started](https://docs.aws.amazon.com/sdk-for-
 
 All of the examples require replacing certain configuration values in the source code. These values
 are specified as String variables at the beginning of each example, and begin and end with three stars
-(for example, "\*\*\* Your Bucket Name \*\*\*"). The source code comments and developer guide provide
+(for example, "\*\*\* Your Bucket Name \*\*\*"). The source-code comments and developer guide provide
 further information.
