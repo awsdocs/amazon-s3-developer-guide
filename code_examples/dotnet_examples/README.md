@@ -19,7 +19,7 @@ Prerequisites
 
 To build and run these examples, you need the following:
 
-* The [AWS SDK for .NET](https://aws.amazon.com/sdk-for-net/>) (downloaded and extracted somewhere on
+* The [AWS SDK for .NET](https://aws.amazon.com/sdk-for-net/) (downloaded and extracted somewhere on
   your machine).
 * AWS credentials, either configured in a local AWS credentials file or by setting the
   ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` environment variables. 
