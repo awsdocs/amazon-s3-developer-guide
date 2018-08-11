@@ -32,7 +32,7 @@ The following is an example of an S3 bucket policy that allows access to a speci
 10.                     "arn:aws:s3:::examplebucket/*"],
 11.        "Condition": {
 12.          "StringNotEquals": {
-13.            "aws:sourceVpce": "vpce-1a2b3c4d"
+13.            "aws:SourceVpce": "vpce-1a2b3c4d"
 14.          }
 15.        },
 16.        "Principal": "*"
@@ -58,7 +58,7 @@ You can create a bucket policy that restricts access to a specific VPC by using 
 10.                     "arn:aws:s3:::examplebucket/*"],
 11.        "Condition": {
 12.          "StringNotEquals": {
-13.            "aws:sourceVpc": "vpc-111bbb22"
+13.            "aws:SourceVpc": "vpc-111bbb22"
 14.          }
 15.        },
 16.        "Principal": "*"
