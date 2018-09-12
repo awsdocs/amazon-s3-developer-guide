@@ -11,6 +11,9 @@ You can use the AWS SDK for Java to manage cross\-origin resource sharing \(CORS
  For instructions on how to create and test a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -13,7 +13,7 @@ The following figure shows that Amazon S3 adds a unique version ID to an object 
 
 ## Using the Console<a name="add-obj-versioning-enabled-bucket-console"></a>
 
- For instructions, see [How Do I Upload an Object to an S3 Bucket? ](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the Amazon Simple Storage Service Console User Guide\. 
+ For instructions, see [How Do I Upload an Object to an S3 Bucket? ](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
 ## Using the AWS SDKs<a name="add-obj-versioning-enabled-bucket-sdk"></a>
 

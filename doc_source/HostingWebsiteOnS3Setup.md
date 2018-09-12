@@ -36,7 +36,7 @@ You can configure an Amazon S3 bucket to function like a website\. This example 
 
 1. Choose **Add Bucket Policy**\.
 
-1. Copy the following bucket policy, and then paste it in the Bucket Policy Editor\.
+1. To host a website, your bucket must have public read access\. It is intentional that everyone in the world will have read access to this bucket\. Copy the following bucket policy, and then paste it in the Bucket Policy Editor\. 
 
    ```
     1. {

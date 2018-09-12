@@ -8,6 +8,8 @@ In cross\-region replication, you have a source bucket on which you configure re
 + If requesting an object from the source bucket – Amazon S3 returns the `x-amz-replication-status` header if the object in your request is eligible for replication\. 
 
   For example, suppose that in your replication configuration, you specify the object prefix `TaxDocs` requesting Amazon S3 to replicate objects with the key name prefix `TaxDocs`\. Then, any objects you upload with this key name prefix—for example, `TaxDocs/document1.pdf`—are eligible for replication\. For any object request with this key name prefix, Amazon S3 returns the `x-amz-replication-status` header with one of the following values for the object's replication status: `PENDING`, `COMPLETED`, or `FAILED`\.
+**Note**  
+After you upload an object, if the object replication fails, there is no mechanism to retry the failed replications\. You must upload the object again for Amazon S3 to replicate the object\. 
 + If requesting an object from the destination bucket – Amazon S3 returns the `x-amz-replication-status` header with value `REPLICA` if the object in your request is a replica that Amazon S3 created\.
 
 You can find the object replication state in the console using the AWS CLI, or programmatically using the AWS SDK\. 

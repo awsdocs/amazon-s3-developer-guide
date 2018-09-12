@@ -7,7 +7,7 @@ You can host a static website on Amazon Simple Storage Service \(Amazon S3\)\. O
 + [Configuring a Bucket for Website Hosting](HowDoIWebsiteConfiguration.md)
 + [Example Walkthroughs \- Hosting Websites on Amazon S3](hosting-websites-on-s3-examples.md)
 
-To host a static website, you configure an Amazon S3 bucket for website hosting, and then upload your website content to the bucket\. The website is then available at the AWS Region\-specific website endpoint of the bucket, which is in one of the following formats:
+To host a static website, you configure an Amazon S3 bucket for website hosting, and then upload your website content to the bucket\. This bucket must have public read access\. It is intentional that everyone in the world will have read access to this bucket\. The website is then available at the AWS Region\-specific website endpoint of the bucket, which is in one of the following formats:
 
 ```
 <bucket-name>.s3-website-<AWS-region>.amazonaws.com

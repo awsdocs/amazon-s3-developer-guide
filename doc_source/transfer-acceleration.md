@@ -15,7 +15,7 @@ When using Transfer Acceleration, additional data transfer charges may apply\. F
 You might want to use Transfer Acceleration on a bucket for various reasons, including the following:
 + You have customers that upload to a centralized bucket from all over the world\.
 + You transfer gigabytes to terabytes of data on a regular basis across continents\.
-+ You underutilize the available bandwidth over the Internet when uploading to Amazon S3\.
++ You are unable to utilize all of your available bandwidth over the Internet when uploading to Amazon S3\.
 
 For more information about when to use Transfer Acceleration, see [Amazon S3 FAQs](https://aws.amazon.com/s3/faqs/#s3ta)\.
 

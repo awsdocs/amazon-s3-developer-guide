@@ -98,7 +98,7 @@ The following example user policy grants the `s3:CreateBucket`, `s3:ListAllMyBuc
 }
 ```
 
-If your user is going to use the console to view buckets and see the contents of any of these buckets, the user must have the `s3:ListAllMyBuckets` and `s3:GetBucketLocation` permissions\. For an example, see [An Example Walkthrough: Using user policies to control access to your bucket](walkthrough1.md)\.
+If your user is going to use the console to view buckets and see the contents of any of these buckets, the user must have the `s3:ListAllMyBuckets` and `s3:GetBucketLocation` permissions\. For an example, see "Policy for Console Access" at [Writing IAM Policies: How to Grant Access to an Amazon S3 Bucket](https://aws.amazon.com/blogs/security/writing-iam-policies-how-to-grant-access-to-an-amazon-s3-bucket/)\.
 
 ## Permissions Related to Bucket Subresource Operations<a name="using-with-s3-actions-related-to-bucket-subresources"></a>
 
@@ -111,7 +111,6 @@ This section provides a list of the permissions related to bucket subresource op
 | --- | --- | 
 | s3:DeleteBucketPolicy | [DELETE Bucket policy](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html) | 
 | s3:DeleteBucketWebsite | [DELETE Bucket website](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html) | 
-| s3:DeleteReplicationConfiguration | [DELETE Bucket replication](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEreplication.html) | 
 | s3:GetAccelerateConfiguration | [GET Bucket accelerate ](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETaccelerate.html) | 
 | s3:GetAnalyticsConfiguration | [GET Bucket analytics](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETAnalyticsConfig.html), [List Bucket Analytics Configurations ](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketListAnalyticsConfigs.html) | 
 | s3:GetBucketAcl | [GET Bucket acl](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETacl.html) | 
@@ -140,11 +139,11 @@ This section provides a list of the permissions related to bucket subresource op
 | s3:PutBucketTagging  | [DELETE Bucket tagging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html), [PUT Bucket tagging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTtagging.html) | 
 | s3:PutBucketVersioning | [PUT Bucket versioning](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html) | 
 | s3:PutBucketWebsite | [PUT Bucket website](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html) | 
-| s3:PutEncryptionConfiguration | [ PUT Bucket encryption](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html) and [ DELETE Bucket encryption](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEencryption.html)  | 
+| s3:PutEncryptionConfiguration | [ PUT Bucket encryption](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html), [ DELETE Bucket encryption](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEencryption.html)  | 
 | s3:PutInventoryConfiguration | [PUT Bucket inventory](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTInventoryConfig.html), [DELETE Bucket inventory ](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEInventoryConfiguration.html) | 
-| s3:PutLifecycleConfiguration | [PUT Bucket lifecycle](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html) | 
+| s3:PutLifecycleConfiguration | [PUT Bucket lifecycle](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html), [DELETE Bucket lifecycle](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html)  | 
 | s3:PutMetricsConfiguration | [PUT Bucket metrics](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html), [DELETE Bucket metrics ](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTDeleteBucketMetricsConfiguration.html) | 
-| s3:PutReplicationConfiguration | [PUT Bucket replication](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) | 
+| s3:PutReplicationConfiguration | [PUT Bucket replication](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html), [DELETE Bucket replication](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEreplication.html) | 
 
 The following user policy grants the `s3:GetBucketAcl` permission on the `examplebucket` bucket to user Dave\.
 

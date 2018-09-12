@@ -4,6 +4,9 @@
 The following example shows how to upload an object using the high\-level multipart\-upload Java API \(the `TransferManager` class\)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.File;
 
 import com.amazonaws.AmazonServiceException;

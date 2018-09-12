@@ -59,6 +59,8 @@ An object is uniquely identified within a bucket by a key \(name\) and a version
 
 A key is the unique identifier for an object within a bucket\. Every object in a bucket has exactly one key\. Because the combination of a bucket, key, and version ID uniquely identify each object, Amazon S3 can be thought of as a basic data map between "bucket \+ key \+ version" and the object itself\. Every object in Amazon S3 can be uniquely addressed through the combination of the web service endpoint, bucket name, key, and optionally, a version\. For example, in the URL http://doc\.s3\.amazonaws\.com/2006\-03\-01/AmazonS3\.wsdl, "doc" is the name of the bucket and "2006\-03\-01/AmazonS3\.wsdl" is the key\.
 
+ For more information about object keys, see [Object Keys](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)\. 
+
 ### Regions<a name="Regions"></a>
 
 You can choose the geographical region where Amazon S3 will store the buckets you create\. You might choose a region to optimize latency, minimize costs, or address regulatory requirements\. Objects stored in a region never leave the region unless you explicitly transfer them to another region\. For example, objects stored in the EU \(Ireland\) region never leave it\. 
@@ -71,7 +73,7 @@ Amazon S3 provides read\-after\-write consistency for PUTS of new objects in you
 
 Amazon S3 offers eventual consistency for overwrite PUTS and DELETES in all regions\. 
 
- Updates to a single key are atomic\. For example, if you PUT to an existing key, a subsequent read might return the old data or the updated data, but it will never write corrupted or partial data\. 
+ Updates to a single key are atomic\. For example, if you PUT to an existing key, a subsequent read might return the old data or the updated data, but it will never return corrupted or partial data\. 
 
 Amazon S3 achieves high availability by replicating data across multiple servers within Amazon's data centers\. If a PUT request is successful, your data is safely stored\. However, information about the changes must replicate across Amazon S3, which can take some time, and so you might observe the following behaviors:
 +  A process writes a new object to Amazon S3 and immediately lists keys within its bucket\. Until the change is fully propagated, the object might not appear in the list\. 

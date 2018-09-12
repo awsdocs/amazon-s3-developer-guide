@@ -4,7 +4,10 @@
 The following C\# example initiates a request to restore an archived object for 2 days\. Amazon S3 maintains the restoration status in the object metadata\. After initiating the request, the example retrieves the object metadata and checks the value of the `RestoreInProgress` property\. For instructions on creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```
-using Amazon.S3;
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
+﻿using Amazon.S3;
 using Amazon.S3.Model;
 using System;
 using System.Threading.Tasks;

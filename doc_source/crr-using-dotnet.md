@@ -5,7 +5,10 @@ When the source and destination buckets are owned by two different AWS accounts,
 The following AWS SDK for \.NET code example first adds replication configuration to a bucket and then retrieves it\. You need to update the code by providing your bucket names and IAM role ARN\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
-using Amazon.S3;
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
+﻿using Amazon.S3;
 using Amazon.S3.Model;
 using System;
 using System.Threading.Tasks;

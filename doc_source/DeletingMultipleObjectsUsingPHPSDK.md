@@ -4,7 +4,7 @@ This topic shows how to use classes from version 3 of the AWS SDK for PHP to del
 
  This topic assumes that you are already following the instructions for [Using the AWS SDK for PHP and Running PHP Examples](UsingTheMPphpAPI.md) and have the AWS SDK for PHP properly installed\.
 
-**Example Deleting Multiiple Objects from a Non\-Versioned Bucket\)**  
+**Example Deleting Multiple Objects from a Non\-Versioned Bucket**  
 The following PHP example uses the `deleteObjects()` method to delete multiple objects from a bucket that is not version\-enabled\.  
  For information about running the PHP examples in this guide, see [Running PHP Examples](UsingTheMPphpAPI.md#running-php-samples)\.   
 
@@ -39,13 +39,15 @@ $keys = $s3->listObjects([
 // 3. Delete the objects.
 $s3->deleteObjects([
     'Bucket'  => $bucket,
-    'Objects' => array_map(function ($key) {
-        return ['Key' => $key];
-    }, $keys),
+    'Delete' => [
+        'Objects' => array_map(function ($key) {
+            return ['Key' => $key];
+        }, $keys)
+    ],
 ]);
 ```
 
-**Example Deleting Multiple Objects from a Version\-enabled Bucket\)**  
+**Example Deleting Multiple Objects from a Version\-enabled Bucket**  
 The following PHP example uses the `deleteObjects()` method to delete multiple objects from a version\-enabled bucket\.  
  For information about running the PHP examples in this guide, see [Running PHP Examples](UsingTheMPphpAPI.md#running-php-samples)\.   
 
@@ -86,12 +88,13 @@ $versions = $s3->listObjectVersions(['Bucket' => $bucket])
 // 4. Delete the object versions.
 $s3->deleteObjects([
     'Bucket'  => $bucket,
-    'Objects' => array_map(function ($version) {
-        return [
-            'Key'       => $version['Key'],
-            'VersionId' => $version['VersionId']
-        ];
-    }, $versions),
+    'Delete' => [
+        'Objects' => array_map(function ($version) {
+          return [
+              'Key'       => $version['Key'],
+              'VersionId' => $version['VersionId']
+        }, $versions),
+    ],       
 ]);
 
 echo "The following objects were deleted successfully:". PHP_EOL;

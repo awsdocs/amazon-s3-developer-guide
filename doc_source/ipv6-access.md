@@ -16,7 +16,7 @@ The following are some things you should know before trying to access a bucket o
 + The client and the network accessing the bucket must be enabled to use IPv6\. 
 + Both virtual hosted\-style and path style requests are supported for IPv6 access\. For more information, see [Amazon S3 Dual\-Stack Endpoints](dual-stack-endpoints.md#dual-stack-endpoints-description)\.
 + If you use source IP address filtering in your AWS Identity and Access Management \(IAM\) user or bucket policies, you need to update the policies to include IPv6 address ranges\. For more information, see [Using IPv6 Addresses in IAM Policies](#ipv6-access-iam)\.
-+ When using IPv6, server access log files output IP addresses in an IPv6 format\. You need to update existing tools, scripts, and software that you use to parse Amazon S3 log files so that they can parse the IPv6 formatted `Remote IP` addresses\. For more information, see [Server Access Log Format](LogFormat.md) and [Server Access Logging](ServerLogs.md)\. 
++ When using IPv6, server access log files output IP addresses in an IPv6 format\. You need to update existing tools, scripts, and software that you use to parse Amazon S3 log files so that they can parse the IPv6 formatted `Remote IP` addresses\. For more information, see [Server Access Log Format](LogFormat.md) and [Amazon S3 Server Access Logging](ServerLogs.md)\. 
 **Note**  
 If you experience issues related to the presence of IPv6 addresses in log files, contact [AWS Support](https://aws.amazon.com/premiumsupport/)\.
 
@@ -100,7 +100,7 @@ You get back information similar to the following example\. If you are connected
 > Host: s3.dualstack.us-west-2.amazonaws.com
 ```
 
-If you are using Microsoft Windows 7, you can test whether you can access a dual\-stack endpoint over IPv6 or IPv4 by using the `ping` command as shown in the following example\.
+If you are using Microsoft Windows 7 or Windows 10, you can test whether you can access a dual\-stack endpoint over IPv6 or IPv4 by using the `ping` command as shown in the following example\.
 
 ```
 ping ipv6.s3.dualstack.us-west-2.amazonaws.com 

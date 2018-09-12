@@ -51,7 +51,7 @@ The following transitions are not supported:
 Using lifecycle configuration, you can transition objects to the GLACIER storage class—that is, archive data to Amazon Glacier, a lower\-cost storage solution\. 
 
 **Important**  
-When you choose the GLACIER storage class, Amazon S3 uses the low\-cost Amazon Glacier service to store the objects\. Although the objects are stored in Amazon Glacier, you manage them in Amazon S3, not directly through Amazon Glacier\.
+When you choose the GLACIER storage class, Amazon S3 uses the low\-cost Amazon Glacier service to store the objects\. Although the objects are stored in Amazon Glacier, these remain Amazon S3 objects that you manage in Amazon S3, and you cannot access them directly through Amazon Glacier\.
 
 Before you archive objects, review the following sections for relevant considerations\.
 
@@ -69,42 +69,7 @@ The following are the general considerations for you to consider before you arch
 
    
 
-  Note that object restoration from an archive can take up to five hours\. 
-
-   
-
-  You can restore an object by using the Amazon S3 console or programmatically by using the AWS SDKs wrapper libraries or the Amazon S3 REST API in your code\. For more information, see [POST Object restore](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html)\.
-
-   
-+ The transition of objects to the GLACIER storage class is one\-way\.
-
-   
-
-  You cannot use a lifecycle configuration rule to convert the storage class of an object from GLACIER to STANDARD or REDUCED\_REDUNDANCY\. If you want to change the storage class of an already archived object to either STANDARD or REDUCED\_REDUNDANCY, you must use the restore operation to make a temporary copy first\. Then use the copy operation to overwrite the object as a STANDARD, STANDARD\_IA, or REDUCED\_REDUNDANCY object\.
-
-   
-+ The GLACIER storage class objects are visible and available only through Amazon S3, not through Amazon Glacier\.
-
-   
-
-  Amazon S3 stores the archived objects in Amazon Glacier\. However, these are Amazon S3 objects, and you can access them only by using the Amazon S3 console or the Amazon S3 API\. You cannot access the archived objects through the Amazon Glacier console or the Amazon Glacier API\.
-
-### Cost Considerations<a name="glacier-pricing-considerations"></a>
-
-If you are planning to archive infrequently accessed data for a period of months or years, the GLACIER storage class will usually reduce your storage costs\. You should, however, consider the following in order to ensure that the GLACIER storage class is appropriate for you:
-+ Objects in the GLACIER storage class are not available in real time\.
-
-   
-
-  Archived objects are Amazon S3 objects, but before you can access an archived object, you must first restore a temporary copy of it\. The restored object copy is available only for the duration you specify in the restore request\. After that, Amazon S3 deletes the temporary copy, and the object remains archived in Amazon Glacier\. 
-
-   
-
-  Note that object restoration from an archive can take up to five hours\. 
-
-   
-
-  You can restore an object by using the Amazon S3 console or programmatically by using the AWS SDKs wrapper libraries or the Amazon S3 REST API in your code\. For more information, see [POST Object restore](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html)\.
+  You can restore an object by using the Amazon S3 console or programmatically by using the AWS SDKs wrapper libraries or the Amazon S3 REST API in your code\. For more information, see [Restoring Archived Objects](restoring-objects.md)\.
 
    
 + The transition of objects to the GLACIER storage class is one\-way\.
@@ -114,7 +79,7 @@ If you are planning to archive infrequently accessed data for a period of months
   You cannot use a lifecycle configuration rule to convert the storage class of an object from GLACIER to STANDARD or REDUCED\_REDUNDANCY storage classes\. If you want to change the storage class of an archived object to either STANDARD or REDUCED\_REDUNDANCY, you must use the restore operation to make a temporary copy first\. Then use the copy operation to overwrite the object as a STANDARD, STANDARD\_IA, ONEZONE\_IA, or REDUCED\_REDUNDANCY object\.
 
    
-+ GLACIER storage class objects are visible and available only through Amazon S3, not through Amazon Glacier\.
++ The GLACIER storage class objects are visible and available only through Amazon S3, not through Amazon Glacier\.
 
    
 
@@ -154,9 +119,7 @@ The Amazon S3 product detail page provides pricing information and example calcu
 
 ### Restoring Archived Objects<a name="restore-glacier-objects-concepts"></a>
 
-Archived objects are not accessible in real time\. You must first initiate a restore request and then wait until a temporary copy of the object is available for the duration that you specify in the request\. Restore jobs are typically completed in three to five hours, so it is important that you archive only objects that you will not need to access in real time\. 
-
-After you receive a temporary copy of the restored object, the object's storage class remains GLACIER \(a GET or HEAD request will return `GLACIER` as the storage class\)\. 
+Archived objects are not accessible in real time\. You must first initiate a restore request and then wait until a temporary copy of the object is available for the duration that you specify in the request\. After you receive a temporary copy of the restored object, the object's storage class remains GLACIER \(a GET or HEAD request will return `GLACIER` as the storage class\)\. 
 
 **Note**  
 When you restore an archive, you are paying for both the archive \(GLACIER rate\) and a copy you restored temporarily \(REDUCED\_REDUNDANCY storage rate\)\. For information about pricing, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 

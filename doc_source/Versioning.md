@@ -26,9 +26,9 @@ The versioning state applies to all \(never some\) of the objects in that bucket
 
 You can configure bucket versioning using any of the following methods:
 + Configure versioning using the Amazon S3 console\.
-+ Configure versioning programmatically using the AWS SDKs
++ Configure versioning programmatically using the AWS SDKs\.
 
-  Both the console and the SDKs call the REST API Amazon S3 provides to manage versioning\. 
+  Both the console and the SDKs call the REST API that Amazon S3 provides to manage versioning\. 
 **Note**  
 If you need to, you can also make the Amazon S3 REST API calls directly from your code\. However, this can be cumbersome because it requires you to write code to authenticate your requests\. 
 
@@ -55,7 +55,7 @@ For an example of configuring versioning, see [Examples of Enabling Bucket Versi
 
 ## MFA Delete<a name="MultiFactorAuthenticationDelete"></a>
 
-You can optionally add another layer of security by configuring a bucket to enable MFA \(Multi\-Factor Authentication\) Delete, which requires additional authentication for either of the following operations\.
+You can optionally add another layer of security by configuring a bucket to enable MFA \(multi\-factor authentication\) Delete, which requires additional authentication for either of the following operations:
 + Change the versioning state of your bucket
 + Permanently delete an object version
 
@@ -65,7 +65,7 @@ You can optionally add another layer of security by configuring a bucket to enab
 
 MFA Delete thus provides added security in the event, for example, your security credentials are compromised\. 
 
-To enable or disable MFA delete, you use the same API that you use to configure versioning on a bucket\. Amazon S3 stores the MFA Delete configuration in the same *versioning* subresource that stores the bucket's versioning status\.
+To enable or disable MFA Delete, you use the same API that you use to configure versioning on a bucket\. Amazon S3 stores the MFA Delete configuration in the same *versioning* subresource that stores the bucket's versioning status\.
 
 ```
 <VersioningConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"> 
@@ -84,7 +84,7 @@ MFA Delete and MFA\-protected API access are features intended to provide protec
 For more information on how to purchase and activate an authentication device, see [https://aws\.amazon\.com/iam/details/mfa/](https://aws.amazon.com/iam/details/mfa/)\. 
 
 **Note**  
-The bucket owner, the AWS account that created the bucket \(root account\), and all authorized IAM users can enable versioning, but only the bucket owner \(root account\) can enable MFA delete\.
+The bucket owner, the AWS account that created the bucket \(root account\), and all authorized IAM users can enable versioning, but only the bucket owner \(root account\) can enable MFA Delete\.
 
 ## Related Topics<a name="versioning-related-topics"></a>
 

@@ -3,6 +3,9 @@
 The following example shows how to use the AWS SDK for Java to set tags for a new object and retrieve or replace tags for an existing object\. For more information about object tagging, see [Object Tagging](object-tagging.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

@@ -14,7 +14,7 @@ The introductory examples \(see [Example Walkthroughs: Managing Access to Your A
 
 1. Set the default profile\. 
 
-   You will store user credentials in the AWS CLI config file\. Create a default profile in the config file using your AWS account credentials\. 
+   You will store user credentials in the AWS CLI config file\. Create a default profile in the config file using your AWS account credentials\. See [Configuration and Credential Files](http://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html) for instructions on finding and editing your AWS CLI config file\.
 
    ```
    [default]

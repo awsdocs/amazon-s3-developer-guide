@@ -4,7 +4,7 @@ In addition to replication configuration, Amazon S3 supports several other bucke
 + Configure versioning on a bucket\. For more information, see [Using Versioning](Versioning.md)\.
 + Configure a bucket for website hosting\. For more information, see [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\.
 + Configure bucket access via a bucket policy or ACL\. For more information, see [Using Bucket Policies and User Policies](using-iam-policies.md) and see [Managing Access with ACLs](S3_ACLs_UsingACLs.md)\.
-+ Configure a bucket to store access logs\. For more information, [Server Access Logging](ServerLogs.md)\.
++ Configure a bucket to store access logs\. For more information, [Amazon S3 Server Access Logging](ServerLogs.md)\.
 + Configure the lifecycle for objects in the bucket\. For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
 This topic explains how bucket replication configuration influences the behavior of other bucket configurations\.
@@ -29,7 +29,7 @@ Both the source and destination buckets must be versioning\-enabled when you con
 
 Note the following:
 + If you have Amazon S3 delivering logs to a bucket that also has replication enabled, Amazon S3 replicates the log objects\.
-+ If you have server access logs \([Server Access Logging](ServerLogs.md)\) or AWS CloudTrail Logs \( [Logging Amazon S3 API Calls by Using AWS CloudTrail](cloudtrail-logging.md)\) enabled on your source or destination bucket, Amazon S3 includes the CRR\-related requests in the logs\. For example, Amazon S3 logs each object that it replicates\. 
++ If you have server access logs \([Amazon S3 Server Access Logging](ServerLogs.md)\) or AWS CloudTrail Logs \( [Logging Amazon S3 API Calls by Using AWS CloudTrail](cloudtrail-logging.md)\) enabled on your source or destination bucket, Amazon S3 includes the CRR\-related requests in the logs\. For example, Amazon S3 logs each object that it replicates\. 
 
 ## CRR and Destination Region<a name="crr-and-dest-region"></a>
 

@@ -61,9 +61,7 @@ Follow the steps to create and subscribe to an Amazon Simple Notification Servic
       ],
       "Resource": "SNS-topic-ARN",
       "Condition": {
-         "ArnLike": {          
-         "aws:SourceArn": "arn:aws:s3:*:*:bucket-name"    
-       }
+         "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
       }
      }
     ]
@@ -88,7 +86,7 @@ Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Ama
 
    ```
    {
-    "Version": "2008-10-17",
+    "Version": "2012-10-17",
     "Id": "example-ID",
     "Statement": [
      {
@@ -102,16 +100,14 @@ Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Ama
       ],
       "Resource": "SQS-queue-ARN",
       "Condition": {
-         "ArnLike": {          
-         "aws:SourceArn": "arn:aws:s3:*:*:bucket-name"    
-       }
+         "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
       }
      }
     ]
    }
    ```
 
-1. \(Optional\) If the SQS queue is SSE enabled, add the following policy to the associated KMS key\.
+1. \(Optional\) If the Amazon SQS queue is server\-side encryption \(SSE\) enabled, add the following policy to the associated custom AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. You must add the policy to a custom CMK because the default AWS managed CMK for Amazon SQS cannot be modified\. For more information about using SSE for Amazon SQS with AWS KMS, see [Protecting Data Using Server\-Side Encryption \(SSE\) and AWS KMS](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html)\. 
 
    ```
    {
@@ -163,7 +159,10 @@ The following C\# code example provides a complete code listing that adds a noti
 **Example**  
 
 ```
-using Amazon.S3;
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
+﻿using Amazon.S3;
 using Amazon.S3.Model;
 using System;
 using System.Collections.Generic;
@@ -231,6 +230,9 @@ The following example shows how to add a notification configuration to a bucket\
 **Example**  
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.IOException;
 import java.util.EnumSet;
 

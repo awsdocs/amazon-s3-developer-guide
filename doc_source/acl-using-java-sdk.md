@@ -8,6 +8,9 @@ This section provides examples of how to configure access control list \(ACL\) g
 This example creates a bucket\. In the request, the example specifies a canned ACL that grants the Log Delivery group permission to write logs to the bucket\.   
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -86,6 +89,9 @@ This example updates the ACL on an object\. The example performs the following t
 + Saves the ACL to the object
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.IOException;
 
 import com.amazonaws.AmazonServiceException;

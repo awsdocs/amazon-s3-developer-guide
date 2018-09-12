@@ -2,11 +2,11 @@
 
 With Amazon S3 Select, you can use simple structured query language \(SQL\) statements to filter the contents of Amazon S3 objects and retrieve just the subset of data that you need\. By using Amazon S3 Select to filter this data, you can reduce the amount of data that Amazon S3 transfers, which reduces the cost and latency to retrieve this data\.
 
-Amazon S3 Select works on objects stored in CSV or JSON format\. It also works with objects that are compressed with GZIP, and server\-side encrypted objects\. You can specify the format of the results as either CSV or JSON, and you can determine how the records in the result are delimited\.
+Amazon S3 Select works on objects stored in CSV, JSON, or Apache Parquet format\. It also works with objects that are compressed with GZIP or BZIP2 \(for CSV and JSON objects only\), and server\-side encrypted objects\. You can specify the format of the results as either CSV or JSON, and you can determine how the records in the result are delimited\.
 
 You pass SQL expressions to Amazon S3 in the request\. Amazon S3 Select supports a subset of SQL\. For more information about the SQL elements that are supported by Amazon S3 Select, see [SQL Reference for Amazon S3 Select and Amazon Glacier Select](s3-glacier-select-sql-reference.md)\.
 
-You can perform SQL queries using AWS SDKs, the SELECT Object Content REST API, the AWS Command Line Interface \(AWS CLI\), or the Amazon S3 console\. The Amazon S3 console limits the amount of data returned to 40 MB\. To retrieve more data, use the AWS Command Line Interface or the API\.
+You can perform SQL queries using AWS SDKs, the SELECT Object Content REST API, the AWS Command Line Interface \(AWS CLI\), or the Amazon S3 console\. The Amazon S3 console limits the amount of data returned to 40 MB\. To retrieve more data, use the AWS CLI or the API\.
 
 ## Requirements and Limits<a name="selecting-content-from-objects-requirements-and-limits"></a>
 
@@ -17,6 +17,14 @@ The following are requirements for using Amazon S3 Select:
 The following limits apply when using Amazon S3 Select:
 + The maximum length of a SQL expression is 256 KB\.
 + The maximum length of a record in the result is 1 MB\.
+
+Additional limitations apply when using Amazon S3 Select with Parquet objects:
++ Amazon S3 Select supports only columnar compression using GZIP or Snappy\. Amazon S3 Select doesn't support whole\-object compression for Parquet objects\.
++ Amazon S3 Select doesn't support Parquet output\. You must specify the output format as CSV or JSON\.
++ The maximum uncompressed block size is 256 MB\.
++ The maximum number of columns is 100\.
++ You must use the data types specified in the object's schema\.
++ Selecting on a repeated field returns only the last value\.
 
 ## Constructing a Request<a name="selecting-content-from-objects-contructing-request"></a>
 

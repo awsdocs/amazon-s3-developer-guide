@@ -20,7 +20,7 @@ There are no new charges for using default encryption for S3 buckets\. Requests 
 This section describes how to set up Amazon S3 default encryption\. You can use the AWS SDKs, the Amazon S3 REST API, the AWS Command Line Interface \(AWS CLI\), or the Amazon S3 console to enable the default encryption\. The easiest way to set up default encryption for an S3 bucket is by using the AWS Management Console\.
 
 You can set up default encryption on a bucket using any of the following ways:
-+ Use the Amazon S3 console\. For more information, see [How Do I Create an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
++ Use the Amazon S3 console\. For more information, see [How Do I Enable Default Encryption for an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/default-bucket-encryption.html) in the *Amazon Simple Storage Service Console User Guide*\.
 + Use the following REST APIs:
   + Use the REST API [PUT Bucket encryption](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html) operation to enable default encryption and to set the type of server\-side encryption to use—SSE\-S3 or SSE\-KMS\.
   + Use the REST API [DELETE Bucket encryption](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEencryption.html) to disable the default encryption of objects\. After you disable default encryption, Amazon S3 encrypts objects only if `PUT` requests include the encryption information\. For more information, see [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) and [PUT Object \- Copy](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\.

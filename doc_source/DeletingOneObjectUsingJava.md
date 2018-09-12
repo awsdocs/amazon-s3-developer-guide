@@ -10,6 +10,9 @@ For more information about versioning, see [Object Versioning](ObjectVersioning.
 The following example deletes an object from a bucket\. The example assumes that the bucket is not versioning\-enabled and the object doesn't have any version IDs\. In the delete request, you specify only the object key and not a version ID\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.IOException;
 
 import com.amazonaws.AmazonServiceException;
@@ -58,6 +61,9 @@ The following example deletes an object from a versioned bucket\. The example de
 You can get the version IDs of an object by sending a `ListVersions` request\.
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.IOException;
 
 import com.amazonaws.AmazonServiceException;

@@ -17,9 +17,9 @@ This section provides examples of lifecycle configuration\. Each example shows h
 Each lifecycle rule includes a filter that you can use to identify a subset of objects in your bucket to which the lifecycle rule applies\. The following lifecycle configurations show examples of how you can specify a filter\.
 + In this lifecycle configuration rule, the filter specifies a key prefix \(`tax/`\)\. Therefore, the rule applies to objects with key name prefix `tax/`, such as `tax/doc1.txt` and `tax/doc2.txt`
 
-  The rule specifies two actions that request Amazon S3 to do the following:
+  The rule specifies two actions that direct Amazon S3 to do the following:
   + Transition objects to the GLACIER storage class 365 days \(one year\) after creation\.
-  + Delete objects \(the `Expiration` action\) objects 3650 days \(10 years\) after creation\.
+  + Delete objects \(the `Expiration` action\) 3650 days \(10 years\) after creation\.
 
   ```
   <LifecycleConfiguration>

@@ -51,10 +51,10 @@ We recommend the following:
 The `GLACIER` storage class is suitable for archiving data where data access is infrequent\. Archived objects are not available for real\-time access\. You must first restore the objects before you can access them\. For more information, see [Restoring Archived Objects](restoring-objects.md)\. The storage class offers same durability, resiliency as the STANDARD storage class\.  
 
 **Important**  
-When you choose the GLACIER storage class, Amazon S3 uses the low\-cost Amazon Glacier service to store the objects\. Although the objects are stored in Amazon Glacier, you manage them in Amazon S3, not directly through Amazon Glacier\.
+When you choose the GLACIER storage class, Amazon S3 uses the low\-cost Amazon Glacier service to store the objects\. Although the objects are stored in Amazon Glacier, these remain Amazon S3 objects that you manage in Amazon S3, and you cannot access them directly through Amazon Glacier\.
 
 Note the following about the GLACIER storage class:
-+ You cannot specify GLACIER as the storage class at the time that you create an object\. You create GLACIER objects by first uploading objects using as the storage class\. Then, you transition these objects to the GLACIER storage class using lifecycle management\. For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
++ You cannot specify GLACIER as the storage class at the time that you create an object\. You create GLACIER objects by first uploading objects using STANDARD, RRS, STANDARD\_IA, or ONEZONE\_IA as the storage class\. Then you transition these objects to the GLACIER storage class using lifecycle management\. For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
    
 + You must first restore the GLACIER objects before you can access them \(STANDARD, RRS, STANDARD\_IA, and ONEZONE\_IA objects are available for anytime access\)\. For more information, [Transitioning to the GLACIER Storage Class \(Object Archival\)](lifecycle-transition-general-considerations.md#before-deciding-to-archive-objects)\.

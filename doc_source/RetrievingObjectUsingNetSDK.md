@@ -1,6 +1,6 @@
 # Get an Object Using the AWS SDK for \.NET<a name="RetrievingObjectUsingNetSDK"></a>
 
-When you download an object, you get all of object's metadata and a stream from which to read the contents\. You should read the content of the stream as quickly as possible because the data is streamed directly from Amazon S3 and your network connection will remain open until you read all the data or close the input stream\. You do the following to get an object:
+When you download an object, you get all of the object's metadata and a stream from which to read the contents\. You should read the content of the stream as quickly as possible because the data is streamed directly from Amazon S3 and your network connection will remain open until you read all the data or close the input stream\. You do the following to get an object:
 + Execute the `getObject` method by providing bucket name and object key in the request\.
 + Execute one of the `GetObjectResponse` methods to process the stream\.
 
@@ -38,7 +38,10 @@ The following C\# code example retrieves an object from an Amazon S3 bucket\. Fr
 For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```
-using Amazon.S3;
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
+﻿using Amazon.S3;
 using Amazon.S3.Model;
 using System;
 using System.IO;

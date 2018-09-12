@@ -51,8 +51,8 @@ All the tasks of creating users and granting permissions are done in the AWS Man
       1. Note down the **IAM User Sign\-In URL** for AccountAadmin\. You will need to use this URL when signing in to the AWS Management Console\. For more information about where to find it, see [How Users Sign in to Your Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_how-users-sign-in.html) in *IAM User Guide*\. Note down the URL for each of the accounts\.
 
 1. Set up either the AWS Command Line Interface \(CLI\) or the AWS Tools for Windows PowerShell\. Make sure you save administrator user credentials as follows:
-   + If using the AWS CLI, create two profiles, AccountAadmin and AccountBadmin, in the config file\.
-   + If using the AWS Tools for Windows PowerShell, make sure you store credentials for the session as AccountAadmin and AccountBadmin\.
+   + If using the AWS CLI, create a profile, AccountAadmin, in the config file\.
+   + If using the AWS Tools for Windows PowerShell, make sure you store credentials for the session as AccountAadmin\.
 
    For instructions, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
 
@@ -141,7 +141,7 @@ Using the credentials of user AccountAadmin in Account A, and the special IAM us
       }
       ```
 
-      For instructions, see [Working with Inline Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_inline-using.html) in the *IAM User Guide*\. Note you need to sign in to the console using Account B credentials\.
+      For instructions, see [Working with Inline Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_inline-using.html) in the *IAM User Guide*\. Note you need to sign in to the console using Account A credentials\.
 
 ## Step 2: Test Permissions<a name="grant-permissions-to-user-in-your-account-test"></a>
 

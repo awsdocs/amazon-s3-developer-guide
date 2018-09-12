@@ -13,6 +13,9 @@ To copy an object using the low\-level Java API, do the following:
 The following example shows how to use the Amazon S3 low\-level Java API to perform a multipart copy\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

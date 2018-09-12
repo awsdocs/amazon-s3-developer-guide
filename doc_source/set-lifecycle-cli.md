@@ -20,7 +20,7 @@ Note that the Amazon S3 lifecycle configuration is an XML file\. But when using 
           <Status>Enabled</Status>
           <Transition>        
              <Days>365</Days>        
-             <StorageClass>GLACIER</StorageClass>    must   
+             <StorageClass>GLACIER</StorageClass>
           </Transition>    
           <Expiration>
                <Days>3650</Days>

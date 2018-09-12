@@ -55,6 +55,9 @@ For buckets without versioning enabled, you can delete all objects directly and 
 For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.util.Iterator;
 
 import com.amazonaws.AmazonServiceException;
@@ -148,7 +151,7 @@ You can empty a bucket's content \(that is, delete all content, but keep the buc
 
 ### Empty a Bucket: Using the Amazon S3 console<a name="empty-bucket-console"></a>
 
-For information about using the Amazon S3 console to empty a bucket, see [How Do I Empty an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/empty-bucket.html.html) in the *Amazon Simple Storage Service Console User Guide*
+For information about using the Amazon S3 console to empty a bucket, see [How Do I Empty an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/empty-bucket.html) in the *Amazon Simple Storage Service Console User Guide*
 
 ### Empty a Bucket: Using the AWS CLI<a name="empty-bucket-awscli"></a>
 
@@ -174,7 +177,7 @@ You cannot remove objects from a bucket with versioning enabled\. Amazon S3 adds
 To empty a bucket with versioning enabled, you have the following options:
 + Delete the bucket programmatically using the AWS SDK\. 
 + Use the bucket's lifecycle configuration to request that Amazon S3 delete the objects\. 
-+ Use the Amazon S3 console \(can only use this option if your bucket contains less than 100,000 items—including both object versions and delete markers\)\.
++ Use the Amazon S3 console \(see [How Do I Empty an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/empty-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\)\.
 
 ### Empty a Bucket: Using Lifecycle Configuration<a name="empty-bucket-lifecycle"></a>
 

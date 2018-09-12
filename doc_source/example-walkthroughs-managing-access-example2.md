@@ -149,7 +149,7 @@ The bucket policy grants the `s3:GetBucketLocation` and `s3:ListBucket` permissi
 
 ## Step 2: Do the Account B Tasks<a name="access-policies-walkthrough-cross-account-permissions-acctB-tasks"></a>
 
-Now the Account B administrator creates a user, Dave, and delegates the Dave permissions received from Account A\. 
+Now the Account B administrator creates a user, Dave, and delegates the permissions received from Account A\. 
 
 ### Step 2\.1: Sign In to the AWS Management Console<a name="access-policies-walkthrough-cross-account-permissions-acctB-tasks-sign-in"></a>
 
@@ -157,36 +157,35 @@ Using the IAM user sign\-in URL for Account B, first sign in to the AWS Manageme
 
 ### Step 2\.2: Create User Dave in Account B<a name="access-policies-walkthrough-example2b-create-user"></a>
 
-1. In the IAM console, create a user, Dave\. 
+In the IAM console, create a user, Dave\. 
 
-   For instructions, see [Creating IAM Users \(AWS Management Console\)](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console) in the *IAM User Guide*\. 
-
-1. Note down the UserDave credentials\.
+For instructions, see [Creating IAM Users \(AWS Management Console\)](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console) in the *IAM User Guide*\. 
 
 ### Step 2\.3: Delegate Permissions to User Dave<a name="access-policies-walkthrough-example2-delegate-perm-userdave"></a>
-+ Create an inline policy for the user Dave by using the following policy\. You will need to update the policy by providing your bucket name\.
 
-  It is assumed you are signed in to the console using AccountBadmin user credentials\.
+Create an inline policy for the user Dave by using the following policy\. You will need to update the policy by providing your bucket name\.
 
-  ```
-  {
-     "Version": "2012-10-17",
-     "Statement": [
-        {
-           "Sid": "Example",
-           "Effect": "Allow",
-           "Action": [
-              "s3:ListBucket"
-           ],
-           "Resource": [
-              "arn:aws:s3:::examplebucket"
-           ]
-        }
-     ]
-  }
-  ```
+It is assumed you are signed in to the console using AccountBadmin user credentials\.
 
-  For instructions, see [Working with Inline Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_inline-using.html) in the *IAM User Guide*\.
+```
+{
+   "Version": "2012-10-17",
+   "Statement": [
+      {
+         "Sid": "Example",
+         "Effect": "Allow",
+         "Action": [
+            "s3:ListBucket"
+         ],
+         "Resource": [
+            "arn:aws:s3:::examplebucket"
+         ]
+      }
+   ]
+}
+```
+
+For instructions, see [Working with Inline Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_inline-using.html) in the *IAM User Guide*\.
 
 ### Step 2\.4: Test Permissions<a name="access-policies-walkthrough-example2b-user-dave-access"></a>
 

@@ -4,9 +4,11 @@
 
  Bucket ownership is not transferable; however, if a bucket is empty, you can delete it\. After a bucket is deleted, the name becomes available to reuse, but the name might not be available for you to reuse for various reasons\. For example, some other account could create a bucket with that name\. Note, too, that it might take some time before the name can be reused\. So if you want to use the same bucket name, don't delete the bucket\. 
 
- There is no limit to the number of objects that can be stored in a bucket and no difference in performance whether you use many buckets or just a few\. You can store all of your objects in a single bucket, or you can organize them across several buckets\.
+There is no limit to the number of objects that can be stored in a bucket and no difference in performance whether you use many buckets or just a few\. You can store all of your objects in a single bucket, or you can organize them across several buckets\.
 
-If you explicitly specify an AWS Region in your create bucket request that is different from the Region that you specifed when you created the client, you might get an error\.
+After you have created a bucket, you can't change its Region\.
+
+If you explicitly specify an AWS Region in your create bucket request that is different from the Region that you specified when you created the client, you might get an error\.
 
 You cannot create a bucket within another bucket\.
 

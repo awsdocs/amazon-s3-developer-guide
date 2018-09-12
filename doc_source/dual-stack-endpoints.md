@@ -68,6 +68,9 @@ The following example shows how to enable dual\-stack endpoints when creating an
 For instructions on creating and testing a working Java sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
@@ -133,9 +136,6 @@ using (var s3Client = new AmazonS3Client(config))
 ```
 
 For a full \.NET sample for listing objects, see [Listing Keys Using the AWS SDK for \.NET](ListingObjectKeysUsingNetSDK.md)\. 
-
-**Note**  
-You currently cannot use transfer acceleration with dual\-stack endpoints\. The \.NET SDK will throw an exception if you configure both `UseAccelerateEndpoint` and `UseDualstackEndpoint` on the config object\. For more information, see [Using Transfer Acceleration from the AWS SDK for \.NET](transfer-acceleration-examples.md#transfer-acceleration-examples-dotnet)\.
 
 For information about how to create and test a working \.NET sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\. 
 

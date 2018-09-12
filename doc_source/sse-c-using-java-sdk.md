@@ -16,6 +16,9 @@ For information about SSE\-C, see [Protecting Data Using Server\-Side Encryption
 **Example**  
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -148,6 +151,9 @@ The following example uses `TransferManager` to create objects and shows how to 
 **Example**  
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.File;
 import java.security.SecureRandom;
 

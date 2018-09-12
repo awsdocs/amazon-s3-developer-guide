@@ -1,16 +1,23 @@
 # Document History<a name="WhatsNew"></a>
++ **Latest documentation update:** September 5, 2018
++ **Current API version:** 2006\-03\-01
 
-The following table describes the important changes since the last release of the *Amazon Simple Storage Service Developer Guide*\. 
+The following table describes the important changes in each release of the *Amazon Simple Storage Service Developer Guide* from June 19, 2018, onward\. For notification about updates to this documentation, you can subscribe to an RSS feed\.
 
-**Relevant Dates to this History:**
-+ **Current product version:** 2006\-03\-01
-+ **Last documentation update:** April 30, 2018
+| Change | Description | Date | 
+| --- |--- |--- |
+| New Amazon S3 Select features | Amazon S3 Select now supports Apache Parquet input, queries on nested JSON objects, and two new Amazon CloudWatch monitoring metrics \(`SelectScannedBytes` and `SelectReturnedBytes`\)\. | September 5, 2018 | 
+| Updates now available over RSS | You can now subscribe to an RSS feed to receive notifications about updates to the Amazon Simple Storage Service Developer Guide guide\. | June 19, 2018 | 
+
+## Earlier Updates<a name="WhatsNew-earlier-doc-history"></a>
+
+The following table describes the important changes in each release of the *Amazon Simple Storage Service Developer Guide* before June 19, 2018\. 
 
 
 | Change | Description | Date | 
 | --- | --- | --- | 
-|  Code examples update  |  Code examples updated: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/WhatsNew.html)  | In this release | 
-|  Amazon S3 now reports GLACIER and ONEZONE\_IA storage classes to Amazon CloudWatch Logs storage metrics  |  In addition to reporting actual bytes, these storage metrics include per\-object overhead bytes for applicable storage classes \(ONEZONE\_IA, STANDARD\_IA, and GLACIER\): [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/WhatsNew.html) For more information about storage metrics, see [Monitoring Metrics with Amazon CloudWatch](cloudwatch-monitoring.md)\.  | In this release | 
+|  Code examples update  |  Code examples updated: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/WhatsNew.html)  | April 30, 2018 | 
+|  Amazon S3 now reports GLACIER and ONEZONE\_IA storage classes to Amazon CloudWatch Logs storage metrics  |  In addition to reporting actual bytes, these storage metrics include per\-object overhead bytes for applicable storage classes \(ONEZONE\_IA, STANDARD\_IA, and GLACIER\): [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/WhatsNew.html) For more information about storage metrics, see [Monitoring Metrics with Amazon CloudWatch](cloudwatch-monitoring.md)\.  | April 30, 2018 | 
 | New storage class  |  Amazon S3 now offers a new storage class, ONEZONE\_IA \(IA, for infrequent access\) for storing objects\. For more information, see [Storage Classes](storage-class-intro.md)\.   |  April 4, 2018  | 
 | Amazon S3 Select | Amazon S3 now supports retrieving object content based on an SQL expression\. For more information, see [Selecting Content from Objects](selecting-content-from-objects.md)\.  |  April 4, 2018 | 
 | Asia Pacific \(Osaka\-Local\) Region |  Amazon S3 is now available in the Asia Pacific \(Osaka\-Local\) Region\. For more information about Amazon S3 Regions and endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.  You can use the Asia Pacific \(Osaka\-Local\) Region only in conjunction with the Asia Pacific \(Tokyo\) Region\. To request access to Asia Pacific \(Osaka\-Local\) Region, contact your sales representative\.   |  February 12, 2018 | 
@@ -57,7 +64,7 @@ The following table describes the important changes since the last release of th
 | Server\-side encryption with customer\-provided encryption keys |  Amazon S3 now supports server\-side encryption using customer\-provided encryption keys \(SSE\-C\)\. Server\-side encryption enables you to request Amazon S3 to encrypt your data at rest\. When using SSE\-C, Amazon S3 encrypts your objects with the custom encryption keys that you provide\. Since Amazon S3 performs the encryption for you, you get the benefits of using your own encryption keys without the cost of writing or executing your own encryption code\.  For more information about SSE\-C, see [Server\-Side Encryption \(Using Customer\-Provided Encryption Keys\)](http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html)\.  | June 12, 2014 | 
 | Lifecycle support for versioning |  Prior to this release, lifecycle configuration was supported only on nonversioned buckets\. Now you can configure lifecycle on both nonversioned and versioning\-enabled buckets\. For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.   | May 20, 2014 | 
 | Access control topics revised |  Revised Amazon S3 access control documentation\. For more information, see [Managing Access Permissions to Your Amazon S3 Resources](s3-access-control.md)\.   | April 15, 2014 | 
-| Server access logging topic revised |  Revised server access logging documentation\. For more information, see [Server Access Logging](ServerLogs.md)\.   | November 26, 2013 | 
+| Server access logging topic revised |  Revised server access logging documentation\. For more information, see [Amazon S3 Server Access Logging](ServerLogs.md)\.   | November 26, 2013 | 
 | \.NET SDK samples updated to version 2\.0 |  \.NET SDK samples in this guide are now compliant to version 2\.0\.  | November 26, 2013  | 
 | SOAP Support Over HTTP Deprecated |  SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\.  | September 20, 2013 | 
 | IAM policy variable support |  The IAM access policy language now supports variables\. When a policy is evaluated, any policy variables are replaced with values that are supplied by context\-based information from the authenticated user’s session\. You can use policy variables to define general purpose policies without explicitly listing all the components of the policy\. For more information about policy variables, see [IAM Policy Variables Overview](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_variables.html) in the *IAM User Guide*\.  For examples of policy variables in Amazon S3, see [User Policy Examples](example-policies-s3.md)\.   | April 3, 2013 | 

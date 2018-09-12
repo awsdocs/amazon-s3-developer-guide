@@ -4,6 +4,9 @@
 The following example shows how to retrieve a list of in\-progress multipart uploads using the low\-level Java API:  
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.util.List;
 
 import com.amazonaws.AmazonServiceException;

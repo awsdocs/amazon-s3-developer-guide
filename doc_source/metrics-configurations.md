@@ -33,7 +33,7 @@ To request more complex filtering, choose two or more elements\. Only objects th
 
 ## How to Add Metrics Configurations<a name="add-metrics-configurations"></a>
 
-You can add metrics configurations to a bucket through the Amazon S3 console, with the AWS CLI, or with the Amazon S3 REST API\. For information about how to do this in the AWS Management Console, see the [ Amazon S3 Console User Guide](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-metrics.html)\. 
+You can add metrics configurations to a bucket through the Amazon S3 console, with the AWS CLI, or with the Amazon S3 REST API\. For information about how to do this in the AWS Management Console, see the [How Do I Configure Request Metrics for an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-metrics.html) in the Amazon Simple Storage Service Console User Guide\.
 
 **Add Metrics Configurations with the AWS CLI**
 

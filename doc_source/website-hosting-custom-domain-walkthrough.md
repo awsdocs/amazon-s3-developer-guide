@@ -6,34 +6,20 @@ Suppose that you want to host your static website on Amazon S3\. You registered 
 + [Before You Begin](#root-domain-walkthrough-before-you-begin)
 + [Step 1: Register a Domain](#website-hosting-custom-domain-walkthrough-domain-registry)
 + [Step 2: Create and Configure Buckets and Upload Data](#root-domain-walkthrough-s3-tasks)
-+ [Step 3: Create and Configure Amazon Route 53 Hosted Zone](#root-domain-walkthrough-switch-to-route53-as-dnsprovider)
-+ [Step 4: Switch to Amazon Route 53 as Your DNS Provider](#root-domain-walkthrough-update-ns-record)
-+ [Step 5: Testing](#root-domain-testing)
++ [Step 3: Add Alias Records for example\.com and www\.example\.com](#root-domain-walkthrough-add-arecord-to-hostedzone)
++ [Step 4: Testing](#root-domain-testing)
 
 ## Before You Begin<a name="root-domain-walkthrough-before-you-begin"></a>
 
-As you walk through the steps in this example, you work with the following services:
+As you follow the steps in this example, you work with the following services:
 
-**Domain registrar of your choice –** If you don't already have a registered domain name, such as `example.com`, create and register one with a registrar of your choice\. You can typically register a domain for a small yearly fee\. For procedural information about registering a domain name, see the registrar's website\.
+**Amazon Route 53 –** You use Route 53 to register domains and to define where you want to route internet traffic for your domain\. We explain how to create Route 53 alias records that route traffic for your domain \(example\.com\) and subdomain \(www\.example\.com\) to an Amazon S3 bucket that contains an HTML file\.
 
-**Amazon S3 –** You use Amazon S3 to create buckets, upload a sample website page, configure permissions so that everyone can see the content, and then configure the buckets for website hosting\. In this example, because you want to allow requests for both `http://www.example.com` and `http://example.com`, you create two buckets; however, you host content in only one bucket\. You configure the other Amazon S3 bucket to redirect requests to the bucket that hosts the content\.
-
-**Amazon Route 53 –** You configure Amazon Route 53 as your Domain Name System \(DNS\) provider\. You create a hosted zone in Amazon Route 53 for your domain and configure applicable DNS records\. If you are switching from an existing DNS provider, you need to ensure that you have transferred all of the DNS records for your domain\. 
-
-We recommend that you have basic familiarity with domains, DNS, CNAME records, and A records\. A detailed explanation of these concepts is beyond the scope of this guide\. Your domain registrar should provide any basic information that you need\.
-
-In this example, we use Route 53\. However, you can use most registrars to define a CNAME record that points to an Amazon S3 bucket\.
-
-**Note**  
-All the steps in this example use `example.com` as a domain name\. Replace this domain name with the one that you registered\.
+**Amazon S3 –** You use Amazon S3 to create buckets, upload a sample website page, configure permissions so that everyone can see the content, and then configure the buckets for website hosting\.
 
 ## Step 1: Register a Domain<a name="website-hosting-custom-domain-walkthrough-domain-registry"></a>
 
-If you already have a registered domain, you can skip this step\. If you are new to hosting a website, your first step is to register a domain, such as `example.com`, with a registrar of your choice\.   
-
-After you choose a registrar, register your domain name according to the instructions at the registrar’s website\. For a list of registrar websites that you can use to register your domain name, see [Information for Registrars and Registrants](https://www.icann.org/resources/pages/registrars-0d-2012-02-25-en) at the ICANN\.org website\.
-
- When you have a registered domain name, your next task is to create and configure Amazon S3 buckets for website hosting and to upload your website content\. 
+If you don't already have a registered domain name, such as `example.com`, register one with Route 53\. For more information, see [Registering a New Domain](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html) in the *Amazon Route 53 Developer Guide*\. When you have a registered domain name, your next tasks are to create and configure Amazon S3 buckets for website hosting and to upload your website content\. 
 
 ## Step 2: Create and Configure Buckets and Upload Data<a name="root-domain-walkthrough-s3-tasks"></a>
 
@@ -76,9 +62,7 @@ Like domains, subdomains must have their own S3 buckets, and the buckets must sh
 
    For step\-by\-step instructions, see [How Do I Upload an Object to an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
-1. Configure permissions for your objects to make them publicly accessible\. 
-
-   Attach the following bucket policy to the `example.com` bucket, substituting the name of your bucket for *example\.com*\. For step\-by\-step instructions to attach a bucket policy, see [How Do I Add an S3 Bucket Policy?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+1. To host a website, your bucket must have public read access\. It is intentional that everyone in the world will have read access to this bucket\. To grant public read access, attach the following bucket policy to the `example.com` bucket, substituting the name of your bucket for *example\.com*\. For step\-by\-step instructions to attach a bucket policy, see [How Do I Add an S3 Bucket Policy?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
    ```
    {
@@ -145,101 +129,55 @@ To test the website, type the URL of the endpoint in your browser\. Your request
 
  In the next step, you use Amazon Route 53 to enable customers to use all of the URLs to navigate to your site\.
 
-## Step 3: Create and Configure Amazon Route 53 Hosted Zone<a name="root-domain-walkthrough-switch-to-route53-as-dnsprovider"></a>
+## Step 3: Add Alias Records for example\.com and www\.example\.com<a name="root-domain-walkthrough-add-arecord-to-hostedzone"></a>
 
- Configure Amazon Route 53 as your Domain Name System \(DNS\) provider\. If you want to serve content from your root domain, such as `example.com`, you must use Amazon Route 53\. You create a hosted zone, which holds the DNS records associated with your domain:
-+ An alias record that maps the domain *example\.com* to the example\.com bucket\. This is the bucket that you configured as a website endpoint in step 2\.2\.
-+ Another alias record that maps the subdomain www\.*example\.com* to the www\.*example\.com* bucket\. You configured this bucket to redirect requests to the example\.com bucket in step 2\.2\.
+In this step, you create the alias records that you add to the hosted zone for your domain maps `example.com` and `www.example.com` to the corresponding S3 buckets\. Instead of using IP addresses, the alias records use the Amazon S3 website endpoints\. Amazon Route 53 maintains a mapping between the alias records and the IP addresses where the Amazon S3 buckets reside\.
 
-### Step 3\.1: Create a Hosted Zone for Your Domain<a name="root-domain-walkthrough-create-route53-hostedzone"></a>
+**To route traffic to your website**
 
-Go to the Amazon Route 53 console at [https://console\.aws\.amazon\.com/route53](https://console.aws.amazon.com/route53/home) and then create a hosted zone for your domain\. For instructions, go to [Creating a Hosted Zone](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html#Step_CreateHostedZone) in the *http://docs\.aws\.amazon\.com/Route53/latest/DeveloperGuide/*\. 
+1. Open the Route 53 console at [https://console\.aws\.amazon\.com/route53/](https://console.aws.amazon.com/route53/)\.
 
-The following example shows the hosted zone created for the `example.com` domain\. Write down the Route 53 name servers \(NS\) for this domain\. You will need them later\. 
+1. In the navigation pane, choose **Hosted zones**\.
+**Note**  
+When you registered your domain, Amazon Route 53 automatically created a hosted zone with the same name\. A hosted zone contains information about how you want Route 53 to route traffic for the domain\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/RootDomainR53NameServers.png)
+1. In the list of hosted zones, choose the name of your domain\.
 
-### Step 3\.2: Add Alias Records for example\.com and www\.example\.com<a name="root-domain-walkthrough-add-arecord-to-hostedzone"></a>
+1. Choose **Create Record Set**\.
+**Note**  
+Each record contains information about how you want to route traffic for one domain \(example\.com\) or subdomain \(www\.example\.com\)\. Records are stored in the hosted zone for your domain\.
 
-The alias records that you add to the hosted zone for your domain maps `example.com` and `www.example.com` to the corresponding S3 buckets\. Instead of using IP addresses, the alias records use the Amazon S3 website endpoints\. Amazon Route 53 maintains a mapping between the alias records and the IP addresses where the S3 buckets reside\. 
+1. Specify the following values:  
+**Name**  
+For the first record that you'll create, accept the default value, which is the name of your hosted zone and your domain\. This will route internet traffic to the bucket that has the same name as your domain\.  
+Repeat this step to create a second record for your subdomain\. For the second record, type **www**\. This will route internet traffic to the www\.*example\.com* bucket\.  
+**Type**  
+Choose **A – IPv4 address**\.  
+**Alias**  
+Choose **Yes**\.  
+**Alias Target**  
+Type the name of the region that you created your Amazon S3 bucket in\. Use the applicable value from the **Website Endpoint** column in the [Amazon Simple Storage Service Website Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_website_region_endpoints) table in the [AWS Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html) chapter of the *Amazon Web Services General Reference*\.  
+You specify the same value for **Alias Target** for both records\. Route 53 figures out which bucket to route traffic to based on the name of the record\.  
+**Routing Policy**  
+Accept the default value of **Simple**\.  
+**Evaluate Target Health**  
+Accept the default value of **No**\.
 
-For step\-by\-step instructions, see [Creating Resource Record Sets by Using the Amazon Route 53 Console](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html) in the *Amazon Route 53 Developer Guide*\. 
+1. Choose **Create**\.
+
+1. For www\.*example\.com*, repeat steps 4 through 6 to create a record\.
 
 The following screenshot shows the alias record for `example.com` as an illustration\. You also need to create an alias record for `www.example.com`\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/RootDomainAliasRecord.png)
 
-To enable this hosted zone, you must use Amazon Route 53 as the DNS server for your domain **example\.com**\. If you are moving an existing website to Amazon S3, first you must transfer DNS records associated with your domain **example\.com** to the hosted zone that you created in Amazon Route 53 for your domain\. If you are creating a new website, you can go directly to step 4\.
-
 **Note**  
 Creating, changing, and deleting resource record sets take time to propagate to the Route 53 DNS servers\. Changes generally propagate to all Route 53 name servers in a couple of minutes\. In rare circumstances, propagation can take up to 30 minutes\.
 
-### Step 3\.3: Transfer Other DNS Records from Your Current DNS Provider to Route 53<a name="root-domain-walkthrough-migrate-dns-records"></a>
+## Step 4: Testing<a name="root-domain-testing"></a>
 
-Before you switch to Amazon Route 53 as your DNS provider, you must transfer the remaining DNS records—including MX records, CNAME records, and A records—from your DNS provider to Amazon Route 53\. You don't need to transfer the following records:
-+ NS records– Instead of transferring these, replace their values with the name server values that are provided by Amazon Route 53\.
-+ SOA record– Amazon Route 53 provides this record in the hosted zone with a default value\. 
+To verify that the website is working correctly, in your browser, try the following URLs:
++ `http://example.com` – Displays the index document in the `example.com` bucket\.
++ `http://www.example.com` – Redirects your request to `http://example.com`\. 
 
-Migrating required DNS records is a critical step to ensure the continued availability of all the existing services hosted under the domain name\.
-
-### Step 3\.4: Create A Type DNS Records<a name="root-domain-walkthroguh-add-a-type-record"></a>
-
-If you're not transferring your website from another existing website, you need to create new A type DNS records\.
-
-**Note**  
-If you've already transferred A type records for this website from a different DNS provider, you can skip the rest of this step\.
-
-**To create A type DNS records in the Route 53 console**
-
-1. Open the Route 53 console in your web browser\.
-
-1. On the **Dashboard**, choose **Hosted zones**\.
-
-1. Choose your domain name in the table of hosted zones\.
-
-1. Choose **Create Record Set**\.
-
-1. In the **Create Record Set** form that appears on the right, choose **Yes** for **Alias**\.
-
-1. In **Alias Target**, provide the Amazon S3 website endpoint—for example, `s3-website-us-west-2.amazonaws.com`\.
-
-1. Choose **Save Record Set**\.
-
-Now that you've added an A type DNS record to your record set, it appears in the table as in the following example\.
-
-![\[Screenshot showing table of record sets in Route 53 console\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/RootDomainARecord.png)
-
-## Step 4: Switch to Amazon Route 53 as Your DNS Provider<a name="root-domain-walkthrough-update-ns-record"></a>
-
-To switch to Amazon Route 53 as your DNS provider, contact your DNS provider and update the name server \(NS\) record to use the name servers in the delegation that you set in Amazon Route 53\. 
-
-On your DNS provider's site, update the NS record with the delegation set values of the hosted zone as shown in the following Amazon Route 53 console screenshot\. For more information, see [Updating Your DNS Service's Name Server Records](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html#Step_UpdateRegistrar) in *Amazon Route 53 Developer Guide*\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/RootDomainR53NameServers.png)
-
-When the transfer to Route 53 is complete, verify that the name server for your domain has indeed changed\. On a Linux computer, use the `dig` DNS lookup utility\. For example, use this `dig` command:
-
-```
-dig +recurse +trace www.example.com any
-```
-
-It returns the following output \(only partial output is shown\)\. The output shows the same name servers on the Amazon Route 53 hosted zone that you created for the `example.com` domain\.
-
-```
-...
-example.com.      172800  IN      NS      ns-9999.awsdns-99.com.
-example.com.      172800  IN      NS      ns-9999.awsdns-99.org.
-example.com.      172800  IN      NS      ns-9999.awsdns-99.co.uk.
-example.com.      172800  IN      NS      ns-9999.awsdns-99.net.
-
-www.example.com.  300     IN      CNAME   www.example.com.s3-website-us-east-1.amazonaws.com.
-...
-```
-
-## Step 5: Testing<a name="root-domain-testing"></a>
-
- To verify that the website is working correctly, in your browser, try the following URLs:
-+ `http://example.com` \- Displays the index document in the `example.com` bucket\.
-+ `http://www.example.com`\- Redirects your request to `http://example.com`\. 
-
- In some cases, you might need to clear the cache of your web browser to see the expected behavior\.
+In some cases, you might need to clear the cache of your web browser to see the expected behavior\.

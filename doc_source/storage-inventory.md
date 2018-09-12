@@ -179,7 +179,7 @@ The following is an example of a manifest in a `manifest.json` file for a CSV\-f
 ```
 {
     "sourceBucket": "example-source-bucket",
-    "destinationBucket": "example-inventory-destination-bucket",
+    "destinationBucket": "arn:aws:s3:::example-inventory-destination-bucket",
     "version": "2016-11-30",
     "creationTimestamp" : "1514944800000",
     "fileFormat": "CSV",
@@ -188,8 +188,7 @@ The following is an example of a manifest in a `manifest.json` file for a CSV\-f
         {
             "key": "Inventory/example-source-bucket/2016-11-06T21-32Z/files/939c6d46-85a9-4ba8-87bd-9db705a579ce.csv.gz",
             "size": 2147483647,
-            "MD5checksum": "f11166069f1990abeb9c97ace9cdfabc",
-            "inventoriedRecord": 58050695
+            "MD5checksum": "f11166069f1990abeb9c97ace9cdfabc"
         }
     ]
 }
@@ -215,7 +214,11 @@ The following is an example of a manifest in a `manifest.json` file for an ORC\-
 }
 ```
 
-The `symlink.txt` file is an Apache Hive\-compatible manifest file that allows Hive to automatically discover inventory files and their associated data files\. The Hive\-compatible manifest works with any Hive\-compatible service, including Athena, AWS Glue, and Amazon Redshift Spectrum\. It also works with Hive\-compatible applications, including [Presto](https://prestodb.io/), [Apache Hive](https://hive.apache.org/), [Apache Spark](https://databricks.com/spark/about/), and many others\.
+The `symlink.txt` file is an Apache Hive\-compatible manifest file that allows Hive to automatically discover inventory files and their associated data files\. The Hive\-compatible manifest works with the Hive\-compatible services Athena and Amazon Redshift Spectrum\. It also works with Hive\-compatible applications, including [Presto](https://prestodb.io/), [Apache Hive](https://hive.apache.org/), [Apache Spark](https://databricks.com/spark/about/), and many others\.
+
+**Important**  
+The `symlink.txt` Apache Hive\-compatible manifest file does not currently work with AWS Glue\.  
+The ORC format inventory files do not work with [Apache Hive](https://hive.apache.org/) and [Apache Spark](https://databricks.com/spark/about/)\. 
 
 ## How Do I Know When an Inventory Is Complete?<a name="storage-inventory-notification"></a>
 

@@ -34,6 +34,171 @@ Where `table_name` is one of `S3Object` \(for Amazon S3 Select\) or `ARCHIVE` or
 
 Following standard SQL, the `FROM` clause creates rows that are filtered in the `WHERE` clause and projected in the `SELECT` list\. 
 
+For JSON objects that are stored in Amazon S3 Select, you can also use the following forms of the `FROM` clause:
+
+```
+FROM S3Object[*].path
+FROM S3Object[*].path alias
+FROM S3Object[*].path AS alias
+```
+
+Using this form of the `FROM` clause, you can select from arrays or objects within a JSON object\. You can specify `path` using one of the following forms:
++ By name \(in an object\): `.name` or `['name']`
++ By index \(in an array\): `[index]`
++ By wildcard \(in an object\): `.*`
++ By wildcard \(in an array\): `[*]`
+
+**Note**  
+This form of the `FROM` clause works only with JSON objects\.
+Wildcards always emit at least one record\. If no record matches, then Amazon S3 Select emits the value `MISSING`\. During output serialization \(after the query is complete\), Amazon S3 Select replaces `MISSING` values with empty records\.
+Aggregate functions \(`AVG`, `COUNT`, `MAX`, `MIN`, and `SUM`\) skip `MISSING` values\.
+If you don't provide an alias when using a wildcard, you can refer to the row using the last element in the path\. For example, you could select all prices from a list of books using the query `SELECT price FROM S3Object[*].books[*].price`\. If the path ends in a wildcard rather than a name, then you can use the value `_1` to refer to the row\. For example, instead of `SELECT price FROM S3Object[*].books[*].price`, you could use the query `SELECT _1.price FROM S3Object[*].books[*]`\.
+Amazon S3 Select always treats a JSON document as an array of root\-level values\. Thus, even if the JSON object that you are querying has only one root element, the `FROM` clause must begin with `S3Object[*]`\. However, for compatibility reasons, Amazon S3 Select allows you to omit the wildcard if you don't include a path\. Thus, the complete clause `FROM S3Object` is equivalent to `FROM S3Object[*] as S3Object`\. If you include a path, you must also use the wildcard\. So `FROM S3Object` and `FROM S3Object[*].path` are both valid clauses, but `FROM S3Object.path` is not\.
+
+**Example**  
+**Examples:**  
+*Example \#1*  
+This example shows results using the following dataset and query:  
+
+```
+{
+    "Rules": [
+        {"id": "id-1", "condition": "x < 20"},
+        {"condition": "y > x"},
+        {"id": "id-2", "condition": "z = DEBUG"}
+    ]
+},
+{
+    "created": "June 27",
+    "modified": "July 6"
+}
+```
+
+```
+SELECT id FROM S3Object[*].Rules[*].id
+```
+
+```
+{"id":"id-1"},
+{},
+{"id":"id-2"},
+{}
+```
+Amazon S3 Select produces each result for the following reasons:  
++ *\{"id":"id\-1"\}* — S3Object\[0\]\.Rules\[0\]\.id produced a match\.
++ *\{\}* — S3Object\[0\]\.Rules\[1\]\.id did not match a record, so Amazon S3 Select emitted `MISSING`, which was then changed to an empty record during output serialization and returned\.
++ *\{"id":"id\-2"\}* — S3Object\[0\]\.Rules\[2\]\.id produced a match\.
++ *\{\}* — S3Object\[1\] did not match on `Rules`, so Amazon S3 Select emitted `MISSING`, which was then changed to an empty record during output serialization and returned\.
+If you don't want Amazon S3 Select to return empty records when it doesn't find a match, you can test for the value `MISSING`\. The following query returns the same results as the previous query, but with the empty values omitted:  
+
+```
+SELECT id FROM S3Object[*].Rules[*].id WHERE id IS NOT MISSING
+```
+
+```
+{"id":"id-1"},
+{"id":"id-2"}
+```
+*Example \#2*  
+This example shows results using the following dataset and queries:  
+
+```
+{
+    "created": "936864000",
+    "dir_name": "important_docs",
+    "files": [
+        {
+            "name": "."
+        },
+        {
+            "name": ".."
+        },
+        {
+            "name": ".aws"
+        },
+        {
+            "name": "downloads"
+        }
+    ],
+    "owner": "AWS S3"
+},
+{
+    "created": "936864000",
+    "dir_name": "other_docs",
+    "files": [
+        {
+            "name": "."
+        },
+        {
+            "name": ".."
+        },
+        {
+            "name": "my stuff"
+        },
+        {
+            "name": "backup"
+        }
+    ],
+    "owner": "User"
+}
+```
+
+```
+SELECT d.dir_name, d.files FROM S3Object[*] d
+```
+
+```
+{
+    "dir_name": "important_docs",
+    "files": [
+        {
+            "name": "."
+        },
+        {
+            "name": ".."
+        },
+        {
+            "name": ".aws"
+        },
+        {
+            "name": "downloads"
+        }
+    ]
+},
+{
+    "dir_name": "other_docs",
+    "files": [
+        {
+            "name": "."
+        },
+        {
+            "name": ".."
+        },
+        {
+            "name": "my stuff"
+        },
+        {
+            "name": "backup"
+        }
+    ]
+}
+```
+
+```
+SELECT _1.dir_name, _1.owner FROM S3Object[*]
+```
+
+```
+{
+    "dir_name": "important_docs",
+    "owner": "AWS S3"
+},
+{
+    "dir_name": "other_docs",
+    "owner": "User"
+}
+```
+
 ## WHERE Clause<a name="s3-glacier-select-sql-reference-where"></a>
 
 The `WHERE` clause follows this syntax: 
@@ -83,7 +248,9 @@ The `SELECT` and `WHERE` clauses can refer to record data using one of the metho
   }
   ```
 
-  *Example \#1*: The following query returns these results:
+  *Example \#1*
+
+  The following query returns these results:
 
   ```
   Select s.name from S3Object s
@@ -93,7 +260,9 @@ The `SELECT` and `WHERE` clauses can refer to record data using one of the metho
   {"name":"Susan Smith"}
   ```
 
-  *Example \#2*: The following query returns these results:
+  *Example \#2*
+
+  The following query returns these results:
 
   ```
   Select s.projects[0].project_name from S3Object s

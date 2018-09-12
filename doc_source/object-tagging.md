@@ -106,16 +106,16 @@ If you configured cross\-region replication \(CRR\) on your bucket, Amazon S3 re
 
 ### Object Tagging and Access Control Policies<a name="tagging-and-policies"></a>
 
-You can also use permissions policies \(bucket and user policies\) to manage object tagging related permissions\. For policy actions see the following topics: 
+You can also use permissions policies \(bucket and user policies\) to manage permissions related to object tagging\. For policy actions see the following topics: 
 +  [Permissions for Object Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-objects) 
 +  [Permissions Related to Bucket Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-buckets)
 
-Object tags enable fine\-grained access control for managing permissions\. You can grant conditional permissions based on object tags\. Amazon S3 supports the following condition keys that you can use to grant object tag\-based conditional permissions\.
+Object tags enable fine\-grained access control for managing permissions\. You can grant conditional permissions based on object tags\. Amazon S3 supports the following condition keys that you can use to grant conditional permissions based on object tags:
 + `s3:ExistingObjectTag/<tag-key>` – Use this condition key to verify that an existing object tag has the specific tag key and value\. 
 
    
 **Note**  
-When granting permissions for the `PUT Object` and `DELETE Object` operations, this condition key is not supported\. That is, you cannot create a policy to grant or deny a user permissions to delete or override an existing object based on its existing tags\. 
+When granting permissions for the `PUT Object` and `DELETE Object` operations, this condition key is not supported\. That is, you cannot create a policy to grant or deny a user permissions to delete or overwrite an object based on its existing tags\. 
 
    
 + `s3:RequestObjectTagKeys` – Use this condition key to restrict the tag keys that you want to allow on objects\. This is useful when adding tags to objects using the PutObjectTagging and PutObject, and POST object requests\.

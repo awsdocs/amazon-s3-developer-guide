@@ -316,7 +316,7 @@ Now Dave can access objects in the bucket owned by Account A as follows:
    aws sts assume-role --role-arn arn:aws:iam::accountA-ID:role/examplerole --profile AccountCDave --role-session-name test
    ```
 
-   In response, AWS Security Token Service \(STS\) returns temporary security credentials \(access key ID, secret access key, and a security token\)\.
+   In response, AWS Security Token Service \(STS\) returns temporary security credentials \(access key ID, secret access key, and a session token\)\.
 
 1. Save the temporary security credentials in the AWS CLI config file under the `TempCred` profile\.
 
@@ -324,7 +324,7 @@ Now Dave can access objects in the bucket owned by Account A as follows:
    [profile TempCred]
    aws_access_key_id = temp-access-key-ID
    aws_secret_access_key = temp-secret-access-key
-   aws_security_token = security-token
+   aws_session_token = session-token
    region = us-west-2
    ```
 

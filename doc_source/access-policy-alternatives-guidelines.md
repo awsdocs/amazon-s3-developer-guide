@@ -25,7 +25,7 @@ A bucket owner cannot grant permissions on objects it does not own\. For example
 
 ### When to Use a Bucket ACL<a name="when-to-use-bucket-acl"></a>
 
-The only recommended use case for the bucket ACL is to grant write permission to the Amazon S3 Log Delivery group to write access log objects to your bucket \(see [Server Access Logging](ServerLogs.md)\)\. If you want Amazon S3 to deliver access logs to your bucket, you will need to grant write permission on the bucket to the Log Delivery group\. The only way you can grant necessary permissions to the Log Delivery group is via a bucket ACL, as shown in the following bucket ACL fragment\.
+The only recommended use case for the bucket ACL is to grant write permission to the Amazon S3 Log Delivery group to write access log objects to your bucket \(see [Amazon S3 Server Access Logging](ServerLogs.md)\)\. If you want Amazon S3 to deliver access logs to your bucket, you will need to grant write permission on the bucket to the Log Delivery group\. The only way you can grant necessary permissions to the Log Delivery group is via a bucket ACL, as shown in the following bucket ACL fragment\.
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>

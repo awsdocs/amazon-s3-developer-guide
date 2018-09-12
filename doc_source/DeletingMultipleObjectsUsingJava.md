@@ -9,6 +9,9 @@ The following example uses the Multi\-Object Delete API to delete objects from a
 For more information about deleting objects, see [Deleting Objects](DeletingObjects.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -76,6 +79,9 @@ The following example uses the Multi\-Object Delete API to delete objects from a
 1. Remove the delete markers by specifying the object keys and version IDs of the delete markers\. The operation deletes the delete markers, which results in the objects reappearing in the AWS Management Console\.
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

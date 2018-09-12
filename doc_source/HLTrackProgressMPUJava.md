@@ -7,6 +7,9 @@ The following example demonstrates how to subscribe to a `ProgressEvent` event a
 **Example**  
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.File;
 
 import com.amazonaws.AmazonServiceException;

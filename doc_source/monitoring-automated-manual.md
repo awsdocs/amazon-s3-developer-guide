@@ -10,7 +10,7 @@ You can use the following automated monitoring tools to watch Amazon S3 and repo
 
 ## Manual Monitoring Tools<a name="monitoring-manual-tools"></a>
 
-Another important part of monitoring Amazon S3 involves manually monitoring those items that the CloudWatch alarms don't cover\. The Amazon S3, CloudWatch, Trusted Advisor, and other AWS console dashboards provide an at\-a\-glance view of the state of your AWS environment\. You may want to enable server access logging, which tracks requests for access to your bucket\. Each access log record provides details about a single access request, such as the requester, bucket name, request time, request action, response status, and error code, if any\. For more information, see [Server Access Logging](ServerLogs.md) in the *Amazon Simple Storage Service Developer Guide*\.
+Another important part of monitoring Amazon S3 involves manually monitoring those items that the CloudWatch alarms don't cover\. The Amazon S3, CloudWatch, Trusted Advisor, and other AWS console dashboards provide an at\-a\-glance view of the state of your AWS environment\. You may want to enable server access logging, which tracks requests for access to your bucket\. Each access log record provides details about a single access request, such as the requester, bucket name, request time, request action, response status, and error code, if any\. For more information, see [Amazon S3 Server Access Logging](ServerLogs.md) in the *Amazon Simple Storage Service Developer Guide*\.
 + Amazon S3 dashboard shows:
   + Your buckets and the objects and properties they contain\.
 + CloudWatch home page shows:

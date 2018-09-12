@@ -5,80 +5,91 @@
 + [Using the AWS SDKs](#list-obj-version-enabled-bucket-sdk-examples)
 + [Using the REST API](#ListingtheObjectsinaVersioningEnabledBucket)
 
-This section provides an example of listing object versions from a versioning\-enabled bucket\. Amazon S3 stores object version information in the *versions* subresource \(see [Bucket Configuration Options](UsingBucket.md#bucket-config-options-intro)\) associated with the bucket\. 
+This section provides an example of listing object versions from a versioning\-enabled bucket\. Amazon S3 stores object version information in the *versions* subresource \(see [Bucket Configuration Options](UsingBucket.md#bucket-config-options-intro)\) that is associated with the bucket\. 
 
 ## Using the Console<a name="list-obj-version-enabled-bucket-console"></a>
 
-For information about listing object versions in the console, see [ How Do I See the Versions of an S3 Object?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/view-object-versions.html) in the Amazon Simple Storage Service Console User Guide\. 
+For information about listing object versions using the Amazon S3 console, see [ How Do I See the Versions of an S3 Object?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/view-object-versions.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
 ## Using the AWS SDKs<a name="list-obj-version-enabled-bucket-sdk-examples"></a>
 
-The code examples in this section retrieve an object listing from a version\-enabled bucket\. Each request returns up to 1000 versions\. If you have more, you will need to send a series of requests to retrieve a list of all versions\. To illustrate how pagination works, the code examples limit the response to two object versions\. If there are more than two object versions in the bucket, the response returns the `IsTruncated` element with the value "true" and also includes the `NextKeyMarker` and `NextVersionIdMarker` elements whose values you can use to retrieve the next set of object keys\. The code example includes these values in the subsequent request to retrieve the next set of objects\.
+The examples in this section show how to retrieve an object listing from a versioning\-enabled bucket\. Each request returns up to 1,000 versions, unless you specify a lower number\. If the bucket contains more versions than this limit, you send a series of requests to retrieve the list of all versions\. This process of returning results in "pages" is called *pagination*\. To show how pagination works, the examples limit each response to two object versions\. After retrieving the first page of results, each example checks to determine whether the version list was truncated\. If it was, the example continues retrieving pages until all versions have been retrieved\. 
+
+**Note**  
+The following examples also work with a bucket that isn't versioning\-enabled, or for objects that don't have individual versions\. In those cases, Amazon S3 returns the object listing with a version ID of `null`\.
 
  For information about using other AWS SDKs, see [Sample Code and Libraries](https://aws.amazon.com/code/)\. 
 
 ### Using the AWS SDK for Java<a name="list-obj-version-enabled-bucket-java"></a>
 
-For information about how to create and test a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
+For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 **Example**  
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.IOException;
 
-import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ListVersionsRequest;
 import com.amazonaws.services.s3.model.S3VersionSummary;
 import com.amazonaws.services.s3.model.VersionListing;
 
-public class ListKeysVersionEnabledBucket {
-	private static String bucketName = "*** bucket name ***";
-	
-	public static void main(String[] args) throws IOException {
-        AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
+public class ListKeysVersioningEnabledBucket {
+
+    public static void main(String[] args) throws IOException {
+        String clientRegion = "*** Client region ***";
+        String bucketName = "*** Bucket name ***";
+        
         try {
-            System.out.println("Listing objects");
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                                    .withCredentials(new ProfileCredentialsProvider())
+                                    .withRegion(clientRegion)
+                                    .build();
             
+            // Retrieve the list of versions. If the bucket contains more versions
+            // than the specified maximum number of results, Amazon S3 returns
+            // one page of results per request.
             ListVersionsRequest request = new ListVersionsRequest()
                 .withBucketName(bucketName)
                 .withMaxResults(2);
-                // you can specify .withPrefix to obtain version list for a specific object or objects with 
-                // the specified key prefix.
-   
-            VersionListing versionListing;            
-            do {
-                versionListing = s3client.listVersions(request);
+            VersionListing versionListing = s3Client.listVersions(request); 
+            int numVersions = 0, numPages = 0;
+            while(true) {
+                numPages++;
                 for (S3VersionSummary objectSummary : 
-                	versionListing.getVersionSummaries()) {
-                    System.out.println(" - " + objectSummary.getKey() + "  " +
-                            "(size = " + objectSummary.getSize() + ")" +
-                    		"(versionID= " + objectSummary.getVersionId() + ")");
-
+                    versionListing.getVersionSummaries()) {
+                    System.out.printf("Retrieved object %s, version %s\n", 
+                                            objectSummary.getKey(), 
+                                            objectSummary.getVersionId());
+                    numVersions++;
                 }
-                request.setKeyMarker(versionListing.getNextKeyMarker());
-                request.setVersionIdMarker(versionListing.getNextVersionIdMarker());
-            } while (versionListing.isTruncated());
-         } catch (AmazonServiceException ase) {
-            System.out.println("Caught an AmazonServiceException, " +
-            		"which means your request made it " +
-                    "to Amazon S3, but was rejected with an error response " +
-                    "for some reason.");
-            System.out.println("Error Message:    " + ase.getMessage());
-            System.out.println("HTTP Status Code: " + ase.getStatusCode());
-            System.out.println("AWS Error Code:   " + ase.getErrorCode());
-            System.out.println("Error Type:       " + ase.getErrorType());
-            System.out.println("Request ID:       " + ase.getRequestId());
-        } catch (AmazonClientException ace) {
-            System.out.println("Caught an AmazonClientException, " +
-            		"which means the client encountered " +
-                    "an internal error while trying to communicate" +
-                    " with S3, " +
-                    "such as not being able to access the network.");
-            System.out.println("Error Message: " + ace.getMessage());
+                // Check whether there are more pages of versions to retrieve. If
+                // there are, retrieve them. Otherwise, exit the loop.
+                if(versionListing.isTruncated()) {
+                    versionListing = s3Client.listNextBatchOfVersions(versionListing);
+                }
+                else {
+                    break;
+                }
+            }
+            System.out.println(numVersions + " object versions retrieved in " + numPages + " pages");
+         } 
+        catch(AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        }
+        catch(SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
         }
     }
 }
@@ -91,7 +102,10 @@ For information about how to create and test a working sample, see [Running the 
 **Example**  
 
 ```
-using Amazon.S3;
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
+﻿using Amazon.S3;
 using Amazon.S3.Model;
 using System;
 using System.Threading.Tasks;
@@ -162,12 +176,12 @@ namespace Amazon.DocSamples.S3
 
 ## Using the REST API<a name="ListingtheObjectsinaVersioningEnabledBucket"></a>
 
-To list all of the versions of all of the objects in a bucket, you use the `versions` subresource in a `GET Bucket` request\. Amazon S3 can retrieve only a maximum of 1000 objects, and each object version counts fully as an object\. Therefore, if a bucket contains two keys \(e\.g\., `photo.gif` and `picture.jpg`\), and the first key has 990 versions and the second key has 400 versions; a single request would retrieve all 990 versions of `photo.gif` and only the most recent 10 versions of `picture.jpg`\.
+To list all the versions of all the objects in a bucket, you use the `versions` subresource in a `GET Bucket` request\. Amazon S3 can retrieve only a maximum of 1,000 objects, and each object version counts fully as an object\. Therefore, if a bucket contains two keys \(for example, `photo.gif` and `picture.jpg`\), and the first key has 990 versions and the second key has 400 versions, a single request would retrieve all 990 versions of `photo.gif` and only the most recent 10 versions of `picture.jpg`\.
 
 Amazon S3 returns object versions in the order in which they were stored, with the most recently stored returned first\.
 
 **To list all object versions in a bucket**
-+ In a `GET Bucket` request, include the `versions` sub\-resource\.
++ In a `GET Bucket` request, include the `versions` subresource\.
 
   ```
   1. GET /?versions HTTP/1.1

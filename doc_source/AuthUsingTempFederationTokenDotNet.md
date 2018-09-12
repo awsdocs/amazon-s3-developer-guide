@@ -49,7 +49,10 @@ The following C\# example lists the keys in the specified bucket\. In the exampl
   Update the following sample and provide the bucket name that you specified in the preceding federated user access policy\. For instructions on how to create and test a working example, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
   ```
-  using Amazon.Runtime;
+  // Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+  // SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+  
+  ﻿using Amazon.Runtime;
   using Amazon.S3;
   using Amazon.S3.Model;
   using Amazon.SecurityToken;

@@ -10,7 +10,7 @@
 The following code examples create a bucket programmatically using the AWS SDKs for Java, \.NET, and Ruby\. The code examples perform the following tasks:
 + Create a bucket, if the bucket doesn't already exist—The examples create a bucket by performing the following tasks:
   + Create a client by explicitly specifying an AWS Region \(the example uses the `s3-eu-west-1` Region\)\. Accordingly, the client communicates with Amazon S3 using the `s3-eu-west-1.amazonaws.com` endpoint\. You can specify any other AWS Region\. For a list of AWS Regions, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\. 
-  + Send a create bucket request by specifying only a bucket name\. The create bucket request doesn't specify another AWS Region\. The client sends a request to Amazon S3 to create the bucket in the Region you specified when creating the client\. 
+  + Send a create bucket request by specifying only a bucket name\. The create bucket request doesn't specify another AWS Region\. The client sends a request to Amazon S3 to create the bucket in the Region you specified when creating the client\. Once you have created a bucket, you can't change its Region\.
 **Note**  
 If you explicitly specify an AWS Region in your create bucket request that is different from the Region you specifed when you created the client, you might get an error\. For more information, see [Creating a Bucket](UsingBucket.md#create-bucket-intro)\.
 
@@ -27,6 +27,9 @@ To create a bucket using the Amazon S3 console, see [How Do I Create an S3 Bucke
 This example shows how to create an Amazon S3 bucket using the AWS SDK for Java\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
 import java.io.IOException;
 
 import com.amazonaws.AmazonServiceException;
@@ -80,7 +83,10 @@ For information about how to create and test a working sample, see [Running the 
 **Example**  
 
 ```
-using Amazon.S3;
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
+﻿using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Util;
 using System;

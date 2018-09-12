@@ -407,9 +407,7 @@ Example of an IAM policy that you attach to the destination SNS topic\.
    ],
    "Resource": "SNS-ARN",
    "Condition": {
-      "ArnLike": {          
-      "aws:SourceArn": "arn:aws:s3:*:*:bucket-name"    
-    }
+      "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
    }
   }
  ]
@@ -434,9 +432,7 @@ Example of an IAM policy that you attach to the destination SQS queue\.
    ],
    "Resource": "SQS-ARN",
    "Condition": {
-      "ArnLike": {          
-      "aws:SourceArn": "arn:aws:s3:*:*:bucket-name"    
-    }
+      "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
    }
   }
  ]
@@ -447,9 +443,7 @@ Note that for both the Amazon SNS and Amazon SQS IAM policies, you can specify t
 
 ```
 "Condition": {         
-  "StringLike": {          
-      "aws:SourceArn": "arn:aws:s3:*:*:bucket-name"         
-  }
+  "StringLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
   }
 ```
 
