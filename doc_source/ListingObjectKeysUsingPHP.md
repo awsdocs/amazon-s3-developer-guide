@@ -33,13 +33,14 @@ $s3 = new S3Client([
 
 // Use the high-level iterators (returns ALL of your objects).
 try {
-    $objects = $s3->getPaginator('ListObjects', [
+    $results = $s3->getPaginator('ListObjects', [
         'Bucket' => $bucket
     ]);
 
-    echo "Keys retrieved!" . PHP_EOL;
-    foreach ($objects as $object) {
-        echo $object['Key'] . PHP_EOL;
+    foreach ($results as $result) {
+        foreach ($result['Contents'] as $object) {
+            echo $object['Key'] . PHP_EOL;
+        }
     }
 } catch (S3Exception $e) {
     echo $e->getMessage() . PHP_EOL;
@@ -47,12 +48,10 @@ try {
 
 // Use the plain API (returns ONLY up to 1000 of your objects).
 try {
-    $result = $s3->listObjects([
+    $objects = $s3->listObjects([
         'Bucket' => $bucket
     ]);
-
-    echo "Keys retrieved!" . PHP_EOL;
-    foreach ($result['Contents'] as $object) {
+    foreach ($objects['Contents']  as $object) {
         echo $object['Key'] . PHP_EOL;
     }
 } catch (S3Exception $e) {

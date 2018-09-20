@@ -9,7 +9,7 @@ The notification message Amazon S3 sends to publish an event is a JSON message w
 
   Note that:
   + `sequencer` cannot be used to determine order for events on different object keys\.
-  + The sequencers can be of different lengths\. So to compare these values, you first right pad the shorter value with zeros and then do lexicographical comparison\.
+  + The sequencers can be of different lengths\. So to compare these values, you first left pad the shorter value with zeros and then do lexicographical comparison\.
 
 ```
 {  

@@ -102,7 +102,7 @@ For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md
 
 ### Object Tagging and Cross\-Region Replication \(CRR\)<a name="tagging-and-crr"></a>
 
-If you configured cross\-region replication \(CRR\) on your bucket, Amazon S3 replicates tags, provided you grant S3 permission to read the tags\. For more information, see [Setting Up Cross\-Region Replication](crr-how-setup.md)\.
+If you configured cross\-region replication \(CRR\) on your bucket, Amazon S3 replicates tags, provided you grant S3 permission to read the tags\. For more information, see [Overview of Setting Up CRR ](crr-how-setup.md)\.
 
 ### Object Tagging and Access Control Policies<a name="tagging-and-policies"></a>
 

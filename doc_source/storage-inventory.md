@@ -117,7 +117,7 @@ The inventory list contains a list of the objects in an S3 bucket and the follow
 + **Storage class** – Storage class used for storing the object\. For more information, see [Storage Classes](storage-class-intro.md)\.
 + **Multipart upload flag** – Set to `True` if the object was uploaded as a multipart upload\. For more information, see [Multipart Upload Overview](mpuoverview.md)\.
 + **Delete marker** – Set to `True`, if the object is a delete marker\. For more information, see [Object Versioning](ObjectVersioning.md)\. \(This field is not included if the list is only for the current version of objects\.\)
-+ **Replication status** – Set to `PENDING`, `COMPLETED`, `FAILED`, or `REPLICA.` For more information, see [Finding the Cross\-Region Replication Status ](crr-status.md)\.
++ **Replication status** – Set to `PENDING`, `COMPLETED`, `FAILED`, or `REPLICA.` For more information, see [Cross\-Region Replication: Status Information](crr-status.md)\.
 + **Encryption status** – Set to `SSE-S3`, `SSE-C`, `SSE-KMS`, or `NOT-SSE`\. The server\-side encryption status for SSE\-S3, SSE\-KMS, and SSE with customer\-provided keys \(SSE\-C\)\. A status of `NOT-SSE` means that the object is not encrypted with server\-side encryption\. For more information, see [Protecting Data Using Encryption](UsingEncryption.md)\.
 
 The following is an example CSV inventory list opened in a spreadsheet application\. The heading row is shown only to help clarify the example; it is not included in the actual list\.

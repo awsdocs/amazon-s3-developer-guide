@@ -52,14 +52,17 @@ for ($i = 1; $i <= 3; $i++) {
     ]);
 }
 try {
-    $succeeded = $s3->execute($batch);
-    $failed = array();
-} catch (CommandTransferException $e) {
-    $succeeded = $e->getSuccessfulCommands();
-    echo "Failed Commands:" . PHP_EOL;
-    foreach ($e->getFailedCommands() as $failedCommand) {
-        echo $e->getExceptionForFailedCommand($FailedCommand)->getMessage() . PHP_EOL;
+    $results = CommandPool::batch($s3, $batch);
+    foreach($results as $result) {
+        if ($result instanceof ResultInterface) {
+            // Result handling here
+        }
+        if ($result instanceof AwsException) {
+            // AwsException handling here
+        }
     }
+} catch (\Exception $e) {
+    // General error handling here
 }
 ```
 
