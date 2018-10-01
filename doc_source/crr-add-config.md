@@ -107,7 +107,7 @@ To specify a rule with a filter based on object tags, use the following code\. Y
 ...
 ```
 
-To specify a rule filter with a combination of a key prefix and object tags, use this code\. You wrap these filters in a AND parent element\. Amazon S3 performs logical AND operation to combine these filters\. In other words, the rule applies to a subset of objects with a specific key prefix and specific tags\. 
+To specify a rule filter with a combination of a key prefix and object tags, use this code\. You wrap these filters in an AND parent element\. Amazon S3 performs logical AND operation to combine these filters\. In other words, the rule applies to a subset of objects with a specific key prefix and specific tags\. 
 
 ```
 <Rule>
