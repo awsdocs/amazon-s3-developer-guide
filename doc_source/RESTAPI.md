@@ -35,7 +35,7 @@ Following is an example of a path\-style version of the same request\.
 
 You will receive an HTTP response code 307 Temporary Redirect error and a message indicating what the correct URI is for your resource if you try to access a bucket outside the US East \(N\. Virginia\) region with path\-style syntax that uses either of the following: 
 +  `http://s3.amazonaws.com` 
-+  An endpoint for a region different from the one where the bucket resides\. For example, if you use `http://s3-eu-west-1.amazonaws.com` for a bucket that was created in the US West \(N\. California\) region\.
++  An endpoint for a region different from the one where the bucket resides\. For example, if you use `http://s3-us-west-1.amazonaws.com` for a bucket that was created in the US West \(N\. California\) region\.
 
 ## Making Requests to Dual\-Stack Endpoints by Using the REST API<a name="rest-api-dual-stack"></a>
 
