@@ -99,6 +99,7 @@ Amazon S3 supports both virtual\-hosted–style and path\-style URLs to access a
   + Region\-specific endpoint, `http://s3-aws-region.amazonaws.com/bucket`
 
    In a path\-style URL, the endpoint you use must match the Region in which the bucket resides\. For example, if your bucket is in the South America \(São Paulo\) Region, you must use the `http://s3-sa-east-1.amazonaws.com/bucket` endpoint\. If your bucket is in the US East \(N\. Virginia\) Region, you must use the `http://s3.amazonaws.com/bucket` endpoint\.
+You can access objects in S3 bucket via secured https URLs: `https://s3.amazonaws.com/bucket/image.png` 
 
 **Important**  
 Because buckets can be accessed using path\-style and virtual\-hosted–style URLs, we recommend you create buckets with DNS\-compliant bucket names\. For more information, see [Bucket Restrictions and Limitations](BucketRestrictions.md)\.
