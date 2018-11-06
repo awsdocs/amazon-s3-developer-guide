@@ -61,22 +61,18 @@ public class MakingRequestsWithIAMTempCredentials {
             // Amazon S3 will deny access. You must use credentials for an IAM user or an IAM role.
             AssumeRoleRequest roleRequest = new AssumeRoleRequest()
                                                     .withRoleArn(roleARN)
-                                                    .withRoleSessionName(roleSessionName);
-            stsClient.assumeRole(roleRequest);
+                                                    .withRoleSessionName(roleSessionName)
+                                                    .withDurationSeconds(7200);
 
-            // Start a session.
-            GetSessionTokenRequest getSessionTokenRequest = new GetSessionTokenRequest();
-            // The duration can be set to more than 3600 seconds only if temporary
-            // credentials are requested by an IAM user rather than an account owner.
-            getSessionTokenRequest.setDurationSeconds(7200);
-            GetSessionTokenResult sessionTokenResult = stsClient.getSessionToken(getSessionTokenRequest);
-            Credentials sessionCredentials = sessionTokenResult.getCredentials();
+             // Assume the role and start a session
+            AssumeRoleResult assumeRoleResult = stsClient.assumeRole(roleRequest);
 
             // Package the temporary security credentials as a BasicSessionCredentials object 
             // for an Amazon S3 client object to use.
             BasicSessionCredentials basicSessionCredentials = new BasicSessionCredentials(
-                    sessionCredentials.getAccessKeyId(), sessionCredentials.getSecretAccessKey(),
-                    sessionCredentials.getSessionToken());
+                    assumeRoleResult.getCredentials().getAccessKeyId(),
+                    assumeRoleResult.getCredentials().getSecretAccessKey(),
+                    assumeRoleResult.getCredentials().getSessionToken());
 
             // Provide temporary security credentials so that the Amazon S3 client 
 			// can send authenticated requests to Amazon S3. You create the client 
