@@ -4,7 +4,7 @@ With Amazon S3 Select, you can use simple structured query language \(SQL\) stat
 
 Amazon S3 Select works on objects stored in CSV, JSON, or Apache Parquet format\. It also works with objects that are compressed with GZIP or BZIP2 \(for CSV and JSON objects only\), and server\-side encrypted objects\. You can specify the format of the results as either CSV or JSON, and you can determine how the records in the result are delimited\.
 
-You pass SQL expressions to Amazon S3 in the request\. Amazon S3 Select supports a subset of SQL\. For more information about the SQL elements that are supported by Amazon S3 Select, see [SQL Reference for Amazon S3 Select and Amazon Glacier Select](s3-glacier-select-sql-reference.md)\.
+You pass SQL expressions to Amazon S3 in the request\. Amazon S3 Select supports a subset of SQL\. For more information about the SQL elements that are supported by Amazon S3 Select, see [SQL Reference for Amazon S3 Select and Glacier Select](s3-glacier-select-sql-reference.md)\.
 
 You can perform SQL queries using AWS SDKs, the SELECT Object Content REST API, the AWS Command Line Interface \(AWS CLI\), or the Amazon S3 console\. The Amazon S3 console limits the amount of data returned to 40 MB\. To retrieve more data, use the AWS CLI or the API\.
 
@@ -30,11 +30,11 @@ Additional limitations apply when using Amazon S3 Select with Parquet objects:
 
 When you construct a request, you provide details of the object that is being queried using an `InputSerialization` object\. You provide details of how the results are to be returned using an `OutputSerialization` object\. You also include the SQL expression that Amazon S3 uses to filter the request\.
 
-For more information about constructing an Amazon S3 Select request, see [ SELECT Object Content](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html) in the *Amazon Simple Storage Service API Reference*\. You can also see one of the SDK code examples in the following sections\.
+For more information about constructing an Amazon S3 Select request, see [ SELECT Object Content](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html) in the *Amazon Simple Storage Service API Reference*\. You can also see one of the SDK code examples in the following sections\.
 
 ## Errors<a name="selecting-content-from-objects-errors"></a>
 
-Amazon S3 Select returns an error code and associated error message when an issue is encountered while attempting to execute a query\. For a list of error codes and descriptions, see the [Special Errors](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html#RESTObjectSELECTContent-responses-special-errors) section of the *SELECT Object Content* page in the *Amazon Simple Storage Service API Reference*\.
+Amazon S3 Select returns an error code and associated error message when an issue is encountered while attempting to execute a query\. For a list of error codes and descriptions, see the [Special Errors](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html#RESTObjectSELECTContent-responses-special-errors) section of the *SELECT Object Content* page in the *Amazon Simple Storage Service API Reference*\.
 
 **Topics**
 + [Requirements and Limits](#selecting-content-from-objects-requirements-and-limits)

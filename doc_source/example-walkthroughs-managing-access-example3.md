@@ -46,9 +46,9 @@ All the tasks of creating users and granting permissions are done in the AWS Man
       1. Follow the on\-screen instructions\. AWS will notify you by email when your account is active and available for you to use\.
 
    1. Using Account A credentials, sign in to the [IAM console](https://console.aws.amazon.com/iam/home?#home) and do the following to create an administrator user:
-      + Create user AccountAadmin and note down security credentials\. For more information about adding users, see [Creating an IAM User in Your AWS Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *IAM User Guide*\. 
-      + Grant AccountAadmin administrator privileges by attaching a user policy giving full access\. For instructions, see [Working with Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\. 
-      + In the IAM console **Dashboard**, note down the** IAM User Sign\-In URL**\. Users in this account must use this URL when signing in to the AWS Management Console\. For more information, see [How Users Sign in to Your Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_how-users-sign-in.html) in *IAM User Guide*\. 
+      + Create user AccountAadmin and note down security credentials\. For more information about adding users, see [Creating an IAM User in Your AWS Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *IAM User Guide*\. 
+      + Grant AccountAadmin administrator privileges by attaching a user policy giving full access\. For instructions, see [Working with Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\. 
+      + In the IAM console **Dashboard**, note down the** IAM User Sign\-In URL**\. Users in this account must use this URL when signing in to the AWS Management Console\. For more information, see [How Users Sign in to Your Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_how-users-sign-in.html) in *IAM User Guide*\. 
 
    1. Repeat the preceding step using Account B credentials and create administrator user AccountBadmin\.
 
@@ -68,15 +68,15 @@ Using the IAM user sign\-in URL for Account A first sign in to the AWS Managemen
 
 1. In the Amazon S3 console, create a bucket\. This exercise assumes the bucket is created in the US East \(N\. Virginia\) region and the name is `examplebucket`\.
 
-   For instructions, see [How Do I Create an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+   For instructions, see [How Do I Create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
 1. In the IAM console, create a user Dave\. 
 
-   For instructions, see [Creating IAM Users \(AWS Management Console\)](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console) in the *IAM User Guide*\. 
+   For instructions, see [Creating IAM Users \(AWS Management Console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console) in the *IAM User Guide*\. 
 
 1. Note down the Dave credentials\. 
 
-1. In the Amazon S3 console, attach the following bucket policy to `examplebucket` bucket\. For instructions, see [How Do I Add an S3 Bucket Policy?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) in the *Amazon Simple Storage Service Console User Guide*\. Follow the steps to add a bucket policy\. For information about how to find account IDs, see [Finding Your AWS Account ID](http://docs.aws.amazon.com//general/latest/gr/acct-identifiers.html#FindingYourAccountIdentifiers)\. 
+1. In the Amazon S3 console, attach the following bucket policy to `examplebucket` bucket\. For instructions, see [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) in the *Amazon Simple Storage Service Console User Guide*\. Follow the steps to add a bucket policy\. For information about how to find account IDs, see [Finding Your AWS Account ID](https://docs.aws.amazon.com//general/latest/gr/acct-identifiers.html#FindingYourAccountIdentifiers)\. 
 
    The policy grants Account B the `s3:PutObject` and `s3:ListBucket` permissions\. The policy also grants user Dave the `s3:GetObject` permission\. 
 
@@ -128,7 +128,7 @@ Now that Account B has permissions to perform operations on Account A's bucket, 
    aws s3api put-object --bucket examplebucket --key HappyFace.jpg --body HappyFace.jpg --profile AccountBadmin
    ```
 
-1. Add a grant to the object ACL to allow the bucket owner full control of the object\. For information about how to find a canonical user ID, see [Finding Your Account Canonical User ID](http://docs.aws.amazon.com//general/latest/gr/acct-identifiers.html#FindingCanonicalId)\.
+1. Add a grant to the object ACL to allow the bucket owner full control of the object\. For information about how to find a canonical user ID, see [Finding Your Account Canonical User ID](https://docs.aws.amazon.com//general/latest/gr/acct-identifiers.html#FindingCanonicalId)\.
 
    ```
    aws s3api put-object-acl --bucket examplebucket --key HappyFace.jpg --grant-full-control id="AccountA-CanonicalUserID" --profile AccountBadmin

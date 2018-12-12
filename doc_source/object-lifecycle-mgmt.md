@@ -1,7 +1,7 @@
 # Object Lifecycle Management<a name="object-lifecycle-mgmt"></a>
 
 To manage your objects so that they are stored cost effectively throughout their lifecycle, configure their lifecycle\.  A *lifecycle configuration* is a set of rules that define actions that Amazon S3 applies to a group of objects\. There are two types of actions:
-+ **Transition actions**—Define when objects transition to another [storage class](http://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html)\. For example, you might choose to transition objects to the STANDARD\_IA storage class 30 days after you created them, or archive objects to the GLACIER storage class one year after creating them\. 
++ **Transition actions**—Define when objects transition to another [storage class](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html)\. For example, you might choose to transition objects to the STANDARD\_IA storage class 30 days after you created them, or archive objects to the GLACIER storage class one year after creating them\. 
 
    
 
@@ -31,11 +31,11 @@ A lifecycle configuration, an XML file, comprises a set of rules with predefined
 
 Amazon S3 provides a set of API operations for managing lifecycle configuration on a bucket\. Amazon S3 stores the configuration as a *lifecycle subresource* that is attached to your bucket\. For details, see the following:
 
-[PUT Bucket lifecycle](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html)
+[PUT Bucket lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html)
 
-[GET Bucket lifecycle](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html)
+[GET Bucket lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html)
 
-[DELETE Bucket lifecycle](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html)
+[DELETE Bucket lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html)
 
 You can also configure the lifecycle by using the Amazon S3 console or programmatically by using the AWS SDK wrapper libraries\. If you need to, you can also make the REST API calls directly\. For more information, see [Setting Lifecycle Configuration on a Bucket](how-to-set-lifecycle-configuration-intro.md)\.
 

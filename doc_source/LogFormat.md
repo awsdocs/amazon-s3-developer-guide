@@ -17,7 +17,7 @@ Any field can be set to `-` to indicate that the data was unknown or unavailable
 The following list describes the log record fields\.
 
 **Bucket Owner**  
-The canonical user ID of the owner of the source bucket\. The canonical user ID is another form of the AWS account ID\. For more information about the canonical user ID, see [AWS Account Identifiers](http://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html)\. For information about how to find the canonical user ID for your account, see [Finding Your Account Canonical User ID](http://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)\.  
+The canonical user ID of the owner of the source bucket\. The canonical user ID is another form of the AWS account ID\. For more information about the canonical user ID, see [AWS Account Identifiers](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html)\. For information about how to find the canonical user ID for your account, see [Finding Your Account Canonical User ID](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)\.  
 **Example Entry**  
 
 ```
@@ -173,7 +173,7 @@ From time to time, we might extend the access log record format by adding new fi
 A copy operation involves a `GET` and a `PUT`\. For that reason, we log two records when performing a copy operation\. The previous table describes the fields related to the `PUT` part of the operation\. The following list describes the fields in the record that relate to the `GET` part of the copy operation\.
 
 **Bucket Owner**  
-The canonical user ID of the bucket that stores the object being copied\. The canonical user ID is another form of the AWS account ID\. For more information about the canonical user ID, see [AWS Account Identifiers](http://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html)\. For information about how to find the canonical user ID for your account, see [Finding Your Account Canonical User ID](http://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)\.  
+The canonical user ID of the bucket that stores the object being copied\. The canonical user ID is another form of the AWS account ID\. For more information about the canonical user ID, see [AWS Account Identifiers](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html)\. For information about how to find the canonical user ID for your account, see [Finding Your Account Canonical User ID](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)\.  
 **Example Entry**  
 
 ```

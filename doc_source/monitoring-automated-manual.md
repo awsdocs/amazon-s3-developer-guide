@@ -19,7 +19,7 @@ Another important part of monitoring Amazon S3 involves manually monitoring thos
   + Service health status\.
 
   In addition, you can use CloudWatch to do the following: 
-  + Create [customized dashboards](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CloudWatch_Dashboards.html) to monitor the services you care about\.
+  + Create [customized dashboards](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CloudWatch_Dashboards.html) to monitor the services you care about\.
   + Graph metric data to troubleshoot issues and discover trends\.
   + Search and browse all your AWS resource metrics\.
   + Create and edit alarms to be notified of problems\.

@@ -2,7 +2,7 @@
 
 This topic explains how to use classes from version 3 of the AWS SDK for PHP to request temporary security credentials for federated users and applications and use them to access resources stored in Amazon S3\. It assumes that you are already following the instructions for [Using the AWS SDK for PHP and Running PHP Examples](UsingTheMPphpAPI.md) and have the AWS SDK for PHP properly installed\. 
 
-You can provide temporary security credentials to your federated users and applications so they can send authenticated requests to access your AWS resources\. When requesting these temporary credentials, you must provide a user name and an IAM policy that describes the resource permissions that you want to grant\. These credentials expire when the session duration expires\. By default, the session duration is one hour\. You can explicitly set a different value for the duration when requesting the temporary security credentials for federated users and applications\. For more information about temporary security credentials, see [Temporary Security Credentials](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) in the *IAM User Guide*\. For information about providing temporary security credentials to your federated users and applications, see [Making Requests](MakingRequests.md)\.
+You can provide temporary security credentials to your federated users and applications so they can send authenticated requests to access your AWS resources\. When requesting these temporary credentials, you must provide a user name and an IAM policy that describes the resource permissions that you want to grant\. These credentials expire when the session duration expires\. By default, the session duration is one hour\. You can explicitly set a different value for the duration when requesting the temporary security credentials for federated users and applications\. For more information about temporary security credentials, see [Temporary Security Credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) in the *IAM User Guide*\. For information about providing temporary security credentials to your federated users and applications, see [Making Requests](MakingRequests.md)\.
 
 For added security when requesting temporary security credentials for federated users and applications, we recommend using a dedicated IAM user with only the necessary access permissions\. The temporary user you create can never get more permissions than the IAM user who requested the temporary security credentials\. For information about identity federation, see [AWS Identity and Access Management FAQs](https://aws.amazon.com/iam/faqs/#What_are_the_best_practices_for_using_temporary_security_credentials)\.
 
@@ -24,7 +24,7 @@ For added security when requesting temporary credentials for others, you use the
  9.   ]
 10. }
 ```
-The policy allows the IAM user to request temporary security credentials and access permission only to list your AWS resources\. For more information about how to create an IAM user, see [Creating Your First IAM User and Administrators Group](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\.   
+The policy allows the IAM user to request temporary security credentials and access permission only to list your AWS resources\. For more information about how to create an IAM user, see [Creating Your First IAM User and Administrators Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\.   
 You can now use the IAM user security credentials to test the following example\. The example sends an authenticated request to Amazon S3 using temporary security credentials\. When requesting temporary security credentials for the federated user \(User1\), the example specifies the following policy, which restricts access to list objects in a specific bucket\. Update the policy with your bucket name\.  
 
 ```
@@ -97,5 +97,5 @@ try {
 ```
 
 ## Related Resources<a name="RelatedResources-AuthUsingTempFederationTokenPHP"></a>
-+ [ AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client Class](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html) 
++ [ AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client Class](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html) 
 + [AWS SDK for PHP Documentation](http://aws.amazon.com/documentation/sdk-for-php/)

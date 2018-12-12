@@ -41,7 +41,7 @@ Each lifecycle rule includes a filter that you can use to identify a subset of o
   ```
 
   Instead of specifying object age in terms of days after creation, you can specify a date for each action\. However, you can't use both `Date` and `Days` in the same rule\. 
-+ If you want the lifecycle rule to apply to all objects in the bucket, specify an empty prefix\. In the following configuration, the rule specifies a `Transition` action directing Amazon S3 to transition objects to the GLACIER storage class 0 days after creation in which case objects are eligible for archival to Amazon Glacier at midnight UTC following creation\. 
++ If you want the lifecycle rule to apply to all objects in the bucket, specify an empty prefix\. In the following configuration, the rule specifies a `Transition` action directing Amazon S3 to transition objects to the GLACIER storage class 0 days after creation in which case objects are eligible for archival to Glacier at midnight UTC following creation\. 
 
   ```
   <LifecycleConfiguration>
@@ -383,7 +383,7 @@ Also, you want to save storage costs by moving noncurrent versions to GLACIER 30
 
 ## Example 7: Removing Expired Object Delete Markers<a name="lifecycle-config-conceptual-ex7"></a>
 
-A versioning\-enabled bucket has one current version and one or more noncurrent versions for each object\. When you delete an object, note the following:
+A versioning\-enabled bucket has one current version and zero or more noncurrent versions for each object\. When you delete an object, note the following:
 + If you don't specify a version ID in your delete request, Amazon S3 adds a delete marker instead of deleting the object\. The current object version becomes noncurrent, and then the delete marker becomes the current version\. 
 + If you specify a version ID in your delete request, Amazon S3 deletes the object version permanently \(a delete marker is not created\)\.
 + A delete marker with zero noncurrent versions is referred to as the *expired object delete marker*\. 

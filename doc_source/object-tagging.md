@@ -53,29 +53,29 @@ While it is acceptable to use tags to label objects containing confidential data
 Amazon S3 supports the following API operations that are specifically for object tagging:
 
 **Object API Operations**
-+  [PUT Object tagging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html) – Replaces tags on an object\. You specify tags in the request body\.  There are two distinct scenarios of object tag management using this API\.
++  [PUT Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html) – Replaces tags on an object\. You specify tags in the request body\.  There are two distinct scenarios of object tag management using this API\.
   + Object has no tags – Using this API you can add a set of tags to an object \(the object has no prior tags\)\.
   + Object has a set of existing tags – To modify the existing tag set, you must first retrieve the existing tag set, modify it on the client side, and then use this API to replace the tag set\. If you send this request with empty tag set, S3 deletes existing tag set on the object\.
 
    
-+  [GET Object tagging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html) – Returns the tag set associated with an object\. Amazon S3 returns object tags in the response body\.
++  [GET Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html) – Returns the tag set associated with an object\. Amazon S3 returns object tags in the response body\.
 
    
-+ [DELETE Object tagging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html) – Deletes the tag set associated with an object\. 
++ [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html) – Deletes the tag set associated with an object\. 
 
 **Other API Operations that Support Tagging**
-+  [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) and [Initiate Multipart Upload](http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)– You can specify tags when you create objects\. You specify tags using the `x-amz-tagging` request header\. 
++  [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) and [Initiate Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)– You can specify tags when you create objects\. You specify tags using the `x-amz-tagging` request header\. 
 
    
-+  [GET Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html) – Instead of returning the tag set, Amazon S3 returns the object tag count in the `x-amz-tag-count` header \(only if the requester has permissions to read tags\) because the header response size is limited to 8 K bytes\. If you want to view the tags, you make another request for the [GET Object tagging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html) API operation\.
++  [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html) – Instead of returning the tag set, Amazon S3 returns the object tag count in the `x-amz-tag-count` header \(only if the requester has permissions to read tags\) because the header response size is limited to 8 K bytes\. If you want to view the tags, you make another request for the [GET Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html) API operation\.
 
    
-+ [POST Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html) – You can specify tags in your POST request\. 
++ [POST Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html) – You can specify tags in your POST request\. 
 
   As long as the tags in your request don't exceed the 8 K byte HTTP request header size limit, you can use the `PUT Object `API to create objects with tags\. If the tags you specify exceed the header size limit, you can use this POST method in which you include the tags in the body\. 
 
    
-+  [PUT Object \- Copy](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html) – You can specify the `x-amz-tagging-directive` in your request to direct Amazon S3 to either copy \(default behavior\) the tags or replace tags by a new set of tags provided in the request\. 
++  [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html) – You can specify the `x-amz-tagging-directive` in your request to direct Amazon S3 to either copy \(default behavior\) the tags or replace tags by a new set of tags provided in the request\. 
 
 Note the following:
 + Tagging follows the eventual consistency model\. That is, soon after adding tags to an object, if you try to retrieve the tags, you might get old tags, if any, on the objects\. However, a subsequent call will likely provide the updated tags\.
@@ -96,7 +96,7 @@ or
 phototype=finished
 ```
 
-You might consider archiving the raw photos to Amazon Glacier sometime after they are created\. You can configure a lifecycle rule with a filter that identifies the subset of objects with the key name prefix \(`photos/`\) that have a specific tag \(`phototype=raw`\)\. 
+You might consider archiving the raw photos to Glacier sometime after they are created\. You can configure a lifecycle rule with a filter that identifies the subset of objects with the key name prefix \(`photos/`\) that have a specific tag \(`phototype=raw`\)\. 
 
 For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\. 
 
@@ -214,7 +214,7 @@ The policy ensures that the tag set, if specified in the request, has the specif
   ]
 }
 ```
-For more information, see [Creating a Condition That Tests Multiple Key Values \(Set Operations\)](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_multi-value-conditions.html) in the *IAM User Guide*\.
+For more information, see [Creating a Condition That Tests Multiple Key Values \(Set Operations\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_multi-value-conditions.html) in the *IAM User Guide*\.
 
 **Example 3: Allow a User to Add Object Tags that Include a Specific Tag Key and Value**  
 The following user policy grants a user permissions to perform the `s3:PutObjectTagging` action, which allows user to add tags on an existing object\. The condition requires the user to include a specific tag \(`Project`\) with value set to `X`\.   

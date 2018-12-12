@@ -21,7 +21,7 @@ Following is an example of a REST Error Response\.
 7. </Error>
 ```
 
-For more information about Amazon S3 errors, go to [ErrorCodeList](http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)\.
+For more information about Amazon S3 errors, go to [ErrorCodeList](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)\.
 
 ## Response Headers<a name="UsingRESTErrorResponseHeaders"></a>
 

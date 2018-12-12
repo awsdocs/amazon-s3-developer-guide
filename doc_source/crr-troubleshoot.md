@@ -1,4 +1,4 @@
-# Cross\-Region Replication: Troubleshooting<a name="crr-troubleshoot"></a>
+# Troubleshooting Cross\-Region Replication<a name="crr-troubleshoot"></a>
 
 If object replicas don't appear in the destination bucket after you configure cross\-region replication, use these troubleshooting tips to identify and fix issues\.
 + The time it takes Amazon S3 to replicate an object depends on the size of the object\. For large objects, replication can take up to several hours\. If the object that is being replicated is large, check later to see if it appears in the destination bucket\. You can also check the source object replication status\. If object replication status is pending, then you know Amazon S3 has not completed the replication\. If object replication status is failed, you should check the replication configuration set on the source bucket\.

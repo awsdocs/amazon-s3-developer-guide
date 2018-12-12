@@ -24,7 +24,7 @@ Or, if your bucket is named `example-bucket` and it resides in the EU \(Frankfur
 1. http://example-bucket.s3-website.eu-central-1.amazonaws.com/
 ```
 
-For a list of the Amazon S3 website endpoints by Region, see [Amazon Simple Storage Service Website Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_website_region_endpoints) in the * AWS General Reference*\. 
+For a list of the Amazon S3 website endpoints by Region, see [Amazon Simple Storage Service Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_website_region_endpoints) in the * AWS General Reference*\. 
 
  In order for your customers to access content at the website endpoint, you must make all your content publicly readable\. To do so, you can use a bucket policy or an ACL on an object to grant the necessary permissions\. 
 

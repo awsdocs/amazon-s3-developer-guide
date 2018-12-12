@@ -1,7 +1,7 @@
-# Generate a Pre\-signed Object URL Using AWS SDK for \.NET<a name="ShareObjectPreSignedURLDotNetSDK"></a>
+# Generate a Presigned Object URL Using AWS SDK for \.NET<a name="ShareObjectPreSignedURLDotNetSDK"></a>
 
 **Example**  
-The following example generates a pre\-signed URL that you can give to others so that they can retrieve an object\. For more information, see [Share an Object with Others](ShareObjectPreSignedURL.md)\.   
+The following example generates a presigned URL that you can give to others so that they can retrieve an object\. For more information, see [Share an Object with Others](ShareObjectPreSignedURL.md)\.   
 For instructions about how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```

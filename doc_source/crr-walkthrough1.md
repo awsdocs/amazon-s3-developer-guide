@@ -1,12 +1,12 @@
 # Example 1: Configure CRR When Source and Destination Buckets Are Owned by the Same AWS Account<a name="crr-walkthrough1"></a>
 
-In this example, you set up cross\-region replication \(CRR\) where source and destination buckets are owned by the same AWS accounts\. Examples are provided for using the Amazon S3 console, the AWS Command Line Interface \(AWS CLI\), and the the AWS SDK for Java and AWS SDK for \.NET\.
+In this example, you set up cross\-region replication \(CRR\) where source and destination buckets are owned by the same AWS accounts\. Examples are provided for using the Amazon S3 console, the AWS Command Line Interface \(AWS CLI\), and the AWS SDK for Java and AWS SDK for \.NET\.
 
 **Topics**
 
 ## Configure CRR When Source and Destination Buckets Are Owned by the Same AWS Account \(Console\)<a name="crr-ex1-console"></a>
 
-For step\-by\-step instructions, see [How Do I Add a Cross\-Region Replication \(CRR\) Rule to an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-crr.html) in the *Amazon Simple Storage Service Console User Guide*\. This topic provides instructions for setting replication configuration when buckets are owned by same and different AWS accounts\.
+For step\-by\-step instructions, see [How Do I Add a Cross\-Region Replication \(CRR\) Rule to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-crr.html) in the *Amazon Simple Storage Service Console User Guide*\. This topic provides instructions for setting replication configuration when buckets are owned by same and different AWS accounts\.
 
 ## Configure CRR When Source and Destination Buckets Are Owned by the Same AWS Account \(AWS CLI\)<a name="crr-ex1-cli"></a>
 
@@ -16,7 +16,7 @@ To set up CRR when the source and destination buckets are owned by the same AWS 
 
 1. Set a credentials profile for the AWS CLI\. In this example, we use the profile name `acctA`\. For information about setting credential profiles, see [Named Profiles](https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html) in the *AWS Command Line Interface User Guide*\. 
 **Important**  
-The profile you use for this exercise must have necessary permissions\. For example, in the replication configuration, you specify the IAM role that Amazon S3 can assume\. You can do this only if the profile you use has the `iam:PassRole` permission\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\. If you use an administrator user credentials to create a named profile then you can perform all the tasks\. 
+The profile you use for this exercise must have necessary permissions\. For example, in the replication configuration, you specify the IAM role that Amazon S3 can assume\. You can do this only if the profile you use has the `iam:PassRole` permission\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\. If you use an administrator user credentials to create a named profile then you can perform all the tasks\. 
 
 1. Create a *source* bucket and enable versioning on it\. The following code creates a *source* bucket in the US East \(N\. Virginia\) \(us\-east\-1\) Region\.
 
@@ -186,7 +186,7 @@ To set up replication configuration when both source and destination buckets are
 
    1. Add sample objects to the `Tax` folder in the *source* bucket\. 
 **Note**  
-The amount of time it takes for Amazon S3 to replicate an object depends on the size of the object\. For information about how to see the status of replication, see [Cross\-Region Replication: Status Information](crr-status.md)\.
+The amount of time it takes for Amazon S3 to replicate an object depends on the size of the object\. For information about how to see the status of replication, see [Cross\-Region Replication Status Information](crr-status.md)\.
 
       In the *destination* bucket, verify the following:
       + That Amazon S3 replicated the objects\.
@@ -196,7 +196,7 @@ The amount of time it takes for Amazon S3 to replicate an object depends on the 
 
    1. Update an object's ACL in the *source* bucket and verify that changes appear in the *destination* bucket\.
 
-      For instructions, see [How Do I Set Permissions on an Object?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/set-object-permissions.html) in the *Amazon Simple Storage Service Console User Guide*\.
+      For instructions, see [How Do I Set Permissions on an Object?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/set-object-permissions.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Configure CRR When Source and Destination Buckets Are Owned by the Same AWS Account \(AWS SDK\)<a name="crr-ex1-sdk"></a>
 

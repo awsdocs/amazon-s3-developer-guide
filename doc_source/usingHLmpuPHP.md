@@ -1,6 +1,6 @@
 # Using the AWS PHP SDK for Multipart Upload<a name="usingHLmpuPHP"></a>
 
-You can upload large files to Amazon S3 in multiple parts\. You must use a multipart upload for files larger than 5 GB\. The AWS SDK for PHP exposes the [MultipartUploader](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.MultipartUploader.html) class that simplifies multipart uploads\. 
+You can upload large files to Amazon S3 in multiple parts\. You must use a multipart upload for files larger than 5 GB\. The AWS SDK for PHP exposes the [MultipartUploader](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.MultipartUploader.html) class that simplifies multipart uploads\. 
 
 The `upload` method of the `MultipartUploader` class is best used for a simple multipart upload\. If you need to pause and resume multipart uploads, vary part sizes during the upload, or do not know the size of the data in advance, use the low\-level PHP API\. For more information, see [Using the AWS PHP SDK for Multipart Upload \(Low\-Level API\)](usingLLmpuPHP.md)\. 
 
@@ -47,6 +47,6 @@ try {
 ```
 
 ### Related Resources<a name="RelatedResources-HLuploadFilePHP"></a>
-+ [ AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client Class](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html) 
-+ [ Amazon S3 Multipart Uploads](http://docs.aws.amazon.com/aws-sdk-php/v3/guide/service/s3-multipart-upload.html) 
++ [ AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client Class](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html) 
++ [ Amazon S3 Multipart Uploads](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/service/s3-multipart-upload.html) 
 + [AWS SDK for PHP Documentation](http://aws.amazon.com/documentation/sdk-for-php/)

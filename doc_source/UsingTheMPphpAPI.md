@@ -4,7 +4,7 @@ The AWS SDK for PHP provides access to the API for Amazon S3 bucket and object o
 
 The SDK is available at [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/), which also has instructions for installing and getting started with the SDK\. 
 
-The setup for using the AWS SDK for PHP depends on your environment and how you want to run your application\. To set up your environment to run the examples in this documentation, see the [AWS SDK for PHP Getting Started Guide](http://docs.aws.amazon.com/aws-sdk-php/v2/guide/index.html#getting-started)\.
+The setup for using the AWS SDK for PHP depends on your environment and how you want to run your application\. To set up your environment to run the examples in this documentation, see the [AWS SDK for PHP Getting Started Guide](https://docs.aws.amazon.com/aws-sdk-php/v2/guide/index.html#getting-started)\.
 
 **Topics**
 + [AWS SDK for PHP Levels](#TheMPphpAPI)
@@ -27,8 +27,8 @@ As another example, when enumerating objects in a bucket, you can use the iterat
 
 ## Running PHP Examples<a name="running-php-samples"></a>
 
-To set up and use the Amazon S3 samples for version 3 of the AWS SDK for PHP, see [Installation](http://docs.aws.amazon.com/aws-sdk-php/guide/latest/getting-started/installation.html) in the AWS SDK for PHP Developer Guide\.
+To set up and use the Amazon S3 samples for version 3 of the AWS SDK for PHP, see [Installation](https://docs.aws.amazon.com/aws-sdk-php/guide/latest/getting-started/installation.html) in the AWS SDK for PHP Developer Guide\.
 
 ## Related Resources<a name="RelatedResources-UsingTheMPphpAPI"></a>
-+ [AWS SDK for PHP for Amazon S3](http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/service-s3.html)
-+ [AWS SDK for PHP Documentation](http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/index.html)
++ [AWS SDK for PHP for Amazon S3](https://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/service-s3.html)
++ [AWS SDK for PHP Documentation](https://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/index.html)

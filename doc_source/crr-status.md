@@ -1,4 +1,4 @@
-# Cross\-Region Replication: Status Information<a name="crr-status"></a>
+# Cross\-Region Replication Status Information<a name="crr-status"></a>
 
 To get the cross\-region replication \(CRR\) status of the objects in a bucket, use the Amazon S3 inventory tool\. Amazon S3 sends a \.csv file to the destination bucket that you specify in the inventory configuration\. You can also use Amazon Athena to query replication status in the inventory report\. For more information about Amazon S3 inventory, see [ Amazon S3 Inventory](storage-inventory.md)\.
 

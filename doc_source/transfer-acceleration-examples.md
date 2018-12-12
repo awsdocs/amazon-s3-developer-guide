@@ -13,7 +13,7 @@ This section provides examples of how to enable Amazon S3 Transfer Acceleration 
 
 ## Using the Amazon S3 Console<a name="transfer-acceleration-examples-console"></a>
 
-For information about enabling Transfer Acceleration on a bucket using the Amazon S3 console, see [Enabling Transfer Acceleration](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-transfer-acceleration.html) in the *Amazon Simple Storage Service Console User Guide*\.
+For information about enabling Transfer Acceleration on a bucket using the Amazon S3 console, see [Enabling Transfer Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-transfer-acceleration.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Using Transfer Acceleration from the AWS Command Line Interface \(AWS CLI\)<a name="transfer-acceleration-examples-aws-cli"></a>
 
@@ -21,7 +21,7 @@ This section provides examples of AWS CLI commands used for Transfer Acceleratio
 
 ### Enabling Transfer Acceleration on a Bucket Using the AWS CLI<a name="transfer-acceleration-examples-aws-cli-1"></a>
 
-Use the AWS CLI [ put\-bucket\-accelerate\-configuration](http://docs.aws.amazon.com/cli/latest/reference/s3api/put-bucket-accelerate-configuration.html) command to enable or suspend Transfer Acceleration on a bucket\. The following example sets `Status=Enabled` to enable Transfer Acceleration on a bucket\. You use `Status=Suspended` to suspend Transfer Acceleration\.
+Use the AWS CLI [ put\-bucket\-accelerate\-configuration](https://docs.aws.amazon.com/cli/latest/reference/s3api/put-bucket-accelerate-configuration.html) command to enable or suspend Transfer Acceleration on a bucket\. The following example sets `Status=Enabled` to enable Transfer Acceleration on a bucket\. You use `Status=Suspended` to suspend Transfer Acceleration\.
 
 **Example**  
 
@@ -33,7 +33,7 @@ $ aws s3api put-bucket-accelerate-configuration --bucket bucketname --accelerate
 
 Setting the configuration value `use_accelerate_endpoint` to `true` in a profile in your AWS Config File will direct all Amazon S3 requests made by s3 and s3api AWS CLI commands to the accelerate endpoint: `s3-accelerate.amazonaws.com`\. Transfer Acceleration must be enabled on your bucket to use the accelerate endpoint\. 
 
-All request are sent using the virtual style of bucket addressing:  `my-bucket.s3-accelerate.amazonaws.com`\. Any `ListBuckets`, `CreateBucket`, and `DeleteBucket` requests will not be sent to the accelerate endpoint as the endpoint does not support those operations\. For more information about `use_accelerate_endpoint`, see [AWS CLI S3 Configuration](http://docs.aws.amazon.com/cli/latest/topic/s3-config.html)\. 
+All request are sent using the virtual style of bucket addressing:  `my-bucket.s3-accelerate.amazonaws.com`\. Any `ListBuckets`, `CreateBucket`, and `DeleteBucket` requests will not be sent to the accelerate endpoint as the endpoint does not support those operations\. For more information about `use_accelerate_endpoint`, see [AWS CLI S3 Configuration](https://docs.aws.amazon.com/cli/latest/topic/s3-config.html)\. 
 
 The following example sets `use_accelerate_endpoint` to `true` in the default profile\.
 
@@ -210,11 +210,11 @@ var client = new AmazonS3Client(new AmazonS3Config
 
 ## Using Transfer Acceleration from the AWS SDK for JavaScript<a name="transfer-acceleration-examples-javascript"></a>
 
-For an example of enabling Transfer Acceleration by using the AWS SDK for JavaScript, see [Calling the putBucketAccelerateConfiguration operation](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putBucketAccelerateConfiguration-property) in the *AWS SDK for JavaScript API Reference*\.
+For an example of enabling Transfer Acceleration by using the AWS SDK for JavaScript, see [Calling the putBucketAccelerateConfiguration operation](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putBucketAccelerateConfiguration-property) in the *AWS SDK for JavaScript API Reference*\.
 
 ## Using Transfer Acceleration from the AWS SDK for Python \(Boto\)<a name="transfer-acceleration-examples-python"></a>
 
-For an example of enabling Transfer Acceleration by using the SDK for Python, see [ put\_bucket\_accelerate\_configuration](http://boto3.readthedocs.org/en/latest/reference/services/s3.html#S3.Client.put_bucket_accelerate_configuration) in the *AWS SDK for Python \(Boto 3\) API Reference*\.
+For an example of enabling Transfer Acceleration by using the SDK for Python, see [ put\_bucket\_accelerate\_configuration](http://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.put_bucket_accelerate_configuration) in the *AWS SDK for Python \(Boto 3\) API Reference*\.
 
 ## Using Other AWS SDKs<a name="transfer-acceleration-examples-sdks"></a>
 

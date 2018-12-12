@@ -5,7 +5,7 @@ Use versioning to keep multiple versions of an object in one bucket\. For exampl
 **Note**  
 The SOAP API does not support versioning\. SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features are not supported for SOAP\.
 
-To customize your data retention approach and control storage costs, use object versioning with [Object Lifecycle Management](object-lifecycle-mgmt.md)\. For information about creating lifecycle policies using the AWS Management Console, see [ How Do I Create a Lifecycle Policy for an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html) in the *Amazon Simple Storage Service Console User Guide*\.
+To customize your data retention approach and control storage costs, use object versioning with [Object Lifecycle Management](object-lifecycle-mgmt.md)\. For information about creating lifecycle policies using the AWS Management Console, see [ How Do I Create a Lifecycle Policy for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 If you have an object expiration lifecycle policy in your non\-versioned bucket and you want to maintain the same permanent delete behavior when you enable versioning, you must add a noncurrent expiration policy\. The noncurrent expiration lifecycle policy will manage the deletes of the noncurrent object versions in the version\-enabled bucket\. \(A version\-enabled bucket maintains one current and zero or more noncurrent object versions\.\)
 

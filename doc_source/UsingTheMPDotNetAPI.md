@@ -32,8 +32,8 @@ When writing Amazon S3 applications using the AWS SDK for \.NET, you use the `AW
 + **Amazon\.S3\.Encryption—** Provides `AmazonS3EncryptionClient`\.
 + **Amazon\.S3\.Util—** Provides various utility classes such as `AmazonS3Util` and `BucketRegionDetector`\.
 
-For more information about the AWS SDK for \.NET API, see [AWS SDK for \.NET Version 3 API Reference](http://docs.aws.amazon.com/sdkfornet/v3/apidocs/Index.html)\. 
+For more information about the AWS SDK for \.NET API, see [AWS SDK for \.NET Version 3 API Reference](https://docs.aws.amazon.com/sdkfornet/v3/apidocs/Index.html)\. 
 
 ## Running the Amazon S3 \.NET Code Examples<a name="TestingDotNetApiSamples"></a>
 
-The \.NET code examples in this guide are compatible with the AWS SDK for \.NET version 3\.0\. For information about setting up and running the code examples, see [Getting Started with the AWS SDK for \.NET](http://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-setup.html) in the *AWS SDK for \.NET Developer Guide*\. 
+The \.NET code examples in this guide are compatible with the AWS SDK for \.NET version 3\.0\. For information about setting up and running the code examples, see [Getting Started with the AWS SDK for \.NET](https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-setup.html) in the *AWS SDK for \.NET Developer Guide*\. 

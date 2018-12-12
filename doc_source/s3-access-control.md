@@ -7,3 +7,4 @@ Amazon S3 offers access policy options broadly categorized as resource\-based po
 We recommend you first review the access control overview topics\. For more information, see [Introduction to Managing Access Permissions to Your Amazon S3 Resources](intro-managing-access-s3-resources.md)\. Then for more information about specific access policy options, see the following topics:
 +  [Using Bucket Policies and User Policies](using-iam-policies.md) 
 + [Managing Access with ACLs](S3_ACLs_UsingACLs.md)
++ [Using Amazon S3 Block Public Access](access-control-block-public-access.md)

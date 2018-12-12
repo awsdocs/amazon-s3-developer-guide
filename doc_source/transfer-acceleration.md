@@ -30,8 +30,8 @@ You can access the Speed Comparison tool using either of the following methods:
 
    
 
-  For a list of the regions supported by Amazon S3, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *Amazon Web Services General Reference*\.
-+ Use the Amazon S3 console\. For details, see [Enabling Transfer Acceleration](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-transfer-acceleration.html) in the *Amazon Simple Storage Service Console User Guide*\.
+  For a list of the regions supported by Amazon S3, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *Amazon Web Services General Reference*\.
++ Use the Amazon S3 console\. For details, see [Enabling Transfer Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-transfer-acceleration.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Getting Started with Amazon S3 Transfer Acceleration<a name="transfer-acceleration-getting-started"></a>
 
@@ -40,8 +40,8 @@ To get started using Amazon S3 Transfer Acceleration, perform the following step
 1. **Enable Transfer Acceleration on a bucket** – For your bucket to work with transfer acceleration, the bucket name must conform to DNS naming requirements and must not contain periods \("\."\)\. 
 
    You can enable Transfer Acceleration on a bucket any of the following ways:
-   + Use the Amazon S3 console\. For more information, see [Enabling Transfer Acceleration](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-transfer-acceleration.html) in the *Amazon Simple Storage Service Console User Guide*\.
-   + Use the REST API [PUT Bucket accelerate](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTaccelerate.html) operation\.
+   + Use the Amazon S3 console\. For more information, see [Enabling Transfer Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-transfer-acceleration.html) in the *Amazon Simple Storage Service Console User Guide*\.
+   + Use the REST API [PUT Bucket accelerate](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTaccelerate.html) operation\.
    + Use the AWS CLI and AWS SDKs\. For more information, see [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)\. 
 
 1. **Transfer data to and from the acceleration\-enabled bucket by using one of the following s3\-accelerate endpoint domain names**:
@@ -52,13 +52,13 @@ Support for the dual\-stack accelerated endpoint currently is only available fro
 **Note**  
 You can continue to use the regular endpoint in addition to the accelerate endpoints\.
 
-   You can point your Amazon S3 PUT object and GET object requests to the s3\-accelerate endpoint domain name after you enable Transfer Acceleration\. For example, let's say you currently have a REST API application using [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) that uses the host name **mybucket\.s3\.amazonaws\.com ** in the `PUT` request\. To accelerate the `PUT` you simply change the host name in your request to **mybucket\.s3\-accelerate\.amazonaws\.com**\. To go back to using the standard upload speed, simply change the name back to **mybucket\.s3\.amazonaws\.com**\.
+   You can point your Amazon S3 PUT object and GET object requests to the s3\-accelerate endpoint domain name after you enable Transfer Acceleration\. For example, let's say you currently have a REST API application using [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) that uses the host name **mybucket\.s3\.amazonaws\.com ** in the `PUT` request\. To accelerate the `PUT` you simply change the host name in your request to **mybucket\.s3\-accelerate\.amazonaws\.com**\. To go back to using the standard upload speed, simply change the name back to **mybucket\.s3\.amazonaws\.com**\.
 
    After Transfer Acceleration is enabled, it can take up to 20 minutes for you to realize the performance benefit\. However, the accelerate endpoint will be available as soon as you enable Transfer Acceleration\.
 
    You can use the accelerate endpoint in the AWS CLI, AWS SDKs, and other tools that transfer data to and from Amazon S3\. If you are using the AWS SDKs, some of the supported languages use an accelerate endpoint client configuration flag so you don't need to explicitly set the endpoint for Transfer Acceleration to *bucketname*\.s3\-accelerate\.amazonaws\.com\. For examples of how to use an accelerate endpoint client configuration flag, see [Amazon S3 Transfer Acceleration Examples](transfer-acceleration-examples.md)\.
 
-You can use all of the Amazon S3 operations through the transaction acceleration endpoints, except for the following the operations: [GET Service \(list buckets\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html), [PUT Bucket \(create bucket\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html), and [DELETE Bucket](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETE.html)\. Also, Amazon S3 Transfer Acceleration does not support cross region copies using [PUT Object \- Copy](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\. 
+You can use all of the Amazon S3 operations through the transaction acceleration endpoints, except for the following the operations: [GET Service \(list buckets\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html), [PUT Bucket \(create bucket\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html), and [DELETE Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETE.html)\. Also, Amazon S3 Transfer Acceleration does not support cross region copies using [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\. 
 
 ## Requirements for Using Amazon S3 Transfer Acceleration<a name="transfer-acceleration-requirements"></a>
 
@@ -70,5 +70,5 @@ The following are the requirements for using Transfer Acceleration on an S3 buck
 + You must be the bucket owner to set the transfer acceleration state\. The bucket owner can assign permissions to other users to allow them to set the acceleration state on a bucket\. The `s3:PutAccelerateConfiguration` permission permits users to enable or disable Transfer Acceleration on a bucket\. The `s3:GetAccelerateConfiguration` permission permits users to return the Transfer Acceleration state of a bucket, which is either `Enabled` or `Suspended.` For more information about these permissions, see [Permissions Related to Bucket Subresource Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-bucket-subresources) and [Managing Access Permissions to Your Amazon S3 Resources](s3-access-control.md)\.
 
 ### More Info<a name="transfer-acceleration-moreinfo"></a>
-+ [GET Bucket accelerate](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETaccelerate.html)
-+ [PUT Bucket accelerate](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTaccelerate.html)
++ [GET Bucket accelerate](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETaccelerate.html)
++ [PUT Bucket accelerate](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTaccelerate.html)

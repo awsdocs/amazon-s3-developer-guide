@@ -92,13 +92,13 @@ In the `AllowedOrigin` element, you specify the origins that you want to allow c
 
 ### AllowedHeader Element<a name="cors-allowed-headers"></a>
 
-The `AllowedHeader` element specifies which headers are allowed in a preflight request through the `Access-Control-Request-Headers` header\. Each header name in the `Access-Control-Request-Headers` header must match a corresponding entry in the rule\. Amazon S3 will send only the allowed headers in a response that were requested\. For a sample list of headers that can be used in requests to Amazon S3, go to [Common Request Headers](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html) in the *Amazon Simple Storage Service API Reference* guide\.
+The `AllowedHeader` element specifies which headers are allowed in a preflight request through the `Access-Control-Request-Headers` header\. Each header name in the `Access-Control-Request-Headers` header must match a corresponding entry in the rule\. Amazon S3 will send only the allowed headers in a response that were requested\. For a sample list of headers that can be used in requests to Amazon S3, go to [Common Request Headers](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html) in the *Amazon Simple Storage Service API Reference* guide\.
 
 Each AllowedHeader string in the rule can contain at most one \* wildcard character\. For example, `<AllowedHeader>x-amz-*</AllowedHeader>` will enable all Amazon\-specific headers\.
 
 ### ExposeHeader Element<a name="cors-expose-headers"></a>
 
-Each `ExposeHeader` element identifies a header in the response that you want customers to be able to access from their applications \(for example, from a JavaScript `XMLHttpRequest` object\)\. For a list of common Amazon S3 response headers, go to [Common Response Headers](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonResponseHeaders.html) in the *Amazon Simple Storage Service API Reference* guide\.
+Each `ExposeHeader` element identifies a header in the response that you want customers to be able to access from their applications \(for example, from a JavaScript `XMLHttpRequest` object\)\. For a list of common Amazon S3 response headers, go to [Common Response Headers](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonResponseHeaders.html) in the *Amazon Simple Storage Service API Reference* guide\.
 
 ### MaxAgeSeconds Element<a name="cors-max-age"></a>
 

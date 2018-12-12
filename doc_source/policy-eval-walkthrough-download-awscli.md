@@ -6,15 +6,15 @@ The introductory examples \(see [Example Walkthroughs: Managing Access to Your A
 
 1. Download and configure the AWS CLI\. For instructions, see the following topics in the *AWS Command Line Interface User Guide*\. 
 
-    [Getting Set Up with the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html) 
+    [Getting Set Up with the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html) 
 
-    [Installing the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) 
+    [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) 
 
-   [Configuring the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
+   [Configuring the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
 
 1. Set the default profile\. 
 
-   You will store user credentials in the AWS CLI config file\. Create a default profile in the config file using your AWS account credentials\. See [Configuration and Credential Files](http://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html) for instructions on finding and editing your AWS CLI config file\.
+   You will store user credentials in the AWS CLI config file\. Create a default profile in the config file using your AWS account credentials\. See [Configuration and Credential Files](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html) for instructions on finding and editing your AWS CLI config file\.
 
    ```
    [default]
@@ -63,9 +63,9 @@ $ export AWS_DEFAULT_PROFILE=AccountAadmin
 
 **To set up AWS Tools for Windows PowerShell**
 
-1. Download and configure the AWS Tools for Windows PowerShell\. For instructions, go to [Download and Install the AWS Tools for Windows PowerShell](http://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up.html#pstools-installing-download) in the *AWS Tools for Windows PowerShell User Guide*\. 
+1. Download and configure the AWS Tools for Windows PowerShell\. For instructions, go to [Download and Install the AWS Tools for Windows PowerShell](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up.html#pstools-installing-download) in the *AWS Tools for Windows PowerShell User Guide*\. 
 **Note**  
- In order to load the AWS Tools for Windows PowerShell module, you need to enable PowerShell script execution\. For more information, go to [Enable Script Execution](http://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up.html#enable-script-execution) in the *AWS Tools for Windows PowerShell User Guide*\.
+ In order to load the AWS Tools for Windows PowerShell module, you need to enable PowerShell script execution\. For more information, go to [Enable Script Execution](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up.html#enable-script-execution) in the *AWS Tools for Windows PowerShell User Guide*\.
 
 1. For these exercises, you will specify AWS credentials per session using the `Set-AWSCredentials` command\. The command saves the credentials to a persistent store \(`-StoreAs `parameter\)\.
 
@@ -85,6 +85,6 @@ $ export AWS_DEFAULT_PROFILE=AccountAadmin
      Get-S3Object -BucketName bucketname -StoredCredentials string
      ```
 
-For a list of commands, go to [Amazon Simple Storage Service Cmdlets](http://docs.aws.amazon.com/powershell/latest/reference/Index.html)\. 
+For a list of commands, go to [Amazon Simple Storage Service Cmdlets](https://docs.aws.amazon.com/powershell/latest/reference/Index.html)\. 
 
 Now you are ready to try the exercises\. Follow the links provided at the beginning of the section\.

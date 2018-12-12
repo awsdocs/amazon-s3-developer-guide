@@ -37,9 +37,9 @@ You will do the following in this walkthrough:
 
 Follow the steps to create and subscribe to an Amazon Simple Notification Service \(Amazon SNS\) topic\.
 
-1. Using Amazon SNS console create a topic\. For instructions, see [Create a Topic](http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in the *Amazon Simple Notification Service Developer Guide*\. 
+1. Using Amazon SNS console create a topic\. For instructions, see [Create a Topic](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in the *Amazon Simple Notification Service Developer Guide*\. 
 
-1. Subscribe to the topic\. For this exercise, use email as the communications protocol\. For instructions, see [Subscribe to a Topic](http://docs.aws.amazon.com/sns/latest/dg/SubscribeTopic.html) in the *Amazon Simple Notification Service Developer Guide*\. 
+1. Subscribe to the topic\. For this exercise, use email as the communications protocol\. For instructions, see [Subscribe to a Topic](https://docs.aws.amazon.com/sns/latest/dg/SubscribeTopic.html) in the *Amazon Simple Notification Service Developer Guide*\. 
 
    You will get email requesting you to confirm your subscription to the topic\. Confirm the subscription\. 
 
@@ -80,7 +80,7 @@ Follow the steps to create and subscribe to an Amazon Simple Notification Servic
 
 Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Amazon SQS\) queue\.
 
-1. Using the Amazon SQS console, create a queue\. For instructions, see [Getting Started with Amazon SQS](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-getting-started.html) in the *Amazon Simple Queue Service Developer Guide*\. 
+1. Using the Amazon SQS console, create a queue\. For instructions, see [Getting Started with Amazon SQS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-getting-started.html) in the *Amazon Simple Queue Service Developer Guide*\. 
 
 1. Replace the access policy attached to the queue with the following policy \(in the SQS console, you select the queue, and in the **Permissions** tab, click **Edit Policy Document \(Advanced\)**\.
 
@@ -107,7 +107,7 @@ Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Ama
    }
    ```
 
-1. \(Optional\) If the Amazon SQS queue is server\-side encryption \(SSE\) enabled, add the following policy to the associated custom AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. You must add the policy to a custom CMK because the default AWS managed CMK for Amazon SQS cannot be modified\. For more information about using SSE for Amazon SQS with AWS KMS, see [Protecting Data Using Server\-Side Encryption \(SSE\) and AWS KMS](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html)\. 
+1. \(Optional\) If the Amazon SQS queue is server\-side encryption \(SSE\) enabled, add the following policy to the associated custom AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. You must add the policy to a custom CMK because the default AWS managed CMK for Amazon SQS cannot be modified\. For more information about using SSE for Amazon SQS with AWS KMS, see [Protecting Data Using Server\-Side Encryption \(SSE\) and AWS KMS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html)\. 
 
    ```
    {
@@ -150,7 +150,7 @@ Using the Amazon S3 console, add a notification configuration requesting Amazon 
 
 After you save the notification configuration, Amazon S3 will post a test message, which you will get via email\. 
 
-For instructions, see [How Do I Enable and Configure Event Notifications for an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+For instructions, see [How Do I Enable and Configure Event Notifications for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
 ### Step 3 \(option b\): Enable Notifications on a Bucket Using the AWS SDK for \.NET<a name="step2-enable-notification-using-awssdk-dotnet"></a>
 
@@ -291,4 +291,4 @@ public class EnableNotificationOnABucket {
 
 ## Step 4: Test the Setup<a name="notification-walkthrough-1-test"></a>
 
-Now you can test the setup by uploading an object to your bucket and verify the event notification in the Amazon SQS console\. For instructions, see [Receiving a Message](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-getting-started.htmlReceiveMessage.html) in the *Amazon Simple Queue Service Developer Guide "Getting Started" section*\. 
+Now you can test the setup by uploading an object to your bucket and verify the event notification in the Amazon SQS console\. For instructions, see [Receiving a Message](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-getting-started.htmlReceiveMessage.html) in the *Amazon Simple Queue Service Developer Guide "Getting Started" section*\. 

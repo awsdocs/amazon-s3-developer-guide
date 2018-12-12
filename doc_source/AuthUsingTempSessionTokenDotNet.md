@@ -17,7 +17,7 @@ If you obtain temporary security credentials using your AWS account security cre
 
 The following C\# example lists object keys in the specified bucket\. For illustration, the example obtains temporary security credentials for a default one\-hour session and uses them to send authenticated request to Amazon S3\. 
 
-If you want to test the sample using IAM user credentials, you need to create an IAM user under your AWS account\. For more information about how to create an IAM user, see [Creating Your First IAM User and Administrators Group](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\. For more information about making requests, see [Making Requests](MakingRequests.md)\.
+If you want to test the sample using IAM user credentials, you need to create an IAM user under your AWS account\. For more information about how to create an IAM user, see [Creating Your First IAM User and Administrators Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\. For more information about making requests, see [Making Requests](MakingRequests.md)\.
 
  For instructions on creating and testing a working example, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\. 
 

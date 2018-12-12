@@ -119,7 +119,7 @@ We recommend that you use the `s3:GetObjectVersionForReplication` action instead
   }
   ```
 
-  The AWS account that owns the IAM role must have permissions for these AWS KMS actions \(`kms:Encrypt` and `kms:Decrypt`\) for AWS KMS keys listed in the policy\. If the AWS KMS keys are owned by another AWS account, the key owner must grant these permissions to the AWS account that owns the IAM role\. For more information about managing access to these keys, see [Using IAM Policies with AWS KMS](http://docs.aws.amazon.com/kms/latest/developerguide/control-access-overview.html#overview-policy-elements) in the* AWS Key Management Service Developer Guide*\.
+  The AWS account that owns the IAM role must have permissions for these AWS KMS actions \(`kms:Encrypt` and `kms:Decrypt`\) for AWS KMS keys listed in the policy\. If the AWS KMS keys are owned by another AWS account, the key owner must grant these permissions to the AWS account that owns the IAM role\. For more information about managing access to these keys, see [Using IAM Policies with AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/control-access-overview.html#overview-policy-elements) in the* AWS Key Management Service Developer Guide*\.
 
   The following is a complete IAM policy that grants the necessary permissions to replicate unencrypted objects, objects created with server\-side encryption using Amazon S3\-managed encryption keys, and AWS KMS\-managed encryption keys\.
 **Note**  
@@ -214,7 +214,7 @@ In a cross\-account scenario, where *source* and *destination* buckets are owned
 1. Choose **Save Changes**\.
 
 **To grant the source bucket owner permission to use the key \(AWS CLI\)**
-+ For information, see [put\-key\-policy](http://docs.aws.amazon.com/cli/latest/reference/kms/put-key-policy.html) in the* AWS CLI Command Reference*\. For information about the underlying API, see [PutKeyPolicy](http://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html) in the *[AWS Key Management Service API Reference](http://docs.aws.amazon.com/kms/latest/APIReference/)\.*
++ For information, see [put\-key\-policy](http://docs.aws.amazon.com/cli/latest/reference/kms/put-key-policy.html) in the* AWS CLI Command Reference*\. For information about the underlying API, see [PutKeyPolicy](http://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html) in the *[AWS Key Management Service API Reference](https://docs.aws.amazon.com/kms/latest/APIReference/)\.*
 
 ## AWS KMS Transaction Limit Considerations<a name="crr-kms-considerations"></a>
 

@@ -6,7 +6,7 @@ When *source* and *destination* buckets in a cross\-region replication \(CRR\) c
 
 ## Change Replica Owner When Source and Destination Buckets Are Owned by Different AWS Accounts \(Console\)<a name="crr-ex3-console"></a>
 
-For step\-by\-step instructions, see [Configuring a CRR Rule When the Destination Bucket is in a Different AWS Account](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-crr.html#enable-crr-cross-account-destination) in the *Amazon Simple Storage Service Console User Guide*\. 
+For step\-by\-step instructions, see [Configuring a CRR Rule When the Destination Bucket is in a Different AWS Account](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-crr.html#enable-crr-cross-account-destination) in the *Amazon Simple Storage Service Console User Guide*\. 
 
 ## Change Replica Owner When Source and Destination Buckets Are Owned by Different AWS Accounts \(AWS CLI\)<a name="crr-ex3-cli"></a>
 
@@ -16,9 +16,9 @@ To change replica ownership using the AWS CLI, you create buckets, enable versio
 
 1. In this example, you create the *source* and *destination* buckets in two different AWS accounts\. Configure AWS CLI with two named profiles\. In this example, we use profiles named `acctA` and `acctB`, respectively\. For more information about setting credential profiles, see [Named Profiles](https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html) in the *AWS Command Line Interface User Guide\.*
 **Important**  
-The profiles you use for this exercise must have necessary permissions\. For example, in the replication configuration, you specify the IAM role that Amazon S3 can assume\. You can do this only if the profile you use has the `iam:PassRole` permission\. If you use an administrator user credentials to create a named profile then you can perform all the tasks\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\. 
+The profiles you use for this exercise must have necessary permissions\. For example, in the replication configuration, you specify the IAM role that Amazon S3 can assume\. You can do this only if the profile you use has the `iam:PassRole` permission\. If you use an administrator user credentials to create a named profile then you can perform all the tasks\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\. 
 
-   You will need to make sure these profiles have necessary permissions\. For example, the replication configuration includes an IAM that Amazon S3 can assume\. The named profile you use to attach such configuration to a bucket can do so only if it has the `iam:PassRole` permission\. If you specify administrator user credentials when creating these named profiles, then they all the permissions\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\. 
+   You will need to make sure these profiles have necessary permissions\. For example, the replication configuration includes an IAM that Amazon S3 can assume\. The named profile you use to attach such configuration to a bucket can do so only if it has the `iam:PassRole` permission\. If you specify administrator user credentials when creating these named profiles, then they all the permissions\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\. 
 
 1. Create the *source* bucket and enable versioning\. In this example, we create the *source* bucket in the US East \(N\. Virginia\) \(us\-east\-1\) Region\.
 

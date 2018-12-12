@@ -59,13 +59,13 @@ An object is uniquely identified within a bucket by a key \(name\) and a version
 
 A key is the unique identifier for an object within a bucket\. Every object in a bucket has exactly one key\. Because the combination of a bucket, key, and version ID uniquely identify each object, Amazon S3 can be thought of as a basic data map between "bucket \+ key \+ version" and the object itself\. Every object in Amazon S3 can be uniquely addressed through the combination of the web service endpoint, bucket name, key, and optionally, a version\. For example, in the URL http://doc\.s3\.amazonaws\.com/2006\-03\-01/AmazonS3\.wsdl, "doc" is the name of the bucket and "2006\-03\-01/AmazonS3\.wsdl" is the key\.
 
- For more information about object keys, see [Object Keys](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)\. 
+ For more information about object keys, see [Object Keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)\. 
 
 ### Regions<a name="Regions"></a>
 
 You can choose the geographical region where Amazon S3 will store the buckets you create\. You might choose a region to optimize latency, minimize costs, or address regulatory requirements\. Objects stored in a region never leave the region unless you explicitly transfer them to another region\. For example, objects stored in the EU \(Ireland\) region never leave it\. 
 
- For a list of Amazon S3 regions and endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\. 
+ For a list of Amazon S3 regions and endpoints, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\. 
 
 ### Amazon S3 Data Consistency Model<a name="ConsistencyModel"></a>
 
@@ -160,8 +160,8 @@ For example, you can use IAM with Amazon S3 to control the type of access a user
 
 For more information about IAM, see the following:
 + [AWS Identity and Access Management \(IAM\)](https://aws.amazon.com/iam/)
-+ [Getting Started](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started.html)
-+ [IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/)
++ [Getting Started](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started.html)
++ [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/)
 
 ### Access Control Lists<a name="S3_ACLs"></a>
 
@@ -223,4 +223,4 @@ For information about paying for Amazon S3 storage, see [Amazon S3 Pricing](http
 Once you load your data into Amazon S3, you can use it with other services that we provide\. The following services are the ones you might use most frequently:
 + **Amazon Elastic Compute Cloud** – This web service provides virtual compute resources in the cloud\. For more information, go to the [Amazon EC2 product details page](https://aws.amazon.com/ec2/)\.
 + **Amazon EMR** – This web service enables businesses, researchers, data analysts, and developers to easily and cost\-effectively process vast amounts of data\. It utilizes a hosted Hadoop framework running on the web\-scale infrastructure of Amazon EC2 and Amazon S3\. For more information, go to the [Amazon EMR product details page](https://aws.amazon.com/elasticmapreduce/)\.
-+ **AWS Import/Export** – AWS Import/Export enables you to mail a storage device, such as a RAID drive, to Amazon so that we can upload your \(terabytes\) of data into Amazon S3\. For more information, go to the [AWS Import/Export Developer Guide](http://docs.aws.amazon.com/AWSImportExport/latest/DG/)\. 
++ **AWS Import/Export** – AWS Import/Export enables you to mail a storage device, such as a RAID drive, to Amazon so that we can upload your \(terabytes\) of data into Amazon S3\. For more information, go to the [AWS Import/Export Developer Guide](https://docs.aws.amazon.com/AWSImportExport/latest/DG/)\. 

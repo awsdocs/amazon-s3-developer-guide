@@ -12,7 +12,7 @@ This guide explains the core concepts of Amazon S3, such as buckets and objects,
 |  Information  |  Relevant Sections  | 
 | --- | --- | 
 |  General product overview and pricing  |  [Amazon S3](https://aws.amazon.com/s3/)  | 
-|  Get a quick hands\-on introduction to Amazon S3  |  [Amazon Simple Storage Service Getting Started Guide](http://docs.aws.amazon.com/AmazonS3/latest/gsg/)  | 
+|  Get a quick hands\-on introduction to Amazon S3  |  [Amazon Simple Storage Service Getting Started Guide](https://docs.aws.amazon.com/AmazonS3/latest/gsg/)  | 
 |  Learn about Amazon S3 key terminology and concepts  |  [Introduction to Amazon S3](Introduction.md)  | 
 |  How do I work with buckets?  |  [Working with Amazon S3 Buckets](UsingBucket.md)  | 
 |  How do I work with objects?  |  [Working with Amazon S3 Objects](UsingObjects.md)  | 

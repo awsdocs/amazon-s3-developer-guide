@@ -30,4 +30,4 @@ Setting up cross\-region replication \(CRR\) when *source* and *destination* buc
    }
    ```
 
-Choose the bucket and add bucket policy\. For instructions, see [How Do I Add an S3 Bucket Policy?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) in the *Amazon Simple Storage Service Console User Guide*\.
+Choose the bucket and add bucket policy\. For instructions, see [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) in the *Amazon Simple Storage Service Console User Guide*\.

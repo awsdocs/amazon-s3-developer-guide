@@ -14,13 +14,13 @@ You can configure an Amazon S3 bucket to function like a website\. This example 
 
 1. Create a bucket\.
 
-   For step\-by\-step instructions, see [How Do I Create an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in *Amazon Simple Storage Service Console User Guide*\.
+   For step\-by\-step instructions, see [How Do I Create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in *Amazon Simple Storage Service Console User Guide*\.
 
    For bucket naming guidelines, see [Bucket Restrictions and Limitations](BucketRestrictions.md)\. If you have a registered domain name, for additional information about bucket naming, see [Customizing Amazon S3 URLs with CNAMEs](VirtualHosting.md#VirtualHostingCustomURLs)\.
 
 1. Open the bucket **Properties** pane, choose **Static Website Hosting**, and do the following:
 
-   1. Choose **Enable website hosting**\.
+   1. Choose **Use this bucket to host a website**\.
 
    1. In the **Index Document** box, type the name of your index document\. The name is typically `index.html`\.
 
@@ -63,7 +63,7 @@ You can configure an Amazon S3 bucket to function like a website\. This example 
 
 1. Using the console, upload the index document to your bucket\.
 
-   For instructions, see [Uploading S3 Objects](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
+   For instructions, see [Uploading S3 Objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Step 4: Testing Your Website<a name="step4-test-web-site"></a>
 

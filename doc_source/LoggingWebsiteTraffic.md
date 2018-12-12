@@ -19,3 +19,5 @@ If you want to track the number of visitors who access your website, enable logg
 1. For **Target prefix**, type **root/**\. This setting groups the log data files in the bucket in a folder named `root` so that they are easy to locate\.
 
 1. Choose **Save**\.
+
+You can now review your logs in the `logs.example.com` bucket, in both the `root` and `cdn folders.`

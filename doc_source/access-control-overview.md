@@ -14,14 +14,14 @@ When granting permissions, you decide who is getting them, which Amazon S3 resou
 Buckets and objects are primary Amazon S3 resources, and both have associated subresources\. For example, bucket subresources include the following:
 + `lifecycle` – Stores lifecycle configuration information \(see [Object Lifecycle Management](object-lifecycle-mgmt.md)\)\.
 + `website` – Stores website configuration information if you configure your bucket for website hosting \(see [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\. 
-+ `versioning` – Stores versioning configuration \(see [PUT Bucket versioning](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)\)\. 
++ `versioning` – Stores versioning configuration \(see [PUT Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)\)\. 
 + `policy` and `acl` \(access control list\) – Store access permission information for the bucket\. 
 + `cors` \(cross\-origin resource sharing\) – Supports configuring your bucket to allow cross\-origin requests \(see [Cross\-Origin Resource Sharing \(CORS\)](cors.md)\)\. 
 + `logging` – Enables you to request Amazon S3 to save bucket access logs\.
 
 Object subresources include the following:
 + `acl` – Stores a list of access permissions on the object\. This topic discusses how to use this subresource to manage object permissions \(see [Managing Access with ACLs](S3_ACLs_UsingACLs.md)\)\.
-+ `restore` – Supports temporarily restoring an archived object \(see [POST Object restore](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html)\)\. An object in the Glacier storage class is an archived object\. To access the object, you must first initiate a restore request, which restores a copy of the archived object\. In the request, you specify the number of days that you want the restored copy to exist\. For more information about archiving objects, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
++ `restore` – Supports temporarily restoring an archived object \(see [POST Object restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html)\)\. An object in the Glacier storage class is an archived object\. To access the object, you must first initiate a restore request, which restores a copy of the archived object\. In the request, you specify the number of days that you want the restored copy to exist\. For more information about archiving objects, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
 ### About the Resource Owner<a name="about-resource-owner"></a>
 
@@ -33,7 +33,7 @@ By default, all Amazon S3 resources are private\. Only a resource owner can acce
   + The bucket owner can archive any objects or restore archived objects regardless of who owns them\. Archival refers to the storage class used to store the objects\. For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
 **Important**  
-AWS recommends not using the root credentials of your AWS account to make requests\. Instead, create an IAM user, and grant that user full access\. We refer to these users as administrator users\. You can use the administrator user credentials, instead of root credentials of your account, to interact with AWS and perform tasks, such as create a bucket, create users, and grant them permissions\. For more information, go to [Root Account Credentials vs\. IAM User Credentials](http://docs.aws.amazon.com/general/latest/gr/root-vs-iam.html) in the *AWS General Reference* and [IAM Best Practices](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
+AWS recommends not using the root credentials of your AWS account to make requests\. Instead, create an IAM user, and grant that user full access\. We refer to these users as administrator users\. You can use the administrator user credentials, instead of root credentials of your account, to interact with AWS and perform tasks, such as create a bucket, create users, and grant them permissions\. For more information, go to [Root Account Credentials vs\. IAM User Credentials](https://docs.aws.amazon.com/general/latest/gr/root-vs-iam.html) in the *AWS General Reference* and [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
 
 The following diagram shows an AWS account owning resources, the IAM users, buckets, and objects\.
 
@@ -41,7 +41,7 @@ The following diagram shows an AWS account owning resources, the IAM users, buck
 
 ## Resource Operations<a name="access-control-resource-operations-basics"></a>
 
-Amazon S3 provides a set of operations to work with the Amazon S3 resources\. For a list of available operations, go to [Operations on Buckets](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketOps.html) and [Operations on Objects](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectOps.html) in the *Amazon Simple Storage Service API Reference*\. 
+Amazon S3 provides a set of operations to work with the Amazon S3 resources\. For a list of available operations, go to [Operations on Buckets](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketOps.html) and [Operations on Objects](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectOps.html) in the *Amazon Simple Storage Service API Reference*\. 
 
 ## Managing Access to Resources \(Access Policy Options\)<a name="access-control-resources-manage-permissions-basics"></a>
 

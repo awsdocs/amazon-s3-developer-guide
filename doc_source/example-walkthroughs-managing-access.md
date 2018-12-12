@@ -29,7 +29,7 @@ In addition, when creating resources these examples don't use root credentials o
 
 ### About Using an Administrator User to Create Resources and Grant Permissions<a name="about-using-root-credentials"></a>
 
-AWS Identity and Access Management \(IAM\) recommends not using the root credentials of your AWS account to make requests\. Instead, create an IAM user, grant that user full access, and then use that user's credentials to interact with AWS\. We refer to this user as an administrator user\. For more information, go to [Root Account Credentials vs\. IAM User Credentials](http://docs.aws.amazon.com/general/latest/gr/root-vs-iam.html) in the *AWS General Reference* and [IAM Best Practices](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
+AWS Identity and Access Management \(IAM\) recommends not using the root credentials of your AWS account to make requests\. Instead, create an IAM user, grant that user full access, and then use that user's credentials to interact with AWS\. We refer to this user as an administrator user\. For more information, go to [Root Account Credentials vs\. IAM User Credentials](https://docs.aws.amazon.com/general/latest/gr/root-vs-iam.html) in the *AWS General Reference* and [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
 
 All example walkthroughs in this section use the administrator user credentials\. If you have not created an administrator user for your AWS account, the topics show you how\. 
 

@@ -23,4 +23,4 @@ Ensure that you have included `x-amz-request-payer` and its value in your signat
 
 If the GET request succeeds and the requester is charged, the response includes `x-amz-request-charged:requester`\.
 
-Amazon S3 can return an `Access Denied` error for requests that try to get objects from a Requester Pays bucket\. For more information, see [Error Responses](http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)\.
+Amazon S3 can return an `Access Denied` error for requests that try to get objects from a Requester Pays bucket\. For more information, see [Error Responses](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)\.

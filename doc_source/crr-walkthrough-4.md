@@ -6,7 +6,7 @@ By default, Amazon S3 doesn't replicate objects that are stored at rest using se
 
 ## Replicating Encrypted Objects \(Console\)<a name="crr-ex4-console"></a>
 
-For step\-by\-step instructions, see [How Do I Add a Cross\-Region Replication \(CRR\) Rule to an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-crr.html) in the *Amazon Simple Storage Service Console User Guide*\. This topic provides instructions for setting replication configuration when buckets are owned by same and different AWS accounts\.
+For step\-by\-step instructions, see [How Do I Add a Cross\-Region Replication \(CRR\) Rule to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-crr.html) in the *Amazon Simple Storage Service Console User Guide*\. This topic provides instructions for setting replication configuration when buckets are owned by same and different AWS accounts\.
 
 ## Replicating Encrypted Objects \(AWS CLI\)<a name="crr-ex4-cli"></a>
 
@@ -175,7 +175,7 @@ To set up replication configuration when both *source* and *destination* buckets
 
 1. Add the following replication configuration to the *source* bucket\. It tells Amazon S3 to replicate objects with the `Tax/` prefix to the *destination* bucket\. 
 **Important**  
-In the replication configuration you specify the IAM role that Amazon S3 can assume\. You can do this only if you have the `iam:PassRole` permission\. The profile you specify in the CLI command must have the permission\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\.
+In the replication configuration you specify the IAM role that Amazon S3 can assume\. You can do this only if you have the `iam:PassRole` permission\. The profile you specify in the CLI command must have the permission\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\.
 
    ```
     <ReplicationConfiguration>

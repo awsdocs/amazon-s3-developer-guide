@@ -29,7 +29,7 @@ The access policy language allows you to specify conditions when granting permis
 
 The `Condition` block specifies the `StringEquals` condition that is applied to the specified key\-value pair, `"s3:x-amz-acl":["public-read"]`\. There is a set of predefined keys you can use in expressing a condition\. The example uses the `s3:x-amz-acl` condition key\. This condition requires user to include the `x-amz-acl` header with value `public-read` in every PUT object request\. 
 
-For more information about specifying conditions in an access policy language, see [Condition](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Condition) in the *IAM User Guide*\. 
+For more information about specifying conditions in an access policy language, see [Condition](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Condition) in the *IAM User Guide*\. 
 
 The following topics describe AWS\-wide and Amazon S3–specific condition keys and provide example policies\. 
 
@@ -41,7 +41,7 @@ The following topics describe AWS\-wide and Amazon S3–specific condition keys 
 ## Available Condition Keys<a name="AvailableKeys-iamV2"></a>
 
 The predefined keys available for specifying conditions in an Amazon S3 access policy can be classified as follows:
-+ **AWS\-wide keys** – AWS provides a set of common keys that are supported by all AWS services that support policies\. These keys that are common to all services are called AWS\-wide keys and use the prefix `aws:`\. For a list of AWS\-wide keys, see [Available Keys for Conditions](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\. There are also keys that are specific to Amazon S3, which use the prefix `s3:`\. Amazon S3–specific keys are discussed in the next bulleted item\.
++ **AWS\-wide keys** – AWS provides a set of common keys that are supported by all AWS services that support policies\. These keys that are common to all services are called AWS\-wide keys and use the prefix `aws:`\. For a list of AWS\-wide keys, see [Available Keys for Conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\. There are also keys that are specific to Amazon S3, which use the prefix `s3:`\. Amazon S3–specific keys are discussed in the next bulleted item\.
 
    
 
@@ -122,7 +122,7 @@ The `IPAddress` and `NotIpAddress` key values specified in the condition uses CI
 **Important**  
  Not all conditions make sense for all actions\. For example, it makes sense to include an `s3:LocationConstraint` condition on a policy that grants the `s3:CreateBucket` Amazon S3 permission, but not for the `s3:GetObject` permission\. Amazon S3 can test for semantic errors of this type that involve Amazon S3–specific conditions\. However, if you are creating a policy for an IAM user and you include a semantically invalid Amazon S3 condition, no error is reported, because IAM cannot validate Amazon S3 conditions\. 
 
-The following section describes the condition keys that can be used to grant conditional permission for bucket and object operations\. In addition, there are condition keys related to Amazon S3 Signature Version 4 authentication\. For more information, go to [Amazon S3 Signature Version 4 Authentication Specific Policy Keys](http://docs.aws.amazon.com/AmazonS3/latest/API/bucket-policy-s3-sigv4-conditions.html) in the *Amazon Simple Storage Service API Reference*\.
+The following section describes the condition keys that can be used to grant conditional permission for bucket and object operations\. In addition, there are condition keys related to Amazon S3 Signature Version 4 authentication\. For more information, go to [Amazon S3 Signature Version 4 Authentication Specific Policy Keys](https://docs.aws.amazon.com/AmazonS3/latest/API/bucket-policy-s3-sigv4-conditions.html) in the *Amazon Simple Storage Service API Reference*\.
 
 ## Amazon S3 Condition Keys for Object Operations<a name="object-keys-in-amazon-s3-policies"></a>
 
@@ -136,7 +136,7 @@ The following section describes the condition keys that can be used to grant con
 
 ### Example 1: Granting s3:PutObject permission with a condition requiring the bucket owner to get full control<a name="grant-putobject-conditionally-1"></a>
 
-Suppose that Account A owns a bucket and the account administrator wants to grant Dave, a user in Account B, permissions to upload objects\. By default, objects that Dave uploads are owned by Account B, and Account A has no permissions on these objects\. Because the bucket owner is paying the bills, it wants full permissions on the objects that Dave uploads\. The Account A administrator can do this by granting the `s3:PutObject` permission to Dave, with a condition that the request include ACL\-specific headers, that either grants full permission explicitly or uses a canned ACL \(see [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\)\.
+Suppose that Account A owns a bucket and the account administrator wants to grant Dave, a user in Account B, permissions to upload objects\. By default, objects that Dave uploads are owned by Account B, and Account A has no permissions on these objects\. Because the bucket owner is paying the bills, it wants full permissions on the objects that Dave uploads\. The Account A administrator can do this by granting the `s3:PutObject` permission to Dave, with a condition that the request include ACL\-specific headers, that either grants full permission explicitly or uses a canned ACL \(see [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\)\.
 + Require the `x-amz-full-control` header in the request with full control permission to the bucket owner\.
 
   The following bucket policy grants the `s3:PutObject` permission to user Dave with a condition using the `s3:x-amz-grant-full-control` condition key, which requires the request to include the `x-amz-full-control` header\.
@@ -244,7 +244,7 @@ aws s3api put-object --bucket example1bucket --key HappyFace.jpg --body c:\Happy
 
 ### Example 3: Granting s3:PutObject permission to copy objects with a restriction on the copy source<a name="putobject-limit-copy-source-2"></a>
 
-In the PUT Object request, when you specify a source object, it is a copy operation \(see [PUT Object \- Copy](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\)\. Accordingly, the bucket owner can grant a user permission to copy objects with restrictions on the source\. For example:
+In the PUT Object request, when you specify a source object, it is a copy operation \(see [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\)\. Accordingly, the bucket owner can grant a user permission to copy objects with restrictions on the source\. For example:
 + Allow copying objects only from the `sourcebucket` bucket\.
 + Allow copying objects from the `sourcebucket` bucket, and only the objects whose key name prefix starts with `public/` f\. For example, `sourcebucket/public/*`
 + Allow copying only a specific object from the `sourcebucket`; for example, `sourcebucket/example.jpg`\.
@@ -385,7 +385,7 @@ Suppose that an AWS account administrator wants to grant its user \(Dave\) permi
 **Note**  
 In this example, the bucket owner is granting permission to one of its users, so either a bucket policy or a user policy can be used\. This example shows a user policy\.
 
-For a list of Amazon S3 Regions, go to [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *Amazon Web Services General Reference*\. 
+For a list of Amazon S3 Regions, go to [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *Amazon Web Services General Reference*\. 
 
 ```
 {
@@ -470,7 +470,7 @@ A bucket owner can restrict a user to list the contents of a specific folder in 
 
 In this example, the bucket owner and the parent account to which the user belongs are the same\. So the bucket owner can use either a bucket policy or a user policy\. First, we show a user policy\.
 
-The following user policy grants the `s3:ListBucket` permission \(see [GET Bucket \(List Objects\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html)\) with a condition that requires the user to specify the `prefix` in the request with the value `projects`\. 
+The following user policy grants the `s3:ListBucket` permission \(see [GET Bucket \(List Objects\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html)\) with a condition that requires the user to specify the `prefix` in the request with the value `projects`\. 
 
 ```
 {

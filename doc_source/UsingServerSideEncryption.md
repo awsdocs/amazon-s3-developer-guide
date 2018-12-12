@@ -44,12 +44,12 @@ Server\-side encryption encrypts only the object data, not object metadata\.
 To request server\-side encryption using the object creation REST APIs, provide the , `x-amz-server-side-encryption` request header\. For information about the REST APIs, see [Specifying Server\-Side Encryption Using the REST API](SSEUsingRESTAPI.md)\.
 
 The following Amazon S3 APIs support this header:
-+ PUT operations—Specify the request header when uploading data using the PUT API\. For more information, see [PUT Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\.
-+ Initiate Multipart Upload—Specify the header in the initiate request when uploading large objects using the multipart upload API \. For more information, see [Initiate Multipart Upload](http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)\.
-+ COPY operations—When you copy an object, you have both a source object and a target object\. For more information, see [PUT Object \- Copy](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\.
++ PUT operations—Specify the request header when uploading data using the PUT API\. For more information, see [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\.
++ Initiate Multipart Upload—Specify the header in the initiate request when uploading large objects using the multipart upload API \. For more information, see [Initiate Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)\.
++ COPY operations—When you copy an object, you have both a source object and a target object\. For more information, see [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\.
 
 **Note**  
-When using a POST operation to upload an object, instead of providing the request header, you provide the same information in the form fields\. For more information, see [POST Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html)\. 
+When using a POST operation to upload an object, instead of providing the request header, you provide the same information in the form fields\. For more information, see [POST Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html)\. 
 
 The AWS SDKs also provide wrapper APIs that you can use to request server\-side encryption\. You can also use the AWS Management Console to upload objects and request server\-side encryption\.
 

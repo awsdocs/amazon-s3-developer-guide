@@ -4,11 +4,11 @@ This topic guides you through using classes from version 3 of the AWS SDK for PH
 
  This topic assumes that you are already following the instructions for [Using the AWS SDK for PHP and Running PHP Examples](UsingTheMPphpAPI.md) and have the AWS SDK for PHP properly installed\. 
 
-To list the object keys contained in a bucket using the AWS SDK for PHP you first must list the objects contained in the bucket and then extract the key from each of the listed objects\. When listing objects in a bucket you have the option of using the low\-level [Aws\\S3\\S3Client::listObjects\(\)](http://docs.aws.amazon.com/aws-sdk-php/v3/api/api-s3-2006-03-01.html#listobjects) method or the high\-level [Aws\\ResultPaginator](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.ResultPaginator.html) class\. 
+To list the object keys contained in a bucket using the AWS SDK for PHP you first must list the objects contained in the bucket and then extract the key from each of the listed objects\. When listing objects in a bucket you have the option of using the low\-level [Aws\\S3\\S3Client::listObjects\(\)](https://docs.aws.amazon.com/aws-sdk-php/v3/api/api-s3-2006-03-01.html#listobjects) method or the high\-level [Aws\\ResultPaginator](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.ResultPaginator.html) class\. 
 
 The low\-level `listObjects()` method maps to the underlying Amazon S3 REST API\. Each `listObjects()` request returns a page of up to 1,000 objects\. If you have more than 1,000 objects in the bucket, your response will be truncated and you will need to send another `listObjects()` request to retrieve the next set of 1,000 objects\. 
 
-You can use the high\-level `ListObjects` paginator to make your task of listing the objects contained in a bucket a bit easier\. To use the `ListObjects` paginator to create a list of objects you execute the Amazon S3 client [getPaginator\(\)](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.AwsClientInterface.html#_getPaginator) method that is inherited from [Aws/AwsClientInterface](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.AwsClientInterface.html) class with the `ListObjects` command as the first argument and an array to contain the returned objects from the specified bucket as the second argument\. When used as a `ListObjects` paginator the `getPaginator()` method returns all the objects contained in the specified bucket\. There is no 1,000 object limit, so you don't need to worry if the response is truncated or not\.
+You can use the high\-level `ListObjects` paginator to make your task of listing the objects contained in a bucket a bit easier\. To use the `ListObjects` paginator to create a list of objects you execute the Amazon S3 client [getPaginator\(\)](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.AwsClientInterface.html#_getPaginator) method that is inherited from [Aws/AwsClientInterface](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.AwsClientInterface.html) class with the `ListObjects` command as the first argument and an array to contain the returned objects from the specified bucket as the second argument\. When used as a `ListObjects` paginator the `getPaginator()` method returns all the objects contained in the specified bucket\. There is no 1,000 object limit, so you don't need to worry if the response is truncated or not\.
 
 The following tasks guide you through using the PHP Amazon S3 client methods to list the objects contained in a bucket from which you can list the object keys\.
 
@@ -60,6 +60,6 @@ try {
 ```
 
 ## Related Resources<a name="RelatedResources-ListingObjectKeysUsingPHP"></a>
-+ [ AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client Class](http://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html) 
-+ [ Paginators](http://docs.aws.amazon.com/aws-sdk-php/v3/guide/guide/paginators.html) 
++ [ AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client Class](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html) 
++ [ Paginators](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/guide/paginators.html) 
 + [AWS SDK for PHP Documentation](http://aws.amazon.com/documentation/sdk-for-php/)

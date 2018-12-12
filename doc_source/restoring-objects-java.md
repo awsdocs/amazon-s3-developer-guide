@@ -1,7 +1,7 @@
 # Restore an Archived Object Using the AWS SDK for Java<a name="restoring-objects-java"></a>
 
 **Example**  
-The following example shows how to restore an object archived to Amazon Glacier using the AWS SDK for Java\. The example initiates a restoration request for the specified archived object and checks its restoration status\. For more information about restoring archived objects, see [Restoring Archived Objects](restoring-objects.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
+The following example shows how to restore an object archived to Amazon S3 Glacier using the AWS SDK for Java\. The example initiates a restoration request for the specified archived object and checks its restoration status\. For more information about restoring archived objects, see [Restoring Archived Objects](restoring-objects.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
 // Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.

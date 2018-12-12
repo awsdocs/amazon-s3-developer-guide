@@ -19,7 +19,7 @@ As you follow the steps in this example, you work with the following services:
 
 ## Step 1: Register a Domain<a name="website-hosting-custom-domain-walkthrough-domain-registry"></a>
 
-If you don't already have a registered domain name, such as `example.com`, register one with Route 53\. For more information, see [Registering a New Domain](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html) in the *Amazon Route 53 Developer Guide*\. When you have a registered domain name, your next tasks are to create and configure Amazon S3 buckets for website hosting and to upload your website content\. 
+If you don't already have a registered domain name, such as `example.com`, register one with Route 53\. For more information, see [Registering a New Domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html) in the *Amazon Route 53 Developer Guide*\. When you have a registered domain name, your next tasks are to create and configure Amazon S3 buckets for website hosting and to upload your website content\. 
 
 ## Step 2: Create and Configure Buckets and Upload Data<a name="root-domain-walkthrough-s3-tasks"></a>
 
@@ -42,7 +42,7 @@ Like domains, subdomains must have their own S3 buckets, and the buckets must sh
 
 1. Create two buckets that match your domain name and subdomain\. For instance, `example.com` and `www.example.com`\.
 
-   For step\-by\-step instructions, see [How Do I Create an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
+   For step\-by\-step instructions, see [How Do I Create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 1. Upload your website data to the `example.com` bucket\. 
 
@@ -60,9 +60,9 @@ Like domains, subdomains must have their own S3 buckets, and the buckets must sh
    </html>
    ```
 
-   For step\-by\-step instructions, see [How Do I Upload an Object to an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+   For step\-by\-step instructions, see [How Do I Upload an Object to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
-1. To host a website, your bucket must have public read access\. It is intentional that everyone in the world will have read access to this bucket\. To grant public read access, attach the following bucket policy to the `example.com` bucket, substituting the name of your bucket for *example\.com*\. For step\-by\-step instructions to attach a bucket policy, see [How Do I Add an S3 Bucket Policy?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+1. To host a website, your bucket must have public read access\. It is intentional that everyone in the world will have read access to this bucket\. To grant public read access, attach the following bucket policy to the `example.com` bucket, substituting the name of your bucket for *example\.com*\. For step\-by\-step instructions to attach a bucket policy, see [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
    ```
    {
@@ -156,7 +156,7 @@ Choose **A – IPv4 address**\.
 **Alias**  
 Choose **Yes**\.  
 **Alias Target**  
-Type the name of the region that you created your Amazon S3 bucket in\. Use the applicable value from the **Website Endpoint** column in the [Amazon Simple Storage Service Website Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_website_region_endpoints) table in the [AWS Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html) chapter of the *Amazon Web Services General Reference*\.  
+Type the name of your Amazon S3 bucket endpoint, for example `example.com (s3-website-us-west-2)`\.  
 You specify the same value for **Alias Target** for both records\. Route 53 figures out which bucket to route traffic to based on the name of the record\.  
 **Routing Policy**  
 Accept the default value of **Simple**\.  

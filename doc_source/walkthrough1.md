@@ -72,7 +72,7 @@ The walkthrough uses `companybucket` as the bucket name, Alice and Bob as the IA
 
  To sign into the AWS Management Console with your AWS account credentials, go to [https://console\.aws\.amazon\.com/](https://console.aws.amazon.com/)\.  An IAM user cannot sign in by using the same link\. An IAM user must use an IAM\-enabled sign\-in page\. As the account owner, you can provide this link to your users\. 
 
-For more information about IAM, go to [The AWS Management Console Sign\-in Page](http://docs.aws.amazon.com/IAM/latest/UserGuide/console.html) in the *IAM User Guide*\.
+For more information about IAM, go to [The AWS Management Console Sign\-in Page](https://docs.aws.amazon.com/IAM/latest/UserGuide/console.html) in the *IAM User Guide*\.
 
 ### To Provide a Sign\-in Link for IAM Users<a name="walkthrough-sign-in-user-credentials"></a>
 
@@ -90,7 +90,7 @@ In this step, you will sign in to the Amazon S3 console with your AWS account cr
 
 1. Create a bucket\. 
 
-   For step\-by\-step instructions, see [How Do I Create an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
+   For step\-by\-step instructions, see [How Do I Create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 1. Upload one document to the bucket\.
 
@@ -116,7 +116,7 @@ In this step, you will sign in to the Amazon S3 console with your AWS account cr
 
    s3\-dg\.pdf
 
-   For step\-by\-step instructions, see [How Do I Upload Files and Folders to an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+   For step\-by\-step instructions, see [How Do I Upload Files and Folders to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
 ## Step 2: Create IAM Users and a Group<a name="walkthrough1-add-users"></a>
 
@@ -125,9 +125,9 @@ Now use the IAM console to add two IAM users, Alice and Bob, to your AWS account
 **Warning**  
 When you add users and a group, do not attach any policies that grant permissions to these users\. At first, these users will not have any permissions\. In the following sections, you will incrementally grant permissions\. You must first ensure that you have assigned passwords to these IAM users\. You will use these user credentials to test Amazon S3 actions and verify that the permissions work as expected\.
 
-For step\-by\-step instructions on creating a new IAM user, see [Creating an IAM User in Your AWS Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *IAM User Guide*\. When you create the users for this walkthrough, check "AWS Management Console access" and leave "Programmatic access" unchecked\.
+For step\-by\-step instructions on creating a new IAM user, see [Creating an IAM User in Your AWS Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *IAM User Guide*\. When you create the users for this walkthrough, check "AWS Management Console access" and leave "Programmatic access" unchecked\.
 
-For step\-by\-step instructions on creating an administrative group, see [Creating Your First IAM User and Administrators Group](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) section in the *IAM User Guide*\.
+For step\-by\-step instructions on creating an administrative group, see [Creating Your First IAM User and Administrators Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) section in the *IAM User Guide*\.
 
 ## Step 3: Verify that IAM Users Have No Permissions<a name="walkthrough1-verify-no-user-permissions"></a>
 
@@ -188,7 +188,7 @@ The **Summary** entry will display a message stating that the policy does not gr
 
 1. Attach the `AllowGroupToSeeBucketListInTheConsole` managed policy that you created to the Consultants group\.
 
-   For step\-by\-step instructions for attaching a managed policy, see [Adding and Removing IAM Policies \(Console\)](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html#attach-managed-policy-console) in the *IAM User Guide*\. 
+   For step\-by\-step instructions for attaching a managed policy, see [Adding and Removing IAM Policies \(Console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html#attach-managed-policy-console) in the *IAM User Guide*\. 
 
    You attach policy documents to IAM users and groups in the IAM console\. Because we want both our users to be able to list the buckets, we attach the policy to the group\. 
 
@@ -211,7 +211,7 @@ Remember, we are using `companybucket` for illustration\. You must use the name 
 
 To understand what request the console sends to Amazon S3 when you click a bucket name, the response Amazon S3 returns, and how the console interprets the response, it is necessary to take a little deep dive\.
 
-When you click a bucket name, the console sends the [GET Bucket \(List Objects\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html) request to Amazon S3\. This request includes the following parameters:
+When you click a bucket name, the console sends the [GET Bucket \(List Objects\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html) request to Amazon S3\. This request includes the following parameters:
 + `prefix` parameter with an empty string as its value\. 
 + `delimiter` parameter with `/` as its value\. 
 
@@ -254,7 +254,7 @@ The console interprets this result and displays the root\-level items as three f
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/walkthrough-10.png)
 
-Now, if Bob or Alice double\-clicks the **Development** folder, the console sends the [GET Bucket \(List Objects\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html) request to Amazon S3 with the `prefix` and the `delimiter` parameters set to the following values:
+Now, if Bob or Alice double\-clicks the **Development** folder, the console sends the [GET Bucket \(List Objects\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html) request to Amazon S3 with the `prefix` and the `delimiter` parameters set to the following values:
 + `prefix` parameter with value `Development/`\.
 + `delimiter` parameter with` '/'` value\. 
 
@@ -297,7 +297,7 @@ Now, let's return to granting users permission to list the root\-level bucket it
 }
 ```
 
-When you use the Amazon S3 console, note that when you click a bucket, the console first sends the [GET Bucket location](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html) request to find the AWS region where the bucket is deployed\. Then the console uses the region\-specific endpoint for the bucket to send the [GET Bucket \(List Objects\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html) request\. As a result, if users are going to use the console, you must grant permission for the `s3:GetBucketLocation` action as shown in the following policy statement:
+When you use the Amazon S3 console, note that when you click a bucket, the console first sends the [GET Bucket location](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html) request to find the AWS region where the bucket is deployed\. Then the console uses the region\-specific endpoint for the bucket to send the [GET Bucket \(List Objects\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html) request\. As a result, if users are going to use the console, you must grant permission for the `s3:GetBucketLocation` action as shown in the following policy statement:
 
 ```
 {
@@ -316,7 +316,7 @@ When you use the Amazon S3 console, note that when you click a bucket, the conso
 
 1. Replace the existing `AllowGroupToSeeBucketListInTheConsole` managed policy that is attached to the Consultants group with the following policy, which also allows the `s3:ListBucket` action\. Remember to replace `companybucket` in the policy `Resource` with the name of your bucket\. 
 
-   For step\-by\-step instructions, see [Editing Customer Managed Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html) in the *IAM User Guide*\. When following the step\-by\-step instructions, make sure to follow the directions for applying your changes to all principal entities that the policy is attached to\. 
+   For step\-by\-step instructions, see [Editing Customer Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html) in the *IAM User Guide*\. When following the step\-by\-step instructions, make sure to follow the directions for applying your changes to all principal entities that the policy is attached to\. 
 
    ```
    {
@@ -372,7 +372,7 @@ Now we grant additional permissions to Alice so she can see the content of the D
 
 ### Step 5\.1: Grant IAM User Alice Permission to List the Development Folder Content<a name="walkthrough-grant-user1-permissions-listbucket"></a>
 
-For Alice to list the Development folder content, you must apply a policy to the Alice user that grants permission for the `s3:ListBucket` action on the `companybucket` bucket, provided the request includes the prefix `Development/`\. Because we want this policy to be applied only to the user Alice we'll use an inline policy\. For more information about inline policies, see [Managed Policies and Inline Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html) in the *IAM User Guide*\.
+For Alice to list the Development folder content, you must apply a policy to the Alice user that grants permission for the `s3:ListBucket` action on the `companybucket` bucket, provided the request includes the prefix `Development/`\. Because we want this policy to be applied only to the user Alice we'll use an inline policy\. For more information about inline policies, see [Managed Policies and Inline Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html) in the *IAM User Guide*\.
 
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
@@ -581,7 +581,7 @@ Replace the Consultants group policy with an updated policy that includes the pr
 
 1. Replace the existing `AllowGroupToSeeBucketListInTheConsole` managed policy that is attached to the Consultants group with the following policy\. Remember to replace `companybucket` in the policy with the name of your bucket\. 
 
-   For instructions, see [Editing Customer Managed Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#edit-managed-policy-console) in the *IAM User Guide*\. When following the instructions, make sure to follow the directions for applying your changes to all principal entities that the policy is attached to\. 
+   For instructions, see [Editing Customer Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#edit-managed-policy-console) in the *IAM User Guide*\. When following the instructions, make sure to follow the directions for applying your changes to all principal entities that the policy is attached to\. 
 
    ```
    {
@@ -632,9 +632,9 @@ Replace the Consultants group policy with an updated policy that includes the pr
 
 ## Cleanup<a name="walkthrough-cleanup"></a>
 
-In order to clean up, go to the IAM console and remove the users Alice and Bob\. For step\-by\-step instructions, go to [Deleting an IAM User](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_manage.html#id_users_deleting) in the *IAM User Guide*\.
+In order to clean up, go to the IAM console and remove the users Alice and Bob\. For step\-by\-step instructions, go to [Deleting an IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_manage.html#id_users_deleting) in the *IAM User Guide*\.
 
 To ensure that you aren't charged further for storage, you should also delete the objects and the bucket that you created for this exercise \.
 
 ## Related Resources<a name="RelatedResources-walkthrough1"></a>
-+ [Working with Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\.
++ [Working with Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\.

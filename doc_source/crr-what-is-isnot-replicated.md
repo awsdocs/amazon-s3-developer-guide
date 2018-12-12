@@ -61,7 +61,7 @@ Amazon S3 doesn't replicate the following:
 
   For more information about lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 **Note**  
-If using the latest version of the replication configuration \(the XML specifies `Filter` as the child of `Rule`\), delete makers created either by a user action or by Amazon S3 as part of the lifecyle action are not replicated\. However, if using earlier version of the replication configuration \(the XML specifies `Prefix` as the child of `Rule`\), delete markers resulting from user actions are replicated\. For more information, see [Backward Compatibility ](crr-add-config.md#crr-backward-compat-considerations)\.
+If using the latest version of the replication configuration \(the XML specifies `Filter` as the child of `Rule`\), delete makers created either by a user action or by Amazon S3 as part of the lifecycle action are not replicated\. However, if using earlier version of the replication configuration \(the XML specifies `Prefix` as the child of `Rule`\), delete markers resulting from user actions are replicated\. For more information, see [Backward Compatibility ](crr-add-config.md#crr-backward-compat-considerations)\.
 + Objects in the source bucket that are replicas that were created by another cross\-region replication\.
 
   You can replicate objects from a source bucket to *only one* destination bucket\. After Amazon S3 replicates an object, the object can't be replicated again\. For example, if you change the destination bucket in an existing replication configuration, Amazon S3 won't replicate the object again\.
@@ -74,4 +74,4 @@ If using the latest version of the replication configuration \(the XML specifies
 
 [Overview of Setting Up CRR ](crr-how-setup.md)
 
-[Cross\-Region Replication: Status Information](crr-status.md)
+[Cross\-Region Replication Status Information](crr-status.md)

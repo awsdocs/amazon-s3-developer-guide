@@ -1,6 +1,6 @@
-# Upload an Object Using a Pre\-Signed URL \(AWS SDK for Ruby\)<a name="UploadObjectPreSignedURLRubySDK"></a>
+# Upload an Object Using a Presigned URL \(AWS SDK for Ruby\)<a name="UploadObjectPreSignedURLRubySDK"></a>
 
-The following tasks guide you through using a Ruby script to upload an object using a pre\-signed URL for SDK for Ruby \- Version 3\.
+The following tasks guide you through using a Ruby script to upload an object using a presigned URL for SDK for Ruby \- Version 3\.
 
 
 **Uploading Objects \- SDK for Ruby \- Version 3**  
@@ -8,15 +8,15 @@ The following tasks guide you through using a Ruby script to upload an object us
 |  |  | 
 | --- |--- |
 |  1  |  Create an instance of the `Aws::S3::Resource` class\.  | 
-|  2  |  Provide a bucket name and an object key by calling the `#bucket[]` and the `#object[]` methods of your `Aws::S3::Resource` class instance\. Generate a pre\-signed URL by creating an instance of the `URI` class, and use it to parse the `.presigned_url` method of your `Aws::S3::Resource` class instance\. You must specify `:put` as an argument to `.presigned_url`, and you must specify `PUT` to `Net::HTTP::Session#send_request` if you want to upload an object\.  | 
-|  3  |  Anyone with the pre\-signed URL can upload an object\.  The upload creates an object or replaces any existing object with the same key that is specified in the pre\-signed URL\.  | 
+|  2  |  Provide a bucket name and an object key by calling the `#bucket[]` and the `#object[]` methods of your `Aws::S3::Resource` class instance\. Generate a presigned URL by creating an instance of the `URI` class, and use it to parse the `.presigned_url` method of your `Aws::S3::Resource` class instance\. You must specify `:put` as an argument to `.presigned_url`, and you must specify `PUT` to `Net::HTTP::Session#send_request` if you want to upload an object\.  | 
+|  3  |  Anyone with the presigned URL can upload an object\.  The upload creates an object or replaces any existing object with the same key that is specified in the presigned URL\.  | 
 
 The following Ruby code example demonstrates the preceding tasks for SDK for Ruby \- Version 3\.
 
 **Example**  
 
 ```
- 1. #Uploading an object using a pre-signed URL for SDK for Ruby - Version 3.
+ 1. #Uploading an object using a presigned URL for SDK for Ruby - Version 3.
  2. 
  3. require 'aws-sdk-s3'
  4. require 'net/http'

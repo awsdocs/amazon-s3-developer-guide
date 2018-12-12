@@ -52,14 +52,14 @@ Asia Pacific \(Sydney\)
 Asia Pacific \(Tokyo\)
 EU \(Ireland\)
 South America \(São Paulo\)
-For a list of all the Amazon S3 supported regions and endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
+For a list of all the Amazon S3 supported regions and endpoints, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
 
 **Warning**  
-When you grant other AWS accounts access to your resources, be aware that the AWS accounts can delegate their permissions to users under their accounts\. This is known as *cross\-account access*\. For information about using cross\-account access, see [ Creating a Role to Delegate Permissions to an IAM User](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\. 
+When you grant other AWS accounts access to your resources, be aware that the AWS accounts can delegate their permissions to users under their accounts\. This is known as *cross\-account access*\. For information about using cross\-account access, see [ Creating a Role to Delegate Permissions to an IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\. 
 
 ### Finding an AWS Account Canonical User ID<a name="finding-canonical-id"></a>
 
-The canonical user ID is associated with your AWS account\. It is a long string, such as `79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be`\. For information about how to find the canonical user ID for your account, see [Finding Your Account Canonical User ID](http://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)\. 
+The canonical user ID is associated with your AWS account\. It is a long string, such as `79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be`\. For information about how to find the canonical user ID for your account, see [Finding Your Account Canonical User ID](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)\. 
 
 You can also look up the canonical user ID of an AWS account by reading the ACL of a bucket or an object to which the AWS account has access permissions\. When an individual AWS account is granted permissions by a grant request, a grant entry is added to the ACL with the AWS account's canonical user ID\. 
 
@@ -84,7 +84,7 @@ We highly recommend that you never grant the **All Users group** `WRITE`, `WRITE
   WRITE permission on a bucket enables this group to write server access logs \(see [Amazon S3 Server Access Logging](ServerLogs.md)\) to the bucket\.
 
 **Note**  
-When using ACLs, a grantee can be an AWS account or one of the predefined Amazon S3 groups\. However, the grantee cannot be an IAM user\. For more information about AWS users and permissions within IAM, go to [Using AWS Identity and Access Management](http://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
+When using ACLs, a grantee can be an AWS account or one of the predefined Amazon S3 groups\. However, the grantee cannot be an IAM user\. For more information about AWS users and permissions within IAM, go to [Using AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
 
 ## What Permissions Can I Grant?<a name="permissions"></a>
 

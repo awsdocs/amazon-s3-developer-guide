@@ -21,11 +21,11 @@ When using an AWS KMS\-managed customer master key to enable client\-side data e
 The client obtains a unique data encryption key for each object that it uploads\.
 +  **When downloading an object**—The client downloads the encrypted object from Amazon S3 along with the cipher blob version of the data encryption key stored as object metadata\. The client then sends the cipher blob to AWS KMS to get the plain\-text version of the key so that it can decrypt the object data\.
 
-For more information about AWS KMS, see [What is the AWS Key Management Service?](http://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide*\.
+For more information about AWS KMS, see [What is the AWS Key Management Service?](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide*\.
 
 **Example**  
 The following example uploads an object to Amazon S3 using AWS KMS with the AWS SDK for Java\. The example uses a KMS\-managed customer master key \(CMK\) to encrypt data on the client side before uploading it to Amazon S3\. If you already have a CMK, you can use that by specifying the value of the `kms_cmk_id` variable in the sample code\. If you don't have a CMK, or you need another one, you can generate one through the Java API\. The example shows how to generate a CMK\.  
-For more information on key material, see [Importing Key Material in AWS Key Management Service \(AWS KMS\)](http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
+For more information on key material, see [Importing Key Material in AWS Key Management Service \(AWS KMS\)](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
 // Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.

@@ -8,10 +8,10 @@ When you add a lifecycle configuration, Amazon S3 replaces the existing lifecycl
 **Example \.NET Code Example**  
 The following example shows how to use the AWS SDK for \.NET to add, update, and delete a bucket's lifecycle configuration\. The code example does the following:  
 + Adds a lifecycle configuration to a bucket\. 
-+ Retrieves the lifecyle configuration and updates it by adding another rule\. 
++ Retrieves the lifecycle configuration and updates it by adding another rule\. 
 + Adds the modified lifecycle configuration to the bucket\. Amazon S3 replaces the existing lifecycle configuration\.
 + Retrieves the configuration again and verifies it by printing the number of rules in the configuration\.
-+ Deletes the lifecyle configuration\.and verifies the deletion
++ Deletes the lifecycle configuration\.and verifies the deletion
 For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```

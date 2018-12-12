@@ -1,4 +1,4 @@
-# Cross\-Region Replication: Additional Considerations<a name="crr-and-other-bucket-configs"></a>
+# Cross\-Region Replication Additional Considerations<a name="crr-and-other-bucket-configs"></a>
 
 Amazon S3 also supports bucket configurations for the following:
 + Versioning\. For more information, see [Using Versioning](Versioning.md)\.

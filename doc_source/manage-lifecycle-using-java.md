@@ -8,10 +8,10 @@ When you add a lifecycle configuration to a bucket, Amazon S3 replaces the bucke
 **Example**  
 The following example shows how to use the AWS SDK for Java to add, update, and delete the lifecycle configuration of a bucket\. The example does the following:  
 + Adds a lifecycle configuration to a bucket\. 
-+ Retrieves the lifecyle configuration and updates it by adding another rule\. 
++ Retrieves the lifecycle configuration and updates it by adding another rule\. 
 + Adds the modified lifecycle configuration to the bucket\. Amazon S3 replaces the existing configuration\. 
 + Retrieves the configuration again and verifies that it has the right number of rules by the printing number of rules\.
-+ Deletes the lifecyle configuration and verifies that it has been deleted by attempting to retrieve it again\.
++ Deletes the lifecycle configuration and verifies that it has been deleted by attempting to retrieve it again\.
  For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```

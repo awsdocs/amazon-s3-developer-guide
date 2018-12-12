@@ -4,7 +4,7 @@ If you encounter unexpected behavior while accessing buckets set with the CORS c
 
 1. Verify that the CORS configuration is set on the bucket\. 
 
-   For instructions, see [Editing Bucket Permissions](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/EditingBucketPermissions.html) in the *Amazon Simple Storage Service Console User Guide*\. If the CORS configuration is set, the console displays an **Edit CORS Configuration** link in the **Permissions** section of the **Properties** bucket\.
+   For instructions, see [Editing Bucket Permissions](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/EditingBucketPermissions.html) in the *Amazon Simple Storage Service Console User Guide*\. If the CORS configuration is set, the console displays an **Edit CORS Configuration** link in the **Permissions** section of the **Properties** bucket\.
 
 1. Capture the complete request and response using a tool of your choice\. For each request Amazon S3 receives, there must be a CORS rule that matches the data in your request, as follows:
 

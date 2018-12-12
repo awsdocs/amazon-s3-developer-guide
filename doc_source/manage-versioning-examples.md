@@ -10,7 +10,7 @@
 
 ## Using the Amazon S3 Console<a name="manage-versioning-examples-console"></a>
 
-For more information about enabling versioning on a bucket using the Amazon S3 console, see [ How Do I Enable or Suspend Versioning for an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-versioning.html) in the *Amazon Simple Storage Service Console User Guide*\.
+For more information about enabling versioning on a bucket using the Amazon S3 console, see [ How Do I Enable or Suspend Versioning for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-versioning.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Using the AWS SDK for Java<a name="manage-versioning-examples-java"></a>
 

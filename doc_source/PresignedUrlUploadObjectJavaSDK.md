@@ -1,11 +1,11 @@
-# Upload an Object Using a Pre\-Signed URL \(AWS SDK for Java\)<a name="PresignedUrlUploadObjectJavaSDK"></a>
+# Upload an Object Using a Presigned URL \(AWS SDK for Java\)<a name="PresignedUrlUploadObjectJavaSDK"></a>
 
-You can use the AWS SDK for Java to generate a presigned URL that you, or anyone you give the URL, can use to upload an object to Amazon S3\. When you use the URL to upload an object, Amazon S3 creates the object in the specified bucket\. If an object with the same key that is specified in the pre\-signed URL already exists in the bucket, Amazon S3 replaces the existing object with the uploaded object\. To successfully complete an upload, you must do the following:
+You can use the AWS SDK for Java to generate a presigned URL that you, or anyone you give the URL, can use to upload an object to Amazon S3\. When you use the URL to upload an object, Amazon S3 creates the object in the specified bucket\. If an object with the same key that is specified in the presigned URL already exists in the bucket, Amazon S3 replaces the existing object with the uploaded object\. To successfully complete an upload, you must do the following:
 + Specify the HTTP PUT verb when creating the `GeneratePresignedUrlRequest` and `HttpURLConnection` objects\.
 + Interact with the `HttpURLConnection` object in some way after finishing the upload\. The following example accomplishes this by using the `HttpURLConnection` object to check the HTTP response code\.
 
 **Example**  
-This example generates a pre\-signed URL and uses it to upload sample data as an object\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
+This example generates a presigned URL and uses it to upload sample data as an object\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
 // Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.

@@ -1,6 +1,6 @@
 # Making Requests Using the REST API<a name="RESTAPI"></a>
 
-This section contains information on how to make requests to Amazon S3 endpoints by using the REST API\. For a list of Amazon S3 endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
+This section contains information on how to make requests to Amazon S3 endpoints by using the REST API\. For a list of Amazon S3 endpoints, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
 
 **Topics**
 + [Making Requests to Dual\-Stack Endpoints by Using the REST API](#rest-api-dual-stack)

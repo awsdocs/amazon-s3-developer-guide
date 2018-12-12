@@ -24,7 +24,7 @@ Use the following naming conventions for the dual\-stack virtual hosted\-style a
 
   s3\.dualstack\.*aws\-region*\.amazonaws\.com/*bucketname*
 
-For more information about endpoint name style, see [Accessing a Bucket](UsingBucket.md#access-bucket-intro)\. For a list of Amazon S3 endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\. 
+For more information about endpoint name style, see [Accessing a Bucket](UsingBucket.md#access-bucket-intro)\. For a list of Amazon S3 endpoints, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\. 
 
 **Important**  
 You can use transfer acceleration with dual\-stack endpoints\. For more information, see [Getting Started with Amazon S3 Transfer Acceleration](transfer-acceleration.md#transfer-acceleration-getting-started)\.
@@ -37,7 +37,7 @@ This section provides examples of AWS CLI commands used to make requests to a du
 
 You set the configuration value `use_dualstack_endpoint` to `true` in a profile in your AWS Config file to direct all Amazon S3 requests made by the `s3` and `s3api` AWS CLI commands to the dual\-stack endpoint for the specified region\. You specify the region in the config file or in a command using the `--region` option\. 
 
-When using dual\-stack endpoints with the AWS CLI, both `path` and `virtual` addressing styles are supported\. The addressing style, set in the config file, controls if the bucket name is in the hostname or part of the URL\. By default, the CLI will attempt to use virtual style where possible, but will fall back to path style if necessary\. For more information, see [AWS CLI Amazon S3 Configuration](http://docs.aws.amazon.com/cli/latest/topic/s3-config.html)\.
+When using dual\-stack endpoints with the AWS CLI, both `path` and `virtual` addressing styles are supported\. The addressing style, set in the config file, controls if the bucket name is in the hostname or part of the URL\. By default, the CLI will attempt to use virtual style where possible, but will fall back to path style if necessary\. For more information, see [AWS CLI Amazon S3 Configuration](https://docs.aws.amazon.com/cli/latest/topic/s3-config.html)\.
 
 You can also make configuration changes by using a command, as shown in the following example, which sets `use_dualstack_endpoint` to `true` and `addressing_style` to `virtual` in the default profile\.
 

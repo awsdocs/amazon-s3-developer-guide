@@ -193,7 +193,7 @@ You have the following options you can add in the <Destination> element:
 To get started, you can add the following example replication configurations to your bucket, as appropriate\.
 
 **Important**  
-To add a replication configuration to a bucket, you must have the `iam:PassRole` permission\. This permission allows you to pass the IAM role that grants Amazon S3 replication permissions\. You specify the IAM role by providing the Amazon Resource Name \(ARN\) that is used in the `Role` element in the replication configuration XML\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\.
+To add a replication configuration to a bucket, you must have the `iam:PassRole` permission\. This permission allows you to pass the IAM role that grants Amazon S3 replication permissions\. You specify the IAM role by providing the Amazon Resource Name \(ARN\) that is used in the `Role` element in the replication configuration XML\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\.
 
 **Example 1: Replication Configuration with One Rule**  
 The following basic replication configuration specifies one rule\. The rule specifies an IAM role that Amazon S3 can assume and a destination bucket for object replicas\. The rule `Status` indicates that the rule is in effect\.  
@@ -286,7 +286,7 @@ You can specify a storage class for the object replicas as follows:
   </Rule>
 </ReplicationConfiguration>
 ```
-You can specify any storage class that Amazon S3 supports, except for `GLACIER`\. To transition objects to the `GLACIER` storage class, you use lifecycle configuration\. For more information about lifecycle management, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\. For more information about storage classes, see [Storage Classes](storage-class-intro.md)\.
+You can specify any storage class that Amazon S3 supports\.
 
 **Example 2: Replication Configuration with Two Rules**  
 
@@ -378,7 +378,7 @@ In this configuration, the two rules specify filters with overlapping key prefix
 **Example 4: Example Walkthroughs**  
 For example walkthroughs, see [Cross\-Region Replication \(CRR\) Walkthroughs](crr-example-walkthroughs.md)\.
 
-For more information about the XML structure of replication configuration, see [PutBucketReplication](http://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html) in the *Amazon Simple Storage Service API Reference*\. 
+For more information about the XML structure of replication configuration, see [PutBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html) in the *Amazon Simple Storage Service API Reference*\. 
 
 ## Backward Compatibility<a name="crr-backward-compat-considerations"></a>
 

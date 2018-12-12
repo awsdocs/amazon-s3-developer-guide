@@ -10,7 +10,7 @@ You can enable or disable logging programmatically by using either the Amazon S3
 
 ## Enabling Logging<a name="enabling-logging-general"></a>
 
-To enable logging, you submit a [PUT Bucket logging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html) request to add the logging configuration on the source bucket\. The request specifies the target bucket and, optionally, the prefix to be used with all log object keys\. The following example identifies `logbucket` as the target bucket and `logs/` as the prefix\. 
+To enable logging, you submit a [PUT Bucket logging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html) request to add the logging configuration on the source bucket\. The request specifies the target bucket and, optionally, the prefix to be used with all log object keys\. The following example identifies `logbucket` as the target bucket and `logs/` as the prefix\. 
 
 ```
 <BucketLoggingStatus xmlns="http://doc.s3.amazonaws.com/2006-03-01">
@@ -21,9 +21,9 @@ To enable logging, you submit a [PUT Bucket logging](http://docs.aws.amazon.com/
 </BucketLoggingStatus>
 ```
 
-The log objects are written and owned by the Log Delivery account, and the bucket owner is granted full permissions on the log objects\. In addition, you can optionally grant permissions to other users so that they can access the logs\. For more information, see [PUT Bucket logging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html)\. 
+The log objects are written and owned by the Log Delivery account, and the bucket owner is granted full permissions on the log objects\. In addition, you can optionally grant permissions to other users so that they can access the logs\. For more information, see [PUT Bucket logging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html)\. 
 
-Amazon S3 also provides the [GET Bucket logging](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlogging.html) API to retrieve logging configuration on a bucket\. To delete the logging configuration, you send the PUT Bucket logging request with an empty `BucketLoggingStatus`\. 
+Amazon S3 also provides the [GET Bucket logging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlogging.html) API to retrieve logging configuration on a bucket\. To delete the logging configuration, you send the PUT Bucket logging request with an empty `BucketLoggingStatus`\. 
 
 ```
 <BucketLoggingStatus xmlns="http://doc.s3.amazonaws.com/2006-03-01">
@@ -147,4 +147,4 @@ namespace Amazon.DocSamples.S3
 
 ## More Info<a name="enable-logging-programming-more-info"></a>
 + [Amazon S3 Server Access Logging](ServerLogs.md)
-+ [AWS::S3::Bucket](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html) in the AWS CloudFormation User Guide
++ [AWS::S3::Bucket](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html) in the AWS CloudFormation User Guide

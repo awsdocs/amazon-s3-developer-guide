@@ -16,7 +16,7 @@ AbortMultipartUploadRequest abortMPURequest = new AbortMultipartUploadRequest
 await AmazonS3Client.AbortMultipartUploadAsync(abortMPURequest);
 ```
 
-You can also abort all in\-progress multipart uploads that were initiated prior to a specific time\. This clean\-up operation is useful for aborting multipart uploads that didn't complete or were aborted\. For more information, see [Abort Multipart Uploads to an S3 Bucket Using the AWS SDK for \.NET \(High\-L:evel API\)](HLAbortDotNet.md)\.
+You can also abort all in\-progress multipart uploads that were initiated prior to a specific time\. This clean\-up operation is useful for aborting multipart uploads that didn't complete or were aborted\. For more information, see [Abort Multipart Uploads to an S3 Bucket Using the AWS SDK for \.NET \(High\-Level API\)](HLAbortDotNet.md)\.
 
 ## More Info<a name="LLAbortMPUnet-more-info"></a>
 
