@@ -47,6 +47,25 @@ Both the source and target buckets must be owned by the same AWS account, and th
 
 For more information about enabling server access logging, see [Enabling Logging Using the Console](enable-logging-console.md) and [Enabling Logging Programmatically](enable-logging-programming.md)\. 
 
+### Deliver logs to AWS-KMS encrypted buckets
+
+If the target bucket is encrypted using the SSE-KMS mechanism, the Key's policy has to be changed by adding the following statement:
+
+```
+        {
+            "Sid": "Allow s3-log-delivery",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "s3.amazonaws.com"
+            },
+            "Action": [
+                "kms:Encrypt",
+                "kms:GenerateDataKey*"
+            ],
+            "Resource": "*"
+        }
+```
+
 ## Log Object Key Format<a name="server-log-keyname-format"></a>
 
 Amazon S3 uses the following object key format for the log objects it uploads in the target bucket:
