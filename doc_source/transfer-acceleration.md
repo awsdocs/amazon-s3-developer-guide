@@ -54,7 +54,7 @@ You can continue to use the regular endpoint in addition to the accelerate endpo
 
    You can point your Amazon S3 PUT object and GET object requests to the s3\-accelerate endpoint domain name after you enable Transfer Acceleration\. For example, let's say you currently have a REST API application using [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) that uses the host name **mybucket\.s3\.amazonaws\.com ** in the `PUT` request\. To accelerate the `PUT` you simply change the host name in your request to **mybucket\.s3\-accelerate\.amazonaws\.com**\. To go back to using the standard upload speed, simply change the name back to **mybucket\.s3\.amazonaws\.com**\.
 
-   After Transfer Acceleration is enabled, it can take up to 20 minutes for you to realize the performance benefit\. However, the accelerate endpoint will be available as soon as you enable Transfer Acceleration\.
+   After Transfer Acceleration is enabled, it can take up to 30 minutes for you to realize the performance benefit\. However, the accelerate endpoint will be available as soon as you enable Transfer Acceleration\.
 
    You can use the accelerate endpoint in the AWS CLI, AWS SDKs, and other tools that transfer data to and from Amazon S3\. If you are using the AWS SDKs, some of the supported languages use an accelerate endpoint client configuration flag so you don't need to explicitly set the endpoint for Transfer Acceleration to *bucketname*\.s3\-accelerate\.amazonaws\.com\. For examples of how to use an accelerate endpoint client configuration flag, see [Amazon S3 Transfer Acceleration Examples](transfer-acceleration-examples.md)\.
 
