@@ -117,7 +117,11 @@ When source and destination buckets aren't owned by the same accounts, the owner
          "Principal":{
             "AWS":"SourceBucket-AcctID"
          },
-         "Action":"s3:List*",
+         "Action":[
+           "s3:List*",
+           "s3:GetBucketVersioning",
+           "s3:PutBucketVersioning"
+         ],
          "Resource":"arn:aws:s3:::destinationbucket"
       }
    ]
