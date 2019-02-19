@@ -5,9 +5,7 @@ This topic shows how to use the low\-level API classes from version 3 of the AWS
 The following PHP example demonstrates listing all in\-progress multipart uploads on a bucket\.
 
 ```
-<?php 
-
-require 'vendor/autoload.php';
+ require 'vendor/autoload.php';
 
 use Aws\S3\S3Client;
 

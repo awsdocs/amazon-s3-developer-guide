@@ -20,9 +20,7 @@ The following tasks guide you through using PHP classes to make multiple copies 
 The following PHP example illustrates the use of the `copyObject()` method to copy a single object within Amazon S3 and using a batch of calls to `CopyObject` using the `getcommand()` method to make multiple copies of an object\.  
 
 ```
-<?php
-
-require 'vendor/autoload.php';
+ require 'vendor/autoload.php';
 
 use Aws\S3\S3Client;
 

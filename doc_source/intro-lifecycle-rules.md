@@ -235,12 +235,12 @@ When you specify the number of days in the `Transition` and `Expiration` actions
 Amazon S3 maintains only the last modified date for each object\. For example, the Amazon S3 console shows the **Last Modified** date in the object **Properties** pane\. When you initially create a new object, this date reflects the date the object is created\. If you replace the object, the date changes accordingly\. So when we use the term *creation date*, it is synonymous with the term *last modified date*\. 
 
 When specifying the number of days in the `NoncurrentVersionTransition` and `NoncurrentVersionExpiration` actions in a lifecycle configuration, note the following:
-+ It is the number of days from when the version of the object becomes noncurrent \(that is, since the object was overwritten or deleted\), as the time when Amazon S3 will perform the action on the specified object or objects\.
-+ Amazon S3 calculates the time by adding the number of days specified in the rule to the time when the new successor version of the object is created and rounding the resulting time to the next day midnight UTC\. For example, in your bucket, you have a current version of an object that was created at 1/1/2014 10:30 AM UTC, if the new successor version of the object that replaces the current version is created at 1/15/2014 10:30 AM UTC and you specify 3 days in a transition rule, then the transition date of the object would be calculated as 1/19/2014 00:00 UTC\. 
++ It is the number of days from when the version of the object becomes noncurrent \(that is, when the object is overwritten or deleted\), that Amazon S3 will perform the action on the specified object or objects\.
++ Amazon S3 calculates the time by adding the number of days specified in the rule to the time when the new successor version of the object is created and rounding the resulting time to the next day midnight UTC\. For example, in your bucket, suppose that you have a current version of an object that was created at 1/1/2014 10:30 AM UTC\. If the new version of the object that replaces the current version is created at 1/15/2014 10:30 AM UTC, and you specify 3 days in a transition rule, the transition date of the object is calculated as 1/19/2014 00:00 UTC\. 
 
 ### Lifecycle Rules: Based on a Specific Date<a name="intro-lifecycle-rules-date"></a>
 
-When specifying an action in a lifecycle rule, you can specify a date when you want Amazon S3to take the action\. When the specific date arrives, S3 applies the action to all qualified objects \(based on the filter criteria\)\. 
+When specifying an action in a lifecycle rule, you can specify a date when you want Amazon S3 to take the action\. When the specific date arrives, S3 applies the action to all qualified objects \(based on the filter criteria\)\. 
 
 If you specify a lifecycle action with a date that is in the past, all qualified objects become immediately eligible for that lifecycle action\.
 

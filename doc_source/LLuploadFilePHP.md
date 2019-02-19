@@ -5,9 +5,7 @@ This topic guides shows how to use the low\-level `uploadPart` method from versi
 The following PHP example uploads a file to an Amazon S3 bucket using the low\-level PHP API multipart upload\. For information about running the PHP examples in this guide, see [Running PHP Examples](UsingTheMPphpAPI.md#running-php-samples)\. 
 
 ```
-<?php
-
-require 'vendor/autoload.php';
+ require 'vendor/autoload.php';
 
 use Aws\S3\S3Client;
 

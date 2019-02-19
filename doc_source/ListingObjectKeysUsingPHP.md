@@ -16,9 +16,7 @@ The following tasks guide you through using the PHP Amazon S3 client methods to 
 The following PHP example demonstrates how to list the keys from a specified bucket\. It shows how to use the high\-level `getIterator()` method to list the objects in a bucket and then how to extract the key from each of the objects in the list\. It also show how to use the low\-level `listObjects()` method to list the objects in a bucket and then how to extract the key from each of the objects in the list returned\. For information about running the PHP examples in this guide, go to [Running PHP Examples](UsingTheMPphpAPI.md#running-php-samples)\.   
 
 ```
-<?php
-
-require 'vendor/autoload.php';
+ require 'vendor/autoload.php';
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;

@@ -2,7 +2,7 @@
 
 By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with AWS KMS\-managed keys\. This section explains additional configuration you add to direct Amazon S3 to replicate these objects\. 
 
-For an example with step\-by\-step instructions, see [Example 4: Replicating Encrypted Objects](crr-walkthrough-4.md)\. For information about creating a replication configuration, see [Cross\-Region Replication ](crr.md)\. 
+For an example with step\-by\-step instructions, see [Example 4: Replicating Encrypted Objects](crr-walkthrough-4.md)\. For information about creating a replication configuration, see [Cross\-Region Replication](crr.md)\. 
 
 **Topics**
 + [Specifying Additional Information in the Replication Configuration](#crr-kms-extra-config)

@@ -75,7 +75,7 @@ This section provides a list of the permissions related to bucket operations tha
 | s3:CreateBucket | [PUT Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html) | 
 | s3:DeleteBucket | [DELETE Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETE.html) | 
 | s3:ListBucket | [GET Bucket \(List Objects\)](https://docs.aws.amazon.com/AmazonS3/latest/API/v2-RESTBucketGET.html), [HEAD Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketHEAD.html) | 
-| s3:ListBucketVersions | [GET Bucket Object versions](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html) | 
+| s3:ListBucketVersions | [GET Bucket Object versions](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETVersion.html) | 
 | s3:ListAllMyBuckets | [GET Service](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html)  | 
 | s3:ListBucketMultipartUploads | [List Multipart Uploads](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadListMPUpload.html) | 
 

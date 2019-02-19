@@ -69,8 +69,14 @@ You can configure an Amazon S3 bucket to function like a website\. This example 
 
 Type the following URL in the browser, replacing *example\-bucket* with the name of your bucket and *website\-region* with the name of the AWS Region where you deployed your bucket\. For information about AWS Region names, see [Website Endpoints](WebsiteEndpoints.md) \)\. 
 
+The two general forms of an Amazon S3 website endpoint are as follows: 
+
 ```
 1. http://example-bucket.s3-website-region.amazonaws.com
+```
+
+```
+1. http://example-bucket.s3-website.region.amazonaws.com
 ```
 
 If your browser displays your `index.html` page, the website was successfully deployed\.

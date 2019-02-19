@@ -6,8 +6,30 @@ You can abort an in\-progress multipart upload by calling the `AmazonS3Client.ab
 The following example shows how to abort multipart uploads using the low\-level Java API\.  
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+/**
+ * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * This file is licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ * http://aws.amazon.com/apache2.0/
+ *
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+*/
+
+// snippet-sourcedescription:[LowLevelAbortMultipartUpload.java demonstrates how to abort an in-progress multipart upload.]
+// snippet-service:[s3]
+// snippet-keyword:[Java]
+// snippet-keyword:[Amazon S3]
+// snippet-keyword:[Code Sample]
+// snippet-keyword:[Abort Multipart Upload]
+// snippet-sourcetype:[full-example]
+// snippet-sourcedate:[2019-01-28]
+// snippet-sourceauthor:[AWS]
+// snippet-start:[s3.java.low_level_abort_multipart_upload.complete]
 
 import java.util.List;
 
@@ -64,6 +86,8 @@ public class LowLevelAbortMultipartUpload {
         }
     }
 }
+
+// snippet-end:[s3.java.low_level_abort_multipart_upload.complete]
 ```
 
 **Note**  

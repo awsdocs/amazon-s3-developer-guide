@@ -5,9 +5,7 @@ This topic describes how to use a class from version 3 of the AWS SDK for PHP to
 The following PHP example shows how to abort an in\-progress multipart upload using the `abortMultipartUpload()` method\. For information about running the PHP examples in this guide, see [Running PHP Examples](UsingTheMPphpAPI.md#running-php-samples)\.
 
 ```
-<?php
-
-require 'vendor/autoload.php';
+ require 'vendor/autoload.php';
 
 use Aws\S3\S3Client;
 

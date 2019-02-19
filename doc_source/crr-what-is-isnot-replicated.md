@@ -70,7 +70,7 @@ If using the latest version of the replication configuration \(the XML specifies
 
 ## Related Topics<a name="crr-whatis-isnot-related-topics"></a>
 
-[Cross\-Region Replication ](crr.md)
+[Cross\-Region Replication](crr.md)
 
 [Overview of Setting Up CRR ](crr-how-setup.md)
 

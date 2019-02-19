@@ -15,9 +15,7 @@ The following PHP example uploads a file to an Amazon S3 bucket\. The example de
 For information about running the PHP examples in this guide, see [Running PHP Examples](UsingTheMPphpAPI.md#running-php-samples)\.
 
 ```
-<?php
-
-require 'vendor/autoload.php';
+ require 'vendor/autoload.php';
 
 use Aws\Common\Exception\MultipartUploadException;
 use Aws\S3\MultipartUploader;

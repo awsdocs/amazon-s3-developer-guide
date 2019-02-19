@@ -1,6 +1,6 @@
 # Protecting Data Using Server\-Side Encryption with AWS KMS–Managed Keys \(SSE\-KMS\)<a name="UsingKMSEncryption"></a>
 
-Server\-side encryption is about protecting data at rest\. AWS Key Management Service \(AWS KMS\) is a service that combines secure, highly available hardware and software to provide a key management system scaled for the cloud\. AWS KMS uses customer master keys \(CMKs\) to encrypt your Amazon S3 objects\. You use AWS KMS via the Encryption Keys section in the IAM console or via AWS KMS APIs to centrally create encryption keys, define the policies that control how keys can be used, and audit key usage to prove they are being used correctly\. You can use these keys to protect your data in Amazon S3 buckets\.
+Server\-side encryption is about protecting data at rest\. AWS Key Management Service \(AWS KMS\) is a service that combines secure, highly available hardware and software to provide a key management system scaled for the cloud\. AWS KMS uses customer master keys \(CMKs\) to encrypt your Amazon S3 objects\. You use AWS KMS via the [AWS Management Console](https://console.aws.amazon.com/kms) or [AWS KMS APIs](https://docs.aws.amazon.com/kms/latest/APIReference/) to centrally create encryption keys, define the policies that control how keys can be used, and audit key usage to prove they are being used correctly\. You can use these keys to protect your data in Amazon S3 buckets\.
 
 The first time you add an SSE\-KMS–encrypted object to a bucket in a region, a default CMK is created for you automatically\. This key is used for SSE\-KMS encryption unless you select a CMK that you created separately using AWS Key Management Service\. Creating your own CMK gives you more flexibility, including the ability to create, rotate, disable, and define access controls, and to audit the encryption keys used to protect your data\.
 
@@ -13,7 +13,7 @@ The highlights of SSE\-KMS are:
 + You can choose to create and manage encryption keys yourself, or you can choose to use your default service key uniquely generated on a customer by service by region level\. 
 + The ETag in the response is not the MD5 of the object data\.
 + The data keys used to encrypt your data are also encrypted and stored alongside the data they protect\. 
-+ Auditable master keys can be created, rotated, and disabled from the IAM console\. 
++ Auditable master keys can be created, rotated, and disabled from the AWS KMS console\. 
 + The security controls in AWS KMS can help you meet encryption\-related compliance requirements\.
 
 Amazon S3 supports bucket policies that you can use if you require server\-side encryption for all objects that are stored in your bucket\. For example, the following bucket policy denies upload object \(`s3:PutObject`\) permission to everyone if the request does not include the `x-amz-server-side-encryption` header requesting server\-side encryption with SSE\-KMS\.

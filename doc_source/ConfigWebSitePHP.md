@@ -7,9 +7,7 @@ The following PHP example adds a website configuration to the specified bucket\.
  For instructions on creating and testing a working sample, see [Using the AWS SDK for PHP and Running PHP Examples](UsingTheMPphpAPI.md)\. 
 
 ```
-<?php
-
-require 'vendor/autoload.php';
+ require 'vendor/autoload.php';
 
 use Aws\S3\S3Client;
 

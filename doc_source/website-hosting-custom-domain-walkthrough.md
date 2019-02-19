@@ -72,10 +72,8 @@ Like domains, subdomains must have their own S3 buckets, and the buckets must sh
            "Effect":"Allow",
    	  "Principal": "*",
          "Action":["s3:GetObject"],
-         "Resource":["arn:aws:s3:::example.com/*"
-         ]
-       }
-     ]
+         "Resource":["arn:aws:s3:::example.com/*"]
+       }]
    }
    ```
 
@@ -136,10 +134,8 @@ In this step, you create the alias records that you add to the hosted zone for y
 **To route traffic to your website**
 
 1. Open the Route 53 console at [https://console\.aws\.amazon\.com/route53/](https://console.aws.amazon.com/route53/)\.
-
-1. In the navigation pane, choose **Hosted zones**\.
 **Note**  
-When you registered your domain, Amazon Route 53 automatically created a hosted zone with the same name\. A hosted zone contains information about how you want Route 53 to route traffic for the domain\.
+If you dont already use Amazon Route 53, you can get started [here\.](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide//getting-started.html#getting-started-find-domain-name) After you have completed your set up, you can resume the instructions below\.
 
 1. In the list of hosted zones, choose the name of your domain\.
 

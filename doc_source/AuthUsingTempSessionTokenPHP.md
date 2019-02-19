@@ -12,51 +12,49 @@ The following PHP example lists object keys in the specified bucket using tempor
 If you want to test the example using IAM user credentials, you need to create an IAM user under your AWS account\. For information about how to create an IAM user, see [Creating Your First IAM User and Administrators Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\. For an example of setting the session duration when using IAM user credentials to request a session, see [Making Requests Using Federated User Temporary Credentials \- AWS SDK for PHP](AuthUsingTempFederationTokenPHP.md)\.   
 
 ```
- 1. <?php
- 2. 
- 3. require 'vendor/autoload.php';
- 4. 
- 5. use Aws\Sts\StsClient;
- 6. use Aws\S3\S3Client;
- 7. use Aws\S3\Exception\S3Exception;
- 8. 
- 9. $bucket = '*** Your Bucket Name ***';
-10. 
-11. $sts = new StsClient([
-12.     'version' => 'latest',
-13.     'region' => 'us-east-1'
-14. ]);
-15.     
-16. $sessionToken = $sts->getSessionToken();
-17. 
-18. $s3 = new S3Client([
-19.     'region' => 'us-east-1',
-20.     'version' => 'latest',
-21.     'credentials' => [
-22.         'key'    => $sessionToken['Credentials']['AccessKeyId'],
-23.         'secret' => $sessionToken['Credentials']['SecretAccessKey'],
-24.         'token'  => $sessionToken['Credentials']['SessionToken']
-25.     ]
-26. ]);
-27. 
-28. $result = $s3->listBuckets();
-29. 
-30. 
-31. try {
-32.     // Retrieve a paginator for listing objects.
-33.     $objects = $s3->getPaginator('ListObjects', [
-34.         'Bucket' => $bucket
-35.     ]);
-36.     
-37.     echo "Keys retrieved!" . PHP_EOL;
-38.     
-39.     // List objects
-40.     foreach ($objects as $object) {
-41.         echo $object['Key'] . PHP_EOL;
-42.     }
-43. } catch (S3Exception $e) {
-44.     echo $e->getMessage() . PHP_EOL;
-45. }
+ require 'vendor/autoload.php';
+
+use Aws\Sts\StsClient;
+use Aws\S3\S3Client;
+use Aws\S3\Exception\S3Exception;
+
+$bucket = '*** Your Bucket Name ***';
+
+$sts = new StsClient([
+    'version' => 'latest',
+    'region' => 'us-east-1'
+]);
+    
+$sessionToken = $sts->getSessionToken();
+
+$s3 = new S3Client([
+    'region' => 'us-east-1',
+    'version' => 'latest',
+    'credentials' => [
+        'key'    => $sessionToken['Credentials']['AccessKeyId'],
+        'secret' => $sessionToken['Credentials']['SecretAccessKey'],
+        'token'  => $sessionToken['Credentials']['SessionToken']
+    ]
+]);
+
+$result = $s3->listBuckets();
+
+
+try {
+    // Retrieve a paginator for listing objects.
+    $objects = $s3->getPaginator('ListObjects', [
+        'Bucket' => $bucket
+    ]);
+    
+    echo "Keys retrieved!" . PHP_EOL;
+    
+    // List objects
+    foreach ($objects as $object) {
+        echo $object['Key'] . PHP_EOL;
+    }
+} catch (S3Exception $e) {
+    echo $e->getMessage() . PHP_EOL;
+}
 ```
 
 ## Related Resources<a name="RelatedResources-AuthUsingTempSessionTokenPHP"></a>

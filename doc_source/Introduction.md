@@ -98,13 +98,13 @@ The following table describes the characteristics of eventually consistent read 
 
 This section provides examples of eventually consistent and consistent read requests when multiple clients are writing to the same items\.
 
-In this example, both W1 \(write 1\) and W2 \(write 2\) complete before the start of R1 \(read 1\) and R2 \(read 2\)\. For a consistent read, R1 and R2 both return `color = ruby`\. For an eventually consistent read, R1 and R2 might return `color = red`, `color = ruby`, or no results, depending on the amount of time that has elapsed\. 
+In this example, both W1 \(write 1\) and W2 \(write 2\) complete before the start of R1 \(read 1\) and R2 \(read 2\)\. For a consistent read, R1 and R2 both return `color = ruby`\. For an eventually consistent read, R1 and R2 might return `color = red` or  `color = ruby` depending on the amount of time that has elapsed\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/consistency1.png)
 
 In the next example, W2 does not complete before the start of R1\. Therefore, R1 might return `color = ruby` or `color = garnet` for either a consistent read or an eventually consistent read\. Also, depending on the amount of time that has elapsed, an eventually consistent read might return no results\.
 
- For a consistent read, R2 returns `color = garnet`\. For an eventually consistent read, R2 might return `color = ruby`, `color = garnet`, or no results depending on the amount of time that has elapsed\. 
+For a consistent read, R2 returns `color = garnet`\. For an eventually consistent read, R2 might return `color = ruby` or  `color = garnet` depending on the amount of time that has elapsed\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/consistency2.png)
 

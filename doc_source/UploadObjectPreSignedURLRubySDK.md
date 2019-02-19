@@ -16,29 +16,56 @@ The following Ruby code example demonstrates the preceding tasks for SDK for Rub
 **Example**  
 
 ```
- 1. #Uploading an object using a presigned URL for SDK for Ruby - Version 3.
- 2. 
- 3. require 'aws-sdk-s3'
- 4. require 'net/http'
- 5. 
- 6. s3 = Aws::S3::Resource.new(region:'us-west-2')
- 7. 
- 8. obj = s3.bucket('BucketName').object('KeyName')
- 9. # Replace BucketName with the name of your bucket.
-10. # Replace KeyName with the name of the object you are creating or replacing.
-11. 
-12. url = URI.parse(obj.presigned_url(:put))
-13. 
-14. body = "Hello World!"
-15. # This is the contents of your object. In this case, it's a simple string.
-16. 
-17. Net::HTTP.start(url.host) do |http|
-18.   http.send_request("PUT", url.request_uri, body, {
-19. # This is required, or Net::HTTP will add a default unsigned content-type.
-20.     "content-type" => "",
-21.   })
-22. end
-23. 
-24. puts obj.get.body.read
-25. # This will print out the contents of your object to the terminal window.
+#**
+ #* Copyright 2010-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ #*
+ #* This file is licensed under the Apache License, Version 2.0 (the "License").
+ #* You may not use this file except in compliance with the License. A copy of
+ #* the License is located at
+ #*
+ #* http://aws.amazon.com/apache2.0/
+ #*
+ #* This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ #* CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ #* specific language governing permissions and limitations under the License.
+#**
+
+
+# snippet-sourcedescription:[create_bucket.rb allows anyone with the presigned URL can upload an object by using the AWS SDK for Ruby.] 
+# snippet-service:[s3]
+# snippet-keyword:[Ruby]
+# snippet-keyword:[Amazon S3]
+# snippet-keyword:[PUT Bucket, Presigned URL]
+# snippet-keyword:[Upload-presigned-url]
+# snippet-sourcetype:[snippet]
+# snippet-sourcedate:[2019-01-28]
+# snippet-sourceauthor:[AWS]
+
+# snippet-start:[s3.ruby.upload_object_presigned_url.rb]
+#Uploading an object using a presigned URL for SDK for Ruby - Version 3.
+
+require 'aws-sdk-s3'
+require 'net/http'
+
+s3 = Aws::S3::Resource.new(region:'us-west-2')
+
+obj = s3.bucket('BucketName').object('KeyName')
+# Replace BucketName with the name of your bucket.
+# Replace KeyName with the name of the object you are creating or replacing.
+
+url = URI.parse(obj.presigned_url(:put))
+
+body = "Hello World!"
+# This is the contents of your object. In this case, it's a simple string.
+
+Net::HTTP.start(url.host) do |http|
+  http.send_request("PUT", url.request_uri, body, {
+# This is required, or Net::HTTP will add a default unsigned content-type.
+    "content-type" => "",
+  })
+end
+
+puts obj.get.body.read
+# This will print out the contents of your object to the terminal window.
+# snippet-end:[s3.ruby.upload_object_presigned_url.rb]
 ```
