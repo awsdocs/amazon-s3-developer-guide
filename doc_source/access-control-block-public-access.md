@@ -44,6 +44,7 @@ Because Block Public Access settings don't alter existing policies or ACLs, remo
     + `aws:SourceAccount`
     + `s3:x-amz-server-side-encryption-aws-kms-key-id`
     + `aws:userid`, outside the pattern "`AROLEID:*`"
+    + `aws:PrincipalOrgId`
   + Under these rules, the following example policies are considered public:
 
     ```
