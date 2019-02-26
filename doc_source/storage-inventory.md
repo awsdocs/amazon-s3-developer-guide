@@ -315,7 +315,7 @@ Athena can query Amazon S3 inventory files in ORC, Parquet, or CSV format\. When
     When using Athena to query a Parquet\-formatted inventory report, use the following Parquet SerDe in place of the ORC SerDe in the `ROW FORMAT SERDE` statement\.
 
    ```
-   ROW FORMAT SERDE ‘org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe’
+   ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe'
    ```
 
 1. To add new inventory lists to your table, use the following `MSCK REPAIR TABLE` command\.
