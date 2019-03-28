@@ -77,6 +77,8 @@ Like domains, subdomains must have their own S3 buckets, and the buckets must sh
    }
    ```
 
+   *Note*: The above policy is an example only and allows full access to the contents of your bucket. Please review our [guide](https://aws.amazon.com/premiumsupport/knowledge-center/secure-s3-resources/) on S3 security to ensure that you are limiting access to the bucket.
+
     You now have two buckets, *example\.com* and *www\.example\.com*, and you have uploaded your website content to the *example\.com* bucket\. In the next step, you configure *www\.example\.com* to redirect requests to your *example\.com* bucket\. By redirecting requests, you can maintain only one copy of your website content\. Visitors who type `www` in their browsers and those who specify only the root domain are routed to the same website content in your *example\.com* bucket\. 
 
 ### Step 2\.2: Configure Buckets for Website Hosting<a name="root-domain-walkthrough-configure-bucket-aswebsite"></a>
