@@ -10,7 +10,7 @@ You can host a static website on Amazon Simple Storage Service \(Amazon S3\)\. O
 To host a static website, you configure an Amazon S3 bucket for website hosting, and then upload your website content to the bucket\. This bucket must have public read access\. It is intentional that everyone in the world will have read access to this bucket\. The website is then available at the AWS Region\-specific website endpoint of the bucket, which is in one of the following formats:
 
 ```
-<bucket-name>.s3-website-<AWS-region>.amazonaws.com
+<bucket-name>.s3-website.<AWS-region>.amazonaws.com
 ```
 
 ```
@@ -21,17 +21,17 @@ For a list of AWS Region\-specific website endpoints for Amazon S3, see [Website
 + This URL returns a default index document that you configured for the website\.
 
   ```
-  http://examplebucket.s3-website-us-west-2.amazonaws.com/
+  http://examplebucket.s3-website.us-west-2.amazonaws.com/
   ```
 + This URL requests the photo\.jpg object, which is stored at the root level in the bucket\.
 
   ```
-  http://examplebucket.s3-website-us-west-2.amazonaws.com/photo.jpg
+  http://examplebucket.s3-website.us-west-2.amazonaws.com/photo.jpg
   ```
 + This URL requests the `docs/doc1.html` object in your bucket\. 
 
   ```
-  http://examplebucket.s3-website-us-west-2.amazonaws.com/docs/doc1.html
+  http://examplebucket.s3-website.us-west-2.amazonaws.com/docs/doc1.html
   ```
 
 **Using Your Own Domain**  
