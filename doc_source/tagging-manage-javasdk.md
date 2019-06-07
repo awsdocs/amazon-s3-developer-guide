@@ -3,8 +3,31 @@
 The following example shows how to use the AWS SDK for Java to set tags for a new object and retrieve or replace tags for an existing object\. For more information about object tagging, see [Object Tagging](object-tagging.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+/**
+ * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * This file is licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ * http://aws.amazon.com/apache2.0/
+ *
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+*/
+
+// snippet-sourcedescription:[ManagingObjectTags.java demonstrates how to set, get, and replace an S3 object's tags.]
+// snippet-service:[s3]
+// snippet-keyword:[Java]
+// snippet-keyword:[Amazon S3]
+// snippet-keyword:[Code Sample]
+// snippet-keyword:[GET Object tagging]
+// snippet-keyword:[PUT Object tagging]
+// snippet-sourcetype:[full-example]
+// snippet-sourcedate:[2019-01-28]
+// snippet-sourceauthor:[AWS]
+// snippet-start:[s3.java.managing_object_tags.complete]
 
 import java.io.File;
 import java.util.ArrayList;
@@ -61,4 +84,6 @@ public class ManagingObjectTags {
         }
     }
 }
+
+// snippet-end:[s3.java.managing_object_tags.complete]
 ```

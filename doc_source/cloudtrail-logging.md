@@ -161,7 +161,7 @@ You can also use CloudTrail logs together with CloudWatch for Amazon S3\. CloudT
 
  A trail is a configuration that enables delivery of events as log files to an Amazon S3 bucket that you specify\. CloudTrail log files contain one or more log entries\. An event represents a single request from any source and includes information about the requested action, the date and time of the action, request parameters, and so on\. CloudTrail log files are not an ordered stack trace of the public API calls, so they do not appear in any specific order\.
 
-The following example shows a CloudTrail log entry that demonstrates the [DELETE Bucket policy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html), [PUT Bucket acl](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTacl.html), and [GET Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html) actions\.
+The following example shows a CloudTrail log entry that demonstrates the [GET Service](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html), [PUT Bucket acl](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTacl.html), and [GET Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html) actions\.
 
 ```
 {
@@ -176,16 +176,22 @@ The following example shows a CloudTrail log entry that demonstrates the [DELETE
             "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
             "userName": "myUserName"
         },
-        "eventTime": "2015-08-26T20:46:31Z",
+        "eventTime": "2019-02-01T03:18:19Z",
         "eventSource": "s3.amazonaws.com",
-        "eventName": "DeleteBucketPolicy",
+        "eventName": "ListBuckets",
         "awsRegion": "us-west-2",
         "sourceIPAddress": "127.0.0.1",
         "userAgent": "[]",
         "requestParameters": {
-            "bucketName": "myawsbucket"
+            "host": [
+                "s3.us-west-2.amazonaws.com"
+            ]
         },
         "responseElements": null,
+        "additionalEventData": {
+            "SignatureVersion": "SigV2",
+            "AuthenticationMethod": "QueryString"
+    },
         "requestID": "47B8E8D397DCE7A6",
         "eventID": "cdc4b7ed-e171-4cef-975a-ad829d4123e8",
         "eventType": "AwsApiCall",
@@ -201,7 +207,7 @@ The following example shows a CloudTrail log entry that demonstrates the [DELETE
             "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
             "userName": "myUserName"
         },
-      "eventTime": "2015-08-26T20:46:31Z",
+      "eventTime": "2019-02-01T03:22:33Z",
       "eventSource": "s3.amazonaws.com",
       "eventName": "PutBucketAcl",
       "awsRegion": "us-west-2",
@@ -225,8 +231,19 @@ The following example shows a CloudTrail log entry that demonstrates the [DELETE
                   "ID": "d25639fbe9c19cd30a4c0f43fbf00e2d3f96400a9aa8dabfbbebe1906Example"
               }
           }
+          "host": [
+              "s3-us-west-2.amazonaws.com"
+          ],
+          "acl": [
+              ""
+          ]
       },
       "responseElements": null,
+      "additionalEventData": {
+          "SignatureVersion": "SigV4",
+          "CipherSuite": "ECDHE-RSA-AES128-SHA",
+          "AuthenticationMethod": "AuthHeader"
+      },
       "requestID": "BD8798EACDD16751",
       "eventID": "607b9532-1423-41c7-b048-ec2641693c47",
       "eventType": "AwsApiCall",
@@ -242,16 +259,27 @@ The following example shows a CloudTrail log entry that demonstrates the [DELETE
           "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
           "userName": "myUserName"
         },
-      "eventTime": "2015-08-26T20:46:31Z",
+      "eventTime": "2019-02-01T03:26:37Z",
       "eventSource": "s3.amazonaws.com",
       "eventName": "GetBucketVersioning",
       "awsRegion": "us-west-2",
       "sourceIPAddress": "",
       "userAgent": "[]",
       "requestParameters": {
-          "bucketName": "myawsbucket"
+          "host": [
+              "s3.us-west-2.amazonaws.com"
+          ],
+          "bucketName": "myawsbucket",
+          "versioning": [
+              ""
+          ]
       },
       "responseElements": null,
+      "additionalEventData": {
+          "SignatureVersion": "SigV4",
+          "CipherSuite": "ECDHE-RSA-AES128-SHA",
+          "AuthenticationMethod": "AuthHeader",
+    },
       "requestID": "07D681279BD94AED",
       "eventID": "f2b287f3-0df1-4961-a2f4-c4bdfed47657",
       "eventType": "AwsApiCall",

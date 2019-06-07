@@ -49,8 +49,8 @@ The following code shows the minimum requirements for a rule:
 ...
     <Rule>
         <ID>Rule-1</ID>
-        <Status>rule-Enabled-or-Diasbled</Priority>
-        <Priority>integer</Status>
+        <Status>rule-Enabled-or-Diasbled</Status>
+        <Priority>integer</Priority>
         <DeleteMarkerReplication>
            <Status>Disabled</Status>
         </DeleteMarkerReplication>

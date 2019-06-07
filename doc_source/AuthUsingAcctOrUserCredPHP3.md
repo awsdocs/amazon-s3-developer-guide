@@ -7,9 +7,7 @@ The following PHP example shows how the client makes a request using your securi
 **Example**  
 
 ```
-<?php
-
-
+ 
 require 'vendor/autoload.php';
 
 use Aws\Sts\StsClient;

@@ -43,4 +43,4 @@ If replication is enabled and you remove the IAM role that grants Amazon S3 the 
 
 ## Related Topics<a name="crr-other-config-related-topics"></a>
 
-[Cross\-Region Replication ](crr.md)
+[Cross\-Region Replication](crr.md)

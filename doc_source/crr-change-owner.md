@@ -1,6 +1,6 @@
 # CRR Additional Configuration: Changing the Replica Owner<a name="crr-change-owner"></a>
 
-In cross\-region replication \(CRR\), the owner of the source object also owns the replica by default\. When source and destination buckets are owned by different AWS accounts, you can add optional configuration settings to change replica ownership to the AWS account that owns the destination bucket\. You might do this, for example, to restrict access to object replicas\. This is referred to as the *owner override* option of the replication configuration\. This section explains only the relevant additional configuration settings\. For information about setting the replication configuration see [Cross\-Region Replication ](crr.md)\. 
+In cross\-region replication \(CRR\), the owner of the source object also owns the replica by default\. When source and destination buckets are owned by different AWS accounts, you can add optional configuration settings to change replica ownership to the AWS account that owns the destination bucket\. You might do this, for example, to restrict access to object replicas\. This is referred to as the *owner override* option of the replication configuration\. This section explains only the relevant additional configuration settings\. For information about setting the replication configuration see [Cross\-Region Replication](crr.md)\. 
 
 To configure the owner override, you do the following:
 + Add the owner override option to the replication configuration to tell Amazon S3 to change replica ownership\. 

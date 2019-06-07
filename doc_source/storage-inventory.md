@@ -6,7 +6,7 @@ Amazon S3 inventory provides comma\-separated values \(CSV\), [Apache optimized 
 
 You can configure multiple inventory lists for a bucket\. You can configure what object metadata to include in the inventory, whether to list all object versions or only current versions, where to store the inventory list file output, and whether to generate the inventory on a daily or weekly basis\. You can also specify that the inventory list file be encrypted\.
 
-You can query Amazon S3 inventory using standard SQL by using Amazon Athena, Amazon Redshift Spectrum, and other tools such as [Presto](https://prestodb.io/), [Apache Hive](https://hive.apache.org/), and [Apache Spark](https://databricks.com/spark/about/)\. It's easy to use Athena to run queries on your inventory files\. You can use Athena for Amazon S3 inventory queries in all Regions where Athena is available\. 
+You can query Amazon S3 inventory using standard SQL by using [Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug//what-is.html), Amazon Redshift Spectrum, and other tools such as [Presto](https://prestodb.io/), [Apache Hive](https://hive.apache.org/), and [Apache Spark](https://databricks.com/spark/about/)\. It's easy to use Athena to run queries on your inventory files\. You can use Athena for Amazon S3 inventory queries in all Regions where Athena is available\. 
 
 **Topics**
 + [How Do I Set Up Amazon S3 Inventory?](#storage-inventory-how-to-set-up)
@@ -283,13 +283,13 @@ Athena can query Amazon S3 inventory files in ORC, Parquet, or CSV format\. When
 
 **To get started using Athena to query Amazon S3 inventory**
 
-1. Create an Athena table\. For information about creating a table, see [Getting Started](https://docs.aws.amazon.com/athena/latest/ug/getting-started.html) in the *Amazon Athena User Guide*\.
+1. Create an Athena table\. For information about creating a table, see [Creating Tables in Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug//creating-tables.html) in the *Amazon Athena User Guide*\.
 
-   The following sample query includes all optional fields in an ORC\-formatted inventory report\. Drop any optional field that you did not choose for your inventory so that the query corresponds to the fields chosen for your inventory\. Also, you must use your bucket name and the location\. The location points to your inventory destination path; for example, `s3://destination-prefix/source-bucket/config-ID/hive`\.
+   The following sample query includes all optional fields in an ORC\-formatted inventory report\. Drop any optional field that you did not choose for your inventory so that the query corresponds to the fields chosen for your inventory\. Also, you must use your bucket name and the location\. The location points to your inventory destination path; for example, `s3://destination-prefix/source-bucket/config-ID/hive/`\.
 
    ```
    CREATE EXTERNAL TABLE your-table-name(
-     `bucket` string,
+     'bucket' string,
      key string,
      version_id string,
      is_latest boolean,
@@ -309,7 +309,7 @@ Athena can query Amazon S3 inventory files in ORC, Parquet, or CSV format\. When
      ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.orc.OrcSerde'
      STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.SymlinkTextInputFormat'
      OUTPUTFORMAT  'org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat'
-     LOCATION 's3://destination-prefix/source-bucket/config-ID/hive';
+     LOCATION 's3://destination-prefix/source-bucket/config-ID/hive/';
    ```
 
     When using Athena to query a Parquet\-formatted inventory report, use the following Parquet SerDe in place of the ORC SerDe in the `ROW FORMAT SERDE` statement\.
@@ -335,7 +335,7 @@ For more information about using Athena, see [Amazon Athena User Guide](https://
 ## Amazon S3 Inventory REST APIs<a name="storage-inventory-related-resources"></a>
 
 The following are the REST operations used for Amazon S3 inventory\.
-+  [ DELETE Bucket inventory configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEInventoryConfiguration.html) 
-+  [ GET Bucket inventory configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) 
-+  [ List Bucket Inventory Configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketListInventoryConfigs.html) 
-+  [ PUT Bucket inventory configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTInventoryConfig.html) 
++  [ DELETE Bucket Inventory ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEInventoryConfiguration.html) 
++  [ GET Bucket Inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) 
++  [ List Bucket Inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketListInventoryConfigs.html) 
++  [ PUT Bucket Inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTInventoryConfig.html) 

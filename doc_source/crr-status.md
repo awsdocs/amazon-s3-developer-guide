@@ -62,4 +62,4 @@ If lifecycle configuration is enabled on the source bucket, Amazon S3 puts suspe
 
 ## Related Topics<a name="crr-status-related-topics"></a>
 
-[Cross\-Region Replication ](crr.md)
+[Cross\-Region Replication](crr.md)

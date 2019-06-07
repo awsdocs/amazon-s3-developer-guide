@@ -67,6 +67,10 @@ MFA Delete thus provides added security in the event, for example, your security
 
 To enable or disable MFA Delete, you use the same API that you use to configure versioning on a bucket\. Amazon S3 stores the MFA Delete configuration in the same *versioning* subresource that stores the bucket's versioning status\.
 
+ MFA Delete can help prevent accidental bucket deletions as the person initiating the delete action has to: 
++ Prove physical possession of an MFA device with an MFA code and
++ It adds an extra layer of friction and security to the delete action
+
 ```
 <VersioningConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"> 
   <Status>VersioningState</Status>

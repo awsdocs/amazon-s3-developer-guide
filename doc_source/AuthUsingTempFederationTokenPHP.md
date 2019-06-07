@@ -42,9 +42,7 @@ You can now use the IAM user security credentials to test the following example\
 In the following example, when specifying the policy resource, replace `YourBucketName` with the name of your bucket\.:  
 
 ```
-<?php
-
-require 'vendor/autoload.php';
+ require 'vendor/autoload.php';
 
 use Aws\Sts\StsClient;
 use Aws\S3\S3Client;

@@ -2,7 +2,7 @@
 
 To send authenticated requests using your AWS account or IAM user credentials:
 + Create an instance of the `AmazonS3Client` class\. 
-+ Execute one of the `AmazonS3Client` methods to send requests to Amazon S3\. The client generates the necessary signature from the credentialsthat you provide and includes it in the request it sends to Amazon S3\. 
++ Execute one of the `AmazonS3Client` methods to send requests to Amazon S3\. The client generates the necessary signature from the credentials that you provide and includes it in the request it sends to Amazon S3\. 
 
 The following C\# example shows how to perform the preceding tasks\. For information about running the \.NET examples in this guide and for instructions on how to store your credentials in a configuration file, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 

@@ -1,7 +1,7 @@
 # Amazon Simple Storage Service Developer Guide
 
 -----
-*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -257,8 +257,15 @@ Amazon's trademarks and trade dress may not be used in
       + [Managing Object Locks](object-lock-managing.md)
 + [Performing Batch Operations](batch-ops.md)
    + [The Basics: Amazon S3 Batch Operations Jobs](batch-ops-basics.md)
-   + [Creating a Job](batch-ops-create-job.md)
-   + [Managing Jobs](batch-ops-managing-jobs.md)
+   + [Creating a Batch Operations Job](batch-ops-create-job.md)
+      + [Granting Permissions for Batch Operations](batch-ops-iam-role-policies.md)
+   + [Operations](batch-ops-operations.md)
+      + [PUT Object Copy](batch-ops-copy-object.md)
+      + [Initiate Restore Object](batch-ops-initiate-restore-object.md)
+      + [Invoke a Lambda Function](batch-ops-invoke-lambda.md)
+      + [Put Object ACL](batch-ops-put-object-acl.md)
+      + [Put Object Tagging](batch-ops-put-object-tagging.md)
+   + [Managing Batch Operations Jobs](batch-ops-managing-jobs.md)
 + [Hosting a Static Website on Amazon S3](WebsiteHosting.md)
    + [Website Endpoints](WebsiteEndpoints.md)
    + [Configuring a Bucket for Website Hosting](HowDoIWebsiteConfiguration.md)

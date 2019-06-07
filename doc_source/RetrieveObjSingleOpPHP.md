@@ -23,34 +23,32 @@ For more information about retrieving objects, see [Getting Objects](GettingObje
 The following PHP example retrieves an object and displays the content of the object in the browser\. The example shows how to use the `getObject()` method\. For information about running the PHP examples in this guide, see [Running PHP Examples](UsingTheMPphpAPI.md#running-php-samples)\. 
 
 ```
- 1. <?php
- 2. 
- 3. require 'vendor/autoload.php';
- 4. 
- 5. use Aws\S3\S3Client;
- 6. use Aws\S3\Exception\S3Exception;
- 7. 
- 8. $bucket = '*** Your Bucket Name ***';
- 9. $keyname = '*** Your Object Key ***';
-10. 
-11. $s3 = new S3Client([
-12.     'version' => 'latest',
-13.     'region'  => 'us-east-1'
-14. ]);
-15. 
-16. try {
-17.     // Get the object.
-18.     $result = $s3->getObject([
-19.         'Bucket' => $bucket,
-20.         'Key'    => $keyname
-21.     ]);
-22. 
-23.     // Display the object in the browser.
-24.     header("Content-Type: {$result['ContentType']}");
-25.     echo $result['Body'];
-26. } catch (S3Exception $e) {
-27.     echo $e->getMessage() . PHP_EOL;
-28. }
+ require 'vendor/autoload.php';
+
+use Aws\S3\S3Client;
+use Aws\S3\Exception\S3Exception;
+
+$bucket = '*** Your Bucket Name ***';
+$keyname = '*** Your Object Key ***';
+
+$s3 = new S3Client([
+    'version' => 'latest',
+    'region'  => 'us-east-1'
+]);
+
+try {
+    // Get the object.
+    $result = $s3->getObject([
+        'Bucket' => $bucket,
+        'Key'    => $keyname
+    ]);
+
+    // Display the object in the browser.
+    header("Content-Type: {$result['ContentType']}");
+    echo $result['Body'];
+} catch (S3Exception $e) {
+    echo $e->getMessage() . PHP_EOL;
+}
 ```
 
 ## Related Resources<a name="RelatedResources-RetrieveObjSingleOpPHP"></a>

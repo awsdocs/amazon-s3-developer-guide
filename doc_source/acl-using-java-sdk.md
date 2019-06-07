@@ -8,12 +8,34 @@ This section provides examples of how to configure access control list \(ACL\) g
 This example creates a bucket\. In the request, the example specifies a canned ACL that grants the Log Delivery group permission to write logs to the bucket\.   
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+/**
+ * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * This file is licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ * http://aws.amazon.com/apache2.0/
+ *
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+*/
+
+// snippet-sourcedescription:[CreateBucketWithACL.java demonstrates how to create a bucket with a canned ACL and how to modify a bucket's ACL grants.]
+// snippet-service:[s3]
+// snippet-keyword:[Java]
+// snippet-keyword:[Amazon S3]
+// snippet-keyword:[Code Sample]
+// snippet-keyword:[GET Bucket acl]
+// snippet-keyword:[PUT Bucket acl]
+// snippet-sourcetype:[full-example]
+// snippet-sourcedate:[2019-01-28]
+// snippet-sourceauthor:[AWS]
+// snippet-start:[s3.java.create_bucket_with_acl.complete]
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
@@ -24,6 +46,7 @@ import com.amazonaws.services.s3.model.AccessControlList;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.CanonicalGrantee;
 import com.amazonaws.services.s3.model.CreateBucketRequest;
+import com.amazonaws.services.s3.model.EmailAddressGrantee;
 import com.amazonaws.services.s3.model.Grant;
 import com.amazonaws.services.s3.model.GroupGrantee;
 import com.amazonaws.services.s3.model.Permission;
@@ -33,6 +56,7 @@ public class CreateBucketWithACL {
     public static void main(String[] args) throws IOException {
         String clientRegion = "*** Client region ***";
         String bucketName = "*** Bucket name ***";
+        String userEmailForReadPermission = "*** user@example.com ***";
 
         try {
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
@@ -40,15 +64,14 @@ public class CreateBucketWithACL {
                     .withRegion(clientRegion)
                     .build();
 
-            // Create a bucket with a canned ACL. This ACL will be deleted by the
-            // getGrantsAsList().clear() call below. It is here for demonstration
-            // purposes.
+            // Create a bucket with a canned ACL. This ACL will be replaced by the setBucketAcl()
+            // calls below. It is included here for demonstration purposes.
             CreateBucketRequest createBucketRequest = new CreateBucketRequest(bucketName, clientRegion)
                     .withCannedAcl(CannedAccessControlList.LogDeliveryWrite);
             s3Client.createBucket(createBucketRequest);
     
             // Create a collection of grants to add to the bucket.
-            Collection<Grant> grantCollection = new ArrayList<Grant>();
+            ArrayList<Grant> grantCollection = new ArrayList<Grant>();
             
             // Grant the account owner full control.
             Grant grant1 = new Grant(new CanonicalGrantee(s3Client.getS3AccountOwner().getId()), Permission.FullControl);
@@ -58,12 +81,16 @@ public class CreateBucketWithACL {
             Grant grant2 = new Grant(GroupGrantee.LogDelivery, Permission.Write);
             grantCollection.add(grant2);
     
-            // Save (replace) grants by deleting all current ACL grants and replacing
-            // them with the two we just created.
-            AccessControlList bucketAcl = s3Client.getBucketAcl(bucketName);
-            bucketAcl.getGrantsAsList().clear();
-            bucketAcl.getGrantsAsList().addAll(grantCollection);
+            // Save grants by replacing all current ACL grants with the two we just created.
+            AccessControlList bucketAcl = new AccessControlList();
+            bucketAcl.grantAllPermissions(grantCollection.toArray(new Grant[0]));
             s3Client.setBucketAcl(bucketName, bucketAcl);
+            
+            // Retrieve the bucket's ACL, add another grant, and then save the new ACL.
+            AccessControlList newBucketAcl = s3Client.getBucketAcl(bucketName);
+            Grant grant3 = new Grant(new EmailAddressGrantee(userEmailForReadPermission), Permission.Read);
+            newBucketAcl.grantAllPermissions(grant3);
+            s3Client.setBucketAcl(bucketName, newBucketAcl);
         }
         catch(AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
@@ -77,6 +104,8 @@ public class CreateBucketWithACL {
         }
     }
 }
+
+// snippet-end:[s3.java.create_bucket_with_acl.complete]
 ```
 
 ## Configuring ACL Grants on an Existing Object<a name="set-acl-java-existing-resource-example"></a>
@@ -89,8 +118,31 @@ This example updates the ACL on an object\. The example performs the following t
 + Saves the ACL to the object
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+/**
+ * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * This file is licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ * http://aws.amazon.com/apache2.0/
+ *
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+*/
+
+// snippet-sourcedescription:[ModifyACLExistingObject.java demonstrates how to retrieve, modify, and set the ACL grants for an S3 object.]
+// snippet-service:[s3]
+// snippet-keyword:[Java]
+// snippet-keyword:[Amazon S3]
+// snippet-keyword:[Code Sample]
+// snippet-keyword:[GET Object acl]
+// snippet-keyword:[PUT Object acl]
+// snippet-sourcetype:[full-example]
+// snippet-sourcedate:[2019-01-28]
+// snippet-sourceauthor:[AWS]
+// snippet-start:[s3.java.modify_acl_existing_object.complete]
 
 import java.io.IOException;
 
@@ -143,4 +195,6 @@ public class ModifyACLExistingObject {
         }
     }
 }
+
+// snippet-end:[s3.java.modify_acl_existing_object.complete]
 ```

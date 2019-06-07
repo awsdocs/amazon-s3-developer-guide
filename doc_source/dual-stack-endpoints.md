@@ -68,8 +68,30 @@ The following example shows how to enable dual\-stack endpoints when creating an
 For instructions on creating and testing a working Java sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+/**
+ * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * This file is licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ * http://aws.amazon.com/apache2.0/
+ *
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+*/
+
+// snippet-sourcedescription:[DualStackEndpoints.java demonstrates how to create an S3 client with dual-stack endpoints enabled.]
+// snippet-service:[s3]
+// snippet-keyword:[Java]
+// snippet-keyword:[Amazon S3]
+// snippet-keyword:[Code Sample]
+// snippet-keyword:[GET Bucket]
+// snippet-sourcetype:[full-example]
+// snippet-sourcedate:[2019-01-28]
+// snippet-sourceauthor:[AWS]
+// snippet-start:[s3.java.dual_stack_endpoints.complete]
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
@@ -105,6 +127,8 @@ public class DualStackEndpoints {
         }
     }
 }
+
+// snippet-end:[s3.java.dual_stack_endpoints.complete]
 ```
 
 If you are using the AWS SDK for Java on Windows, you might have to set the following Java virtual machine \(JVM\) property: 
