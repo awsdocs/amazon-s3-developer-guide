@@ -34,7 +34,7 @@ To replicate encrypted objects with the AWS CLI, you create buckets, enable vers
 
 1. Create the *destination* bucket and enable versioning on it\. In this example, we create the *destination* bucket in the US West \(Oregon\) \(us\-west\-2\) Region\. 
 **Note**  
-To set up replication configuration when both *source* and *destination* buckets are in the same AWS account, you use the same profile\. In this example, we use `acctA`\. To test replication configuration when the buckets are owned by different AWS accounts, you specify different profiles for each\. In this example, we use the `acctB` profile for the *destination* bucket\.
+To set up replication configuration when both *source* and *destination* buckets are in the same AWS account, you use the same profile\. In this example, we use `acctA`\. To test replication configuration when the buckets are owned by different AWS accounts, you specify different profiles for each\. 
 
    ```
    aws s3api create-bucket \
@@ -86,6 +86,8 @@ To set up replication configuration when both *source* and *destination* buckets
    1. Attach a permissions policy to the role\. This policy grants permissions for various Amazon S3 bucket and object actions\. 
 
       1. Copy the following permissions policy and save it to a file named `s3-role-permissions-policykmsobj.json` in the current directory on your local computer\. You create an IAM role and attach the policy to it later\. 
+**Important**  
+ In the permission policy you specify the AWS KMS key IDs that will be used for encryption of *source* and `destination` buckets\. You must create two separate KMS keys for the `source` and `destination` buckets\. KMS keys are never shared outside the AWS Region in which they were created\. 
 
          ```
          {
@@ -119,7 +121,7 @@ To set up replication configuration when both *source* and *destination* buckets
                            "AES256"
                         ],
                         "s3:x-amz-server-side-encryption-aws-kms-key-id":[
-                           "AWS KMS key IDs to use for encrypting object replicas"  
+                           "AWS KMS key IDs(in ARN format) to use for encrypting object replicas"  
                         ]
                      }
                   },
@@ -139,7 +141,7 @@ To set up replication configuration when both *source* and *destination* buckets
                      }
                   },
                   "Resource":[
-                     "AWS KMS key IDs used to encrypt source objects." 
+                     "AWS KMS key IDs(in ARN format) used to encrypt source objects." 
                   ]
                },
                {
@@ -156,7 +158,7 @@ To set up replication configuration when both *source* and *destination* buckets
                      }
                   },
                   "Resource":[
-                     "AWS KMS key IDs to use for encrypting object replicas" 
+                     "AWS KMS key IDs(in ARN format) to use for encrypting object replicas" 
                   ]
                }
             ]
@@ -215,7 +217,7 @@ In the replication configuration you specify the IAM role that Amazon S3 can ass
          "Rules":[
             {
                "Status":"Enabled",
-               "Priority":"1",
+               "Priority":1,
                "DeleteMarkerReplication":{
                   "Status":"Disabled"
                },
@@ -225,27 +227,26 @@ In the replication configuration you specify the IAM role that Amazon S3 can ass
                "Destination":{
                   "Bucket":"arn:aws:s3:::destination",
                   "EncryptionConfiguration":{
-                     "ReplicaKmsKeyID":"AWS KMS key IDs to use for encrypting object replicas"
+                     "ReplicaKmsKeyID":"AWS KMS key IDs(in ARN format)  to use for encrypting object replicas"
                   }
                },
                "SourceSelectionCriteria":{
                   "SseKmsEncryptedObjects":{
                      "Status":"Enabled"
                   }
-               },
-               "Status":"Enabled"
+               }
             }
          ]
       }
       ```
 
-   1. Edit the JSON to provide values for the *destination* bucket and *IAM\-role\-ARN*\. Save the changes\.
+   1. Edit the JSON to provide values for the *destination* bucket, *KMS ID ARN* and *IAM\-role\-ARN*\. Save the changes\.
 
    1. Add the replication configuration to your *source* bucket\. Be sure to provide the *source* bucket name\.
 
       ```
       $ aws s3api put-bucket-replication \
-      --replication-configuration file://replicationkmsobj.json \
+      --replication-configuration file://replication.json \
       --bucket source \
       --profile acctA
       ```

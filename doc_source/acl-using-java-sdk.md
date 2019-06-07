@@ -8,32 +8,6 @@ This section provides examples of how to configure access control list \(ACL\) g
 This example creates a bucket\. In the request, the example specifies a canned ACL that grants the Log Delivery group permission to write logs to the bucket\.   
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
-
-// snippet-sourcedescription:[CreateBucketWithACL.java demonstrates how to create a bucket with a canned ACL and how to modify a bucket's ACL grants.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[GET Bucket acl]
-// snippet-keyword:[PUT Bucket acl]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.create_bucket_with_acl.complete]
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -104,8 +78,6 @@ public class CreateBucketWithACL {
         }
     }
 }
-
-// snippet-end:[s3.java.create_bucket_with_acl.complete]
 ```
 
 ## Configuring ACL Grants on an Existing Object<a name="set-acl-java-existing-resource-example"></a>
@@ -118,32 +90,6 @@ This example updates the ACL on an object\. The example performs the following t
 + Saves the ACL to the object
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
-
-// snippet-sourcedescription:[ModifyACLExistingObject.java demonstrates how to retrieve, modify, and set the ACL grants for an S3 object.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[GET Object acl]
-// snippet-keyword:[PUT Object acl]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.modify_acl_existing_object.complete]
-
 import java.io.IOException;
 
 import com.amazonaws.AmazonServiceException;
@@ -195,6 +141,4 @@ public class ModifyACLExistingObject {
         }
     }
 }
-
-// snippet-end:[s3.java.modify_acl_existing_object.complete]
 ```

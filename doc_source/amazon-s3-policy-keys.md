@@ -90,6 +90,10 @@ The `IPAddress` and `NotIpAddress` key values specified in the condition uses CI
     For example policies using object tags related condition keys, see [Object Tagging and Access Control Policies](object-tagging.md#tagging-and-policies)\.
   + `s3:RequestObjectTagKeys`
   + `s3:RequestObjectTag/<tag-key>`
+  + `s3:object-lock-remaining-retention-days`
+  + `s3:object-lock-mode`
+  + `s3:object-lock-retain-until-date`
+  + `s3:object-lock-legal-hold`
 
    
 

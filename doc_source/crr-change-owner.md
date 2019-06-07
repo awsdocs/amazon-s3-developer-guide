@@ -1,6 +1,6 @@
 # CRR Additional Configuration: Changing the Replica Owner<a name="crr-change-owner"></a>
 
-In cross\-region replication \(CRR\), the owner of the source object also owns the replica by default\. When source and destination buckets are owned by different AWS accounts, you can add optional configuration settings to change replica ownership to the AWS account that owns the destination bucket\. You might do this, for example, to restrict access to object replicas\. This is referred to as the *owner override* option of the replication configuration\. This section explains only the relevant additional configuration settings\. For information about setting the replication configuration see [Cross\-Region Replication](crr.md)\. 
+In cross\-region replication \(CRR\), the owner of the source object also owns the replica by default\. When source and destination buckets are owned by different AWS accounts, you can add optional configuration settings to change replica ownership to the AWS account that owns the destination bucket\. You might do this, for example, to restrict access to object replicas\. This is referred to as the *owner override* option of the replication configuration\. This section explains only the relevant additional configuration settings\. For information about setting the replication configuration, see [Cross\-Region Replication](crr.md)\. 
 
 To configure the owner override, you do the following:
 + Add the owner override option to the replication configuration to tell Amazon S3 to change replica ownership\. 
@@ -62,7 +62,7 @@ The following example replication configuration tells Amazon S3 to replicate obj
 
 ## Granting Amazon S3 Permission to Change Replica Ownership<a name="repl-ownership-add-role-permission"></a>
 
-Grant Amazon S3 permissions to change replica ownership by adding permission for the `s3:ObjectOwnerOverrideToBucketOwner` action in the permission policy associated with the IAM role\. This is the IAM role that you specified in the replication configuration that allows Amazon S3 to assume and replicate objects on your behalf\. 
+Grant Amazon S3 permissions to change replica ownership by adding permission for the `s3:ObjectOwnerOverrideToBucketOwner` action in the permissions policy associated with the IAM role\. This is the IAM role that you specified in the replication configuration that allows Amazon S3 to assume and replicate objects on your behalf\. 
 
 ```
 ...
@@ -102,7 +102,7 @@ When you configure the ownership override option, the following considerations a
   If you add the owner override, Amazon S3 replicates only the object version, not the ACL\. In addition, Amazon S3 doesn't replicate subsequent changes to the source object ACL\. Amazon S3 sets the ACL on the replica that grants full control to the destination bucket owner\. 
 
    
-+  When you update a replication configuration to enable, or disable,the owner override, the following occur: 
++  When you update a replication configuration to enable, or disable, the owner override, the following occurs: 
 
    
   + If you add the owner override option to the replication configuration

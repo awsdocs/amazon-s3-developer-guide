@@ -2,11 +2,11 @@
 
 Amazon CloudWatch metrics for Amazon S3 can help you understand and improve the performance of applications that use Amazon S3\. There are two ways that you can use CloudWatch with Amazon S3\.
 + **Daily Storage Metrics for Buckets** ‐ You can monitor bucket storage using CloudWatch, which collects and processes storage data from Amazon S3 into readable, daily metrics\. These storage metrics for Amazon S3 are reported once per day and are provided to all customers at no additional cost\.
-+ **Request metrics** ‐ You can choose to monitor Amazon S3 requests to quickly identify and act on operational issues\. The metrics are available at 1 minute intervals after some latency to process\. These CloudWatch metrics are billed at the same rate as the Amazon CloudWatch Custom Metrics\. For information on CloudWatch pricing, see [Amazon CloudWatch Pricing](https://aws.amazon.com/cloudwatch/pricing/)\. To learn more about how to opt\-in to getting these metrics, see [Metrics Configurations for Buckets](metrics-configurations.md)\.
++ **Request metrics** ‐ You can choose to monitor Amazon S3 requests to quickly identify and act on operational issues\. The metrics are available at 1\-minute intervals after some latency to process\. These CloudWatch metrics are billed at the same rate as the Amazon CloudWatch custom metrics\. For information about CloudWatch pricing, see [Amazon CloudWatch Pricing](https://aws.amazon.com/cloudwatch/pricing/)\. To learn how to opt in to getting these metrics, see [Metrics Configurations for Buckets](metrics-configurations.md)\.
 
-  When enabled, request metrics are reported for all object operations\. By default, these 1\-minute metrics are available at the Amazon S3 bucket level\. You can also define a filter for the metrics collected –using a shared prefix or object tag– allowing you to align metrics filters to specific business applications, workflows, or internal organizations\.
+  When enabled, request metrics are reported for all object operations\. By default, these 1\-minute metrics are available at the Amazon S3 bucket level\. You can also define a filter for the metrics collected using a shared prefix or object tag\. This allows you to align metrics filters to specific business applications, workflows, or internal organizations\.
 
-All CloudWatch statistics are retained for a period of fifteen months, so that you can access historical information and gain a better perspective on how your web application or service is performing\. For more information on CloudWatch, see [What Are Amazon CloudWatch, Amazon CloudWatch Events, and Amazon CloudWatch Logs?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
+All CloudWatch statistics are retained for a period of 15 months so that you can access historical information and gain a better perspective on how your web application or service is performing\. For more information, see [What Is Amazon CloudWatch?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
 
 ## Metrics and Dimensions<a name="metrics-dimensions"></a>
 
@@ -19,8 +19,8 @@ The `AWS/S3` namespace includes the following daily storage metrics for buckets\
 
 | Metric | Description | 
 | --- | --- | 
-| BucketSizeBytes |  The amount of data in bytes stored in a bucket in the STANDARD storage class, INTELLIGENT\_TIERING storage class, Standard \- Infrequent Access \(STANDARD\_IA\) storage class, OneZone \- Infrequent Access \(ONEZONE\_IA\), Reduced Redundancy Storage \(RRS\) class, or Glacier \(GLACIER\) storage class\. Valid storage type filters: `StandardStorage`, `IntelligentTieringStorage`, `GlacierS3ObjectOverhead`, `StandardIAStorage`, `StandardIAObjectOverhead`, `StandardIAStorage`, `StandardIAObjectOverhead`, `OneZoneIAStorage`, `OneZoneIAObjectOverhead`, `ReducedRedundancyStorage`, `GlacierStorage`, and `GlacierObjectOverhead` \(see the `StorageType` dimension\) Units: Bytes Valid statistics: Average  | 
-| NumberOfObjects |  The total number of objects \(includes all objects including all their versions\) stored in a bucket for all storage classes Valid storage type filters: `AllStorageTypes` \(see the `StorageType` dimension\) Units: Count Valid statistics: Average  | 
+| BucketSizeBytes |  The amount of data in bytes stored in a bucket in the STANDARD storage class, INTELLIGENT\_TIERING storage class, Standard \- Infrequent Access \(STANDARD\_IA\) storage class, OneZone \- Infrequent Access \(ONEZONE\_IA\), Reduced Redundancy Storage \(RRS\) class, or Glacier \(GLACIER\) storage class\. This value is calculated by summing the size of all objects in the bucket \(both current and noncurrent objects\), including the size of all parts for all incomplete multipart uploads to the bucket\.  Valid storage type filters: `StandardStorage`, `IntelligentTieringStorage`, `GlacierS3ObjectOverhead`, `StandardIAStorage`, `StandardIASizeOverhead`, `StandardIAStorage`, `StandardIAObjectOverhead`, `OneZoneIAStorage`, `OneZoneIASizeOverhead`, `ReducedRedundancyStorage`, `GlacierStorage`, and `GlacierObjectOverhead` \(see the `StorageType` dimension\) Units: Bytes Valid statistics: Average  | 
+| NumberOfObjects |  The total number of objects stored in a bucket for all storage classes except for the GLACIER storage class\. This value is calculated by counting all objects in the bucket \(both current and noncurrent objects\) and the total number of parts for all incomplete multipart uploads to the bucket\. Valid storage type filters: `AllStorageTypes` \(see the `StorageType` dimension\) Units: Count Valid statistics: Average  | 
 
 ## Amazon S3 CloudWatch Request Metrics<a name="s3-request-cloudwatch-metrics"></a>
 
@@ -39,8 +39,8 @@ The `AWS/S3` namespace includes the following request metrics\.
 | SelectScannedBytes |  The number of bytes of data scanned with Amazon S3 [SELECT Object Content](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html) requests in an Amazon S3 bucket\.   Units: Bytes  Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max  | 
 | SelectReturnedBytes |  The number of bytes of data returned with Amazon S3 [SELECT Object Content](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html) requests in an Amazon S3 bucket\.   Units: Bytes  Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max  | 
 | ListRequests |  The number of HTTP requests that list the contents of a bucket\. Units: Count Valid statistics: Sum  | 
-| BytesDownloaded |  The number bytes downloaded for requests made to an Amazon S3 bucket, where the response includes a body\. Units: Bytes Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max  | 
-| BytesUploaded |  The number bytes uploaded that contain a request body, made to an Amazon S3 bucket\. Units: Bytes Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max  | 
+| BytesDownloaded |  The number of bytes downloaded for requests made to an Amazon S3 bucket, where the response includes a body\. Units: Bytes Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max  | 
+| BytesUploaded |  The number of bytes uploaded that contain a request body, made to an Amazon S3 bucket\. Units: Bytes Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max  | 
 | 4xxErrors |  The number of HTTP 4xx client error status code requests made to an Amazon S3 bucket with a value of either 0 or 1\. The `average` statistic shows the error rate, and the `sum` statistic shows the count of that type of error, during each period\. Units: Count Valid statistics: Average \(reports per request\), Sum \(reports per period\), Min, Max, Sample Count  | 
 | 5xxErrors |  The number of HTTP 5xx server error status code requests made to an Amazon S3 bucket with a value of either 0 or 1\. The `average` statistic shows the error rate, and the `sum` statistic shows the count of that type of error, during each period\. Units: Counts Valid statistics: Average \(reports per request\), Sum \(reports per period\), Min, Max, Sample Count  | 
 | FirstByteLatency |  The per\-request time from the complete request being received by an Amazon S3 bucket to when the response starts to be returned\. Units: Milliseconds Valid statistics: Average, Sum, Min, Max, Sample Count  | 
@@ -54,12 +54,12 @@ The following dimensions are used to filter Amazon S3 metrics\.
 |  Dimension  |  Description  | 
 | --- | --- | 
 |  BucketName  |  This dimension filters the data you request for the identified bucket only\.  | 
-|  StorageType  |  This dimension filters the data that you have stored in a bucket by the type of storage\. The types are `StandardStorage` for the STANDARD storage class, `IntelligentTieringStorage` for the INTELLIGENT\_TIERING storage class, `StandardIAStorage` for the STANDARD\_IA storage class, `OneZoneIAStorage` for the ONEZONE\_IA storage class, `ReducedRedundancyStorage` for the REDUCED\_REDUNDANCY storage class, `GlacierStorage` for the GLACIER storage class, and `AllStorageTypes`\. The `AllStorageTypes` type includes the STANDARD, INTELLIGENT\_TIERING, STANDARD\_IA, ONEZONE\_IA, REDUCED\_REDUNDANCY, and GLACIER storage classes\.   | 
+|  StorageType  |  This dimension filters the data that you have stored in a bucket by the following types of storage:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html)  | 
 | FilterId | This dimension filters metrics configurations that you specify for request metrics on a bucket, for example, a prefix or a tag\. You specify a filter id when you create a metrics configuration\. For more information, see [Metrics Configurations for Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/metrics-configurations.html)\. | 
 
 ## Accessing CloudWatch Metrics<a name="cloudwatch-monitoring-accessing"></a>
 
- You can use the following procedures to view the storage metrics for Amazon S3\. Note that to get the Amazon S3 metrics involved, you must set a start and end time stamp\. For metrics for any given 24\-hour period, set the time period to 86400 seconds, the number of seconds in a day\. Also, remember to set the `BucketName` and `StorageType` dimensions\.
+ You can use the following procedures to view the storage metrics for Amazon S3\. To get the Amazon S3 metrics involved, you must set a start and end timestamp\. For metrics for any given 24\-hour period, set the time period to 86400 seconds, the number of seconds in a day\. Also, remember to set the `BucketName` and `StorageType` dimensions\.
 
 For example, if you use the AWS CLI to get the average of a specific bucket's size, in bytes, you could use the following command:
 
@@ -90,9 +90,9 @@ This example produces the following output:
 
 1. Choose the **S3** namespace\.
 
-1. \(Optional\) To view a metric, type the metric name in the search field\.
+1. \(Optional\) To view a metric, enter the metric name in the search field\.
 
-1. \(Optional\) To filter by the **StorageType** dimension, type the name of the storage class in the search field\.
+1. \(Optional\) To filter by the **StorageType** dimension, enter the name of the storage class in the search field\.
 
 **To view a list of valid metrics stored for your AWS account using the AWS CLI**
 + At a command prompt, use the following command:

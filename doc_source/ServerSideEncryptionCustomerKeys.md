@@ -7,6 +7,9 @@ When you upload an object, Amazon S3 uses the encryption key you provide to appl
 **Important**  
 Amazon S3 does not store the encryption key you provide\. Instead, we store a randomly salted HMAC value of the encryption key in order to validate future requests\. The salted HMAC value cannot be used to derive the value of the encryption key or to decrypt the contents of the encrypted object\. That means, if you lose the encryption key, you lose the object\. 
 
+**Note**  
+Server\-side encryption encrypts only the object data, not object metadata\.
+
 When you retrieve an object, you must provide the same encryption key as part of your request\. Amazon S3 first verifies that the encryption key you provided matches, and then decrypts the object before returning the object data to you\. 
 
 The highlights of SSE\-C are:

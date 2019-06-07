@@ -16,30 +16,89 @@ The following are some variations you might use:
 The following example retrieves an object from an Amazon S3 bucket three ways: first, as a complete object, then as a range of bytes from the object, then as a complete object with overridden response header values\. For more information about getting objects from Amazon S3, see [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.
 
 ```
- require 'vendor/autoload.php';
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
-use Aws\S3\S3Client;
-use Aws\S3\Exception\S3Exception;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.ResponseHeaderOverrides;
+import com.amazonaws.services.s3.model.S3Object;
 
-$bucket = '*** Your Bucket Name ***';
-$keyname = '*** Your Object Key ***';
+public class GetObject {
 
-$s3 = new S3Client([
-    'version' => 'latest',
-    'region'  => 'us-east-1'
-]);
+    public static void main(String[] args) throws IOException {
+        String clientRegion = "*** Client region ***";
+        String bucketName = "*** Bucket name ***";
+        String key = "*** Object key ***";
 
-try {
-    // Get the object.
-    $result = $s3->getObject([
-        'Bucket' => $bucket,
-        'Key'    => $keyname
-    ]);
+        S3Object fullObject = null, objectPortion = null, headerOverrideObject = null;
+        try {
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withRegion(clientRegion)
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .build();
 
-    // Display the object in the browser.
-    header("Content-Type: {$result['ContentType']}");
-    echo $result['Body'];
-} catch (S3Exception $e) {
-    echo $e->getMessage() . PHP_EOL;
+            // Get an object and print its contents.
+            System.out.println("Downloading an object");
+            fullObject = s3Client.getObject(new GetObjectRequest(bucketName, key));
+            System.out.println("Content-Type: " + fullObject.getObjectMetadata().getContentType());
+            System.out.println("Content: ");
+            displayTextInputStream(fullObject.getObjectContent());
+            
+            // Get a range of bytes from an object and print the bytes.
+            GetObjectRequest rangeObjectRequest = new GetObjectRequest(bucketName, key)
+                                                        .withRange(0,9);
+            objectPortion = s3Client.getObject(rangeObjectRequest);
+            System.out.println("Printing bytes retrieved.");
+            displayTextInputStream(objectPortion.getObjectContent());
+            
+            // Get an entire object, overriding the specified response headers, and print the object's content.
+            ResponseHeaderOverrides headerOverrides = new ResponseHeaderOverrides()
+                                                            .withCacheControl("No-cache")
+                                                            .withContentDisposition("attachment; filename=example.txt");
+            GetObjectRequest getObjectRequestHeaderOverride = new GetObjectRequest(bucketName, key)
+                                                            .withResponseHeaders(headerOverrides);
+            headerOverrideObject = s3Client.getObject(getObjectRequestHeaderOverride);
+            displayTextInputStream(headerOverrideObject.getObjectContent());
+        }
+        catch(AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        }
+        catch(SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
+        }
+        finally {
+            // To ensure that the network connection doesn't remain open, close any open input streams.
+            if(fullObject != null) {
+                fullObject.close();
+            }
+            if(objectPortion != null) {
+                objectPortion.close();
+            }
+            if(headerOverrideObject != null) {
+                headerOverrideObject.close();
+            }
+        }
+    }
+
+    private static void displayTextInputStream(InputStream input) throws IOException {
+        // Read the text input stream one line at a time and display each line.
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+        System.out.println();
+    }
 }
 ```

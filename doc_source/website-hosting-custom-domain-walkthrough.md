@@ -161,7 +161,7 @@ Accept the default value of **No**\.
 
 1. Choose **Create**\.
 
-1. For www\.*example\.com*, repeat steps 4 through 6 to create a record\.
+1. For www\.*example\.com*, repeat steps 3 through 5 to create a record\.
 
 The following screenshot shows the alias record for `example.com` as an illustration\. You also need to create an alias record for `www.example.com`\.
 

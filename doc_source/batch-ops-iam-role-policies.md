@@ -1,6 +1,8 @@
 # Granting Permissions for Batch Operations<a name="batch-ops-iam-role-policies"></a>
 
-Amazon S3 must have your permissions to perform batch operations on your behalf\. You grant these permissions via an IAM role\. For more information, see [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)\. When you create an IAM role, you attach the following trust and permissions policies:
+Amazon S3 must have your permissions to perform batch operations on your behalf\. You grant these permissions through an AWS Identity and Access Management \(IAM\) role\. This section provides examples of the trust and permissions policies you use when creating an IAM role\. For more information, see [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)\. 
+
+[![AWS Videos](http://img.youtube.com/vi/https://www.youtube.com/embed/GrxlP39ye20//0.jpg)](http://www.youtube.com/watch?v=https://www.youtube.com/embed/GrxlP39ye20/)
 
 ## Trust Policy<a name="batch-ops-iam-role-policies-trust"></a>
 
@@ -27,7 +29,7 @@ Depending on the type of operations, you can attach one of the following policie
 
 **Note**  
 Regardless of the operation, Amazon S3 needs permissions to read your manifest object from your S3 bucket and optionally write a report to your bucket\. Therefore, all of the following policies include these permissions\.
-For S3 inventory report manifests, Amazon S3 batch operations requires permission to read the manifest\.json object as well as all associated csv data files\.
+For Amazon S3 inventory report manifests, Amazon S3 batch operations require permission to read the manifest\.json object and all associated CSV data files\.
 + PUT copy object
 
   ```

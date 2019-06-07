@@ -1,7 +1,5 @@
 # Managing Batch Operations Jobs<a name="batch-ops-managing-jobs"></a>
 
-[Sign up for the Preview](https://pages.awscloud.com/S3BatchOperations-Preview.html)
-
 Amazon S3 provides a robust set of tools to help you manage your batch operations jobs after you have created them\. This section describes the operations you can use to manage your jobs\. You can perform all of the operations listed in this section using the AWS Management Console, AWS CLI, AWS SDKs, or REST APIs\.
 
 **Topics**
@@ -12,6 +10,8 @@ Amazon S3 provides a robust set of tools to help you manage your batch operation
 + [Tracking Job Failure](#batch-ops-job-status-failure)
 + [Notifications and Logging](#batch-ops-notifications)
 + [Completion Reports](#batch-ops-completion-report)
+
+[![AWS Videos](http://img.youtube.com/vi/https://www.youtube.com/embed/CuMDH6c0zm4//0.jpg)](http://www.youtube.com/watch?v=https://www.youtube.com/embed/CuMDH6c0zm4/)
 
 ## Listing Jobs<a name="batch-ops-list-jobs"></a>
 
@@ -69,4 +69,4 @@ In addition to requesting completion reports, you can also capture, review, and 
 
 When you create a job, you can request a completion report\. Then as long as Amazon S3 batch operations successfully invoke at least one task, Amazon S3 generates a completion report after it finishes running tasks, fails, or is canceled\. You can configure the completion report to include all tasks or only failed tasks\. 
 
-The completion report includes the job configuration and status and information for each task, including the object key and version, status, error codes, and descriptions of any errors\. If you don't configure a completion report, you can still monitor and audit your job and its tasks using CloudTrail, Amazon CloudWatch, Amazon SNS, and Amazon SQS\. However, completion reports provide an easy way to view the results of your tasks in a consolidated format with no additional setup required\.
+The completion report includes the job configuration and status and information for each task, including the object key and version, status, error codes, and descriptions of any errors\. If you don't configure a completion report, you can still monitor and audit your job and its tasks using CloudTrail, Amazon CloudWatch, Amazon SNS, and Amazon SQS\. However, completion reports provide an easy way to view the results of your tasks in a consolidated format with no additional setup required\. For an example of a completion report, see [Amazon S3 Batch Operations Completion Report Examples](batch-ops-examples-reports.md)\. 

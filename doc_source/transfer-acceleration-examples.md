@@ -5,7 +5,7 @@ This section provides examples of how to enable Amazon S3 Transfer Acceleration 
 **Topics**
 + [Using the Amazon S3 Console](#transfer-acceleration-examples-console)
 + [Using Transfer Acceleration from the AWS Command Line Interface \(AWS CLI\)](#transfer-acceleration-examples-aws-cli)
-+ [Using Transfer Acceleration with the AWS SDK for Java](#transfer-acceleration-examples-java)
++ [Using Transfer Acceleration from the AWS SDK for Java](#transfer-acceleration-examples-java)
 + [Using Transfer Acceleration from the AWS SDK for \.NET](#transfer-acceleration-examples-dotnet)
 + [Using Transfer Acceleration from the AWS SDK for JavaScript](#transfer-acceleration-examples-javascript)
 + [Using Transfer Acceleration from the AWS SDK for Python \(Boto\)](#transfer-acceleration-examples-python)
@@ -66,7 +66,7 @@ $ aws configure set s3.addressing_style virtual
 $ aws s3 cp file.txt s3://bucketname/keyname --region region --endpoint-url http://s3-accelerate.amazonaws.com
 ```
 
-## Using Transfer Acceleration with the AWS SDK for Java<a name="transfer-acceleration-examples-java"></a>
+## Using Transfer Acceleration from the AWS SDK for Java<a name="transfer-acceleration-examples-java"></a>
 
 ### <a name="transfer-acceleration-examples-java-uploads"></a>
 
@@ -79,33 +79,6 @@ The following example shows how to use an accelerate endpoint to upload an objec
 For more information about using Transfer Acceleration, see [Getting Started with Amazon S3 Transfer Acceleration](transfer-acceleration.md#transfer-acceleration-getting-started)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
-
-// snippet-sourcedescription:[TransferAcceleration.java demonstrates how to enable and use transfer acceleration with Amazon S3.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[PUT Bucket accelerate]
-// snippet-keyword:[GET Bucket accelerate]
-// snippet-keyword:[PUT Object]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.transfer_acceleration.complete]
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
@@ -158,8 +131,6 @@ public class TransferAcceleration {
         }
     }
 }
-
-// snippet-end:[s3.java.transfer_acceleration.complete]
 ```
 
 ## Using Transfer Acceleration from the AWS SDK for \.NET<a name="transfer-acceleration-examples-dotnet"></a>
@@ -169,10 +140,7 @@ The following example shows how to use the AWS SDK for \.NET to enable Transfer 
 **Example**  
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
-
-﻿using Amazon.S3;
+using Amazon.S3;
 using Amazon.S3.Model;
 using System;
 using System.Threading.Tasks;

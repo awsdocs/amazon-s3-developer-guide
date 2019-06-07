@@ -1,14 +1,20 @@
-# Server Access Log Format<a name="LogFormat"></a>
+# Amazon S3 Server Access Log Format<a name="LogFormat"></a>
 
-The server access log files consist of a sequence of newline\-delimited log records\. Each log record represents one request and consists of space\-delimited fields\. The following is an example log consisting of six log records\. 
+This section describes the Amazon S3 server access log files\.
+
+**Topics**
++ [Additional Logging for Copy Operations](#AdditionalLoggingforCopyOperations)
++ [Custom Access Log Information](#LogFormatCustom)
++ [Programming Considerations for Extensible Server Access Log Format](#LogFormatExtensible)
+
+The server access log files consist of a sequence of newline\-delimited log records\. Each log record represents one request and consists of space\-delimited fields\. The following is an example log consisting of five log records\. 
 
 ```
-1. 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be mybucket [06/Feb/2014:00:00:38 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be 3E57427F3EXAMPLE REST.GET.VERSIONING - "GET /mybucket?versioning HTTP/1.1" 200 - 113 - 7 - "-" "S3Console/0.4" -
-2. 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be mybucket [06/Feb/2014:00:00:38 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be 891CE47D2EXAMPLE REST.GET.LOGGING_STATUS - "GET /mybucket?logging HTTP/1.1" 200 - 242 - 11 - "-" "S3Console/0.4" -
-3. 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be mybucket [06/Feb/2014:00:00:38 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be A1206F460EXAMPLE REST.GET.BUCKETPOLICY - "GET /mybucket?policy HTTP/1.1" 404 NoSuchBucketPolicy 297 - 38 - "-" "S3Console/0.4" -
-4. 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be mybucket [06/Feb/2014:00:01:00 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be 7B4A0FABBEXAMPLE REST.GET.VERSIONING - "GET /mybucket?versioning HTTP/1.1" 200 - 113 - 33 - "-" "S3Console/0.4" -
-5. 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be mybucket [06/Feb/2014:00:01:57 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be DD6CC733AEXAMPLE REST.PUT.OBJECT s3-dg.pdf "PUT /mybucket/s3-dg.pdf HTTP/1.1" 200 - - 4406583 41754 28 "-" "S3Console/0.4" -
-6. 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be mybucket [06/Feb/2014:00:03:21 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be BC3C074D0EXAMPLE REST.GET.VERSIONING - "GET /mybucket?versioning HTTP/1.1" 200 - 113 - 28 - "-" "S3Console/0.4" -
+1. 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be awsexamplebucket [06/Feb/2019:00:00:38 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be 3E57427F3EXAMPLE REST.GET.VERSIONING - "GET /awsexamplebucket?versioning HTTP/1.1" 200 - 113 - 7 - "-" "S3Console/0.4" - s9lzHYrFp76ZVxRcpX9+5cjAnEH2ROuNkd2BHfIa6UkFVdtjf5mKR3/eTPFvsiP/XV/VLi31234= SigV2 ECDHE-RSA-AES128-GCM-SHA256 AuthHeader awsexamplebucket.s3.amazonaws.com TLSV1.1
+2. 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be awsexamplebucket [06/Feb/2019:00:00:38 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be 891CE47D2EXAMPLE REST.GET.LOGGING_STATUS - "GET /awsexamplebucket?logging HTTP/1.1" 200 - 242 - 11 - "-" "S3Console/0.4" - 9vKBE6vMhrNiWHZmb2L0mXOcqPGzQOI5XLnCtZNPxev+Hf+7tpT6sxDwDty4LHBUOZJG96N1234= SigV2 ECDHE-RSA-AES128-GCM-SHA256 AuthHeader awsexamplebucket.s3.amazonaws.com TLSV1.1
+3. 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be awsexamplebucket [06/Feb/2019:00:00:38 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be A1206F460EXAMPLE REST.GET.BUCKETPOLICY - "GET /awsexamplebucket?policy HTTP/1.1" 404 NoSuchBucketPolicy 297 - 38 - "-" "S3Console/0.4" - BNaBsXZQQDbssi6xMBdBU2sLt+Yf5kZDmeBUP35sFoKa3sLLeMC78iwEIWxs99CRUrbS4n11234= SigV2 ECDHE-RSA-AES128-GCM-SHA256 AuthHeader awsexamplebucket.s3.amazonaws.com TLSV1.1
+4. 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be awsexamplebucket [06/Feb/2019:00:01:00 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be 7B4A0FABBEXAMPLE REST.GET.VERSIONING - "GET /awsexamplebucket?versioning HTTP/1.1" 200 - 113 - 33 - "-" "S3Console/0.4" - Ke1bUcazaN1jWuUlPJaxF64cQVpUEhoZKEG/hmy/gijN/I1DeWqDfFvnpybfEseEME/u7ME1234= SigV2 ECDHE-RSA-AES128-GCM-SHA256 AuthHeader awsexamplebucket.s3.amazonaws.com TLSV1.1
+5. 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be awsexamplebucket [06/Feb/2019:00:01:57 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be DD6CC733AEXAMPLE REST.PUT.OBJECT s3-dg.pdf "PUT /awsexamplebucket/s3-dg.pdf HTTP/1.1" 200 - - 4406583 41754 28 "-" "S3Console/0.4" - 10S62Zv81kBW7BB6SX4XJ48o6kpcl6LPwEoizZQQxJd5qDSCTLX0TgS37kYUBKQW3+bPdrg1234= SigV4 ECDHE-RSA-AES128-SHA AuthHeader awsexamplebucket.s3.amazonaws.com TLSV1.1
 ```
 
 **Note**  
@@ -29,7 +35,7 @@ The name of the bucket that the request was processed against\. If the system re
 **Example Entry**  
 
 ```
-mybucket
+awsexamplebucket
 ```
 
 **Time**  
@@ -37,7 +43,7 @@ The time at which the request was received\. The format, using `strftime()` term
 **Example Entry**  
 
 ```
-[06/Feb/2014:00:00:38 +0000]
+[06/Feb/2019:00:00:38 +0000]
 ```
 
 **Remote IP**  
@@ -77,7 +83,7 @@ The "key" part of the request, URL encoded, or "\-" if the operation does not ta
 **Example Entry**  
 
 ```
-/photos/2014/08/puppy.jpg
+/photos/2019/08/puppy.jpg
 ```
 
 **Request\-URI**  
@@ -85,7 +91,7 @@ The Request\-URI part of the HTTP request message\.
 **Example Entry**  
 
 ```
-"GET /mybucket/photos/2014/08/puppy.jpg?x-foo=bar HTTP/1.1"
+"GET /awsexamplebucket/photos/2019/08/puppy.jpg?x-foo=bar HTTP/1.1"
 ```
 
 **HTTP status**  
@@ -160,13 +166,53 @@ The version ID in the request, or "\-" if the operation does not take a `version
 3HL4kqtJvjVBH40Nrjfkd
 ```
 
-## Custom Access Log Information<a name="LogFormatCustom"></a>
+**Host Id**  
+The x\-amz\-id\-2 or Amazon S3 extended request ID\.   
+**Example Entry**  
 
-You can include custom information to be stored in the access log record for a request by adding a custom query\-string parameter to the URL for the request\. Amazon S3 ignores query\-string parameters that begin with "x\-", but includes those parameters in the access log record for the request, as part of the `Request-URI` field of the log record\. For example, a `GET` request for "s3\.amazonaws\.com/mybucket/photos/2014/08/puppy\.jpg?x\-user=johndoe" works the same as the same request for "s3\.amazonaws\.com/mybucket/photos/2014/08/puppy\.jpg", except that the "x\-user=johndoe" string is included in the `Request-URI` field for the associated log record\. This functionality is available in the REST interface only\.
+```
+s9lzHYrFp76ZVxRcpX9+5cjAnEH2ROuNkd2BHfIa6UkFVdtjf5mKR3/eTPFvsiP/XV/VLi31234=
+```
 
-## Programming Considerations for Extensible Server Access Log Format<a name="LogFormatExtensible"></a>
+**Signature Version**  
+The signature version, `SigV2` or `SigV4`, that was used to authenticate the request or a `-` for unauthenticated requests\.  
+**Example Entry**  
 
-From time to time, we might extend the access log record format by adding new fields to the end of each line\. Code that parses server access logs must be written to handle trailing fields that it does not understand\. 
+```
+SigV2
+```
+
+**Cipher Suite**  
+The Secure Sockets Layer \(SSL\) cipher that was negotiated for HTTPS request or a `-` for HTTP\.  
+**Example Entry**  
+
+```
+ECDHE-RSA-AES128-GCM-SHA256
+```
+
+**Authentication Type**  
+The type of request authentication used, `AuthHeader` for authentication headers, `QueryString` for query string \(pre\-signed URL\) or a `-` for unauthenticated requests\.  
+**Example Entry**  
+
+```
+AuthHeader
+```
+
+**Host Header**  
+The endpoint used to connect to Amazon S3  
+**Example Entry**  
+
+```
+s3-us-west-2.amazonaws.com
+```
+
+**TLS version**  
+The Transport Layer Security \(TLS\) version negotiated by the client\. The value is one of following: `TLSv1`, `TLSv1.1`, `TLSv1.2`; or `-` if TLS wasn't used\.  
+**Example Entry**  
+
+```
+TLSv1.2
+```
 
 ## Additional Logging for Copy Operations<a name="AdditionalLoggingforCopyOperations"></a>
 
@@ -185,7 +231,7 @@ The name of the bucket that stores the object being copied\.
 **Example Entry**  
 
 ```
-mybucket
+awsexamplebucket
 ```
 
 **Time**  
@@ -193,7 +239,7 @@ The time at which the request was received\. The format, using `strftime()` term
 **Example Entry**  
 
 ```
-[06/Feb/2014:00:00:38 +0000]
+[06/Feb/2019:00:00:38 +0000]
 ```
 
 **Remote IP**  
@@ -233,7 +279,7 @@ The "key" of the object being copied or "\-" if the operation does not take a ke
 **Example Entry**  
 
 ```
-/photos/2014/08/puppy.jpg
+/photos/2019/08/puppy.jpg
 ```
 
 **Request\-URI**  
@@ -241,7 +287,7 @@ The Request\-URI part of the HTTP request message\.
 **Example Entry**  
 
 ```
-"GET /mybucket/photos/2014/08/puppy.jpg?x-foo=bar"
+"GET /awsexamplebucket/photos/2019/08/puppy.jpg?x-foo=bar"
 ```
 
 **HTTP status**  
@@ -315,3 +361,59 @@ The version ID of the object being copied or "\-" if the `x-amz-copy-source` hea
 ```
 3HL4kqtJvjVBH40Nrjfkd
 ```
+
+**Host Id**  
+The x\-amz\-id\-2 or Amazon S3 extended request ID\.  
+**Example Entry**  
+
+```
+s9lzHYrFp76ZVxRcpX9+5cjAnEH2ROuNkd2BHfIa6UkFVdtjf5mKR3/eTPFvsiP/XV/VLi31234=
+```
+
+**Signature Version**  
+The signature version, `SigV2` or `SigV4`, that was used to authenticate the request or a `-` for unauthenticated requests\.  
+**Example Entry**  
+
+```
+SigV2
+```
+
+**Cipher Suite**  
+The Secure Sockets Layer \(SSL\) cipher that was negotiated for HTTPS request or a `-` for HTTP\.  
+**Example Entry**  
+
+```
+ECDHE-RSA-AES128-GCM-SHA256
+```
+
+**Authentication Type**  
+The type of request authentication used, `AuthHeader` for authentication headers, `QueryString` for query string \(pre\-signed URL\) or a `-` for unauthenticated requests\.  
+**Example Entry**  
+
+```
+AuthHeader
+```
+
+**Host Header**  
+The endpoint used to connect to Amazon S3  
+**Example Entry**  
+
+```
+s3-us-west-2.amazonaws.com
+```
+
+**TLS version**  
+The Transport Layer Security \(TLS\) version negotiated by the client\. The value is one of following: `TLSv1`, `TLSv1.1`, `TLSv1.2`; or `-` if TLS wasn't used\.  
+**Example Entry**  
+
+```
+TLSv1.2
+```
+
+## Custom Access Log Information<a name="LogFormatCustom"></a>
+
+You can include custom information to be stored in the access log record for a request by adding a custom query\-string parameter to the URL for the request\. Amazon S3 ignores query\-string parameters that begin with "x\-", but includes those parameters in the access log record for the request, as part of the `Request-URI` field of the log record\. For example, a `GET` request for "s3\.amazonaws\.com/awsexamplebucket/photos/2019/08/puppy\.jpg?x\-user=johndoe" works the same as the same request for "s3\.amazonaws\.com/awsexamplebucket/photos/2019/08/puppy\.jpg", except that the "x\-user=johndoe" string is included in the `Request-URI` field for the associated log record\. This functionality is available in the REST interface only\.
+
+## Programming Considerations for Extensible Server Access Log Format<a name="LogFormatExtensible"></a>
+
+From time to time, we might extend the access log record format by adding new fields to the end of each line\. Code that parses server access logs must be written to handle trailing fields that it does not understand\. 

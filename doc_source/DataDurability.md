@@ -3,7 +3,7 @@
 **Topics**
 + [Protecting Data Using Encryption](UsingEncryption.md)
 + [Using Versioning](Versioning.md)
-+ [Introduction to Amazon S3 Object Lock](object-lock.md)
++ [Locking Objects Using Amazon S3 Object Lock](object-lock.md)
 
 Amazon S3 provides a highly durable storage infrastructure designed for mission\-critical and primary data storage\. Objects are redundantly stored on multiple devices across multiple facilities in an Amazon S3 region\. To help better ensure data durability, Amazon S3 `PUT` and `PUT Object copy` operations synchronously store your data across multiple facilities before returning `SUCCESS`\. Once the objects are stored, Amazon S3 maintains their durability by quickly detecting and repairing any lost redundancy\. 
 

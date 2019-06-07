@@ -14,7 +14,7 @@
  For more information on this aspect of listing, see [Listing Keys Hierarchically Using a Prefix and Delimiter](ListingKeysHierarchy.md)\. 
 
 **List Implementation Efficiency**  
-List performance is not substantially affected by the total number of keys in your bucket, nor by the presence or absence of the prefix, marker, maxkeys, or delimiter arguments\. For information on improving overall bucket performance, including the list operation, see [Request Rate and Performance Guidelines](request-rate-perf-considerations.md)\.
+List performance is not substantially affected by the total number of keys in your bucket, nor by the presence or absence of the prefix, marker, maxkeys, or delimiter arguments\. 
 
 ## Iterating Through Multi\-Page Results<a name="ListingKeysPaginated"></a>
 

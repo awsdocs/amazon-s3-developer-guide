@@ -74,5 +74,3 @@ namespace Amazon.DocSamples.S3
     }
 }
 ```
-
-## Changing Server\-Side Encryption of an Existing Object \(Copy Operation\)<a name="ChangingServer-SideEncryptionofanExistingObjectCopyOperation02"></a>

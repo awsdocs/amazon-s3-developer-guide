@@ -10,6 +10,7 @@ The following AWS SDKs support client\-side encryption:
 + [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/)
 + [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/)
 + [AWS SDK for Ruby](https://aws.amazon.com/sdk-for-ruby/)
++ [AWS SDK for C\+\+;](https://aws.amazon.com/sdk-for-cpp/)
 
 ## Option 1: Using an AWS KMS–Managed Customer Master Key \(CMK\)<a name="client-side-encryption-kms-managed-master-key-intro"></a>
 
@@ -28,32 +29,6 @@ The following example uploads an object to Amazon S3 using AWS KMS with the AWS 
 For more information on key material, see [Importing Key Material in AWS Key Management Service \(AWS KMS\)](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
-
-// snippet-sourcedescription:[UploadObjectKMSKey.java demonstrates how to upload and download S3 objects using a KMS key.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[GET Object]
-// snippet-keyword:[PUT Object]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.upload_object_kms_key.complete]
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -138,8 +113,6 @@ public class UploadObjectKMSKey {
         }
     }
 }
-
-// snippet-end:[s3.java.upload_object_kms_key.complete]
 ```
 
 ## Option 2: Using a Client\-Side Master Key<a name="client-side-encryption-client-side-master-key-intro"></a>
@@ -176,32 +149,6 @@ The following example shows how to do these tasks:
 For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
-
-// snippet-sourcedescription:[S3ClientSideEncryptionSymMasterKey.java demonstrates how to upload and download encrypted objects using S3 with a client-side symmetric master key.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[PUT Object]
-// snippet-keyword:[GET Object]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.s3_client_side_encryption_sym_master_key.complete]
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -301,8 +248,6 @@ public class S3ClientSideEncryptionSymMasterKey {
         return new SecretKeySpec(encodedPrivateKey, "AES");
     }
 }
-
-// snippet-end:[s3.java.s3_client_side_encryption_sym_master_key.complete]
 ```
 
 The following example shows how to do these tasks:
@@ -315,32 +260,6 @@ The following example shows how to do these tasks:
 For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
-
-// snippet-sourcedescription:[S3ClientSideEncryptionAsymmetricMasterKey.java demonstrates how to upload and download encrypted objects using S3 with a client-side asymmetric master key.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[PUT Object]
-// snippet-keyword:[GET Object]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.s3_client_side_encryption_asymmetric_master_key.complete]
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -482,6 +401,4 @@ public class S3ClientSideEncryptionAsymmetricMasterKey {
         return new KeyPair(publicKey, privateKey);
     }
 }
-
-// snippet-end:[s3.java.s3_client_side_encryption_asymmetric_master_key.complete]
 ```

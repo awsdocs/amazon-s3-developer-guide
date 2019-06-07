@@ -186,8 +186,6 @@ In the IAM console, create an IAM role \("examplerole"\) that grants Account C p
 
 1. In the navigation pane on the left, click **Roles** and then click **Create New Role**\.
 
-1. Enter `examplerole` for the role name, and then click **Next Step**\.
-
 1. Under **Select Role Type**, select **Role for Cross\-Account Access**, and then click the **Select** button next to **Provide access between AWS accounts you own**\.
 
 1. Enter the Account C account ID\.
@@ -199,6 +197,8 @@ In the IAM console, create an IAM role \("examplerole"\) that grants Account C p
 1. Select the box next to the `access-accountA-bucket` policy that you created and then click **Next Step**\.
 
    The Review page appears so you can confirm the settings for the role before it's created\. One very important item to note on this page is the link that you can send to your users who need to use this role\. Users who click the link go straight to the Switch Role page with the Account ID and Role Name fields already filled in\. You can also see this link later on the Role Summary page for any cross\-account role\.
+
+1. Enter `examplerole` for the role name, and then click **Next Step**\.
 
 1. After reviewing the role, click **Create Role**\.
 

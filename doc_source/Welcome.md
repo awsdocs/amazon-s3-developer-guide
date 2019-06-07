@@ -1,4 +1,4 @@
-# What Is Amazon S3?<a name="Welcome"></a>
+# What is Amazon S3?<a name="Welcome"></a>
 
 Amazon Simple Storage Service is storage for the Internet\. It is designed to make web\-scale computing easier for developers\.
 

@@ -16,33 +16,6 @@ For information about SSE\-C, see [Protecting Data Using Server\-Side Encryption
 **Example**  
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
-
-// snippet-sourcedescription:[ServerSideEncryptionUsingClientSideEncryptionKey.java demonstrates how to perform various operations with S3 using server-side encryption with a customer-provided encryption key.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[GET Object]
-// snippet-keyword:[PUT Object]
-// snippet-keyword:[HEAD Object]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.server_side_encryption_using_client_side_encryption_key.complete]
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -158,8 +131,6 @@ public class ServerSideEncryptionUsingClientSideEncryptionKey {
         System.out.println();
     }
 }
-
-// snippet-end:[s3.java.server_side_encryption_using_client_side_encryption_key.complete]
 ```
 
 ## Other Amazon S3 Operations with SSE\-C using the AWS SDK for Java<a name="sse-c-java-other-api"></a>
@@ -177,31 +148,6 @@ The following example uses `TransferManager` to create objects and shows how to 
 **Example**  
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
-
-// snippet-sourcedescription:[ServerSideEncryptionCopyObjectUsingHLwithSSEC.java demonstrates how to perform various operations with the high-level TransferManager class using S3 server-side encryption with a customer-generated encryption key.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[PUT Object]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.server_side_encryption_copy_object_using_hl_with_sse_c.complete]
-
 import java.io.File;
 import java.security.SecureRandom;
 
@@ -279,6 +225,4 @@ public class ServerSideEncryptionCopyObjectUsingHLwithSSEC {
         }
     }
 }
-
-// snippet-end:[s3.java.server_side_encryption_copy_object_using_hl_with_sse_c.complete]
 ```

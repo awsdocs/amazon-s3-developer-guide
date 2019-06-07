@@ -1,17 +1,18 @@
 # Overview of Managing Access<a name="access-control-overview"></a>
 
+When granting permissions, you decide who is getting them, which Amazon S3 resources they are getting permissions for, and specific actions you want to allow on those resources\. 
+
 **Topics**
-+ [Amazon S3 Resources](#access-control-resources-basics)
++ [Amazon S3 Resources: Buckets and Objects](#access-control-resources-basics)
++ [Amazon S3 Bucket and Object Ownership](#about-resource-owner)
 + [Resource Operations](#access-control-resource-operations-basics)
 + [Managing Access to Resources \(Access Policy Options\)](#access-control-resources-manage-permissions-basics)
 + [Which Access Control Method Should I Use?](#so-which-one-should-i-use)
-+ [Related Topics](#access-control-overview-related-topics)
++ [More Info](#access-control-overview-related-topics)
 
-When granting permissions, you decide who is getting them, which Amazon S3 resources they are getting permissions for, and specific actions you want to allow on those resources\. 
+## Amazon S3 Resources: Buckets and Objects<a name="access-control-resources-basics"></a>
 
-## Amazon S3 Resources<a name="access-control-resources-basics"></a>
-
-Buckets and objects are primary Amazon S3 resources, and both have associated subresources\. For example, bucket subresources include the following:
+In Amazon Web Services \(AWS\), a resource is an entity that you can work with\. In Amazon S3, buckets and objects are the resources, and both have associated subresources\. For example, bucket subresources include the following:
 + `lifecycle` – Stores lifecycle configuration information \(see [Object Lifecycle Management](object-lifecycle-mgmt.md)\)\.
 + `website` – Stores website configuration information if you configure your bucket for website hosting \(see [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\. 
 + `versioning` – Stores versioning configuration \(see [PUT Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)\)\. 
@@ -23,21 +24,33 @@ Object subresources include the following:
 + `acl` – Stores a list of access permissions on the object\. This topic discusses how to use this subresource to manage object permissions \(see [Managing Access with ACLs](S3_ACLs_UsingACLs.md)\)\.
 + `restore` – Supports temporarily restoring an archived object \(see [POST Object restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html)\)\. An object in the Glacier storage class is an archived object\. To access the object, you must first initiate a restore request, which restores a copy of the archived object\. In the request, you specify the number of days that you want the restored copy to exist\. For more information about archiving objects, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
-### About the Resource Owner<a name="about-resource-owner"></a>
+## Amazon S3 Bucket and Object Ownership<a name="about-resource-owner"></a>
 
-By default, all Amazon S3 resources are private\. Only a resource owner can access the resource\. The resource owner refers to the AWS account that creates the resource\. For example:
-+ The AWS account that you use to create buckets and objects owns those resources\. 
-+ If you create an AWS Identity and Access Management \(IAM\) user in your AWS account, your AWS account is the parent owner\. If the IAM user uploads an object, the parent account, to which the user belongs, owns the object\. 
+Buckets and objects are Amazon S3 resources\. By default, only the resource owner can access these resources\. The resource owner refers to the AWS account that creates the resource\. For example: 
++ The AWS account that you use to create buckets and upload objects owns those resources\. 
+
+   
++  If you upload an object using AWS Identity and Access Management \(IAM\) user or role credentials, the AWS account that the user or role belongs to owns the object\. 
+
+   
 + A bucket owner can grant cross\-account permissions to another AWS account \(or users in another account\) to upload objects\. In this case, the AWS account that uploads objects owns those objects\. The bucket owner does not have permissions on the objects that other accounts own, with the following exceptions:
   + The bucket owner pays the bills\. The bucket owner can deny access to any objects, or delete any objects in the bucket, regardless of who owns them\. 
   + The bucket owner can archive any objects or restore archived objects regardless of who owns them\. Archival refers to the storage class used to store the objects\. For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
+### Ownership and Request Authentication<a name="about-resource-owner-requests"></a>
+
+All requests to a bucket are either authenticated or unauthenticated\. Authenticated requests must include a signature value that authenticates the request sender, unauthenticated requests do not\. For more information on request authentication, see [Making Requests](MakingRequests.md)\.
+
+A bucket owner can allow unauthenticated requests\. For example, unauthenticated [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) requests are allowed when a bucket has a public bucket policy, or when a bucket ACL grants `WRITE` or `FULL_CONTROL` access to the All Users group or the anonymous user specifically\. For more information about public bucket policies and public ACLs, see [The Meaning of "Public"](access-control-block-public-access.md#access-control-block-public-access-policy-status)\.
+
+All unauthenticated requests are made by the anonymous user\. This user is represented in access control lists \(ACLs\) by the specific canonical user ID `65a011a29cdf8ec533ec3d1ccaae921c`\. If an object is uploaded to a bucket through an unauthenticated request, the anonymous user owns the object\. The default object ACL grants `FULL_CONTROL` to the anonymous user as the object's owner\. Therefore, Amazon S3 allows unauthenticated requests to retrieve the object or modify its ACL\. 
+
+To prevent objects from being modified by the anonymous user, we recommend that you do not implement bucket policies that allow anonymous public writes to your bucket or use ACLs that allow the anonymous user write access to your bucket\. You can enforce this recommended behavior by using Amazon S3 Block Public Access\. 
+
+For more information about blocking public access, see [Using Amazon S3 Block Public Access](access-control-block-public-access.md)\. For more information about ACLs, see [Access Control List \(ACL\) Overview](acl-overview.md)\.
+
 **Important**  
-AWS recommends not using the root credentials of your AWS account to make requests\. Instead, create an IAM user, and grant that user full access\. We refer to these users as administrator users\. You can use the administrator user credentials, instead of root credentials of your account, to interact with AWS and perform tasks, such as create a bucket, create users, and grant them permissions\. For more information, go to [Root Account Credentials vs\. IAM User Credentials](https://docs.aws.amazon.com/general/latest/gr/root-vs-iam.html) in the *AWS General Reference* and [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
-
-The following diagram shows an AWS account owning resources, the IAM users, buckets, and objects\.
-
-![\[Diagram showing an AWS account that owns resources, IAM users, buckets, and objects.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/account-owns-all-resources.png)
+AWS recommends that you don't use the AWS account root user credentials to make authenticated requests\. Instead, create an IAM user and grant that user full access\. We refer to these users as administrator users\. You can use the administrator user credentials, instead of AWS account root user credentials, to interact with AWS and perform tasks, such as create a bucket, create users, and grant them permissions\. For more information, see [AWS Account Root User Credentials vs\. IAM User Credentials](https://docs.aws.amazon.com/general/latest/gr/root-vs-iam.html) in the *AWS General Reference* and [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
 
 ## Resource Operations<a name="access-control-resource-operations-basics"></a>
 
@@ -75,7 +88,7 @@ Access policy describes who has access to what\. You can associate an access pol
     ```
 
     Both bucket and object ACLs use the same XML schema\.
-  + Bucket Policy – For your bucket, you can add a bucket policy to grant other AWS accounts or IAM users permissions for the bucket and the objects in it\. Any object permissions apply only to the objects that the bucket owner creates\. Bucket policies supplement, and in many cases, replace ACL\-based access policies\.
+  + Bucket policy – For your bucket, you can add a bucket policy to grant other AWS accounts or IAM users permissions for the bucket and the objects in it\. Any object permissions apply only to the objects that the bucket owner creates\. Bucket policies supplement, and in many cases, replace ACL\-based access policies\.
 
     The following is an example bucket policy\. You express bucket policy \(and user policy\) using a JSON file\. The policy grants anonymous read permission on all objects in a bucket\. The bucket policy has one statement, which allows the `s3:GetObject` action \(read permission\) on objects in a bucket named `examplebucket`\.  By specifying the `principal` with a wild card \(\*\), the policy grants anonymous access\. 
 
@@ -145,7 +158,7 @@ When Amazon S3 receives a request, it must evaluate all the access policies to d
 
  [Example Walkthroughs: Managing Access to Your Amazon S3 Resources ](example-walkthroughs-managing-access.md) 
 
-## Related Topics<a name="access-control-overview-related-topics"></a>
+## More Info<a name="access-control-overview-related-topics"></a>
 
 We recommend that you first review the introductory topics that explain the options available for you to manage access to your Amazon S3 resources\. For more information, see [Introduction to Managing Access Permissions to Your Amazon S3 Resources](intro-managing-access-s3-resources.md)\. You can then use the following topics for more information about specific access policy options\. 
 +  [Using Bucket Policies and User Policies](using-iam-policies.md) 

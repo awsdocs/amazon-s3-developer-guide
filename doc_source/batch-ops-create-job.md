@@ -1,7 +1,5 @@
 # Creating a Batch Operations Job<a name="batch-ops-create-job"></a>
 
-[Sign up for the Preview](https://pages.awscloud.com/S3BatchOperations-Preview.html)
-
 This section describes the information that you need to create an Amazon S3 batch operations job\. It also describes the results of a `Create Job` request\.
 
 ## Create Job Request<a name="batch-ops-create-job-request-elements"></a>
@@ -12,10 +10,10 @@ To create a job, you must provide the following information:
 Specify the operation that you want Amazon S3 batch operations to execute against the objects in the manifest\. Each operation type accepts parameters that are specific to that operation, which enables you to perform the same tasks as if you performed the operation one\-by\-one on each object\.
 
 **Manifest**  
-The manifest is a list of all of the objects that you want Amazon S3 batch operations to execute the specified action on\. You can use an [ Amazon S3 Inventory](storage-inventory.md) report as a manifest or use your own customized CSV list of objects\.  
+The manifest is a list of all of the objects that you want Amazon S3 batch operations to execute the specified action on\. You can use an [ Amazon S3 Inventory](storage-inventory.md) report as a manifest or use your own customized CSV list of objects\. For more information about manifests, see [Specifying a Manifest](batch-ops-basics.md#specify-batchjob-manifest)\.
 
 **Priority**  
-Use job priorities to indicate the relative priority of this job to others running in your account\. A higher number indicates higher priority\.   
+Use job priorities to indicate the relative priority of this job to others running in your account\. A higher number indicates higher priority\.  
  Job priorities have no intrinsic meaning to Amazon S3 batch operations, so you can use them to prioritize jobs however you want\. For example, you might want to assign all `Initiate Restore Object` jobs a priority of 1, all `PUT Object Copy` jobs a priority of 2, and all `Put Object ACL` jobs a priority of 3\. Batch operations prioritize jobs according to priority numbers, but strict ordering isn't guaranteed\. Thus, you shouldn't use job priorities to ensure that any one job will start or finish before any other job\. If you need to ensure strict ordering, wait until one job has finished before starting the next\. 
 
 **RoleArn**  
@@ -31,7 +29,7 @@ You can also provide a description of up to 256 characters to help you track and
 
 If the `Create Job` request succeeds, Amazon S3 returns a job ID\. The job ID is a unique identifier that Amazon S3 generates automatically so that you can identify your batch operations job and monitor its status\.
 
-When you create a job through the AWS CLI, AWS SDKs, or REST API, you can set Amazon S3 batch operations to begin processing the job automatically\. The job runs as soon as it's ready and not waiting behind higher\-priority jobs\. When you create a job through the AWS Management Console, you must review the job details and confirm that you want to run it before batch operations can begin to process it\. After you confirm that you want to run the job, it progresses as though you had created it through one of the other methods\.
+When you create a job through the AWS CLI, AWS SDKs, or REST API, you can set Amazon S3 batch operations to begin processing the job automatically\. The job runs as soon as it's ready and not waiting behind higher\-priority jobs\. When you create a job through the AWS Management Console, you must review the job details and confirm that you want to run it before batch operations can begin to process it\. After you confirm that you want to run the job, it progresses as though you had created it through one of the other methods\. If a job remains in the suspended state for over 30 days, it will fail\.
 
 ## Related Resources<a name="batch-ops-create-job-related-resources"></a>
 + [The Basics: Amazon S3 Batch Operations Jobs](batch-ops-basics.md)

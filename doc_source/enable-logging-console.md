@@ -6,4 +6,4 @@ When you enable logging on a bucket, the console both enables logging on the sou
 
 For information about how to enable logging programmatically, see [Enabling Logging Programmatically](enable-logging-programming.md)\.
 
-For information about the log record format, including the list of fields and their descriptions, see [Server Access Log Format](LogFormat.md)\.
+For information about the log record format, including the list of fields and their descriptions, see [Amazon S3 Server Access Log Format](LogFormat.md)\.

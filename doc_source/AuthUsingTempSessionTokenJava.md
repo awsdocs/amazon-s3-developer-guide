@@ -24,31 +24,6 @@ If you want to test the sample using IAM user credentials, you will need to crea
 For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
-
-// snippet-sourcedescription:[MakingRequestsWithIAMTempCredentials.java demonstrates how to assume an IAM role temporarily and use it to make requests against Amazon S3.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[GET Bucket]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.making_requests_with_IAM_temp_credentials.complete]
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -125,8 +100,6 @@ public class MakingRequestsWithIAMTempCredentials {
         }
     }
 }
-
-// snippet-end:[s3.java.making_requests_with_IAM_temp_credentials.complete]
 ```
 
 ## Related Resources<a name="RelatedResources008"></a>

@@ -55,33 +55,6 @@ For buckets without versioning enabled, you can delete all objects directly and 
 For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
-
-// snippet-sourcedescription:[DeleteBucket.java demonstrates how to empty and then delete an S3 bucket.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[DELETE Bucket]
-// snippet-keyword:[GET Bucket]
-// snippet-keyword:[DELETE Object]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.delete_bucket.complete]
-
 import java.util.Iterator;
 
 import com.amazonaws.AmazonServiceException;
@@ -161,8 +134,6 @@ public class DeleteBucket {
         }
     }
 }
-
-// snippet-end:[s3.java.delete_bucket.complete]
 ```
 
 ## Empty a Bucket<a name="empty-bucket"></a>
@@ -203,7 +174,7 @@ You cannot remove objects from a bucket with versioning enabled\. Amazon S3 adds
 To empty a bucket with versioning enabled, you have the following options:
 + Delete the bucket programmatically using the AWS SDK\. 
 + Use the bucket's lifecycle configuration to request that Amazon S3 delete the objects\. 
-+ Use the Amazon S3 console \(see [How Do I Empty an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/empty-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\)\.
++ Use the Amazon S3 console\. For more information, see [How Do I Empty an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/empty-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ### Empty a Bucket: Using Lifecycle Configuration<a name="empty-bucket-lifecycle"></a>
 

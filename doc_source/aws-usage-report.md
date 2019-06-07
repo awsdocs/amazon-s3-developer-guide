@@ -12,7 +12,7 @@ The Amazon S3 usage report includes the following information:
   + A code that identifies the type of request
   + A code that identifies the type of retrieval
   + A code that identifies the type of data transfer
-  + A code that identifies early deletions from INTELLIGENT\_TIERING, STANDARD\_IA, ONEZONE\_IA, or GLACIER storage
+  + A code that identifies early deletions from INTELLIGENT\_TIERING, STANDARD\_IA, ONEZONE\_IA, GLACIER, or DEEP\_ARCHIVE storage
   + `StorageObjectCount` – The count of objects stored within a given bucket
 
   For a detailed explanation of Amazon S3 usage types, see [Understanding Your AWS Billing and Usage Reports for Amazon S3](aws-usage-report-understand.md)\.
@@ -23,7 +23,7 @@ The Amazon S3 usage report includes the following information:
   + The number of requests during the specified time period
   + The amount of data transferred, in bytes
   + The amount of data stored, in byte\-hours, which is the number of bytes stored in a given hour
-  + The amount of data associated with restorations from GLACIER, STANDARD\_IA, or ONEZONE\_IA storage, in bytes
+  + The amount of data associated with restorations from DEEP\_ARCHIVE, GLACIER, STANDARD\_IA, or ONEZONE\_IA storage, in bytes
 
 **Tip**  
 For detailed information about every request that Amazon S3 receives for your objects, turn on server access logging for your buckets\. For more information, see [Amazon S3 Server Access Logging](ServerLogs.md)\. 

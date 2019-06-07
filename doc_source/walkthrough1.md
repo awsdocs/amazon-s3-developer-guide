@@ -98,6 +98,8 @@ In this step, you will sign in to the Amazon S3 console with your AWS account cr
 
 1. Add three folders named Private, Finance, and Development to the bucket\.
 
+   For step\-by\-step instructions to create a folder, go to [Creating a Folder](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html) in the *Amazon Simple Storage Service Console User Guide*\.
+
 1. Upload one or two documents to each folder\. 
 
    For this exercise, assume you have uploaded a couple of documents in each folder, resulting in the bucket having objects with the following keys:
@@ -164,7 +166,7 @@ Since you'll be granting user permissions, sign in with your AWS account credent
 
    1. Click on the **JSON** tab\.
 
-   1. Copy the following access policy and paste it into the  policy text field: 
+   1. Copy the following access policy and paste it into the policy text field: 
 
       ```
       {
@@ -180,7 +182,7 @@ Since you'll be granting user permissions, sign in with your AWS account credent
       }
       ```
 
-      A policy is a JSON document\. In the document, a `Statement` is an array of objects, each describing a permission using a collection of name\-value pairs\. The preceding policy describes one specific permission\. The `Action` specifies the type of access\. In the policy, the `s3:ListAllMyBuckets` is a predefined Amazon S3 action\. This action covers the Amazon S3 GET Service operation, which returns list of all buckets owned by the authenticated sender\. The `Effect` element value determine if specific permission is allowed or denied\.
+      A policy is a JSON document\. In the document, a `Statement` is an array of objects, each describing a permission using a collection of name\-value pairs\. The preceding policy describes one specific permission\. The `Action` specifies the type of access\. In the policy, the `s3:ListAllMyBuckets` is a predefined Amazon S3 action\. This action covers the Amazon S3 GET Service operation, which returns list of all buckets owned by the authenticated sender\. The `Effect` element value determines if specific permission is allowed or denied\.
 
    1. Click **Review Policy**\. On the next page, enter `AllowGroupToSeeBucketListInTheConsole` in the **Name** field, and then click **Create policy**\.
 **Note**  
@@ -388,7 +390,7 @@ For Alice to list the Development folder content, you must apply a policy to the
 
    1. Click the **JSON** tab\.
 
-   1. Copy the following policy into the  policy text field:
+   1. Copy the following policy into the policy text field:
 
       ```
       {
@@ -446,7 +448,7 @@ For Alice to get and put objects in the Development folder, she needs permission
 
    1. Click **Edit Policy** next to the name of the policy you created in the previous step\.
 
-   1. Copy the following policy into the  policy text field, replacing the existing policy:
+   1. Copy the following policy into the policy text field, replacing the existing policy:
 
       ```
       {
@@ -508,10 +510,11 @@ Note that there are two conditional expressions in the `Condition` block\. The r
 
 Follow the steps in the preceding section and again update the inline policy you created for user Alice\.
 
-Copy the following policy into the  policy text field, replacing the existing policy:
+Copy the following policy into the policy text field, replacing the existing policy:
 
 ```
 {
+   "Version": "2012-10-17",
    "Statement":[
       {
          "Sid":"AllowListBucketIfSpecificPrefixIsIncludedInRequest",

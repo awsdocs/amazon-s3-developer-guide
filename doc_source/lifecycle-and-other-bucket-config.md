@@ -16,12 +16,26 @@ Lifecycle configuration on MFA\-enabled buckets is not supported\.
 
 ## Lifecycle and Logging<a name="lifecycle-general-considerations-logging"></a>
 
-If you have logging enabled on your bucket, Amazon S3 reports the results of an expiration action as follows: 
-+ If the lifecycle expiration action results in Amazon S3 permanently removing the object, Amazon S3 reports it as an `S3.EXPIRE.OBJECT` operation in the log record\.
-+ For a versioning\-enabled bucket, if the lifecycle expiration action results in a logical deletion of the current version, in which Amazon S3 adds a delete marker, Amazon S3 reports the logical deletion as an `S3.CREATE.DELETEMARKER` operation in the log record\. For more information, see [Object Versioning](ObjectVersioning.md)\.
-+ When Amazon S3 transitions an object to the GLACIER storage class, it reports it as an operation `S3.TRANSITION.OBJECT` in the log record to indicate it has initiated the operation\. When the object is transitioned to the STANDARD\_IA \(or ONEZONE\_IA\) storage class, it is reported as an `S3.TRANSITION_SIA.OBJECT` \(or `S3.TRANSITION_ZIA.OBJECT`\) operation\. 
+Amazon S3 lifecycle actions are not captured by CloudTrail object level logging since CloudTrail captures API requests made to external Amazon S3 endpoints whereas Amazon S3 lifecycle actions are performed using internal Amazon S3 endpoints\. Amazon S3 server access logs can be enabled in an S3 bucket to capture Amazon S3 lifecycle related actions such as object transition to another storage class and object expiration resulting in permanent deletion or logical deletion\. For more information, see [Amazon S3 Server Access Logging](ServerLogs.md)
+
+If you have logging enabled on your bucket, Amazon S3 server access logs report the results of the following operations:
+
+
+| Operation log | Decription | 
+| --- | --- | 
+|  `S3.EXPIRE.OBJECT`  |  Amazon S3 permanently deletes the object due to the lifecycle expiration action\.  | 
+|  `S3.CREATE.DELETEMARKER`  |  Amazon S3 logically deletes the current version and adds a delete marker in a versioning enabled bucket\.  | 
+|  `S3.TRANSITION_SIA.OBJECT`  |  Amazon S3 transitions the object to the STANDARD\_IA storage class\.  | 
+|  `S3.TRANSITION_ZIA.OBJECT`  |  Amazon S3 transitions the object to the ONEZONE\_IA storage class\.  | 
+|  `S3.TRANSITION_INT.OBJECT`  |  Amazon S3 transitions the object to the Intelligent\-Tiering storage class\.  | 
+|  `S3.TRANSITION.OBJECT`  |  Amazon S3 initiates the transition of object to the GLACIER storage class\.  | 
+|  `S3.TRANSITION_GDA.OBJECT`  |  Amazon S3 initiates the transition of object to the GLACIER DEEP\_ARCHIVE storage class\.  | 
+|  `S3.DELETE.UPLOAD`  |  Amazon S3 aborts incomplete multipart upload\.  | 
+
+**Note**  
+Amazon S3 server access log records are generally delivered on a best effort basis and cannot be used for complete accounting of all Amazon S3 requests\. 
 
 ### More Info<a name="lifecycle-general-considerations-logging-more-info"></a>
 + [Lifecycle Configuration Elements](intro-lifecycle-rules.md) 
-+ [Transitioning to the GLACIER Storage Class \(Object Archival\)](lifecycle-transition-general-considerations.md#before-deciding-to-archive-objects)
++ [Transitioning to the GLACIER and DEEP ARCHIVE Storage Classes \(Object Archival\)](lifecycle-transition-general-considerations.md#before-deciding-to-archive-objects)
 + [Setting Lifecycle Configuration on a Bucket](how-to-set-lifecycle-configuration-intro.md) 
