@@ -1,0 +1,3 @@
+# Managing Object Tags the Console<a name="tagging-manage-console"></a>
+
+You can use the Amazon S3 console to add tags to new objects when you upload them or you can add them to existing objects\. For instructions on how to add tags to objects using the Amazon S3 console, see [Adding Object Tags](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-object-tags.html) in the Amazon Simple Storage Service Console User Guide\. 

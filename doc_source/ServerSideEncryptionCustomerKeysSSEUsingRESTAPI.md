@@ -1,0 +1,11 @@
+# Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the REST API<a name="ServerSideEncryptionCustomerKeysSSEUsingRESTAPI"></a>
+
+The following Amazon S3 REST APIs support headers related to server\-side encryption with customer\-provided encryption keys\. For more information about these headers, see [Using SSE\-C](ServerSideEncryptionCustomerKeys.md#sse-c-how-to-programmatically-intro)\. 
++ [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html)
++ [HEAD Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html)
++ [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)
++ [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)
++ [POST Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html)
++ [Initiate Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)
++ [Upload Part](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPart.html)
++ [Upload Part \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html)
