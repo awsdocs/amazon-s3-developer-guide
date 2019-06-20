@@ -1,0 +1,3 @@
+# Further Details<a name="ErrorDetails"></a>
+
+Many error responses contain additional structured data meant to be read and understood by a developer diagnosing programming errors\. For example, if you send a Content\-MD5 header with a REST PUT request that doesn't match the digest calculated on the server, you receive a BadDigest error\. The error response also includes as detail elements the digest we calculated, and the digest you told us to expect\. During development, you can use this information to diagnose the error\. In production, a well\-behaved program might include this information in its error log\.
