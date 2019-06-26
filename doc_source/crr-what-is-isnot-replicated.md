@@ -29,7 +29,7 @@ Amazon S3 replicates the following:
 +  Object tags, if there are any\.
 
    
-+ Amazon S3 Object Lock retention information, if there is any\. When Amazon S3 replicates objects that have retention information applied, it applies those same retention controls to your replicas, overriding the default retention period configured on your destination bucket\. If you don't have retention controls applied to the objects in your source bucket, and you replicate into a destination bucket that has a default retention period set, the destination bucket's default retention period is applied to your object replicas\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
++ Amazon S3 object lock retention information, if there is any\. When Amazon S3 replicates objects that have retention information applied, it applies those same retention controls to your replicas, overriding the default retention period configured on your destination bucket\. If you don't have retention controls applied to the objects in your source bucket, and you replicate into a destination bucket that has a default retention period set, the destination bucket's default retention period is applied to your object replicas\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
 
 ### How Delete Operations Affect CRR<a name="crr-delete-op"></a>
 

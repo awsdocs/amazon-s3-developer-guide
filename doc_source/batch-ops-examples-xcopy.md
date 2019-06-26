@@ -108,7 +108,7 @@ In the following console procedure, you set up permissions for an Amazon S3 batc
 
 1. After the inventory report is available, create an Amazon S3 batch operations PUT object copy job in the destination account, choosing the inventory report from the destination manifest bucket\. You need the ARN for the role that you created in the destination account\. 
 
-   For general information about creating a job, see [Creating a Batch Operations Job](batch-ops-create-job.md)\. For information about creating a job using the console, see [ Creating an Amazon S3 Batch Operations Job](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/batch-ops-create-job.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+   For general information about creating a job, see [Creating an Amazon S3 Batch Operations Job](batch-ops-create-job.md)\. For information about creating a job using the console, see [ Creating an Amazon S3 Batch Operations Job](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/batch-ops-create-job.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
 ## Using a CSV Manifest Stored in the Source AWS Account<a name="specify-batchjob-manifest-xaccount-csv"></a>
 
@@ -215,4 +215,4 @@ The following procedure shows how to set up permissions when using an Amazon S3 
 
 1. Create an Amazon S3 batch operations job in the destination account\. You need the ARN for the role that you created in the destination account\. 
 
-   For general information about creating a job, see [Creating a Batch Operations Job](batch-ops-create-job.md)\. For information about creating a job using the console, see [ Creating an Amazon S3 Batch Operations Job](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/batch-ops-create-job.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+   For general information about creating a job, see [Creating an Amazon S3 Batch Operations Job](batch-ops-create-job.md)\. For information about creating a job using the console, see [ Creating an Amazon S3 Batch Operations Job](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/batch-ops-create-job.html) in the *Amazon Simple Storage Service Console User Guide*\. 

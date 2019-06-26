@@ -15,7 +15,7 @@ Amazon S3 stores a replication configuration as XML\. In the replication configu
 </ReplicationConfiguration>
 ```
 
-Amazon S3 can't replicate objects without your permission\. You grant permissions with the IAM role that you specify in the replication configuration\. Amazon S3 assumes the IAM role to replicate objects on your behalf\. You must grant the required permissions to the IAM role first\. For more information about managing permissions, see [Setting Up Permissions for Cross\-Region Replication ](setting-repl-config-perm-overview.md)\.
+Amazon S3 can't replicate objects without your permission\. You grant permissions with the IAM role that you specify in the replication configuration\. Amazon S3 assumes the IAM role to replicate objects on your behalf\. You must grant the required permissions to the IAM role first\. For more information about managing permissions, see [Setting Up Permissions for Cross\-Region Replication](setting-repl-config-perm-overview.md)\.
 
 You add one rule in replication configuration in the following scenarios:
 + You want to replicate all objects\.

@@ -41,7 +41,7 @@ The following topics describe AWS\-wide and Amazon S3–specific condition keys 
 ## Available Condition Keys<a name="AvailableKeys-iamV2"></a>
 
 The predefined keys available for specifying conditions in an Amazon S3 access policy can be classified as follows:
-+ **AWS\-wide keys** – AWS provides a set of common keys that are supported by all AWS services that support policies\. These keys that are common to all services are called AWS\-wide keys and use the prefix `aws:`\. For a list of AWS\-wide keys, see [Available Keys for Conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\. There are also keys that are specific to Amazon S3, which use the prefix `s3:`\. Amazon S3–specific keys are discussed in the next bulleted item\.
++ **AWS\-wide keys** – AWS provides a set of common keys that are supported by all AWS services that support policies\. These keys that are common to all services are called AWS\-wide keys and use the prefix `aws:`\. For a list of AWS\-wide keys, see [Available Keys for Conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\. There are also keys that are specific to Amazon S3, which use the prefix `s3:`\. Amazon S3–specific keys are discussed in the next bulleted item\.
 
    
 

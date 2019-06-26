@@ -1,6 +1,6 @@
 # Working with Amazon S3 Buckets<a name="UsingBucket"></a>
 
-Amazon S3 is cloud storage for the internet\. To upload your data \(photos, videos, documents etc\.\), you first create a bucket in one of the AWS Regions\. You can then upload any number of objects to the bucket\. 
+To upload your data \(photos, videos, documents etc\.\) to Amazon S3, you must first create an S3 bucket in one of the AWS Regions\. You can then upload any number of objects to the bucket\. 
 
 In terms of implementation, buckets and objects are resources, and Amazon S3 provides APIs for you to manage them\. For example, you can create a bucket and upload objects using the Amazon S3 API\. You can also use the Amazon S3 console to perform these operations\. The console uses the Amazon S3 APIs to send requests to Amazon S3\. 
 
@@ -12,7 +12,6 @@ Amazon S3 creates buckets in a Region you specify\. To optimize latency, minimiz
 
 **Note**  
 Objects belonging to a bucket that you create in a specific AWS Region never leave that Region, unless you explicitly transfer them to another Region\. For example, objects stored in the EU \(Ireland\) Region never leave it\. 
-Public access is granted to buckets and objects through access control lists \(ACLs\), bucket policies, or both\. To help ensure that all your S3 buckets and objects have their public access blocked, turn on all four settings for *block public access*\. These settings apply account\-wide for all current and future buckets\. We recommend that you turn on block public access settings\. Before applying these settings, verify that your applications will work correctly without public access\. If you require some level of public access to your buckets or objects, you can customize the individual settings to suit your storage use cases\. For more information, see [Using Amazon S3 Block Public Access](access-control-block-public-access.md)\. 
 
 **Topics**
 + [Creating a Bucket](#create-bucket-intro)
@@ -22,6 +21,7 @@ Public access is granted to buckets and objects through access control lists \(A
 + [Examples of Creating a Bucket](create-bucket-get-location-example.md)
 + [Deleting or Emptying a Bucket](delete-or-empty-bucket.md)
 + [Amazon S3 Default Encryption for S3 Buckets](bucket-encryption.md)
++ [Using Amazon S3 Block Public Access](using-bucket-access-control-block-public-access.md)
 + [Managing Bucket Website Configuration](ManagingBucketWebsiteConfig.md)
 + [Amazon S3 Transfer Acceleration](transfer-acceleration.md)
 + [Requester Pays Buckets](RequesterPaysBuckets.md)

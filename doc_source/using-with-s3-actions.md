@@ -191,8 +191,13 @@ This section provides a list of the permissions related to account operations th
 
 | Permission Keywords | Amazon S3 Operation\(s\) Covered | 
 | --- | --- | 
+| s3:CreateJob | [CreateJob](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTAccountPOSTCreateJob.html) | 
+| s3:DescribeJob | [DescribeJob](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTAccountGETDescribeJob.html) | 
 | s3:GetAccountPublicAccessBlock | [GET PublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTAccountGETPublicAccessBlock.html) | 
+| s3:ListJobs | [ListJobs](https://docs.aws.amazon.com/AmazonS3/latest/API//RESTAccountGETListJobs.html) | 
 | s3:PutAccountPublicAccessBlock | [PUT PublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTAccountPUTPublicAccessBlock.html), [DELETE PublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTAccountDELETEPublicAccessBlock.html) | 
+| s3:UpdateJobPriority | [UpdateJobPriority](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTAccountPOSTUpdateJobPriority.html) | 
+| s3:UpdateJobStatus | [UpdateJobStatus](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTAccountPOSTUpdateJobStatus.html) | 
 
 The following example user policy grants the `s3:GetAccountPublicAccessBlock` permission to a user\. Note that for these permissions, you set the `Resource` value to `"*"`\. For more information, see [Specifying Resources in a Policy](s3-arn-format.md)\.
 

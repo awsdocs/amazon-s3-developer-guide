@@ -1,8 +1,8 @@
-# Creating a Batch Operations Job<a name="batch-ops-create-job"></a>
+# Creating an Amazon S3 Batch Operations Job<a name="batch-ops-create-job"></a>
 
 This section describes the information that you need to create an Amazon S3 batch operations job\. It also describes the results of a `Create Job` request\.
 
-## Create Job Request<a name="batch-ops-create-job-request-elements"></a>
+## Creating a Job Request<a name="batch-ops-create-job-request-elements"></a>
 
 To create a job, you must provide the following information:
 
@@ -10,7 +10,7 @@ To create a job, you must provide the following information:
 Specify the operation that you want Amazon S3 batch operations to execute against the objects in the manifest\. Each operation type accepts parameters that are specific to that operation, which enables you to perform the same tasks as if you performed the operation one\-by\-one on each object\.
 
 **Manifest**  
-The manifest is a list of all of the objects that you want Amazon S3 batch operations to execute the specified action on\. You can use an [ Amazon S3 Inventory](storage-inventory.md) report as a manifest or use your own customized CSV list of objects\. For more information about manifests, see [Specifying a Manifest](batch-ops-basics.md#specify-batchjob-manifest)\.
+The manifest is a list of all of the objects that you want Amazon S3 batch operations to execute the specified action on\. You can use a CSV\-formatted [ Amazon S3 Inventory](storage-inventory.md) report as a manifest or use your own customized CSV list of objects\. For more information about manifests, see [Specifying a Manifest](batch-ops-basics.md#specify-batchjob-manifest)\.
 
 **Priority**  
 Use job priorities to indicate the relative priority of this job to others running in your account\. A higher number indicates higher priority\.  
@@ -25,7 +25,7 @@ Specify whether you want Amazon S3 batch operations to generate a completion rep
 **Description \(Optional\)**  
 You can also provide a description of up to 256 characters to help you track and monitor your job\. Amazon S3 includes this description whenever it returns information about a job or displays job details on the Amazon S3 console\. You can then easily sort and filter jobs according to the descriptions that you assigned\. Descriptions don't need to be unique, so you can use descriptions as categories \(for example, "Weekly Log Copy Jobs"\) to help you track groups of similar jobs\.
 
-## Create Job Response<a name="batch-ops-create-job-response-elements"></a>
+## Creating a Job Response<a name="batch-ops-create-job-response-elements"></a>
 
 If the `Create Job` request succeeds, Amazon S3 returns a job ID\. The job ID is a unique identifier that Amazon S3 generates automatically so that you can identify your batch operations job and monitor its status\.
 

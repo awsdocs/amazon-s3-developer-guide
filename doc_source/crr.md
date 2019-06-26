@@ -30,9 +30,9 @@ Cross\-region replication requires the following:
 + The source and destination buckets must be in different AWS Regions\. 
 + Amazon S3 must have permissions to replicate objects from the source bucket to the destination bucket on your behalf\. 
 + If the owner of the source bucket doesn't own the object in the bucket, the object owner must grant the bucket owner `READ` and `READ_ACP` permissions with the object access control list \(ACL\)\. For more information, see [Managing Access with ACLs](S3_ACLs_UsingACLs.md)\. 
-+ If the source bucket has Amazon S3 Object Lock enabled, the destination bucket must also have Object Lock enabled\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
++ If the source bucket has Amazon S3 object lock enabled, the destination bucket must also have object lock enabled\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
 
-  To enable cross\-region replication on a bucket that has Object Lock enabled, contact the AWS Support team at [AWS Support](https://console.aws.amazon.com/support/home)\.
+  To enable cross\-region replication on a bucket that has object lock enabled, contact the AWS Support team at [AWS Support](https://console.aws.amazon.com/support/home)\.
 
 For more information, see [Overview of Setting Up CRR ](crr-how-setup.md)\. 
 

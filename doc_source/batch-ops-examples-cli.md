@@ -25,7 +25,7 @@ The following example creates an Amazon S3 batch operations `S3PutObjectTagging`
 
       Record the role's Amazon Resource Name \(ARN\)\. You need the ARN when you create a job\.
 
-   1. Create an IAM policy with permissions and attach it to the IAM role that you created in the previous step\. For more information about permissions, see [Granting Permissions for Batch Operations](batch-ops-iam-role-policies.md)\.
+   1. Create an IAM policy with permissions and attach it to the IAM role that you created in the previous step\. For more information about permissions, see [Granting Permissions for Amazon S3 Batch OperationsRequired Permissions for Creating an Amazon S3 Batch Operations Job](batch-ops-iam-role-policies.md)\.
 
       ```
       aws iam put-role-policy \

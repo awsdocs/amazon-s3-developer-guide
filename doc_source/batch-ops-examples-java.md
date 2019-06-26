@@ -10,9 +10,9 @@ This section provides examples of how to create and manage Amazon S3 batch opera
 
 ## Creating an Amazon S3 batch operations Job Using the AWS SDK for Java<a name="batch-ops-examples-java-create-job"></a>
 
-The following example shows how to create an Amazon S3 batch operations job\. For information about creating a job, see [Creating a Batch Operations Job](batch-ops-create-job.md)\.
+The following example shows how to create an Amazon S3 batch operations job\. For information about creating a job, see [Creating an Amazon S3 Batch Operations Job](batch-ops-create-job.md)\.
 
-For information about setting up the permissions you need to create a job, see [Granting Permissions for Batch Operations](batch-ops-iam-role-policies.md)\. 
+For information about setting up the permissions you need to create a job, see [Granting Permissions for Amazon S3 Batch OperationsRequired Permissions for Creating an Amazon S3 Batch Operations Job](batch-ops-iam-role-policies.md)\. 
 
 **Example**  
 

@@ -222,7 +222,7 @@ When creating an Amazon S3 batch operations job to invoke a Lambda function, you
 + An IAM role with permission to invoke the function
 + The action parameter `LambdaInvokeFunction`
 
-For more information about creating an Amazon S3 batch operations job, see [Creating a Batch Operations Job](batch-ops-create-job.md) and [Operations](batch-ops-operations.md)\.
+For more information about creating an Amazon S3 batch operations job, see [Creating an Amazon S3 Batch Operations Job](batch-ops-create-job.md) and [Operations](batch-ops-operations.md)\.
 
 The following example creates an Amazon S3 batch operations job that invokes a Lambda function using the AWS CLI\.
 
