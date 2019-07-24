@@ -423,7 +423,7 @@ Example of an IAM policy that you attach to the destination SNS topic\.
    "Action": [
     "SNS:Publish"
    ],
-   "Resource": "SNS-ARN",
+   "Resource": "arn:aws:sns:REGION:ACCOUNT-ID:TOPICNAME",
    "Condition": {
       "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
    }
@@ -448,7 +448,7 @@ Example of an IAM policy that you attach to the destination SQS queue\.
    "Action": [
     "SQS:SendMessage"
    ],
-   "Resource": "SQS-ARN",
+   "Resource": "arn:aws:sqs:REGION:ACCOUNT-ID:QUEUENAMEHERE",
    "Condition": {
       "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
    }
