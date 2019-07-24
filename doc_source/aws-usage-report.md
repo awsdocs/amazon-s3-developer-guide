@@ -5,14 +5,14 @@ For more detail about your Amazon S3 storage usage, download dynamically generat
 When you download a usage report, you can choose to aggregate usage data by hour, day, or month\. The Amazon S3 usage report lists operations by usage type and AWS Region, for example, the amount of data transferred out of the Asia Pacific \(Sydney\) Region\.
 
 The Amazon S3 usage report includes the following information:
-+ **Service** –  `Amazon Simple Storage Service`
++ **Service** – `Amazon Simple Storage Service`
 + **Operation** – The operation performed on your bucket or object\. For a detailed explanation of Amazon S3 operations, see [Tracking Operations in Your Usage Reports](aws-usage-report-understand.md#aws-usage-report-understand-operations)\.
 + **UsageType** – One of the following values:
   + A code that identifies the type of storage
   + A code that identifies the type of request
   + A code that identifies the type of retrieval
   + A code that identifies the type of data transfer
-  + A code that identifies early deletions from STANDARD\_IA, ONEZONE\_IA, or GLACIER storage
+  + A code that identifies early deletions from INTELLIGENT\_TIERING, STANDARD\_IA, ONEZONE\_IA, GLACIER, or DEEP\_ARCHIVE storage
   + `StorageObjectCount` – The count of objects stored within a given bucket
 
   For a detailed explanation of Amazon S3 usage types, see [Understanding Your AWS Billing and Usage Reports for Amazon S3](aws-usage-report-understand.md)\.
@@ -23,10 +23,10 @@ The Amazon S3 usage report includes the following information:
   + The number of requests during the specified time period
   + The amount of data transferred, in bytes
   + The amount of data stored, in byte\-hours, which is the number of bytes stored in a given hour
-  + The amount of data associated with restorations from GLACIER, STANDARD\_IA, or ONEZONE\_IA storage, in bytes
+  + The amount of data associated with restorations from DEEP\_ARCHIVE, GLACIER, STANDARD\_IA, or ONEZONE\_IA storage, in bytes
 
 **Tip**  
-For detailed information about every request that Amazon S3 receives for your objects, turn on server access logging for your buckets\. For more information, see [Server Access Logging](ServerLogs.md)\. 
+For detailed information about every request that Amazon S3 receives for your objects, turn on server access logging for your buckets\. For more information, see [Amazon S3 Server Access Logging](ServerLogs.md)\. 
 
 You can download a usage report as an XML or a comma\-separated values \(CSV\) file\. The following is an example CSV usage report opened in a spreadsheet application\.
 

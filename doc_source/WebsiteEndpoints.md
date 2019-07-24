@@ -2,6 +2,9 @@
 
 When you configure a bucket for website hosting, the website is available via the region\-specific website endpoint\. Website endpoints are different from the endpoints where you send REST API requests\. For more information about the differences between the endpoints, see [Key Differences Between the Amazon Website and the REST API Endpoint](#WebsiteRestEndpointDiff)\.
 
+**Note**  
+The Amazon S3 website endpoints do not support HTTPS\. For information about using HTTPS with an Amazon S3 bucket, see [How do I use CloudFront to serve HTTPS requests for my Amazon S3 bucket?](https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-https-requests-s3) and [Requiring HTTPS for Communication Between CloudFront and Your Amazon S3 Origin\.](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-s3-origin.html) 
+
 The two general forms of an Amazon S3 website endpoint are as follows: 
 
 ```
@@ -24,7 +27,7 @@ Or, if your bucket is named `example-bucket` and it resides in the EU \(Frankfur
 1. http://example-bucket.s3-website.eu-central-1.amazonaws.com/
 ```
 
-For a list of the Amazon S3 website endpoints by Region, see [Amazon Simple Storage Service Website Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_website_region_endpoints) in the * AWS General Reference*\. 
+For a list of the Amazon S3 website endpoints by Region, see [Amazon Simple Storage Service Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_website_region_endpoints) in the * AWS General Reference*\. 
 
  In order for your customers to access content at the website endpoint, you must make all your content publicly readable\. To do so, you can use a bucket policy or an ACL on an object to grant the necessary permissions\. 
 

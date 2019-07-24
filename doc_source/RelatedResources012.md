@@ -5,8 +5,8 @@ Following is a table that lists related resources that you'll find useful as you
 
 |  Resource  |  Description  | 
 | --- | --- | 
-|  [ Amazon Simple Storage Service Getting Started Guide](http://docs.aws.amazon.com/AmazonS3/latest/gsg/)  | The Getting Started Guide provides a quick tutorial of the service based on a simple use case\.  | 
-|  [ Amazon Simple Storage Service API Reference](http://docs.aws.amazon.com/AmazonS3/latest/API/)  | The API Reference describes Amazon S3 operations in detail\. | 
+|  [ Amazon Simple Storage Service Getting Started Guide](https://docs.aws.amazon.com/AmazonS3/latest/gsg/)  | The Getting Started Guide provides a quick tutorial of the service based on a simple use case\.  | 
+|  [ Amazon Simple Storage Service API Reference](https://docs.aws.amazon.com/AmazonS3/latest/API/)  | The API Reference describes Amazon S3 operations in detail\. | 
 |  [Amazon S3Technical FAQ](https://aws.amazon.com/s3/faqs/)  |  The FAQ covers the top questions developers have asked about this product\.   | 
 |  [AWS Developer Resource Center](https://aws.amazon.com/resources/)  | A central starting point to find documentation, code samples, release notes, and other information to help you build innovative applications with AWS\.  | 
 |   [AWS Management Console](https://aws.amazon.com/console/)   |   The console allows you to perform most of the functions of Amazon S3without programming\.  | 

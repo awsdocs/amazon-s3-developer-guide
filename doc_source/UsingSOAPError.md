@@ -21,4 +21,4 @@ For example, if you attempt to delete the object "Fred", which does not exist, t
 9. </soapenv:Body>
 ```
 
-For more information about Amazon S3 errors, go to [ErrorCodeList](http://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)\.
+For more information about Amazon S3 errors, go to [ErrorCodeList](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)\.

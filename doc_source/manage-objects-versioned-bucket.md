@@ -9,4 +9,4 @@
 + [Restoring Previous Versions](RestoringPreviousVersions.md)
 + [Versioned Object Permissions](VersionedObjectPermissionsandACLs.md)
 
-Objects stored in your bucket before you set the versioning state have a version ID of `null`\. When you enable versioning, existing objects in your bucket do not change\. What changes is how Amazon S3 handles the objects in future requests\. The topics in this section explain various object operations in a versioning\-enabled bucket\.
+Objects that are stored in your bucket before you set the versioning state have a version ID of `null`\. When you enable versioning, existing objects in your bucket do not change\. What changes is how Amazon S3 handles the objects in future requests\. The topics in this section explain various object operations in a versioning\-enabled bucket\.

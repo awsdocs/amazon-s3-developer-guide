@@ -29,7 +29,7 @@ The Amazon S3 team encourages customers to investigate applications that repeate
 
 ## Getting Amazon S3 Request IDs for AWS Support<a name="get-request-ids"></a>
 
-Whenever you need to contact AWS Support due to encountering errors or unexpected behavior in Amazon S3, you will need to get the request IDs associated with the failed action\. Getting these request IDs enables AWS Support to help you resolve the problems you're experiencing\. Request IDs come in pairs, are returned in every response that Amazon S3 processes \(even the erroneous ones\), and can be accessed through verbose logs\. There are a number of common methods for getting your request IDs\.
+Whenever you need to contact AWS Support due to encountering errors or unexpected behavior in Amazon S3, you will need to get the request IDs associated with the failed action\. Getting these request IDs enables AWS Support to help you resolve the problems you're experiencing\. Request IDs come in pairs, are returned in every response that Amazon S3 processes \(even the erroneous ones\), and can be accessed through verbose logs\. There are a number of common methods for getting your request IDs including, S3 access logs and CloudTrail events/data events\.
 
 After you've recovered these logs, copy and retain those two values, because you'll need them when you contact AWS Support\. For information about contacting AWS Support, see [Contact Us](https://aws.amazon.com/contact-us/)\.
 
@@ -80,7 +80,7 @@ S3 Extended Request ID: IOWQ4fDEXAMPLEQM+ey7N9WgVhSnQ6JEXAMPLEZb7hSQDASK+Jd1vEXA
 
 #### Using the SDK for PHP to Obtain Request IDs<a name="php-request-id"></a>
 
-You can configure logging using PHP\. For more information, see [How can I see what data is sent over the wire?](http://docs.aws.amazon.com/aws-sdk-php/guide/latest/faq.html#how-can-i-see-what-data-is-sent-over-the-wire) in the FAQ for the *AWS SDK for PHP*\.
+You can configure logging using PHP\. For more information, see [How can I see what data is sent over the wire?](https://docs.aws.amazon.com/aws-sdk-php/guide/latest/faq.html#how-can-i-see-what-data-is-sent-over-the-wire) in the FAQ for the *AWS SDK for PHP*\.
 
 #### Using the SDK for Java to Obtain Request IDs<a name="java-request-id"></a>
 
@@ -95,11 +95,11 @@ S3ResponseMetadata md = s3.getCachedResponseMetadata(req);
 System.out.println("Host ID: " + md.getHostId() + " RequestID: " + md.getRequestId());
 ```
 
-Alternatively, you can use verbose logging of every Java request and response\. For more information, see [Verbose Wire Logging](http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/java-dg-logging.html#sdk-net-logging-verbose) in the Logging AWS SDK for Java Calls topic in the *AWS SDK for Java Developer Guide*\.
+Alternatively, you can use verbose logging of every Java request and response\. For more information, see [Verbose Wire Logging](https://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/java-dg-logging.html#sdk-net-logging-verbose) in the Logging AWS SDK for Java Calls topic in the *AWS SDK for Java Developer Guide*\.
 
 #### Using the AWS SDK for \.NET to Obtain Request IDs<a name="net-request-id"></a>
 
-You can configure logging in AWS SDK for \.NET using the built\-in `System.Diagnostics` logging tool\. For more information, see the [ Logging with the AWS SDK for \.NET](http://aws.amazon.com/blogs/developer/logging-with-the-aws-sdk-for-net/) AWS Developer Blog post\.
+You can configure logging in AWS SDK for \.NET using the built\-in `System.Diagnostics` logging tool\. For more information, see the [ Logging with the AWS SDK for \.NET](https://aws.amazon.com/blogs/developer/logging-with-the-aws-sdk-for-net/) AWS Developer Blog post\.
 
 **Note**  
 By default, the returned log contains only error information\. The config file needs to have `AWSLogMetrics` \(and optionally, `AWSResponseLogging`\) added to get the request IDs\.

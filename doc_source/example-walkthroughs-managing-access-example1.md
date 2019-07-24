@@ -42,17 +42,17 @@ All the tasks of creating users and granting permissions are done in the AWS Man
 
       1. Create user AccountAadmin and note down the user security credentials\. 
 
-         For instructions, see [Creating an IAM User in Your AWS Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *IAM User Guide*\. 
+         For instructions, see [Creating an IAM User in Your AWS Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *IAM User Guide*\. 
 
       1. Grant AccountAadmin administrator privileges by attaching a user policy giving full access\. 
 
-         For instructions, see [Working with Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\. 
+         For instructions, see [Working with Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\. 
 
-      1. Note down the **IAM User Sign\-In URL** for AccountAadmin\. You will need to use this URL when signing in to the AWS Management Console\. For more information about where to find it, see [How Users Sign in to Your Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_how-users-sign-in.html) in *IAM User Guide*\. Note down the URL for each of the accounts\.
+      1. Note down the **IAM User Sign\-In URL** for AccountAadmin\. You will need to use this URL when signing in to the AWS Management Console\. For more information about where to find it, see [How Users Sign in to Your Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_how-users-sign-in.html) in *IAM User Guide*\. Note down the URL for each of the accounts\.
 
 1. Set up either the AWS Command Line Interface \(CLI\) or the AWS Tools for Windows PowerShell\. Make sure you save administrator user credentials as follows:
-   + If using the AWS CLI, create two profiles, AccountAadmin and AccountBadmin, in the config file\.
-   + If using the AWS Tools for Windows PowerShell, make sure you store credentials for the session as AccountAadmin and AccountBadmin\.
+   + If using the AWS CLI, create a profile, AccountAadmin, in the config file\.
+   + If using the AWS Tools for Windows PowerShell, make sure you store credentials for the session as AccountAadmin\.
 
    For instructions, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
 
@@ -62,13 +62,13 @@ Using the credentials of user AccountAadmin in Account A, and the special IAM us
 
 1. Create Resources \(a bucket and an IAM user\)
 
-   1. In the Amazon S3 console create a bucket\. Note down the AWS region in which you created it\. For instructions, see [How Do I Create an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+   1. In the Amazon S3 console create a bucket\. Note down the AWS region in which you created it\. For instructions, see [How Do I Create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
    1. In the IAM console, do the following: 
 
       1. Create a user, Dave\.
 
-         For instructions, see [Creating IAM Users \(AWS Management Console\)](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console) in the *IAM User Guide*\. 
+         For instructions, see [Creating IAM Users \(AWS Management Console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console) in the *IAM User Guide*\. 
 
       1. Note down the UserDave credentials\.
 
@@ -141,7 +141,7 @@ Using the credentials of user AccountAadmin in Account A, and the special IAM us
       }
       ```
 
-      For instructions, see [Working with Inline Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_inline-using.html) in the *IAM User Guide*\. Note you need to sign in to the console using Account B credentials\.
+      For instructions, see [Working with Inline Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_inline-using.html) in the *IAM User Guide*\. Note you need to sign in to the console using Account A credentials\.
 
 ## Step 2: Test Permissions<a name="grant-permissions-to-user-in-your-account-test"></a>
 

@@ -1,155 +1,61 @@
 # Deleting Multiple Objects Using the AWS SDK for \.NET<a name="DeletingMultipleObjectsUsingNetSDK"></a>
 
-The following tasks guide you through using the AWS SDK for \.NET classes to delete multiple objects in a single HTTP request\. 
+The AWS SDK for \.NET provides a convenient method for deleting multiple objects: `DeleteObjects`\. For each object that you want to delete, you specify the key name and the version of the object\. If the bucket is not versioning\-enabled, you specify `null` for the version ID\. If an exception occurs, review the `DeleteObjectsException` response to determine which objects were not deleted and why\. 
 
-
-**Deleting Multiple Objects \(Non\-Versioned Bucket\)**  
-
-|  |  | 
-| --- |--- |
-|  1  |  Create an instance of the `AmazonS3Client` class\.   | 
-|  2  |  Create an instance of the `DeleteObjectsRequest` class and provide list of the object keys you want to delete\.  | 
-|  3  |  Execute the `AmazonS3Client.DeleteObjects` method\.  If one or more objects fail to delete, Amazon S3 throws a `DeleteObjectsException`\.  | 
-
-The following C\# code sample demonstrates the preceding steps\. 
+**Example Deleting Multiple Objects from a Non\-Versioning Bucket**  
+The following C\# example uses the multi\-object delete API to delete objects from a bucket that is not version\-enabled\. The example uploads the sample objects to the bucket, and then uses the `DeleteObjects` method to delete the objects in a single request\. In the `DeleteObjectsRequest`, the example specifies only the object key names because the version IDs are null\.  
+For information about creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```
- 1. DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest();
- 2. multiObjectDeleteRequest.BucketName = bucketName;
- 3.    
- 4. multiObjectDeleteRequest.AddKey("<object Key>", null); // version ID is null.
- 5. multiObjectDeleteRequest.AddKey("<object Key>", null);
- 6. multiObjectDeleteRequest.AddKey("<object Key>", null);
- 7. 
- 8. try
- 9. {
-10.   DeleteObjectsResponse response = client.DeleteObjects(multiObjectDeleteRequest);
-11.   Console.WriteLine("Successfully deleted all the {0} items", response.DeletedObjects.Count);
-12. }
-13. catch (DeleteObjectsException e)
-14. {
-15.   // Process exception.
-16. }
-```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
 
-The DeleteObjectsRequest can also take the list of KeyVersion objects as parameter\. For bucket without versioning, version ID is null\.
-
-```
-List<KeyVersion> keys = new List<KeyVersion>();
-KeyVersion keyVersion = new KeyVersion
-  {
-       Key = key,
-       VersionId = null // For buckets without versioning.
-  };
-
-keys.Add(keyVersion);
-List<KeyVersion> keys = new List<KeyVersion>(); 
-...
-DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest
-{
-    BucketName = bucketName, 
-    Objects = keys // This includes the object keys and null version IDs.
-};
-```
-
-In the event of an exception, you can review the `DeleteObjectsException` to determine which objects failed to delete and why as shown in the following C\# code example\.
-
-```
-1. DeleteObjectsResponse errorResponse = e.Response;
-2. Console.WriteLine("No. of objects successfully deleted = {0}", errorResponse.DeletedObjects.Count);
-3. Console.WriteLine("No. of objects failed to delete = {0}", errorResponse.DeleteErrors.Count);
-4. Console.WriteLine("Printing error data...");
-5. foreach (DeleteError deleteError in errorResponse.DeleteErrors)
-6. {
-7.    Console.WriteLine("Object Key: {0}\t{1}\t{2}", deleteError.Key, deleteError.Code, deleteError.Message);
-8. }
-```
-
-The following tasks guide you through deleting objects from a version\-enabled bucket\. 
-
-
-**Deleting Multiple Objects \(Version\-Enabled Bucket\)**  
-
-|  |  | 
-| --- |--- |
-|  1  |  Create an instance of the `AmazonS3Client` class\.   | 
-|  2  |  Create an instance of the `DeleteObjectsRequest` class and provide a list of object keys and optionally the version IDs of the objects that you want to delete\. If you specify the version ID of the object you want to delete, Amazon S3 deletes the specific object version\. If you don't specify the version ID of the object that you want to delete, Amazon S3 adds a delete marker\. For more information, see [Deleting One Object Per Request](DeletingOneObject.md)\.  | 
-|  3  |  Execute the `AmazonS3Client.DeleteObjects` method\.  | 
-
-The following C\# code sample demonstrates the preceding steps\. 
-
-```
- 1. List<KeyVersion> keysAndVersions = new List<KeyVersion>();
- 2. // provide a list of object keys and versions.
- 3. 
- 4. DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest
- 5.   {
- 6.     BucketName = bucketName,
- 7.     Objects = keysAndVersions 
- 8.   };
- 9. 
-10. try
-11. {
-12.   DeleteObjectsResponse response = client.DeleteObjects(multiObjectDeleteRequest);
-13.   Console.WriteLine("Successfully deleted all the {0} items", response.DeletedObjects.Count);
-14. }
-15. catch (DeleteObjectsException e)
-16. {
-17.   // Process exception.
-18. }
-```
-
-**Example 1: Multi\-Object Delete \(Non\-Versioned Bucket\)**  
-The following C\# code example uses the Multi\-Object API to delete objects from a bucket that is not version\-enabled\. The example first uploads the sample objects to the bucket and then uses the `DeleteObjects` method to delete the objects in a single request\. In the `DeleteObjectsRequest`, the example specifies only the object key names because the version IDs are null\.  
-For information about how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
-
-```
+﻿using Amazon.S3;
+using Amazon.S3.Model;
 using System;
 using System.Collections.Generic;
-using Amazon.S3;
-using Amazon.S3.Model;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class DeleteMultipleObjects
+    class DeleteMultipleObjectsNonVersionedBucketTest
     {
-        static string bucketName = "*** Provide a bucket name ***";
-        static IAmazonS3 client;
+        private const string bucketName = "*** versioning-enabled bucket name ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 s3Client;
 
-        public static void Main(string[] args)
+        public static void Main()
         {
-            using (client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1))
-            {
-                var keysAndVersions = PutObjects(3);
-                // Delete the objects.
-                MultiObjectDelete(keysAndVersions);
-            }
-
-            Console.WriteLine("Click ENTER to continue.....");
-            Console.ReadLine();
+            s3Client = new AmazonS3Client(bucketRegion);
+            MultiObjectDeleteAsync().Wait();
         }
 
-        static void MultiObjectDelete(List<KeyVersion> keys)
+        static async Task MultiObjectDeleteAsync()
         {
+            // Create sample objects (for subsequent deletion).
+            var keysAndVersions = await PutObjectsAsync(3);
+
             // a. multi-object delete by specifying the key names and version IDs.
             DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest
             {
-                BucketName = bucketName, 
-                Objects = keys // This includes the object keys and null version IDs.
+                BucketName = bucketName,
+                Objects = keysAndVersions // This includes the object keys and null version IDs.
             };
-            multiObjectDeleteRequest.AddKey("AWSSDKcopy2.dll", null);
+            // You can add specific object key to the delete request using the .AddKey.
+            // multiObjectDeleteRequest.AddKey("TickerReference.csv", null);
             try
             {
-                DeleteObjectsResponse response = client.DeleteObjects(multiObjectDeleteRequest);
+                DeleteObjectsResponse response = await s3Client.DeleteObjectsAsync(multiObjectDeleteRequest);
                 Console.WriteLine("Successfully deleted all the {0} items", response.DeletedObjects.Count);
             }
             catch (DeleteObjectsException e)
             {
-                PrintDeletionReport(e);
+                PrintDeletionErrorStatus(e);
             }
         }
 
-        private static void PrintDeletionReport(DeleteObjectsException e)
+        private static void PrintDeletionErrorStatus(DeleteObjectsException e)
         {
             // var errorResponse = e.ErrorResponse;
             DeleteObjectsResponse errorResponse = e.Response;
@@ -165,7 +71,7 @@ namespace s3.amazon.com.docsamples
             }
         }
 
-        static List<KeyVersion> PutObjects(int number)
+        static async Task<List<KeyVersion>> PutObjectsAsync(int number)
         {
             List<KeyVersion> keys = new List<KeyVersion>();
             for (int i = 0; i < number; i++)
@@ -176,15 +82,14 @@ namespace s3.amazon.com.docsamples
                     BucketName = bucketName,
                     Key = key,
                     ContentBody = "This is the content body!",
-
                 };
 
-                PutObjectResponse response = client.PutObject(request);
+                PutObjectResponse response = await s3Client.PutObjectAsync(request);
                 KeyVersion keyVersion = new KeyVersion
                 {
-                     Key = key,
-                     // For non-versioned bucket operations, we only need object key.
-                     // VersionId = response.VersionId
+                    Key = key,
+                    // For non-versioned bucket operations, we only need object key.
+                    // VersionId = response.VersionId
                 };
                 keys.Add(keyVersion);
             }
@@ -194,67 +99,74 @@ namespace s3.amazon.com.docsamples
 }
 ```
 
-**Example 2: Multi\-Object Delete \(Version\-Enabled Bucket\)**  
-The following C\# code example uses the Multi\-Object API to delete objects from a version\-enabled bucket\. In addition to showing the DeleteObjects Multi\-Object Delete API usage, it also illustrates how versioning works in a version\-enabled bucket\.  
-Before you can test the sample, you must create a sample bucket and provide the bucket name in the example\. You can use the AWS Management Console to create a bucket\.   
-The example performs the following actions:  
+**Example Multi\-Object Deletion for a Version\-Enabled Bucket**  
+The following C\# example uses the multi\-object delete API to delete objects from a version\-enabled bucket\. The example performs the following actions:  
 
-1.  Enable versioning on the bucket\. 
+1. Creates sample objects and deletes them by specifying the key name and version ID for each object\. The operation deletes specific versions of the objects\.
 
-1.  Perform a versioned\-delete\.
+1. Creates sample objects and deletes them by specifying only the key names\. Because the example doesn't specify version IDs, the operation only adds delete markers\. It doesn't delete any specific versions of the objects\. After deletion, these objects don't appear in the Amazon S3 console\.
 
-   The example first uploads the sample objects\. In response, Amazon S3 returns the version IDs for each sample object that you uploaded\. The example then deletes these objects using the Multi\-Object Delete API\. In the request, it specifies both the object keys and the version IDs \(that is, versioned delete\)\. 
-
-1. Perform a non\-versioned delete\. 
-
-   The example uploads the new sample objects\. Then, it deletes the objects using the Multi\-Object API\. However, in the request, it specifies only the object keys\. In this case, Amazon S3 adds the delete markers and the objects disappear from your bucket\.
-
-1. Delete the delete markers\. 
-
-   To illustrate how the delete markers work, the sample deletes the delete markers\. In the Multi\-Object Delete request, it specifies the object keys and the version IDs of the delete markers it received in the response in the preceding step\. This action makes the objects reappear in your bucket\.
-For information about how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
+1. Deletes the delete markers by specifying the object keys and version IDs of the delete markers\. When the operation deletes the delete markers, the objects reappear in the console\.
+For information about creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
+﻿using Amazon.S3;
+using Amazon.S3.Model;
 using System;
 using System.Collections.Generic;
-using Amazon.S3;
-using Amazon.S3.Model;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class DeleteMultipleObjectsVersionedBucket
+    class DeleteMultipleObjVersionedBucketTest
     {
-        static string bucketName = "*** Provide a bucket name ***";
-        static IAmazonS3 client;
+        private const string bucketName = "*** versioning-enabled bucket name ***"; 
+       // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 s3Client;
 
-        public static void Main(string[] args)
+        public static void Main()
         {
-            using (client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1))
-            {
+            s3Client = new AmazonS3Client(bucketRegion);
+            DeleteMultipleObjectsFromVersionedBucketAsync().Wait();
+        }
 
-                // 1. Enable versioning on the bucket.
-                EnableVersioningOnBucket(bucketName);
+        private static async Task DeleteMultipleObjectsFromVersionedBucketAsync()
+        {
 
-                // 2a. Upload the sample objects.
-                var keysAndVersions1 = PutObjects(3);
-                // 2b. Delete the specific object versions.
-                VersionedDelete(keysAndVersions1);
+            // Delete objects (specifying object version in the request).
+            await DeleteObjectVersionsAsync();
 
-                // 3a. Upload the sample objects.
-                var keysAndVersions2 = PutObjects(3);
+            // Delete objects (without specifying object version in the request). 
+            var deletedObjects = await DeleteObjectsAsync();
 
-                // 3b. Delete objects using only keys. Amazon S3 creates a delete marker and 
-                // returns its version Id in the response.
-                List<DeletedObject> deletedObjects = NonVersionedDelete(keysAndVersions2);
+            // Additional exercise - remove the delete markers S3 returned in the preceding response. 
+            // This results in the objects reappearing in the bucket (you can 
+            // verify the appearance/disappearance of objects in the console).
+            await RemoveDeleteMarkersAsync(deletedObjects);
+        }
 
-                // 3c. Additional exercise - using a multi-object versioned delete, remove the 
-                // delete markers received in the preceding response. This results in your objects 
-                // reappearing in your bucket.
-                RemoveMarkers(deletedObjects);
-            }
+        private static async Task<List<DeletedObject>> DeleteObjectsAsync()
+        {
+            // Upload the sample objects.
+            var keysAndVersions2 = await PutObjectsAsync(3);
 
-            Console.WriteLine("Click ENTER to continue.....");
-            Console.ReadLine();
+            // Delete objects using only keys. Amazon S3 creates a delete marker and 
+            // returns its version ID in the response.
+            List<DeletedObject> deletedObjects = await NonVersionedDeleteAsync(keysAndVersions2);
+            return deletedObjects;
+        }
+
+        private static async Task DeleteObjectVersionsAsync()
+        {
+            // Upload the sample objects.
+            var keysAndVersions1 = await PutObjectsAsync(3);
+
+            // Delete the specific object versions.
+            await VersionedDeleteAsync(keysAndVersions1);
         }
 
         private static void PrintDeletionReport(DeleteObjectsException e)
@@ -263,26 +175,16 @@ namespace s3.amazon.com.docsamples
             Console.WriteLine("No. of objects successfully deleted = {0}", errorResponse.DeletedObjects.Count);
             Console.WriteLine("No. of objects failed to delete = {0}", errorResponse.DeleteErrors.Count);
             Console.WriteLine("Printing error data...");
-            foreach (DeleteError deleteError in errorResponse.DeleteErrors)
+            foreach (var deleteError in errorResponse.DeleteErrors)
             {
                 Console.WriteLine("Object Key: {0}\t{1}\t{2}", deleteError.Key, deleteError.Code, deleteError.Message);
             }
         }
 
-        static void EnableVersioningOnBucket(string bucketName)
-        {
-            PutBucketVersioningRequest setBucketVersioningRequest = new PutBucketVersioningRequest
-            {
-                BucketName = bucketName,
-                VersioningConfig = new S3BucketVersioningConfig { Status = VersionStatus.Enabled }
-            };
-            client.PutBucketVersioning(setBucketVersioningRequest);
-        }
-
-        static void VersionedDelete(List<KeyVersion> keys)
+        static async Task VersionedDeleteAsync(List<KeyVersion> keys)
         {
             // a. Perform a multi-object delete by specifying the key names and version IDs.
-            DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest
+            var multiObjectDeleteRequest = new DeleteObjectsRequest
             {
                 BucketName = bucketName,
                 Objects = keys // This includes the object keys and specific version IDs.
@@ -290,7 +192,7 @@ namespace s3.amazon.com.docsamples
             try
             {
                 Console.WriteLine("Executing VersionedDelete...");
-                DeleteObjectsResponse response = client.DeleteObjects(multiObjectDeleteRequest);
+                DeleteObjectsResponse response = await s3Client.DeleteObjectsAsync(multiObjectDeleteRequest);
                 Console.WriteLine("Successfully deleted all the {0} items", response.DeletedObjects.Count);
             }
             catch (DeleteObjectsException e)
@@ -299,7 +201,7 @@ namespace s3.amazon.com.docsamples
             }
         }
 
-        static List<DeletedObject> NonVersionedDelete(List<KeyVersion> keys)
+        static async Task<List<DeletedObject>> NonVersionedDeleteAsync(List<KeyVersion> keys)
         {
             // Create a request that includes only the object key names.
             DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest();
@@ -316,7 +218,7 @@ namespace s3.amazon.com.docsamples
             try
             {
                 Console.WriteLine("Executing NonVersionedDelete...");
-                response = client.DeleteObjects(multiObjectDeleteRequest);
+                response = await s3Client.DeleteObjectsAsync(multiObjectDeleteRequest);
                 Console.WriteLine("Successfully deleted all the {0} items", response.DeletedObjects.Count);
             }
             catch (DeleteObjectsException e)
@@ -325,12 +227,12 @@ namespace s3.amazon.com.docsamples
                 throw; // Some deletes failed. Investigate before continuing.
             }
             // This response contains the DeletedObjects list which we use to delete the delete markers.
-            return response.DeletedObjects; 
+            return response.DeletedObjects;
         }
 
-        private static void RemoveMarkers(List<DeletedObject> deletedObjects)
+        private static async Task RemoveDeleteMarkersAsync(List<DeletedObject> deletedObjects)
         {
-            List<KeyVersion> keyVersionList = new List<KeyVersion>();
+            var keyVersionList = new List<KeyVersion>();
 
             foreach (var deletedObject in deletedObjects)
             {
@@ -352,8 +254,8 @@ namespace s3.amazon.com.docsamples
             try
             {
                 Console.WriteLine("Removing the delete markers .....");
-                var deleteObjectResponse = client.DeleteObjects(multiObjectDeleteRequest);
-                Console.WriteLine("Successfully deleted all the {0} delete markers", 
+                var deleteObjectResponse = await s3Client.DeleteObjectsAsync(multiObjectDeleteRequest);
+                Console.WriteLine("Successfully deleted all the {0} delete markers",
                                             deleteObjectResponse.DeletedObjects.Count);
             }
             catch (DeleteObjectsException e)
@@ -362,11 +264,11 @@ namespace s3.amazon.com.docsamples
             }
         }
 
-        static List<KeyVersion> PutObjects(int number)
+        static async Task<List<KeyVersion>> PutObjectsAsync(int number)
         {
-            List<KeyVersion> keys = new List<KeyVersion>();
+            var keys = new List<KeyVersion>();
 
-            for (int i = 0; i < number; i++)
+            for (var i = 0; i < number; i++)
             {
                 string key = "ObjectToDelete-" + new System.Random().Next();
                 PutObjectRequest request = new PutObjectRequest
@@ -377,11 +279,11 @@ namespace s3.amazon.com.docsamples
 
                 };
 
-                PutObjectResponse response = client.PutObject(request);
+                var response = await s3Client.PutObjectAsync(request);
                 KeyVersion keyVersion = new KeyVersion
                 {
-                     Key = key,
-                     VersionId = response.VersionId
+                    Key = key,
+                    VersionId = response.VersionId
                 };
 
                 keys.Add(keyVersion);

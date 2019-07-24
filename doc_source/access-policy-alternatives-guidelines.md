@@ -25,7 +25,7 @@ A bucket owner cannot grant permissions on objects it does not own\. For example
 
 ### When to Use a Bucket ACL<a name="when-to-use-bucket-acl"></a>
 
-The only recommended use case for the bucket ACL is to grant write permission to the Amazon S3 Log Delivery group to write access log objects to your bucket \(see [Server Access Logging](ServerLogs.md)\)\. If you want Amazon S3 to deliver access logs to your bucket, you will need to grant write permission on the bucket to the Log Delivery group\. The only way you can grant necessary permissions to the Log Delivery group is via a bucket ACL, as shown in the following bucket ACL fragment\.
+The only recommended use case for the bucket ACL is to grant write permission to the Amazon S3 Log Delivery group to write access log objects to your bucket \(see [Amazon S3 Server Access Logging](ServerLogs.md)\)\. If you want Amazon S3 to deliver access logs to your bucket, you will need to grant write permission on the bucket to the Log Delivery group\. The only way you can grant necessary permissions to the Log Delivery group is via a bucket ACL, as shown in the following bucket ACL fragment\.
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -50,7 +50,7 @@ The only recommended use case for the bucket ACL is to grant write permission to
 ## When to Use a Bucket Policy<a name="when-to-use-bucket-policy"></a>
 
 If an AWS account that owns a bucket wants to grant permission to users in its account, it can use either a bucket policy or a user policy\. But in the following scenarios, you will need to use a bucket policy\.
-+ **You want to manage cross\-account permissions for all Amazon S3 permissions** – You can use ACLs to grant cross\-account permissions to other accounts, but ACLs support only a finite set of permission \([What Permissions Can I Grant?](acl-overview.md#permissions)\), these don't include all Amazon S3 permissions\. For example, you cannot grant permissions on bucket subresources \(see [Managing Access Permissions to Your Amazon S3 Resources](s3-access-control.md)\) using an ACL\. 
++ **You want to manage cross\-account permissions for all Amazon S3 permissions** – You can use ACLs to grant cross\-account permissions to other accounts, but ACLs support only a finite set of permission \([What Permissions Can I Grant?](acl-overview.md#permissions)\), these don't include all Amazon S3 permissions\. For example, you cannot grant permissions on bucket subresources \(see [Identity and Access Management in Amazon S3](s3-access-control.md)\) using an ACL\. 
 
   Although both bucket and user policies support granting permission for all Amazon S3 operations \(see [Specifying Permissions in a Policy](using-with-s3-actions.md)\), the user policies are for managing permissions for users in your account\. For cross\-account permissions to other AWS accounts or users in another account, you must use a bucket policy\.
 

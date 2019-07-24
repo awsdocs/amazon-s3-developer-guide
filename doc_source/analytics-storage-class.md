@@ -1,6 +1,6 @@
 # Amazon S3 Analytics – Storage Class Analysis<a name="analytics-storage-class"></a>
 
-By using Amazon S3 analytics *storage class analysis* you can analyze storage access patterns to help you decide when to transition the right data to the right storage class\. This new Amazon S3 analytics feature observes data access patterns to help you determine when to transition less frequently accessed STANDARD storage to the STANDARD\_IA \(IA, for infrequent access\) storage class\. For more information about storage classes, see [Storage Classes](storage-class-intro.md)\. 
+By using Amazon S3 analytics *storage class analysis* you can analyze storage access patterns to help you decide when to transition the right data to the right storage class\. This new Amazon S3 analytics feature observes data access patterns to help you determine when to transition less frequently accessed STANDARD storage to the STANDARD\_IA \(IA, for infrequent access\) storage class\. For more information about storage classes, see [Amazon S3 Storage Classes](storage-class-intro.md)\. 
 
 After storage class analysis observes the infrequent access patterns of a filtered set of data over a period of time, you can use the analysis results to help you improve your lifecycle policies\. You can configure storage class analysis to analyze all the objects in a bucket\. Or, you can configure filters to group objects together for analysis by common prefix \(that is, objects that have names that begin with a common string\), by object tags, or by both prefix and tags\. You'll most likely find that filtering by object groups is the best way to benefit from storage class analysis\. 
 
@@ -31,8 +31,8 @@ You set up storage class analysis by configuring what object data you want to an
   When you configure storage class analysis for a bucket or filter, you can choose to have the analysis data exported to a file each day\. The analysis for the day is added to the file to form a historic analysis log for the configured filter\. The file is updated daily at the destination of your choice\. When selecting data to export, you specify a destination bucket and optional destination prefix where the file is written\.
 
 You can use the Amazon S3 console, the REST API, or the AWS CLI or AWS SDKs to configure storage class analysis\.
-+ For information about how to configure storage class analysis in the Amazon S3 console, see [ How Do I Configure Storage Class Analysis?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-analytics-storage-class.html)\.
-+ To use the Amazon S3 API, use the [PutBucketAnalyticsConfiguration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTAnalyticsConfig.html) REST API, or the equivalent, from the AWS CLI or AWS SDKs\. 
++ For information about how to configure storage class analysis in the Amazon S3 console, see [ How Do I Configure Storage Class Analysis?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-analytics-storage-class.html)\.
++ To use the Amazon S3 API, use the [PutBucketAnalyticsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTAnalyticsConfig.html) REST API, or the equivalent, from the AWS CLI or AWS SDKs\. 
 
 ## How Do I Use Storage Class Analysis?<a name="analytics-storage-class-contents"></a>
 
@@ -97,7 +97,7 @@ You must create a bucket policy on the destination bucket to grant permissions t
 
 After you configure storage class analysis reports, you start getting the exported report daily after 24 hours\. After that, Amazon S3 continues monitoring and providing daily exports\. 
 
-You can open the CSV file in a spreadsheet application or import the file into other applications like [Amazon QuickSight](http://docs.aws.amazon.com/quicksight/latest/user/welcome.html)\. For information on using Amazon S3 files with Amazon QuickSight, see [ Create a Data Set Using Amazon S3 Files](http://docs.aws.amazon.com/quicksight/latest/user/create-a-data-set-s3.html) in the *Amazon QuickSight User Guide*\. 
+You can open the CSV file in a spreadsheet application or import the file into other applications like [Amazon QuickSight](https://docs.aws.amazon.com/quicksight/latest/user/welcome.html)\. For information on using Amazon S3 files with Amazon QuickSight, see [ Create a Data Set Using Amazon S3 Files](https://docs.aws.amazon.com/quicksight/latest/user/create-a-data-set-s3.html) in the *Amazon QuickSight User Guide*\. 
 
 Data in the exported file is sorted by date within object age group as shown in following examples\. If the storage class is STANDARD the row also contains data for the columns `ObjectAgeForSIATransition` and `RecommendedObjectAgeForSIATransition`\.
 
@@ -139,7 +139,7 @@ If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, 
 ## Amazon S3 Analytics REST APIs<a name="analytics-storage-class-related-resources"></a>
 
 The following are the REST operations used for storage inventory\.
-+  [ DELETE Bucket analytics configuration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEAnalyticsConfiguration.html) 
-+  [ GET Bucket analytics configuration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETAnalyticsConfig.html) 
-+  [ List Bucket Analytics Configuration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketListAnalyticsConfigs.html) 
-+  [ PUT Bucket analytics configuration](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTAnalyticsConfig.html) 
++  [ DELETE Bucket analytics configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEAnalyticsConfiguration.html) 
++  [ GET Bucket analytics configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETAnalyticsConfig.html) 
++  [ List Bucket Analytics Configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketListAnalyticsConfigs.html) 
++  [ PUT Bucket analytics configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTAnalyticsConfig.html) 

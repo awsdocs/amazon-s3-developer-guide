@@ -15,15 +15,20 @@ The following tasks guide you through using the Ruby classes to copy an object i
 **Example**  
 
 ```
- 1. require 'aws-sdk-s3'
- 2. 
- 3. source_bucket_name = '*** Provide bucket name ***'
- 4. target_bucket_name = '*** Provide bucket name ***'
- 5. source_key = '*** Provide source key ***'
- 6. target_key = '*** Provide target key ***'
- 7. 
- 8. s3 = Aws::S3::Client.new(region: 'us-west-2')
- 9. s3.copy_object({bucket: target_bucket_name, copy_source: source_bucket_name + '/' + source_key, key: target_key})
-10. 
-11. puts "Copying file #{source_key} to #{target_key}."
+require 'aws-sdk-s3'
+
+source_bucket_name = '*** Provide bucket name ***'
+target_bucket_name = '*** Provide bucket name ***'
+source_key = '*** Provide source key ***'
+target_key = '*** Provide target key ***'
+
+begin
+  s3 = Aws::S3::Client.new(region: 'us-west-2')
+  s3.copy_object(bucket: target_bucket_name, copy_source: source_bucket_name + '/' + source_key, key: target_key)
+rescue StandardError => ex
+  puts 'Caught exception copying object ' + source_key + ' from bucket ' + source_bucket_name + ' to bucket ' + target_bucket_name + ' as ' + target_key + ':'
+  puts ex.message
+end
+
+puts 'Copied ' +  source_key + ' from bucket ' + source_bucket_name + ' to bucket ' + target_bucket_name + ' as ' + target_key
 ```

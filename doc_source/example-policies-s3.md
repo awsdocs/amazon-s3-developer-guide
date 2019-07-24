@@ -159,7 +159,7 @@ When using policy variables, you must explicitly specify version `2012-10-17` in
 **Note**  
 In the 2012\-10\-17 version of the policy, policy variables start with `$`\. This change in syntax can potentially create a conflict if your object key includes a `$`\. For example, to include an object key `my$file` in a policy, you specify the `$` character with `${$}`, `my${$}file`\.
 
-Although IAM user names are friendly, human\-readable identifiers, they are not required to be globally unique\. For example, if user Bob leaves the organization and another Bob joins, then new Bob could access old Bob's information\. Instead of using user names, you could create folders based on user IDs\. Each user ID is unique\. In this case, you must modify the preceding policy to use the `${aws:userid}` policy variable\. For more information about user identifiers, see [IAM Identifiers](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in the *IAM User Guide*\.
+Although IAM user names are friendly, human\-readable identifiers, they are not required to be globally unique\. For example, if user Bob leaves the organization and another Bob joins, then new Bob could access old Bob's information\. Instead of using user names, you could create folders based on user IDs\. Each user ID is unique\. In this case, you must modify the preceding policy to use the `${aws:userid}` policy variable\. For more information about user identifiers, see [IAM Identifiers](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in the *IAM User Guide*\.
 
 ```
 {
@@ -186,7 +186,7 @@ Suppose that you want to develop a mobile app, a game that stores users' data in
 
 In this case, you can require users to sign in to your app by using public identity providers such as Login with Amazon, Facebook, or Google\. After users have signed in to your app through one of these providers, they have a user ID that you can use to create user\-specific folders at run time\. 
 
-You can then use web identity federation in AWS Security Token Service to integrate information from the identity provider with your app and to get temporary security credentials for each user\. You can then create IAM policies that allow the app to access your bucket and perform such operations as creating user\-specific folders and uploading data\. For more information about web identity federation, see [About Web Identity Federation](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html) in the *IAM User Guide*\.
+You can then use web identity federation in AWS Security Token Service to integrate information from the identity provider with your app and to get temporary security credentials for each user\. You can then create IAM policies that allow the app to access your bucket and perform such operations as creating user\-specific folders and uploading data\. For more information about web identity federation, see [About Web Identity Federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html) in the *IAM User Guide*\.
 
 ## Example: Allow a group to have a shared folder in Amazon S3<a name="iam-policy-ex2"></a>
 

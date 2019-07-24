@@ -1,50 +1,49 @@
 # Abort Multipart Uploads<a name="HLAbortMPUploadsJava"></a>
 
-The `TransferManager` class provides a method, `abortMultipartUploads`, to abort multipart uploads in progress\. An upload is considered to be in progress once you initiate it and until you complete it or abort it\. You provide a `Date` value and this API aborts all the multipart uploads, on that bucket, that were initiated before the specified `Date` and are still in progress\. 
-
-Because you are billed for all storage associated with uploaded parts \(see [Multipart Upload and Pricing](mpuoverview.md#mpuploadpricing)\), it is important that you either complete the multipart upload to have the object created or abort the multipart upload to remove any uploaded parts\.
-
-The following tasks guide you through using the high\-level Java classes to abort multipart uploads\.
-
-
-**High\-Level API Multipart Uploads Aborting Process**  
-
-|  |  | 
-| --- |--- |
-| 1 | Create an instance of the `TransferManager` class\.  | 
-| 2 | Execute the `TransferManager.abortMultipartUploads` method by passing the bucket name and a `Date` value\. | 
-
-The following Java code example demonstrates the preceding tasks\.
-
 **Example**  
-The following Java code aborts all multipart uploads in progress that were initiated on a specific bucket over a week ago\. For instructions on how to create and test a working sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\.   
+The following example uses the high\-level Java API \(the `TransferManager` class\) to abort all in\-progress multipart uploads that were initiated on a specific bucket over a week ago\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
 import java.util.Date;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.transfer.TransferManager;
+import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 
-public class AbortMPUUsingHighLevelAPI {
+public class HighLevelAbortMultipartUpload {
 
-    public static void main(String[] args) throws Exception {
-        String existingBucketName = "*** Provide existing bucket name ***";
-        
-        TransferManager tm = new TransferManager(new ProfileCredentialsProvider());        
+    public static void main(String[] args) {
+        String clientRegion = "*** Client region ***";
+        String bucketName = "*** Bucket name ***";
 
-        int sevenDays = 1000 * 60 * 60 * 24 * 7;
-		Date oneWeekAgo = new Date(System.currentTimeMillis() - sevenDays);
-        
         try {
-        	tm.abortMultipartUploads(existingBucketName, oneWeekAgo);
-        } catch (AmazonClientException amazonClientException) {
-        	System.out.println("Unable to upload file, upload was aborted.");
-        	amazonClientException.printStackTrace();
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withRegion(clientRegion)
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .build();
+            TransferManager tm = TransferManagerBuilder.standard()
+                    .withS3Client(s3Client)
+                    .build();
+            
+            // sevenDays is the duration of seven days in milliseconds.
+            long sevenDays = 1000 * 60 * 60 * 24 * 7;
+            Date oneWeekAgo = new Date(System.currentTimeMillis() - sevenDays);
+            tm.abortMultipartUploads(bucketName, oneWeekAgo);
+        }
+        catch(AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        }
+        catch(SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client couldn't 
+            // parse the response from Amazon S3.
+            e.printStackTrace();
         }
     }
 }
 ```
-
-**Note**  
-You can also abort a specific multipart upload\. For more information, see [Abort a Multipart Upload](LLAbortMPUJava.md)\. 

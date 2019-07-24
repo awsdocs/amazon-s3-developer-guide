@@ -1,61 +1,61 @@
-# Abort Multipart Uploads<a name="HLAbortDotNet"></a>
+# Abort Multipart Uploads to an S3 Bucket Using the AWS SDK for \.NET \(High\-Level API\)<a name="HLAbortDotNet"></a>
 
-The `TransferUtility` class provides a method, `AbortMultipartUploads`, to abort multipart uploads in progress\. An upload is considered to be in\-progress once you initiate it and until you complete it or abort it\. You provide a `DateTime` value and this API aborts all the multipart uploads, on that bucket, that were initiated before the specified `DateTime` and in progress\. 
+To abort in\-progress  multipart uploads, use the `TransferUtility` class from the AWS SDK for \.NET\. You provide a `DateTime`value\. The API then aborts all of the multipart uploads that were initiated before the specified date and time and remove the uploaded parts\. An upload is considered to be in\-progress after you initiate it and it completes or you abort it\. 
 
-Because you are billed for all storage associated with uploaded parts \(see [Multipart Upload and Pricing](mpuoverview.md#mpuploadpricing)\), it is important that you either complete the multipart upload to have the object created or abort the multipart upload to remove any uploaded parts\.
+Because you are billed for all storage associated with uploaded parts, it's important that you either complete the multipart upload to finish creating the object or abort it to remove uploaded parts\. For more information about Amazon S3 multipart uploads, see [Multipart Upload Overview](mpuoverview.md)\. For information about pricing, see [Multipart Upload and Pricing](mpuoverview.md#mpuploadpricing)\.
 
-The following tasks guide you through using the high\-level \.NET classes to abort multipart uploads\.
-
-
-**High\-Level API Multipart Uploads Aborting Process**  
-
-|  |  | 
-| --- |--- |
-| 1 | Create an instance of the `TransferUtility` class by providing your AWS credentials\.  | 
-| 2 | Execute the `TransferUtility.AbortMultipartUploads` method by passing the bucket name and a `DateTime` value\. | 
-
-The following C\# code sample demonstrates the preceding tasks\.
-
-**Example**  
+The following C\# example aborts all in\-progress multipart uploads that were initiated on a specific bucket over a week ago\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions on creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
-1. TransferUtility utility = new TransferUtility();
-2. utility.AbortMultipartUploads(existingBucketName, DateTime.Now.AddDays(-7));
-```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
 
-**Example**  
-The following C\# code aborts all multipart uploads in progress that were initiated on a specific bucket over a week ago\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
-
-```
-using System;
-using Amazon.S3;
+﻿using Amazon.S3;
 using Amazon.S3.Transfer;
+using System;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class AbortMPUUsingHighLevelAPI
+    class AbortMPUUsingHighLevelAPITest
     {
-        static string existingBucketName = "***Provide bucket name***";
+        private const string bucketName = "*** provide bucket name ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 s3Client;
 
-        static void Main(string[] args)
+        public static void Main()
+        {
+            s3Client = new AmazonS3Client(bucketRegion);
+            AbortMPUAsync().Wait();
+        }
+
+        private static async Task AbortMPUAsync()
         {
             try
             {
-                TransferUtility transferUtility =
-                    new TransferUtility(new AmazonS3Client(Amazon.RegionEndpoint.USEast1));
-                // Aborting uploads that were initiated over a week ago.
-                transferUtility.AbortMultipartUploads(
-                    existingBucketName, DateTime.Now.AddDays(-7));
-            }
+                var transferUtility = new TransferUtility(s3Client);
 
+                // Abort all in-progress uploads initiated before the specified date.
+                await transferUtility.AbortMultipartUploadsAsync(
+                    bucketName, DateTime.Now.AddDays(-7));
+            }
             catch (AmazonS3Exception e)
             {
-                Console.WriteLine(e.Message, e.InnerException);
+                Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
             }
-        }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
+        } 
     }
 }
 ```
 
 **Note**  
-You can also abort a specific multipart upload\. For more information, see [List Multipart Uploads](LLlistMPuploadsDotNet.md)\. 
+You can also abort a specific multipart upload\. For more information, see [List Multipart Uploads to an S3 Bucket Using the AWS SDK for \.NET \(Low\-level\)List Multipart Uploads ](LLlistMPuploadsDotNet.md)\. 
+
+## More Info<a name="HLAbortDotNet-more-info"></a>
+
+[AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)

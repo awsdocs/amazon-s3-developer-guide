@@ -2,7 +2,7 @@
 
 Any object in Amazon S3 that can be read anonymously can also be downloaded via BitTorrent\. Doing so requires use of a BitTorrent client application\. Amazon does not distribute a BitTorrent client application, but there are many free clients available\. The Amazon S3BitTorrent implementation has been tested to work with the official BitTorrent client \(go to [http://www\.bittorrent\.com/](http://www.bittorrent.com/)\)\.
 
-The starting point for a BitTorrent download is a \.torrent file\. This small file describes for BitTorrent clients both the data to be downloaded and where to get started finding that data\. A \.torrent file is a small fraction of the size of the actual object to be downloaded\. Once you feed your BitTorrent client application an Amazon S3 generated \.torrent file, it should start downloading immediately from Amazon S3 `and` from any "peer" BitTorrent clients\.
+The starting point for a BitTorrent download is a \.torrent file\. This small file describes for BitTorrent clients both the data to be downloaded and where to get started finding that data\. A \.torrent file is a small fraction of the size of the actual object to be downloaded\. Once you feed your BitTorrent client application an Amazon S3 generated \.torrent file, it should start downloading immediately from Amazon S3 and from any "peer" BitTorrent clients\.
 
 Retrieving a \.torrent file for any publicly available object is easy\. Simply add a "?torrent" query string parameter at the end of the REST GET request for the object\. No authentication is required\. Once you have a BitTorrent client installed, downloading an object using BitTorrent download might be as easy as opening this URL in your web browser\.
 

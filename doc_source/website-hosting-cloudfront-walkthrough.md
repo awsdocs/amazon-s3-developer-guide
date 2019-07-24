@@ -23,13 +23,11 @@ First, you create a CloudFront distribution\. This makes your website available 
 
 1. On the **Select a delivery method for your content** page, for **Web**, choose **Get Started**\.
 
-1. On the **Create Distribution** page, in the **Origin Settings** section, for **Origin Domain Name**, type the Amazon S3 static website hosting endpoint for your bucket\. For example, `example.com.s3-website-us-east-1.amazonaws.com`\.
-**Note**  
-Be sure to specify the static website hosting endpoint, not the name of the bucket\. For more information, see [Amazon Simple Storage Service Website Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_website_region_endpoints)\.
+1. On the **Create Distribution** page, in the **Origin Settings** section, for **Origin Domain Name**, type the Amazon S3 static website hosting endpoint for your bucket\. For example, `example.com.s3.amazonaws.com`\.
 
    CloudFront fills in the **Origin ID** for you\.
 
-1. For **Default Cache Behavior Settings**, leave the values set to the defaults\. For more information about these configuration options, see [Values that You Specify When You Create or Update a Web Distribution](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/WorkingWithDownloadDistributions.html#DownloadDistValuesYouSpecify) in the *Amazon CloudFront Developer Guide*\.
+1. For **Default Cache Behavior Settings**, leave the values set to the defaults\. For more information about these configuration options, see [Values that You Specify When You Create or Update a Web Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/WorkingWithDownloadDistributions.html#DownloadDistValuesYouSpecify) in the *Amazon CloudFront Developer Guide*\.
 
 1. For **Distribution Settings**, do the following:
 
@@ -88,7 +86,7 @@ If you created your site as a learning exercise only, you can delete the resourc
 
 ## \(Optional\) Check the Log Files<a name="check-log-files"></a>
 
-The access logs tell you how many people are visiting the website\. They also contain valuable business data that you can analyze with other services, such as [Amazon EMR](http://docs.aws.amazon.com/emr/latest/DeveloperGuide/)\. 
+The access logs tell you how many people are visiting the website\. They also contain valuable business data that you can analyze with other services, such as [Amazon EMR](https://docs.aws.amazon.com/emr/latest/DeveloperGuide/)\. 
 
 In your bucket, older Amazon S3 log files are located in the `root` folder\. All new log files, which should be CloudFront logs, are located in the `cdn` folder\. Amazon S3 writes website access logs to your log bucket every two hours\. CloudFront writes logs to your log bucket within 24 hours from when the corresponding requests are made\.
 

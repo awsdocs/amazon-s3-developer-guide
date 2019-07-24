@@ -7,74 +7,67 @@
 + [Using the AWS SDK for Ruby Version 3](#create-bucket-get-location-ruby)
 + [Using Other AWS SDKs](#create-bucket-using-other-sdks)
 
-This section provides code examples of creating a bucket programmatically using the AWS SDKs for Java, \.NET, and Ruby\. The code examples perform the following tasks:
-+ Create a bucket if it does not exist — The examples create a bucket as follows:
-  + Create a client by explicitly specifying an AWS Region \(example uses the `s3-eu-west-1` Region\)\. Accordingly, the client communicates with Amazon S3 using the `s3-eu-west-1.amazonaws.com` endpoint\. You can specify any other AWS Region\. For a list of available AWS Regions, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\. 
-  + Send a create bucket request by specifying only a bucket name\. The create bucket request does not specify another AWS Region; therefore, the client sends a request to Amazon S3 to create the bucket in the Region you specified when creating the client\. 
+The following code examples create a bucket programmatically using the AWS SDKs for Java, \.NET, and Ruby\. The code examples perform the following tasks:
++ Create a bucket, if the bucket doesn't already exist—The examples create a bucket by performing the following tasks:
+  + Create a client by explicitly specifying an AWS Region \(the example uses the `s3-eu-west-1` Region\)\. Accordingly, the client communicates with Amazon S3 using the `s3-eu-west-1.amazonaws.com` endpoint\. You can specify any other AWS Region\. For a list of AWS Regions, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\. 
+  + Send a create bucket request by specifying only a bucket name\. The create bucket request doesn't specify another AWS Region\. The client sends a request to Amazon S3 to create the bucket in the Region you specified when creating the client\. Once you have created a bucket, you can't change its Region\.
 **Note**  
-If you specify a Region in your create bucket request that conflicts with the Region you specify when you create the client, you might get an error\. For more information, see [Creating a Bucket](UsingBucket.md#create-bucket-intro)\.
+If you explicitly specify an AWS Region in your create bucket request that is different from the Region you specified when you created the client, you might get an error\. For more information, see [Creating a Bucket](UsingBucket.md#create-bucket-intro)\.
 
-    The SDK libraries send the PUT bucket request to Amazon S3 \(see [PUT Bucket](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html)\) to create the bucket\. 
-+ Retrieve bucket location information — Amazon S3 stores bucket location information in the *location* subresource associated with the bucket\. The SDK libraries send the GET Bucket location request \(see [GET Bucket location](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html)\) to retrieve this information\.
+    The SDK libraries send the PUT bucket request to Amazon S3 to create the bucket\. For more information, see [PUT Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html)\.
++ Retrieve information about the location of the bucket—Amazon S3 stores bucket location information in the *location* subresource that is associated with the bucket\. The SDK libraries send the GET Bucket location request \(see [GET Bucket location](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html)\) to retrieve this information\.
 
 ## Using the Amazon S3 Console<a name="create-bucket-get-location-console"></a>
 
-For creating a bucket using Amazon S3 console, see [How Do I Create an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
+To create a bucket using the Amazon S3 console, see [How Do I Create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Using the AWS SDK for Java<a name="create-bucket-get-location-java"></a>
 
 **Example**  
-For instructions on how to create and test a working sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\.   
+This example shows how to create an Amazon S3 bucket using the AWS SDK for Java\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
 import java.io.IOException;
 
-import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.regions.Region;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.GetBucketLocationRequest;
 
 public class CreateBucket {
-	private static String bucketName     = "*** bucket name ***";
-	
-	public static void main(String[] args) throws IOException {
-        AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
-        s3client.setRegion(Region.getRegion(Regions.US_WEST_1));
-       
-        try {
-            if(!(s3client.doesBucketExist(bucketName)))
-            {
-            	// Note that CreateBucketRequest does not specify region. So bucket is 
-            	// created in the region specified in the client.
-            	s3client.createBucket(new CreateBucketRequest(
-						bucketName));
-            }
-            // Get location.
-            String bucketLocation = s3client.getBucketLocation(new GetBucketLocationRequest(bucketName));
-            System.out.println("bucket location = " + bucketLocation);
 
-         } catch (AmazonServiceException ase) {
-            System.out.println("Caught an AmazonServiceException, which " +
-            		"means your request made it " +
-                    "to Amazon S3, but was rejected with an error response" +
-                    " for some reason.");
-            System.out.println("Error Message:    " + ase.getMessage());
-            System.out.println("HTTP Status Code: " + ase.getStatusCode());
-            System.out.println("AWS Error Code:   " + ase.getErrorCode());
-            System.out.println("Error Type:       " + ase.getErrorType());
-            System.out.println("Request ID:       " + ase.getRequestId());
-        } catch (AmazonClientException ace) {
-            System.out.println("Caught an AmazonClientException, which " +
-            		"means the client encountered " +
-                    "an internal error while trying to " +
-                    "communicate with S3, " +
-                    "such as not being able to access the network.");
-            System.out.println("Error Message: " + ace.getMessage());
+    public static void main(String[] args) throws IOException {
+        String clientRegion = "*** Client region ***";
+        String bucketName = "*** Bucket name ***";
+
+        try {
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .withRegion(clientRegion)
+                    .build();
+
+            if (!s3Client.doesBucketExistV2(bucketName)) {
+                // Because the CreateBucketRequest object doesn't specify a region, the
+                // bucket is created in the region specified in the client.
+                s3Client.createBucket(new CreateBucketRequest(bucketName));
+                
+                // Verify that the bucket was created by retrieving it and checking its location.
+                String bucketLocation = s3Client.getBucketLocation(new GetBucketLocationRequest(bucketName));
+                System.out.println("Bucket location: " + bucketLocation);
+            }
+        }
+        catch(AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it and returned an error response.
+            e.printStackTrace();
+        }
+        catch(SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
         }
     }
 }
@@ -87,76 +80,65 @@ For information about how to create and test a working sample, see [Running the 
 **Example**  
 
 ```
-using System;
-using Amazon.S3;
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
+﻿using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Util;
+using System;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class CreateBucket
+    class CreateBucketTest
     {
-        static string bucketName = "*** bucket name ***";
-
-        public static void Main(string[] args)
+        private const string bucketName = "*** bucket name ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 s3Client;
+        public static void Main()
         {
-            using (var client = new AmazonS3Client(Amazon.RegionEndpoint.EUWest1))
-            {
-
-                if (!(AmazonS3Util.DoesS3BucketExist(client, bucketName)))
-                {
-                    CreateABucket(client);
-                }
-                // Retrieve bucket location.
-                string bucketLocation = FindBucketLocation(client);
-            }
-
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            s3Client = new AmazonS3Client(bucketRegion);
+            CreateBucketAsync().Wait();
         }
 
-        static string FindBucketLocation(IAmazonS3 client)
-        {
-            string bucketLocation;
-            GetBucketLocationRequest request = new GetBucketLocationRequest()
-            {
-                BucketName = bucketName
-            };
-            GetBucketLocationResponse response = client.GetBucketLocation(request);
-            bucketLocation = response.Location.ToString();
-            return bucketLocation;
-        }
-
-        static void CreateABucket(IAmazonS3 client)
+        static async Task CreateBucketAsync()
         {
             try
             {
-                PutBucketRequest putRequest1 = new PutBucketRequest
+                if (!(await AmazonS3Util.DoesS3BucketExistAsync(s3Client, bucketName)))
                 {
-                    BucketName = bucketName,
-                    UseClientRegion = true
-                };
+                    var putBucketRequest = new PutBucketRequest
+                    {
+                        BucketName = bucketName,
+                        UseClientRegion = true
+                    };
 
-                PutBucketResponse response1 = client.PutBucket(putRequest1);
+                    PutBucketResponse putBucketResponse = await s3Client.PutBucketAsync(putBucketRequest);
+                }
+                // Retrieve the bucket location.
+                string bucketLocation = await FindBucketLocationAsync(s3Client);
             }
-            catch (AmazonS3Exception amazonS3Exception)
+            catch (AmazonS3Exception e)
             {
-                if (amazonS3Exception.ErrorCode != null &&
-                    (amazonS3Exception.ErrorCode.Equals("InvalidAccessKeyId")
-                    ||
-                    amazonS3Exception.ErrorCode.Equals("InvalidSecurity")))
-                {
-                    Console.WriteLine("Check the provided AWS Credentials.");
-                    Console.WriteLine(
-                        "For service sign up go to http://aws.amazon.com/s3");
-                }
-                else
-                {
-                    Console.WriteLine(
-                        "Error occurred. Message:'{0}' when writing an object"
-                        , amazonS3Exception.Message);
-                }
+                Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
             }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
+        }
+        static async Task<string> FindBucketLocationAsync(IAmazonS3 client)
+        {
+            string bucketLocation;
+            var request = new GetBucketLocationRequest()
+            {
+                BucketName = bucketName
+            };
+            GetBucketLocationResponse response = await client.GetBucketLocationAsync(request);
+            bucketLocation = response.Location.ToString();
+            return bucketLocation;
         }
     }
 }
@@ -169,9 +151,9 @@ For information about how to create and test a working sample, see [Using the AW
 **Example**  
 
 ```
-require 'aws-sdk'
+require 'aws-sdk-s3'
 	        
-s3 = Aws::S3::Client.new(region: 'us-west-1')
+s3 = Aws::S3::Client.new(region: 'us-west-2')
 s3.create_bucket(bucket: 'bucket-name')
 ```
 

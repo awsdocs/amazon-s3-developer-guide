@@ -1,75 +1,80 @@
-# What Is and Is Not Replicated<a name="crr-what-is-isnot-replicated"></a>
+# What Does Amazon S3 Replicate?<a name="crr-what-is-isnot-replicated"></a>
 
-This section explains what Amazon S3 replicates and what it does not replicate after you add a replication configuration on a bucket\.
+Amazon S3 replicates only specific items in buckets that are configured for cross\-region replication\. 
 
-## What Is Replicated<a name="crr-what-is-replicated"></a>
+## What Is Replicated?<a name="crr-what-is-replicated"></a>
 
 Amazon S3 replicates the following:
-+ Any new objects created after you add a replication configuration, with exceptions described in the next section\.
++ Objects created after you add a replication configuration, with exceptions described in the next section\.
 
    
-+ In addition to unencrypted objects, Amazon S3 replicates objects encrypted using Amazon S3 managed keys \(SSE\-S3\) or AWS KMS managed keys \(SSE\-KMS\)\. The replicated copy of the object is also encrypted using the same type of server\-side encryption that was used for the source object, SSE\-S3, or SSE\-KMS\. For more information about server\-side encryption\. see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.
++ Both unencrypted objects and objects encrypted using Amazon S3 managed keys \(SSE\-S3\) or AWS KMS managed keys \(SSE\-KMS\), although you must explicitly enable the option to replicate objects encrypted using KMS keys\. The replicated copy of the object is encrypted using the same type of server\-side encryption that was used for the source object\. For more information about server\-side encryption, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.
 
    
-+ Along with the objects, Amazon S3 also replicates object metadata\.
++ Object metadata\.
 
    
-+ Amazon S3 replicates only objects in the source bucket for which the bucket owner has permissions to read objects and read access control lists \(ACLs\)\. For more information about resource ownership, see [About the Resource Owner](access-control-overview.md#about-resource-owner)\.
++ Only objects in the source bucket for which the bucket owner has permissions to read objects and access control lists \(ACLs\)\. For more information about resource ownership, For more information, see [Amazon S3 Bucket and Object Ownership](access-control-overview.md#about-resource-owner)\.
 
    
-+ Any object ACL updates are replicated, unless you directed Amazon S3 to change the replica ownership in a cross\-account scenario \(see [Cross\-Region Replication Additional Configuration: Change Replica Owner](crr-change-owner.md)\)\. 
++ Object ACL updates, unless you direct Amazon S3 to change the replica ownership when source and destination buckets aren't owned by the same accounts 
+
+   \(see [CRR Additional Configuration: Changing the Replica Owner](crr-change-owner.md)\)\. 
 
    
 
-  There can be some delay before Amazon S3 can bring the two ACLs in sync\. This applies only to objects created after you add a replication configuration to the bucket\.
+  It can take a while until Amazon S3 can bring the two ACLs in sync\. This applies only to objects created after you add a replication configuration to the bucket\.
 
    
-+ Amazon S3 replicates object tags, if any\.
-
-### Delete Operation and Cross\-Region Replication<a name="crr-delete-op"></a>
-
-If you delete an object from the source bucket, the cross\-region replication behavior is as follows:
-+ If a DELETE request is made without specifying an object version ID, Amazon S3 adds a delete marker, which cross\-region replication replicates to the destination bucket\. For more information about versioning and delete markers, see [Using Versioning](Versioning.md)\.
++  Object tags, if there are any\.
 
    
-+ If a DELETE request specifies a particular object version ID to delete, Amazon S3 deletes that object version in the source bucket, but it does not replicate the deletion in the destination bucket \(in other words, it does not delete the same object version from the destination bucket\)\. This behavior protects data from malicious deletions\. 
++ Amazon S3 object lock retention information, if there is any\. When Amazon S3 replicates objects that have retention information applied, it applies those same retention controls to your replicas, overriding the default retention period configured on your destination bucket\. If you don't have retention controls applied to the objects in your source bucket, and you replicate into a destination bucket that has a default retention period set, the destination bucket's default retention period is applied to your object replicas\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
 
-## What Is Not Replicated<a name="crr-what-is-not-replicated"></a>
+### How Delete Operations Affect CRR<a name="crr-delete-op"></a>
 
-Amazon S3 does not replicate the following:
-+ Amazon S3 does not retroactively replicate objects that existed before you added replication configuration\.
+If you delete an object from the source bucket, the following occurs:
++ If you make a DELETE request without specifying an object version ID, Amazon S3 adds a delete marker\. Amazon S3 deals with the delete marker as follows:
+  + If you are using the latest version of the replication configuration, that is, you specify the `Filter` element in a replication configuration rule, Amazon S3 does not replicate the delete marker\.
+  + If you don't specify the `Filter` element, Amazon S3 assumes that the replication configuration is a prior version V1\. In the earlier version, Amazon S3 handled replication of delete markers differently\. For more information, see [Backward Compatibility ](crr-add-config.md#crr-backward-compat-considerations)\. 
++ If you specify an object version ID to delete in a DELETE request, Amazon S3 deletes that object version in the source bucket, but it doesn't replicate the deletion in the destination bucket\. In other words, it doesn't delete the same object version from the destination bucket\. This protects data from malicious deletions\. 
+
+## What Isn't Replicated?<a name="crr-what-is-not-replicated"></a>
+
+Amazon S3 doesn't replicate the following:
++  Objects that existed before you added the replication configuration to the bucket\. In other words, Amazon S3 doesn't replicate objects retroactively\.
 
    
-+ The following encrypted objects are not replicated:
++ The following encrypted objects:
   + Objects created with server\-side encryption using customer\-provided \(SSE\-C\) encryption keys\.
-  + Objects created with server\-side encryption using AWS KMS–managed encryption \(SSE\-KMS\) keys, unless you explicitly enable this option\. 
+  + Objects created with server\-side encryption using AWS KMS–managed encryption \(SSE\-KMS\) keys\. By default, Amazon S3 does not replicate objects encrypted using KMS keys\. However, you can explicitly enable replication of these objects in the replication configuration, and provide relevant information so that Amazon S3 can replicate these objects\. 
 
    For more information about server\-side encryption, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. 
 
    
-+ Objects in the source bucket for which the bucket owner does not have permissions\. This can happen when the object owner is different from the bucket owner\. For information about how an object owner can grant permissions to the bucket owner, see [Granting Cross\-Account Permissions to Upload Objects While Ensuring the Bucket Owner Has Full Control](example-bucket-policies.md#example-bucket-policies-use-case-8)\.
++ Objects in the source bucket that the bucket owner doesn't have permissions for \(when the bucket owner is not the owner of the object\)\. For information about how an object owner can grant permissions to a bucket owner, see [Granting Cross\-Account Permissions to Upload Objects While Ensuring the Bucket Owner Has Full Control](example-bucket-policies.md#example-bucket-policies-use-case-8)\.
 
    
-+ Updates to bucket\-level subresources are not replicated\. For example, you might change lifecycle configuration on your source bucket or add notification configuration to your source bucket\. These changes are not applied to the destination bucket\. This allows you to have different bucket configurations on the source and destination buckets\. 
++ Updates to bucket\-level subresources\. For example, if you change the lifecycle configuration or add a notification configuration to your source bucket, these changes are not applied to the destination bucket\. This makes it possible to have different configurations on source and destination buckets\. 
 
    
-+ Only customer actions are replicated\. Actions performed by lifecycle configuration are not replicated\. For more information about lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
++ Actions performed by lifecycle configuration\. 
 
-   
+  For example, if lifecycle configuration is enabled only on your source bucket, Amazon S3 creates delete markers for expired objects, but it does not replicate those markers\. If you want the same lifecycle configuration applied to both source and destination buckets, enable the same lifecycle configuration on both\.
 
-  For example, if lifecycle configuration is enabled only on your source bucket, Amazon S3 creates delete markers for expired objects, but it does not replicate those markers\. However, you can have the same lifecycle configuration on both the source and destination buckets if you want the same lifecycle configuration applied to both buckets\. 
+  For more information about lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
+**Note**  
+If using the latest version of the replication configuration \(the XML specifies `Filter` as the child of `Rule`\), delete markers created either by a user action or by Amazon S3 as part of the lifecycle action are not replicated\. However, if you are using an earlier version of the replication configuration \(the XML specifies `Prefix` as the child of `Rule`\), delete markers resulting from user actions are replicated\. For more information, see [Backward Compatibility ](crr-add-config.md#crr-backward-compat-considerations)\.
++ Objects in the source bucket that are replicas that were created by another cross\-region replication\.
 
-   
-+ Objects in the source bucket that are replicas, created by another cross\-region replication, are not replicated\.
+  You can replicate objects from a source bucket to *only one* destination bucket\. After Amazon S3 replicates an object, the object can't be replicated again\. For example, if you change the destination bucket in an existing replication configuration, Amazon S3 won't replicate the object again\.
 
-   
-
-  Suppose that you configure cross\-region replication where bucket A is the source and bucket B is the destination\. Now suppose that you add another cross\-region replication where bucket B is the source and bucket C is the destination\. In this case, objects in bucket B that are replicas of objects in bucket A are not replicated to bucket C\. 
+  Another example: Suppose that you configure cross\-region replication where bucket A is the source and bucket B is the destination\. Now suppose that you add another cross\-region replication configuration where bucket B is the source and bucket C is the destination\. In this case, objects in bucket B that are replicas of objects in bucket A are not replicated to bucket C\. 
 
 ## Related Topics<a name="crr-whatis-isnot-related-topics"></a>
 
-[Cross\-Region Replication \(CRR\)](crr.md)
+[Cross\-Region Replication](crr.md)
 
-[Setting Up Cross\-Region Replication](crr-how-setup.md)
+[Overview of Setting Up CRR ](crr-how-setup.md)
 
-[Finding the Cross\-Region Replication Status ](crr-status.md)
+[Cross\-Region Replication Status Information](crr-status.md)

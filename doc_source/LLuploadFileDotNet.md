@@ -1,143 +1,72 @@
-# Upload a File<a name="LLuploadFileDotNet"></a>
+# Upload a File to an S3 Bucket Using the AWS SDK for \.NET \(Low\-Level API\)<a name="LLuploadFileDotNet"></a>
 
-The following tasks guide you through using the low\-level \.NET classes to upload a file\.
-
-
-**Low\-Level API File UploadingProcess**  
-
-|  |  | 
-| --- |--- |
-| 1 | Create an instance of the `AmazonS3Client` class, by providing your AWS credentials\. | 
-| 2 | Initiate multipart upload by executing the `AmazonS3Client.InitiateMultipartUpload` method\. You will need to provide information required to initiate the multipart upload by creating an instance of the `InitiateMultipartUploadRequest` class\.  | 
-| 3 | Save the Upload ID that the `AmazonS3Client.InitiateMultipartUpload` method returns\. You will need to provide this upload ID for each subsequent multipart upload operation\. | 
-| 4 | Upload the parts\. For each part upload, execute the `AmazonS3Client.UploadPart` method\. You will need to provide part upload information such as upload ID, bucket name, and the part number\. You provide this information by creating an instance of the `UploadPartRequest` class\.  | 
-| 5 | Save the response of the `AmazonS3Client.UploadPart` method in a list\. This response includes the ETag value and the part number you will later need to complete the multipart upload\.  | 
-| 6 | Repeat tasks 4 and 5 for each part\. | 
-| 7 | Execute the AmazonS3Client\.CompleteMultipartUpload method to complete the multipart upload\.  | 
-
-The following C\# code sample demonstrates the preceding tasks\.
-
-**Example**  
-
-```
- 1. IAmazonS3 s3Client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1);
- 2. 
- 3. // List to store upload part responses.
- 4. List<UploadPartResponse> uploadResponses = new List<UploadPartResponse>();
- 5. 
- 6. // 1. Initialize.
- 7. InitiateMultipartUploadRequest initiateRequest = new InitiateMultipartUploadRequest
- 8.     {
- 9.         BucketName = existingBucketName,
-10.         Key = keyName
-11.     };
-12. 
-13. InitiateMultipartUploadResponse initResponse = 
-14.     s3Client.InitiateMultipartUpload(initRequest);
-15. 
-16. // 2. Upload Parts.
-17. long contentLength = new FileInfo(filePath).Length;
-18. long partSize = 5242880; // 5 MB
-19. 
-20. try
-21. {
-22.     long filePosition = 0;
-23.     for (int i = 1; filePosition < contentLength; i++)
-24.     {
-25. 
-26.         // Create request to upload a part.
-27.         UploadPartRequest uploadRequest = new UploadPartRequest
-28.                         {
-29.                             BucketName = existingBucketName,
-30.                             Key = keyName,
-31.                             UploadId = initResponse.UploadId,
-32.                             PartNumber = i,
-33.                             PartSize = partSize,
-34.                             FilePosition = filePosition,
-35.                             FilePath = filePath
-36.                         };
-37. 
-38.         // Upload part and add response to our list.
-39.          uploadResponses.Add(s3Client.UploadPart(uploadRequest));
-40. 
-41.         filePosition += partSize;
-42.     }
-43. 
-44.     // Step 3: complete.
-45.     CompleteMultipartUploadRequest completeRequest = new CompleteMultipartUploadRequest
-46.        {
-47.            BucketName = existingBucketName,
-48.            Key = keyName,
-49.            UploadId = initResponse.UploadId,
-50.         };
-51. 
-52.     CompleteMultipartUploadResponse completeUploadResponse =
-53.       s3Client.CompleteMultipartUpload(completeRequest);
-54.  
-55. }
-56. catch (Exception exception)
-57. {
-58.     Console.WriteLine("Exception occurred: {0}", exception.Message);
-59.     AbortMultipartUploadRequest abortMPURequest = new AbortMultipartUploadRequest
-60.       {
-61.             BucketName = existingBucketName,
-62.             Key = keyName,
-63.             UploadId = initResponse.UploadId
-64.        };
-65.     s3Client.AbortMultipartUpload(abortMPURequest);
-66. }
-```
+The following C\# example shows how to use the low\-level AWS SDK for \.NET multipart upload API to upload a file to an S3 bucket\. For information about Amazon S3 multipart uploads, see [Multipart Upload Overview](mpuoverview.md)\.
 
 **Note**  
- When uploading large objects using the \.NET API, timeout might occur even while data is being written to the request stream\. You can set explicit timeout using the `UploadPartRequest`\. 
+When you use the AWS SDK for \.NET API to upload large objects, a timeout might occur while data is being written to the request stream\. You can set an explicit timeout using the `UploadPartRequest`\. 
 
-**Example**  
-The following C\# code example uploads a file to an Amazon S3 bucket\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
+The following C\# example uploads a file to an S3 bucket using the low\-level multipart upload API\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions for creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
+
+﻿using Amazon.Runtime;
+using Amazon.S3;
+using Amazon.S3.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Amazon.S3;
-using Amazon.S3.Model;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class UploadFileMPULowLevelAPI
+    class UploadFileMPULowLevelAPITest
     {
-        static string existingBucketName = "*** bucket name ***";
-        static string keyName            = "*** key name ***";
-        static string filePath           = "*** file path ***";
+        private const string bucketName = "*** provide bucket name ***";
+        private const string keyName = "*** provide a name for the uploaded object ***";
+        private const string filePath = "*** provide the full path name of the file to upload ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 s3Client;
 
-        static void Main(string[] args)
+        public static void Main()
         {
-            IAmazonS3 s3Client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1);
+            s3Client = new AmazonS3Client(bucketRegion);
+            Console.WriteLine("Uploading an object");
+            UploadObjectAsync().Wait(); 
+        }
 
-            // List to store upload part responses.
+        private static async Task UploadObjectAsync()
+        {
+            // Create list to store upload part responses.
             List<UploadPartResponse> uploadResponses = new List<UploadPartResponse>();
 
-            // 1. Initialize.
+            // Setup information required to initiate the multipart upload.
             InitiateMultipartUploadRequest initiateRequest = new InitiateMultipartUploadRequest
-                {
-                    BucketName = existingBucketName,
-                    Key = keyName
-                };
+            {
+                BucketName = bucketName,
+                Key = keyName
+            };
 
+            // Initiate the upload.
             InitiateMultipartUploadResponse initResponse =
-                s3Client.InitiateMultipartUpload(initiateRequest);
+                await s3Client.InitiateMultipartUploadAsync(initiateRequest);
 
-            // 2. Upload Parts.
+            // Upload parts.
             long contentLength = new FileInfo(filePath).Length;
             long partSize = 5 * (long)Math.Pow(2, 20); // 5 MB
 
             try
             {
+                Console.WriteLine("Uploading parts");
+        
                 long filePosition = 0;
                 for (int i = 1; filePosition < contentLength; i++)
                 {
                     UploadPartRequest uploadRequest = new UploadPartRequest
                         {
-                            BucketName = existingBucketName,
+                            BucketName = bucketName,
                             Key = keyName,
                             UploadId = initResponse.UploadId,
                             PartNumber = i,
@@ -146,39 +75,52 @@ namespace s3.amazon.com.docsamples
                             FilePath = filePath
                         };
 
-                    // Upload part and add response to our list.
-                    uploadResponses.Add(s3Client.UploadPart(uploadRequest));
+                    // Track upload progress.
+                    uploadRequest.StreamTransferProgress +=
+                        new EventHandler<StreamTransferProgressArgs>(UploadPartProgressEventCallback);
+
+                    // Upload a part and add the response to our list.
+                    uploadResponses.Add(await s3Client.UploadPartAsync(uploadRequest));
 
                     filePosition += partSize;
                 }
 
-                // Step 3: complete.
+                // Setup to complete the upload.
                 CompleteMultipartUploadRequest completeRequest = new CompleteMultipartUploadRequest
                     {
-                        BucketName = existingBucketName,
+                        BucketName = bucketName,
                         Key = keyName,
-                        UploadId = initResponse.UploadId,
-                        //PartETags = new List<PartETag>(uploadResponses)
-
-                    };
+                        UploadId = initResponse.UploadId
+                     };
                 completeRequest.AddPartETags(uploadResponses);
 
+                // Complete the upload.
                 CompleteMultipartUploadResponse completeUploadResponse =
-                    s3Client.CompleteMultipartUpload(completeRequest);
-
+                    await s3Client.CompleteMultipartUploadAsync(completeRequest);
             }
             catch (Exception exception)
             {
-                Console.WriteLine("Exception occurred: {0}", exception.Message);
+                Console.WriteLine("An AmazonS3Exception was thrown: { 0}", exception.Message);
+
+                // Abort the upload.
                 AbortMultipartUploadRequest abortMPURequest = new AbortMultipartUploadRequest
                 {
-                    BucketName = existingBucketName,
+                    BucketName = bucketName,
                     Key = keyName,
                     UploadId = initResponse.UploadId
                 };
-                s3Client.AbortMultipartUpload(abortMPURequest);
+               await s3Client.AbortMultipartUploadAsync(abortMPURequest);
             }
+        }
+        public static void UploadPartProgressEventCallback(object sender, StreamTransferProgressArgs e)
+        {
+            // Process event. 
+            Console.WriteLine("{0}/{1}", e.TransferredBytes, e.TotalBytes);
         }
     }
 }
 ```
+
+## More Info<a name="LLuploadFileDotNet-more-info"></a>
+
+[AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)

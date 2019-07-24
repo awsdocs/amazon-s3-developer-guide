@@ -63,4 +63,4 @@ Before you delete your S3 bucket, make sure that logging is disabled for the buc
 
 1. Choose **Save**\.
 
-Now, you can delete your bucket\. For more information, see [How Do I Delete an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
+Now, you can delete your bucket\. For more information, see [How Do I Delete an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.

@@ -1,63 +1,125 @@
 # Specifying Server\-Side Encryption Using the AWS SDK for Java<a name="SSEUsingJavaSDK"></a>
 
-When using the AWS SDK for Java to upload an object, you can use the `ObjectMetadata` property of the `PutObjectRequest` to set the `x-amz-server-side-encryption` request header \(see [Specifying Server\-Side Encryption Using the REST API](SSEUsingRESTAPI.md)\)\. When you call the `PutObject` method of the `AmazonS3` client as shown in the following Java code example, Amazon S3 encrypts and saves the data\.
+When you use the AWS SDK for Java to upload an object, you can use server\-side encryption to encrypt it\. To request server\-side encryption, use the `ObjectMetadata` property of the `PutObjectRequest` to set the `x-amz-server-side-encryption` request header\. When you call the `putObject()` method of the `AmazonS3Client`, Amazon S3 encrypts and saves the data\.
+
+You can also request server\-side encryption when uploading objects with the multipart upload API: 
++ When using the high\-level multipart upload API, you use the `TransferManager` methods to apply server\-side encryption to objects as you upload them\. You can use any of the upload methods that take `ObjectMetadata` as a parameter\. For more information, see [Using the AWS Java SDK for Multipart Upload \(High\-Level API\)](usingHLmpuJava.md)\.
++ When using the low\-level multipart upload API, you specify server\-side encryption when you initiate the multipart upload\. You add the `ObjectMetadata` property by calling the `InitiateMultipartUploadRequest.setObjectMetadata()` method\. For more information, see [Upload a File](llJavaUploadFile.md)\.
+
+You can't directly change the encryption state of an object \(encrypting an unencrypted object or decrypting an encrypted object\)\. To change an object's encryption state, you make a copy of the object, specifying the desired encryption state for the copy, and then delete the original object\. Amazon S3 encrypts the copied object only if you explicitly request server\-side encryption\. To request encryption of the copied object through the Java API, use the `ObjectMetadata` property to specify server\-side encryption in the `CopyObjectRequest`\.
+
+**Example Example**  
+The following example shows how to set server\-side encryption using the AWS SDK for Java\. It shows how to perform the following tasks:  
++ Upload a new object using server\-side encryption\.
++ Change an object's encryption state \(in this example, encrypting a previously unencrypted object\) by making a copy of the object\.
++ Check the encryption state of the object\.
+For more information about server\-side encryption, see [Specifying Server\-Side Encryption Using the REST API](SSEUsingRESTAPI.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
- 1. File file = new File(uploadFileName);
- 2. PutObjectRequest putRequest = new PutObjectRequest(
- 3.                                       bucketName, keyName, file);
- 4.             
- 5. // Request server-side encryption.
- 6. ObjectMetadata objectMetadata = new ObjectMetadata();
- 7. objectMetadata.setSSEAlgorithm(ObjectMetadata.AES_256_SERVER_SIDE_ENCRYPTION);     
- 8. putRequest.setMetadata(objectMetadata);
- 9. 
-10. PutObjectResult response = s3client.putObject(putRequest);
-11. System.out.println("Uploaded object encryption status is " + 
-12.                   response.getSSEAlgorithm());
+import java.io.ByteArrayInputStream;
+
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.internal.SSEResultBase;
+import com.amazonaws.services.s3.model.CopyObjectRequest;
+import com.amazonaws.services.s3.model.CopyObjectResult;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectResult;
+
+public class SpecifyServerSideEncryption {
+
+    public static void main(String[] args) {
+           String clientRegion = "*** Client region ***";
+           String bucketName = "*** Bucket name ***";
+           String keyNameToEncrypt = "*** Key name for an object to upload and encrypt ***";
+           String keyNameToCopyAndEncrypt = "*** Key name for an unencrypted object to be encrypted by copying ***";
+           String copiedObjectKeyName = "*** Key name for the encrypted copy of the unencrypted object ***";
+           
+           try {
+               AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                                       .withRegion(clientRegion)
+                                       .withCredentials(new ProfileCredentialsProvider())
+                                       .build();
+           
+               // Upload an object and encrypt it with SSE.
+               uploadObjectWithSSEEncryption(s3Client, bucketName, keyNameToEncrypt);
+               
+               // Upload a new unencrypted object, then change its encryption state
+               // to encrypted by making a copy.
+               changeSSEEncryptionStatusByCopying(s3Client, 
+                                                  bucketName, 
+                                                  keyNameToCopyAndEncrypt, 
+                                                  copiedObjectKeyName);
+           }
+           catch(AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        }
+        catch(SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
+        }
+    }
+
+    private static void uploadObjectWithSSEEncryption(AmazonS3 s3Client, String bucketName, String keyName) {
+        String objectContent = "Test object encrypted with SSE";
+        byte[] objectBytes = objectContent.getBytes();
+                
+        // Specify server-side encryption.
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentLength(objectBytes.length);
+        objectMetadata.setSSEAlgorithm(ObjectMetadata.AES_256_SERVER_SIDE_ENCRYPTION);
+        PutObjectRequest putRequest = new PutObjectRequest(bucketName, 
+                                                           keyName, 
+                                                           new ByteArrayInputStream(objectBytes), 
+                                                           objectMetadata);
+
+        // Upload the object and check its encryption status.
+        PutObjectResult putResult = s3Client.putObject(putRequest);
+        System.out.println("Object \"" + keyName + "\" uploaded with SSE.");
+        printEncryptionStatus(putResult);
+    }
+    
+    private static void changeSSEEncryptionStatusByCopying(AmazonS3 s3Client, 
+                                                           String bucketName, 
+                                                           String sourceKey,
+                                                           String destKey) {
+        // Upload a new, unencrypted object.
+        PutObjectResult putResult = s3Client.putObject(bucketName, sourceKey, "Object example to encrypt by copying");
+        System.out.println("Unencrypted object \"" + sourceKey + "\" uploaded.");
+        printEncryptionStatus(putResult);
+        
+        // Make a copy of the object and use server-side encryption when storing the copy.
+        CopyObjectRequest request = new CopyObjectRequest(bucketName,
+                                                          sourceKey,
+                                                          bucketName,
+                                                          destKey);
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setSSEAlgorithm(ObjectMetadata.AES_256_SERVER_SIDE_ENCRYPTION);
+        request.setNewObjectMetadata(objectMetadata);
+        
+        // Perform the copy operation and display the copy's encryption status.
+        CopyObjectResult response = s3Client.copyObject(request);
+        System.out.println("Object \"" + destKey + "\" uploaded with SSE.");
+        printEncryptionStatus(response);
+        
+        // Delete the original, unencrypted object, leaving only the encrypted copy in Amazon S3.
+        s3Client.deleteObject(bucketName, sourceKey);
+        System.out.println("Unencrypted object \"" + sourceKey + "\" deleted.");
+    }
+    
+    private static void printEncryptionStatus(SSEResultBase response) {
+        String encryptionStatus = response.getSSEAlgorithm();
+        if(encryptionStatus == null) {
+            encryptionStatus = "Not encrypted with SSE"; 
+        }
+        System.out.println("Object encryption status is: " + encryptionStatus);
+    }
+}
 ```
-
-In response, Amazon S3 returns the encryption algorithm used for encrypting your object data, which you can check using the `getSSEAlgorithm` method\. 
-
-For a working sample that shows how to upload an object, see [Upload an Object Using the AWS SDK for Java](UploadObjSingleOpJava.md)\. For server\-side encryption, add the `ObjectMetadata` property to your request\. 
-
-When uploading large objects using multipart upload API, you can request server\-side encryption for the object that you are uploading\. 
-+ When using the low\-level multipart upload API \(see [Upload a File](llJavaUploadFile.md)\) to upload a large object, you can specify server\-side encryption when you initiate the multipart upload\. That is, you add the `ObjectMetadata` property by calling the `InitiateMultipartUploadRequest.setObjectMetadata` method\. 
-+ When using the high\-level multipart upload API \(see [Using the AWS Java SDK for Multipart Upload \(High\-Level API\)](usingHLmpuJava.md)\), the `TransferManager` class provides methods to upload objects\. You can call any of the upload methods that take `ObjectMetadata` as a parameter\.
-
-## Determining the Encryption Algorithm Used<a name="DeterminingEncryptionAlgorithmUsed01"></a>
-
-To determine the encryption state of an existing object, you can retrieve the object metadata as shown in the following Java code example\.
-
-```
-1. GetObjectMetadataRequest request2 = 
-2.                 new GetObjectMetadataRequest(bucketName, keyName);
-3.          
-4. ObjectMetadata metadata = s3client.getObjectMetadata(request2);
-5. 
-6. System.out.println("Encryption algorithm used: " + 
-7.             metadata.getSSEAlgorithm());
-```
-
-If server\-side encryption is not used for the object that is stored in Amazon S3, the method returns null\.
-
-## Changing Server\-Side Encryption of an Existing Object \(Copy Operation\)<a name="ChangingServer-SideEncryptionofanExistingObjectCopyOperation01"></a>
-
-To change the encryption state of an existing object, you make a copy of the object and delete the source object\. By default, the copy API does not encrypt the target unless you explicitly request server\-side encryption\. You can request the encryption of the target object by using the `ObjectMetadata` property to specify server\-side encryption in the `CopyObjectRequest` as shown in the following Java code example\. 
-
-```
- 1. CopyObjectRequest copyObjRequest = new CopyObjectRequest(
- 2. sourceBucket, sourceKey, targetBucket, targetKey);
- 3.             
- 4. // Request server-side encryption.
- 5. ObjectMetadata objectMetadata = new ObjectMetadata();
- 6. objectMetadata.setSSEAlgorithm(ObjectMetadata.AES_256_SERVER_SIDE_ENCRYPTION); 
- 7.             
- 8. copyObjRequest.setNewObjectMetadata(objectMetadata);
- 9.          
-10. CopyObjectResult response =  s3client.copyObject(copyObjRequest);
-11. System.out.println("Copied object encryption status is " + 
-12.                   response.getSSEAlgorithm());
-```
-
-For a working sample of how to copy an object, see [Copy an Object Using the AWS SDK for Java](CopyingObjectUsingJava.md)\. You can specify server\-side encryption in the `CopyObjectRequest` object as shown in the preceding code example\.

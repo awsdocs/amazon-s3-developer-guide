@@ -20,11 +20,11 @@ A `DELETE` request has the following use cases:
 
 ## Using the Console<a name="delete-obj-version-version-enabled-console"></a>
 
-For instructions see, [How Do I See the Versions of an S3 Object?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/view-object-versions.html) in the Amazon Simple Storage Service Console User Guide\. 
+For instructions see, [How Do I See the Versions of an S3 Object?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/view-object-versions.html) in the Amazon Simple Storage Service Console User Guide\. 
 
 ## Using the AWS SDKs<a name="delete-obj-version-version-enabled-bucket-sdks"></a>
 
-For examples of uploading objects using the AWS SDKs for Java, \.NET, and PHP, see [Deleting Objects](DeletingObjects.md)\. The examples for uploading objects in nonversioned and versioning\-enabled buckets are the same, although in the case of versioning\-enabled buckets, Amazon S3 assigns a version number\. Otherwise, the version number is null\. 
+For examples of deleting objects using the AWS SDKs for Java, \.NET, and PHP, see [Deleting Objects](DeletingObjects.md)\. The examples for deleting objects in nonversioned and versioning\-enabled buckets are the same, although in the case of versioning\-enabled buckets, Amazon S3 assigns a version number\. Otherwise, the version number is null\. 
 
 For information about using other AWS SDKs, see [Sample Code and Libraries](https://aws.amazon.com/code/)\. 
 

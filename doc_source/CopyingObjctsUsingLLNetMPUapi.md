@@ -1,199 +1,121 @@
-# Copy an Object Using the AWS SDK for \.NET Multipart Upload API<a name="CopyingObjctsUsingLLNetMPUapi"></a>
+# Copy an Amazon S3 Object Using the AWS SDK for \.NET Multipart Upload API<a name="CopyingObjctsUsingLLNetMPUapi"></a>
 
-The following task guides you through using the \.NET SDK to copy an Amazon S3 object from one source location to another, such as from one bucket to another\. You can use the code demonstrated here to copy objects that are greater than 5 GB\. For objects less than 5 GB, use the single operation copy described in [Copy an Object Using the AWS SDK for \.NET](CopyingObjectUsingNetSDK.md)\.
+The following C\# example shows how to use the AWS SDK for \.NET to copy an Amazon S3 object that is larger than 5 GB from one source location to another, such as from one bucket to another\. To copy objects that are smaller than 5 GB, use the single\-operation copy procedure described in [Copy an Amazon S3 Object in a Single Operation Using the AWS SDK for \.NET](CopyingObjectUsingNetSDK.md)\. For more information about Amazon S3 multipart uploads, see [Multipart Upload Overview](mpuoverview.md)\.
 
-
-**Copying Objects**  
-
-|  |  | 
-| --- |--- |
-|  1  |  Create an instance of the `AmazonS3Client` class by providing your AWS credentials\.  | 
-|  2  |  Initiate a multipart copy by executing the `AmazonS3Client.InitiateMultipartUpload` method\. Create an instance of the `InitiateMultipartUploadRequest`\. You will need to provide a bucket name and key name\.  | 
-|  3  |  Save the upload ID from the response object that the `AmazonS3Client.InitiateMultipartUpload` method returns\. You will need to provide this upload ID for each subsequent multipart upload operation\.  | 
-|  4  |  Copy all the parts\. For each part copy, create a new instance of the `CopyPartRequest` class and provide part information including source bucket, destination bucket, object key, uploadID, first byte of the part, last byte of the part, and the part number\.   | 
-|  5  |  Save the response of the `CopyPartRequest` method in a list\. The response includes the ETag value and the part number you will need to complete the multipart upload\.   | 
-|  6  |  Repeat tasks 4 and 5 for each part\.  | 
-|  7  | Execute the AmazonS3Client\.CompleteMultipartUpload method to complete the copy\.  | 
-
-The following C\# code sample demonstrates the preceding tasks\.
-
-**Example**  
+This example shows how to copy an Amazon S3 object that is larger than 5 GB from one S3 bucket to another using the AWS SDK for \.NET multipart upload API\. For information about SDK compatibility and instructions for creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
- 1. // Step 1. Create instance and provide credentials.
- 2. IAmazonS3 s3Client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1);
- 3. 
- 4. // List to store upload part responses.
- 5. List<UploadPartResponse> uploadResponses = new List<UploadPartResponse>();
- 6. List<CopyPartResponse> copyResponses = new List<CopyPartResponse>();
- 7. InitiateMultipartUploadRequest initiateRequest =
- 8.         new InitiateMultipartUploadRequest
- 9.             {
-10.                 BucketName = targetBucket,
-11.                 Key = targetObjectKey
-12.             };
-13. 
-14. // Step 2. Initialize.
-15. InitiateMultipartUploadResponse initResponse = s3Client.InitiateMultipartUpload(initiateRequest);
-16. 
-17. // Step 3. Save Upload Id.
-18. String uploadId = initResponse.UploadId;
-19. 
-20. try
-21. {
-22.     // Get object size.
-23.     GetObjectMetadataRequest metadataRequest = new GetObjectMetadataRequest
-24.         {
-25.              BucketName = sourceBucket,
-26.              Key        = sourceObjectKey
-27.         };
-28. 
-29.     GetObjectMetadataResponse metadataResponse = 
-30.                  s3Client.GetObjectMetadata(metadataRequest);
-31.     long objectSize = metadataResponse.ContentLength; // in bytes
-32. 
-33.     // Copy parts.
-34.     long partSize = 5 * (long)Math.Pow(2, 20); // 5 MB
-35. 
-36.     long bytePosition = 0;
-37.     for (int i = 1; bytePosition < objectSize; i++)
-38.     {
-39. 
-40.         CopyPartRequest copyRequest = new CopyPartRequest
-41.             {
-42.                 DestinationBucket = targetBucket,
-43.                 DestinationKey = targetObjectKey,
-44.                 SourceBucket = sourceBucket,
-45.                 SourceKey = sourceObjectKey,
-46.                 UploadId = uploadId,
-47.                 FirstByte = bytePosition,
-48.                 LastByte = bytePosition + partSize - 1 >= objectSize ? objectSize - 1 : bytePosition + partSize - 1,
-49.                 PartNumber = i
-50.             };
-51. 
-52.         copyResponses.Add(s3Client.CopyPart(copyRequest));
-53. 
-54.                     bytePosition += partSize;
-55.     }
-56.                 CompleteMultipartUploadRequest completeRequest =
-57.           new CompleteMultipartUploadRequest
-58.               {
-59.                   BucketName = targetBucket,
-60.                   Key = targetObjectKey,
-61.                   UploadId = initResponse.UploadId
-62.               };
-63. 
-64.     completeRequest.AddPartETags(copyResponses);
-65.     CompleteMultipartUploadResponse completeUploadResponse = s3Client.CompleteMultipartUpload(completeRequest);
-66. 
-67. }
-68. catch (Exception e) {
-69.     Console.WriteLine(e.Message);
-70. }
-```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
 
-**Example**  
-The following C\# code example copies an object from one Amazon S3 bucket to another\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
-
-```
+﻿using Amazon.S3;
+using Amazon.S3.Model;
 using System;
 using System.Collections.Generic;
-using Amazon.S3;
-using Amazon.S3.Model;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class CopyObjectUsingMPUapi
+    class CopyObjectUsingMPUapiTest
     {
+        private const string sourceBucket = "*** provide the name of the bucket with source object ***";
+        private const string targetBucket = "*** provide the name of the bucket to copy the object to ***";
+        private const string sourceObjectKey = "*** provide the name of object to copy ***";
+        private const string targetObjectKey = "*** provide the name of the object copy ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2; 
+        private static IAmazonS3 s3Client;
 
-        static string sourceBucket    = "*** Source bucket name ***";
-        static string targetBucket    = "*** Target bucket name ***";
-        static string sourceObjectKey = "*** Source object key ***";
-        static string targetObjectKey = "*** Target object key ***";
-
-        static void Main(string[] args)
+        public static void Main()
         {
-            IAmazonS3 s3Client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1);
-
-            // List to store upload part responses.
+            s3Client = new AmazonS3Client(bucketRegion);
+            Console.WriteLine("Copying an object");
+            MPUCopyObjectAsync().Wait();
+        }
+        private static async Task MPUCopyObjectAsync()
+        {
+            // Create a list to store the upload part responses.
             List<UploadPartResponse> uploadResponses = new List<UploadPartResponse>();
-
             List<CopyPartResponse> copyResponses = new List<CopyPartResponse>();
-            InitiateMultipartUploadRequest initiateRequest =
-                   new InitiateMultipartUploadRequest
-                       {
-                           BucketName = targetBucket,
-                           Key = targetObjectKey
-                       };
 
+            // Setup information required to initiate the multipart upload.
+            InitiateMultipartUploadRequest initiateRequest =
+                new InitiateMultipartUploadRequest
+                {
+                    BucketName = targetBucket,
+                    Key = targetObjectKey
+                };
+
+            // Initiate the upload.
             InitiateMultipartUploadResponse initResponse =
-                s3Client.InitiateMultipartUpload(initiateRequest);
+                await s3Client.InitiateMultipartUploadAsync(initiateRequest);
+
+            // Save the upload ID.
             String uploadId = initResponse.UploadId;
 
             try
             {
-                // Get object size.
+                // Get the size of the object.
                 GetObjectMetadataRequest metadataRequest = new GetObjectMetadataRequest
-                    {
-                         BucketName = sourceBucket,
-                         Key        = sourceObjectKey
-                    };
+                {
+                    BucketName = sourceBucket,
+                    Key = sourceObjectKey
+                };
 
-                GetObjectMetadataResponse metadataResponse = 
-                             s3Client.GetObjectMetadata(metadataRequest);
-                long objectSize = metadataResponse.ContentLength; // in bytes
+                GetObjectMetadataResponse metadataResponse =
+                    await s3Client.GetObjectMetadataAsync(metadataRequest);
+                long objectSize = metadataResponse.ContentLength; // Length in bytes.
 
-                // Copy parts.
-                long partSize = 5 * (long)Math.Pow(2, 20); // 5 MB
+                // Copy the parts.
+                long partSize = 5 * (long)Math.Pow(2, 20); // Part size is 5 MB.
 
                 long bytePosition = 0;
                 for (int i = 1; bytePosition < objectSize; i++)
                 {
-
                     CopyPartRequest copyRequest = new CopyPartRequest
-                        {
-                            DestinationBucket = targetBucket,
-                            DestinationKey = targetObjectKey,
-                            SourceBucket = sourceBucket,
-                            SourceKey = sourceObjectKey,
-                            UploadId = uploadId,
-                            FirstByte = bytePosition,
-                            LastByte = bytePosition + partSize - 1 >= objectSize ? objectSize - 1 : bytePosition + partSize - 1,
-                            PartNumber = i
-                        };
+                    {
+                        DestinationBucket = targetBucket,
+                        DestinationKey = targetObjectKey,
+                        SourceBucket = sourceBucket,
+                        SourceKey = sourceObjectKey,
+                        UploadId = uploadId,
+                        FirstByte = bytePosition,
+                        LastByte = bytePosition + partSize - 1 >= objectSize ? objectSize - 1 : bytePosition + partSize - 1,
+                        PartNumber = i
+                    };
 
-                    copyResponses.Add(s3Client.CopyPart(copyRequest));
+                    copyResponses.Add(await s3Client.CopyPartAsync(copyRequest));
 
                     bytePosition += partSize;
                 }
+
+                // Set up to complete the copy.
                 CompleteMultipartUploadRequest completeRequest =
-                      new CompleteMultipartUploadRequest
-                          {
-                              BucketName = targetBucket,
-                              Key = targetObjectKey,
-                              UploadId = initResponse.UploadId
-                          };
-
+                new CompleteMultipartUploadRequest
+                {
+                    BucketName = targetBucket,
+                    Key = targetObjectKey,
+                    UploadId = initResponse.UploadId
+                };
                 completeRequest.AddPartETags(copyResponses);
-                CompleteMultipartUploadResponse completeUploadResponse = s3Client.CompleteMultipartUpload(completeRequest);
 
+                // Complete the copy.
+                CompleteMultipartUploadResponse completeUploadResponse = 
+                    await s3Client.CompleteMultipartUploadAsync(completeRequest);
+            }
+            catch (AmazonS3Exception e)
+            {
+                Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
             }
-        }
-
-        // Helper function that constructs ETags.
-        static List<PartETag> GetETags(List<CopyPartResponse> responses)
-        {
-            List<PartETag> etags = new List<PartETag>();
-            foreach (CopyPartResponse response in responses)
-            {
-                etags.Add(new PartETag(response.PartNumber, response.ETag));
-            }
-            return etags;
         }
     }
 }
 ```
+
+## More Info<a name="CopyingObjctsUsingLLNetMPUapi-more-info"></a>
+
+[AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)

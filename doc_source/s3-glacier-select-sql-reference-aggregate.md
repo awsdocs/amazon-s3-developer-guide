@@ -3,7 +3,7 @@
 Amazon S3 Select supports the following aggregate functions\.
 
 **Note**  
-Amazon Glacier Select does not support aggregate functions\.
+Glacier Select does not support aggregate functions\.
 
 
 | Function | Argument Type | Return Type | 

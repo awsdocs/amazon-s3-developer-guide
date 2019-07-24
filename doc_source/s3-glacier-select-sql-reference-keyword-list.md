@@ -1,6 +1,6 @@
 # Reserved Keywords<a name="s3-glacier-select-sql-reference-keyword-list"></a>
 
-Below is the list of reserved keywords for Amazon S3 Select and Amazon Glacier Select\. These include function names, data types, operators, etc\., that needed to execute the SQL expressions used to query object content\.
+Below is the list of reserved keywords for Amazon S3 Select and Glacier Select\. These include function names, data types, operators, etc\., that needed to execute the SQL expressions used to query object content\.
 
 ```
 absolute

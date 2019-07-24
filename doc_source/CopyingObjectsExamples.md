@@ -23,7 +23,7 @@ For more information about the object metadata, see [Object Key and Metadata](Us
 Copying objects across locations incurs bandwidth charges\. 
 
 **Note**  
-If the source object is archived in Amazon Glacier \(the storage class of the object is `GLACIER`\), you must first restore a temporary copy before you can copy the object to another bucket\. For information about archiving objects, see [Transitioning to the GLACIER Storage Class \(Object Archival\)](lifecycle-transition-general-considerations.md#before-deciding-to-archive-objects)\. 
+If the source object is archived in Amazon Glacier \(the storage class of the object is `GLACIER`\), you must first restore a temporary copy before you can copy the object to another bucket\. For information about archiving objects, see [Transitioning to the GLACIER and DEEP ARCHIVE Storage Classes \(Object Archival\)](lifecycle-transition-general-considerations.md#before-deciding-to-archive-objects)\. 
 
 When copying objects, you can request Amazon S3 to save the target object encrypted using an AWS Key Management Service \(KMS\) encryption key, an Amazon S3\-managed encryption key, or a customer\-provided encryption key\. Accordingly, you must specify encryption information in your request\. If the copy source is an object that is stored in Amazon S3 using server\-side encryption with customer provided key, you will need to provide encryption information in your request so Amazon S3 can decrypt the object for copying\. For more information, see [Protecting Data Using Encryption](UsingEncryption.md)\.
 

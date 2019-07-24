@@ -1,103 +1,104 @@
 # Making Requests Using IAM User Temporary Credentials \- AWS SDK for Java<a name="AuthUsingTempSessionTokenJava"></a>
 
-An IAM user or an AWS Account can request temporary security credentials \(see [Making Requests](MakingRequests.md)\) using AWS SDK for Java and use them to access Amazon S3\. These credentials expire after the session duration\. By default, the session duration is one hour\.  If you use IAM user credentials, you can specify duration, between 1 and 36 hours, when requesting the temporary security credentials\. 
+An IAM user or an AWS Account can request temporary security credentials \(see [Making Requests](MakingRequests.md)\) using the AWS SDK for Java and use them to access Amazon S3\. These credentials expire after the specified session duration\. To use IAM temporary security credentials, do the following:
 
+1. Create an instance of the `AWSSecurityTokenServiceClient` class\. For information about providing credentials, see [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)\.
 
-**Making Requests Using IAM User Temporary Security Credentials**  
+1. Assume the desired role by calling the `assumeRole()` method of the Security Token Service \(STS\) client\.
 
-|  |  | 
-| --- |--- |
-|  1  |  Create an instance of the AWS Security Token Service client `AWSSecurityTokenServiceClient`\.  | 
-|  2  |  Start a session by calling the `GetSessionToken` method of the STS client you created in the preceding step\. You provide session information to this method using a `GetSessionTokenRequest` object\. The method returns your temporary security credentials\.  | 
-|  3  |  Package the temporary security credentials in an instance of the `BasicSessionCredentials` object so you can provide the credentials to your Amazon S3 client\.  | 
-|  4  |  Create an instance of the `AmazonS3Client` class by passing in the temporary security credentials\.  You send the requests to Amazon S3 using this client\. If you send requests using expired credentials, Amazon S3 returns an error\.   | 
+1. Start a session by calling the `getSessionToken()` method of the STS client\. You provide session information to this method using a `GetSessionTokenRequest` object\. 
 
-The following Java code sample demonstrates the preceding tasks\.
+   The method returns the temporary security credentials\.
 
-**Example**  
+1. Package the temporary security credentials into a `BasicSessionCredentials` object\. You use this object to provide the temporary security credentials to your Amazon S3 client\.
 
-```
- 1. // In real applications, the following code is part of your trusted code. It has 
- 2. // your security credentials you use to obtain temporary security credentials.
- 3. AWSSecurityTokenServiceClient stsClient = 
- 4.                         new AWSSecurityTokenServiceClient(new ProfileCredentialsProvider());
- 5.         
- 6. //
- 7. // Manually start a session.
- 8. GetSessionTokenRequest getSessionTokenRequest = new GetSessionTokenRequest();
- 9. // Following duration can be set only if temporary credentials are requested by an IAM user.
-10. getSessionTokenRequest.setDurationSeconds(7200); 
-11. 
-12. GetSessionTokenResult sessionTokenResult = 
-13.                            stsClient.getSessionToken(getSessionTokenRequest);
-14. Credentials sessionCredentials = sessionTokenResult.getCredentials();
-15.   
-16. // Package the temporary security credentials as 
-17. // a BasicSessionCredentials object, for an Amazon S3 client object to use.
-18. BasicSessionCredentials basicSessionCredentials = 
-19.                new BasicSessionCredentials(sessionCredentials.getAccessKeyId(), 
-20.         		                           sessionCredentials.getSecretAccessKey(), 
-21.         		                            sessionCredentials.getSessionToken());
-22. 
-23. // The following will be part of your less trusted code. You provide temporary security
-24. // credentials so it can send authenticated requests to Amazon S3. 
-25. // Create Amazon S3 client by passing in the basicSessionCredentials object.
-26. AmazonS3Client s3 = new AmazonS3Client(basicSessionCredentials);
-27.             
-28. // Test. For example, get object keys in a bucket.
-29. ObjectListing objects = s3.listObjects(bucketName);
-```
+1. Create an instance of the `AmazonS3Client` class using the temporary security credentials\. You send requests to Amazon S3 using this client\. If you send requests using expired credentials, Amazon S3 will return an error\.
 
 **Note**  
-If you obtain temporary security credentials using your AWS account credentials, the temporary security credentials are valid for only one hour\. You can specify session duration only if you use IAM user credentials to request a session\.
+If you obtain temporary security credentials using your AWS account security credentials, the temporary credentials are valid for only one hour\. You can specify the session duration only if you use IAM user credentials to request a session\.
 
-The following Java code example lists the object keys in the specified bucket\. For illustration, the code example obtains temporary security credentials for a default one hour session and uses them to send an authenticated request to Amazon S3\. 
+The following example lists a set of object keys in the specified bucket\. The example obtains temporary security credentials for a two\-hour session and uses them to send an authenticated request to Amazon S3\.
 
-If you want to test the sample using IAM user credentials, you will need to create an IAM user under your AWS Account\. For more information about how to create an IAM user, see [Creating Your First IAM User and Administrators Group](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\. 
+If you want to test the sample using IAM user credentials, you will need to create an IAM user under your AWS Account\. For more information about how to create an IAM user, see [Creating Your First IAM User and Administrators Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\.
+
+For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 ```
- 1. import java.io.IOException;
- 2. import com.amazonaws.auth.BasicSessionCredentials;
- 3. import com.amazonaws.auth.PropertiesCredentials;
- 4. import com.amazonaws.services.s3.AmazonS3Client;
- 5. import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient;
- 6. import com.amazonaws.services.securitytoken.model.Credentials;
- 7. import com.amazonaws.services.securitytoken.model.GetSessionTokenRequest;
- 8. import com.amazonaws.services.securitytoken.model.GetSessionTokenResult;
- 9. import com.amazonaws.services.s3.model.ObjectListing;
-10. 
-11. public class S3Sample {
-12. 	private static String bucketName = "*** Provide bucket name ***";
-13. 
-14.     public static void main(String[] args) throws IOException {        
-15.         AWSSecurityTokenServiceClient stsClient = 
-16.                                new AWSSecurityTokenServiceClient(new ProfileCredentialsProvider());        
-17.         //
-18.         // Start a session.
-19.         GetSessionTokenRequest getSessionTokenRequest = 
-20.                                              new GetSessionTokenRequest();
-21. 
-22.         GetSessionTokenResult sessionTokenResult = 
-23.                             stsClient.getSessionToken(getSessionTokenRequest);
-24.         Credentials sessionCredentials = sessionTokenResult.getCredentials();
-25.         System.out.println("Session Credentials: " 
-26.                                                + sessionCredentials.toString());
-27.   
-28.         
-29.         // Package the session credentials as a BasicSessionCredentials 
-30.         // object for an S3 client object to use.
-31.         BasicSessionCredentials basicSessionCredentials = 
-32.              new BasicSessionCredentials(sessionCredentials.getAccessKeyId(), 
-33.         		                         sessionCredentials.getSecretAccessKey(), 
-34.         		                         sessionCredentials.getSessionToken());
-35.         AmazonS3Client s3 = new AmazonS3Client(basicSessionCredentials);
-36. 
-37.         // Test. For example, get object keys for a given bucket. 
-38.         ObjectListing objects = s3.listObjects(bucketName);
-39.         System.out.println("No. of Objects = " + 
-40.                                            objects.getObjectSummaries().size());
-41.     }
-42. }
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicSessionCredentials;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.ObjectListing;
+import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
+import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder;
+import com.amazonaws.services.securitytoken.model.*;
+
+public class MakingRequestsWithIAMTempCredentials {
+    public static void main(String[] args) {
+        Regions clientRegion = Regions.DEFAULT_REGION;
+        String roleARN = "*** ARN for role to be assumed ***";
+        String roleSessionName = "*** Role session name ***";
+        String bucketName = "*** Bucket name ***";
+
+        try {
+            // Creating the STS client is part of your trusted code. It has
+            // the security credentials you use to obtain temporary security credentials.
+            AWSSecurityTokenService stsClient = AWSSecurityTokenServiceClientBuilder.standard()
+                .withCredentials(new ProfileCredentialsProvider())
+                .withRegion(clientRegion)
+                .build();
+
+            // Assume the IAM role. Note that you cannot assume the role of an AWS root account;
+            // Amazon S3 will deny access. You must use credentials for an IAM user or an IAM role.
+            AssumeRoleRequest roleRequest = new AssumeRoleRequest()
+                .withRoleArn(roleARN)
+                .withRoleSessionName(roleSessionName);
+
+            AssumeRoleResult response = stsClient.assumeRole(roleRequest);
+
+            // Start a session.
+            GetSessionTokenRequest getSessionTokenRequest = new GetSessionTokenRequest().withDurationSeconds(7200);
+            // The duration can be set to more than 3600 seconds only if temporary
+            // credentials are requested by an IAM user rather than an account owner.
+            GetSessionTokenResult sessionTokenResult = stsClient.getSessionToken(getSessionTokenRequest);
+            Credentials sessionCredentials = sessionTokenResult
+                .getCredentials()
+                .withSessionToken(sessionTokenResult.getCredentials().getSessionToken())
+                .withExpiration(sessionTokenResult.getCredentials().getExpiration());
+
+            // Package the temporary security credentials as a BasicSessionCredentials object 
+            // for an Amazon S3 client object to use.
+            BasicSessionCredentials basicSessionCredentials = new BasicSessionCredentials(
+                sessionCredentials.getAccessKeyId(), sessionCredentials.getSecretAccessKey(),
+                sessionCredentials.getSessionToken());
+
+            // Provide temporary security credentials so that the Amazon S3 client 
+            // can send authenticated requests to Amazon S3. You create the client
+            // using the basicSessionCredentials object.
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(basicSessionCredentials))
+                .withRegion(clientRegion)
+                .build();
+
+            // Verify that assuming the role worked and the permissions are set correctly
+            // by getting a set of object keys from the bucket.
+            ObjectListing objects = s3Client.listObjects(bucketName);
+            System.out.println("No. of Objects: " + objects.getObjectSummaries().size());
+        } catch (AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
+        }
+    }
+}
 ```
 
 ## Related Resources<a name="RelatedResources008"></a>

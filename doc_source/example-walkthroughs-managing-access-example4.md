@@ -27,7 +27,7 @@ The AWS account identified in the trust policy then grants its user permission t
 + Assume the role and, in response, get temporary security credentials\. 
 + Using the temporary security credentials, access the objects in the bucket\.
 
-For more information about IAM roles, go to [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in *IAM User Guide*\. 
+For more information about IAM roles, go to [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in *IAM User Guide*\. 
 
 The following is a summary of the walkthrough steps:
 
@@ -68,9 +68,9 @@ You may want to open a text editor and write down some of the information as you
          AWS will notify you by email when your account is active and available for you to use\.
 
    1. Using Account A credentials, sign in to the [IAM console](https://console.aws.amazon.com/iam/home?#home) and do the following to create an administrator user:
-      + Create user AccountAadmin and note down security credentials\. For more information about adding users, see [Creating an IAM User in Your AWS Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *IAM User Guide*\. 
-      + Grant AccountAadmin administrator privileges by attaching a user policy giving full access\. For instructions, see [Working with Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\. 
-      + In the IAM Console **Dashboard**, note down the** IAM User Sign\-In URL**\. Users in this account must use this URL when signing in to the AWS Management Console\. For more information, go to [How Users Sign In to Your Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_how-users-sign-in.html) in *IAM User Guide*\. 
+      + Create user AccountAadmin and note down security credentials\. For more information about adding users, see [Creating an IAM User in Your AWS Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *IAM User Guide*\. 
+      + Grant AccountAadmin administrator privileges by attaching a user policy giving full access\. For instructions, see [Working with Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\. 
+      + In the IAM Console **Dashboard**, note down the** IAM User Sign\-In URL**\. Users in this account must use this URL when signing in to the AWS Management Console\. For more information, go to [How Users Sign In to Your Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_how-users-sign-in.html) in *IAM User Guide*\. 
 
    1. Repeat the preceding step to create administrator users in Account B and Account C\.
 
@@ -116,7 +116,7 @@ In the Amazon S3 console, do the following:
 
 1. Create a bucket\. This exercise assumes the bucket name is `examplebucket`\.
 
-   For instructions, see [How Do I Create an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+   For instructions, see [How Do I Create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
 1. Attach the following bucket policy granting conditional permission to the Account B administrator permission to upload objects\.
 
@@ -186,8 +186,6 @@ In the IAM console, create an IAM role \("examplerole"\) that grants Account C p
 
 1. In the navigation pane on the left, click **Roles** and then click **Create New Role**\.
 
-1. Enter `examplerole` for the role name, and then click **Next Step**\.
-
 1. Under **Select Role Type**, select **Role for Cross\-Account Access**, and then click the **Select** button next to **Provide access between AWS accounts you own**\.
 
 1. Enter the Account C account ID\.
@@ -200,6 +198,8 @@ In the IAM console, create an IAM role \("examplerole"\) that grants Account C p
 
    The Review page appears so you can confirm the settings for the role before it's created\. One very important item to note on this page is the link that you can send to your users who need to use this role\. Users who click the link go straight to the Switch Role page with the Account ID and Role Name fields already filled in\. You can also see this link later on the Role Summary page for any cross\-account role\.
 
+1. Enter `examplerole` for the role name, and then click **Next Step**\.
+
 1. After reviewing the role, click **Create Role**\.
 
    The `examplerole` role is displayed in the list of roles\.
@@ -210,7 +210,7 @@ In the IAM console, create an IAM role \("examplerole"\) that grants Account C p
 
 1. Click **Show policy document** and verify the trust policy shown matches the following policy\.
 
-   The following trust policy establishes trust with Account C, by allowing it the `sts:AssumeRole` action\. For more information, go to [AssumeRole](http://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) in the *AWS Security Token Service API Reference*\.
+   The following trust policy establishes trust with Account C, by allowing it the `sts:AssumeRole` action\. For more information, go to [AssumeRole](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) in the *AWS Security Token Service API Reference*\.
 
    ```
    {
@@ -256,7 +256,7 @@ In the preceding steps, Account A has already created a role, `examplerole`, est
 
 1. In the IAM console, create a user Dave\. 
 
-   For instructions, see [Creating IAM Users \(AWS Management Console\)](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console) in the *IAM User Guide*\. 
+   For instructions, see [Creating IAM Users \(AWS Management Console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console) in the *IAM User Guide*\. 
 
 1. Note down the Dave credentials\. Dave will need these credentials to assume the `examplerole` role\.
 
@@ -316,7 +316,7 @@ Now Dave can access objects in the bucket owned by Account A as follows:
    aws sts assume-role --role-arn arn:aws:iam::accountA-ID:role/examplerole --profile AccountCDave --role-session-name test
    ```
 
-   In response, AWS Security Token Service \(STS\) returns temporary security credentials \(access key ID, secret access key, and a security token\)\.
+   In response, AWS Security Token Service \(STS\) returns temporary security credentials \(access key ID, secret access key, and a session token\)\.
 
 1. Save the temporary security credentials in the AWS CLI config file under the `TempCred` profile\.
 
@@ -324,7 +324,7 @@ Now Dave can access objects in the bucket owned by Account A as follows:
    [profile TempCred]
    aws_access_key_id = temp-access-key-ID
    aws_secret_access_key = temp-secret-access-key
-   aws_security_token = security-token
+   aws_session_token = session-token
    region = us-west-2
    ```
 
@@ -359,6 +359,6 @@ Now Dave can access objects in the bucket owned by Account A as follows:
 1. Sign in to the AWS Management Console \([AWS Management Console](https://console.aws.amazon.com/)\) using Account C credentials\. In the IAM console, delete user AccountCadmin and user Dave\.
 
 ## Related Resources<a name="RelatedResources-managing-access-example4"></a>
-+ [Creating a Role to Delegate Permissions to an IAM User](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
-+ [Tutorial: Delegate Access Across AWS Accounts Using IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial-cross-account-with-roles.html) in the *IAM User Guide*\.
-+ [Working with Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\.
++ [Creating a Role to Delegate Permissions to an IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
++ [Tutorial: Delegate Access Across AWS Accounts Using IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial-cross-account-with-roles.html) in the *IAM User Guide*\.
++ [Working with Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\.

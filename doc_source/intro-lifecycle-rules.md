@@ -119,7 +119,7 @@ You can filter objects by key prefix, object tags, or a combination of both \(in
 
   The lifecycle rule applies to objects that have both of the tags specified\. Amazon S3 performs a logical AND\. Note the following:
   + Each tag must match both key and value exactly\.
-  + The rule applies to a subset of objects that have one or more tags specified in the rule\. If an object has additional tags specified, it doesn't matter\.
+  + The rule applies to a subset of objects that has tags specified in the rule\. If an object has additional tags specified, it doesn't matter\.\.
 **Note**  
 When you specify multiple tags in a filter, each tag key must be unique\.
 + **Specifying a filter based on both prefix and one or more tags** – In a lifecycle rule, you can specify a filter based on both the key prefix and one or more tags\. Again, you must wrap all of these in the <And> element as shown following: 
@@ -167,7 +167,7 @@ You can direct Amazon S3 to perform specific actions in an object's lifetime by 
 + **Transition** action element – You specify the `Transition` action to transition objects from one storage class to another\. For more information about transitioning objects, see [Supported Transitions and Related Constraints](lifecycle-transition-general-considerations.md#lifecycle-general-considerations-transition-sc)\. When a specified date or time period in the object's lifetime is reached, Amazon S3 performs the transition\. 
 
   For a versioned bucket \(versioning\-enabled or versioning\-suspended bucket\), the `Transition` action applies to the current object version\. To manage noncurrent versions, Amazon S3 defines the `NoncurrentVersionTransition` action \(described below\)\.
-+ **Expiration action element** – The `Expiration` action expires objects identified in the rule and applies to eligible objects in any of the Amazon S3 storage classes\. For more information about storage classes, see [Storage Classes](storage-class-intro.md)\. Amazon S3 makes all expired objects unavailable\. Whether the objects are permanently removed depends on the versioning state of the bucket\. 
++ **Expiration action element** – The `Expiration` action expires objects identified in the rule and applies to eligible objects in any of the Amazon S3 storage classes\. For more information about storage classes, see [Amazon S3 Storage Classes](storage-class-intro.md)\. Amazon S3 makes all expired objects unavailable\. Whether the objects are permanently removed depends on the versioning state of the bucket\. 
 **Important**  
 Object expiration lifecycle polices do not remove incomplete multipart uploads\. To remove incomplete multipart uploads you must use the **AbortIncompleteMultipartUpload** lifecycle configuration action that is described later in this section\. 
   + **Non\-versioned bucket** – The `Expiration` action results in Amazon S3 permanently removing the object\. 
@@ -235,12 +235,12 @@ When you specify the number of days in the `Transition` and `Expiration` actions
 Amazon S3 maintains only the last modified date for each object\. For example, the Amazon S3 console shows the **Last Modified** date in the object **Properties** pane\. When you initially create a new object, this date reflects the date the object is created\. If you replace the object, the date changes accordingly\. So when we use the term *creation date*, it is synonymous with the term *last modified date*\. 
 
 When specifying the number of days in the `NoncurrentVersionTransition` and `NoncurrentVersionExpiration` actions in a lifecycle configuration, note the following:
-+ It is the number of days from when the version of the object becomes noncurrent \(that is, since the object was overwritten or deleted\), as the time when Amazon S3 will perform the action on the specified object or objects\.
-+ Amazon S3 calculates the time by adding the number of days specified in the rule to the time when the new successor version of the object is created and rounding the resulting time to the next day midnight UTC\. For example, in your bucket, you have a current version of an object that was created at 1/1/2014 10:30 AM UTC, if the new successor version of the object that replaces the current version is created at 1/15/2014 10:30 AM UTC and you specify 3 days in a transition rule, then the transition date of the object would be calculated as 1/19/2014 00:00 UTC\. 
++ It is the number of days from when the version of the object becomes noncurrent \(that is, when the object is overwritten or deleted\), that Amazon S3 will perform the action on the specified object or objects\.
++ Amazon S3 calculates the time by adding the number of days specified in the rule to the time when the new successor version of the object is created and rounding the resulting time to the next day midnight UTC\. For example, in your bucket, suppose that you have a current version of an object that was created at 1/1/2014 10:30 AM UTC\. If the new version of the object that replaces the current version is created at 1/15/2014 10:30 AM UTC, and you specify 3 days in a transition rule, the transition date of the object is calculated as 1/19/2014 00:00 UTC\. 
 
 ### Lifecycle Rules: Based on a Specific Date<a name="intro-lifecycle-rules-date"></a>
 
-When specifying an action in a lifecycle rule, you can specify a date when you want Amazon S3to take the action\. When the specific date arrives, S3 applies the action to all qualified objects \(based on the filter criteria\)\. 
+When specifying an action in a lifecycle rule, you can specify a date when you want Amazon S3 to take the action\. When the specific date arrives, S3 applies the action to all qualified objects \(based on the filter criteria\)\. 
 
 If you specify a lifecycle action with a date that is in the past, all qualified objects become immediately eligible for that lifecycle action\.
 

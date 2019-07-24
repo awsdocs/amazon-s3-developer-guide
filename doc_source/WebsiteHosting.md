@@ -7,7 +7,7 @@ You can host a static website on Amazon Simple Storage Service \(Amazon S3\)\. O
 + [Configuring a Bucket for Website Hosting](HowDoIWebsiteConfiguration.md)
 + [Example Walkthroughs \- Hosting Websites on Amazon S3](hosting-websites-on-s3-examples.md)
 
-To host a static website, you configure an Amazon S3 bucket for website hosting, and then upload your website content to the bucket\. The website is then available at the AWS Region\-specific website endpoint of the bucket, which is in one of the following formats:
+To host a static website, you configure an Amazon S3 bucket for website hosting, and then upload your website content to the bucket\. This bucket must have public read access\. It is intentional that everyone in the world will have read access to this bucket\. The website is then available at the AWS Region\-specific website endpoint of the bucket, which is in one of the following formats:
 
 ```
 <bucket-name>.s3-website-<AWS-region>.amazonaws.com
@@ -38,3 +38,6 @@ For a list of AWS Region\-specific website endpoints for Amazon S3, see [Website
 Instead of accessing the website by using an Amazon S3 website endpoint, you can use your own domain, such as `example.com` to serve your content\. Amazon S3, along with Amazon Route 53, supports hosting a website at the root domain\. For example, if you have the root domain `example.com` and you host your website on Amazon S3, your website visitors can access the site from their browser by typing either `http://www.example.com` or `http://example.com`\. For an example walkthrough, see [Example: Setting up a Static Website Using a Custom Domain](website-hosting-custom-domain-walkthrough.md)\. 
 
 To configure a bucket for website hosting, you add website configuration to the bucket\. For more information, see [Configuring a Bucket for Website Hosting](HowDoIWebsiteConfiguration.md)\.
+
+**Note**  
+The Amazon S3 website endpoints do not support HTTPS\. For information about using HTTPS with an Amazon S3 bucket, see [How do I use CloudFront to serve HTTPS requests for my Amazon S3 bucket?](https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-https-requests-s3) and [Requiring HTTPS for Communication Between CloudFront and Your Amazon S3 Origin\.](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-s3-origin.html) 

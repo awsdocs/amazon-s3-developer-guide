@@ -29,4 +29,4 @@ Adding the crossdomain\.xml file to your bucket allows any Adobe Flash Player to
 1. ['starts-with', '$Filename', '']
 ```
 
-Some versions of the Adobe Flash Player do not properly handle HTTP responses that have an empty body\. To configure POST to return a response that does not have an empty body, set `success_action_status` to 201\. Amazon S3 will then return an XML document with a 201 status code\. For information about the content of the XML document, see [POST Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html)\. For information about form fields, see [HTML Form Fields](HTTPPOSTForms.md#HTTPPOSTFormFields)\. 
+Some versions of the Adobe Flash Player do not properly handle HTTP responses that have an empty body\. To configure POST to return a response that does not have an empty body, set `success_action_status` to 201\. Amazon S3 will then return an XML document with a 201 status code\. For information about the content of the XML document, see [POST Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html)\. For information about form fields, see [HTML Form Fields](HTTPPOSTForms.md#HTTPPOSTFormFields)\. 

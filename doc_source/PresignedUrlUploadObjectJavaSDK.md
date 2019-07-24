@@ -1,39 +1,11 @@
-# Upload an Object Using a Pre\-Signed URL \(AWS SDK for Java\)<a name="PresignedUrlUploadObjectJavaSDK"></a>
+# Upload an Object Using a Presigned URL \(AWS SDK for Java\)<a name="PresignedUrlUploadObjectJavaSDK"></a>
 
-The following tasks guide you through using the Java classes to upload an object using a pre\-signed URL\.
-
-
-**Uploading Objects**  
-
-|  |  | 
-| --- |--- |
-|  1  |  Create an instance of the `AmazonS3` class\.   | 
-|  2  |  Generate a pre\-signed URL by executing the `AmazonS3.generatePresignedUrl` method\. You provide a bucket name, an object key, and an expiration date by creating an instance of the `GeneratePresignedUrlRequest` class\. You must specify the HTTP verb PUT when creating this URL if you want to use it to upload an object\.  | 
-|  3  |  Anyone with the pre\-signed URL can upload an object\.  The upload creates an object or replaces any existing object with the same key that is specified in the pre\-signed URL\.  | 
-
-The following Java code example demonstrates the preceding tasks\.
+You can use the AWS SDK for Java to generate a presigned URL that you, or anyone you give the URL, can use to upload an object to Amazon S3\. When you use the URL to upload an object, Amazon S3 creates the object in the specified bucket\. If an object with the same key that is specified in the presigned URL already exists in the bucket, Amazon S3 replaces the existing object with the uploaded object\. To successfully complete an upload, you must do the following:
++ Specify the HTTP PUT verb when creating the `GeneratePresignedUrlRequest` and `HttpURLConnection` objects\.
++ Interact with the `HttpURLConnection` object in some way after finishing the upload\. The following example accomplishes this by using the `HttpURLConnection` object to check the HTTP response code\.
 
 **Example**  
-
-```
- 1. AmazonS3 s3Client = new AmazonS3Client(new ProfileCredentialsProvider()); 
- 2. 
- 3. java.util.Date expiration = new java.util.Date();
- 4. long msec = expiration.getTime();
- 5. msec += 1000 * 60 * 60; // Add 1 hour.
- 6. expiration.setTime(msec);
- 7. 
- 8. GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(bucketName, objectKey);
- 9. generatePresignedUrlRequest.setMethod(HttpMethod.PUT); 
-10. generatePresignedUrlRequest.setExpiration(expiration);
-11.              
-12. URL s = s3client.generatePresignedUrl(generatePresignedUrlRequest); 
-13. 
-14. // Use the pre-signed URL to upload an object.
-```
-
-**Example**  
-The following Java code example generates a pre\-signed URL\. The example code then uses the pre\-signed URL to upload sample data as an object\. For instructions about how to create and test a working sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\.  
+This example generates a presigned URL and uses it to upload sample data as an object\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
 import java.io.IOException;
@@ -41,70 +13,68 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.HttpMethod;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
+import com.amazonaws.services.s3.model.S3Object;
 
 public class GeneratePresignedUrlAndUploadObject {
-	private static String bucketName = "*** bucket name ***"; 
-	private static String objectKey  = "*** object key ***";
 
-	public static void main(String[] args) throws IOException {
-		AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
+    public static void main(String[] args) throws IOException {
+        String clientRegion = "*** Client region ***";
+        String bucketName = "*** Bucket name ***";
+        String objectKey = "*** Object key ***";
 
-		try {
-			System.out.println("Generating pre-signed URL.");
-			java.util.Date expiration = new java.util.Date();
-			long milliSeconds = expiration.getTime();
-			milliSeconds += 1000 * 60 * 60; // Add 1 hour.
-			expiration.setTime(milliSeconds);
+        try {
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .withRegion(clientRegion)
+                    .build();
+    
+            // Set the pre-signed URL to expire after one hour.
+            java.util.Date expiration = new java.util.Date();
+            long expTimeMillis = expiration.getTime();
+            expTimeMillis += 1000 * 60 * 60;
+            expiration.setTime(expTimeMillis);
 
-			GeneratePresignedUrlRequest generatePresignedUrlRequest = 
-				    new GeneratePresignedUrlRequest(bucketName, objectKey);
-			generatePresignedUrlRequest.setMethod(HttpMethod.PUT); 
-			generatePresignedUrlRequest.setExpiration(expiration);
-
-			URL url = s3client.generatePresignedUrl(generatePresignedUrlRequest); 
-
-			UploadObject(url);
-
-			System.out.println("Pre-Signed URL = " + url.toString());
-		} catch (AmazonServiceException exception) {
-			System.out.println("Caught an AmazonServiceException, " +
-					"which means your request made it " +
-					"to Amazon S3, but was rejected with an error response " +
-			"for some reason.");
-			System.out.println("Error Message: " + exception.getMessage());
-			System.out.println("HTTP  Code: "    + exception.getStatusCode());
-			System.out.println("AWS Error Code:" + exception.getErrorCode());
-			System.out.println("Error Type:    " + exception.getErrorType());
-			System.out.println("Request ID:    " + exception.getRequestId());
-		} catch (AmazonClientException ace) {
-			System.out.println("Caught an AmazonClientException, " +
-					"which means the client encountered " +
-					"an internal error while trying to communicate" +
-					" with S3, " +
-			"such as not being able to access the network.");
-			System.out.println("Error Message: " + ace.getMessage());
-		}
-	}
-
-	public static void UploadObject(URL url) throws IOException
-	{
-		HttpURLConnection connection=(HttpURLConnection) url.openConnection();
-		connection.setDoOutput(true);
-		connection.setRequestMethod("PUT");
-		OutputStreamWriter out = new OutputStreamWriter(
-				connection.getOutputStream());
-		out.write("This text uploaded as object.");
-		out.close();
-		int responseCode = connection.getResponseCode();
-		System.out.println("Service returned response code " + responseCode);
-
-	}
+            // Generate the pre-signed URL.
+            System.out.println("Generating pre-signed URL.");
+            GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(bucketName, objectKey)
+                    .withMethod(HttpMethod.PUT)
+                    .withExpiration(expiration);
+            URL url = s3Client.generatePresignedUrl(generatePresignedUrlRequest);
+            
+            // Create the connection and use it to upload the new object using the pre-signed URL.
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setRequestMethod("PUT");
+            OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
+            out.write("This text uploaded as an object via presigned URL.");
+            out.close();
+    
+            // Check the HTTP response code. To complete the upload and make the object available, 
+            // you must interact with the connection object in some way.
+            connection.getResponseCode();
+            System.out.println("HTTP response code: " + connection.getResponseCode());
+    
+            // Check to make sure that the object was uploaded successfully.
+            S3Object object = s3Client.getObject(bucketName, objectKey);
+            System.out.println("Object " + object.getKey() + " created in bucket " + object.getBucketName());
+        }
+        catch(AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        }
+        catch(SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client  
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
+        }
+    }
 }
 ```

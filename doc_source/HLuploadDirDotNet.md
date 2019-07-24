@@ -1,10 +1,10 @@
 # Upload a Directory<a name="HLuploadDirDotNet"></a>
 
-Using the `TransferUtility` class you can also upload an entire directory\. By default, Amazon S3 only uploads the files at the root of the specified directory\. You can, however, specify to recursively upload files in all the subdirectories\. 
+You can use the `TransferUtility` class to upload an entire directory\. By default, the API uploads only the files at the root of the specified directory\. You can, however, specify recursively uploading files in all of the subdirectories\. 
 
-You can also specify filtering expressions to select files, in the specified directory, based on some filtering criteria\. For example, to upload only the \.pdf files from a directory you specify a "\*\.pdf" filter expression\. 
+To select files in the specified directory based on filtering criteria, specify filtering expressions\. For example, to upload only the \.pdf files from a directory, specify the `"*.pdf"` filter expression\. 
 
-When uploading files from a directory you cannot specify the object's key name\. It is constructed from the file's location in the directory as well as its name\. For example, assume you have a directory, c:\\myfolder, with the following structure:
+When uploading files from a directory, you don't specify the key names for the resulting objects\. Amazon S3 constructs the key names using the original file path\. For example, assume that you have a directory called `c:\myfolder` with the following structure:
 
 **Example**  
 
@@ -26,80 +26,80 @@ When you upload this directory, Amazon S3 uses the following key names:
 3. media/An.mp3
 ```
 
-The following tasks guide you through using the high\-level \.NET classes to upload a directory\. 
-
-
-**High\-Level API Directory Uploading Process**  
-
-|  |  | 
-| --- |--- |
-| 1 | Create an instance of the `TransferUtility` class by providing your AWS credentials\.  | 
-| 2 | Execute one of the `TransferUtility.UploadDirectory` overloads\. | 
-
-The following C\# code sample demonstrates the preceding tasks\.
-
 **Example**  
+The following C\# example uploads a directory to an Amazon S3 bucket\. It shows how to use various `TransferUtility.UploadDirectory` overloads to upload the directory\. Each successive call to upload replaces the previous upload\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```
-1. TransferUtility utility = new TransferUtility();
-2. utility.UploadDirectory(directoryPath, existingBucketName);
-```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
 
-**Example**  
-The following C\# code example uploads a directory to an Amazon S3 bucket\. The example illustrates the use of various `TransferUtility.UploadDirectory` overloads to upload a directory, each successive call to upload replaces the previous upload\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
-
-```
+﻿using Amazon.S3;
+using Amazon.S3.Transfer;
 using System;
 using System.IO;
-using Amazon.S3;
-using Amazon.S3.Transfer;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+
+namespace Amazon.DocSamples.S3
 {
-    class UploadDirectoryMPUHighLevelAPI
+    class UploadDirMPUHighLevelAPITest
     {
-        static string existingBucketName = "*** Provide bucket name ***";
-        static string directoryPath      = "*** Provide directory name ***";
+        private const string existingBucketName = "*** bucket name ***";
+        private const string directoryPath = @"*** directory path ***";
+        // The example uploads only .txt files.
+        private const string wildCard = "*.txt";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 s3Client;
+        static void Main()
+        {
+            s3Client = new AmazonS3Client(bucketRegion);
+            UploadDirAsync().Wait();
+        }
 
-        static void Main(string[] args)
+        private static async Task UploadDirAsync()
         {
             try
             {
-                TransferUtility directoryTransferUtility =
-                    new TransferUtility(new AmazonS3Client(Amazon.RegionEndpoint.USEast1));
+                var directoryTransferUtility =
+                    new TransferUtility(s3Client);
 
                 // 1. Upload a directory.
-                directoryTransferUtility.UploadDirectory(directoryPath,
-                                                         existingBucketName);
+                await directoryTransferUtility.UploadDirectoryAsync(directoryPath,
+                    existingBucketName);
                 Console.WriteLine("Upload statement 1 completed");
 
-                // 2. Upload only the .txt files from a directory. 
-                //    Also, search recursively. 
-                directoryTransferUtility.UploadDirectory(
+                // 2. Upload only the .txt files from a directory 
+                //    and search recursively. 
+                await directoryTransferUtility.UploadDirectoryAsync(
                                                directoryPath,
                                                existingBucketName,
-                                               "*.txt",
+                                               wildCard,
                                                SearchOption.AllDirectories);
                 Console.WriteLine("Upload statement 2 completed");
 
-                // 3. Same as 2 and some optional configuration 
-                //    Search recursively for .txt files to upload).
-                TransferUtilityUploadDirectoryRequest request =
-                    new TransferUtilityUploadDirectoryRequest
-                    {
-                        BucketName = existingBucketName,
-                        Directory = directoryPath,
-                        SearchOption = SearchOption.AllDirectories,
-                        SearchPattern = "*.txt"
-                    };
+                // 3. The same as Step 2 and some optional configuration. 
+                //    Search recursively for .txt files to upload.
+                var request = new TransferUtilityUploadDirectoryRequest
+                {
+                    BucketName = existingBucketName,
+                    Directory = directoryPath,
+                    SearchOption = SearchOption.AllDirectories,
+                    SearchPattern = wildCard
+                };
 
-                directoryTransferUtility.UploadDirectory(request);
+                await directoryTransferUtility.UploadDirectoryAsync(request);
                 Console.WriteLine("Upload statement 3 completed");
             }
-
             catch (AmazonS3Exception e)
             {
-                Console.WriteLine(e.Message, e.InnerException);
+                Console.WriteLine(
+                        "Error encountered ***. Message:'{0}' when writing an object", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(
+                    "Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
             }
         }
     }

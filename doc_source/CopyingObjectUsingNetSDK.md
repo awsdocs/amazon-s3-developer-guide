@@ -1,81 +1,63 @@
-# Copy an Object Using the AWS SDK for \.NET<a name="CopyingObjectUsingNetSDK"></a>
+# Copy an Amazon S3 Object in a Single Operation Using the AWS SDK for \.NET<a name="CopyingObjectUsingNetSDK"></a>
 
-The following tasks guide you through using the high\-level \.NET classes to upload a file\. The API provides several variations, *overloads*, of the `Upload` method to easily upload your data\.
+The following C\# example shows how to use the high\-level AWS SDK for \.NET to copy objects that are as big as 5 GB in a single operation\. For objects that are bigger than 5 GB, use the multipart upload copy example described in [Copy an Amazon S3 Object Using the AWS SDK for \.NET Multipart Upload API](CopyingObjctsUsingLLNetMPUapi.md)\.
 
-
-**Copying Objects**  
-
-|  |  | 
-| --- |--- |
-| 1 | Create an instance of the `AmazonS3` class\.  | 
-| 2 | Execute one of the `AmazonS3.CopyObject`\. You need to provide information such as source bucket, source key name, target bucket, and target key name\. You provide this information by creating an instance of the `CopyObjectRequest` class\. | 
-
-The following C\# code example demonstrates the preceding tasks\.
-
-**Example**  
+This example makes a copy of an object that is a maximum of 5 GB\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
- 1. static IAmazonS3 client;
- 2. client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1);
- 3. 
- 4. CopyObjectRequest request = new CopyObjectRequest()
- 5. {
- 6.     SourceBucket      = bucketName,
- 7.     SourceKey         = objectKey,
- 8.     DestinationBucket = bucketName,
- 9.     DestinationKey    = destObjectKey
-10. };
-11. CopyObjectResponse response = client.CopyObject(request);
-```
+// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
 
-**Example**  
-The following C\# code example makes a copy of an object\. You will need to update code and provide your bucket names, and object keys\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
-
-```
-using System;
-using Amazon.S3;
+﻿using Amazon.S3;
 using Amazon.S3.Model;
+using System;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class CopyObject
+    class CopyObjectTest
     {
-        static string sourceBucket      = "*** Bucket on which to enable logging ***";
-        static string destinationBucket = "*** Bucket where you want logs stored ***";
-        static string objectKey         = "*** Provide key name ***";
-        static string destObjectKey     = "*** Provide destination key name ***";
-        static IAmazonS3 client;
+        private const string sourceBucket = "*** provide the name of the bucket with source object ***";
+        private const string destinationBucket = "*** provide the name of the bucket to copy the object to ***";
+        private const string objectKey = "*** provide the name of object to copy ***";
+        private const string destObjectKey = "*** provide the destination object key name ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2; 
+        private static IAmazonS3 s3Client;
 
-        public static void Main(string[] args)
+        public static void Main()
         {
-            using (client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1))
-                {
-                    Console.WriteLine("Copying an object");
-                    CopyingObject();
-                }
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            s3Client = new AmazonS3Client(bucketRegion);
+            Console.WriteLine("Copying an object");
+            CopyingObjectAsync().Wait();
         }
 
-        static void CopyingObject()
+        private static async Task CopyingObjectAsync()
         {
             try
             {
                 CopyObjectRequest request = new CopyObjectRequest
                 {
-                    SourceBucket      = sourceBucket,
-                    SourceKey         = objectKey,
+                    SourceBucket = sourceBucket,
+                    SourceKey = objectKey,
                     DestinationBucket = destinationBucket,
-                    DestinationKey    = destObjectKey
+                    DestinationKey = destObjectKey
                 };
-                CopyObjectResponse response = client.CopyObject(request);
+                CopyObjectResponse response = await s3Client.CopyObjectAsync(request);
             }
-            catch (AmazonS3Exception s3Exception)
+            catch (AmazonS3Exception e)
             {
-                Console.WriteLine(s3Exception.Message,
-                                  s3Exception.InnerException);
+                Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
             }
         }
     }
 }
 ```
+
+## More Info<a name="CopyingObjectUsingNetSDK-more-info"></a>
+
+[AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)
