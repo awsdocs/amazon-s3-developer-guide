@@ -49,7 +49,7 @@ The following code shows the minimum requirements for a rule\.
 ...
     <Rule>
         <ID>Rule-1</ID>
-        <Status>rule-Enabled-or-Diasbled</Status>
+        <Status>rule-Enabled-or-Disabled</Status>
         <Priority>integer</Priority>
         <DeleteMarkerReplication>
            <Status>Disabled</Status>
@@ -405,7 +405,7 @@ The latest version of the replication configuration XML is V2\. For backward com
   ...
       <Rule>
           <ID>Rule-1</ID>
-          <Status>rule-Enabled-or-Diasbled</Priority>
+          <Status>rule-Enabled-or-Disabled</Priority>
           <Priority>integer</Status>
           <DeleteMarkerReplication>
              <Status>Disabled</Status>
