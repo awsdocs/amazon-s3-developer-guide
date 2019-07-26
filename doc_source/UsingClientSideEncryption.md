@@ -10,7 +10,7 @@ The following AWS SDKs support client\-side encryption:
 + [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/)
 + [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/)
 + [AWS SDK for Ruby](https://aws.amazon.com/sdk-for-ruby/)
-+ [AWS SDK for C\+\+;](https://aws.amazon.com/sdk-for-cpp/)
++ [AWS SDK for C\+\+](https://aws.amazon.com/sdk-for-cpp/)
 
 ## Option 1: Using an AWS KMS–Managed Customer Master Key \(CMK\)<a name="client-side-encryption-kms-managed-master-key-intro"></a>
 
