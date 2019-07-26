@@ -105,7 +105,7 @@ The first column in the following table lists usage types that appear in your bi
 
 1. For more information on the byte\-hours unit, see [Converting Usage Byte\-Hours to Billed GB\-Months](#aws-usage-report-understand-converting-byte-hours)\.
 
-1. When objects that are archived to the GLACIER or DEEP\_ARCHIVE storage class are deleted before the minimum storage commitment has passed, which is 90 days for GLACIER or 180\-days for DEEP\_ARCHIVE, there is a prorated charge per gigabyte for the remaining days\.
+1. When objects that are archived to the GLACIER or DEEP\_ARCHIVE storage class are deleted, overwritten, or transitioned to a different storage class before the minimum storage commitment has passed, which is 90 days for GLACIER or 180\-days for DEEP\_ARCHIVE, there is a prorated charge per gigabyte for the remaining days\.
 
 1. For objects that are in INTELLIGENT\_TIERING, STANDARD\_IA, or ONEZONE\_IA storage, when they are deleted, overwritten, or transitioned to a different storage class prior to 30 days, there is a prorated charge per gigabyte for the remaining days\.
 

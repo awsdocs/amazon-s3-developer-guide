@@ -52,7 +52,7 @@ Block public access settings don't alter existing policies or ACLs\. Therefore, 
 + **Policies**
   + When evaluating a bucket policy, Amazon S3 begins by assuming that the policy is public\. It then evaluates the policy to determine whether it qualifies as non\-public\. To be considered non\-public, a bucket policy must grant access only to fixed values \(values that don't contain a wildcard\) of one or more of the following:
     + A set of Classless Inter\-Domain Routings \(CIDRs\), using `aws:SourceIp`\. For more information about CIDR, see [RFC 4632](http://www.rfc-editor.org/rfc/rfc4632.txt) on the RFC Editor website\.
-    + An AWS principal, user, role, or service principal
+    + An AWS principal, user, role, or service principal \(e\.g\. `aws:PrincipalOrgID`\)
     + `aws:SourceArn`
     + `aws:SourceVpc`
     + `aws:SourceVpce`

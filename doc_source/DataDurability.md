@@ -11,7 +11,6 @@ Amazon S3 further protects your data using versioning\. You can use versioning t
 
 The following security best practices also address data protection in Amazon S3:
 + [Implement server-side encryption](security-best-practices.md#server-side)
-+ [Implement server-side encryption](security-best-practices.md#server-side)
 + [Enforce encryption of data in transit](security-best-practices.md#transit)
 + [Consider using Amazon Macie with Amazon S3](security-best-practices.md#macie)
 + [Identify and audit all your Amazon S3 buckets](security-best-practices.md#audit)

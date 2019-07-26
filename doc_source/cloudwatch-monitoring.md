@@ -36,15 +36,15 @@ The `AWS/S3` namespace includes the following request metrics\.
 | HeadRequests |  The number of HTTP HEAD requests made to an Amazon S3 bucket\. Units: Count Valid statistics: Sum  | 
 | PostRequests |  The number of HTTP POST requests made to an Amazon S3 bucket\. Units: Count Valid statistics: Sum  [Delete Multiple Objects](https://docs.aws.amazon.com/AmazonS3/latest/API/multiobjectdeleteapi.html) and [SELECT Object Content](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html) requests are not included in this metric\.    | 
 | SelectRequests |  The number of Amazon S3 [SELECT Object Content](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html) requests made for objects in an Amazon S3 bucket\.  Units: Count Valid statistics: Sum  | 
-| SelectScannedBytes |  The number of bytes of data scanned with Amazon S3 [SELECT Object Content](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html) requests in an Amazon S3 bucket\.   Units: Bytes  Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max  | 
-| SelectReturnedBytes |  The number of bytes of data returned with Amazon S3 [SELECT Object Content](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html) requests in an Amazon S3 bucket\.   Units: Bytes  Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max  | 
+| SelectScannedBytes |  The number of bytes of data scanned with Amazon S3 [SELECT Object Content](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html) requests in an Amazon S3 bucket\.   Units: Bytes  Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max \(same as p100\), any percentile between p0\.0 and p99\.9  | 
+| SelectReturnedBytes |  The number of bytes of data returned with Amazon S3 [SELECT Object Content](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html) requests in an Amazon S3 bucket\.   Units: Bytes  Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max \(same as p100\), any percentile between p0\.0 and p99\.9  | 
 | ListRequests |  The number of HTTP requests that list the contents of a bucket\. Units: Count Valid statistics: Sum  | 
-| BytesDownloaded |  The number of bytes downloaded for requests made to an Amazon S3 bucket, where the response includes a body\. Units: Bytes Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max  | 
-| BytesUploaded |  The number of bytes uploaded that contain a request body, made to an Amazon S3 bucket\. Units: Bytes Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max  | 
+| BytesDownloaded |  The number of bytes downloaded for requests made to an Amazon S3 bucket, where the response includes a body\. Units: Bytes Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max \(same as p100\), any percentile between p0\.0 and p99\.9  | 
+| BytesUploaded |  The number of bytes uploaded that contain a request body, made to an Amazon S3 bucket\. Units: Bytes Valid statistics: Average \(bytes per request\), Sum \(bytes per period\), Sample Count, Min, Max \(same as p100\), any percentile between p0\.0 and p99\.9  | 
 | 4xxErrors |  The number of HTTP 4xx client error status code requests made to an Amazon S3 bucket with a value of either 0 or 1\. The `average` statistic shows the error rate, and the `sum` statistic shows the count of that type of error, during each period\. Units: Count Valid statistics: Average \(reports per request\), Sum \(reports per period\), Min, Max, Sample Count  | 
 | 5xxErrors |  The number of HTTP 5xx server error status code requests made to an Amazon S3 bucket with a value of either 0 or 1\. The `average` statistic shows the error rate, and the `sum` statistic shows the count of that type of error, during each period\. Units: Counts Valid statistics: Average \(reports per request\), Sum \(reports per period\), Min, Max, Sample Count  | 
-| FirstByteLatency |  The per\-request time from the complete request being received by an Amazon S3 bucket to when the response starts to be returned\. Units: Milliseconds Valid statistics: Average, Sum, Min, Max, Sample Count  | 
-| TotalRequestLatency |  The elapsed per\-request time from the first byte received to the last byte sent to an Amazon S3 bucket\. This includes the time taken to receive the request body and send the response body, which is not included in `FirstByteLatency`\. Units: Milliseconds Valid statistics: Average, Sum, Min, Max, Sample Count  | 
+| FirstByteLatency |  The per\-request time from the complete request being received by an Amazon S3 bucket to when the response starts to be returned\. Units: Milliseconds Valid statistics: Average, Sum, Min, Max\(same as p100\), Sample Count, any percentile between p0\.0 and p100  | 
+| TotalRequestLatency |  The elapsed per\-request time from the first byte received to the last byte sent to an Amazon S3 bucket\. This includes the time taken to receive the request body and send the response body, which is not included in `FirstByteLatency`\. Units: Milliseconds Valid statistics: Average, Sum, Min, Max\(same as p100\), Sample Count, any percentile between p0\.0 and p100  | 
 
 ## Amazon S3 CloudWatch Dimensions<a name="s3-cloudwatch-dimensions"></a>
 
@@ -61,13 +61,13 @@ The following dimensions are used to filter Amazon S3 metrics\.
 
  You can use the following procedures to view the storage metrics for Amazon S3\. To get the Amazon S3 metrics involved, you must set a start and end timestamp\. For metrics for any given 24\-hour period, set the time period to 86400 seconds, the number of seconds in a day\. Also, remember to set the `BucketName` and `StorageType` dimensions\.
 
-For example, if you use the AWS CLI to get the average of a specific bucket's size, in bytes, you could use the following command:
+For example, if you use the AWS CLI to get the average of a specific bucket's size, in bytes, you could use the following command\.
 
 ```
 aws cloudwatch get-metric-statistics --metric-name BucketSizeBytes --namespace AWS/S3 --start-time 2016-10-19T00:00:00Z --end-time 2016-10-20T00:00:00Z --statistics Average --unit Bytes --region us-west-2 --dimensions Name=BucketName,Value=ExampleBucket Name=StorageType,Value=StandardStorage --period 86400 --output json
 ```
 
-This example produces the following output:
+This example produces the following output\.
 
 ```
 {
@@ -95,7 +95,7 @@ This example produces the following output:
 1. \(Optional\) To filter by the **StorageType** dimension, enter the name of the storage class in the search field\.
 
 **To view a list of valid metrics stored for your AWS account using the AWS CLI**
-+ At a command prompt, use the following command:
++ At a command prompt, use the following command\.
 
   ```
   1. aws cloudwatch list-metrics --namespace "AWS/S3"

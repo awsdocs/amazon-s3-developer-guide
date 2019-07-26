@@ -63,10 +63,10 @@ We recommend the following:
 The **GLACIER** and **DEEP\_ARCHIVE** storage classes are designed for low\-cost data archiving\. These storage classes offer the same durability and resiliency as the STANDARD storage class\. For a comparison of storage class durability and availability, see the Durability and Availability table at the end of this section\.
 
 These storage classes differ as follows:
-+ GLACIER—Use for archives where portions of the data might need to be retrieved in minutes\. Data stored in the GLACIER storage class has a minimum storage duration period of 90 days and can be accessed in as little as 1\-5 minutes using expedited retrieval\. If you delete an object before the 90\-day minimum, you are charged for 90 days\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 
++ GLACIER—Use for archives where portions of the data might need to be retrieved in minutes\. Data stored in the GLACIER storage class has a minimum storage duration period of 90 days and can be accessed in as little as 1\-5 minutes using expedited retrieval\. If you have deleted, overwritten, or transitioned to a different storage class an object before the 90\-day minimum, you are charged for 90 days\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 
 
    
-+ DEEP\_ARCHIVE—Use for archiving data that rarely needs to be accessed\. Data stored in the DEEP\_ARCHIVE storage class has a minimum storage duration period of 180 days and a default retrieval time of 12 hours\. If you delete an object before the 180\-day minimum, you are charged for 180 days\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 
++ DEEP\_ARCHIVE—Use for archiving data that rarely needs to be accessed\. Data stored in the DEEP\_ARCHIVE storage class has a minimum storage duration period of 180 days and a default retrieval time of 12 hours\. If you have deleted, overwritten, or transitioned to a different storage class an object before the 180\-day minimum, you are charged for 180 days\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 
 
   DEEP\_ARCHIVE is the lowest cost storage option in AWS\. Storage costs for DEEP\_ARCHIVE are less expensive than using the GLACIER storage class\. You can reduce DEEP\_ARCHIVE retrieval costs by using bulk retrieval, which returns data within 48 hours\. 
 

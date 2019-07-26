@@ -10,10 +10,7 @@ The following examples show how to delete an object from both versioned and non\
 The following C\# example deletes an object from a non\-versioned bucket\. The example assumes that the objects don't have version IDs, so you don't specify version IDs\. You specify only the object key\. For information about how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.   
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
-
-﻿using Amazon.S3;
+using Amazon.S3;
 using Amazon.S3.Model;
 using System;
 using System.Threading.Tasks;
@@ -33,7 +30,6 @@ namespace Amazon.DocSamples.S3
             client = new AmazonS3Client(bucketRegion);
             DeleteObjectNonVersionedBucketAsync().Wait();
         }
-
         private static async Task DeleteObjectNonVersionedBucketAsync()
         {
             try
@@ -78,10 +74,7 @@ You can also get the version ID of an object by sending a `ListVersions` request
 For information about how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.   
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
-
-﻿using Amazon.S3;
+using Amazon.S3;
 using Amazon.S3.Model;
 using System;
 using System.Threading.Tasks;

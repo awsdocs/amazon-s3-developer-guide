@@ -15,7 +15,7 @@ Server access logs do not log information regarding wrong\-region redirect error
 + [Enabling Logging Programmatically](enable-logging-programming.md)
 + [Amazon S3 Server Access Log Format](LogFormat.md)
 + [Deleting Amazon S3 Log Files](deleting-log-files-lifecycle.md)
-+ [Using Amazon S3 Access Logs to Identify Signature Version 2 Requests](using-s3-access-logs-to-idenitfy-sigv2-requests.md)
++ [Using Amazon S3 Access Logs to Identify Requests](using-s3-access-logs-to-idenitfy-requests.md)
 
 ## How to Enable Server Access Logging<a name="server-access-logging-overview"></a>
 
@@ -29,6 +29,12 @@ There is no extra charge for enabling server access logging on an Amazon S3 buck
 To enable access logging, you must do the following: 
 +  Turn on the log delivery by adding logging configuration on the bucket for which you want Amazon S3 to deliver access logs\. We refer to this bucket as the *source bucket*\. 
 +  Grant the Amazon S3 Log Delivery group write permission on the bucket where you want the access logs saved\. We refer to this bucket as the *target bucket*\. 
+
+**Note**  
+ Amazon S3 only supports granting permission to deliver access logs via bucket ACL, not via bucket policy\.
+ Adding *deny* conditions to a bucket policy may prevent Amazon S3 from delivering access logs\.
+ [Default bucket encryption](bucket-encryption.html) on the destination bucket *may only be used* if **AES256 \(SSE\-S3\)** is selected\. SSE\-KMS encryption is not supported\. 
+Amazon S3 obbject lock cannot be enabled on the log destination bucket\.
 
 To turn on log delivery, you provide the following logging configuration information:
 + The name of the target bucket where you want Amazon S3 to save the access logs as objects\. You can have logs delivered to any bucket that you own that is in the same Region as the source bucket, including the source bucket itself\. 

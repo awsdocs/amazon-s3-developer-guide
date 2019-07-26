@@ -115,20 +115,66 @@ java.net.preferIPv6Addresses=true
 When using the AWS SDK for \.NET you use the `AmazonS3Config` class to enable the use of a dual\-stack endpoint as shown in the following example\. 
 
 ```
-var config = new AmazonS3Config
-{
-    UseDualstackEndpoint = true,
-    RegionEndpoint = RegionEndpoint.USWest2
-};
+using Amazon.S3;
+using Amazon.S3.Model;
+using System;
+using System.Threading.Tasks;
 
-using (var s3Client = new AmazonS3Client(config))
+namespace Amazon.DocSamples.S3
 {
-    var request = new ListObjectsRequest
+    class DualStackEndpointTest
     {
-        BucketName = “myBucket”
-    };
+        private const string bucketName = "*** bucket name ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 client;
 
-    var response = await s3Client.ListObjectsAsync(request);
+        public static void Main()
+        {
+            var config = new AmazonS3Config
+            {
+                UseDualstackEndpoint = true,
+                RegionEndpoint = bucketRegion
+            };
+            client = new AmazonS3Client(config);
+            Console.WriteLine("Listing objects stored in a bucket");
+            ListingObjectsAsync().Wait();
+        }
+
+        private static async Task ListingObjectsAsync()
+        {
+            try
+            {
+                var request = new ListObjectsV2Request
+                {
+                    BucketName = bucketName,
+                    MaxKeys = 10
+                };
+                ListObjectsV2Response response;
+                do
+                {
+                    response = await client.ListObjectsV2Async(request);
+
+                    // Process the response.
+                    foreach (S3Object entry in response.S3Objects)
+                    {
+                        Console.WriteLine("key = {0} size = {1}",
+                            entry.Key, entry.Size);
+                    }
+                    Console.WriteLine("Next Continuation Token: {0}", response.NextContinuationToken);
+                    request.ContinuationToken = response.NextContinuationToken;
+                } while (response.IsTruncated == true);
+            }
+            catch (AmazonS3Exception amazonS3Exception)
+            {
+                Console.WriteLine("An AmazonS3Exception was thrown. Exception: " + amazonS3Exception.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.ToString());
+            }
+        }
+    }
 }
 ```
 

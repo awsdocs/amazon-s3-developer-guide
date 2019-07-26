@@ -14,10 +14,7 @@ For information about SSE\-C, see [Protecting Data Using Server\-Side Encryption
 **Example**  
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
-
-﻿using Amazon.S3;
+using Amazon.S3;
 using Amazon.S3.Model;
 using System;
 using System.IO;
@@ -40,7 +37,6 @@ namespace Amazon.DocSamples.S3
             client = new AmazonS3Client(bucketRegion);
             ObjectOpsUsingClientEncryptionKeyAsync().Wait();
         }
-
         private static async Task ObjectOpsUsingClientEncryptionKeyAsync()
         {
             try
@@ -181,10 +177,7 @@ To upload large objects, you can use multipart upload API \(see [Uploading Objec
 **Example**  
 
   ```
-  // Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-  // SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
-  
-  ﻿using Amazon.S3;
+  using Amazon.S3;
   using Amazon.S3.Model;
   using System;
   using System.Collections.Generic;

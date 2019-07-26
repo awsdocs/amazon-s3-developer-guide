@@ -159,10 +159,7 @@ The following C\# code example provides a complete code listing that adds a noti
 **Example**  
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
-
-﻿using Amazon.S3;
+using Amazon.S3;
 using Amazon.S3.Model;
 using System;
 using System.Collections.Generic;
@@ -189,7 +186,7 @@ namespace Amazon.DocSamples.S3
         {
             try
             {
-                PutBucketNotificationRequest request = new PutBucketNotificationRequest
+               PutBucketNotificationRequest request = new PutBucketNotificationRequest
                 {
                     BucketName = bucketName
                 };

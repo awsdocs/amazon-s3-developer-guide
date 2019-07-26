@@ -67,7 +67,7 @@ In the following console procedure, you set up permissions for an Amazon S3 batc
                        "s3:GetObjectVersionTagging"
                    ],
                    "Resource": [
-                       "arn:aws:s3:::ObjectDestinationBucket*/*",
+                       "arn:aws:s3:::ObjectDestinationBucket/*",
                        "arn:aws:s3:::ObjectSourceBucket/*",
                        "arn:aws:s3:::ObjectDestinationManifestBucket/*"
                    ]
@@ -145,7 +145,7 @@ The following procedure shows how to set up permissions when using an Amazon S3 
                        "s3:GetObjectVersionTagging"
                    ],
                    "Resource": [
-                       "arn:aws:s3:::ObjectDestinationBucket*/*",
+                       "arn:aws:s3:::ObjectDestinationBucket/*",
                        "arn:aws:s3:::ObjectSourceBucket/*",
                        "arn:aws:s3:::ObjectSourceManifestBucket/*"
                    ]
@@ -169,15 +169,15 @@ The following procedure shows how to set up permissions when using an Amazon S3 
                "Effect": "Allow",
                "Principal": {
                    "AWS": [
-                       "arn:aws:iam::*DestinationAccountNumber*:user/ConsoleUserCreatingJob",
-                       "arn:aws:iam::*DestinationAccountNumber*:role/BatchOperationsDestinationRoleCOPY"
+                       "arn:aws:iam::DestinationAccountNumber:user/ConsoleUserCreatingJob",
+                       "arn:aws:iam::DestinationAccountNumber:role/BatchOperationsDestinationRoleCOPY"
                    ]
                },
                "Action": [
                    "s3:GetObject",
                    "s3:GetObjectVersion"
                ],
-               "Resource": "arn:aws:s3:::*ObjectSourceManifestBucket*/*"
+               "Resource": "arn:aws:s3:::ObjectSourceManifestBucket/*"
            }
        ]
    }
@@ -197,7 +197,7 @@ The following procedure shows how to set up permissions when using an Amazon S3 
                "Sid": "AllowBatchOperationsSourceObjectCOPY",
                "Effect": "Allow",
                "Principal": {
-                   "AWS": "arn:aws:iam::*DestinationAccountNumber*:role/BatchOperationsDestinationRoleCOPY"
+                   "AWS": "arn:aws:iam::DestinationAccountNumber:role/BatchOperationsDestinationRoleCOPY"
                },
                "Action": [
                    "s3:GetObject",

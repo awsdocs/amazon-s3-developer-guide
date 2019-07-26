@@ -47,46 +47,48 @@ Version\-specific permissions such as `s3:GetObjectVersion` are only required wh
 
   ```
   {
-    "Version":"2012-10-17",
-    "Statement":[
-      {
-        "Action": [
-          "s3:PutObject",
-          "s3:PutObjectAcl",
-          "s3:PutObjectTagging"
-        ],
-        "Effect": "Allow",
-        "Resource": "arn:aws:s3:::{{DestinationBucket}}/*"
-      },
-      {
-        "Action": [
-          "s3:GetObject"
-        ],
-        "Effect": "Allow",
-        "Resource": "arn:aws:s3:::{{SourceBucket}}/*"
-      },
-      {
-        "Effect": "Allow",
-        "Action": [
-          "s3:GetObject",
-          "s3:GetObjectVersion",
-          "s3:GetBucketLocation"
-        ],
-        "Resource": [
-          "arn:aws:s3:::{{ManifestBucket}}/*"
-        ]
-      },
-      {
-        "Effect":"Allow",
-        "Action":[
-          "s3:PutObject",
-          "s3:GetBucketLocation"
-        ],
-        "Resource":[
-          "arn:aws:s3:::{{ReportBucket}}/*"
-        ]
-      }
-    ]
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Action": [
+                  "s3:PutObject",
+                  "s3:PutObjectAcl",
+                  "s3:PutObjectTagging"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:s3:::{{DestinationBucket}}/*"
+          },
+          {
+              "Action": [
+                  "s3:GetObject",
+                  "s3:GetObjectAcl",
+                  "s3:GetObjectTagging"
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:s3:::{{SourceBucket}}/*"
+          },
+          {
+              "Effect": "Allow",
+              "Action": [
+                  "s3:GetObject",
+                  "s3:GetObjectVersion",
+                  "s3:GetBucketLocation"
+              ],
+              "Resource": [
+                  "arn:aws:s3:::{{ManifestBucket}}/*"
+              ]
+          },
+          {
+              "Effect": "Allow",
+              "Action": [
+                  "s3:PutObject",
+                  "s3:GetBucketLocation"
+              ],
+              "Resource": [
+                  "arn:aws:s3:::{{ReportBucket}}/*"
+              ]
+          }
+      ]
   }
   ```
 + PUT object tagging

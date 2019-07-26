@@ -23,7 +23,7 @@ After you create a job, Amazon S3 processes the list of objects in the manifest 
 
 ## Specifying a Manifest<a name="specify-batchjob-manifest"></a>
 
-A manifest is an Amazon S3 object that lists object keys that you want Amazon S3 to act upon\. To specify a manifest for a job, you specify the manifest object key, ETag, and optional version ID\.  The contents of the manifest must be URL encoded and Server\-Side Encryption with Customer\-Provided Keys \(SSE\-C\) and Server\-Side Encryption with AWS KMS\-Managed Keys \(SSE\-KMS\) encrypted manifests are not supported\. 
+ A manifest is an Amazon S3 object that lists object keys that you want Amazon S3 to act upon\. To create a manifest for a job, you specify the manifest object key, ETag, and optional version ID\. The contents of the manifest must be URL encoded\. Manifests that use server\-side encryption with customer\-provided keys \(SSE\-C\) and server\-side encryption with AWS KMS managed keys \(SSE\-KMS\) are not supported\. Your manifest must contain the bucket name, object key, and optionally, the object version for each object\. Any other fields in the manifest are not used by Amazon S3 batch operations\. 
 
 You can specify a manifest in a create job request using one of the following two formats\.
 + Amazon S3 inventory report — must be a CSV\-formatted Amazon S3 inventory report\. You must specify the `manifest.json` file that is associated with the inventory report\. For more information about inventory reports, see [ Amazon S3 Inventory](storage-inventory.md)\. If the inventory report includes version IDs, Amazon S3 batch operations operate on the specific object versions\.
