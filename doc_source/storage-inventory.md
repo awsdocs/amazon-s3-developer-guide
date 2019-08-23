@@ -60,7 +60,7 @@ The easiest way to set up an inventory is by using the AWS Management Console, b
 
    When you configure an inventory list for a source bucket, you specify the destination bucket where you want the list to be stored, and whether you want to generate the list daily or weekly\. You can also configure what object metadata to include and whether to list all object versions or only current versions\. 
 
-   You can specify that the inventory list file be encrypted by using Amazon S3\-managed keys \(SSE\-S3\) or AWS KMS\-managed keys \(SSE\-KMS\)\. For more information about SSE\-S3 and SSE\-KMS, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. If you plan to use SSE\-KMS encryption, see Step 3\.
+   You can specify that the inventory list file be encrypted by using Amazon S3\-managed keys \(SSE\-S3\) or keys stored in AWS KMS \(SSE\-KMS\)\. For more information about SSE\-S3 and SSE\-KMS, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. If you plan to use SSE\-KMS encryption, see Step 3\.
    + For information about how to use the console to configure an inventory list, see [How Do I Configure Amazon S3 Inventory?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-inventory.html) in the *Amazon Simple Storage Service Console User Guide*\.
    + To use the Amazon S3 API to configure an inventory list, use the [PUT Bucket inventory configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTInventoryConfig.html) REST API, or the equivalent from the AWS CLI or AWS SDKs\. 
 

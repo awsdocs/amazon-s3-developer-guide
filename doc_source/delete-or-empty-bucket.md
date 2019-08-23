@@ -55,23 +55,20 @@ For buckets without versioning enabled, you can delete all objects directly and 
 For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 ```
-import java.util.Iterator;
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.ListVersionsRequest;
-import com.amazonaws.services.s3.model.ObjectListing;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
-import com.amazonaws.services.s3.model.S3VersionSummary;
-import com.amazonaws.services.s3.model.VersionListing;
+import com.amazonaws.services.s3.model.*;
+
+import java.util.Iterator;
 
 public class DeleteBucket {
 
     public static void main(String[] args) {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
 
         try {
@@ -79,7 +76,7 @@ public class DeleteBucket {
                     .withCredentials(new ProfileCredentialsProvider())
                     .withRegion(clientRegion)
                     .build();
-    
+
             // Delete all objects from the bucket. This is sufficient
             // for unversioned buckets. For versioned buckets, when you attempt to delete objects, Amazon S3 inserts
             // delete markers for all objects, but doesn't delete the object versions.
@@ -91,7 +88,7 @@ public class DeleteBucket {
                 while (objIter.hasNext()) {
                     s3Client.deleteObject(bucketName, objIter.next().getKey());
                 }
-    
+
                 // If the bucket contains many objects, the listObjects() call
                 // might not return all of the objects in the first listing. Check to
                 // see whether the listing was truncated. If so, retrieve the next page of objects 
@@ -102,7 +99,7 @@ public class DeleteBucket {
                     break;
                 }
             }
-    
+
             // Delete all object versions (required for versioned buckets).
             VersionListing versionList = s3Client.listVersions(new ListVersionsRequest().withBucketName(bucketName));
             while (true) {
@@ -111,23 +108,21 @@ public class DeleteBucket {
                     S3VersionSummary vs = versionIter.next();
                     s3Client.deleteVersion(bucketName, vs.getKey(), vs.getVersionId());
                 }
-    
+
                 if (versionList.isTruncated()) {
                     versionList = s3Client.listNextBatchOfVersions(versionList);
                 } else {
                     break;
                 }
             }
-    
+
             // After all objects and object versions are deleted, delete the bucket.
             s3Client.deleteBucket(bucketName);
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client couldn't
             // parse the response from Amazon S3.
             e.printStackTrace();

@@ -1,6 +1,6 @@
 # Example 4: Replicating Encrypted Objects<a name="crr-walkthrough-4"></a>
 
-By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with AWS KMS\-managed keys\. To replicate encrypted objects, you modify the bucket replication configuration to tell Amazon S3 to replicate these objects\. This example explains how to use the Amazon S3 console and the AWS Command Line Interface \(AWS CLI\) to change the bucket replication configuration to enable replicating encrypted objects\. For more information, see [CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using AWS KMS\-Managed Encryption Keys](crr-replication-config-for-kms-objects.md)\. 
+By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with AWS KMS\-managed keys\. To replicate encrypted objects, you modify the bucket replication configuration to tell Amazon S3 to replicate these objects\. This example explains how to use the Amazon S3 console and the AWS Command Line Interface \(AWS CLI\) to change the bucket replication configuration to enable replicating encrypted objects\. For more information, see [CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](crr-replication-config-for-kms-objects.md)\. 
 
 **Topics**
 
@@ -263,4 +263,4 @@ In the replication configuration you specify the IAM role that Amazon S3 can ass
 
 ## Replicating Encrypted Objects \(AWS SDK\)<a name="crr-ex4-sdk"></a>
 
- For code example to add replication configuration, see [Configure CRR When Source and Destination Buckets Are Owned by the Same AWS Account \(AWS SDK\)](crr-walkthrough1.md#crr-ex1-sdk)\. You will need to modify replication configuration appropriately\. For conceptual information, see [CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using AWS KMS\-Managed Encryption Keys](crr-replication-config-for-kms-objects.md)\. 
+ For code example to add replication configuration, see [Configure CRR When Source and Destination Buckets Are Owned by the Same AWS Account \(AWS SDK\)](crr-walkthrough1.md#crr-ex1-sdk)\. You will need to modify replication configuration appropriately\. For conceptual information, see [CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](crr-replication-config-for-kms-objects.md)\. 

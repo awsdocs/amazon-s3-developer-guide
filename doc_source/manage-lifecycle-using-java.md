@@ -15,12 +15,10 @@ The following example shows how to use the AWS SDK for Java to add, update, and 
  For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
-import java.io.IOException;
-import java.util.Arrays;
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.BucketLifecycleConfiguration;
@@ -32,12 +30,15 @@ import com.amazonaws.services.s3.model.lifecycle.LifecycleFilter;
 import com.amazonaws.services.s3.model.lifecycle.LifecyclePrefixPredicate;
 import com.amazonaws.services.s3.model.lifecycle.LifecycleTagPredicate;
 
+import java.io.IOException;
+import java.util.Arrays;
+
 public class LifecycleConfiguration {
 
     public static void main(String[] args) throws IOException {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
-        
+
         // Create a rule to archive objects with the "glacierobjects/" prefix to Glacier immediately.
         BucketLifecycleConfiguration.Rule rule1 = new BucketLifecycleConfiguration.Rule()
                 .withId("Archive immediately rule")
@@ -68,42 +69,40 @@ public class LifecycleConfiguration {
 
             // Save the configuration.
             s3Client.setBucketLifecycleConfiguration(bucketName, configuration);
-    
+
             // Retrieve the configuration.
             configuration = s3Client.getBucketLifecycleConfiguration(bucketName);
-    
+
             // Add a new rule with both a prefix predicate and a tag predicate.
             configuration.getRules().add(new BucketLifecycleConfiguration.Rule().withId("NewRule")
                     .withFilter(new LifecycleFilter(new LifecycleAndOperator(
                             Arrays.asList(new LifecyclePrefixPredicate("YearlyDocuments/"),
-                                          new LifecycleTagPredicate(new Tag("expire_after", "ten_years"))))))
+                                    new LifecycleTagPredicate(new Tag("expire_after", "ten_years"))))))
                     .withExpirationInDays(3650)
                     .withStatus(BucketLifecycleConfiguration.ENABLED));
-    
+
             // Save the configuration.
             s3Client.setBucketLifecycleConfiguration(bucketName, configuration);
-    
+
             // Retrieve the configuration.
             configuration = s3Client.getBucketLifecycleConfiguration(bucketName);
-    
+
             // Verify that the configuration now has three rules.
             configuration = s3Client.getBucketLifecycleConfiguration(bucketName);
             System.out.println("Expected # of rules = 3; found: " + configuration.getRules().size());
-    
+
             // Delete the configuration.
             s3Client.deleteBucketLifecycleConfiguration(bucketName);
-    
+
             // Verify that the configuration has been deleted by attempting to retrieve it.
             configuration = s3Client.getBucketLifecycleConfiguration(bucketName);
             String s = (configuration == null) ? "No configuration found." : "Configuration found.";
             System.out.println(s);
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();

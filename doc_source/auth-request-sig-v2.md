@@ -5,7 +5,7 @@ This section describes how to authenticate requests using AWS Signature Version 
 Signature Version 4 is supported in all AWS Regions, and it is the only version that is supported for new Regions\. For more information, see [Authenticating Requests \(AWS Signature Version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html) in the *Amazon Simple Storage Service API Reference*\.   
 Amazon S3 offers you the ability to identify what API signature version was used to sign a request\. It is important to identify if any of your workflows are utilizing Signature Version 2 signing and upgrading them to use Signature Version 4 to prevent impact to your business\.   
 If you are using CloudTrail event logs\(recommended option\), please see [Using AWS CloudTrail to Identify Amazon S3 Signature Version 2 Requests ](cloudtrail-request-identification.md#cloudtrail-identification-sigv2-requests) on how to query and identify such requests\. 
-If you are using the Amazon S3 Server Access logs, see [ Using Amazon S3 Access Logs to Identify Signature Version 2 Requests ](using-s3-access-logs-to-idenitfy-requests.md#using-s3-access-logs-to-idenitfy-sigv2-requests) 
+If you are using the Amazon S3 Server Access logs, see [ Using Amazon S3 Access Logs to Identify Signature Version 2 Requests ](using-s3-access-logs-to-identify-requests.md#using-s3-access-logs-to-identify-sigv2-requests) 
 
 **Topics**
 + [Authenticating Requests Using the REST API](S3_Authentication2.md)

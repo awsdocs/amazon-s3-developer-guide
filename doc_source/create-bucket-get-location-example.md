@@ -27,20 +27,21 @@ To create a bucket using the Amazon S3 console, see [How Do I Create an S3 Bucke
 This example shows how to create an Amazon S3 bucket using the AWS SDK for Java\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
-import java.io.IOException;
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.GetBucketLocationRequest;
 
+import java.io.IOException;
+
 public class CreateBucket {
 
     public static void main(String[] args) throws IOException {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
 
         try {
@@ -53,18 +54,16 @@ public class CreateBucket {
                 // Because the CreateBucketRequest object doesn't specify a region, the
                 // bucket is created in the region specified in the client.
                 s3Client.createBucket(new CreateBucketRequest(bucketName));
-                
+
                 // Verify that the bucket was created by retrieving it and checking its location.
                 String bucketLocation = s3Client.getBucketLocation(new GetBucketLocationRequest(bucketName));
                 System.out.println("Bucket location: " + bucketLocation);
             }
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it and returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();

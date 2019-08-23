@@ -14,7 +14,7 @@ Following is an example of a virtual hosted–style request to delete the `puppy
 
 ```
 1. DELETE /puppy.jpg HTTP/1.1
-2. Host: examplebucket.s3-us-west-2.amazonaws.com
+2. Host: examplebucket.s3.amazonaws.com
 3. Date: Mon, 11 Apr 2016 12:00:00 GMT
 4. x-amz-date: Mon, 11 Apr 2016 12:00:00 GMT
 5. Authorization: authorization string
@@ -35,7 +35,7 @@ Following is an example of a path\-style version of the same request\.
 
 You will receive an HTTP response code 307 Temporary Redirect error and a message indicating what the correct URI is for your resource if you try to access a bucket outside the US East \(N\. Virginia\) Region with path\-style syntax that uses either of the following: 
 +  `http://s3.amazonaws.com` 
-+  An endpoint for a Region different from the one where the bucket resides\. For example, if you use `http://s3-eu-west-1.amazonaws.com` for a bucket that was created in the US West \(N\. California\) Region\.
++  An endpoint for a Region different from the one where the bucket resides\. For example, if you use `http://s3-us-west-1.amazonaws.com` for a bucket that was created in the US West \(N\. California\) Region\.
 
 **Important**  
 Buckets created after September 30, 2020, will support only virtual hosted\-style requests\. Path\-style requests will continue to be supported for buckets created on or before this date\. For more information, see [ Amazon S3 Path Deprecation Plan – The Rest of the Story](https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)\.

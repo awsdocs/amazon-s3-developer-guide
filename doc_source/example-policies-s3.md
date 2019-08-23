@@ -2,21 +2,21 @@
 
 This section shows several IAM user policies for controlling user access to Amazon S3\. For information about access policy language, see [Access Policy Language Overview](access-policy-language-overview.md)\.
 
-The following example policies will work if you test them programmatically; however, in order to use them with the Amazon S3 console, you will need to grant additional permissions that are required by the console\. For information about using policies such as these with the Amazon S3 console, see [An Example Walkthrough: Using user policies to control access to your bucket](walkthrough1.md)\. 
+The following example policies will work if you test them programmatically\. However, to use them with the Amazon S3 console, you must grant additional permissions that are required by the console\. For information about using policies such as these with the Amazon S3 console, see [Walkthrough: Controlling Access to a Bucket with User Policies](walkthrough1.md)\. 
 
 **Topics**
-+ [Example: Allow an IAM user access to one of your buckets](#iam-policy-ex0)
-+ [Example: Allow each IAM user access to a folder in a bucket](#iam-policy-ex1)
-+ [Example: Allow a group to have a shared folder in Amazon S3](#iam-policy-ex2)
-+ [Example: Allow all your users to read objects in a portion of the corporate bucket](#iam-policy-ex3)
-+ [Example: Allow a partner to drop files into a specific portion of the corporate bucket](#iam-policy-ex4)
-+ [An Example Walkthrough: Using user policies to control access to your bucket](walkthrough1.md)
++ [Allowing an IAM User Access to One of Your Buckets](#iam-policy-ex0)
++ [Allowing Each IAM User Access to a Folder in a Bucket](#iam-policy-ex1)
++ [Allowing a Group to Have a Shared Folder in Amazon S3](#iam-policy-ex2)
++ [Allowing All Your Users to Read Objects in a Portion of the Corporate Bucket](#iam-policy-ex3)
++ [Allowing a Partner to Drop Files into a Specific Portion of the Corporate Bucket](#iam-policy-ex4)
++ [Walkthrough: Controlling Access to a Bucket with User Policies](walkthrough1.md)
 
-## Example: Allow an IAM user access to one of your buckets<a name="iam-policy-ex0"></a>
+## Allowing an IAM User Access to One of Your Buckets<a name="iam-policy-ex0"></a>
 
 In this example, you want to grant an IAM user in your AWS account access to one of your buckets, `examplebucket`, and allow the user to add, update, and delete objects\. 
 
-In addition to granting the `s3:PutObject`, `s3:GetObject`, and `s3:DeleteObject` permissions to the user, the policy also grants the `s3:ListAllMyBuckets`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions\. These are the additional permissions required by the console\. Also, the `s3:PutObjectAcl` and the `s3:GetObjectAcl` actions are required to be able to copy, cut, and paste objects in the console\. For an example walkthrough that grants permissions to users and tests them using the console, see [An Example Walkthrough: Using user policies to control access to your bucket](walkthrough1.md)\. 
+In addition to granting the `s3:PutObject`, `s3:GetObject`, and `s3:DeleteObject` permissions to the user, the policy also grants the `s3:ListAllMyBuckets`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions\. These are the additional permissions required by the console\. Also, the `s3:PutObjectAcl` and the `s3:GetObjectAcl` actions are required to be able to copy, cut, and paste objects in the console\. For an example walkthrough that grants permissions to users and tests them using the console, see [Walkthrough: Controlling Access to a Bucket with User Policies](walkthrough1.md)\. 
 
 ```
 {
@@ -52,9 +52,9 @@ In addition to granting the `s3:PutObject`, `s3:GetObject`, and `s3:DeleteObject
 }
 ```
 
-## Example: Allow each IAM user access to a folder in a bucket<a name="iam-policy-ex1"></a>
+## Allowing Each IAM User Access to a Folder in a Bucket<a name="iam-policy-ex1"></a>
 
-In this example, you want two IAM users, Alice and Bob, to have access to your bucket, `examplebucket`, so they can add, update, and delete objects\. However, you want to restrict each user’s access to a single folder in the bucket\. You might create folders with names that match the user names\. 
+In this example, you want two IAM users, Alice and Bob, to have access to your bucket, `examplebucket`, so that they can add, update, and delete objects\. However, you want to restrict each user’s access to a single folder in the bucket\. You might create folders with names that match the user names\. 
 
 ```
 examplebucket
@@ -85,7 +85,7 @@ To grant each user access only to his or her folder, you can write a policy for 
 
 You then attach a similar policy to user `Bob`, identifying folder `Bob` in the `Resource` value\. 
 
-Instead of attaching policies to individual users, though, you can write a single policy that uses a policy variable and attach the policy to a group\. You will first need to create a group and add both Alice and Bob to the group\. The following example policy allows a set of Amazon S3 permissions in the `examplebucket/${aws:username}` folder\. When the policy is evaluated, the policy variable `${aws:username}` is replaced by the requester's user name\. For example, if Alice sends a request to put an object, the operation is allowed only if Alice is uploading the object to the `examplebucket/Alice` folder\.
+Instead of attaching policies to individual users, you can write a single policy that uses a policy variable and attach the policy to a group\. First you must create a group and add both Alice and Bob to the group\. The following example policy allows a set of Amazon S3 permissions in the `examplebucket/${aws:username}` folder\. When the policy is evaluated, the policy variable `${aws:username}` is replaced by the requester's user name\. For example, if Alice sends a request to put an object, the operation is allowed only if Alice is uploading the object to the `examplebucket/Alice` folder\.
 
 ```
  1. {
@@ -109,7 +109,7 @@ Instead of attaching policies to individual users, though, you can write a singl
 **Note**  
 When using policy variables, you must explicitly specify version `2012-10-17` in the policy\. The default version of the access policy language, 2008\-10\-17, does not support policy variables\. 
 
- If you want to test the preceding policy on the Amazon S3 console, the console requires permission for additional Amazon S3 permissions, as shown in the following policy\. For information about how the console uses these permissions, see [An Example Walkthrough: Using user policies to control access to your bucket](walkthrough1.md)\. 
+ If you want to test the preceding policy on the Amazon S3 console, the console requires permission for additional Amazon S3 permissions, as shown in the following policy\. For information about how the console uses these permissions, see [Walkthrough: Controlling Access to a Bucket with User Policies](walkthrough1.md)\. 
 
 ```
 {
@@ -180,15 +180,15 @@ Although IAM user names are friendly, human\-readable identifiers, they are not 
 }
 ```
 
-### Allow non\-IAM users \(mobile app users\) access to folders in a bucket<a name="non-iam-mobile-app-user-access"></a>
+### Allowing Non\-IAM Users \(Mobile App Users\) Access to Folders in a Bucket<a name="non-iam-mobile-app-user-access"></a>
 
 Suppose that you want to develop a mobile app, a game that stores users' data in an S3 bucket\. For each app user, you want to create a folder in your bucket\. You also want to limit each user’s access to his or her own folder\.  But you cannot create folders before someone downloads your app and starts playing the game, because you don’t have a user ID\. 
 
-In this case, you can require users to sign in to your app by using public identity providers such as Login with Amazon, Facebook, or Google\. After users have signed in to your app through one of these providers, they have a user ID that you can use to create user\-specific folders at run time\. 
+In this case, you can require users to sign in to your app by using public identity providers such as Login with Amazon, Facebook, or Google\. After users have signed in to your app through one of these providers, they have a user ID that you can use to create user\-specific folders at runtime\. 
 
 You can then use web identity federation in AWS Security Token Service to integrate information from the identity provider with your app and to get temporary security credentials for each user\. You can then create IAM policies that allow the app to access your bucket and perform such operations as creating user\-specific folders and uploading data\. For more information about web identity federation, see [About Web Identity Federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html) in the *IAM User Guide*\.
 
-## Example: Allow a group to have a shared folder in Amazon S3<a name="iam-policy-ex2"></a>
+## Allowing a Group to Have a Shared Folder in Amazon S3<a name="iam-policy-ex2"></a>
 
  Attaching the following policy to the group grants everybody in the group access to the following folder in Amazon S3: `my_corporate_bucket/share/marketing`\. Group members are allowed to access only the specific Amazon S3 permissions shown in the policy and only for objects in the specified folder\. 
 
@@ -211,9 +211,9 @@ You can then use web identity federation in AWS Security Token Service to integr
 16. }
 ```
 
-## Example: Allow all your users to read objects in a portion of the corporate bucket<a name="iam-policy-ex3"></a>
+## Allowing All Your Users to Read Objects in a Portion of the Corporate Bucket<a name="iam-policy-ex3"></a>
 
- In this example, you create a group called `AllUsers`, which contains all the IAM users that are owned by the AWS account\. You then attach a policy that gives the group access to `GetObject` and `GetObjectVersion`, but only for objects in the `my_corporate_bucket/readonly` folder\. 
+ In this example, you create a group named `AllUsers`, which contains all the IAM users that are owned by the AWS account\. You then attach a policy that gives the group access to `GetObject` and `GetObjectVersion`, but only for objects in the `my_corporate_bucket/readonly` folder\. 
 
 ```
  1. {
@@ -231,7 +231,7 @@ You can then use web identity federation in AWS Security Token Service to integr
 13. }
 ```
 
-## Example: Allow a partner to drop files into a specific portion of the corporate bucket<a name="iam-policy-ex4"></a>
+## Allowing a Partner to Drop Files into a Specific Portion of the Corporate Bucket<a name="iam-policy-ex4"></a>
 
  In this example, you create a group called `WidgetCo` that represents a partner company\. You create an IAM user for the specific person or application at the partner company that needs access, and then you put the user in the group\. 
 

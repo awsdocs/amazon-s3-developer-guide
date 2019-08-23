@@ -1,4 +1,4 @@
-# Protecting Data Using Server\-Side Encryption with AWS KMS–Managed Keys \(SSE\-KMS\)<a name="UsingKMSEncryption"></a>
+# Protecting Data Using Server\-Side Encryption with keys stored in AWS KMS\(SSE\-KMS\)<a name="UsingKMSEncryption"></a>
 
 Server\-side encryption is about protecting data at rest\. AWS Key Management Service \(AWS KMS\) is a service that combines secure, highly available hardware and software to provide a key management system scaled for the cloud\. AWS KMS uses customer master keys \(CMKs\) to encrypt your Amazon S3 objects\. You use AWS KMS via the [AWS Management Console](https://console.aws.amazon.com/kms) or [AWS KMS APIs](https://docs.aws.amazon.com/kms/latest/APIReference/) to centrally create encryption keys, define the policies that control how keys can be used, and audit key usage to prove they are being used correctly\. You can use these keys to protect your data in Amazon S3 buckets\.
 
@@ -8,6 +8,7 @@ For more information, see [What is AWS Key Management Service?](https://docs.aws
 
 **Note**  
 If you are uploading or accessing objects encrypted by SSE\-KMS, you need to use AWS Signature Version 4 for added security\. For more information on how to do this using an AWS SDK, see [Specifying Signature Version in Request Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version)\.
+ When using SSE\-KMS encryption with an S3 bucket, the KMS key must be in the same Region as the bucket\. 
 
 The highlights of SSE\-KMS are:
 + You can choose to create and manage encryption keys yourself, or you can choose to use your default service key uniquely generated on a customer by service by Region level\. 
@@ -50,7 +51,7 @@ SSE\-KMS encrypts only the object data\. Any object metadata is not encrypted\.
 
 ## Using AWS Key Management Service in the Amazon S3 Console<a name="kms-encryption-s3-console"></a>
 
-For more information about using AWS KMS\-managed encryption keys in the Amazon S3 console, see [How Do I Upload Files and Folders to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
+For more information about using the Amazon S3 console with encryption keys stored in AWS KMS, see [How Do I Upload Files and Folders to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## API Support for AWS Key Management Service in Amazon S3<a name="APISupportforKMSEncryption"></a>
 

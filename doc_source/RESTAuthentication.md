@@ -57,7 +57,7 @@ Following is pseudogrammar that illustrates the construction of the `Authorizati
 ```
  1. Authorization = "AWS" + " " + AWSAccessKeyId + ":" + Signature;
  2. 
- 3. Signature = Base64( HMAC-SHA1( YourSecretAccessKeyID, UTF-8-Encoding-Of( StringToSign ) ) );
+ 3. Signature = Base64( HMAC-SHA1( YourSecretAccessKey, UTF-8-Encoding-Of( StringToSign ) ) );
  4. 
  5. StringToSign = HTTP-Verb + "\n" +
  6. 	Content-MD5 + "\n" +
@@ -73,7 +73,7 @@ Following is pseudogrammar that illustrates the construction of the `Authorizati
 16. CanonicalizedAmzHeaders = <described below>
 ```
 
- HMAC\-SHA1 is an algorithm defined by [ RFC 2104 \- Keyed\-Hashing for Message Authentication ](http://www.ietf.org/rfc/rfc2104.txt)\. The algorithm takes as input two byte\-strings, a key and a message\. For Amazon S3 request authentication, use your AWS secret access key \(`YourSecretAccessKeyID`\) as the key, and the UTF\-8 encoding of the `StringToSign` as the message\. The output of HMAC\-SHA1 is also a byte string, called the digest\. The `Signature` request parameter is constructed by Base64 encoding this digest\. 
+ HMAC\-SHA1 is an algorithm defined by [ RFC 2104 \- Keyed\-Hashing for Message Authentication ](http://www.ietf.org/rfc/rfc2104.txt)\. The algorithm takes as input two byte\-strings, a key and a message\. For Amazon S3 request authentication, use your AWS secret access key \(`YourSecretAccessKey`\) as the key, and the UTF\-8 encoding of the `StringToSign` as the message\. The output of HMAC\-SHA1 is also a byte string, called the digest\. The `Signature` request parameter is constructed by Base64 encoding this digest\. 
 
 ## Request Canonicalization for Signing<a name="RESTAuthenticationRequestCanonicalization"></a>
 
@@ -263,7 +263,7 @@ The query string request authentication method doesn't require any special HTTP 
 The query string request authentication method differs slightly from the ordinary method but only in the format of the `Signature` request parameter and the `StringToSign` element\. Following is pseudo\-grammar that illustrates the query string request authentication method\. 
 
 ```
-1. Signature = URL-Encode( Base64( HMAC-SHA1( YourSecretAccessKeyID, UTF-8-Encoding-Of( StringToSign ) ) ) );
+1. Signature = URL-Encode( Base64( HMAC-SHA1( YourSecretAccessKey, UTF-8-Encoding-Of( StringToSign ) ) ) );
 2. 
 3. StringToSign = HTTP-VERB + "\n" +
 4.     Content-MD5 + "\n" +
@@ -273,7 +273,7 @@ The query string request authentication method differs slightly from the ordinar
 8.     CanonicalizedResource;
 ```
 
-`YourSecretAccessKeyID` is the AWS secret access key ID that Amazon assigns to you when you sign up to be an Amazon Web Service developer\. Notice how the `Signature` is URL\-Encoded to make it suitable for placement in the query string\. Note also that in `StringToSign`, the HTTP `Date` positional element has been replaced with `Expires`\. The `CanonicalizedAmzHeaders` and `CanonicalizedResource` are the same\. 
+`YourSecretAccessKey` is the AWS secret access key ID that Amazon assigns to you when you sign up to be an Amazon Web Service developer\. Notice how the `Signature` is URL\-Encoded to make it suitable for placement in the query string\. Note also that in `StringToSign`, the HTTP `Date` positional element has been replaced with `Expires`\. The `CanonicalizedAmzHeaders` and `CanonicalizedResource` are the same\. 
 
 **Note**  
 In the query string authentication method, you do not use the `Date` or the `x-amz-date request` header when calculating the string to sign\.

@@ -78,7 +78,7 @@ Grant Amazon S3 permissions to change replica ownership by adding permission for
 
 ## Adding Permission in the Destination Bucket Policy to Allow Changing Replica Ownership<a name="repl-ownership-accept-ownership-b-policy"></a>
 
-The owner of the destination bucket must grant the owner of the source bucket permission to change replica ownership\. The owner of the destination bucket grants the owner of the source bucket permission for the `s3:ObjectOwnerOverrideToBucketOwner` action\. This allows the source bucket owner to accept ownership of the object replicas\. The following example bucket policy statement shows how to do this:
+The owner of the destination bucket must grant the owner of the source bucket permission to change replica ownership\. The owner of the destination bucket grants the owner of the source bucket permission for the `s3:ObjectOwnerOverrideToBucketOwner` action\. This allows the destination bucket owner to accept ownership of the object replicas\. The following example bucket policy statement shows how to do this:
 
 ```
 ...

@@ -15,12 +15,12 @@ Besides the attractiveness of customized URLs, a second benefit of virtual hosti
 
 You will receive an HTTP response code 307 Temporary Redirect error and a message indicating what the correct URI is for your resource if you try to access a bucket outside the US East \(N\. Virginia\) Region with path\-style syntax that uses either of the following: 
 +  `http://s3.amazonaws.com` 
-+  An endpoint for a Region different from the one where the bucket resides\. For example, if you use `http://s3-eu-west-1.amazonaws.com` for a bucket that was created in the US West \(N\. California\) Region\.
++  An endpoint for a Region different from the one where the bucket resides\. For example, if you use `http://s3-us-west-1.amazonaws.com` for a bucket that was created in the US West \(N\. California\) Region\.
 
 **Important**  
 Buckets created after September 30, 2020, will support only virtual hosted\-style requests\. Path\-style requests will continue to be supported for buckets created on or before this date\. For more information, see [ Amazon S3 Path Deprecation Plan – The Rest of the Story](https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)\.
 
-If you use the US East \(N\. Virginia\) endpoint \(`s3.amazonaws.com`\) instead of the Region\-specific endpoint \(for example, `s3-eu-west-1.amazonaws.com`\), Amazon S3 routes any virtual hosted–style requests to the US East \(N\. Virginia\) Region by default\. When you create a bucket in any Region that was launched before March 20, 2019, Amazon S3 updates the DNS to reroute the request to the correct location, which might take time\. In the meantime, the default rule applies and your virtual hosted–style request goes to the US East \(N\. Virginia\) Region\. Amazon S3 then redirects it with an HTTP 307 redirect to the correct Region\. 
+If you use the US East \(N\. Virginia\) endpoint \(`s3.amazonaws.com`\) instead of the Region\-specific endpoint \(for example, `s3-us-west-1.amazonaws.com`\), Amazon S3 routes any virtual hosted–style requests to the US East \(N\. Virginia\) Region by default\. When you create a bucket in any Region that was launched before March 20, 2019, Amazon S3 updates the DNS to reroute the request to the correct location, which might take time\. In the meantime, the default rule applies and your virtual hosted–style request goes to the US East \(N\. Virginia\) Region\. Amazon S3 then redirects it with an HTTP 307 redirect to the correct Region\. 
 
 For S3 buckets in Regions launched after March 20, 2019, the DNS doesn't route your request directly to the AWS Region where your bucket resides\. It returns an HTTP 400 Bad Request error instead\.
 
@@ -163,7 +163,7 @@ The procedure for configuring DNS depends on your DNS server or DNS provider\. F
 
 ## Limitations<a name="VirtualHostingLimitations"></a>
 
-Specifying the bucket for the request by using the HTTP `Host` header is supported for non\-SSL requests and when using the REST API\. You cannot specify the bucket in SOAP by using a different endpoint\. 
+ Virtual host URLs are supported for non\-SSL \(HTTP\) requests only\. 
 
 **Note**  
  SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\. 

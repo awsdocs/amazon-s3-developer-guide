@@ -78,17 +78,16 @@ To enable or disable MFA Delete, you use the same API that you use to configure 
 </VersioningConfiguration>
 ```
 
+**Note**  
+ The bucket owner, the AWS account that created the bucket \(root account\), and all authorized IAM users can enable versioning, but only the bucket owner \(root account\) can enable MFA Delete\. For more information, see the AWS blog post on [ MFA Delete and Versioning](http://aws.amazon.com/blogs/security/securing-access-to-aws-using-mfa-part-3/)\.
+
 To use MFA Delete, you can use either a hardware or virtual MFA device to generate an authentication code\. The following example shows a generated authentication code displayed on a hardware device\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/MFADevice.png)
 
 **Note**  
-MFA Delete and MFA\-protected API access are features intended to provide protection for different scenarios\. You configure MFA Delete on a bucket to ensure that data in your bucket cannot be accidentally deleted\. MFA\-protected API access is used to enforce another authentication factor \(MFA code\) when accessing sensitive Amazon S3 resources\. You can require any operations against these Amazon S3 resources be done with temporary credentials created using MFA\. For an example, see [Adding a Bucket Policy to Require MFA](example-bucket-policies.md#example-bucket-policies-use-case-7)\.
-
-For more information on how to purchase and activate an authentication device, see [https://aws\.amazon\.com/iam/details/mfa/](https://aws.amazon.com/iam/details/mfa/)\. 
-
-**Note**  
-The bucket owner, the AWS account that created the bucket \(root account\), and all authorized IAM users can enable versioning, but only the bucket owner \(root account\) can enable MFA Delete\.
+MFA Delete and MFA\-protected API access are features intended to provide protection for different scenarios\. You configure MFA Delete on a bucket to ensure that data in your bucket cannot be accidentally deleted\. MFA\-protected API access is used to enforce another authentication factor \(MFA code\) when accessing sensitive Amazon S3 resources\. You can require any operations against these Amazon S3 resources be done with temporary credentials created using MFA\. For an example, see [Adding a Bucket Policy to Require MFA](example-bucket-policies.md#example-bucket-policies-use-case-7)\.   
+For more information on how to purchase and activate an authentication device, see [https://aws\.amazon\.com/iam/details/mfa/](https://aws.amazon.com/iam/details/mfa/)\.
 
 ## Related Topics<a name="versioning-related-topics"></a>
 

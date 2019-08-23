@@ -91,10 +91,12 @@ Using the IAM user sign\-in URL for Account A first sign in to the AWS Managemen
                "AWS": "arn:aws:iam::AccountB-ID:root"
             },
             "Action": [
-               "s3:PutObject"
+               "s3:PutObject",
+               "s3:ListBucket"
             ],
             "Resource": [
-               "arn:aws:s3:::examplebucket/*"
+            "arn:aws:s3:::examplebucket/*"
+     	"arn:aws:s3:::examplebucket"
             ]
          },
          {

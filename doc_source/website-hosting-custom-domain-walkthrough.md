@@ -152,7 +152,7 @@ Each record contains information about how you want to route traffic for one dom
 1. Specify the following values:  
 **Name**  
 For the first record that you'll create, accept the default value, which is the name of your hosted zone and your domain\. This will route internet traffic to the bucket that has the same name as your domain\.  
-Repeat this step to create a second record for your subdomain\. For the second record, type **www**\. This will route internet traffic to the www\.*example\.com* bucket\.  
+Repeat this step to create a second record for your subdomain\. For the second record, type **www**\. This will route internet traffic to the *www\.example\.com* bucket\.  
 **Type**  
 Choose **A – IPv4 address**\.  
 **Alias**  
@@ -167,7 +167,7 @@ Accept the default value of **No**\.
 
 1. Choose **Create**\.
 
-1. For www\.*example\.com*, repeat steps 3 through 5 to create a record\.
+1. For *www\.example\.com*, repeat steps 3 through 5 to create a record\.
 
 The following screenshot shows the alias record for `example.com` as an illustration\. You also need to create an alias record for `www.example.com`\.
 

@@ -4,19 +4,20 @@
 The following example shows how to copy an object in Amazon S3 using the AWS SDK for Java\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
-import java.io.IOException;
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CopyObjectRequest;
 
+import java.io.IOException;
+
 public class CopyObjectSingleOperation {
 
     public static void main(String[] args) throws IOException {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
         String sourceKey = "*** Source object key *** ";
         String destinationKey = "*** Destination object key ***";
@@ -30,13 +31,11 @@ public class CopyObjectSingleOperation {
             // Copy the object into a new object in the same bucket.
             CopyObjectRequest copyObjRequest = new CopyObjectRequest(bucketName, sourceKey, bucketName, destinationKey);
             s3Client.copyObject(copyObjRequest);
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client  
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();

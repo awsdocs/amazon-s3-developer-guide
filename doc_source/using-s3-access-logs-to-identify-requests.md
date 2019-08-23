@@ -1,4 +1,4 @@
-# Using Amazon S3 Access Logs to Identify Requests<a name="using-s3-access-logs-to-idenitfy-requests"></a>
+# Using Amazon S3 Access Logs to Identify Requests<a name="using-s3-access-logs-to-identify-requests"></a>
 
  You can identify Amazon S3 requests using Amazon S3 access logs\. 
 
@@ -9,8 +9,8 @@ Depending on how many access requests you get, it may require more resources and
 **Topics**
 + [Enabling Amazon S3 Access Logs for Requests](#enabling-s3-access-logs-for-requests)
 + [Querying Amazon S3 Access Logs for Requests](#querying-s3-access-logs-for-requests)
-+ [Using Amazon S3 Access Logs to Identify Signature Version 2 Requests](#using-s3-access-logs-to-idenitfy-sigv2-requests)
-+ [Using Amazon S3 Access Logs to Identify Object Access Requests](#using-s3-access-logs-to-idenitfy-objects-access)
++ [Using Amazon S3 Access Logs to Identify Signature Version 2 Requests](#using-s3-access-logs-to-identify-sigv2-requests)
++ [Using Amazon S3 Access Logs to Identify Object Access Requests](#using-s3-access-logs-to-identify-objects-access)
 + [Related Resources](#s3-access-logs-requests-more-info)
 
 ## Enabling Amazon S3 Access Logs for Requests<a name="enabling-s3-access-logs-for-requests"></a>
@@ -215,7 +215,7 @@ AND parse_datetime('2017-07-01','yyyy-MM-dd');
 **Note**  
 To reduce the time that you retain your log, you can [create an Amazon S3 lifecycle policy](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html) for your server access logs bucket\. Configure the lifecycle policy to remove log files periodically\. Doing so reduces the amount of data that Athena analyzes for each query\.
 
-## Using Amazon S3 Access Logs to Identify Signature Version 2 Requests<a name="using-s3-access-logs-to-idenitfy-sigv2-requests"></a>
+## Using Amazon S3 Access Logs to Identify Signature Version 2 Requests<a name="using-s3-access-logs-to-identify-sigv2-requests"></a>
 
 Amazon S3 support for Signature Version 2 will be turned off \(deprecated\)\. After that, Amazon S3 will no longer accept requests that use Signature Version 2, and all requests must use *Signature Version 4* signing\. You can identify Signature Version 2 access requests using Amazon S3 access logs\. 
 
@@ -230,11 +230,11 @@ We recommend that you use AWS CloudTrail data events instead of Amazon S3 access
                    GROUP BY requester, Sigv;
 ```
 
-## Using Amazon S3 Access Logs to Identify Object Access Requests<a name="using-s3-access-logs-to-idenitfy-objects-access"></a>
+## Using Amazon S3 Access Logs to Identify Object Access Requests<a name="using-s3-access-logs-to-identify-objects-access"></a>
 
 You can use queries on Amazon S3 server access logs to identify Amazon S3 object access requests, for operations such as GET, PUT, and DELETE, and discover further information about those requests\.
 
-The following Amazon Athena query example shows how to get all PUT object requests for Amazon S3 from the server access log\. You can modify the date range as needed to suit your needs\.
+The following Amazon Athena query example shows how to get all PUT object requests for Amazon S3 from the server access log\. 
 
 **Example — Show all requesters that are sending PUT object requests in a certain period**  
 
@@ -248,8 +248,37 @@ AND
 parse_datetime('2019-07-02:00:42:42','yyyy-MM-dd:HH:mm:ss')
 ```
 
+The following Amazon Athena query example shows how to get all GET object requests for Amazon S3 from the server access log\. 
+
+**Example — Show all requesters that are sending GET object requests in a certain period**  
+
+```
+SELECT Bucket, Requester, RemoteIP, Key, HTTPStatus, ErrorCode, RequestDateTime
+FROM s3_access_logs_db
+WHERE Operation='REST.GET.OBJECT' AND
+parse_datetime(RequestDateTime,'dd/MMM/yyyy:HH:mm:ss Z') 
+BETWEEN parse_datetime('2019-07-01:00:42:42','yyyy-MM-dd:HH:mm:ss')
+AND 
+parse_datetime('2019-07-02:00:42:42','yyyy-MM-dd:HH:mm:ss')
+```
+
+The following Amazon Athena query example shows how to get all annonymous requests to your S3 buckets from the server access log\. 
+
+**Example — Show all anonymous requesters that are making requests to a bucket in a certain period**  
+
+```
+SELECT Bucket, Requester, RemoteIP, Key, HTTPStatus, ErrorCode, RequestDateTime
+FROM s3_access_logs_db.mybucket_logs
+WHERE Requester IS NULL AND
+parse_datetime(RequestDateTime,'dd/MMM/yyyy:HH:mm:ss Z') 
+BETWEEN parse_datetime('2019-07-01:00:42:42','yyyy-MM-dd:HH:mm:ss')
+AND 
+parse_datetime('2019-07-02:00:42:42','yyyy-MM-dd:HH:mm:ss')
+```
+
 **Note**  
-This query can also be useful for security monitoring\. After the query is complete, you can review the results for `PutObject` calls from unexpected or unauthorized IP addresses/requesters\.
+You can modify the date range as needed to suit your needs\.
+These query examples may also be useful for security monitoring\. You can review the results for `PutObject` or `GetObject` calls from unexpected or unauthorized IP addresses/requesters and for identifying any anonymous requests to your buckets\.
  This query only retrieves information from the time at which logging was enabled\. 
 If you are using Amazon S3 AWS CloudTrail logs, see [Using AWS CloudTrail to Identify Access to Amazon S3 Objects](cloudtrail-request-identification.md#cloudtrail-identification-object-access)\. 
 

@@ -90,7 +90,7 @@ Access policy describes who has access to what\. You can associate an access pol
     Both bucket and object ACLs use the same XML schema\.
   + Bucket policy – For your bucket, you can add a bucket policy to grant other AWS accounts or IAM users permissions for the bucket and the objects in it\. Any object permissions apply only to the objects that the bucket owner creates\. Bucket policies supplement, and in many cases, replace ACL\-based access policies\.
 
-    The following is an example bucket policy\. You express bucket policy \(and user policy\) using a JSON file\. The policy grants anonymous read permission on all objects in a bucket\. The bucket policy has one statement, which allows the `s3:GetObject` action \(read permission\) on objects in a bucket named `examplebucket`\.  By specifying the `principal` with a wild card \(\*\), the policy grants anonymous access\. 
+    The following is an example bucket policy\. You express bucket policy \(and user policy\) using a JSON file\. The policy grants anonymous read permission on all objects in a bucket\. The bucket policy has one statement, which allows the `s3:GetObject` action \(read permission\) on objects in a bucket named `examplebucket`\.  By specifying the `principal` with a wild card \(\*\), the policy grants anonymous accesss, and should be used carefully\. For example, the following bucket policy would make objects publicly accessible\. 
 
     ```
     {

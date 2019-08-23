@@ -11,41 +11,37 @@ The following example shows how to use the low\-level Java classes to upload a f
 For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.SdkClientException;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.CompleteMultipartUploadRequest;
-import com.amazonaws.services.s3.model.InitiateMultipartUploadRequest;
-import com.amazonaws.services.s3.model.InitiateMultipartUploadResult;
-import com.amazonaws.services.s3.model.PartETag;
-import com.amazonaws.services.s3.model.UploadPartRequest;
-import com.amazonaws.services.s3.model.UploadPartResult;
-
 public class LowLevelMultipartUpload {
 
     public static void main(String[] args) throws IOException {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
         String keyName = "*** Key name ***";
         String filePath = "*** Path to file to upload ***";
-        
+
         File file = new File(filePath);
         long contentLength = file.length();
         long partSize = 5 * 1024 * 1024; // Set part size to 5 MB. 
 
         try {
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-                                    .withRegion(clientRegion)
-                                    .withCredentials(new ProfileCredentialsProvider())
-                                    .build();
-                       
+                    .withRegion(clientRegion)
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .build();
+
             // Create a list of ETag objects. You retrieve ETags for each object part uploaded,
             // then, after each individual part has been uploaded, pass the list of ETags to 
             // the request to complete the upload.
@@ -82,13 +78,11 @@ public class LowLevelMultipartUpload {
             CompleteMultipartUploadRequest compRequest = new CompleteMultipartUploadRequest(bucketName, keyName,
                     initResponse.getUploadId(), partETags);
             s3Client.completeMultipartUpload(compRequest);
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();

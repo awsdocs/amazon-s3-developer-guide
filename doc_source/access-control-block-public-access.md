@@ -7,7 +7,7 @@ When Amazon S3 receives a request to access a bucket or an object, it determines
 
 |  | 
 | --- |
-|    Public access is granted to buckets and objects through access control lists \(ACLs\), bucket policies, or both\. To help ensure that all your S3 buckets and objects have their public access blocked, turn on *all four* settings for block public access\. These settings apply account\-wide for all current and future buckets\.  We recommend that you turn on block public access settings\. Before applying these settings, verify that your applications will work correctly without public access\. If you require some level of public access to your buckets or objects, you can customize the individual settings to suit your storage use cases\.    | 
+|    Public access is granted to buckets and objects through access control lists \(ACLs\), bucket policies, or both\. To help ensure that all of your Amazon S3 buckets and objects have their public access blocked, we recommend that you turn on all four settings for block public access for your account\. These settings block public access for all current and future buckets\.  Before applying these settings, verify that your applications will work correctly without public access\. If you require some level of public access to your buckets or objects, for example to host a static website as described at [Hosting a Static Website on Amazon S3](WebsiteHosting.md), you can customize the individual settings to suit your storage use cases\.   | 
 
 **Note**  
 You can enable block public access settings only for buckets and AWS accounts\. Amazon S3 doesn't support block public access settings on a per\-object basis\.
@@ -60,33 +60,34 @@ Block public access settings don't alter existing policies or ACLs\. Therefore, 
     + `aws:SourceAccount`
     + `s3:x-amz-server-side-encryption-aws-kms-key-id`
     + `aws:userid`, outside the pattern "`AROLEID:*`"
+    + `aws:PrincipalOrgId`
   + Under these rules, the following example policies are considered public:
 
     ```
     { 
-    	“Principal”: { “Federated”: “graph.facebook.com” }, 
-    	“Resource”: “*”, 
-    	“Action”: “s3:PutObject”, 
-    	“Effect”: “Allow”
+    	"Principal": { "Federated": "graph.facebook.com" }, 
+    	"Resource": "*", 
+    	"Action": "s3:PutObject", 
+    	"Effect": "Allow"
     }
     ```
 
     ```
     {
-    	“Principal”: “*”, 
-    	“Resource”: “*”, 
-    	“Action”: “s3:PutObject”, 
-    	“Effect”: “Allow” 
+    	"Principal": "*", 
+    	"Resource": "*", 
+    	"Action": "s3:PutObject", 
+    	"Effect": "Allow" 
     }
     ```
 
     ```
     {
-    	“Principal”: “*”, 
-    	“Resource”: “*”, 
-    	“Action”: “s3:PutObject”, 
-    	“Effect”: “Allow”, 
-    	“Condition”: { “StringLike”: {“aws:SourceVpc”: “vpc-*”}}
+    	"Principal": "*", 
+    	"Resource": "*", 
+    	"Action": "s3:PutObject", 
+    	"Effect": "Allow", 
+    	"Condition": { "StringLike": {"aws:SourceVpc": "vpc-*"}}
     }
     ```
 
@@ -94,11 +95,11 @@ Block public access settings don't alter existing policies or ACLs\. Therefore, 
 
     ```
     {
-    	“Principal”: “*”, 
-    	“Resource”: “*”, 
-    	“Action”: “s3:PutObject”, 
-    	“Effect”: “Allow”, 
-    	“Condition”: {“StringEquals”: {“aws:SourceVpc”: “vpc-91237329”}}
+    	"Principal": "*", 
+    	"Resource": "*", 
+    	"Action": "s3:PutObject", 
+    	"Effect": "Allow", 
+    	"Condition": {"StringEquals": {"aws:SourceVpc": "vpc-91237329"}}
     }
     ```
   + For more information about bucket policies, see [Using Bucket Policies and User Policies](using-iam-policies.md)\.

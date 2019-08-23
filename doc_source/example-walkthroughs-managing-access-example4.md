@@ -74,15 +74,17 @@ You may want to open a text editor and write down some of the information as you
 
    1. Repeat the preceding step to create administrator users in Account B and Account C\.
 
-1. For Account C, note down the account ID\. 
+1. For Account C, note down the canonical user ID\. 
 
    When you create an IAM role in Account A, the trust policy grants Account C permission to assume the role by specifying the account ID\. You can find account information as follows:
 
-   1. Go to [https://aws\.amazon\.com/](https://aws.amazon.com/) and from the **My Account/Console** drop\-down menu, select **Security Credentials**\. 
+   1. Use your AWS account ID or account alias, your IAM user name, and your password to sign in to the [Amazon S3 Console](https://console.aws.amazon.com/s3/)\.
 
-   1. Sign in using appropriate account credentials\.
+   1. Choose the name of an Amazon S3 bucket to view the details about that bucket\.
 
-   1. Click **Account Identifiers** and note down the **AWS Account ID** and the **Canonical User ID**\.
+   1. Choose the **Permissions** tab and then choose **Access Control List**\. 
+
+   1. In the **Access for your AWS account** section, in the **Account** column is a long identifier, such as `c1daexampleaaf850ea79cf0430f33d72579fd1611c97f7ded193374c0b163b6`\. This is your canonical user ID\.
 
 1. When creating a bucket policy, you will need the following information\. Note down these values:
    + **Canonical user ID of Account A** – When the Account A administrator grants conditional upload object permission to the Account B administrator, the condition specifies the canonical user ID of the Account A user that must get full\-control of the objects\. 

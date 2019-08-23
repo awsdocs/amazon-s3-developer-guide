@@ -9,22 +9,23 @@ To send authenticated requests to Amazon S3 using your AWS account or IAM user c
 **Example**  
 
 ```
-import java.io.IOException;
-import java.util.List;
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
+import java.io.IOException;
+import java.util.List;
+
 public class MakingRequests {
 
     public static void main(String[] args) throws IOException {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
 
         try {
@@ -32,30 +33,27 @@ public class MakingRequests {
                     .withCredentials(new ProfileCredentialsProvider())
                     .withRegion(clientRegion)
                     .build();
-    
+
             // Get a list of objects in the bucket, two at a time, and 
             // print the name and size of each object.
             ListObjectsRequest listRequest = new ListObjectsRequest().withBucketName(bucketName).withMaxKeys(2);
             ObjectListing objects = s3Client.listObjects(listRequest);
-            while(true) {
+            while (true) {
                 List<S3ObjectSummary> summaries = objects.getObjectSummaries();
-                for(S3ObjectSummary summary : summaries) {
+                for (S3ObjectSummary summary : summaries) {
                     System.out.printf("Object \"%s\" retrieved with size %d\n", summary.getKey(), summary.getSize());
                 }
-                if(objects.isTruncated()) {
+                if (objects.isTruncated()) {
                     objects = s3Client.listNextBatchOfObjects(objects);
-                }
-                else {
+                } else {
                     break;
                 }
             }
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();

@@ -1,6 +1,6 @@
 # Using AWS CloudTrail to Identify Amazon S3 Requests<a name="cloudtrail-request-identification"></a>
 
-Amazon S3 lets you identify requests using an AWS CloudTrail event log\. AWS CloudTrail is the preferred way of identifying Amazon S3 requests, but if you are using Amazon S3 server access logs, see [](using-s3-access-logs-to-idenitfy-requests.md)\.
+Amazon S3 lets you identify requests using an AWS CloudTrail event log\. AWS CloudTrail is the preferred way of identifying Amazon S3 requests, but if you are using Amazon S3 server access logs, see [ Using Amazon S3 Access Logs to Identify Requests](using-s3-access-logs-to-identify-requests.md)\.
 
 **Topics**
 + [How CloudTrail Captures Requests Made to Amazon S3](#cloudtrail-logging-s3-requests)
@@ -136,7 +136,7 @@ For more information, see [Announcement: AWS CloudTrail for Amazon S3 adds new f
 **Note**  
 CloudTrail events for Amazon S3 include the signature version in the request details under the key name of '`additionalEventData`'\. To find the signature version on requests made for objects in Amazon S3 like GETs, PUTs, and DELETEs, you must enable CloudTrail data events because it is turned off by default\. 
 
-AWS CloudTrail is the preferred method for identifying Signature Version 2 requests, if you are using Amazon S3 server access logs, see [ Using Amazon S3 Access Logs to Identify Signature Version 2 Requests ](using-s3-access-logs-to-idenitfy-requests.md#using-s3-access-logs-to-idenitfy-sigv2-requests)
+AWS CloudTrail is the preferred method for identifying Signature Version 2 requests, if you are using Amazon S3 server access logs, see [ Using Amazon S3 Access Logs to Identify Signature Version 2 Requests ](using-s3-access-logs-to-identify-requests.md#using-s3-access-logs-to-identify-sigv2-requests)
 
 ### Athena Query Examples for Identifying Amazon S3 Signature Version 2 Requests<a name="ct-examples-identify-sigv2-requests"></a>
 
@@ -256,8 +256,9 @@ The following example shows how to get all PUT object requests for Amazon S3 fro
 
 ### Athena Query Example for Identifying Amazon S3 Object Access Requests<a name="ct-examples-identify-object-access-requests"></a>
 
-**Example — Select all events that have object access requests, and print only EventTime, EventSource, SourceIP, UserAgent, BucketName, Object, and UserARN**  
-In the following Athena query, replace *<s3\_cloudtrail\_events\_db\.cloudtrail\_myawsexamplebucket\_table>* with your Athena details, and modify the date range as needed\.   
+In the following Athena query examples, replace *<s3\_cloudtrail\_events\_db\.cloudtrail\_myawsexamplebucket\_table>* with your Athena details, and modify the date range as needed\. 
+
+**Example — Select all events that have PUT object access requests, and print only EventTime, EventSource, SourceIP, UserAgent, BucketName, Object, and UserARN**  
 
 ```
 SELECT
@@ -276,11 +277,49 @@ WHERE
   AND eventTime BETWEEN "2019-07-05T00:00:00Z" and "2019-07-06T00:00:00Z"
 ```
 
+**Example — Select all events that have GET object access requests, and print only EventTime, EventSource, SourceIP, UserAgent, BucketName, Object, and UserARN**  
+
+```
+SELECT
+  eventTime, 
+  eventName, 
+  eventSource, 
+  sourceIpAddress, 
+  userAgent, 
+  requestParameters.bucketName as bucketName, 
+  requestParameters.key as object,
+  userIdentity.arn as userArn
+FROM
+  s3_cloudtrail_events_db.cloudtrail_myawsexamplebucket_table
+WHERE
+  eventName = ‘GetObject'
+  AND eventTime BETWEEN "2019-07-05T00:00:00Z" and "2019-07-06T00:00:00Z"
+```
+
+**Example — Select all anonymous requester events oo a bucket in a certain period and print only EventTime, EventSource, SourceIP, UserAgent, BucketName, UserIdentity, and UserARN**  
+
+```
+SELECT
+  eventTime, 
+  eventName, 
+  eventSource, 
+  sourceIpAddress, 
+  userAgent, 
+  requestParameters.bucketName as bucketName, 
+  userIdentity.arn as userArn,
+  userIdentity.principalId 
+FROM
+  s3_cloudtrail_events_db.cloudtrail_myawsexamplebucket_table
+WHERE
+  userIdentity.principalId='ANONYMOUS_PRINCIPAL'
+  AND eventTime BETWEEN "2019-07-05T00:00:00Z" and "2019-07-06T00:00:00Z"
+```
+
 **Note**  
-This query can also be useful for security monitoring\. After the query is complete, you can review the results for `PutObject` calls from unexpected or unauthorized IP addresses/requesters\.
+These query examples may also be useful for security monitoring\. You can review the results for `PutObject` or `GetObject` calls from unexpected or unauthorized IP addresses/requesters and for identifying any anonymous requests to your buckets\.
  This query only retrieves information from the time at which logging was enabled\. 
 
-If you are using Amazon S3 server access logs, see [ Using Amazon S3 Access Logs to Identify Object Access Requests](using-s3-access-logs-to-idenitfy-requests.md#using-s3-access-logs-to-idenitfy-objects-access)\.
+If you are using Amazon S3 server access logs, see [ Using Amazon S3 Access Logs to Identify Object Access Requests](using-s3-access-logs-to-identify-requests.md#using-s3-access-logs-to-identify-objects-access)\.
 
 ## Related Resources<a name="cloudtrail-logging-related-resources"></a>
 + [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)

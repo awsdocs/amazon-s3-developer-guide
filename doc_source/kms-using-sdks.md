@@ -15,7 +15,7 @@ PutObjectRequest putRequest = new PutObjectRequest(bucketName,
    keyName, file).withSSEAwsKeyManagementParams(new SSEAwsKeyManagementParams());
 ```
 
-In this case, Amazon S3 uses the default master key \(see [Protecting Data Using Server\-Side Encryption with AWS KMS–Managed Keys \(SSE\-KMS\)](UsingKMSEncryption.md)\)\. You can optionally create your own key and specify that in the request\.
+In this case, Amazon S3 uses the default master key \(see [Protecting Data Using Server\-Side Encryption with keys stored in AWS KMS\(SSE\-KMS\)](UsingKMSEncryption.md)\)\. You can optionally create your own key and specify that in the request\.
 
 ```
 PutObjectRequest putRequest = new PutObjectRequest(bucketName,
@@ -66,7 +66,7 @@ PutObjectRequest putRequest = new PutObjectRequest
    };
 ```
 
-In this case, Amazon S3 uses the default master key \(see [Protecting Data Using Server\-Side Encryption with AWS KMS–Managed Keys \(SSE\-KMS\)](UsingKMSEncryption.md)\)\. You can optionally create your own key and specify that in the request\. 
+In this case, Amazon S3 uses the default master key \(see [Protecting Data Using Server\-Side Encryption with keys stored in AWS KMS\(SSE\-KMS\)](UsingKMSEncryption.md)\)\. You can optionally create your own key and specify that in the request\. 
 
 ```
 PutObjectRequest putRequest1 = new PutObjectRequest

@@ -27,4 +27,4 @@ The following security best practices also address resilience:
 
 ## Encryption of Amazon S3 Backups<a name="backup-encryption"></a>
 
-If you are storing backups using Amazon S3, the encryption of your backups depends on the configuration of those buckets\. Amazon S3 provides a way to set the default encryption behavior for an S3 bucket\. You can set default encryption on a bucket so that all objects are encrypted when they are stored in the bucket\. The default encyrption supports AWS KMS\-managed keys \(SSE\-KMS\)\. For more information, see [ Amazon S3 Default Encryption for S3 Buckets](bucket-encryption.md)\.
+If you are storing backups using Amazon S3, the encryption of your backups depends on the configuration of those buckets\. Amazon S3 provides a way to set the default encryption behavior for an S3 bucket\. You can set default encryption on a bucket so that all objects are encrypted when they are stored in the bucket\. The default encyrption supports keys stored in AWS KMS \(SSE\-KMS\)\. For more information, see [ Amazon S3 Default Encryption for S3 Buckets](bucket-encryption.md)\.

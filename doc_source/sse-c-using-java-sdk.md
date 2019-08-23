@@ -16,6 +16,15 @@ For information about SSE\-C, see [Protecting Data Using Server\-Side Encryption
 **Example**  
 
 ```
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.*;
+
+import javax.crypto.KeyGenerator;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -23,34 +32,18 @@ import java.io.InputStreamReader;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-import javax.crypto.KeyGenerator;
-
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.SdkClientException;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.CopyObjectRequest;
-import com.amazonaws.services.s3.model.GetObjectMetadataRequest;
-import com.amazonaws.services.s3.model.GetObjectRequest;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
-import com.amazonaws.services.s3.model.SSECustomerKey;
-
 public class ServerSideEncryptionUsingClientSideEncryptionKey {
     private static SSECustomerKey SSE_KEY;
     private static AmazonS3 S3_CLIENT;
     private static KeyGenerator KEY_GENERATOR;
 
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
         String keyName = "*** Key name ***";
         String uploadFileName = "*** File path ***";
         String targetKeyName = "*** Target key name ***";
-        
+
         // Create an encryption key.
         KEY_GENERATOR = KeyGenerator.getInstance("AES");
         KEY_GENERATOR.init(256, new SecureRandom());
@@ -64,23 +57,21 @@ public class ServerSideEncryptionUsingClientSideEncryptionKey {
 
             // Upload an object.
             uploadObject(bucketName, keyName, new File(uploadFileName));
-    
+
             // Download the object.
             downloadObject(bucketName, keyName);
-    
+
             // Verify that the object is properly encrypted by attempting to retrieve it
             // using the encryption key.
             retrieveObjectMetadata(bucketName, keyName);
-    
+
             // Copy the object into a new object that also uses SSE-C.
             copyObject(bucketName, keyName, targetKeyName);
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();
@@ -103,11 +94,11 @@ public class ServerSideEncryptionUsingClientSideEncryptionKey {
 
     private static void retrieveObjectMetadata(String bucketName, String keyName) {
         GetObjectMetadataRequest getMetadataRequest = new GetObjectMetadataRequest(bucketName, keyName)
-                                                                .withSSECustomerKey(SSE_KEY);
+                .withSSECustomerKey(SSE_KEY);
         ObjectMetadata objectMetadata = S3_CLIENT.getObjectMetadata(getMetadataRequest);
         System.out.println("Metadata retrieved. Object size: " + objectMetadata.getContentLength());
     }
-    
+
     private static void copyObject(String bucketName, String keyName, String targetKeyName)
             throws NoSuchAlgorithmException {
         // Create a new encryption key for target so that the target is saved using SSE-C.
@@ -115,7 +106,7 @@ public class ServerSideEncryptionUsingClientSideEncryptionKey {
 
         CopyObjectRequest copyRequest = new CopyObjectRequest(bucketName, keyName, bucketName, targetKeyName)
                 .withSourceSSECustomerKey(SSE_KEY)
-				.withDestinationSSECustomerKey(newSSEKey);
+                .withDestinationSSECustomerKey(newSSEKey);
 
         S3_CLIENT.copyObject(copyRequest);
         System.out.println("Object copied");
@@ -148,14 +139,10 @@ The following example uses `TransferManager` to create objects and shows how to 
 **Example**  
 
 ```
-import java.io.File;
-import java.security.SecureRandom;
-
-import javax.crypto.KeyGenerator;
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CopyObjectRequest;
@@ -166,10 +153,14 @@ import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 import com.amazonaws.services.s3.transfer.Upload;
 
+import javax.crypto.KeyGenerator;
+import java.io.File;
+import java.security.SecureRandom;
+
 public class ServerSideEncryptionCopyObjectUsingHLwithSSEC {
 
     public static void main(String[] args) throws Exception {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
         String fileToUpload = "*** File path ***";
         String keyName = "*** New object key name ***";
@@ -177,48 +168,46 @@ public class ServerSideEncryptionCopyObjectUsingHLwithSSEC {
 
         try {
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-                                    .withRegion(clientRegion)
-                                    .withCredentials(new ProfileCredentialsProvider())
-                                    .build();
+                    .withRegion(clientRegion)
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .build();
             TransferManager tm = TransferManagerBuilder.standard()
-                                    .withS3Client(s3Client)
-                                    .build();
+                    .withS3Client(s3Client)
+                    .build();
 
             // Create an object from a file.
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, keyName, new File(fileToUpload));
-    
+
             // Create an encryption key.
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             keyGenerator.init(256, new SecureRandom());
             SSECustomerKey sseCustomerEncryptionKey = new SSECustomerKey(keyGenerator.generateKey());
-    
+
             // Upload the object. TransferManager uploads asynchronously, so this call returns immediately.
             putObjectRequest.setSSECustomerKey(sseCustomerEncryptionKey);
             Upload upload = tm.upload(putObjectRequest);
-            
+
             // Optionally, wait for the upload to finish before continuing.
             upload.waitForCompletion();
             System.out.println("Object created.");
-    
+
             // Copy the object and store the copy using SSE-C with a new key.
             CopyObjectRequest copyObjectRequest = new CopyObjectRequest(bucketName, keyName, bucketName, targetKeyName);
             SSECustomerKey sseTargetObjectEncryptionKey = new SSECustomerKey(keyGenerator.generateKey());
             copyObjectRequest.setSourceSSECustomerKey(sseCustomerEncryptionKey);
             copyObjectRequest.setDestinationSSECustomerKey(sseTargetObjectEncryptionKey);
-    
+
             // Copy the object. TransferManager copies asynchronously, so this call returns immediately.
             Copy copy = tm.copy(copyObjectRequest);
-            
+
             // Optionally, wait for the upload to finish before continuing.
             copy.waitForCompletion();
             System.out.println("Copy complete.");
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();

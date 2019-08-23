@@ -10,19 +10,20 @@ For more information about versioning, see [Object Versioning](ObjectVersioning.
 The following example deletes an object from a bucket\. The example assumes that the bucket is not versioning\-enabled and the object doesn't have any version IDs\. In the delete request, you specify only the object key and not a version ID\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
-import java.io.IOException;
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 
+import java.io.IOException;
+
 public class DeleteObjectNonVersionedBucket {
 
     public static void main(String[] args) throws IOException {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
         String keyName = "*** Key name ****";
 
@@ -33,13 +34,11 @@ public class DeleteObjectNonVersionedBucket {
                     .build();
 
             s3Client.deleteObject(new DeleteObjectRequest(bucketName, keyName));
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();
@@ -58,21 +57,22 @@ The following example deletes an object from a versioned bucket\. The example de
 You can get the version IDs of an object by sending a `ListVersions` request\.
 
 ```
-import java.io.IOException;
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.BucketVersioningConfiguration;
 import com.amazonaws.services.s3.model.DeleteVersionRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 
+import java.io.IOException;
+
 public class DeleteObjectVersionEnabledBucket {
 
     public static void main(String[] args) throws IOException {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
         String keyName = "*** Key name ****";
 
@@ -84,26 +84,23 @@ public class DeleteObjectVersionEnabledBucket {
 
             // Check to ensure that the bucket is versioning-enabled.
             String bucketVersionStatus = s3Client.getBucketVersioningConfiguration(bucketName).getStatus();
-            if(!bucketVersionStatus.equals(BucketVersioningConfiguration.ENABLED)) {
+            if (!bucketVersionStatus.equals(BucketVersioningConfiguration.ENABLED)) {
                 System.out.printf("Bucket %s is not versioning-enabled.", bucketName);
-            }
-            else {
+            } else {
                 // Add an object.
                 PutObjectResult putResult = s3Client.putObject(bucketName, keyName, "Sample content for deletion example.");
                 System.out.printf("Object %s added to bucket %s\n", keyName, bucketName);
-        
+
                 // Delete the version of the object that we just created.
                 System.out.println("Deleting versioned object " + keyName);
                 s3Client.deleteVersion(new DeleteVersionRequest(bucketName, keyName, putResult.getVersionId()));
                 System.out.printf("Object %s, version %s deleted\n", keyName, putResult.getVersionId());
             }
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();

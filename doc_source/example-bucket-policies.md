@@ -8,7 +8,7 @@ Bucket policies are limited to 20 KB in size\.
 You can use the [AWS Policy Generator](https://awspolicygen.s3.amazonaws.com/policygen.html) to create a bucket policy for your Amazon S3 bucket\. You can then use the generated document to set your bucket policy by using the [Amazon S3 console](https://console.aws.amazon.com/s3/home), by a number of third\-party tools, or via your application\. 
 
 **Important**  
-When testing permissions using the Amazon S3 console, you will need to grant additional permissions that the console requires—`s3:ListAllMyBuckets`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions\. For an example walkthrough that grants permissions to users and tests them using the console, see [An Example Walkthrough: Using user policies to control access to your bucket](walkthrough1.md)\.
+When testing permissions using the Amazon S3 console, you will need to grant additional permissions that the console requires—`s3:ListAllMyBuckets`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions\. For an example walkthrough that grants permissions to users and tests them using the console, see [Walkthrough: Controlling Access to a Bucket with User Policies](walkthrough1.md)\.
 
 **Topics**
 + [Granting Permissions to Multiple Accounts with Added Conditions](#example-bucket-policies-use-case-1)
@@ -155,6 +155,9 @@ Suppose you have a website with domain name \(`www.example.com` or `example.com`
 Make sure the browsers you use include the http `referer` header in the request\.
 
 You can further secure access to objects in the `examplebucket` bucket by adding explicit deny to the bucket policy as shown in the following example\. Explicit deny supersedes any permission you might grant to objects in the `examplebucket` bucket using other means such as ACLs or user policies\.
+
+**Important**  
+Be aware that this example will prevent all users \(including the root user\) from performing all Amazon S3 actions, including managing bucket policies\. Consider adding a third `Sid` that grants the root user `s3:*` actions\. 
 
 ```
 {

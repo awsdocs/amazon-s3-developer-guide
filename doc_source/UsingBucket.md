@@ -11,18 +11,17 @@ An Amazon S3 bucket name is globally unique, and the namespace is shared by all 
 Amazon S3 creates buckets in a Region you specify\. To optimize latency, minimize costs, or address regulatory requirements, choose any AWS Region that is geographically close to you\. For example, if you reside in Europe, you might find it advantageous to create buckets in the EU \(Ireland\) or EU \(Frankfurt\) Regions\. For a list of Amazon S3 Regions, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
 
 **Note**  
-Objects belonging to a bucket that you create in a specific AWS Region never leave that Region, unless you explicitly transfer them to another Region\. For example, objects stored in the EU \(Ireland\) Region never leave it\. 
-Public access is granted to buckets and objects through access control lists \(ACLs\), bucket policies, or both\. To help ensure that all your S3 buckets and objects have their public access blocked, turn on all four settings for *block public access*\. These settings apply account\-wide for all current and future buckets\. We recommend that you turn on block public access settings\. Before applying these settings, verify that your applications will work correctly without public access\. If you require some level of public access to your buckets or objects, you can customize the individual settings to suit your storage use cases\. For more information, see [Using Amazon S3 Block Public Access](access-control-block-public-access.md)\.
+Objects that belong to a bucket that you create in a specific AWS Region never leave that Region, unless you explicitly transfer them to another Region\. For example, objects that are stored in the EU \(Ireland\) Region never leave it\. 
 
 **Topics**
 + [Creating a Bucket](#create-bucket-intro)
++ [Managing Public Access to Buckets](#block-public-access-intro)
 + [Accessing a Bucket](#access-bucket-intro)
 + [Bucket Configuration Options](#bucket-config-options-intro)
 + [Bucket Restrictions and Limitations](BucketRestrictions.md)
 + [Examples of Creating a Bucket](create-bucket-get-location-example.md)
 + [Deleting or Emptying a Bucket](delete-or-empty-bucket.md)
 + [Amazon S3 Default Encryption for S3 Buckets](bucket-encryption.md)
-+ [Using Amazon S3 Block Public Access](using-bucket-access-control-block-public-access.md)
 + [Managing Bucket Website Configuration](ManagingBucketWebsiteConfig.md)
 + [Amazon S3 Transfer Acceleration](transfer-acceleration.md)
 + [Requester Pays Buckets](RequesterPaysBuckets.md)
@@ -83,6 +82,14 @@ For more information, see [Root Account Credentials vs\. IAM User Credentials](h
 
 The AWS account that creates a resource owns that resource\. For example, if you create an IAM user in your AWS account and grant the user permission to create a bucket, the user can create a bucket\. But the user does not own the bucket; the AWS account to which the user belongs owns the bucket\. The user will need additional permission from the resource owner to perform any other bucket operations\. For more information about managing permissions for your Amazon S3 resources, see [Identity and Access Management in Amazon S3](s3-access-control.md)\.
 
+## Managing Public Access to Buckets<a name="block-public-access-intro"></a>
+
+Public access is granted to buckets and objects through access control lists \(ACLs\), bucket policies, or both\. To help you manage public access to Amazon S3 resources, Amazon S3 provides *block public access* settings\. Amazon S3 block public access settings can override ACLs and bucket policies so that you can enforce uniform limits on public access to these resources\. You can apply block public access settings to individual buckets or to all buckets in your account\.
+
+To help ensure that all of your Amazon S3 buckets and objects have their public access blocked, we recommend that you turn on all four settings for block public access for your account\. These settings block public access for all current and future buckets\.
+
+Before applying these settings, verify that your applications will work correctly without public access\. If you require some level of public access to your buckets or objects, for example to host a static website as described at [Hosting a Static Website on Amazon S3](WebsiteHosting.md), you can customize the individual settings to suit your storage use cases\. For more information, see [Using Amazon S3 Block Public Access](access-control-block-public-access.md)\.
+
 ## Accessing a Bucket<a name="access-bucket-intro"></a>
 
 You can access your bucket using the Amazon S3 console\. Using the console UI, you can perform almost all bucket operations without having to write any code\. 
@@ -91,7 +98,7 @@ If you access a bucket programmatically, note that Amazon S3 supports RESTful ar
 
 Amazon S3 supports both virtual\-hosted–style and path\-style URLs to access a bucket\. 
 + In a virtual\-hosted–style URL, the bucket name is part of the domain name in the URL\. For example:  
-  + `http://bucket.s3.aws-region.amazonaws.com`
+  + `http://bucket.s3-aws-region.amazonaws.com`
   + `http://bucket.s3.amazonaws.com`
 **Note**  
  Buckets created in Regions launched after March 20, 2019 are not reachable via the `https://bucket.s3.amazonaws.com` naming scheme\.
@@ -102,13 +109,13 @@ Amazon S3 supports both virtual\-hosted–style and path\-style URLs to access a
 
    
 +  In a path\-style URL, the bucket name is not part of the domain\. For example:
-  + Region\-specific endpoint, `http://s3.aws-region.amazonaws.com/bucket`
+  + Region\-specific endpoint, `http://s3-aws-region.amazonaws.com/bucket`
   + US East \(N\. Virginia\) Region endpoint, `http://s3.amazonaws.com/bucket `
 
    In a path\-style URL, the endpoint you use must match the Region in which the bucket resides\. For example, if your bucket is in the South America \(São Paulo\) Region, you must use the `http://s3.sa-east-1.amazonaws.com/bucket` endpoint\. If your bucket is in the US East \(N\. Virginia\) Region, you must use the `http://s3.amazonaws.com/bucket` endpoint\.
 
 **Important**  
-Because buckets can be accessed using path\-style and virtual\-hosted–style URLs, we recommend you create buckets with DNS\-compliant bucket names\. For more information, see [Bucket Restrictions and Limitations](BucketRestrictions.md)\.
+Because buckets can be accessed using path\-style and virtual\-hosted–style URLs, we recommend that you create buckets with DNS\-compliant bucket names\. For more information, see [Bucket Restrictions and Limitations](BucketRestrictions.md)\.
 
 **Accessing an S3 Bucket over IPv6**  
 Amazon S3 has a set of dual\-stack endpoints, which support requests to S3 buckets over both Internet Protocol version 6 \(IPv6\) and IPv4\. For more information, see [Making Requests over IPv6](ipv6-access.md)\.

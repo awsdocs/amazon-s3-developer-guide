@@ -168,7 +168,7 @@ You have the following options you can add in the <Destination> element:
   ```
 
   If you don't add this element to the replication configuration, the replicas are owned by same AWS account that owns the source object\. For more information, see [CRR Additional Configuration: Changing the Replica Owner](crr-change-owner.md)\.
-+ Your source bucket might contain objects that were created with server\-side encryption using AWS KMS\-managed keys\. By default, Amazon S3 doesn't replicate these objects\. You can optionally direct Amazon S3 to replicate these objects by first explicitly opting into this feature by adding the SourceSelectionCriteria element and then providing the AWS KMS key \(for the AWS Region of the destination bucket\) to use for encrypting object replicas\. 
++ Your source bucket might contain objects that were created with server\-side encryption using keys stored in AWS KMS\. By default, Amazon S3 doesn't replicate these objects\. You can optionally direct Amazon S3 to replicate these objects by first explicitly opting into this feature by adding the SourceSelectionCriteria element and then providing the AWS KMS key \(for the AWS Region of the destination bucket\) to use for encrypting object replicas\. 
 
   ```
   ...
@@ -186,7 +186,7 @@ You have the following options you can add in the <Destination> element:
   ...
   ```
 
-  For more information, see [CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using AWS KMS\-Managed Encryption Keys](crr-replication-config-for-kms-objects.md)\.
+  For more information, see [CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](crr-replication-config-for-kms-objects.md)\.
 
 ## Example Replication Configurations<a name="crr-config-example-configs"></a>
 

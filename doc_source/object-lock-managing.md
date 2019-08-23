@@ -39,7 +39,7 @@ You can also use Amazon CloudWatch to generate alerts based on this data\. For i
 
 ## Setting Retention Limits<a name="object-lock-managing-retention-limits"></a>
 
-You can set minimum and maximum allowable retention periods for a bucket using a bucket policy\. You do this using the `s3:object-lock-remaining-retention-days` condition key\. The following example shows a bucket policy that sets a minimum retention period of 10 days\.
+You can set minimum and maximum allowable retention periods for a bucket using a bucket policy\. You do this using the `s3:object-lock-remaining-retention-days` condition key\. The following example shows a bucket policy that sets a maximum retention period of 10 days\.
 
 ```
 {

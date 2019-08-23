@@ -12,7 +12,7 @@ The Multipart upload API enables you to upload large objects in parts\. You can 
 
 Multipart uploading is a three\-step process: You initiate the upload, you upload the object parts, and after you have uploaded all the parts, you complete the multipart upload\. Upon receiving the complete multipart upload request, Amazon S3 constructs the object from the uploaded parts, and you can then access the object just as you would any other object in your bucket\. 
 
-You can list of all your in\-progress multipart uploads or get a list of the parts that you have uploaded for a specific multipart upload\. Each of these operations is explained in this section\.
+You can list all of your in\-progress multipart uploads or get a list of the parts that you have uploaded for a specific multipart upload\. Each of these operations is explained in this section\.
 
 **Multipart Upload Initiation**  
 When you send a request to initiate a multipart upload, Amazon S3 returns a response with an upload ID, which is a unique identifier for your multipart upload\. You must include this upload ID whenever you upload parts, list the parts, complete an upload, or abort an upload\. If you want to provide any metadata describing the object being uploaded, you must provide it in the request to initiate multipart upload\.
@@ -68,9 +68,9 @@ In the example, the rule does not specify a value for the `Prefix` element \(o
 For more information about the bucket lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
 **Note**  
-if the multipart upload is completed within the number of days specified in the rule, the `AbortIncompleteMultipartUpload` lifecycle action does not apply \(that is, Amazon S3 will not take any action\)\. Also, this action does not apply to objects, no objects are deleted by this lifecycle action\.
+If the multipart upload is completed within the number of days specified in the rule, the `AbortIncompleteMultipartUpload` lifecycle action does not apply \(that is, Amazon S3 will not take any action\)\. Also, this action does not apply to objects, no objects are deleted by this lifecycle action\.
 
-The following` put-bucket-lifecycle`  CLI command adds the lifecycle configuration for the specified bucket\. 
+The following `put-bucket-lifecycle` CLI command adds the lifecycle configuration for the specified bucket\. 
 
 ```
 $ aws s3api put-bucket-lifecycle  \

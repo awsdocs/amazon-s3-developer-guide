@@ -18,30 +18,30 @@ This section provides a list of the permissions for object operations that you c
 | Permissions | Amazon S3 Operations | 
 | --- | --- | 
 | s3:AbortMultipartUpload | [Abort Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadAbort.html) | 
-| `s3:BypassGovernanceRetention` | [PUT Object Retention](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTRetention.html), [PUT Object ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html), [DELETE Object ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html) | 
+|  `s3:BypassGovernanceRetention`  | [PUT Object Retention](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTRetention.html), [PUT Object ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html), [DELETE Object ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html) | 
 | s3:DeleteObject | [DELETE Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html) | 
-| `s3:DeleteObjectTagging` | [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html)  | 
+|  `s3:DeleteObjectTagging`  | [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html)  | 
 | s3:DeleteObjectVersion | [DELETE Object \(a Specific Version of the Object\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html) | 
-| `s3:DeleteObjectVersionTagging` | [DELETE Object tagging \(for a Specific Version of the Object\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html) | 
+|  `s3:DeleteObjectVersionTagging`  | [DELETE Object tagging \(for a Specific Version of the Object\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html) | 
 | s3:GetObject |   [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html), [HEAD Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html), [SELECT Object Content](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html) When you grant this permission on a version\-enabled bucket, you always get the latest version data\.   | 
 | s3:GetObjectAcl | [GET Object ACL](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETacl.html) | 
-| `s3:GetObjectLegalHold` | [GET Object Legal Hold](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETLegalHold.html), [GET Object ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html) | 
-| `s3:GetObjectRetention` | [Get Object Retention](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETRetention.html), [GET Object ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html) | 
-| `s3:GetObjectTagging` | [GET Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html)  | 
+|  `s3:GetObjectLegalHold`  | [GET Object Legal Hold](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETLegalHold.html), [GET Object ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html) | 
+|  `s3:GetObjectRetention`  | [Get Object Retention](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETRetention.html), [GET Object ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html) | 
+|  `s3:GetObjectTagging`  | [GET Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html)  | 
 | s3:GetObjectTorrent | [GET Object torrent](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtorrent.html) | 
 | s3:GetObjectVersion |   [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html), [HEAD Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html) To grant permission for version\-specific object data, you must grant this permission\. That is, when you specify version number when making any of these requests, you need this Amazon S3 permission\.  | 
 | s3:GetObjectVersionAcl | [GET ACL ](https://docs.aws.amazon.com/AmazonS3/latest/API/objectGetAclVersions.html) \(for a Specific Version of the Object\) | 
-| `s3:GetObjectVersionTagging` | [GET Object tagging \(for a Specific Version of the Object\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html)  | 
+|  `s3:GetObjectVersionTagging`  | [GET Object tagging \(for a Specific Version of the Object\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html)  | 
 | s3:GetObjectVersionTorrent | [GET Object Torrent versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtorrent.html) | 
 | s3:ListMultipartUploadParts | [List Parts](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadListParts.html) | 
 | s3:PutObject |   [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html), [POST Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html), [Initiate Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html), [Upload Part](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPart.html), [Complete Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadComplete.html), [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html)   | 
 | s3:PutObjectAcl |  [PUT Object ACL](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html) | 
-| `s3:PutObjectLegalHold` | [PUT Object Legal Hold](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTLegalHold.html), [PUT Object ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) | 
-| `s3:PutObjectRetention` | [PUT Object Retention](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTRetention.html), [PUT Object ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) | 
-| `s3:PutObjectTagging` | [PUT Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html) | 
+|  `s3:PutObjectLegalHold`  | [PUT Object Legal Hold](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTLegalHold.html), [PUT Object ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) | 
+|  `s3:PutObjectRetention`  | [PUT Object Retention](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTRetention.html), [PUT Object ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) | 
+|  `s3:PutObjectTagging`  | [PUT Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html) | 
 | s3:PutObjectVersionAcl | [PUT Object ACL \(for a Specific Version of the Object\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html) | 
-| `s3:PutObjectVersionTagging` | [PUT Object tagging \(for a Specific Version of the Object\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html) | 
-| `s3:RestoreObject` | [POST Object restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html) | 
+|  `s3:PutObjectVersionTagging`  | [PUT Object tagging \(for a Specific Version of the Object\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html) | 
+|  `s3:RestoreObject`  | [POST Object restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html) | 
 
 The following example bucket policy grants the `s3:PutObject` and the `s3:PutObjectAcl` permissions to a user \(Dave\)\. If you remove the `Principal` element, you can attach the policy to a user\. These are object operations, and accordingly the relative\-id portion of the `Resource` ARN identifies objects \(`examplebucket/*`\)\. For more information, see [Specifying Resources in a Policy](s3-arn-format.md)\.
 
@@ -126,7 +126,7 @@ This section provides a list of the permissions related to bucket subresource op
 | s3:GetBucketLocation | [GET Bucket location](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html) | 
 | s3:GetBucketLogging | [GET Bucket logging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlogging.html) | 
 | s3:GetBucketNotification | [GET Bucket notification](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETnotification.html) | 
-| `s3:GetBucketObjectLockConfiguration` | [GET Bucket Object Lock configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETObjectLockConfiguration.html) | 
+|  `s3:GetBucketObjectLockConfiguration`  | [GET Bucket Object Lock configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETObjectLockConfiguration.html) | 
 | s3:GetBucketPolicy | [GET Bucket policy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETpolicy.html) | 
 | s3:GetBucketPolicyStatus | [GET BucketPolicyStatus](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETPolicyStatus.html) | 
 | s3:GetBucketPublicAccessBlock | [GET PublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETPublicAccessBlock.html) | 
@@ -145,7 +145,7 @@ This section provides a list of the permissions related to bucket subresource op
 | s3:PutBucketCORS | [PUT Bucket cors](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTcors.html), [DELETE Bucket cors](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEcors.html) | 
 | s3:PutBucketLogging | [PUT Bucket logging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html) | 
 | s3:PutBucketNotification | [PUT Bucket notification](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTnotification.html) | 
-| `s3:PutBucketObjectLockConfiguration` | [PUT Bucket Object Lock configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTObjectLockConfiguration.html) | 
+|  `s3:PutBucketObjectLockConfiguration`  | [PUT Bucket Object Lock configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTObjectLockConfiguration.html) | 
 | s3:PutBucketPolicy | [PUT Bucket policy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html) | 
 | s3:PutBucketPublicAccessBlock | [PUT PublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTPublicAccessBlock.html), [DELETE PublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEPublicAccessBlock.html)  | 
 | s3:PutBucketRequestPayment | [PUT Bucket requestPayment](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTrequestPaymentPUT.html) | 

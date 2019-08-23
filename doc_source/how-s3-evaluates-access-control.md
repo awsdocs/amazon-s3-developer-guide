@@ -6,9 +6,9 @@
 + [How Amazon S3 Authorizes a Request for an Object Operation](access-control-auth-workflow-object-operation.md)
 
 When Amazon S3 receives a request—for example, a bucket or an object operation—it first verifies that the requester has the necessary permissions\. Amazon S3 evaluates all the relevant access policies, user policies, and resource\-based policies \(bucket policy, bucket ACL, object ACL\) in deciding whether to authorize the request\. The following are some of the example scenarios: 
-+  If the requester is an IAM user, Amazon S3 must determine if the parent AWS account to which the user belongs has granted the user necessary permission to perform the operation\. In addition, if the request is for a bucket operation, such as a request to list the bucket content, Amazon S3 must verify that the bucket owner has granted permission for the requester to perform the operation\. 
++  If the requester is an IAM principal, Amazon S3 must determine if the parent AWS account to which the principal belongs has granted the principal necessary permission to perform the operation\. In addition, if the request is for a bucket operation, such as a request to list the bucket content, Amazon S3 must verify that the bucket owner has granted permission for the requester to perform the operation\. 
 **Note**  
-To perform a specific operation on a resource, an IAM user needs permission from both the parent AWS account to which it belongs and the AWS account that owns the resource\.
+To perform a specific operation on a resource, an IAM principal needs permission from both the parent AWS account to which it belongs and the AWS account that owns the resource\.
 + If the request is for an operation on an object that the bucket owner does not own, in addition to making sure the requester has permissions from the object owner, Amazon S3 must also check the bucket policy to ensure the bucket owner has not set explicit deny on the object\. 
 **Note**  
  A bucket owner \(who pays the bill\) can explicitly deny access to objects in the bucket regardless of who owns it\. The bucket owner can also delete any object in the bucket

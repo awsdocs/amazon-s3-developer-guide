@@ -48,7 +48,7 @@ The following are examples of Amazon S3 resource ARNs\.
   arn:aws:s3:::bucket_name/developers/${aws:username}/
   ```
 
-  At run time, when the policy is evaluated, the variable `${aws:username}` in the resource ARN is substituted with the user name making the request\. 
+  At runtime, when the policy is evaluated, the variable `${aws:username}` in the resource ARN is substituted with the user name making the request\. 
 
 To find the ARN for an S3 bucket, you can look at the Amazon S3 console **Bucket Policy** or **CORS configuration** permissions pages\. For more information, see [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) or [How Do I Allow Cross\-Domain Resource Sharing with CORS?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-cors-configuration.html) in the *Amazon Simple Storage Service Console User Guide*\.
 

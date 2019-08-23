@@ -10,19 +10,20 @@ For more information about deleting objects, see [Deleting Objects](DeletingObje
 
 ```
  
-import java.io.IOException;
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 
+import java.io.IOException;
+
 public class DeleteObjectNonVersionedBucket {
 
     public static void main(String[] args) throws IOException {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
         String keyName = "*** Key name ****";
 
@@ -33,13 +34,11 @@ public class DeleteObjectNonVersionedBucket {
                     .build();
 
             s3Client.deleteObject(new DeleteObjectRequest(bucketName, keyName));
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();
@@ -58,13 +57,10 @@ The following example uses the Multi\-Object Delete API to delete objects from a
 1. Remove the delete markers by specifying the object keys and version IDs of the delete markers\. The operation deletes the delete markers, which results in the objects reappearing in the AWS Management Console\.
 
 ```
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.BucketVersioningConfiguration;
@@ -74,14 +70,18 @@ import com.amazonaws.services.s3.model.DeleteObjectsResult;
 import com.amazonaws.services.s3.model.DeleteObjectsResult.DeletedObject;
 import com.amazonaws.services.s3.model.PutObjectResult;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class DeleteMultipleObjectsVersionEnabledBucket {
     private static AmazonS3 S3_CLIENT;
     private static String VERSIONED_BUCKET_NAME;
 
     public static void main(String[] args) throws IOException {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         VERSIONED_BUCKET_NAME = "*** Bucket name ***";
-        
+
         try {
             S3_CLIENT = AmazonS3ClientBuilder.standard()
                     .withCredentials(new ProfileCredentialsProvider())
@@ -90,28 +90,25 @@ public class DeleteMultipleObjectsVersionEnabledBucket {
 
             // Check to make sure that the bucket is versioning-enabled.
             String bucketVersionStatus = S3_CLIENT.getBucketVersioningConfiguration(VERSIONED_BUCKET_NAME).getStatus();
-            if(!bucketVersionStatus.equals(BucketVersioningConfiguration.ENABLED)) {
+            if (!bucketVersionStatus.equals(BucketVersioningConfiguration.ENABLED)) {
                 System.out.printf("Bucket %s is not versioning-enabled.", VERSIONED_BUCKET_NAME);
-            }
-            else {
+            } else {
                 // Upload and delete sample objects, using specific object versions.
                 uploadAndDeleteObjectsWithVersions();
-        
+
                 // Upload and delete sample objects without specifying version IDs.
                 // Amazon S3 creates a delete marker for each object rather than deleting
                 // specific versions.
                 DeleteObjectsResult unversionedDeleteResult = uploadAndDeleteObjectsWithoutVersions();
-        
+
                 // Remove the delete markers placed on objects in the non-versioned create/delete method.
                 multiObjectVersionedDeleteRemoveDeleteMarkers(unversionedDeleteResult);
             }
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();

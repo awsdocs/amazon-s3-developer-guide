@@ -13,20 +13,22 @@ To copy an object using the low\-level Java API, do the following:
 The following example shows how to use the Amazon S3 low\-level Java API to perform a multipart copy\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.SdkClientException;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.services.s3.*;
-import com.amazonaws.services.s3.model.*;
-
 public class LowLevelMultipartCopy {
 
     public static void main(String[] args) throws IOException {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String sourceBucketName = "*** Source bucket name ***";
         String sourceObjectKey = "*** Source object key ***";
         String destBucketName = "*** Target bucket name ***";
@@ -41,12 +43,12 @@ public class LowLevelMultipartCopy {
             // Initiate the multipart upload.
             InitiateMultipartUploadRequest initRequest = new InitiateMultipartUploadRequest(destBucketName, destObjectKey);
             InitiateMultipartUploadResult initResult = s3Client.initiateMultipartUpload(initRequest);
-    
+
             // Get the object size to track the end of the copy operation.
             GetObjectMetadataRequest metadataRequest = new GetObjectMetadataRequest(sourceBucketName, sourceObjectKey);
             ObjectMetadata metadataResult = s3Client.getObjectMetadata(metadataRequest);
             long objectSize = metadataResult.getContentLength();
-    
+
             // Copy the object using 5 MB parts.
             long partSize = 5 * 1024 * 1024;
             long bytePosition = 0;
@@ -56,7 +58,7 @@ public class LowLevelMultipartCopy {
                 // The last part might be smaller than partSize, so check to make sure
                 // that lastByte isn't beyond the end of the object.
                 long lastByte = Math.min(bytePosition + partSize - 1, objectSize - 1);
-                
+
                 // Copy this part.
                 CopyPartRequest copyRequest = new CopyPartRequest()
                         .withSourceBucketName(sourceBucketName)
@@ -70,22 +72,20 @@ public class LowLevelMultipartCopy {
                 copyResponses.add(s3Client.copyPart(copyRequest));
                 bytePosition += partSize;
             }
-    
+
             // Complete the upload request to concatenate all uploaded parts and make the copied object available.
             CompleteMultipartUploadRequest completeRequest = new CompleteMultipartUploadRequest(
-                                                                        destBucketName,
-                                                                        destObjectKey, 
-                                                                        initResult.getUploadId(),
-                                                                        getETags(copyResponses));
+                    destBucketName,
+                    destObjectKey,
+                    initResult.getUploadId(),
+                    getETags(copyResponses));
             s3Client.completeMultipartUpload(completeRequest);
             System.out.println("Multipart copy complete.");
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client  
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();
