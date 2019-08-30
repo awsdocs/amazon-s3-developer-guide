@@ -30,6 +30,9 @@ As another example, when enumerating objects in a bucket, you can use the iterat
 To set up and use the Amazon S3 samples for version 3 of the AWS SDK for PHP, see [ Installation](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/getting-started_installation.html) in the AWS SDK for PHP Developer Guide\.
 
 ## Related Resources<a name="RelatedResources-UsingTheMPphpAPI"></a>
+
+
 + [AWS SDK for PHP for Amazon S3](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/s3-examples.html)
-+ [AWS SDK for PHP Documentation](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/welcome.html) 
++ [AWS SDK for PHP Documentation](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/welcome.html)
 + [AWS SDK for PHP API for Amazon S3](https://docs.aws.amazon.com/aws-sdk-php/v3/api/api-s3-2006-03-01.html) 
+
