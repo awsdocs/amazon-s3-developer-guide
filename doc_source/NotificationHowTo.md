@@ -42,7 +42,7 @@ Amazon S3 supports the following destinations where it can publish events:
    
 + Amazon Simple Queue Service \(Amazon SQS\) queue
 
-  Amazon SQS is a scalable and fully managed message queuing service\. You can use SQS to transmit any volume of data without requiring other services to be always available\. In your notification configuration you can request that Amazon S3 publish events to an SQS queue\. For more information about SQS, see [Amazon SQS](https://aws.amazon.com/sqs/) product detail page\.
+  Amazon SQS is a scalable and fully managed message queuing service\. You can use SQS to transmit any volume of data without requiring other services to be always available\. In your notification configuration you can request that Amazon S3 publish events to an SQS queue\. Currently, Standard SQS queue is only allowed as an Amazon S3 event notification destination, whereas FIFO SQS queue is not allowed\. For more information about SQS, see [Amazon SQS](https://aws.amazon.com/sqs/) product detail page\.
 
    
 + AWS Lambda
@@ -423,7 +423,7 @@ Example of an IAM policy that you attach to the destination SNS topic\.
    "Action": [
     "SNS:Publish"
    ],
-   "Resource": "SNS-ARN",
+   "Resource": "arn:aws:sns:REGION:ACCOUNT-ID:TOPICNAME",
    "Condition": {
       "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
    }
@@ -448,7 +448,7 @@ Example of an IAM policy that you attach to the destination SQS queue\.
    "Action": [
     "SQS:SendMessage"
    ],
-   "Resource": "SQS-ARN",
+   "Resource": "arn:aws:sqs:REGION:ACCOUNT-ID:QUEUENAMEHERE",
    "Condition": {
       "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
    }

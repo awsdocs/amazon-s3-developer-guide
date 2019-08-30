@@ -14,7 +14,7 @@ Amazon S3 replicates the following:
 + Object metadata\.
 
    
-+ Only objects in the source bucket for which the bucket owner has permissions to read objects and access control lists \(ACLs\)\. For more information about resource ownership, see [About the Resource Owner](access-control-overview.md#about-resource-owner)\.
++ Only objects in the source bucket for which the bucket owner has permissions to read objects and access control lists \(ACLs\)\. For more information about resource ownership, For more information, see [Amazon S3 Bucket and Object Ownership](access-control-overview.md#about-resource-owner)\.
 
    
 + Object ACL updates, unless you direct Amazon S3 to change the replica ownership when source and destination buckets aren't owned by the same accounts 
@@ -23,17 +23,20 @@ Amazon S3 replicates the following:
 
    
 
-  It can take awhile until Amazon S3 can bring the two ACLs in sync\. This applies only to objects created after you add a replication configuration to the bucket\.
+  It can take a while until Amazon S3 can bring the two ACLs in sync\. This applies only to objects created after you add a replication configuration to the bucket\.
 
    
 +  Object tags, if there are any\.
+
+   
++ Amazon S3 object lock retention information, if there is any\. When Amazon S3 replicates objects that have retention information applied, it applies those same retention controls to your replicas, overriding the default retention period configured on your destination bucket\. If you don't have retention controls applied to the objects in your source bucket, and you replicate into a destination bucket that has a default retention period set, the destination bucket's default retention period is applied to your object replicas\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
 
 ### How Delete Operations Affect CRR<a name="crr-delete-op"></a>
 
 If you delete an object from the source bucket, the following occurs:
 + If you make a DELETE request without specifying an object version ID, Amazon S3 adds a delete marker\. Amazon S3 deals with the delete marker as follows:
-  + If using latest version of the replication configuration, that is you specify the `Filter` element in a replication configuration rule, Amazon S3 does not replicate the delete marker\.
-  + If don't specify the `Filter` element, Amazon S3 assumes replication configuration is a prior version V1\. In the earlier version, Amazon S3 handled replication of delete markers differently\. For more information, see [Backward Compatibility ](crr-add-config.md#crr-backward-compat-considerations)\. 
+  + If you are using the latest version of the replication configuration, that is, you specify the `Filter` element in a replication configuration rule, Amazon S3 does not replicate the delete marker\.
+  + If you don't specify the `Filter` element, Amazon S3 assumes that the replication configuration is a prior version V1\. In the earlier version, Amazon S3 handled replication of delete markers differently\. For more information, see [Backward Compatibility ](crr-add-config.md#crr-backward-compat-considerations)\. 
 + If you specify an object version ID to delete in a DELETE request, Amazon S3 deletes that object version in the source bucket, but it doesn't replicate the deletion in the destination bucket\. In other words, it doesn't delete the same object version from the destination bucket\. This protects data from malicious deletions\. 
 
 ## What Isn't Replicated?<a name="crr-what-is-not-replicated"></a>
@@ -61,12 +64,12 @@ Amazon S3 doesn't replicate the following:
 
   For more information about lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 **Note**  
-If using the latest version of the replication configuration \(the XML specifies `Filter` as the child of `Rule`\), delete makers created either by a user action or by Amazon S3 as part of the lifecycle action are not replicated\. However, if using earlier version of the replication configuration \(the XML specifies `Prefix` as the child of `Rule`\), delete markers resulting from user actions are replicated\. For more information, see [Backward Compatibility ](crr-add-config.md#crr-backward-compat-considerations)\.
+If using the latest version of the replication configuration \(the XML specifies `Filter` as the child of `Rule`\), delete markers created either by a user action or by Amazon S3 as part of the lifecycle action are not replicated\. However, if you are using an earlier version of the replication configuration \(the XML specifies `Prefix` as the child of `Rule`\), delete markers resulting from user actions are replicated\. For more information, see [Backward Compatibility ](crr-add-config.md#crr-backward-compat-considerations)\.
 + Objects in the source bucket that are replicas that were created by another cross\-region replication\.
 
   You can replicate objects from a source bucket to *only one* destination bucket\. After Amazon S3 replicates an object, the object can't be replicated again\. For example, if you change the destination bucket in an existing replication configuration, Amazon S3 won't replicate the object again\.
 
-  Another example: suppose that you configure cross\-region replication where bucket A is the source and bucket B is the destination\. Now suppose that you add another cross\-region replication configuration where bucket B is the source and bucket C is the destination\. In this case, objects in bucket B that are replicas of objects in bucket A are not replicated to bucket C\. 
+  Another example: Suppose that you configure cross\-region replication where bucket A is the source and bucket B is the destination\. Now suppose that you add another cross\-region replication configuration where bucket B is the source and bucket C is the destination\. In this case, objects in bucket B that are replicas of objects in bucket A are not replicated to bucket C\. 
 
 ## Related Topics<a name="crr-whatis-isnot-related-topics"></a>
 

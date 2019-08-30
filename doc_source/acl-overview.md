@@ -64,7 +64,7 @@ The canonical user ID is associated with your AWS account\. It is a long string,
 You can also look up the canonical user ID of an AWS account by reading the ACL of a bucket or an object to which the AWS account has access permissions\. When an individual AWS account is granted permissions by a grant request, a grant entry is added to the ACL with the AWS account's canonical user ID\. 
 
 **Note**  
-If you make your bucket public \(not recommended\) any unauthenticated user can upload objects to the bucket\. These anonymous users don't have AWS account\. When an anonymous user uploads an object to your bucket Amazon S3 adds a special canonical user ID \(`65a011a29cdf8ec533ec3d1ccaae921c`\) as the object owner in the ACL\.
+If you make your bucket public \(not recommended\) any unauthenticated user can upload objects to the bucket\. These anonymous users don't have an AWS account\. When an anonymous user uploads an object to your bucket Amazon S3 adds a special canonical user ID \(`65a011a29cdf8ec533ec3d1ccaae921c`\) as the object owner in the ACL\. For more information, see [Amazon S3 Bucket and Object Ownership](access-control-overview.md#about-resource-owner)\.
 
 ### Amazon S3 Predefined Groups<a name="specifying-grantee-predefined-groups"></a>
 

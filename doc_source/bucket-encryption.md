@@ -2,7 +2,7 @@
 
 Amazon S3 default encryption provides a way to set the default encryption behavior for an S3 bucket\. You can set default encryption on a bucket so that all objects are encrypted when they are stored in the bucket\. The objects are encrypted using server\-side encryption with either Amazon S3\-managed keys \(SSE\-S3\) or AWS KMS\-managed keys \(SSE\-KMS\)\. 
 
-When you use server\-side encryption, Amazon S3 encrypts an object before saving it to disk in its data centers and decrypts it when you download the objects\. For more information about protecting data using server\-side encryption and encryption key management, see [Protecting Data Using Encryption](UsingEncryption.md)\.
+When you use server\-side encryption, Amazon S3 encrypts an object before saving it to disk in its data centers and decrypts it when you download the objects\. For more information about protecting data using server\-side encryption and encryption key management, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.
 
 Default encryption works with all existing and new S3 buckets\. Without default encryption, to encrypt all objects stored in a bucket, you must include encryption information with every object storage request\. You must also set up an S3 bucket policy to reject storage requests that don't include encryption information\. 
 
@@ -40,7 +40,7 @@ If you currently enforce object encryption for an S3 bucket by using a bucket po
 
 **To change from using a bucket policy to reject `PUT` requests without encryption headers to using default encryption**
 
-1. If you plan to specify that default encryption use SSE\-KMS, make sure that all `PUT` and `GET` object requests are signed using Signature Version 4 and sent over an SSL connection to Amazon S3\. For information about using AWS KMS, see [Protecting Data Using Server\-Side Encryption with AWS KMS–Managed Keys \(SSE\-KMS\)](UsingKMSEncryption.md)\. 
+1. If you plan to specify that default encryption use SSE\-KMS, make sure that all `PUT` and `GET` object requests are signed using Signature Version 4 and sent over an SSL connection to Amazon S3\. For information about using AWS KMS, see [Protecting Data Using Server\-Side Encryption with keys stored in AWS KMS\(SSE\-KMS\)](UsingKMSEncryption.md)\. 
 **Note**  
 By default, the Amazon S3 console, the AWS CLI version 1\.11\.108 and later, and all AWS SDKs released after May 2016 use Signature Version 4 signed requests sent to Amazon S3 over an SSL connection\. 
 

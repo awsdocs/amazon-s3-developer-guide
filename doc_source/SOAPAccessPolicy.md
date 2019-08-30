@@ -3,7 +3,7 @@
 **Note**  
  SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\. 
 
-Access control can be set at the time a bucket or object is written by including the "AccessControlList" element with the request to `CreateBucket`, `PutObjectInline`, or `PutObject`\. The AccessControlList element is described in [Managing Access Permissions to Your Amazon S3 Resources](s3-access-control.md)\. If no access control list is specified with these operations, the resource is created with a default access policy that gives the requester FULL\_CONTROL access \(this is the case even if the request is a PutObjectInline or PutObject request for an object that already exists\)\.
+Access control can be set at the time a bucket or object is written by including the "AccessControlList" element with the request to `CreateBucket`, `PutObjectInline`, or `PutObject`\. The AccessControlList element is described in [Identity and Access Management in Amazon S3](s3-access-control.md)\. If no access control list is specified with these operations, the resource is created with a default access policy that gives the requester FULL\_CONTROL access \(this is the case even if the request is a PutObjectInline or PutObject request for an object that already exists\)\.
 
 Following is a request that writes data to an object, makes the object readable by anonymous principals, and gives the specified user FULL\_CONTROL rights to the bucket \(Most developers will want to give themselves FULL\_CONTROL access to their own bucket\)\.
 

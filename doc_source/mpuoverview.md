@@ -18,7 +18,9 @@ You can list all of your in\-progress multipart uploads or get a list of the par
 When you send a request to initiate a multipart upload, Amazon S3 returns a response with an upload ID, which is a unique identifier for your multipart upload\. You must include this upload ID whenever you upload parts, list the parts, complete an upload, or abort an upload\. If you want to provide any metadata describing the object being uploaded, you must provide it in the request to initiate multipart upload\.
 
 **Parts Upload**  
+
 When uploading a part, in addition to the upload ID, you must specify a part number\. You can choose any part number between 1 and 10,000\. A part number uniquely identifies a part and its position in the object you are uploading\. Part number you choose need not be a consecutive sequence \(for example, it can be 1, 5, and 14\)\. If you upload a new part using the same part number as a previously uploaded part, the previously uploaded part is overwritten\. Whenever you upload a part, Amazon S3 returns an *ETag* header in its response\. For each part upload, you must record the part number and the ETag value\. You need to include these values in the subsequent request to complete the multipart upload\.
+
 
 **Note**  
 After you initiate a multipart upload and upload one or more parts, you must either complete or abort the multipart upload in order to stop getting charged for storage of the uploaded parts\. Only *after* you either complete or abort a multipart upload will Amazon S3 free up the parts storage and stop charging you for the parts storage\.

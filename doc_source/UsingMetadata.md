@@ -10,9 +10,9 @@ Each Amazon S3 object has data, a key, and metadata\. Object key \(or key name\)
 
 When you create an object, you specify the key name, which uniquely identifies the object in the bucket\. For example, in the Amazon S3 console \(see [AWS Management Console](https://console.aws.amazon.com/s3/home)\), when you highlight a bucket, a list of objects in your bucket appears\. These names are the object keys\. The name for a key is a sequence of Unicode characters whose UTF\-8 encoding is at most 1024 bytes long\. 
 
-The Amazon S3 data model is a flat structure: you create a bucket, and the bucket stores objects\. There is no hierarchy of subbuckets or subfolders; however, you can infer logical hierarchy using key name prefixes and delimiters as the Amazon S3 console does\. The Amazon S3 console supports a concept of folders\. Suppose that your bucket \(`admin-created`\) has four objects with the following object keys:
+The Amazon S3 data model is a flat structure: you create a bucket, and the bucket stores objects\. There is no hierarchy of subbuckets or subfolders\. However, you can infer logical hierarchy using key name prefixes and delimiters as the Amazon S3 console does\. The Amazon S3 console supports a concept of folders\. Suppose that your bucket \(`admin-created`\) has four objects with the following object keys:
 
-`Development/Projects1.xls`
+`Development/Projects.xls`
 
 `Finance/statement1.pdf`
 
@@ -50,9 +50,12 @@ The following are examples of valid object key names:
 +  my\.great\_photos\-2014/jan/myvacation\.jpg 
 +  videos/2014/birthday/video1\.wmv
 
+**Important**  
+If an object key name consists of a single period \(\.\), or two periods \(\.\.\), you can’t download the object using the Amazon S3 console\. To download an object with a key name of “\.” or “\.\.”, you must use the AWS CLI, AWS SDKs, or REST API\.
+
 #### Characters That Might Require Special Handling<a name="object-key-guidelines-special-handling"></a>
 
-The following characters in a key name might require additional code handling and likely will need to be URL encoded or referenced as HEX\. Some of these are non\-printable characters and your browser might not handle them, which also requires special handling:
+The following characters in a key name might require additional code handling and likely need to be URL encoded or referenced as HEX\. Some of these are non\-printable characters and your browser might not handle them, which also requires special handling:
 + Ampersand \("&"\) 
 + Dollar \("$"\) 
 + ASCII character ranges 00–1F hex \(0–31 decimal\) and 7F \(127 decimal\) 
@@ -88,7 +91,7 @@ Avoid the following characters in a key name because of significant special hand
 
 There are two kinds of metadata: system metadata and user\-defined metadata\. 
 
-### System\-Defined Metadata<a name="SysMetadata"></a>
+### System\-Defined Object Metadata<a name="SysMetadata"></a>
 
 For each object stored in a bucket, Amazon S3 maintains a set of system metadata\. Amazon S3 processes this system metadata as needed\. For example, Amazon S3 maintains object creation date and size metadata and uses this information as part of object management\. 
 
@@ -98,7 +101,7 @@ There are two categories of system metadata:
 
 1. Other system metadata, such as the storage class configured for the object and whether the object has server\-side encryption enabled, are examples of system metadata whose values you control\. If your bucket is configured as a website, sometimes you might want to redirect a page request to another page or an external URL\. In this case, a webpage is an object in your bucket\. Amazon S3 stores the page redirect value as system metadata whose value you control\. 
 
-   When you create objects, you can configure values of these system metadata items or update the values when you need to\. For more information about storage classes, see [Storage Classes](storage-class-intro.md)\. For more information about server\-side encryption, see [Protecting Data Using Encryption](UsingEncryption.md)\. 
+   When you create objects, you can configure values of these system metadata items or update the values when you need to\. For more information about storage classes, see [Amazon S3 Storage Classes](storage-class-intro.md)\. For more information about server\-side encryption, see [Protecting Data Using Encryption](UsingEncryption.md)\. 
 
 The following table provides a list of system\-defined metadata and whether you can update it\.
 
@@ -112,12 +115,12 @@ The following table provides a list of system\-defined metadata and whether you 
 | x\-amz\-server\-side\-encryption | Indicates whether server\-side encryption is enabled for the object, and whether that encryption is from the AWS Key Management Service \(SSE\-KMS\) or from AWS managed encryption \(SSE\-S3\)\. For more information, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.  | Yes | 
 | x\-amz\-version\-id | Object version\. When you enable versioning on a bucket, Amazon S3 assigns a version number to objects added to the bucket\. For more information, see [Using Versioning](Versioning.md)\. | No | 
 | x\-amz\-delete\-marker | In a bucket that has versioning enabled, this Boolean marker indicates whether the object is a delete marker\.  | No | 
-| x\-amz\-storage\-class | Storage class used for storing the object\. For more information, see [Storage Classes](storage-class-intro.md)\. | Yes | 
+| x\-amz\-storage\-class | Storage class used for storing the object\. For more information, see [Amazon S3 Storage Classes](storage-class-intro.md)\. | Yes | 
 | x\-amz\-website\-redirect\-location |  Redirects requests for the associated object to another object in the same bucket or an external URL\. For more information, see [\(Optional\) Configuring a Webpage Redirect](how-to-page-redirect.md)\. | Yes | 
 | x\-amz\-server\-side\-encryption\-aws\-kms\-key\-id | If x\-amz\-server\-side\-encryption is present and has the value of aws:kms, this indicates the ID of the AWS Key Management Service \(AWS KMS\) master encryption key that was used for the object\. | Yes | 
 | x\-amz\-server\-side\-encryption\-customer\-algorithm | Indicates whether server\-side encryption with customer\-provided encryption keys \(SSE\-C\) is enabled\. For more information, see [Protecting Data Using Server\-Side Encryption with Customer\-Provided Encryption Keys \(SSE\-C\)](ServerSideEncryptionCustomerKeys.md)\.  | Yes | 
 
-### User\-Defined Metadata<a name="UserMetadata"></a>
+### User\-Defined Object Metadata<a name="UserMetadata"></a>
 
 When uploading an object, you can also assign metadata to the object\. You provide this optional information as a name\-value \(key\-value\) pair when you send a PUT or POST request to create the object\. When you upload objects using the REST API, the optional user\-defined metadata names must begin with "x\-amz\-meta\-" to distinguish them from other HTTP headers\. When you retrieve the object using the REST API, this prefix is returned\. When you upload objects using the SOAP API, the prefix is not required\. When you retrieve the object using the SOAP API, the prefix is removed, regardless of which API you used to upload the object\. 
 

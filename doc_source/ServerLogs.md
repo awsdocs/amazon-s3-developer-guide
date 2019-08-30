@@ -2,6 +2,9 @@
 
 Server access logging provides detailed records for the requests that are made to a bucket\. Server access logs are useful for many applications\. For example, access log information can be useful in security and access audits\. It can also help you learn about your customer base and understand your Amazon S3 bill\.
 
+**Note**  
+Server access logs do not log information regarding wrong\-region redirect errors for Regions that launched after March 20, 2019\. Wrong\-region redirect errors occur when a request for an object/bucket is made to an endpoint other than the endpoint of the Region in which the bucket exists\. 
+
 **Topics**
 + [How to Enable Server Access Logging](#server-access-logging-overview)
 + [Log Object Key Format](#server-log-keyname-format)
@@ -10,21 +13,28 @@ Server access logging provides detailed records for the requests that are made t
 + [Bucket Logging Status Changes Take Effect Over Time](#BucketLoggingStatusChanges)
 + [Enabling Logging Using the Console](enable-logging-console.md)
 + [Enabling Logging Programmatically](enable-logging-programming.md)
-+ [Server Access Log Format](LogFormat.md)
++ [Amazon S3 Server Access Log Format](LogFormat.md)
 + [Deleting Amazon S3 Log Files](deleting-log-files-lifecycle.md)
++ [Using Amazon S3 Access Logs to Identify Requests](using-s3-access-logs-to-identify-requests.md)
 
 ## How to Enable Server Access Logging<a name="server-access-logging-overview"></a>
 
 To track requests for access to your bucket, you can enable server access logging\. Each access log record provides details about a single access request, such as the requester, bucket name, request time, request action, response status, and an error code, if relevant\. 
 
 **Note**  
-There is no extra charge for enabling server access logging on an Amazon S3 bucket; however, any log files that the system delivers to you accrue the usual charges for storage\. \(You can delete the log files at any time\.\) No data transfer charges are assessed for log file delivery, but access to the delivered log files is charged the same as any other data transfer\. 
+There is no extra charge for enabling server access logging on an Amazon S3 bucket\. However, any log files that the system delivers to you accrue the usual charges for storage\. \(You can delete the log files at any time\.\) No data transfer charges are assessed for log file delivery, but access to the delivered log files is charged the same as any other data transfer\. 
 
  By default, logging is disabled\. When logging is enabled, logs are saved to a bucket in the same AWS Region as the source bucket\. 
 
 To enable access logging, you must do the following: 
 +  Turn on the log delivery by adding logging configuration on the bucket for which you want Amazon S3 to deliver access logs\. We refer to this bucket as the *source bucket*\. 
 +  Grant the Amazon S3 Log Delivery group write permission on the bucket where you want the access logs saved\. We refer to this bucket as the *target bucket*\. 
+
+**Note**  
+ Amazon S3 only supports granting permission to deliver access logs via bucket ACL, not via bucket policy\.
+ Adding *deny* conditions to a bucket policy may prevent Amazon S3 from delivering access logs\.
+ [Default bucket encryption](bucket-encryption.html) on the destination bucket *may only be used* if **AES256 \(SSE\-S3\)** is selected\. SSE\-KMS encryption is not supported\. 
+Amazon S3 object lock cannot be enabled on the log destination bucket\.
 
 To turn on log delivery, you provide the following logging configuration information:
 + The name of the target bucket where you want Amazon S3 to save the access logs as objects\. You can have logs delivered to any bucket that you own that is in the same Region as the source bucket, including the source bucket itself\. 
@@ -55,7 +65,7 @@ Amazon S3 uses the following object key format for the log objects it uploads in
 TargetPrefixYYYY-mm-DD-HH-MM-SS-UniqueString 
 ```
 
- In the key, `YYYY`, `mm`, `DD`, `HH`, `MM`, and `SS` are the digits of the year, month, day, hour, minute, and seconds \(respectively\) when the log file was delivered\. 
+ In the key, `YYYY`, `mm`, `DD`, `HH`, `MM`, and `SS` are the digits of the year, month, day, hour, minute, and seconds \(respectively\) when the log file was delivered, these dates and times are in Coordinated Universal time \(UTC\)\. 
 
 A log file delivered at a specific time can contain records written at any point before that time\. There is no way to know whether all log records for a certain time interval have been delivered or not\. 
 
@@ -71,7 +81,7 @@ Amazon S3 uses a special log delivery account, called the Log Delivery group, to
 
 Server access log records are delivered on a best effort basis\. Most requests for a bucket that is properly configured for logging result in a delivered log record\. Most log records are delivered within a few hours of the time that they are recorded, but they can be delivered more frequently\. 
 
-The completeness and timeliness of server logging is not guaranteed\. The log record for a particular request might be delivered long after the request was actually processed, or it might not be delivered at all\. The purpose of server logs is to give you an idea of the nature of traffic against your bucket\. It is rare to lose log records, but server logging is not meant to be a complete accounting of all requests\. 
+The completeness and timeliness of server logging is not guaranteed\. The log record for a particular request might be delivered long after the request was actually processed, or *it might not be delivered at all*\. The purpose of server logs is to give you an idea of the nature of traffic against your bucket\. It is rare to lose log records, but server logging is not meant to be a complete accounting of all requests\. 
 
 It follows from the best\-effort nature of the server logging feature that the usage reports available at the AWS portal \(Billing and Cost Management reports on the [AWS Management Console](https://console.aws.amazon.com/)\) might include one or more access requests that do not appear in a delivered server log\. 
 

@@ -4,7 +4,7 @@ The following C\# example shows how server\-side encryption with customer\-provi
 + **Put object**—Uploads an object and requests server\-side encryption using customer\-provided encryption keys\. 
 + **Get object**—Downloads the object that was uploaded in the previous step\. The request provides the same encryption information that was provided when the object was uploaded\. Amazon S3 needs this information to decrypt the object and return it to you\.
 + **Get object metadata**—Provides the same encryption information used when the object was created to retrieve the object's metadata\.
-+ **Copy object**—Makes a copy of the uploaded object\. Because the source object is stored using SSE\-C, the copy request must provide encryption information\. By default, Amazon S3 does not encrypt a copy of an object\. The code directs Amazon S3 to encrypte the copied object using SSE\-C by providing encryption\-related information for the target\. It also stores the target\.
++ **Copy object**—Makes a copy of the uploaded object\. Because the source object is stored using SSE\-C, the copy request must provide encryption information\. By default, Amazon S3 does not encrypt a copy of an object\. The code directs Amazon S3 to encrypt the copied object using SSE\-C by providing encryption\-related information for the target\. It also stores the target\.
 
 **Note**  
 For examples of uploading large objects using the multipart upload API, see [Using the AWS SDK for \.NET for Multipart Upload \(High\-Level API\)](usingHLmpuDotNet.md) and [Using the AWS SDK for \.NET for Multipart Upload \(Low\-Level API\)](usingLLmpuDotNet.md)\.
@@ -14,10 +14,7 @@ For information about SSE\-C, see [Protecting Data Using Server\-Side Encryption
 **Example**  
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
-
-﻿using Amazon.S3;
+using Amazon.S3;
 using Amazon.S3.Model;
 using System;
 using System.IO;
@@ -40,7 +37,6 @@ namespace Amazon.DocSamples.S3
             client = new AmazonS3Client(bucketRegion);
             ObjectOpsUsingClientEncryptionKeyAsync().Wait();
         }
-
         private static async Task ObjectOpsUsingClientEncryptionKeyAsync()
         {
             try
@@ -181,10 +177,7 @@ To upload large objects, you can use multipart upload API \(see [Uploading Objec
 **Example**  
 
   ```
-  // Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-  // SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
-  
-  ﻿using Amazon.S3;
+  using Amazon.S3;
   using Amazon.S3.Model;
   using System;
   using System.Collections.Generic;

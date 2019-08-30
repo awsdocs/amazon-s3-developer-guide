@@ -9,40 +9,42 @@ The following example uses the Multi\-Object Delete API to delete objects from a
 For more information about deleting objects, see [Deleting Objects](DeletingObjects.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
- require 'vendor/autoload.php';
+ 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 
-use Aws\S3\S3Client;
+import java.io.IOException;
 
-$bucket = '*** Your Bucket Name ***';
+public class DeleteObjectNonVersionedBucket {
 
-$s3 = new S3Client([
-    'version' => 'latest',
-    'region'  => 'us-east-1'
-]);
+    public static void main(String[] args) throws IOException {
+        Regions clientRegion = Regions.DEFAULT_REGION;
+        String bucketName = "*** Bucket name ***";
+        String keyName = "*** Key name ****";
 
-// 1. Create a few objects.
-for ($i = 1; $i <= 3; $i++) {
-    $s3->putObject([
-        'Bucket' => $bucket,
-        'Key'    => "key{$i}",
-        'Body'   => "content {$i}",
-    ]);
+        try {
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .withRegion(clientRegion)
+                    .build();
+
+            s3Client.deleteObject(new DeleteObjectRequest(bucketName, keyName));
+        } catch (AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
+        }
+    }
 }
-
-// 2. List the objects and get the keys.
-$keys = $s3->listObjects([
-    'Bucket' => $bucket
-]) ->getPath('Contents/*/Key');
-
-// 3. Delete the objects.
-$s3->deleteObjects([
-    'Bucket'  => $bucket,
-    'Delete' => [
-        'Objects' => array_map(function ($key) {
-            return ['Key' => $key];
-        }, $keys)
-    ],
-]);
 ```
 
 **Example**  
@@ -55,62 +57,124 @@ The following example uses the Multi\-Object Delete API to delete objects from a
 1. Remove the delete markers by specifying the object keys and version IDs of the delete markers\. The operation deletes the delete markers, which results in the objects reappearing in the AWS Management Console\.
 
 ```
- require 'vendor/autoload.php';
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.BucketVersioningConfiguration;
+import com.amazonaws.services.s3.model.DeleteObjectsRequest;
+import com.amazonaws.services.s3.model.DeleteObjectsRequest.KeyVersion;
+import com.amazonaws.services.s3.model.DeleteObjectsResult;
+import com.amazonaws.services.s3.model.DeleteObjectsResult.DeletedObject;
+import com.amazonaws.services.s3.model.PutObjectResult;
 
-use Aws\S3\S3Client;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-$bucket = '*** Your Bucket Name ***';
-$keyname = '*** Your Object Key ***';
+public class DeleteMultipleObjectsVersionEnabledBucket {
+    private static AmazonS3 S3_CLIENT;
+    private static String VERSIONED_BUCKET_NAME;
 
-$s3 = new S3Client([
-    'version' => 'latest',
-    'region'  => 'us-east-1'
-]);
+    public static void main(String[] args) throws IOException {
+        Regions clientRegion = Regions.DEFAULT_REGION;
+        VERSIONED_BUCKET_NAME = "*** Bucket name ***";
 
-// 1. Enable object versioning for the bucket.
-$s3->putBucketVersioning([
-    'Bucket' => $bucket,
-    'Status' => 'Enabled',
-]);
+        try {
+            S3_CLIENT = AmazonS3ClientBuilder.standard()
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .withRegion(clientRegion)
+                    .build();
 
-// 2. Create a few versions of an object.
-for ($i = 1; $i <= 3; $i++) {
-    $s3->putObject([
-        'Bucket' => $bucket,
-        'Key'    => $keyname,
-        'Body'   => "content {$i}",
-    ]);
+            // Check to make sure that the bucket is versioning-enabled.
+            String bucketVersionStatus = S3_CLIENT.getBucketVersioningConfiguration(VERSIONED_BUCKET_NAME).getStatus();
+            if (!bucketVersionStatus.equals(BucketVersioningConfiguration.ENABLED)) {
+                System.out.printf("Bucket %s is not versioning-enabled.", VERSIONED_BUCKET_NAME);
+            } else {
+                // Upload and delete sample objects, using specific object versions.
+                uploadAndDeleteObjectsWithVersions();
+
+                // Upload and delete sample objects without specifying version IDs.
+                // Amazon S3 creates a delete marker for each object rather than deleting
+                // specific versions.
+                DeleteObjectsResult unversionedDeleteResult = uploadAndDeleteObjectsWithoutVersions();
+
+                // Remove the delete markers placed on objects in the non-versioned create/delete method.
+                multiObjectVersionedDeleteRemoveDeleteMarkers(unversionedDeleteResult);
+            }
+        } catch (AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
+        }
+    }
+
+    private static void uploadAndDeleteObjectsWithVersions() {
+        System.out.println("Uploading and deleting objects with versions specified.");
+
+        // Upload three sample objects.
+        ArrayList<KeyVersion> keys = new ArrayList<KeyVersion>();
+        for (int i = 0; i < 3; i++) {
+            String keyName = "delete object without version ID example " + i;
+            PutObjectResult putResult = S3_CLIENT.putObject(VERSIONED_BUCKET_NAME, keyName,
+                    "Object number " + i + " to be deleted.");
+            // Gather the new object keys with version IDs.
+            keys.add(new KeyVersion(keyName, putResult.getVersionId()));
+        }
+
+        // Delete the specified versions of the sample objects.
+        DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest(VERSIONED_BUCKET_NAME)
+                .withKeys(keys)
+                .withQuiet(false);
+
+        // Verify that the object versions were successfully deleted.
+        DeleteObjectsResult delObjRes = S3_CLIENT.deleteObjects(multiObjectDeleteRequest);
+        int successfulDeletes = delObjRes.getDeletedObjects().size();
+        System.out.println(successfulDeletes + " objects successfully deleted");
+    }
+
+    private static DeleteObjectsResult uploadAndDeleteObjectsWithoutVersions() {
+        System.out.println("Uploading and deleting objects with no versions specified.");
+
+        // Upload three sample objects.
+        ArrayList<KeyVersion> keys = new ArrayList<KeyVersion>();
+        for (int i = 0; i < 3; i++) {
+            String keyName = "delete object with version ID example " + i;
+            S3_CLIENT.putObject(VERSIONED_BUCKET_NAME, keyName, "Object number " + i + " to be deleted.");
+            // Gather the new object keys without version IDs.
+            keys.add(new KeyVersion(keyName));
+        }
+
+        // Delete the sample objects without specifying versions.
+        DeleteObjectsRequest multiObjectDeleteRequest = new DeleteObjectsRequest(VERSIONED_BUCKET_NAME).withKeys(keys)
+                .withQuiet(false);
+
+        // Verify that delete markers were successfully added to the objects.
+        DeleteObjectsResult delObjRes = S3_CLIENT.deleteObjects(multiObjectDeleteRequest);
+        int successfulDeletes = delObjRes.getDeletedObjects().size();
+        System.out.println(successfulDeletes + " objects successfully marked for deletion without versions.");
+        return delObjRes;
+    }
+
+    private static void multiObjectVersionedDeleteRemoveDeleteMarkers(DeleteObjectsResult response) {
+        List<KeyVersion> keyList = new ArrayList<KeyVersion>();
+        for (DeletedObject deletedObject : response.getDeletedObjects()) {
+            // Note that the specified version ID is the version ID for the delete marker.
+            keyList.add(new KeyVersion(deletedObject.getKey(), deletedObject.getDeleteMarkerVersionId()));
+        }
+        // Create a request to delete the delete markers.
+        DeleteObjectsRequest deleteRequest = new DeleteObjectsRequest(VERSIONED_BUCKET_NAME).withKeys(keyList);
+
+        // Delete the delete markers, leaving the objects intact in the bucket.
+        DeleteObjectsResult delObjRes = S3_CLIENT.deleteObjects(deleteRequest);
+        int successfulDeletes = delObjRes.getDeletedObjects().size();
+        System.out.println(successfulDeletes + " delete markers successfully deleted");
+    }
 }
-
-// 3. List the objects versions and get the keys and version IDs.
-$versions = $s3->listObjectVersions(['Bucket' => $bucket])
-    ->getPath('Versions');
-
-// 4. Delete the object versions.
-$s3->deleteObjects([
-    'Bucket'  => $bucket,
-    'Delete' => [
-        'Objects' => array_map(function ($version) {
-          return [
-              'Key'       => $version['Key'],
-              'VersionId' => $version['VersionId']
-        }, $versions),
-    ],       
-]);
-
-echo "The following objects were deleted successfully:". PHP_EOL;
-foreach ($result['Deleted'] as $object) {
-    echo "Key: {$object['Key']}, VersionId: {$object['VersionId']}" . PHP_EOL;
-}
-
-echo PHP_EOL . "The following objects could not be deleted:" . PHP_EOL;
-foreach ($result['Errors'] as $object) {
-    echo "Key: {$object['Key']}, VersionId: {$object['VersionId']}" . PHP_EOL;
-}
-
-// 5. Suspend object versioning for the bucket.
-$s3->putBucketVersioning([
-    'Bucket' => $bucket,
-    'Status' => 'Suspended',
-]);
 ```

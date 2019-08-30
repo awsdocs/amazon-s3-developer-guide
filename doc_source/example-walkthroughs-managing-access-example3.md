@@ -9,9 +9,9 @@
 
 The scenario for this example is that a bucket owner wants to grant permission to access objects, but not all objects in the bucket are owned by the bucket owner\. How can a bucket owner grant permission on objects it does not own? For this example, the bucket owner is trying to grant permission to users in its own account\.
 
-A bucket owner can enable other AWS accounts to upload objects\. These objects are owned by the accounts that created them\. The bucket owner does not own objects that were not created by the bucket owner\. Therefore, for the bucket owner to grant access to these objects, the object owner must first grant permission to the bucket owner using an object ACL\. The bucket owner can then delegate those permissions via a bucket policy\. In this example, the bucket owner delegates permission to users in its own account\.
+A bucket owner can enable other AWS accounts to upload objects\. These objects are owned by the accounts that created them\. The bucket owner does not own objects that were not created by the bucket owner\. Therefore, for the bucket owner to grant access to these objects, the object owner must first grant permission to the bucket owner using an object ACL\. For more information, see [Amazon S3 Bucket and Object Ownership](access-control-overview.md#about-resource-owner)\.
 
-The following is a summary of the walkthrough steps:
+In this example, the bucket owner delegates permission to users in its own account\. The following is a summary of the walkthrough steps:
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/access-policy-ex3.png)
 
@@ -91,10 +91,12 @@ Using the IAM user sign\-in URL for Account A first sign in to the AWS Managemen
                "AWS": "arn:aws:iam::AccountB-ID:root"
             },
             "Action": [
-               "s3:PutObject"
+               "s3:PutObject",
+               "s3:ListBucket"
             ],
             "Resource": [
-               "arn:aws:s3:::examplebucket/*"
+            "arn:aws:s3:::examplebucket/*"
+     	"arn:aws:s3:::examplebucket"
             ]
          },
          {

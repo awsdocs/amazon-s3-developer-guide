@@ -33,7 +33,7 @@ If server access logs \([Amazon S3 Server Access Logging](ServerLogs.md)\) or AW
 
 ## CRR and Destination Region<a name="crr-and-dest-region"></a>
 
-In CRR configuration, the source and destination buckets must be in different AWS Regions\. You might choose the Region for you destination bucket based on either your business needs or cost considerations\. For example, inter\-region data transfer charges vary depending on the Regions that you choose\. Suppose that you chose US East \(N\. Virginia\) \(us\-east\-1\) as the Region for your source bucket\. If you choose US West \(Oregon\) \(us\-west\-2\) as the Region for your destination bucket, you pay more than if you choose the US East \(Ohio\) \(us\-east\-2\) Region\. For pricing information, see "Data Transfer Pricing" in [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
+In CRR configuration, the source and destination buckets must be in different AWS Regions\. You might choose the Region for your destination bucket based on either your business needs or cost considerations\. For example, inter\-region data transfer charges vary depending on the Regions that you choose\. Suppose that you chose US East \(N\. Virginia\) \(us\-east\-1\) as the Region for your source bucket\. If you choose US West \(Oregon\) \(us\-west\-2\) as the Region for your destination bucket, you pay more than if you choose the US East \(Ohio\) \(us\-east\-2\) Region\. For pricing information, see "Data Transfer Pricing" in [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
 
 ## Pausing Replication Configuration<a name="crr-pause"></a>
 

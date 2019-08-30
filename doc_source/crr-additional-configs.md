@@ -4,4 +4,4 @@ This section describes additional cross\-region replication configurations\. For
 
 **Topics**
 + [CRR Additional Configuration: Changing the Replica Owner](crr-change-owner.md)
-+ [CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using AWS KMS\-Managed Encryption Keys](crr-replication-config-for-kms-objects.md)
++ [CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](crr-replication-config-for-kms-objects.md)

@@ -28,6 +28,7 @@ You can add tags to new objects when you upload them or you can add them to exis
 + You can associate up to 10 tags with an object\. Tags associated with an object must have unique tag keys\.
 + A tag key can be up to 128 Unicode characters in length and tag values can be up to 256 Unicode characters in length\.
 + Key and values are case sensitive\.
++ For more information on Tag Restrictions\. See [User\-Defined Tag Restrictions](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)\.
 
 Object key name prefixes also enable you to categorize storage, however prefix\-based categorization is one dimensional\. Consider the following object key names:
 
@@ -55,7 +56,10 @@ Amazon S3 supports the following API operations that are specifically for object
 **Object API Operations**
 +  [PUT Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html) – Replaces tags on an object\. You specify tags in the request body\.  There are two distinct scenarios of object tag management using this API\.
   + Object has no tags – Using this API you can add a set of tags to an object \(the object has no prior tags\)\.
-  + Object has a set of existing tags – To modify the existing tag set, you must first retrieve the existing tag set, modify it on the client side, and then use this API to replace the tag set\. If you send this request with empty tag set, S3 deletes existing tag set on the object\.
+  + Object has a set of existing tags – To modify the existing tag set, you must first retrieve the existing tag set, modify it on the client side, and then use this API to replace the tag set\.
+**Note**  
+ If you send this request with an empty tag set, Amazon S3 deletes the existing tag set on the object\. If you use this method, you will be charged for a Tier 1 Request \(PUT\)\. For more information, see [Amazon S3 Pricing](https://d0.awsstatic.com/whitepapers/aws_pricing_overview.pdf)\.  
+The [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html) request is prefereed because it achieves the same result without incurring charges\. 
 
    
 +  [GET Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html) – Returns the tag set associated with an object\. Amazon S3 returns object tags in the response body\.
@@ -75,7 +79,8 @@ Amazon S3 supports the following API operations that are specifically for object
   As long as the tags in your request don't exceed the 8 K byte HTTP request header size limit, you can use the `PUT Object `API to create objects with tags\. If the tags you specify exceed the header size limit, you can use this POST method in which you include the tags in the body\. 
 
    
-+  [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html) – You can specify the `x-amz-tagging-directive` in your request to direct Amazon S3 to either copy \(default behavior\) the tags or replace tags by a new set of tags provided in the request\. 
+
+   [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html) – You can specify the `x-amz-tagging-directive` in your request to direct Amazon S3 to either copy \(default behavior\) the tags or replace tags by a new set of tags provided in the request\. 
 
 Note the following:
 + Tagging follows the eventual consistency model\. That is, soon after adding tags to an object, if you try to retrieve the tags, you might get old tags, if any, on the objects\. However, a subsequent call will likely provide the updated tags\.
