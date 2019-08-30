@@ -4,6 +4,7 @@
 + [Generate a Presigned Object URL using AWS Explorer for Visual Studio](ShareObjectPreSignedURLVSExplorer.md)
 + [Generate a presigned Object URL Using the AWS SDK for Java](ShareObjectPreSignedURLJavaSDK.md)
 + [Generate a Presigned Object URL Using AWS SDK for \.NET](ShareObjectPreSignedURLDotNetSDK.md)
++ [Generate a Presigned Object URL Using AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/s3/presign.html)
 
 All objects by default are private\. Only the object owner has permission to access these objects\. However, the object owner can optionally share objects with others by creating a presigned URL, using their own security credentials, to grant time\-limited permission to download the objects\. 
 

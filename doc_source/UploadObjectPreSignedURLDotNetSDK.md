@@ -5,10 +5,7 @@ The following C\# example shows how to use the AWS SDK for \.NET to upload an ob
 This example generates a presigned URL for a specific object and uses it to upload a file\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions about how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
-
-﻿using Amazon.S3;
+using Amazon.S3;
 using Amazon.S3.Model;
 using System;
 using System.IO;

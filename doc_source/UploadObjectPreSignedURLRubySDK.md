@@ -16,32 +16,6 @@ The following Ruby code example demonstrates the preceding tasks for SDK for Rub
 **Example**  
 
 ```
-#**
- #* Copyright 2010-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- #*
- #* This file is licensed under the Apache License, Version 2.0 (the "License").
- #* You may not use this file except in compliance with the License. A copy of
- #* the License is located at
- #*
- #* http://aws.amazon.com/apache2.0/
- #*
- #* This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- #* CONDITIONS OF ANY KIND, either express or implied. See the License for the
- #* specific language governing permissions and limitations under the License.
-#**
-
-
-# snippet-sourcedescription:[create_bucket.rb allows anyone with the presigned URL can upload an object by using the AWS SDK for Ruby.] 
-# snippet-service:[s3]
-# snippet-keyword:[Ruby]
-# snippet-keyword:[Amazon S3]
-# snippet-keyword:[PUT Bucket, Presigned URL]
-# snippet-keyword:[Upload-presigned-url]
-# snippet-sourcetype:[snippet]
-# snippet-sourcedate:[2019-01-28]
-# snippet-sourceauthor:[AWS]
-
-# snippet-start:[s3.ruby.upload_object_presigned_url.rb]
 #Uploading an object using a presigned URL for SDK for Ruby - Version 3.
 
 require 'aws-sdk-s3'
@@ -67,5 +41,4 @@ end
 
 puts obj.get.body.read
 # This will print out the contents of your object to the terminal window.
-# snippet-end:[s3.ruby.upload_object_presigned_url.rb]
 ```

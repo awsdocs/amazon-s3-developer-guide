@@ -60,7 +60,7 @@ The easiest way to set up an inventory is by using the AWS Management Console, b
 
    When you configure an inventory list for a source bucket, you specify the destination bucket where you want the list to be stored, and whether you want to generate the list daily or weekly\. You can also configure what object metadata to include and whether to list all object versions or only current versions\. 
 
-   You can specify that the inventory list file be encrypted by using Amazon S3\-managed keys \(SSE\-S3\) or AWS KMS\-managed keys \(SSE\-KMS\)\. For more information about SSE\-S3 and SSE\-KMS, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. If you plan to use SSE\-KMS encryption, see Step 3\.
+   You can specify that the inventory list file be encrypted by using Amazon S3\-managed keys \(SSE\-S3\) or keys stored in AWS KMS \(SSE\-KMS\)\. For more information about SSE\-S3 and SSE\-KMS, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. If you plan to use SSE\-KMS encryption, see Step 3\.
    + For information about how to use the console to configure an inventory list, see [How Do I Configure Amazon S3 Inventory?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-inventory.html) in the *Amazon Simple Storage Service Console User Guide*\.
    + To use the Amazon S3 API to configure an inventory list, use the [PUT Bucket inventory configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTInventoryConfig.html) REST API, or the equivalent from the AWS CLI or AWS SDKs\. 
 
@@ -114,14 +114,14 @@ The inventory list contains a list of the objects in an S3 bucket and the follow
 + **Size** – Object size in bytes\.
 + **Last modified date** – Object creation date or the last modified date, whichever is the latest\.
 + **ETag** – The entity tag is a hash of the object\. The ETag reflects changes only to the contents of an object, not its metadata\. The ETag may or may not be an MD5 digest of the object data\. Whether it is depends on how the object was created and how it is encrypted\.
-+ **Storage class** – Storage class used for storing the object\. For more information, see [Storage Classes](storage-class-intro.md)\.
++ **Storage class** – Storage class used for storing the object\. For more information, see [Amazon S3 Storage Classes](storage-class-intro.md)\.
 + **Multipart upload flag** – Set to `True` if the object was uploaded as a multipart upload\. For more information, see [Multipart Upload Overview](mpuoverview.md)\.
-+ **Delete marker** – Set to `True`, if the object is a delete marker\. For more information, see [Object Versioning](ObjectVersioning.md)\. \(This field is not included if the list is only for the current version of objects\.\)
++ **Delete marker** – Set to `True`, if the object is a delete marker\. For more information, see [Object Versioning](ObjectVersioning.md)\. \(This field is automatically added to your report if you've configured the report to include all versions of your objects\)\.
 + **Replication status** – Set to `PENDING`, `COMPLETED`, `FAILED`, or `REPLICA.` For more information, see [Cross\-Region Replication Status Information](crr-status.md)\.
 + **Encryption status** – Set to `SSE-S3`, `SSE-C`, `SSE-KMS`, or `NOT-SSE`\. The server\-side encryption status for SSE\-S3, SSE\-KMS, and SSE with customer\-provided keys \(SSE\-C\)\. A status of `NOT-SSE` means that the object is not encrypted with server\-side encryption\. For more information, see [Protecting Data Using Encryption](UsingEncryption.md)\.
-+ **Object lock Retain until date** – The date until which the locked object cannot be deleted\. For more information, see [Introduction to Amazon S3 Object Lock](object-lock.md)\.
-+ **Object lock Mode** – Set to `Governance` or `Compliance` for objects that are locked\. For more information, see [Introduction to Amazon S3 Object Lock](object-lock.md)\.
-+ **Object lock Legal hold status ** – Set to `On` if a legal hold has been applied to an object; otherwise it is set to `Off`\. For more information, see [Introduction to Amazon S3 Object Lock](object-lock.md)\.
++ **Object lock Retain until date** – The date until which the locked object cannot be deleted\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
++ **Object lock Mode** – Set to `Governance` or `Compliance` for objects that are locked\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
++ **Object lock Legal hold status ** – Set to `On` if a legal hold has been applied to an object; otherwise it is set to `Off`\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
 
 The following is an example CSV inventory list opened in a spreadsheet application\. The heading row is shown only to help clarify the example; it is not included in the actual list\.
 
@@ -146,7 +146,7 @@ When an inventory list is published, the manifest files are published to the fol
 ```
 + *destination\-prefix* is the \(object key name\) prefix set in the inventory configuration, which can be used to group all the inventory list files in a common location within the destination bucket\.
 + *source\-bucket* is the source bucket that the inventory list is for\. It is added to prevent collisions when multiple inventory reports from different source buckets are sent to the same destination bucket\.
-+ *config\-ID* is added to prevent collisions with multiple inventory reports from the same source bucket that are sent to the same destination bucket\.
++ *config\-ID* is added to prevent collisions with multiple inventory reports from the same source bucket that are sent to the same destination bucket\. The *config\-ID* comes from the inventory report configuration, and is the name for the report that is defined on setup\.
 + *YYYY\-MM\-DDTHH\-MMZ* is the timestamp that consists of the start time and the date when the inventory report generation begins scanning the bucket; for example, `2016-11-06T21-32Z`\. Storage added after the timestamp is not in the report\.
 + `manifest.json` is the manifest file\. 
 + `manifest.checksum` is the MD5 of the content of the `manifest.json` file\. 
@@ -288,8 +288,8 @@ Athena can query Amazon S3 inventory files in ORC, Parquet, or CSV format\. When
    The following sample query includes all optional fields in an ORC\-formatted inventory report\. Drop any optional field that you did not choose for your inventory so that the query corresponds to the fields chosen for your inventory\. Also, you must use your bucket name and the location\. The location points to your inventory destination path; for example, `s3://destination-prefix/source-bucket/config-ID/hive/`\.
 
    ```
-   CREATE EXTERNAL TABLE your-table-name(
-     'bucket' string,
+   CREATE EXTERNAL TABLE your_table_name(
+     `bucket` string,
      key string,
      version_id string,
      is_latest boolean,
@@ -315,7 +315,7 @@ Athena can query Amazon S3 inventory files in ORC, Parquet, or CSV format\. When
     When using Athena to query a Parquet\-formatted inventory report, use the following Parquet SerDe in place of the ORC SerDe in the `ROW FORMAT SERDE` statement\.
 
    ```
-   ROW FORMAT SERDE ‘org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe’
+   ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe'
    ```
 
 1. To add new inventory lists to your table, use the following `MSCK REPAIR TABLE` command\.

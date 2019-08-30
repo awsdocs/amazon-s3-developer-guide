@@ -65,6 +65,9 @@ A key is the unique identifier for an object within a bucket\. Every object in a
 
 You can choose the geographical region where Amazon S3 will store the buckets you create\. You might choose a region to optimize latency, minimize costs, or address regulatory requirements\. Objects stored in a region never leave the region unless you explicitly transfer them to another region\. For example, objects stored in the EU \(Ireland\) region never leave it\. 
 
+**Note**  
+You can only access Amazon S3 and its features in AWS Regions that are enabled for your account\.
+
  For a list of Amazon S3 regions and endpoints, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\. 
 
 ### Amazon S3 Data Consistency Model<a name="ConsistencyModel"></a>
@@ -82,7 +85,7 @@ Amazon S3 achieves high availability by replicating data across multiple servers
 +  A process deletes an existing object and immediately lists keys within its bucket\. Until the deletion is fully propagated, Amazon S3 might list the deleted object\. 
 
 **Note**  
-Amazon S3 does not currently support object locking\. If two PUT requests are simultaneously made to the same key, the request with the latest time stamp wins\. If this is an issue, you will need to build an object\-locking mechanism into your application\.   
+Amazon S3 does not currently support Object Locking\. If two PUT requests are simultaneously made to the same key, the request with the latest time stamp wins\. If this is an issue, you will need to build an object\-locking mechanism into your application\.   
 Updates are key\-based; there is no way to make atomic updates across keys\. For example, you cannot make the update of one key dependent on the update of another key unless you design this functionality into your application\.
 
 The following table describes the characteristics of eventually consistent read and consistent read\.
@@ -98,13 +101,13 @@ The following table describes the characteristics of eventually consistent read 
 
 This section provides examples of eventually consistent and consistent read requests when multiple clients are writing to the same items\.
 
-In this example, both W1 \(write 1\) and W2 \(write 2\) complete before the start of R1 \(read 1\) and R2 \(read 2\)\. For a consistent read, R1 and R2 both return `color = ruby`\. For an eventually consistent read, R1 and R2 might return `color = red` or  `color = ruby` depending on the amount of time that has elapsed\. 
+In this example, both W1 \(write 1\) and W2 \(write 2\) complete before the start of R1 \(read 1\) and R2 \(read 2\)\. For a consistent read, R1 and R2 both return `color = ruby`\. For an eventually consistent read, R1 and R2 might return `color = red` or `color = ruby` depending on the amount of time that has elapsed\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/consistency1.png)
 
 In the next example, W2 does not complete before the start of R1\. Therefore, R1 might return `color = ruby` or `color = garnet` for either a consistent read or an eventually consistent read\. Also, depending on the amount of time that has elapsed, an eventually consistent read might return no results\.
 
-For a consistent read, R2 returns `color = garnet`\. For an eventually consistent read, R2 might return `color = ruby` or  `color = garnet` depending on the amount of time that has elapsed\. 
+For a consistent read, R2 returns `color = garnet`\. For an eventually consistent read, R2 might return `color = ruby` or `color = garnet` depending on the amount of time that has elapsed\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/consistency2.png)
 
@@ -128,7 +131,7 @@ This section describes important Amazon S3 features\.
 
  Amazon S3 offers a range of storage classes designed for different use cases\. These include Amazon S3 STANDARD for general\-purpose storage of frequently accessed data, Amazon S3 STANDARD\_IA for long\-lived, but less frequently accessed data, and GLACIER for long\-term archive\.
 
-For more information, see [Storage Classes](storage-class-intro.md)\.
+For more information, see [Amazon S3 Storage Classes](storage-class-intro.md)\.
 
 ### Bucket Policies<a name="BucketPolicies"></a>
 
@@ -223,4 +226,4 @@ For information about paying for Amazon S3 storage, see [Amazon S3 Pricing](http
 Once you load your data into Amazon S3, you can use it with other services that we provide\. The following services are the ones you might use most frequently:
 + **Amazon Elastic Compute Cloud** – This web service provides virtual compute resources in the cloud\. For more information, go to the [Amazon EC2 product details page](https://aws.amazon.com/ec2/)\.
 + **Amazon EMR** – This web service enables businesses, researchers, data analysts, and developers to easily and cost\-effectively process vast amounts of data\. It utilizes a hosted Hadoop framework running on the web\-scale infrastructure of Amazon EC2 and Amazon S3\. For more information, go to the [Amazon EMR product details page](https://aws.amazon.com/elasticmapreduce/)\.
-+ **AWS Import/Export** – AWS Import/Export enables you to mail a storage device, such as a RAID drive, to Amazon so that we can upload your \(terabytes\) of data into Amazon S3\. For more information, go to the [AWS Import/Export Developer Guide](https://docs.aws.amazon.com/AWSImportExport/latest/DG/)\. 
++ **AWS Snowball** – This service accelerates transferring large amounts of data into and out of AWS using physical storage devices, bypassing the Internet\. Each AWS Snowball device type can transport data at faster\-than internet speeds\. This transport is done by shipping the data in the devices through a regional carrier\. For more information, go to the [AWS Snowball product details page](https://aws.amazon.com/snowball)\. 

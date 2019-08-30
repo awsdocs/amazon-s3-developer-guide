@@ -8,7 +8,7 @@ To learn more about CloudTrail, including how to configure and enable it, see th
 
 CloudTrail is enabled on your AWS account when you create the account\. When supported event activity occurs in Amazon S3, that activity is recorded in a CloudTrail event along with other AWS service events in **Event history**\. You can view, search, and download recent events in your AWS account\. For more information, see [Viewing Events with CloudTrail Event History](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)\. 
 
-For an ongoing record of events in your AWS account, including events for Amazon S3, create a trail\. A trail enables CloudTrail to deliver log files to an Amazon S3 bucket\. By default, when you create a trail in the console, the trail applies to all regions\. The trail logs events from all regions in the AWS partition and delivers the log files to the Amazon S3 bucket that you specify\. Additionally, you can configure other AWS services to further analyze and act upon the event data collected in CloudTrail logs\. For more information, see: 
+For an ongoing record of events in your AWS account, including events for Amazon S3, create a trail\. A trail enables CloudTrail to deliver log files to an Amazon S3 bucket\. By default, when you create a trail in the console, the trail applies to all Regions\. The trail logs events from all Regions in the AWS partition and delivers the log files to the Amazon S3 bucket that you specify\. Additionally, you can configure other AWS services to further analyze and act upon the event data collected in CloudTrail logs\. For more information, see the following: 
 + [Overview for Creating a Trail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html)
 + [CloudTrail Supported Services and Integrations](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-aws-service-specific-topics.html#cloudtrail-aws-service-specific-topics-integrations)
 + [Configuring Amazon SNS Notifications for CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/getting_notifications_top_level.html)
@@ -81,6 +81,7 @@ You can also get CloudTrail logs for object\-level Amazon S3 actions\. To do thi
 | --- | --- | 
 |  [Abort Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadAbort.html)  | AbortMultipartUpload | 
 |  [Complete Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadComplete.html)  | CompleteMultipartUpload | 
+|  [Delete Multiple Objects](https://docs.aws.amazon.com/AmazonS3/latest/API/multiobjectdeleteapi.html)  | DeleteObjects | 
 |  [DELETE Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html)  | DeleteObject | 
 |  [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html)  | GetObject | 
 |  [GET Object ACL](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETacl.html)  | GetObjectAcl | 
@@ -103,20 +104,22 @@ In addition to these operations, you can use the following bucket\-level operati
 + [GET Bucket \(List Objects\) Version 2](https://docs.aws.amazon.com/AmazonS3/latest/API/v2-RESTBucketGET.html) – Select a prefix specified in the trail\.
 + [GET Bucket Object versions](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETVersion.html) – Select a prefix specified in the trail\.
 + [HEAD Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketHEAD.html) – Specify a bucket and an empty prefix\.
-+ [Delete Multiple Objects](https://docs.aws.amazon.com/AmazonS3/latest/API/multiobjectdeleteapi.html) – Specify a bucket and an empty prefix\.
++ [Delete Multiple Objects](https://docs.aws.amazon.com/AmazonS3/latest/API/multiobjectdeleteapi.html) – Specify a bucket and an empty prefix\. 
+**Note**  
+CloudTrail does not log key names for the keys that are deleted using the Delete Multiple Objects operation\.
 
 #### Object\-Level Actions in Cross\-Account Scenarios<a name="cloudtrail-object-level-crossaccount"></a>
 
 The following are special use cases involving the object\-level API calls in cross\-account scenarios and how CloudTrail logs are reported\. CloudTrail always delivers logs to the requester \(who made the API call\)\. When setting up cross\-account access, consider the examples in this section\.
 
 **Note**  
-The examples assume CloudTrail logs are appropriately configured\. 
+The examples assume that CloudTrail logs are appropriately configured\. 
 
 ##### Example 1: CloudTrail Delivers Access Logs to the Bucket Owner<a name="cloudtrail-crossaccount-example1"></a>
 
 CloudTrail delivers access logs to the bucket owner only if the bucket owner has permissions for the same object API\. Consider the following cross\-account scenario:
 + Account\-A owns the bucket\.
-+ Account\-B \(the requester\) attempts to access an object in that bucket\.
++ Account\-B \(the requester\) tries to access an object in that bucket\.
 
 CloudTrail always delivers object\-level API access logs to the requester\. In addition, CloudTrail also delivers the same logs to the bucket owner only if the bucket owner has permissions for the same API actions on that object\. 
 
@@ -129,7 +132,7 @@ Consider the following cross\-account scenario:
 + Account\-A owns the bucket\.
 +  Account\-B \(the requester\) sends a request to set an object ACL grant using an email address\. For information about ACLs, see [Access Control List \(ACL\) Overview](acl-overview.md)\.
 
-The request gets the logs along with the email information\. However, the bucket owner—if they eligible to receive logs as in example 1—gets the CloudTrail log reporting the event\. However, the bucket owner doesn't get the ACL configuration information, specifically the grantee email and the grant\. The only information the log tells the bucket owner is that an ACL API call was made by Account\-B\.
+The request gets the logs along with the email information\. However, the bucket owner—if they are eligible to receive logs, as in example 1—gets the CloudTrail log reporting the event\. However, the bucket owner doesn't get the ACL configuration information, specifically the grantee email and the grant\. The only information that the log tells the bucket owner is that an ACL API call was made by Account\-B\.
 
 ### CloudTrail Tracking with Amazon S3 SOAP API Calls<a name="cloudtrail-s3-soap"></a>
 
@@ -153,13 +156,13 @@ Newer Amazon S3 features are not supported for SOAP\. We recommend that you use 
 
 ## Using CloudTrail Logs with Amazon S3 Server Access Logs and CloudWatch Logs<a name="cloudtrail-logging-vs-server-logs"></a>
 
-You can use AWS CloudTrail logs together with server access logs for Amazon S3\. CloudTrail logs provide you with detailed API tracking for Amazon S3 bucket\-level and object\-level operations, while server access logs for Amazon S3 provide you visibility into object\-level operations on your data in Amazon S3\. For more information about server access logs, see [Amazon S3 Server Access Logging](ServerLogs.md)\.
+AWS CloudTrail logs provide a record of actions taken by a user, role, or an AWS service in Amazon S3, while Amazon S3 server access logs provides detailed records for the requests that are made to an S3 bucket\. For more information on how the different logs work and their properties, performance and costs, see [Logging with Amazon S3](logging-with-S3.md)\. You can use AWS CloudTrail logs together with server access logs for Amazon S3\. CloudTrail logs provide you with detailed API tracking for Amazon S3 bucket\-level and object\-level operations\. Server access logs for Amazon S3 provide you visibility into object\-level operations on your data in Amazon S3\. For more information about server access logs, see [Amazon S3 Server Access Logging](ServerLogs.md)\.
 
-You can also use CloudTrail logs together with CloudWatch for Amazon S3\. CloudTrail integration with CloudWatch logs delivers S3 bucket\-level API activity captured by CloudTrail to a CloudWatch log stream in the CloudWatch log group you specify\. You can create CloudWatch alarms for monitoring specific API activity and receive email notifications when the specific API activity occurs\. For more information about CloudWatch alarms for monitoring specific API activity, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\. For more information about using CloudWatch with Amazon S3, see [Monitoring Metrics with Amazon CloudWatch](cloudwatch-monitoring.md)\.
+You can also use CloudTrail logs together with CloudWatch for Amazon S3\. CloudTrail integration with CloudWatch Logs delivers S3 bucket\-level API activity captured by CloudTrail to a CloudWatch log stream in the CloudWatch log group that you specify\. You can create CloudWatch alarms for monitoring specific API activity and receive email notifications when the specific API activity occurs\. For more information about CloudWatch alarms for monitoring specific API activity, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\. For more information about using CloudWatch with Amazon S3, see [Monitoring Metrics with Amazon CloudWatch](cloudwatch-monitoring.md)\.
 
 ## Example: Amazon S3 Log File Entries<a name="cloudtrail-logging-understanding-s3-entries"></a>
 
- A trail is a configuration that enables delivery of events as log files to an Amazon S3 bucket that you specify\. CloudTrail log files contain one or more log entries\. An event represents a single request from any source and includes information about the requested action, the date and time of the action, request parameters, and so on\. CloudTrail log files are not an ordered stack trace of the public API calls, so they do not appear in any specific order\.
+ A trail is a configuration that enables delivery of events as log files to an Amazon S3 bucket that you specify\. CloudTrail log files contain one or more log entries\. An event represents a single request from any source\. It includes information about the requested action, the date and time of the action, request parameters, and so on\. CloudTrail log files are not an ordered stack trace of the public API calls, so they do not appear in any specific order\.
 
 The following example shows a CloudTrail log entry that demonstrates the [GET Service](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html), [PUT Bucket acl](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTacl.html), and [GET Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html) actions\.
 
@@ -292,3 +295,4 @@ The following example shows a CloudTrail log entry that demonstrates the [GET Se
 ## Related Resources<a name="cloudtrail-logging-related-resources"></a>
 + [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)
 + [CloudTrail Event Reference](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference.html)
++ [ Using AWS CloudTrail to Identify Amazon S3 Requests](cloudtrail-request-identification.md)

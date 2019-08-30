@@ -74,15 +74,17 @@ You may want to open a text editor and write down some of the information as you
 
    1. Repeat the preceding step to create administrator users in Account B and Account C\.
 
-1. For Account C, note down the account ID\. 
+1. For Account C, note down the canonical user ID\. 
 
    When you create an IAM role in Account A, the trust policy grants Account C permission to assume the role by specifying the account ID\. You can find account information as follows:
 
-   1. Go to [https://aws\.amazon\.com/](https://aws.amazon.com/) and from the **My Account/Console** drop\-down menu, select **Security Credentials**\. 
+   1. Use your AWS account ID or account alias, your IAM user name, and your password to sign in to the [Amazon S3 Console](https://console.aws.amazon.com/s3/)\.
 
-   1. Sign in using appropriate account credentials\.
+   1. Choose the name of an Amazon S3 bucket to view the details about that bucket\.
 
-   1. Click **Account Identifiers** and note down the **AWS Account ID** and the **Canonical User ID**\.
+   1. Choose the **Permissions** tab and then choose **Access Control List**\. 
+
+   1. In the **Access for your AWS account** section, in the **Account** column is a long identifier, such as `c1daexampleaaf850ea79cf0430f33d72579fd1611c97f7ded193374c0b163b6`\. This is your canonical user ID\.
 
 1. When creating a bucket policy, you will need the following information\. Note down these values:
    + **Canonical user ID of Account A** – When the Account A administrator grants conditional upload object permission to the Account B administrator, the condition specifies the canonical user ID of the Account A user that must get full\-control of the objects\. 
@@ -186,8 +188,6 @@ In the IAM console, create an IAM role \("examplerole"\) that grants Account C p
 
 1. In the navigation pane on the left, click **Roles** and then click **Create New Role**\.
 
-1. Enter `examplerole` for the role name, and then click **Next Step**\.
-
 1. Under **Select Role Type**, select **Role for Cross\-Account Access**, and then click the **Select** button next to **Provide access between AWS accounts you own**\.
 
 1. Enter the Account C account ID\.
@@ -199,6 +199,8 @@ In the IAM console, create an IAM role \("examplerole"\) that grants Account C p
 1. Select the box next to the `access-accountA-bucket` policy that you created and then click **Next Step**\.
 
    The Review page appears so you can confirm the settings for the role before it's created\. One very important item to note on this page is the link that you can send to your users who need to use this role\. Users who click the link go straight to the Switch Role page with the Account ID and Role Name fields already filled in\. You can also see this link later on the Role Summary page for any cross\-account role\.
+
+1. Enter `examplerole` for the role name, and then click **Next Step**\.
 
 1. After reviewing the role, click **Create Role**\.
 

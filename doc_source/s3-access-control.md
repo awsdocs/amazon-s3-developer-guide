@@ -1,4 +1,4 @@
-# Managing Access Permissions to Your Amazon S3 Resources<a name="s3-access-control"></a>
+# Identity and Access Management in Amazon S3<a name="s3-access-control"></a>
 
 By default, all Amazon S3 resources—buckets, objects, and related subresources \(for example, `lifecycle` configuration and `website` configuration\)—are private: only the resource owner, an AWS account that created it, can access the resource\. The resource owner can optionally grant access permissions to others by writing an access policy\. 
 

@@ -1,4 +1,4 @@
-# What Is Amazon S3?<a name="Welcome"></a>
+# What is Amazon S3?<a name="Welcome"></a>
 
 Amazon Simple Storage Service is storage for the Internet\. It is designed to make web\-scale computing easier for developers\.
 
@@ -17,4 +17,4 @@ This guide explains the core concepts of Amazon S3, such as buckets and objects,
 |  How do I work with buckets?  |  [Working with Amazon S3 Buckets](UsingBucket.md)  | 
 |  How do I work with objects?  |  [Working with Amazon S3 Objects](UsingObjects.md)  | 
 |  How do I make requests?  |  [Making Requests](MakingRequests.md)  | 
-|  How do I manage access to my resources?  |  [Managing Access Permissions to Your Amazon S3 Resources](s3-access-control.md)  | 
+|  How do I manage access to my resources?  |  [Identity and Access Management in Amazon S3](s3-access-control.md)  | 

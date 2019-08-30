@@ -14,7 +14,7 @@ A user\-defined cost allocation tag has the following components:
 
 For details on the allowed characters for user\-defined tags and other restrictions, see [User\-Defined Tag Restrictions](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2//allocation-tag-restrictions.html) in the *AWS Billing and Cost Management User Guide*\.
 
-Each S3 bucket has a tag set\. A *tag set* contains all of the tags that are assigned to that bucket\. A tag set can contain as many as 10 tags, or it can be empty\. Keys must be unique within a tag set, but values in a tag set don't have to be unique\. For example, you can have the same value in tag sets named project/Trinity and cost\-center/Trinity\.
+Each S3 bucket has a tag set\. A *tag set* contains all of the tags that are assigned to that bucket\. A tag set can contain as many as 50 tags, or it can be empty\. Keys must be unique within a tag set, but values in a tag set don't have to be unique\. For example, you can have the same value in tag sets named project/Trinity and cost\-center/Trinity\.
 
 Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value\.
 

@@ -119,7 +119,7 @@ You can filter objects by key prefix, object tags, or a combination of both \(in
 
   The lifecycle rule applies to objects that have both of the tags specified\. Amazon S3 performs a logical AND\. Note the following:
   + Each tag must match both key and value exactly\.
-  + The rule applies to a subset of objects that have one or more tags specified in the rule\. If an object has additional tags specified, it doesn't matter\.
+  + The rule applies to a subset of objects that has tags specified in the rule\. If an object has additional tags specified, it doesn't matter\.\.
 **Note**  
 When you specify multiple tags in a filter, each tag key must be unique\.
 + **Specifying a filter based on both prefix and one or more tags** – In a lifecycle rule, you can specify a filter based on both the key prefix and one or more tags\. Again, you must wrap all of these in the <And> element as shown following: 
@@ -167,7 +167,7 @@ You can direct Amazon S3 to perform specific actions in an object's lifetime by 
 + **Transition** action element – You specify the `Transition` action to transition objects from one storage class to another\. For more information about transitioning objects, see [Supported Transitions and Related Constraints](lifecycle-transition-general-considerations.md#lifecycle-general-considerations-transition-sc)\. When a specified date or time period in the object's lifetime is reached, Amazon S3 performs the transition\. 
 
   For a versioned bucket \(versioning\-enabled or versioning\-suspended bucket\), the `Transition` action applies to the current object version\. To manage noncurrent versions, Amazon S3 defines the `NoncurrentVersionTransition` action \(described below\)\.
-+ **Expiration action element** – The `Expiration` action expires objects identified in the rule and applies to eligible objects in any of the Amazon S3 storage classes\. For more information about storage classes, see [Storage Classes](storage-class-intro.md)\. Amazon S3 makes all expired objects unavailable\. Whether the objects are permanently removed depends on the versioning state of the bucket\. 
++ **Expiration action element** – The `Expiration` action expires objects identified in the rule and applies to eligible objects in any of the Amazon S3 storage classes\. For more information about storage classes, see [Amazon S3 Storage Classes](storage-class-intro.md)\. Amazon S3 makes all expired objects unavailable\. Whether the objects are permanently removed depends on the versioning state of the bucket\. 
 **Important**  
 Object expiration lifecycle polices do not remove incomplete multipart uploads\. To remove incomplete multipart uploads you must use the **AbortIncompleteMultipartUpload** lifecycle configuration action that is described later in this section\. 
   + **Non\-versioned bucket** – The `Expiration` action results in Amazon S3 permanently removing the object\. 

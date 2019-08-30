@@ -7,7 +7,7 @@ If your Amazon S3 bucket is configured for website hosting, you can redirect req
 + [Setting a Page Redirect from the REST API](#page-redirect-using-rest-api)
 + [Advanced Conditional Redirects](#advanced-conditional-redirects)
 
-You set the redirect by adding the `x-amz-website-redirect-location` property to the object metadata\.  The website then interprets the object as 301 redirect\. To redirect a request to another object, you set the redirect location to the key of the target object\. To redirect a request to an external URL, you set the redirect location to the URL that you want\. For more information about object metadata, see [System\-Defined Metadata](UsingMetadata.md#SysMetadata)\.
+You set the redirect by adding the `x-amz-website-redirect-location` property to the object metadata\.  The website then interprets the object as 301 redirect\. To redirect a request to another object, you set the redirect location to the key of the target object\. To redirect a request to an external URL, you set the redirect location to the URL that you want\. For more information about object metadata, see [System\-Defined Object Metadata](UsingMetadata.md#SysMetadata)\.
 
 A bucket configured for website hosting has both the website endpoint and the REST endpoint\. A request for a page that is configured as a 301 redirect has the following possible outcomes, depending on the endpoint of the request:
 + **Region\-specific website endpoint – **Amazon S3 redirects the page request according to the value of the `x-amz-website-redirect-location` property\. 

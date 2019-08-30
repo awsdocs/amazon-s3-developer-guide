@@ -1,6 +1,6 @@
-# CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using AWS KMS\-Managed Encryption Keys<a name="crr-replication-config-for-kms-objects"></a>
+# CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS<a name="crr-replication-config-for-kms-objects"></a>
 
-By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with AWS KMS\-managed keys\. This section explains additional configuration you add to direct Amazon S3 to replicate these objects\. 
+By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with keys stored in AWS KMS\. This section explains additional configuration you add to direct Amazon S3 to replicate these objects\. 
 
 For an example with step\-by\-step instructions, see [Example 4: Replicating Encrypted Objects](crr-walkthrough-4.md)\. For information about creating a replication configuration, see [Cross\-Region Replication](crr.md)\. 
 
@@ -76,10 +76,10 @@ This replication configuration has one rule\. The rule applies to objects with t
 
 ## Granting Additional Permissions for the IAM Role<a name="crr-kms-extra-permissions"></a>
 
-To replicate objects created using server\-side encryption with AWS KMS\-managed keys, grant the following additional permissions to the IAM role you specify in the replication configuration\. You grant these permissions by updating the permission policy associated with the IAM role:
-+ Permission for the `s3:GetObjectVersionForReplication` action for source objects\. Permission for this action allows Amazon S3 to replicate both unencrypted objects and objects created with server\-side encryption using Amazon S3\-managed encryption \(SSE\-S3 \) keys or AWS KMS–managed encryption \(SSE\-KMS\) keys\.
+To replicate objects created using server\-side encryption with keys stored in AWS KMS, grant the following additional permissions to the IAM role you specify in the replication configuration\. You grant these permissions by updating the permission policy associated with the IAM role:
++ Permission for the `s3:GetObjectVersionForReplication` action for source objects\. Permission for this action allows Amazon S3 to replicate both unencrypted objects and objects created with server\-side encryption using Amazon S3\-managed encryption \(SSE\-S3 \) keys or encryption keys stored in AWS KMS \(SSE\-KMS\)\.
 **Note**  
-We recommend that you use the `s3:GetObjectVersionForReplication` action instead of the `s3:GetObjectVersion` action because it provides Amazon S3 with only the minimum permissions necessary for cross\-region replication\. In addition, permission for the `s3:GetObjectVersion` action allows replication of unencrypted and SSE\-S3\-encrypted objects, but not of objects created using an AWS KMS\-managed encryption key\. 
+We recommend that you use the `s3:GetObjectVersionForReplication` action instead of the `s3:GetObjectVersion` action because it provides Amazon S3 with only the minimum permissions necessary for cross\-region replication\. In addition, permission for the `s3:GetObjectVersion` action allows replication of unencrypted and SSE\-S3\-encrypted objects, but not of objects created using an encryption key stored in AWS KMS\. 
 + Permissions for the following AWS KMS actions:
   + `kms:Decrypt` permissions for the AWS KMS key that was used to encrypt the source object
   + `kms:Encrypt` permissions for the AWS KMS key used to encrypt the object replica
@@ -121,7 +121,7 @@ We recommend that you use the `s3:GetObjectVersionForReplication` action instead
 
   The AWS account that owns the IAM role must have permissions for these AWS KMS actions \(`kms:Encrypt` and `kms:Decrypt`\) for AWS KMS keys listed in the policy\. If the AWS KMS keys are owned by another AWS account, the key owner must grant these permissions to the AWS account that owns the IAM role\. For more information about managing access to these keys, see [Using IAM Policies with AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/control-access-overview.html#overview-policy-elements) in the* AWS Key Management Service Developer Guide*\.
 
-  The following is a complete IAM policy that grants the necessary permissions to replicate unencrypted objects, objects created with server\-side encryption using Amazon S3\-managed encryption keys, and AWS KMS\-managed encryption keys\.
+  The following is a complete IAM policy that grants the necessary permissions to replicate unencrypted objects, objects created with server\-side encryption using Amazon S3\-managed encryption keys, and encryption keys stored in AWS KMS\.
 **Note**  
 Objects created with server\-side encryption using customer\-provided \(SSE\-C\) encryption keys are not replicated\.
 

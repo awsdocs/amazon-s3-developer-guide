@@ -33,7 +33,7 @@ The AWS CLI is a unified tool to manage your AWS services, including Amazon S3\.
 
 ## Specifying the Signature Version in Request Authentication<a name="specify-signature-version"></a>
 
- Amazon S3 supports only AWS Signature Version 4 in most AWS Regions\. In some of the older AWS Regions, Amazon S3 supports both Signature Version 4 and Signature Version 2\. However, Signature Version 2 is being deprecated, and the final support for Signature Version 2 will end on June 24, 2019\. For more information about the end of support for Signature Version 2, see [AWS Signature Version 2 Deprecation for Amazon S3](#UsingAWSSDK-sig2-deprecation)\.
+ Amazon S3 supports only AWS Signature Version 4 in most AWS Regions\. In some of the older AWS Regions, Amazon S3 supports both Signature Version 4 and Signature Version 2\. However, Signature Version 2 is being turned off \(deprecated\)\. For more information about the end of support for Signature Version 2, see [AWS Signature Version 2 Turned Off \(Deprecated\) for Amazon S3](#UsingAWSSDK-sig2-deprecation)\.
 
 For a list of all the Amazon S3 Regions and the signature versions they support, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
 
@@ -45,16 +45,16 @@ For all AWS Regions, AWS SDKs use Signature Version 4 by default to authenticate
 | AWS CLI |  For the default profile, run the following command: <pre>$ aws configure set default.s3.signature_version s3v4</pre> For a custom profile, run the following command: <pre>$ aws configure set profile.your_profile_name.s3.signature_version s3v4</pre>  | 
 | Java SDK |  Add the following in your code: <pre>System.setProperty(SDKGlobalConfiguration.ENABLE_S3_SIGV4_SYSTEM_PROPERTY, "true");</pre> Or, on the command line, specify the following: <pre>-Dcom.amazonaws.services.s3.enableV4</pre>  | 
 |  JavaScript SDK |  Set the `signatureVersion` parameter to `v4` when constructing the client: <pre>var s3 = new AWS.S3({signatureVersion: 'v4'});</pre>  | 
-| PHP SDK |  Set the `signature` parameter to `v4` when constructing the Amazon S3 service client: <pre><?php <br />									<br />$s3 = new S3Client(['signature' => 'v4']);</pre>  | 
+| PHP SDK |  Set the `signature` parameter to `v4` when constructing the Amazon S3 service client for PHP SDK v2: <pre><?php <br />$client = S3Client::factory([<br />    'region' => 'YOUR-REGION',<br />    'version' => 'latest',<br />    'signature' => 'v4'<br />]);</pre> When using the PHP SDK v3, set the `signature_version` parameter to `v4` during construction of the Amazon S3 service client: <pre><?php <br />$s3 = new Aws\S3\S3Client([<br />    'version' => '2006-03-01',<br />    'region' => 'YOUR-REGION',<br />    'signature_version' => 'v4'<br />]);</pre>  | 
 | Python\-Boto SDK |  Specify the following in the boto default config file: <pre>[s3] use-sigv4 = True</pre>  | 
 | Ruby SDK |  Ruby SDK \- Version 1: Set the `:s3_signature_version` parameter to `:v4` when constructing the client: <pre>s3 = AWS::S3::Client.new(:s3_signature_version => :v4)</pre> Ruby SDK \- Version 3: Set the `signature_version` parameter to `v4` when constructing the client: <pre>s3 = Aws::S3::Client.new(signature_version: 'v4')</pre>  | 
 | \.NET SDK |  Add the following to the code before creating the Amazon S3 client: <pre>AWSConfigsS3.UseSignatureVersion4 = true;</pre> Or, add the following to the config file: <pre><appSettings><br />   <add key="AWS.S3.UseSignatureVersion4" value="true" /><br /></appSettings></pre>  | 
 
  
 
-### AWS Signature Version 2 Deprecation for Amazon S3<a name="UsingAWSSDK-sig2-deprecation"></a>
+### AWS Signature Version 2 Turned Off \(Deprecated\) for Amazon S3<a name="UsingAWSSDK-sig2-deprecation"></a>
 
-Signature Version 2 is being deprecated in Amazon S3, and the final support for Signature Version 2 ends on June 24, 2019\. After June 24, 2019, Amazon S3 will only accept API requests that are signed using Signature Version 4\. 
+Signature Version 2 is being turned off \(deprecated\) in Amazon S3\.  Amazon S3 will then only accept API requests that are signed using Signature Version 4\. 
 
 This section provides answers to common questions regarding the end of support for Signature Version 2\. 
 
@@ -64,7 +64,7 @@ The Signature Version 2 or Signature Version 4 signing process is used to authen
 For more information about signing AWS requests, see [Signing AWS API Requests](https://docs.aws.amazon.com//general/latest/gr/signing_aws_api_requests.html) in the *AWS General Reference*\. 
 
 **What Update Are You Making?**  
-We currently support Amazon S3 API requests that are signed using Signature Version 2 and Signature Version 4 processes\. After June 24, 2019, Amazon S3 will only accept requests that are signed using Signature Version 4\. 
+We currently support Amazon S3 API requests that are signed using Signature Version 2 and Signature Version 4 processes\. After that, Amazon S3 will only accept requests that are signed using Signature Version 4\. 
 
 For more information about signing AWS requests, see [Changes in Signature Version 4](https://docs.aws.amazon.com//general/latest/gr/sigv4_changes.html) in the *AWS General Reference*\. 
 
@@ -79,7 +79,7 @@ For information about which version of the AWS SDKs to use when moving to Signat
 For information about using Signature Version 4 with the Amazon S3 REST API, see [Authenticating Requests \(AWS Signature Version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html) in the *Amazon Simple Storage Service API Reference*\.
 
 **What Happens if I Don't Make Updates?**  
-Requests signed with Signature Version 2 that are made after June 24, 2019 will fail to authenticate with Amazon S3\. Requesters will see errors stating that the request must be signed with Signature Version 4\. 
+Requests signed with Signature Version 2 that are made after that will fail to authenticate with Amazon S3\. Requesters will see errors stating that the request must be signed with Signature Version 4\. 
 
 **Should I Make Changes Even if I’m Using a Presigned URL That Requires Me to Sign for More than 7 Days?**  
 If you are using a presigned URL that requires you to sign for more than 7 days, no action is currently needed\. You can continue to use AWS Signature Version 2 to sign and authenticate the presigned URL\. We will follow up and provide more details on how to migrate to Signature Version 4 for a presigned URL scenario\. 
@@ -94,7 +94,7 @@ If you are using a presigned URL that requires you to sign for more than 7 days,
 
 ### Moving from Signature Version 2 to Signature Version 4<a name="UsingAWSSDK-move-to-Sig4"></a>
 
-If you currently use Signature Version 2 for Amazon S3 API request authentication, you should move to using Signature Version 4\. Support is ending for Signature Version 2, as described in [AWS Signature Version 2 Deprecation for Amazon S3](#UsingAWSSDK-sig2-deprecation)\.
+If you currently use Signature Version 2 for Amazon S3 API request authentication, you should move to using Signature Version 4\. Support is ending for Signature Version 2, as described in [AWS Signature Version 2 Turned Off \(Deprecated\) for Amazon S3](#UsingAWSSDK-sig2-deprecation)\.
 
 For information about using Signature Version 4 with the Amazon S3 REST API, see [Authenticating Requests \(AWS Signature Version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html) in the *Amazon Simple Storage Service API Reference*\.
 
@@ -108,11 +108,11 @@ The following table lists the SDKs with the necessary minimum version to use Sig
 |  AWS SDK for \.NET v1   | Upgrade to 3\.1\.10 or later\. | Yes | [AWS SDK for \.NET](https://github.com/aws/aws-sdk-net/tree/aws-sdk-net-v1/) | 
 |  AWS SDK for \.NET v2   | Upgrade to 3\.1\.10 or later\. | No | [AWS SDK for \.NET v2](https://github.com/aws/aws-sdk-net/tree/aws-sdk-net-v2/) | 
 |  AWS SDK for \.NET v3   | No SDK upgrade is needed\. | Yes | [AWS SDK for \.NET v3](https://github.com/aws/aws-sdk-net) | 
-|  AWS SDK for JavaScript v1   | No action is currently needed\. Upgrade to major version V3 in Q3 2019\. | Yes | [AWS SDK for JavaScript](https://github.com/aws/aws-sdk-js) | 
+|  AWS SDK for JavaScript v1   | Upgrade to 2\.68\.0 or later\. | Yes | [AWS SDK for JavaScript](https://github.com/aws/aws-sdk-js) | 
 |  AWS SDK for JavaScript v2   | Upgrade to 2\.68\.0 or later\. | Yes | [AWS SDK for JavaScript](https://github.com/aws/aws-sdk-js) | 
 |  AWS SDK for JavaScript v3   | No action is currently needed\. Upgrade to major version V3 in Q3 2019\. | No | [AWS SDK for JavaScript](https://github.com/aws/aws-sdk-js) | 
-|  AWS SDK for PHP v1   | Upgrade to major version V3\. | Yes | [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/) | 
-|  AWS SDK for PHP v2   | Upgrade to major version V3\. | Yes | [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/) | 
+|  AWS SDK for PHP v1   | Recommend to upgrade to the most recent version of PHP or, at least to v2\.7\.4 with the signature parameter set to v4 in the S3 client's configuration\. | Yes | [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/) | 
+|  AWS SDK for PHP v2   | Recommend to upgrade to the most recent version of PHP or, at least to v2\.7\.4 with the signature parameter set to v4 in the S3 client's configuration\. | No | [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/) | 
 |  AWS SDK for PHP v3   | No SDK upgrade is needed\. | No | [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/) | 
 |  Boto2   | Upgrade to Boto2 v2\.49\.0\. | Yes | [Boto 2 Upgrade](https://github.com/boto/boto/commit/16729da27b95d6dbbd81bcebb43bcf099ce23fd3) | 
 |  Boto3   | Upgrade to 1\.5\.71 \(Botocore\), 1\.4\.6 \(Boto3\)\. | Yes | [Boto 3 \- AWS SDK for Python](https://github.com/boto/boto3) | 

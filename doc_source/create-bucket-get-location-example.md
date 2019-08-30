@@ -12,7 +12,7 @@ The following code examples create a bucket programmatically using the AWS SDKs 
   + Create a client by explicitly specifying an AWS Region \(the example uses the `s3-eu-west-1` Region\)\. Accordingly, the client communicates with Amazon S3 using the `s3-eu-west-1.amazonaws.com` endpoint\. You can specify any other AWS Region\. For a list of AWS Regions, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\. 
   + Send a create bucket request by specifying only a bucket name\. The create bucket request doesn't specify another AWS Region\. The client sends a request to Amazon S3 to create the bucket in the Region you specified when creating the client\. Once you have created a bucket, you can't change its Region\.
 **Note**  
-If you explicitly specify an AWS Region in your create bucket request that is different from the Region you specifed when you created the client, you might get an error\. For more information, see [Creating a Bucket](UsingBucket.md#create-bucket-intro)\.
+If you explicitly specify an AWS Region in your create bucket request that is different from the Region you specified when you created the client, you might get an error\. For more information, see [Creating a Bucket](UsingBucket.md#create-bucket-intro)\.
 
     The SDK libraries send the PUT bucket request to Amazon S3 to create the bucket\. For more information, see [PUT Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html)\.
 + Retrieve information about the location of the bucket—Amazon S3 stores bucket location information in the *location* subresource that is associated with the bucket\. The SDK libraries send the GET Bucket location request \(see [GET Bucket location](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html)\) to retrieve this information\.
@@ -27,47 +27,21 @@ To create a bucket using the Amazon S3 console, see [How Do I Create an S3 Bucke
 This example shows how to create an Amazon S3 bucket using the AWS SDK for Java\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
-
-// snippet-sourcedescription:[CreateBucket.java demonstrates how to create a new S3 bucket.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[PUT Bucket]
-// snippet-keyword:[HEAD Bucket]
-// snippet-keyword:[GET Bucket location]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.create_bucket.complete]
-
-import java.io.IOException;
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.GetBucketLocationRequest;
 
+import java.io.IOException;
+
 public class CreateBucket {
 
     public static void main(String[] args) throws IOException {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
 
         try {
@@ -80,26 +54,22 @@ public class CreateBucket {
                 // Because the CreateBucketRequest object doesn't specify a region, the
                 // bucket is created in the region specified in the client.
                 s3Client.createBucket(new CreateBucketRequest(bucketName));
-                
+
                 // Verify that the bucket was created by retrieving it and checking its location.
                 String bucketLocation = s3Client.getBucketLocation(new GetBucketLocationRequest(bucketName));
                 System.out.println("Bucket location: " + bucketLocation);
             }
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it and returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();
         }
     }
 }
-
-// snippet-end:[s3.java.create_bucket.complete]
 ```
 
 ## Using the AWS SDK for \.NET<a name="create-bucket-get-location-dotnet"></a>
@@ -109,10 +79,7 @@ For information about how to create and test a working sample, see [Running the 
 **Example**  
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
-
-﻿using Amazon.S3;
+using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Util;
 using System;
@@ -180,37 +147,10 @@ For information about how to create and test a working sample, see [Using the AW
 **Example**  
 
 ```
-#**
- #* Copyright 2010-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- #*
- #* This file is licensed under the Apache License, Version 2.0 (the "License").
- #* You may not use this file except in compliance with the License. A copy of
- #* the License is located at
- #*
- #* http://aws.amazon.com/apache2.0/
- #*
- #* This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- #* CONDITIONS OF ANY KIND, either express or implied. See the License for the
- #* specific language governing permissions and lim2019itations under the License.
-#**
-
-# snippet-sourcedescription:[create_bucket_snippet creates a bucket programmatically by using the AWS SDK for Ruby.] 
-# snippet-service:[s3]
-# snippet-keyword:[Ruby]
-# snippet-keyword:[Amazon S3]
-# snippet-keyword:[Code Sample]
-# snippet-keyword:[CREATE Bucket]
-# snippet-sourcetype:[snippet]
-# snippet-sourcedate:[2019-01-28]
-# snippet-sourceauthor:[AWS]
-
-# snippet-start:[s3.ruby.create_bucket_snippet.rb]
-
 require 'aws-sdk-s3'
 	        
 s3 = Aws::S3::Client.new(region: 'us-west-2')
 s3.create_bucket(bucket: 'bucket-name')
-# snippet-end:[s3.ruby.create_bucket_snippet.rb]
 ```
 
 ## Using Other AWS SDKs<a name="create-bucket-using-other-sdks"></a>

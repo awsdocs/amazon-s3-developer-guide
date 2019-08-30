@@ -29,7 +29,7 @@ The Amazon S3 team encourages customers to investigate applications that repeate
 
 ## Getting Amazon S3 Request IDs for AWS Support<a name="get-request-ids"></a>
 
-Whenever you need to contact AWS Support due to encountering errors or unexpected behavior in Amazon S3, you will need to get the request IDs associated with the failed action\. Getting these request IDs enables AWS Support to help you resolve the problems you're experiencing\. Request IDs come in pairs, are returned in every response that Amazon S3 processes \(even the erroneous ones\), and can be accessed through verbose logs\. There are a number of common methods for getting your request IDs\.
+Whenever you need to contact AWS Support due to encountering errors or unexpected behavior in Amazon S3, you will need to get the request IDs associated with the failed action\. Getting these request IDs enables AWS Support to help you resolve the problems you're experiencing\. Request IDs come in pairs, are returned in every response that Amazon S3 processes \(even the erroneous ones\), and can be accessed through verbose logs\. There are a number of common methods for getting your request IDs including, S3 access logs and CloudTrail events/data events\.
 
 After you've recovered these logs, copy and retain those two values, because you'll need them when you contact AWS Support\. For information about contacting AWS Support, see [Contact Us](https://aws.amazon.com/contact-us/)\.
 

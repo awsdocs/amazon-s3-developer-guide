@@ -7,10 +7,7 @@ The following C\# code example creates two objects with two `PutObjectRequest` r
 For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0 (For details, see https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/LICENSE-SAMPLECODE.)
-
-﻿using Amazon.S3;
+using Amazon.S3;
 using Amazon.S3.Model;
 using System;
 using System.Threading.Tasks;
@@ -20,7 +17,7 @@ namespace Amazon.DocSamples.S3
     class UploadObjectTest
     {
         private const string bucketName = "*** bucket name ***";
-        // Example creates two objects (for simplicity, we upload same file twice).
+        // For simplicity the example creates two objects from the same file.
         // You specify key names for these objects.
         private const string keyName1 = "*** key name for first object created ***";
         private const string keyName2 = "*** key name for second object created ***";

@@ -19,15 +19,13 @@ Additional configuration options are available\. For more information, see [Addi
 **Important**  
 If you have an object expiration lifecycle policy in your non\-versioned bucket and you want to maintain the same permanent delete behavior when you enable versioning, you must add a noncurrent expiration policy\. The noncurrent expiration lifecycle policy will manage the deletes of the noncurrent object versions in the version\-enabled bucket\. \(A version\-enabled bucket maintains one current and zero or more noncurrent object versions\.\) For more information, see [ How Do I Create a Lifecycle Policy for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
-Amazon S3 provides APIs in support of the cross\-region replication\. For more information, see the following topics in the *Amazon Simple Storage Service API Reference*\.:
+Amazon S3 provides APIs in support of the cross\-region replication\. For more information, see the following topics in the *Amazon Simple Storage Service API Reference*:
 +  [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) 
 +  [GET Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETreplication.html) 
 +  [DELETE Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEreplication.html) 
 
-Instead of making these API calls directly from your code, you can add a replication configuration to a bucket with the AWS SDK, AWS CLI, or the Amazon S3 console\. It's easiest to use the console\. For examples with step\-by\-step instructions, see [Cross\-Region Replication \(CRR\) Walkthroughs](crr-example-walkthroughs.md)\.
-
-If you are new to CRR configuration, we recommend that you read the following overviews before  exploring the examples and optional configurations\. The examples provide step\-by\-step instructions for setting up basic CRR configurations\. For more information, see [Cross\-Region Replication \(CRR\) Walkthroughs](crr-example-walkthroughs.md)\. 
+Instead of making these API calls directly from your code, you can add a replication configuration to a bucket with the AWS SDK, AWS CLI, or the Amazon S3 console\. It's easiest to use the console\. For examples with step\-by\-step instructions, see [Cross\-Region Replication \(CRR\) Walkthroughs](crr-example-walkthroughs.md)\. If you are new to CRR configuration, we recommend that you read the following overviews before  exploring the examples and optional configurations\. The examples provide step\-by\-step instructions for setting up basic CRR configurations\. For more information, see [Replication Configuration Overview](crr-add-config.md)\. 
 
 **Topics**
 + [Replication Configuration Overview](crr-add-config.md)
-+ [Setting Up Permissions for CRR](setting-repl-config-perm-overview.md)
++ [Setting Up Permissions for Cross\-Region Replication](setting-repl-config-perm-overview.md)

@@ -1,8 +1,8 @@
 # Protecting Data Using Client\-Side Encryption<a name="UsingClientSideEncryption"></a>
 
 *Client\-side encryption* is the act of encrypting data before sending it to Amazon S3\. To enable client\-side encryption, you have the following options:
-+ Use an AWS KMS\-managed customer master key
-+ Use a client\-side master key
++ Use a master key stored in AWS KMS\.
++ Use a master key you store within your application\.
 
 The following AWS SDKs support client\-side encryption:
 + [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)
@@ -10,57 +10,28 @@ The following AWS SDKs support client\-side encryption:
 + [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/)
 + [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/)
 + [AWS SDK for Ruby](https://aws.amazon.com/sdk-for-ruby/)
++ [AWS SDK for C\+\+](https://aws.amazon.com/sdk-for-cpp/)
 
-## Option 1: Using an AWS KMS–Managed Customer Master Key \(CMK\)<a name="client-side-encryption-kms-managed-master-key-intro"></a>
-
-When using an AWS KMS\-managed customer master key to enable client\-side data encryption, you provide an AWS KMS customer master key ID \(CMK ID\)\. 
-+ **When uploading an object**—Using the CMK ID, the client first sends a request to the AWS Key Management Service \(AWS KMS\) for a key that it can use to encrypt your object data\. AWS KMS returns two versions of a randomly generated data encryption key:
-  + A plain\-text version that the client uses to encrypt the object data
+## Option 1: Using a Master Key stored in AWS KMS<a name="client-side-encryption-kms-managed-master-key-intro"></a>
++ **When uploading an object**—Using the Customer Master Key \(CMK\) ID, the client first sends a request to the AWS Key Management Service \(AWS KMS\) for a key that it can use to encrypt your object data\. AWS KMS returns two versions of a randomly generated data encryption key:
+  + A plaintext version that the client uses to encrypt the object data
   + A cipher blob of the same data encryption key that the client uploads to Amazon S3 as object metadata
 **Note**  
 The client obtains a unique data encryption key for each object that it uploads\.
-+  **When downloading an object**—The client downloads the encrypted object from Amazon S3 along with the cipher blob version of the data encryption key stored as object metadata\. The client then sends the cipher blob to AWS KMS to get the plain\-text version of the key so that it can decrypt the object data\.
++  **When downloading an object**—The client downloads the encrypted object from Amazon S3 along with the cipher blob version of the data encryption key stored as object metadata\. The client then sends the cipher blob to AWS KMS to get the plaintext version of the key so that it can decrypt the object data\.
 
 For more information about AWS KMS, see [What is the AWS Key Management Service?](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide*\.
 
 **Example**  
-The following example uploads an object to Amazon S3 using AWS KMS with the AWS SDK for Java\. The example uses a KMS\-managed customer master key \(CMK\) to encrypt data on the client side before uploading it to Amazon S3\. If you already have a CMK, you can use that by specifying the value of the `kms_cmk_id` variable in the sample code\. If you don't have a CMK, or you need another one, you can generate one through the Java API\. The example shows how to generate a CMK\.  
-For more information on key material, see [Importing Key Material in AWS Key Management Service \(AWS KMS\)](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
+The following example uploads an object to Amazon S3 using AWS KMS with the AWS SDK for Java\. The example uses a AWS\-managed customer master key \(CMK\) to encrypt data on the client side before uploading it to Amazon S3\. If you already have a CMK, you can use that by specifying the value of the `kms_cmk_id` variable in the sample code\. If you don't have a CMK, or you need another one, you can generate one through the Java API\. The example shows how to generate a CMK\.  
+For more information about key material, see [Importing Key Material in AWS Key Management Service \(AWS KMS\)](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
-
-// snippet-sourcedescription:[UploadObjectKMSKey.java demonstrates how to upload and download S3 objects using a KMS key.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[GET Object]
-// snippet-keyword:[PUT Object]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.upload_object_kms_key.complete]
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.RegionUtils;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.kms.AWSKMS;
 import com.amazonaws.services.kms.AWSKMSClientBuilder;
 import com.amazonaws.services.kms.model.CreateKeyResult;
@@ -71,12 +42,15 @@ import com.amazonaws.services.s3.model.KMSEncryptionMaterialsProvider;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 public class UploadObjectKMSKey {
 
     public static void main(String[] args) throws IOException {
         String bucketName = "*** Bucket name ***";
         String keyName = "*** Object key name ***";
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String kms_cmk_id = "*** AWS KMS customer master key ID ***";
         int readChunkSize = 4096;
 
@@ -85,69 +59,64 @@ public class UploadObjectKMSKey {
             // create one. This example creates a key with AWS-created
             // key material.
             AWSKMS kmsClient = AWSKMSClientBuilder.standard()
-                                    .withCredentials(new ProfileCredentialsProvider())
-                                    .withRegion(clientRegion)
-                                    .build();
+                    .withRegion(clientRegion)
+                    .build();
             CreateKeyResult keyResult = kmsClient.createKey();
             kms_cmk_id = keyResult.getKeyMetadata().getKeyId();
-    
-             // Create the encryption client.
+
+            // Create the encryption client.
             KMSEncryptionMaterialsProvider materialProvider = new KMSEncryptionMaterialsProvider(kms_cmk_id);
             CryptoConfiguration cryptoConfig = new CryptoConfiguration()
-                    .withAwsKmsRegion(RegionUtils.getRegion(clientRegion));
+                    .withAwsKmsRegion(RegionUtils.getRegion(clientRegion.toString()));
             AmazonS3Encryption encryptionClient = AmazonS3EncryptionClientBuilder.standard()
                     .withCredentials(new ProfileCredentialsProvider())
                     .withEncryptionMaterials(materialProvider)
                     .withCryptoConfiguration(cryptoConfig)
                     .withRegion(clientRegion).build();
-    
+
             // Upload an object using the encryption client.
             String origContent = "S3 Encrypted Object Using KMS-Managed Customer Master Key.";
             int origContentLength = origContent.length();
             encryptionClient.putObject(bucketName, keyName, origContent);
-    
+
             // Download the object. The downloaded object is still encrypted.
             S3Object downloadedObject = encryptionClient.getObject(bucketName, keyName);
             S3ObjectInputStream input = downloadedObject.getObjectContent();
-    
+
             // Decrypt and read the object and close the input stream.
             byte[] readBuffer = new byte[readChunkSize];
             ByteArrayOutputStream baos = new ByteArrayOutputStream(readChunkSize);
             int bytesRead = 0;
             int decryptedContentLength = 0;
-    
+
             while ((bytesRead = input.read(readBuffer)) != -1) {
                 baos.write(readBuffer, 0, bytesRead);
                 decryptedContentLength += bytesRead;
             }
             input.close();
-    
+
             // Verify that the original and decrypted contents are the same size.
             System.out.println("Original content length: " + origContentLength);
             System.out.println("Decrypted content length: " + decryptedContentLength);
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();
         }
     }
 }
-
-// snippet-end:[s3.java.upload_object_kms_key.complete]
 ```
 
-## Option 2: Using a Client\-Side Master Key<a name="client-side-encryption-client-side-master-key-intro"></a>
+## Option 2: Using a Master Key Stored Within Your Application<a name="client-side-encryption-client-side-master-key-intro"></a>
 
-This section shows how to use a client\-side master key for client\-side data encryption\. 
+This section shows how to use a master key stored within your application for client\-side data encryption\. 
 
 **Important**  
-Your client\-side master keys and your unencrypted data are never sent to AWS\. It's important that you safely manage your encryption keys\. If you lose them, you won't be able to decrypt your data\.
+Your client\-side master keys and your unencrypted data are never sent to AWS\. It's important that you safely manage your encryption keys\. If you lose them, you can't decrypt your data\.
 
 This is how it works:
 + **When uploading an object**—You provide a client\-side master key to the Amazon S3 encryption client\. The client uses the master key only to encrypt the data encryption key that it generates randomly\. The process works like this:
@@ -176,61 +145,27 @@ The following example shows how to do these tasks:
 For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3EncryptionClientBuilder;
+import com.amazonaws.services.s3.model.*;
 
-// snippet-sourcedescription:[S3ClientSideEncryptionSymMasterKey.java demonstrates how to upload and download encrypted objects using S3 with a client-side symmetric master key.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[PUT Object]
-// snippet-keyword:[GET Object]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.s3_client_side_encryption_sym_master_key.complete]
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.SdkClientException;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3EncryptionClientBuilder;
-import com.amazonaws.services.s3.model.EncryptionMaterials;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.StaticEncryptionMaterialsProvider;
-
 public class S3ClientSideEncryptionSymMasterKey {
 
     public static void main(String[] args) throws Exception {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
         String objectKeyName = "*** Object key name ***";
         String masterKeyDir = System.getProperty("java.io.tmpdir");
@@ -256,25 +191,23 @@ public class S3ClientSideEncryptionSymMasterKey {
 
             // Upload a new object. The encryption client automatically encrypts it.
             byte[] plaintext = "S3 Object Encrypted Using Client-Side Symmetric Master Key.".getBytes();
-            s3EncryptionClient.putObject(new PutObjectRequest(bucketName, 
-                                                            objectKeyName, 
-                                                            new ByteArrayInputStream(plaintext), 
-                                                            new ObjectMetadata()));
-    
+            s3EncryptionClient.putObject(new PutObjectRequest(bucketName,
+                    objectKeyName,
+                    new ByteArrayInputStream(plaintext),
+                    new ObjectMetadata()));
+
             // Download and decrypt the object.
             S3Object downloadedObject = s3EncryptionClient.getObject(bucketName, objectKeyName);
             byte[] decrypted = com.amazonaws.util.IOUtils.toByteArray(downloadedObject.getObjectContent());
-    
+
             // Verify that the data that you downloaded is the same as the original data.
             System.out.println("Plaintext: " + new String(plaintext));
             System.out.println("Decrypted text: " + new String(decrypted));
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();
@@ -301,78 +234,37 @@ public class S3ClientSideEncryptionSymMasterKey {
         return new SecretKeySpec(encodedPrivateKey, "AES");
     }
 }
-
-// snippet-end:[s3.java.s3_client_side_encryption_sym_master_key.complete]
 ```
 
 The following example shows how to do these tasks:
-+ Generate a 1024\-bit RSA key pair
-+ Save and load the RSA keys to and from the file system
-+ Use the RSA keys to encrypt data on the client side before sending it to Amazon S3
-+ Use the RSA keys to decrypt data received from Amazon S3
-+ Verify that the decrypted data is the same as the original data
++ Generate a 1024\-bit RSA key pair\.
++ Save and load the RSA keys to and from the file system\.
++ Use the RSA keys to encrypt data on the client side before sending it to Amazon S3\.
++ Use the RSA keys to decrypt data received from Amazon S3\.
++ Verify that the decrypted data is the same as the original data\.
 
 For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.
 
 ```
-/**
- * Copyright 2018-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * This file is licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License. A copy of
- * the License is located at
- *
- * http://aws.amazon.com/apache2.0/
- *
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
-*/
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3EncryptionClientBuilder;
+import com.amazonaws.services.s3.model.*;
+import com.amazonaws.util.IOUtils;
 
-// snippet-sourcedescription:[S3ClientSideEncryptionAsymmetricMasterKey.java demonstrates how to upload and download encrypted objects using S3 with a client-side asymmetric master key.]
-// snippet-service:[s3]
-// snippet-keyword:[Java]
-// snippet-keyword:[Amazon S3]
-// snippet-keyword:[Code Sample]
-// snippet-keyword:[PUT Object]
-// snippet-keyword:[GET Object]
-// snippet-sourcetype:[full-example]
-// snippet-sourcedate:[2019-01-28]
-// snippet-sourceauthor:[AWS]
-// snippet-start:[s3.java.s3_client_side_encryption_asymmetric_master_key.complete]
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.SecureRandom;
+import java.io.*;
+import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.SdkClientException;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3EncryptionClientBuilder;
-import com.amazonaws.services.s3.model.EncryptionMaterials;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.StaticEncryptionMaterialsProvider;
-import com.amazonaws.util.IOUtils;
-
 public class S3ClientSideEncryptionAsymmetricMasterKey {
 
     public static void main(String[] args) throws Exception {
-        String clientRegion = "*** Client region ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
         String bucketName = "*** Bucket name ***";
         String objectKeyName = "*** Key name ***";
         String rsaKeyDir = System.getProperty("java.io.tmpdir");
@@ -396,7 +288,7 @@ public class S3ClientSideEncryptionAsymmetricMasterKey {
                     .withEncryptionMaterials(new StaticEncryptionMaterialsProvider(encryptionMaterials))
                     .withRegion(clientRegion)
                     .build();
-    
+
             // Create a new object.
             byte[] plaintext = "S3 Object Encrypted Using Client-Side Asymmetric Master Key.".getBytes();
             S3Object object = new S3Object();
@@ -406,36 +298,34 @@ public class S3ClientSideEncryptionAsymmetricMasterKey {
             metadata.setContentLength(plaintext.length);
 
             // Upload the object. The encryption client automatically encrypts it.
-            PutObjectRequest putRequest = new PutObjectRequest(bucketName, 
-                                                               object.getKey(), 
-                                                               object.getObjectContent(),
-                                                               metadata);
+            PutObjectRequest putRequest = new PutObjectRequest(bucketName,
+                    object.getKey(),
+                    object.getObjectContent(),
+                    metadata);
             s3EncryptionClient.putObject(putRequest);
-    
+
             // Download and decrypt the object.
             S3Object downloadedObject = s3EncryptionClient.getObject(bucketName, object.getKey());
             byte[] decrypted = IOUtils.toByteArray(downloadedObject.getObjectContent());
-    
+
             // Verify that the data that you downloaded is the same as the original data.
             System.out.println("Plaintext: " + new String(plaintext));
             System.out.println("Decrypted text: " + new String(decrypted));
-        }
-        catch(AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process 
             // it, so it returned an error response.
             e.printStackTrace();
-        }
-        catch(SdkClientException e) {
+        } catch (SdkClientException e) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace();
         }
     }
 
-    private static void saveKeyPair(String dir, 
-                                   String publicKeyName, 
-                                   String privateKeyName, 
-                                   KeyPair keyPair) throws IOException {
+    private static void saveKeyPair(String dir,
+                                    String publicKeyName,
+                                    String privateKeyName,
+                                    KeyPair keyPair) throws IOException {
         PrivateKey privateKey = keyPair.getPrivate();
         PublicKey publicKey = keyPair.getPublic();
 
@@ -453,9 +343,9 @@ public class S3ClientSideEncryptionAsymmetricMasterKey {
     }
 
     private static KeyPair loadKeyPair(String dir,
-                                      String publicKeyName,
-                                      String privateKeyName,
-                                      String algorithm)
+                                       String publicKeyName,
+                                       String privateKeyName,
+                                       String algorithm)
             throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
         // Read the public key from the specified file.
         File publicKeyFile = new File(dir + File.separator + publicKeyName);
@@ -482,6 +372,4 @@ public class S3ClientSideEncryptionAsymmetricMasterKey {
         return new KeyPair(publicKey, privateKey);
     }
 }
-
-// snippet-end:[s3.java.s3_client_side_encryption_asymmetric_master_key.complete]
 ```
