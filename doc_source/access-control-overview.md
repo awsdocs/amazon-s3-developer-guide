@@ -14,7 +14,7 @@ When granting permissions, you decide who is getting them, which Amazon S3 resou
 
 In Amazon Web Services \(AWS\), a resource is an entity that you can work with\. In Amazon S3, buckets and objects are the resources, and both have associated subresources\. For example, bucket subresources include the following:
 + `lifecycle` – Stores lifecycle configuration information \(see [Object Lifecycle Management](object-lifecycle-mgmt.md)\)\.
-+ `website` – Stores website configuration information if you configure your bucket for website hosting \(see [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\. 
++ `website` – Stores website configuration information if you configure your bucket for website hosting \(see [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\)\. 
 + `versioning` – Stores versioning configuration \(see [PUT Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)\)\. 
 + `policy` and `acl` \(access control list\) – Store access permission information for the bucket\. 
 + `cors` \(cross\-origin resource sharing\) – Supports configuring your bucket to allow cross\-origin requests \(see [Cross\-Origin Resource Sharing \(CORS\)](cors.md)\)\. 
