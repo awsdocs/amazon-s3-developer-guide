@@ -146,7 +146,7 @@ Amazon S3 can send event notification messages to the following destinations\. Y
 + Publish event messages to an Amazon Simple Notification Service \(Amazon SNS\) topic
 + Publish event messages to an Amazon Simple Queue Service \(Amazon SQS\) queue
 **Note**  
-If the destination queue is SSE enabled, Amazon S3 will need access to the associated KMS key to enable message encryption\.
+If the destination queue or topic is SSE enabled, Amazon S3 will need access to the associated KMS key to enable message encryption\.
 + Publish event messages to AWS Lambda by invoking a Lambda function and providing the event message as an argument
 
 You must grant Amazon S3 permissions to post messages to an Amazon SNS topic or an Amazon SQS queue\. You must also grant Amazon S3 permission to invoke an AWS Lambda function on your behalf\. For information about granting these permissions, see [Granting Permissions to Publish Event Notification Messages to a Destination](#grant-destinations-permissions-to-s3)\. 
@@ -377,7 +377,7 @@ The following notification configuration is invalid because it has overlapping p
         </Filter>
     </TopicConfiguration>
     <TopicConfiguration>
-         <Topic>arn:aws:snsus-west-2:444455556666:sns-topic-two</Topic>
+         <Topic>arn:aws:sns:us-west-2:444455556666:sns-topic-two</Topic>
          <Event>s3:ObjectCreated:Put</Event>
          <Filter>
              <S3Key>

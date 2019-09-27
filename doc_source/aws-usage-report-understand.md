@@ -91,8 +91,8 @@ The first column in the following table lists usage types that appear in your bi
 |  *region*\-TimedStorage\-GlacierStaging  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in GLACIER staging storage  | 
 |  *region*\-TimedStorage\-GDA\-ByteHrs  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in DEEP\_ARCHIVE storage  | 
 |  *region*\-TimedStorage\-GDA\-Staging  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in DEEP\_ARCHIVE staging storage  | 
-|  *region*\-TimedStorage\-INT\-Freq\-ByteHrs  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in the frequent access tier of INTELLIGENT\_TIERING storage  | 
-|  *region*\-TimedStorage\-INT\-InFreq\-ByteHrs  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in the infrequent access tier of INTELLIGENT\_TIERING storage  | 
+|  *region*\-TimedStorage\-INT\-FA\-ByteHrs  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in the frequent access tier of INTELLIGENT\_TIERING storage  | 
+|  *region*\-TimedStorage\-INT\-IA\-ByteHrs  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in the infrequent access tier of INTELLIGENT\_TIERING storage  | 
 |  *region*\-TimedStorage\-RRS\-ByteHrsb  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in Reduced Redundancy Storage \(RRS\) storage  | 
 |  *region*\-TimedStorage\-SIA\-ByteHrs  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in STANDARD\_IA storage  | 
 |  *region*\-TimedStorage\-ZIA\-ByteHrs  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in ONEZONE\_IA storage  | 

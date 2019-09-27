@@ -14,9 +14,6 @@ Amazon S3 supports a waterfall model for transitioning between storage classes, 
 
 ![\[Amazon S3 storage class waterfall graphic.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/SupportedTransitionsWaterfallModel.png)
 
-**Note**  
-The diagram does not mention the REDUCED\_REDUNDANCY storage class because we don't recommend using it\. 
-
 Amazon S3 supports the following lifecycle transitions between storage classes using a lifecycle configuration:
 + You can transition from the STANDARD storage class to any other storage class\.
 + You can transition from any storage class to the GLACIER or DEEP\_ARCHIVE storage classes\. 

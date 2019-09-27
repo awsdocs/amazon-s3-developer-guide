@@ -16,7 +16,11 @@ When required, you can restore large segments of the data stored in the GLACIER 
 
 For information about using lifecycle transitions to move objects to the GLACIER or DEEP\_ARCHIVE storage classes, see [Transitioning to the GLACIER and DEEP ARCHIVE Storage Classes \(Object Archival\)](lifecycle-transition-general-considerations.md#before-deciding-to-archive-objects)\.
 
-The following sections provide more information\.
+To restore more than one Amazon S3 object with a single request, you can use Amazon S3 batch operations\. You provide Amazon S3 batch operations with a list of objects to operate on\. Amazon S3 batch operations call the respective API to perform the specified operation\. A single Amazon S3 batch operations job can perform the specified operation on billions of objects containing exabytes of data\. 
+
+Amazon S3 batch operations track progress, send notifications, and store a detailed completion report of all actions, providing a fully managed, auditable, serverless experience\. You can use Amazon S3 batch operations through the AWS Management Console, AWS CLI, AWS SDKs, or REST API\. For more information, see [The Basics: Amazon S3 Batch Operations Jobs](batch-ops-basics.md)\.
+
+The following sections provide more information about restoring objects\.
 
 **Topics**
 + [Archive Retrieval Options](#restoring-objects-retrieval-options)
@@ -41,17 +45,17 @@ The following table summarizes the archival retrieval options\.
 | Storage Class | Expedited | Standard | Bulk | 
 | --- | --- | --- | --- | 
 |  GLACIER  |  1–5 minutes  |  3–5 hours  |  5–12 hours  | 
-|  DEEP\_ARCHIVE  |  Not Available  |  Within 12 hours  |  Within 48 hours  | 
+|  DEEP\_ARCHIVE  |  Not available  |  Within 12 hours  |  Within 48 hours  | 
 
-To make an `Expedited`, `Standard`, or `Bulk` retrieval, set the `Tier` request element in the [POST Object restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html) REST API request to the option you want, or the equivalent in the AWS CLI, or AWS SDKs\. If you have purchased provisioned capacity, all Expedited retrievals are automatically served through your provisioned capacity\. 
+To make an `Expedited`, `Standard`, or `Bulk` retrieval, set the `Tier` request element in the [POST Object restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html) REST API request to the option you want, or the equivalent in the AWS CLI or AWS SDKs\. If you purchased provisioned capacity, all Expedited retrievals are automatically served through your provisioned capacity\. 
 
 You can restore an archived object programmatically or by using the Amazon S3 console\. Amazon S3 processes only one restore request at a time per object\. You can use both the console and the Amazon S3 API to check the restoration status and to find out when Amazon S3 will delete the restored copy\. 
 
 ### Provisioned Capacity<a name="restoring-objects-expedited-capacity"></a>
 
-Provisioned capacity ensures that your retrieval capacity for expedited retrievals is available when you need it\. Each unit of capacity provides that at least three expedited retrievals can be performed every five minutes and provides up to 150 MB/s of retrieval throughput\.
+Provisioned capacity ensures that your retrieval capacity for expedited retrievals is available when you need it\. Each unit of capacity provides that at least three expedited retrievals can be performed every 5 minutes, and it provides up to 150 MB/s of retrieval throughput\.
 
-You should purchase provisioned retrieval capacity if your workload requires highly reliable and predictable access to a subset of your data in minutes\. Without provisioned capacity, Expedited retrievals might not be accepted during periods of high demand\. If you require access to Expedited retrievals under all circumstances, we recommend that you purchase provisioned retrieval capacity\. 
+If your workload requires highly reliable and predictable access to a subset of your data in minutes, you should purchase provisioned retrieval capacity\. Without provisioned capacity, Expedited retrievals might not be accepted during periods of high demand\. If you require access to Expedited retrievals under all circumstances, we recommend that you purchase provisioned retrieval capacity\. 
 
 You can purchase provisioned capacity using the Amazon S3 console, the Amazon S3 Glacier console, the [Purchase Provisioned Capacity](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-PurchaseProvisionedCapacity.html) REST API, the AWS SDKs, or the AWS CLI\. For provisioned capacity pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 
 

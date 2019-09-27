@@ -296,7 +296,7 @@ WHERE
   AND eventTime BETWEEN "2019-07-05T00:00:00Z" and "2019-07-06T00:00:00Z"
 ```
 
-**Example — Select all anonymous requester events oo a bucket in a certain period and print only EventTime, EventSource, SourceIP, UserAgent, BucketName, UserIdentity, and UserARN**  
+**Example — Select all anonymous requester events to a bucket in a certain period and print only EventTime, EventSource, SourceIP, UserAgent, BucketName, UserIdentity, and UserARN**  
 
 ```
 SELECT

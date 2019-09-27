@@ -82,8 +82,8 @@ Like domains, subdomains must have their own S3 buckets, and the buckets must sh
       ]
    }
    ```
-
-   *Note*: The above policy is an example only and allows full access to the contents of your bucket. Please review our [guide](https://aws.amazon.com/premiumsupport/knowledge-center/secure-s3-resources/) on S3 security to ensure that you are limiting access to the bucket.
+**Important**  
+The above policy is an example only and allows full access to the contents of your bucket\. For more information on security best practices, see [How can I secure the files in my Amazon S3 bucket?](https://aws.amazon.com/premiumsupport/knowledge-center/secure-s3-resources/)\.
 
     You now have two buckets, *example\.com* and *www\.example\.com*, and you have uploaded your website content to the *example\.com* bucket\. In the next step, you configure *www\.example\.com* to redirect requests to your *example\.com* bucket\. By redirecting requests, you can maintain only one copy of your website content\. Visitors who type `www` in their browsers and those who specify only the root domain are routed to the same website content in your *example\.com* bucket\. 
 
@@ -143,7 +143,7 @@ In this step, you create the alias records that you add to the hosted zone for y
 
 1. Open the Route 53 console at [https://console\.aws\.amazon\.com/route53/](https://console.aws.amazon.com/route53/)\.
 **Note**  
-If you dont already use Amazon Route 53, you can get started [here\.](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide//getting-started.html#getting-started-find-domain-name) After you have completed your set up, you can resume the instructions below\.
+If you don't already use Amazon Route 53, you can get started [here\.](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide//getting-started.html#getting-started-find-domain-name) After you have completed your set up, you can resume the instructions below\.
 
 1. In the list of hosted zones, choose the name of your domain\.
 

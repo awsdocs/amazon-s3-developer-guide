@@ -4,12 +4,13 @@ Amazon S3 batch operations can invoke AWS Lambda functions to perform custom act
 
 You can work with Amazon S3 batch operations for Lambda using the AWS Management Console, AWS Command Line Interface \(AWS CLI\), AWS SDKs, or REST APIs\. For more information about using Lambda, see [ Getting Started with AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) in the *AWS Lambda Developer Guide*\. 
 
-The following topics explain how you can get started using Amazon S3 batch operations with Lambda\. 
+The following sections explain how you can get started using Amazon S3 batch operations with Lambda\. 
 
 **Topics**
 + [Using Lambda with Amazon S3 Batch Operations](#batch-ops-invoke-lambda-using)
 + [Creating a Lambda Function to Use with Amazon S3 Batch Operations](#batch-ops-invoke-lambda-custom-functions)
 + [Creating an Amazon S3 Batch Operations Job That Invokes a Lambda Function](#batch-ops-invoke-lambda-create-job)
++ [Providing Task\-Level Information in Lambda Manifests](#storing-task-level-information-in-lambda)
 
 ## Using Lambda with Amazon S3 Batch Operations<a name="batch-ops-invoke-lambda-using"></a>
 
@@ -17,7 +18,7 @@ When using Amazon S3 batch operations with AWS Lambda, you must create new Lambd
 
 You create an Amazon S3 batch operations job that invokes your Lambda function\. The job runs the same Lambda function on all of the objects listed in your manifest\. You can control what versions of your Lambda function to use while processing the objects in your manifest\. Amazon S3 batch operations support unqualified Amazon Resource Names \(ARNs\), aliases, and specific versions\. For more information, see [ Introduction to AWS Lambda Versioning](https://docs.aws.amazon.com/lambda/latest/dg/versioning-intro.html) in the *AWS Lambda Developer Guide*\.
 
-If you provide the Amazon S3 batch operations job with a function ARN that uses an alias or the `$LATEST` qualifier, and you update what version either of those points to, Amazon S3 batch operations will start calling the new version of your Lambda function\. This can be useful when you want to update functionality part of the way through a large job\. If you want Amazon S3 batch operations not to change the version that is used, provide the specific version in the `FunctionARN` parameter when you create your job\.
+If you provide the Amazon S3 batch operations job with a function ARN that uses an alias or the `$LATEST` qualifier, and you update the version that either of those points to, Amazon S3 batch operations starts calling the new version of your Lambda function\. This can be useful when you want to update functionality part of the way through a large job\. If you don't want Amazon S3 batch operations to change the version that is used, provide the specific version in the `FunctionARN` parameter when you create your job\.
 
 ### Response and Result Codes<a name="batch-ops-invoke-lambda-response-codes"></a>
 
@@ -34,16 +35,16 @@ There are two levels of codes that Amazon S3 batch operations expect from Lambda
 
 ## Creating a Lambda Function to Use with Amazon S3 Batch Operations<a name="batch-ops-invoke-lambda-custom-functions"></a>
 
-This section provides example AWS Identity and Access Management \(IAM\) permissions that you must use with your Lambda function and an example Lambda function to use with Amazon S3 batch operations\. If you have never created a Lambda function before, we recommend the following tutorial[ Using AWS Lambda with Amazon S3](https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html) in the *AWS Lambda Developer Guide*\.
+This section provides example AWS Identity and Access Management \(IAM\) permissions that you must use with your Lambda function\. It also contains an example Lambda function to use with Amazon S3 batch operations\. If you have never created a Lambda function before, see [Tutorial: Using AWS Lambda with Amazon S3](https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html) in the *AWS Lambda Developer Guide*\.
 
-You must create Lambda functions specifically for use with Amazon S3 batch operations\. You can't reuse existing Amazon S3 event\-based Lambda functions because Lambda functions that are used for Amazon S3 batch operations must accept and return special data fields\. 
+You must create Lambda functions specifically for use with Amazon S3 batch operations\. You can't reuse existing Amazon S3 event\-based Lambda functions\. This is because Lambda functions that are used for Amazon S3 batch operations must accept and return special data fields\. 
 
-### IAM Permissions<a name="batch-ops-invoke-lambda-custom-functions-iam"></a>
+### Example IAM Permissions<a name="batch-ops-invoke-lambda-custom-functions-iam"></a>
 
 The following are examples of the IAM permissions that are necessary to use a Lambda function with Amazon S3 batch operations\. 
 
-**Example Amazon S3 Batch Operations Trust Policy**  
-The following is an example of the trust policy you can use for the execution role to give Lambda permission to execute the function invoked by an Amazon S3 batch operations job\.  
+**Example — Amazon S3 batch operations trust policy**  
+The following is an example of the trust policy that you can use for the execution role\. It gives Lambda permission to execute the function invoked by an Amazon S3 batch operations job\.  
 
 ```
 {
@@ -60,8 +61,8 @@ The following is an example of the trust policy you can use for the execution ro
 }
 ```
 
-**Example Lambda IAM Policy**  
-The following is an example of an IAM policy to give Amazon S3 batch operations permission to invoke the Lambda function and read the input manifest\.  
+**Example — Lambda IAM policy**  
+The following is an example of an IAM policy that gives Amazon S3 batch operations permission to invoke the Lambda function and read the input manifest\.  
 
 ```
 {
@@ -236,4 +237,115 @@ aws s3control create-job
     --role-arn arn:aws:iam::AccountID:role/BatchOperationsRole
     --region Region
     --description “Lambda Function"
+```
+
+## Providing Task\-Level Information in Lambda Manifests<a name="storing-task-level-information-in-lambda"></a>
+
+When you use AWS Lambda functions with Amazon S3 batch operations, you might want additional data to accompany each task/key that is operated on\. For example, you might want to have both a source object key and new object key provided\. Your Lambda function could then copy the source key to a new S3 bucket under a new name\. By default, Amazon S3 batch operations let you specify only the destination bucket and a list of source keys in the input manifest to your job\. The following describes how you can include additional data in your manifest so that you can run more complex Lambda functions\.
+
+To specify per\-key parameters in your Amazon S3 batch operations manifest to use in your Lambda function's code, use the following URL\-encoded JSON format\. The `key` field is passed to your Lambda function as if it were an Amazon S3 object key\. But it can be interpreted by the Lambda function to contain other values or multiple keys, as shown following\. 
+
+**Note**  
+The maximum number of characters for the `key` field in the manifest is 1,024\.
+
+**Example — Manifest substituting the "Amazon S3 keys" with JSON strings**  
+The URL\-encoded version must be provided to Amazon S3 batch operations\.  
+
+```
+my-bucket,{"origKey": "object1key", "newKey": "newObject1Key"}
+my-bucket,{"origKey": "object2key", "newKey": "newObject2Key"}
+my-bucket,{"origKey": "object3key", "newKey": "newObject3Key"}
+```
+
+**Example — Manifest URL\-encoded**  
+This URL\-encoded version must be provided to Amazon S3 batch operations\. The non\-URL\-encoded version does not work\.  
+
+```
+my-bucket,%7B%22origKey%22%3A%20%22object1key%22%2C%20%22newKey%22%3A%20%22newObject1Key%22%7D
+my-bucket,%7B%22origKey%22%3A%20%22object2key%22%2C%20%22newKey%22%3A%20%22newObject2Key%22%7D
+my-bucket,%7B%22origKey%22%3A%20%22object3key%22%2C%20%22newKey%22%3A%20%22newObject3Key%22%7D
+```
+
+**Example — Lambda function with manifest format writing results to the job report**  
+
+```
+import json
+from urllib.parse import unquote_plus
+
+
+# This example Lambda function shows how to parse JSON that is encoded into the Amazon S3 batch
+# operations manifest containing lines like this:
+#
+# bucket,encoded-json
+# bucket,encoded-json
+# bucket,encoded-json
+#
+# For example, if we wanted to send the following JSON to this Lambda function:
+#
+# bucket,{"origKey": "object1key", "newKey": "newObject1Key"}
+# bucket,{"origKey": "object2key", "newKey": "newObject2Key"}
+# bucket,{"origKey": "object3key", "newKey": "newObject3Key"}
+#
+# We would simply URL-encode the JSON like this to create the real manifest to create a batch
+# operations job with:
+#
+# my-bucket,%7B%22origKey%22%3A%20%22object1key%22%2C%20%22newKey%22%3A%20%22newObject1Key%22%7D
+# my-bucket,%7B%22origKey%22%3A%20%22object2key%22%2C%20%22newKey%22%3A%20%22newObject2Key%22%7D
+# my-bucket,%7B%22origKey%22%3A%20%22object3key%22%2C%20%22newKey%22%3A%20%22newObject3Key%22%7D
+#
+def lambda_handler(event, context):
+    # Parse job parameters from Amazon S3 batch operations
+    jobId = event['job']['id']
+    invocationId = event['invocationId']
+    invocationSchemaVersion = event['invocationSchemaVersion']
+
+    # Prepare results
+    results = []
+
+    # S3 batch operations currently only passes a single task at a time in the array of tasks.
+    task = event['tasks'][0]
+
+    # Extract the task values we might want to use
+    taskId = task['taskId']
+    s3Key = task['s3Key']
+    s3VersionId = task['s3VersionId']
+    s3BucketArn = task['s3BucketArn']
+    s3BucketName = s3BucketArn.split(':::')[-1]
+
+    try:
+        # Assume it will succeed for now
+        resultCode = 'Succeeded'
+        resultString = ''
+
+        # Decode the JSON string that was encoded into the S3 Key value and convert the
+        # resulting string into a JSON structure.
+        s3Key_decoded = unquote_plus(s3Key)
+        keyJson = json.loads(s3Key_decoded)
+
+        # Extract some values from the JSON that we might want to operate on.  In this example
+        # we won't do anything except return the concatenated string as a fake result.
+        newKey = keyJson['newKey']
+        origKey = keyJson['origKey']
+        resultString = origKey + " --> " + newKey
+
+    except Exception as e:
+        # If we run into any exceptions, fail this task so batch operations does retry it and
+        # return the exception string so we can see the failure message in the final report
+        # created by batch operations.
+        resultCode = 'PermanentFailure'
+        resultString = 'Exception: {}'.format(e)
+    finally:
+        # Send back the results for this task.
+        results.append({
+            'taskId': taskId,
+            'resultCode': resultCode,
+            'resultString': resultString
+        })
+
+    return {
+        'invocationSchemaVersion': invocationSchemaVersion,
+        'treatMissingKeysAs': 'PermanentFailure',
+        'invocationId': invocationId,
+        'results': results
+    }
 ```

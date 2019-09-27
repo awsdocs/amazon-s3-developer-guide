@@ -1,6 +1,6 @@
 # Managing Amazon S3 Object Locks<a name="object-lock-managing"></a>
 
-Amazon S3 object lock lets you store objects in Amazon S3 using a *write\-once\-read\-many* \(WORM\) model\. You can use it to view, configure, and manage the object lock status of your Amazon S3 objects\. For more information about Amazon S3 object lock capabilities, see [Amazon S3 Object Lock Overview](object-lock-overview.md)\.
+Amazon S3 object lock lets you store objects in Amazon S3 using a *write once, read many* \(WORM\) model\. You can use it to view, configure, and manage the object lock status of your Amazon S3 objects\. For more information about Amazon S3 object lock capabilities, see [Amazon S3 Object Lock Overview](object-lock-overview.md)\.
 
 **Topics**
 + [Viewing the Lock Information for an Object](#object-lock-managing-view)
@@ -8,7 +8,7 @@ Amazon S3 object lock lets you store objects in Amazon S3 using a *write\-once\-
 + [Configuring Events and Notifications](#object-lock-managing-events)
 + [Setting Retention Limits](#object-lock-managing-retention-limits)
 + [Managing Delete Markers and Object Lifecycles](#object-lock-managing-lifecycle)
-+ [Using Object Lock with Cross\-Region Replication](#object-lock-managing-replication)
++ [Using Object Lock with Replication](#object-lock-managing-replication)
 
 ## Viewing the Lock Information for an Object<a name="object-lock-managing-view"></a>
 
@@ -65,7 +65,7 @@ You can set minimum and maximum allowable retention periods for a bucket using a
 ```
 
 **Note**  
-If your bucket is the destination bucket for a cross\-region replication \(CRR\) policy and you want to set up minimum and maximum allowable retention periods for object replicas that are created using CRR, you must include the `s3:ReplicateObject` action in your bucket policy\.
+If your bucket is the destination bucket for a replication policy and you want to set up minimum and maximum allowable retention periods for object replicas that are created using replication, you must include the `s3:ReplicateObject` action in your bucket policy\.
 
 For more information about using bucket policies, see [Using Bucket Policies and User Policies](using-iam-policies.md)\.
 
@@ -78,28 +78,28 @@ Delete markers are not WORM\-protected, regardless of any retention period or le
 
 Object lifecycle management configurations continue to function normally on protected objects, including placing delete markers\. However, protected object versions remain safe from being deleted or overwritten by a lifecycle configuration\. For more information about managing object lifecycles, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
-## Using Object Lock with Cross\-Region Replication<a name="object-lock-managing-replication"></a>
+## Using Object Lock with Replication<a name="object-lock-managing-replication"></a>
 
-You can use Amazon S3 object lock with cross\-region replication \(CRR\) to enable automatic, asynchronous copying of locked objects and their retention metadata, across S3 buckets in different AWS Regions\. When you use CRR, objects in a *source bucket* are replicated to a *destination bucket*\. For more information, see [Cross\-Region Replication](crr.md)\. 
+You can use Amazon S3 object lock with replication to enable automatic, asynchronous copying of locked objects and their retention metadata, across S3 buckets in different or the same AWS Regions\. When you use replication, objects in a *source bucket* are replicated to a *destination bucket*\. For more information, see [Replication](replication.md)\. 
 
-To set up object lock with cross\-region replication, you can choose one of the following options\.
+To set up object lock with replication, you can choose one of the following options\.
 
 Option 1: Enable object lock first\.
 
 1. Enable object lock on the destination bucket, or on both the source and the destination bucket\. 
 
-1. Set up CRR between the source and the destination buckets\.
+1. Set up replication between the source and the destination buckets\.
 
-Option 2: Set up CRR first\.
+Option 2: Set up replication first\.
 
-1. Set up CRR between the source and destination buckets\.
+1. Set up replication between the source and destination buckets\.
 
 1. Enable object lock on just the destination bucket, or on both the source and destination buckets\.
 
-To complete step 2 in the preceding options, you must contact [AWS Support](https://console.aws.amazon.com//support/home)\. This is required to make sure cross\-region replication is configured correctly\. 
+To complete step 2 in the preceding options, you must contact [AWS Support](https://console.aws.amazon.com//support/home)\. This is required to make sure that replication is configured correctly\. 
 
-Before you contact AWS Support, review the following requirements for setting up object lock with cross\-region replication:
+Before you contact AWS Support, review the following requirements for setting up object lock with replication:
 + The Amazon S3 destination bucket must have object lock enabled on it\.
-+ You must grant two new permissions on the source S3 bucket in the AWS Identity and Access Management \(IAM\) role that you use to set up CRR\. The two new permissions are `s3:GetObjectRetention` and `s3:GetObjectLegalHold`\. If the role has an `s3:Get*` permission, it satisfies the requirement\. For more information, see [Setting Up Permissions for Cross\-Region Replication](setting-repl-config-perm-overview.md)\.
++ You must grant two new permissions on the source S3 bucket in the AWS Identity and Access Management \(IAM\) role that you use to set up replication\. The two new permissions are `s3:GetObjectRetention` and `s3:GetObjectLegalHold`\. If the role has an `s3:Get*` permission, it satisfies the requirement\. For more information, see [Setting Up Permissions for Replication](setting-repl-config-perm-overview.md)\.
 
 For more information about Amazon S3 object lock, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.

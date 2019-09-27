@@ -1,4 +1,4 @@
-# Replication Configuration Overview<a name="crr-add-config"></a>
+# Replication Configuration Overview<a name="replication-add-config"></a>
 
 Amazon S3 stores a replication configuration as XML\. In the replication configuration XML file, you specify an AWS Identity and Access Management \(IAM\) role and one or more rules\. 
 
@@ -15,26 +15,26 @@ Amazon S3 stores a replication configuration as XML\. In the replication configu
 </ReplicationConfiguration>
 ```
 
-Amazon S3 can't replicate objects without your permission\. You grant permissions with the IAM role that you specify in the replication configuration\. Amazon S3 assumes the IAM role to replicate objects on your behalf\. You must grant the required permissions to the IAM role first\. For more information about managing permissions, see [Setting Up Permissions for Cross\-Region Replication](setting-repl-config-perm-overview.md)\.
+Amazon S3 can't replicate objects without your permission\. You grant permissions with the IAM role that you specify in the replication configuration\. Amazon S3 assumes the IAM role to replicate objects on your behalf\. You must grant the required permissions to the IAM role first\. For more information about managing permissions, see [Setting Up Permissions for Replication](setting-repl-config-perm-overview.md)\.
 
 You add one rule in replication configuration in the following scenarios:
 + You want to replicate all objects\.
 + You want to replicate a subset of objects\. You identify the object subset by adding a filter in the rule\. In the filter, you specify an object key prefix, tags, or a combination of both, to identify the subset of objects that the rule applies to\. 
 
-You add multiple rules in a replication configuration if you want to select a different subset of objects\. In each rule, you specify a filter that selects a different subset of objects\. For example, you might choose to replicates objects that have either `tax/` or` document/` key prefixes\. You would add two rules and specify the `tax/` key prefix filter in one rule and the `document/` key prefix in the other\.
+You add multiple rules in a replication configuration if you want to select a different subset of objects\. In each rule, you specify a filter that selects a different subset of objects\. For example, you might choose to replicate objects that have either `tax/` or` document/` key prefixes\. You would add two rules and specify the `tax/` key prefix filter in one rule and the `document/` key prefix in the other\.
 
 The following sections provide additional information\.
 
 **Topics**
-+ [The Basic Rule Configuration](#crr-config-min-rule-config)
-+ [Optional: Specifying a Filter](#crr-config-optional-filter)
-+ [Additional Destination Configurations](#crr-config-optional-dest-config)
-+ [Example Replication Configurations](#crr-config-example-configs)
-+ [Backward Compatibility](#crr-backward-compat-considerations)
++ [Basic Rule Configuration](#replication-config-min-rule-config)
++ [Optional: Specifying a Filter](#replication-config-optional-filter)
++ [Additional Destination Configurations](#replication-config-optional-dest-config)
++ [Example Replication Configurations](#replication-config-example-configs)
++ [Backward Compatibility](#replication-backward-compat-considerations)
 
-## The Basic Rule Configuration<a name="crr-config-min-rule-config"></a>
+## Basic Rule Configuration<a name="replication-config-min-rule-config"></a>
 
-### <a name="crr-config-min-rule-config"></a>
+### <a name="replication-config-min-rule-config"></a>
 
 Each rule must include the rule's status and priority, and indicate whether to replicate delete makers\. 
 + `Status` indicates whether the rule is enabled or disabled\. If a rule is disabled, Amazon S3 doesn't perform the actions specified in the rule\. 
@@ -67,7 +67,7 @@ The following code shows the minimum requirements for a rule\.
 
 You can also specify other configuration options\. For example, you might choose to use a storage class for object replicas that differs from the class for the source object\. 
 
-## Optional: Specifying a Filter<a name="crr-config-optional-filter"></a>
+## Optional: Specifying a Filter<a name="replication-config-optional-filter"></a>
 
 To choose a subset of objects that the rule applies to, add an optional filter\. You can filter by object key prefix, object tags, or combination of both\. If you filter on both a key prefix and object tags, Amazon S3 combines the filters using a logical AND operator\. In other words, the rule applies to a subset of objects with a specific key prefix and specific tags\. 
 
@@ -107,7 +107,7 @@ To specify a rule with a filter based on object tags, use the following code\. Y
 ...
 ```
 
-To specify a rule filter with a combination of a key prefix and object tags, use this code\. You warp these filters in a AND parent element\. Amazon S3 performs logical AND operation to combine these filters\. In other words, the rule applies to a subset of objects with a specific key prefix and specific tags\. 
+To specify a rule filter with a combination of a key prefix and object tags, use this code\. You wrap these filters in an `AND` parent element\. Amazon S3 performs a logical `AND` operation to combine these filters\. In other words, the rule applies to a subset of objects with a specific key prefix and specific tags\. 
 
 ```
 <Rule>
@@ -130,9 +130,9 @@ To specify a rule filter with a combination of a key prefix and object tags, use
 ...
 ```
 
-## Additional Destination Configurations<a name="crr-config-optional-dest-config"></a>
+## Additional Destination Configurations<a name="replication-config-optional-dest-config"></a>
 
-In the destination configuration, you specify the bucket where you want Amazon S3 to replicate objects\. You can configure CRR to replicate objects from one source bucket to one destination bucket\. If you add multiple rules in a replication configuration, all of the rules must identify the same destination bucket\. 
+In the destination configuration, you specify the bucket where you want Amazon S3 to replicate objects\. You can set configurations to replicate objects from one source bucket to one destination bucket\. If you add multiple rules in a replication configuration, all of the rules must identify the same destination bucket\. 
 
 ```
 ...
@@ -142,7 +142,7 @@ In the destination configuration, you specify the bucket where you want Amazon S
 ...
 ```
 
-You have the following options you can add in the <Destination> element:
+You can add the following options in the `<Destination>` element:
 + You can specify the storage class for the object replicas\. By default, Amazon S3 uses the storage class of the source object to create object replicas, as in the following example\. 
 
   ```
@@ -167,7 +167,7 @@ You have the following options you can add in the <Destination> element:
   ...
   ```
 
-  If you don't add this element to the replication configuration, the replicas are owned by same AWS account that owns the source object\. For more information, see [CRR Additional Configuration: Changing the Replica Owner](crr-change-owner.md)\.
+  If you don't add this element to the replication configuration, the replicas are owned by same AWS account that owns the source object\. For more information, see [Additional Replication Configuration: Changing the Replica Owner](replication-change-owner.md)\.
 + Your source bucket might contain objects that were created with server\-side encryption using keys stored in AWS KMS\. By default, Amazon S3 doesn't replicate these objects\. You can optionally direct Amazon S3 to replicate these objects by first explicitly opting into this feature by adding the SourceSelectionCriteria element and then providing the AWS KMS key \(for the AWS Region of the destination bucket\) to use for encrypting object replicas\. 
 
   ```
@@ -186,9 +186,9 @@ You have the following options you can add in the <Destination> element:
   ...
   ```
 
-  For more information, see [CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](crr-replication-config-for-kms-objects.md)\.
+  For more information, see [Additional Replication Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](replication-config-for-kms-objects.md)\.
 
-## Example Replication Configurations<a name="crr-config-example-configs"></a>
+## Example Replication Configurations<a name="replication-config-example-configs"></a>
 
 To get started, you can add the following example replication configurations to your bucket, as appropriate\.
 
@@ -376,13 +376,13 @@ In this configuration, the two rules specify filters with overlapping key prefix
 ```
 
 **Example 4: Example Walkthroughs**  
-For example walkthroughs, see [Cross\-Region Replication \(CRR\) Walkthroughs](crr-example-walkthroughs.md)\.
+For example walkthroughs, see [Replication Walkthroughs](replication-example-walkthroughs.md)\.
 
 For more information about the XML structure of replication configuration, see [PutBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) in the *Amazon Simple Storage Service API Reference*\. 
 
-## Backward Compatibility<a name="crr-backward-compat-considerations"></a>
+## Backward Compatibility<a name="replication-backward-compat-considerations"></a>
 
-The latest version of the replication configuration XML is V2\. For backward compatibility, `Amazon S3 ` continues to support the V1 configuration\. If you have used replication configuration XML V1, consider the following issues that affect backward compatibility:
+The latest version of the replication configuration XML is V2\. For backward compatibility, Amazon S3 continues to support the V1 configuration\. If you have used replication configuration XML V1, consider the following issues that affect backward compatibility:
 + Replication configuration XML V2 includes the `Filter` element for rules\. With the `Filter` element, you can specify object filters based on the object key prefix, tags, or both to scope the objects that the rule applies to\. Replication configuration XML V1 supported filtering based only on the key prefix\. In that case, you add the `Prefix` directly as a child element of the `Rule` element, as in the following example\.
 
   ```
@@ -399,7 +399,7 @@ The latest version of the replication configuration XML is V2\. For backward com
   ```
 
   For backward compatibility, `Amazon S3 ` continues to support the V1 configuration\. 
-+ When you delete an object from your source bucket without specifying an object version ID, Amazon S3 adds a delete marker\. If you use V1 of the replication configuration XML, Amazon S3 replicates delete markers that resulted from user actions\. In other words, if the user deleted the object, and not if Amazon S3 deleted it because the object expired as part of lifecycle action\. In V2, Amazon S3 doesn't replicate delete markers and therefore you must set the `DeleteMarkerReplication` element to `Disabled`\. 
++ When you delete an object from your source bucket without specifying an object version ID, Amazon S3 adds a delete marker\. If you use V1 of the replication configuration XML, Amazon S3 replicates delete markers that resulted from user actions\. In other words, if the user deleted the object, and not if Amazon S3 deleted it because the object expired as part of lifecycle action\. In V2, Amazon S3 doesn't replicate delete markers\. Therefore, you must set the `DeleteMarkerReplication` element to `Disabled`\. 
 
   ```
   ...

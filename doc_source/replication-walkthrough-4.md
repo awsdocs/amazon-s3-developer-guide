@@ -1,16 +1,16 @@
-# Example 4: Replicating Encrypted Objects<a name="crr-walkthrough-4"></a>
+# Example 4: Replicating Encrypted Objects<a name="replication-walkthrough-4"></a>
 
-By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with AWS KMS\-managed keys\. To replicate encrypted objects, you modify the bucket replication configuration to tell Amazon S3 to replicate these objects\. This example explains how to use the Amazon S3 console and the AWS Command Line Interface \(AWS CLI\) to change the bucket replication configuration to enable replicating encrypted objects\. For more information, see [CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](crr-replication-config-for-kms-objects.md)\. 
+By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with AWS KMS\-managed keys\. To replicate encrypted objects, you modify the bucket replication configuration to tell Amazon S3 to replicate these objects\. This example explains how to use the Amazon S3 console and the AWS Command Line Interface \(AWS CLI\) to change the bucket replication configuration to enable replicating encrypted objects\. For more information, see [Additional Replication Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](replication-config-for-kms-objects.md)\. 
 
 **Topics**
 
-## Replicating Encrypted Objects \(Console\)<a name="crr-ex4-console"></a>
+## Replicate Encrypted Objects \(Console\)<a name="replication-ex4-console"></a>
 
-For step\-by\-step instructions, see [How Do I Add a Cross\-Region Replication \(CRR\) Rule to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-crr.html) in the *Amazon Simple Storage Service Console User Guide*\. This topic provides instructions for setting replication configuration when buckets are owned by same and different AWS accounts\.
+For step\-by\-step instructions, see [How Do I Add a Replication Rule to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-replication.html) in the *Amazon Simple Storage Service Console User Guide*\. This topic provides instructions for setting replication configuration when buckets are owned by same and different AWS accounts\.
 
-## Replicating Encrypted Objects \(AWS CLI\)<a name="crr-ex4-cli"></a>
+## Replicate Encrypted Objects \(AWS CLI\)<a name="replication-ex4-cli"></a>
 
-To replicate encrypted objects with the AWS CLI, you create buckets, enable versioning on the buckets, create an IAM role that gives Amazon S3 permission to replicate objects, and add the replication configuration to the source bucket\. The replication configuration provides information related to replicating objects encrypted using KMS keys\. The IAM role permission include necessary permissions to replicate the encrypted objects\. You also test the setup\.
+To replicate encrypted objects with the AWS CLI, you create buckets, enable versioning on the buckets, create an IAM role that gives Amazon S3 permission to replicate objects, and add the replication configuration to the source bucket\. The replication configuration provides information related to replicating objects encrypted using KMS keys\. The IAM role permissions include necessary permissions to replicate the encrypted objects\. You also test the setup\.
 
 **To replicate encrypted objects \(AWS CLI\)**
 
@@ -78,7 +78,7 @@ To set up replication configuration when both *source* and *destination* buckets
 
          ```
          $ aws iam create-role \
-         --role-name crrRolekmsobj \
+         --role-name replicationRolekmsobj \
          --assume-role-policy-document file://s3-role-trust-policy-kmsobj.json  \
          --profile acctA
          ```
@@ -87,7 +87,7 @@ To set up replication configuration when both *source* and *destination* buckets
 
       1. Copy the following permissions policy and save it to a file named `s3-role-permissions-policykmsobj.json` in the current directory on your local computer\. You create an IAM role and attach the policy to it later\. 
 **Important**  
- In the permission policy you specify the AWS KMS key IDs that will be used for encryption of *source* and `destination` buckets\. You must create two separate KMS keys for the `source` and `destination` buckets\. KMS keys are never shared outside the AWS Region in which they were created\. 
+ In the permissions policy, you specify the AWS KMS key IDs that will be used for encryption of *source* and `destination` buckets\. You must create two separate KMS keys for the `source` and `destination` buckets\. KMS keys are never shared outside the AWS Region in which they were created\. 
 
          ```
          {
@@ -169,9 +169,9 @@ To set up replication configuration when both *source* and *destination* buckets
 
          ```
          $ aws iam put-role-policy \
-         --role-name crrRolekmsobj \
+         --role-name replicationRolekmsobj \
          --policy-document file://s3-role-permissions-policykmsobj.json \
-         --policy-name crrRolechangeownerPolicy \
+         --policy-name replicationRolechangeownerPolicy \
          --profile acctA
          ```
 
@@ -261,6 +261,8 @@ In the replication configuration you specify the IAM role that Amazon S3 can ass
 
    1. Verify that the *destination* bucket contains the object replicas and that they are encrypted using the KMS encryption key that you specified in the configuration\.
 
-## Replicating Encrypted Objects \(AWS SDK\)<a name="crr-ex4-sdk"></a>
+## Replicate Encrypted Objects \(AWS SDK\)<a name="replication-ex4-sdk"></a>
 
- For code example to add replication configuration, see [Configure CRR When Source and Destination Buckets Are Owned by the Same AWS Account \(AWS SDK\)](crr-walkthrough1.md#crr-ex1-sdk)\. You will need to modify replication configuration appropriately\. For conceptual information, see [CRR Additional Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](crr-replication-config-for-kms-objects.md)\. 
+ For a code example to add replication configuration, see [Configure Replication When Buckets Are Owned by the Same Account \(AWS SDK\)](replication-walkthrough1.md#replication-ex1-sdk)\. You need to modify the replication configuration appropriately\. 
+
+For conceptual information, see [Additional Replication Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](replication-config-for-kms-objects.md)\. 

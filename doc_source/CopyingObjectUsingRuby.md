@@ -7,8 +7,8 @@ The following tasks guide you through using the Ruby classes to copy an object i
 
 |  |  | 
 | --- |--- |
-| 1 | Use the Amazon S3 modularized gem for version 3 of the AWS SDK for Ruby, require 'aws\-sdk\-s3', and provide your AWS credentials\. For more information about how to provide your credentials, see [Making Requests Using AWS Account or IAM User Credentials](AuthUsingAcctOrUserCredentials.md)\. | 
-| 2 |  Provide the request information, such as source bucket name, source key name, destination bucket name, and destination key\.   | 
+|  1  |  Use the Amazon S3 modularized gem for version 3 of the AWS SDK for Ruby, require 'aws\-sdk\-s3', and provide your AWS credentials\. For more information about how to provide your credentials, see [Making Requests Using AWS Account or IAM User Credentials](AuthUsingAcctOrUserCredentials.md)\.  | 
+|  2  |  Provide the request information, such as source bucket name, source key name, destination bucket name, and destination key\.   | 
 
  The following Ruby code example demonstrates the preceding tasks using the `#copy_object` method to copy an object from one bucket to another\.
 

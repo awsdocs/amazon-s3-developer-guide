@@ -11,7 +11,7 @@ There are no new charges for using default encryption for S3 buckets\. Requests 
 **Topics**
 + [How Do I Set Up Amazon S3 Default Encryption for an S3 Bucket?](#bucket-encryption-how-to-set-up)
 + [Moving to Default Encryption from Using Bucket Policies for Encryption Enforcement](#bucket-encryption-update-bucket-policy)
-+ [Using Default Encryption with Cross\-Region Replication](#bucket-encryption-update-bucket-policy)
++ [Using Default Encryption with Replication](#bucket-encryption-update-bucket-policy)
 + [Monitoring Default Encryption with CloudTrail and CloudWatch](#bucket-encryption-tracking)
 + [More Info](#bucket-encryption-related-resources)
 
@@ -52,9 +52,9 @@ By default, the Amazon S3 console, the AWS CLI version 1\.11\.108 and later, and
 
 After you enable default encryption for your S3 bucket, objects stored in Amazon S3 through any `PUT` requests without encryption headers are encrypted using the bucket\-level default encryption settings\.
 
-## Using Default Encryption with Cross\-Region Replication<a name="bucket-encryption-update-bucket-policy"></a>
+## Using Default Encryption with Replication<a name="bucket-encryption-update-bucket-policy"></a>
 
-After you enable default encryption for a cross\-region replication destination bucket, the following encryption behavior applies: 
+After you enable default encryption for a replication destination bucket, the following encryption behavior applies: 
 + If objects in the source bucket are not encrypted, the replica objects in the destination bucket are encrypted using the default encryption settings of the destination bucket\. This results in the `ETag` of the source object being different from the `ETag` of the replica object\. You must update applications that use the `ETag` to accommodate for this difference\.
 + If objects in the source bucket are encrypted using SSE\-S3 or SSE\-KMS, the replica objects in the destination bucket use the same encryption as the source object encryption\. The default encryption settings of the destination bucket are not used\.
 

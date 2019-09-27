@@ -1,7 +1,7 @@
 # Object Tagging<a name="object-tagging"></a>
 
 Use object tagging to categorize storage\. Each tag is a key\-value pair\. Consider the following tagging examples:
-+ Suppose an object contains protected health information \(PHI\) data\. You might tag the object using the following key\-value pair, as shown following:
++ Suppose that an object contains protected health information \(PHI\) data\. You might tag the object using the following key\-value pair\.
 
   ```
   PHI=True
@@ -12,25 +12,25 @@ Use object tagging to categorize storage\. Each tag is a key\-value pair\. Consi
   ```
   Classification=PHI
   ```
-+ Suppose you store project files in your S3 bucket\. You might tag these objects with a key called `Project` and a value, as shown following:
++ Suppose that you store project files in your S3 bucket\. You might tag these objects with a key named `Project` and a value, as shown following\.
 
   ```
   Project=Blue
   ```
-+ You can add multiple tags to an object, as shown following:
++ You can add multiple tags to an object, as shown following\.
 
   ```
   Project=x
   Classification=confidential
   ```
 
-You can add tags to new objects when you upload them or you can add them to existing objects\. Note the following:
-+ You can associate up to 10 tags with an object\. Tags associated with an object must have unique tag keys\.
-+ A tag key can be up to 128 Unicode characters in length and tag values can be up to 256 Unicode characters in length\.
-+ Key and values are case sensitive\.
-+ For more information on Tag Restrictions\. See [User\-Defined Tag Restrictions](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)\.
+You can add tags to new objects when you upload them, or you can add them to existing objects\. Note the following:
++ You can associate up to 10 tags with an object\. Tags that are associated with an object must have unique tag keys\.
++ A tag key can be up to 128 Unicode characters in length, and tag values can be up to 256 Unicode characters in length\.
++ The key and values are case sensitive\.
++ For more information about tag restrictions, see [User\-Defined Tag Restrictions](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)\.
 
-Object key name prefixes also enable you to categorize storage, however prefix\-based categorization is one dimensional\. Consider the following object key names:
+Object key name prefixes also enable you to categorize storage\. However, prefix\-based categorization is one\-dimensional\. Consider the following object key names:
 
 ```
 photos/photo1.jpg
@@ -38,16 +38,20 @@ project/projectx/document.pdf
 project/projecty/document2.pdf
 ```
 
-These key names have the prefixes `photos/`, `project/projectx/`, and `project/projecty/`\. These prefixes enable one\-dimensional categorization\. That is, everything under a prefix is one category\. For example, the prefix project/projectx identifies all documents related to project x\.
+These key names have the prefixes `photos/`, `project/projectx/`, and `project/projecty/`\. These prefixes enable one\-dimensional categorization\. That is, everything under a prefix is one category\. For example, the prefix `project/projectx` identifies all documents related to project x\.
 
-With tagging, you now have another dimension\. If you want photo1 in project x category, you can tag the object accordingly\. In addition to data classification, tagging offers other benefits\. For example, 
-+ Object tags enable fine\-grained access control of permissions\. For example, you could grant an IAM user permissions to read only objects with specific tags\.
-+ Object tags enable fine\-grained object lifecycle management in which you can specify tag\-based filter, in addition to key name prefix, in a lifecycle rule\.
+With tagging, you now have another dimension\. If you want photo1 in project x category, you can tag the object accordingly\. In addition to data classification, tagging offers benefits such as the following:
++ Object tags enable fine\-grained access control of permissions\. For example, you could grant an IAM user permissions to read\-only objects with specific tags\.
++ Object tags enable fine\-grained object lifecycle management in which you can specify a tag\-based filter, in addition to a key name prefix, in a lifecycle rule\.
 + When using Amazon S3 analytics, you can configure filters to group objects together for analysis by object tags, by key name prefix, or by both prefix and tags\.
 + You can also customize Amazon CloudWatch metrics to display information by specific tag filters\. The following sections provide details\.
 
 **Important**  
-While it is acceptable to use tags to label objects containing confidential data \(such as, personally identifiable information \(PII\) or protected health information \(PHI\)\), the tags themselves shouldn't contain any confidential information\. 
+It is acceptable to use tags to label objects containing confidential data, such as personally identifiable information \(PII\) or protected health information \(PHI\)\. However, the tags themselves shouldn't contain any confidential information\. 
+
+To add object tag sets to more than one Amazon S3 object with a single request, you can use Amazon S3 batch operations\. You provide Amazon S3 batch operations with a list of objects to operate on\. Amazon S3 batch operations call the respective API to perform the specified operation\. A single Amazon S3 batch operations job can perform the specified operation on billions of objects containing exabytes of data\. 
+
+Amazon S3 batch operations track progress, send notifications, and store a detailed completion report of all actions, providing a fully managed, auditable, serverless experience\. You can use Amazon S3 batch operations through the AWS Management Console, AWS CLI, AWS SDKs, or REST API\. For more information, see [The Basics: Amazon S3 Batch Operations Jobs](batch-ops-basics.md)\.
 
 ## API Operations Related to Object Tagging<a name="tagging-apis"></a>
 
@@ -59,7 +63,7 @@ Amazon S3 supports the following API operations that are specifically for object
   + Object has a set of existing tags – To modify the existing tag set, you must first retrieve the existing tag set, modify it on the client side, and then use this API to replace the tag set\.
 **Note**  
  If you send this request with an empty tag set, Amazon S3 deletes the existing tag set on the object\. If you use this method, you will be charged for a Tier 1 Request \(PUT\)\. For more information, see [Amazon S3 Pricing](https://d0.awsstatic.com/whitepapers/aws_pricing_overview.pdf)\.  
-The [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html) request is prefereed because it achieves the same result without incurring charges\. 
+The [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html) request is preferred because it achieves the same result without incurring charges\. 
 
    
 +  [GET Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html) – Returns the tag set associated with an object\. Amazon S3 returns object tags in the response body\.
@@ -67,7 +71,7 @@ The [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/REST
    
 + [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html) – Deletes the tag set associated with an object\. 
 
-**Other API Operations that Support Tagging**
+**Other API Operations That Support Tagging**
 +  [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) and [Initiate Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)– You can specify tags when you create objects\. You specify tags using the `x-amz-tagging` request header\. 
 
    
@@ -93,7 +97,7 @@ This section explains how object tagging relates to other configurations\.
 
 In bucket lifecycle configuration, you can specify a filter to select a subset of objects to which the rule applies\. You can specify a filter based on the key name prefixes, object tags, or both\. 
 
-Suppose you store photos \(raw and the finished format\) in your Amazon S3 bucket\. You might tag these objects as shown following: 
+Suppose that you store photos \(raw and the finished format\) in your Amazon S3 bucket\. You might tag these objects as shown following\. 
 
 ```
 phototype=raw
@@ -105,9 +109,9 @@ You might consider archiving the raw photos to Glacier sometime after they are c
 
 For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\. 
 
-### Object Tagging and Cross\-Region Replication \(CRR\)<a name="tagging-and-crr"></a>
+### Object Tagging and Replication<a name="tagging-and-replication"></a>
 
-If you configured cross\-region replication \(CRR\) on your bucket, Amazon S3 replicates tags, provided you grant S3 permission to read the tags\. For more information, see [Overview of Setting Up CRR ](crr-how-setup.md)\.
+If you configured Replication on your bucket, Amazon S3 replicates tags, provided you grant Amazon S3 permission to read the tags\. For more information, see [Overview of Setting Up Replication](replication-how-setup.md)\.
 
 ### Object Tagging and Access Control Policies<a name="tagging-and-policies"></a>
 
@@ -130,8 +134,8 @@ When granting permissions for the `PUT Object` and `DELETE Object` operations, t
 
 For a complete list of Amazon S3 service\-specific condition keys, see [Available Condition Keys](amazon-s3-policy-keys.md#AvailableKeys-iamV2)\. The following permissions policies illustrate how object tagging enables fine grained access permissions management\.
 
-**Example 1: Allow a User to Read Only the Objects that Have a Specific Tag**  
-The following permissions policy grants a user permission to read objects, but the condition limits the read permission to only objects that have the following specific tag key and value:  
+**Example 1: Allow a user to read only the Objects that have a specific tag**  
+The following permissions policy grants a user permission to read objects, but the condition limits the read permission to only objects that have the following specific tag key and value\.  
 
 ```
 security : public
@@ -160,7 +164,7 @@ Note that the policy uses the Amazon S3 condition key, `s3:ExistingObjectTag/<ta
 }
 ```
 
-**Example 2: Allow a User to Add Object Tags with Restrictions on the Allowed Tag Keys**  
+**Example 2: Allow a user to add object tags with restrictions on the allowed tag keys**  
 The following permissions policy grants a user permissions to perform the `s3:PutObjectTagging` action, which allows user to add tags to an existing object\. The condition limits the tag keys that the user is allowed to use\. The condition uses the `s3:RequestObjectTagKeys` condition key to specify the set of tag keys\.  
 
 ```
@@ -221,7 +225,7 @@ The policy ensures that the tag set, if specified in the request, has the specif
 ```
 For more information, see [Creating a Condition That Tests Multiple Key Values \(Set Operations\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_multi-value-conditions.html) in the *IAM User Guide*\.
 
-**Example 3: Allow a User to Add Object Tags that Include a Specific Tag Key and Value**  
+**Example 3: Allow a user to add object tags that include a specific tag key and value**  
 The following user policy grants a user permissions to perform the `s3:PutObjectTagging` action, which allows user to add tags on an existing object\. The condition requires the user to include a specific tag \(`Project`\) with value set to `X`\.   
 
 ```
