@@ -186,3 +186,6 @@ The following are example messages:
   38.    ]
   39. }
   ```
+  
+  **Note**  
+You can find a definition of each IAM identification prefix (AIDA, AROA, AGPA, etc) here: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-prefixes \.
