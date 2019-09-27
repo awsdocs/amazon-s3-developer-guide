@@ -9,7 +9,7 @@
 
 Amazon S3 is a REST service\. You can send requests to Amazon S3 using the REST API or the AWS SDK \(see [Sample Code and Libraries](https://aws.amazon.com/code)\) wrapper libraries that wrap the underlying Amazon S3 REST API, simplifying your programming tasks\. 
 
-Every interaction with Amazon S3 is either authenticated or anonymous\. Authentication is a process of verifying the identity of the requester trying to access an Amazon Web Services \(AWS\) product\. Authenticated requests must include a signature value that authenticates the request sender\. The signature value is, in part, generated from the requester's AWS access keys \(access key ID and secret access key\)\. For more information about getting access keys, see [How Do I Get Security Credentials?](http://docs.aws.amazon.com/general/latest/gr/getting-aws-sec-creds.html) in the *AWS General Reference*\. 
+Every interaction with Amazon S3 is either authenticated or anonymous\. Authentication is a process of verifying the identity of the requester trying to access an Amazon Web Services \(AWS\) product\. Authenticated requests must include a signature value that authenticates the request sender\. The signature value is, in part, generated from the requester's AWS access keys \(access key ID and secret access key\)\. For more information about getting access keys, see [How Do I Get Security Credentials?](https://docs.aws.amazon.com/general/latest/gr/getting-aws-sec-creds.html) in the *AWS General Reference*\. 
 
 If you are using the AWS SDK, the libraries compute the signature from the keys you provide\. However, if you make direct REST API calls in your application, you must write the code to compute the signature and add it to the request\. 
 
@@ -45,10 +45,10 @@ You can use these temporary security credentials in making requests to Amazon S3
 
 For information on signing requests using temporary security credentials in your REST API requests, see [Signing and Authenticating REST Requests](RESTAuthentication.md)\. For information about sending requests using AWS SDKs, see [Making Requests Using the AWS SDKs](MakingAuthenticatedRequests.md)\. 
 
-For more information about IAM support for temporary security credentials, see [Temporary Security Credentials](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) in the *IAM User Guide*\.
+For more information about IAM support for temporary security credentials, see [Temporary Security Credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) in the *IAM User Guide*\.
 
-For added security, you can require multifactor authentication \(MFA\) when accessing your Amazon S3 resources by configuring a bucket policy\. For information, see [Adding a Bucket Policy to Require MFA](example-bucket-policies.md#example-bucket-policies-use-case-7)\. After you require MFA to access your Amazon S3 resources, the only way you can access these resources is by providing temporary credentials that are created with an MFA key\. For more information, see the [AWS Multi\-Factor Authentication](https://aws.amazon.com/mfa/) detail page and [Configuring MFA\-Protected API Access](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_configure-api-require.html) in the *IAM User Guide*\.
+For added security, you can require multifactor authentication \(MFA\) when accessing your Amazon S3 resources by configuring a bucket policy\. For information, see [Adding a Bucket Policy to Require MFA](example-bucket-policies.md#example-bucket-policies-use-case-7)\. After you require MFA to access your Amazon S3 resources, the only way you can access these resources is by providing temporary credentials that are created with an MFA key\. For more information, see the [AWS Multi\-Factor Authentication](https://aws.amazon.com/mfa/) detail page and [Configuring MFA\-Protected API Access](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_configure-api-require.html) in the *IAM User Guide*\.
 
 ## Request Endpoints<a name="RequestEndpoints"></a>
 
-You send REST requests to the service's predefined endpoint\. For a list of all AWS services and their corresponding endpoints, go to [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html) in the *AWS General Reference*\.
+You send REST requests to the service's predefined endpoint\. For a list of all AWS services and their corresponding endpoints, go to [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) in the *AWS General Reference*\.

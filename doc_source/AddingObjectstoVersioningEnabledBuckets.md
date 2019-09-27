@@ -13,7 +13,7 @@ The following figure shows that Amazon S3 adds a unique version ID to an object 
 
 ## Using the Console<a name="add-obj-versioning-enabled-bucket-console"></a>
 
- For instructions, see [How Do I Upload an Object to an S3 Bucket? ](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the Amazon Simple Storage Service Console User Guide\. 
+ For instructions, see [How Do I Upload an Object to an S3 Bucket? ](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
 ## Using the AWS SDKs<a name="add-obj-versioning-enabled-bucket-sdk"></a>
 
@@ -28,10 +28,10 @@ For information about using other AWS SDKs, see [Sample Code and Libraries](http
 
 |  |  | 
 | --- |--- |
-| 1 | Enable versioning on a bucket using a PUT Bucket versioning request\. For more information, see [PUT Bucket versioning](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)\. | 
+| 1 | Enable versioning on a bucket using a PUT Bucket versioning request\. For more information, see [PUT Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)\. | 
 | 2 | Send a PUT, POST, or COPY request to store an object in the bucket\. | 
 
-When you add an object to a versioning\-enabled bucket, Amazon S3 returns the version ID of the object in the `x-amz-versionid` response header, for example:
+When you add an object to a versioning\-enabled bucket, Amazon S3 returns the version ID of the object in the `x-amz-version-id` response header, for example:
 
 ```
 1. x-amz-version-id: 3/L4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY

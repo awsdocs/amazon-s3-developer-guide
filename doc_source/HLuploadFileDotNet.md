@@ -1,97 +1,89 @@
-# Upload a File<a name="HLuploadFileDotNet"></a>
+# Upload a File to an S3 Bucket Using the AWS SDK for \.NET \(High\-Level API\)<a name="HLuploadFileDotNet"></a>
 
-The following tasks guide you through using the high\-level \.NET classes to upload a file\. The API provides several variations, *overloads*, of the `Upload` method to easily upload your data\.
+To upload a file to an S3 bucket, use the `TransferUtility` class\. When uploading data from a file, you must provide the object's key name\. If you don't, the API uses the file name for the key name\. When uploading data from a stream, you must provide the object's key name\.
 
+To set advanced upload options—such as the part size, the number of threads when uploading the parts concurrently, metadata, the storage class, or ACL—use the `TransferUtilityUploadRequest` class\. 
 
-**High\-Level API File Uploading Process**  
-
-|  |  | 
-| --- |--- |
-| 1 | Create an instance of the `TransferUtility` class by providing your AWS credentials\.  | 
-| 2 | Execute one of the `TransferUtility.Upload` overloads depending on whether you are uploading data from a file, a stream, or a directory\. | 
-
-The following C\# code sample demonstrates the preceding tasks\.
-
-**Example**  
+The following C\# example uploads a file to an Amazon S3 bucket in multiple parts\. It shows how to use various `TransferUtility.Upload` overloads to upload a file\. Each successive call to upload replaces the previous upload\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions for creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
-1. TransferUtility utility = new TransferUtility();
-2. utility.Upload(filePath, existingBucketName);
-```
-
- When uploading large files using the \.NET API, timeout might occur even while data is being written to the request stream\. You can set explicit timeout using the `TransferUtilityConfig.DefaultTimeout` as demonstrated in the following C\# code sample\. 
-
-**Example**  
-
-```
-1. TransferUtilityConfig config = new TransferUtilityConfig();
-2. config.DefaultTimeout = 11111;
-3. TransferUtility utility = new TransferUtility(config);
-```
-
-**Example**  
-The following C\# code example uploads a file to an Amazon S3 bucket\. The example illustrates the use of various `TransferUtility.Upload` overloads to upload a file; each successive call to upload replaces the previous upload\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)   
-
-```
-using System;
-using System.IO;
 using Amazon.S3;
 using Amazon.S3.Transfer;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class UploadFileMPUHighLevelAPI
+    class UploadFileMPUHighLevelAPITest
     {
-        static string existingBucketName = "*** Provide bucket name ***";
-        static string keyName            = "*** Provide your object key ***";
-        static string filePath           = "*** Provide file name ***";
+        private const string bucketName = "*** provide bucket name ***";
+        private const string keyName = "*** provide a name for the uploaded object ***";
+        private const string filePath = "*** provide the full path name of the file to upload ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 s3Client;
 
-        static void Main(string[] args)
+        public static void Main()
+        {
+            s3Client = new AmazonS3Client(bucketRegion);
+            UploadFileAsync().Wait();
+        }
+
+        private static async Task UploadFileAsync()
         {
             try
-            { 
-                TransferUtility fileTransferUtility = new
-                    TransferUtility(new AmazonS3Client(Amazon.RegionEndpoint.USEast1));
+            {
+                var fileTransferUtility =
+                    new TransferUtility(s3Client);
 
-                // 1. Upload a file, file name is used as the object key name.
-                fileTransferUtility.Upload(filePath, existingBucketName);
+                // Option 1. Upload a file. The file name is used as the object key name.
+                await fileTransferUtility.UploadAsync(filePath, bucketName);
                 Console.WriteLine("Upload 1 completed");
 
-                // 2. Specify object key name explicitly.
-                fileTransferUtility.Upload(filePath,
-                                          existingBucketName, keyName);
+                // Option 2. Specify object key name explicitly.
+                await fileTransferUtility.UploadAsync(filePath, bucketName, keyName);
                 Console.WriteLine("Upload 2 completed");
 
-                // 3. Upload data from a type of System.IO.Stream.
-                using (FileStream fileToUpload =
+                // Option 3. Upload data from a type of System.IO.Stream.
+                using (var fileToUpload = 
                     new FileStream(filePath, FileMode.Open, FileAccess.Read))
                 {
-                    fileTransferUtility.Upload(fileToUpload,
-                                               existingBucketName, keyName);
+                    await fileTransferUtility.UploadAsync(fileToUpload,
+                                               bucketName, keyName);
                 }
                 Console.WriteLine("Upload 3 completed");
 
-                // 4.Specify advanced settings/options.
-                TransferUtilityUploadRequest fileTransferUtilityRequest = new TransferUtilityUploadRequest
+                // Option 4. Specify advanced settings.
+                var fileTransferUtilityRequest = new TransferUtilityUploadRequest
                 {
-                    BucketName = existingBucketName,
+                    BucketName = bucketName,
                     FilePath = filePath,
-                    StorageClass = S3StorageClass.ReducedRedundancy,
+                    StorageClass = S3StorageClass.StandardInfrequentAccess,
                     PartSize = 6291456, // 6 MB.
                     Key = keyName,
                     CannedACL = S3CannedACL.PublicRead
                 };
                 fileTransferUtilityRequest.Metadata.Add("param1", "Value1");
                 fileTransferUtilityRequest.Metadata.Add("param2", "Value2");
-                fileTransferUtility.Upload(fileTransferUtilityRequest);
+
+                await fileTransferUtility.UploadAsync(fileTransferUtilityRequest);
                 Console.WriteLine("Upload 4 completed");
             }
-            catch (AmazonS3Exception s3Exception)
+            catch (AmazonS3Exception e)
             {
-                Console.WriteLine(s3Exception.Message,
-                                  s3Exception.InnerException);
+                Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
             }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
+
         }
     }
 }
 ```
+
+## More Info<a name="HLuploadFileDotNet-more-info"></a>
+
+[AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)

@@ -1,161 +1,110 @@
 # Deleting an Object Using the AWS SDK for Java<a name="DeletingOneObjectUsingJava"></a>
 
-The following tasks guide you through using the AWS SDK for Java classes to delete an object\. 
+You can delete an object from a bucket\. If you have versioning enabled on the bucket, you have the following options:
++ Delete a specific object version by specifying a version ID\.
++ Delete an object without specifying a version ID, in which case S3 adds a delete marker to the object\.
 
+For more information about versioning, see [Object Versioning](ObjectVersioning.md)\. 
 
-**Deleting an Object \(Non\-Versioned Bucket\)**  
-
-|  |  | 
-| --- |--- |
-|  1  |  Create an instance of the `AmazonS3Client` class\.   | 
-|  2  |  Execute one of the `AmazonS3Client.deleteObject` methods\. You can provide a bucket name and an object name as parameters or provide the same information in a `DeleteObjectRequest` object and pass the object as a parameter\. If you have not enabled versioning on the bucket, the operation deletes the object\. If you have enabled versioning, the operation adds a delete marker\. For more information, see [Deleting One Object Per Request](DeletingOneObject.md)\.  | 
-
-The following Java sample demonstrates the preceding steps\. The sample uses the `DeleteObjectRequest` class to provide a bucket name and an object key\.
-
-**Example**  
+**Example Example 1: Deleting an Object \(Non\-Versioned Bucket\)**  
+The following example deletes an object from a bucket\. The example assumes that the bucket is not versioning\-enabled and the object doesn't have any version IDs\. In the delete request, you specify only the object key and not a version ID\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
-1. AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());        
-2. s3client.deleteObject(new DeleteObjectRequest(bucketName, keyName));
-```
-
-
-**Deleting a Specific Version of an Object \(Version\-Enabled Bucket\)**  
-
-|  |  | 
-| --- |--- |
-|  1  |  Create an instance of the `AmazonS3Client` class\.   | 
-|  2  |  Execute one of the `AmazonS3Client.deleteVersion` methods\. You can provide a bucket name and an object key directly as parameters or use the `DeleteVersionRequest` to provide the same information\.  | 
-
-The following Java sample demonstrates the preceding steps\. The sample uses the `DeleteVersionRequest` class to provide a bucket name, an object key, and a version Id\.
-
-**Example**  
-
-```
-1. AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());        
-2. s3client.deleteObject(new DeleteVersionRequest(bucketName, keyName, versionId));
-```
-
-**Example 1: Deleting an Object \(Non\-Versioned Bucket\)**  
-The following Java example deletes an object from a bucket\. If you have not enabled versioning on the bucket, Amazon S3 deletes the object\. If you have enabled versioning, Amazon S3 adds a delete marker and the object is not deleted\. For information about how to create and test a working sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\.   
-
-```
-import java.io.IOException;
-
-import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 
-public class DeleteAnObjectNonVersionedBucket  {
+import java.io.IOException;
 
-    private static String bucketName = "*** Provide a Bucket Name ***";
-    private static String keyName    = "*** Provide a Key Name ****"; 
+public class DeleteObjectNonVersionedBucket {
 
     public static void main(String[] args) throws IOException {
-        AmazonS3 s3Client = new AmazonS3Client(new ProfileCredentialsProvider());
+        Regions clientRegion = Regions.DEFAULT_REGION;
+        String bucketName = "*** Bucket name ***";
+        String keyName = "*** Key name ****";
+
         try {
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .withRegion(clientRegion)
+                    .build();
+
             s3Client.deleteObject(new DeleteObjectRequest(bucketName, keyName));
-        } catch (AmazonServiceException ase) {
-            System.out.println("Caught an AmazonServiceException.");
-            System.out.println("Error Message:    " + ase.getMessage());
-            System.out.println("HTTP Status Code: " + ase.getStatusCode());
-            System.out.println("AWS Error Code:   " + ase.getErrorCode());
-            System.out.println("Error Type:       " + ase.getErrorType());
-            System.out.println("Request ID:       " + ase.getRequestId());
-        } catch (AmazonClientException ace) {
-            System.out.println("Caught an AmazonClientException.");
-            System.out.println("Error Message: " + ace.getMessage());
+        } catch (AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
         }
     }
 }
 ```
 
-**Example 2: Deleting an Object \(Versioned Bucket\)**  
-The following Java example deletes a specific version of an object from a versioned bucket\. The `deleteObject` request removes the specific object version from the bucket\.   
-To test the sample, you must provide a bucket name\. The code sample performs the following tasks:  
+**Example Example 2: Deleting an Object \(Versioned Bucket\)**  
+The following example deletes an object from a versioned bucket\. The example deletes a specific object version by specifying the object key name and version ID\. The example does the following:  
 
-1. Enable versioning on the bucket\.
+1. Adds a sample object to the bucket\. Amazon S3 returns the version ID of the newly added object\. The example uses this version ID in the delete request\.
 
-1. Add a sample object to the bucket\. In response, Amazon S3 returns the version ID of the newly added object\.
-
-1. Delete the sample object using the `deleteVersion` method\. The `DeleteVersionRequest` class specifies both an object key name and a version ID\.
-For information about how to create and test a working sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\.   
+1. Deletes the object version by specifying both the object key name and a version ID\. If there are no other versions of that object, Amazon S3 deletes the object entirely\. Otherwise, Amazon S3 only deletes the specified version\.
+**Note**  
+You can get the version IDs of an object by sending a `ListVersions` request\.
 
 ```
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.Random;
-
-import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.BucketVersioningConfiguration;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteVersionRequest;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
-import com.amazonaws.services.s3.model.SetBucketVersioningConfigurationRequest;
 
-public class DeleteAnObjectVersionEnabledBucket  {
+import java.io.IOException;
 
-    static String bucketName = "*** Provide a Bucket Name ***";
-    static String keyName    = "*** Provide a Key Name ****"; 
-    static AmazonS3Client s3Client;
-    
+public class DeleteObjectVersionEnabledBucket {
+
     public static void main(String[] args) throws IOException {
-        s3Client = new AmazonS3Client(new ProfileCredentialsProvider());
+        Regions clientRegion = Regions.DEFAULT_REGION;
+        String bucketName = "*** Bucket name ***";
+        String keyName = "*** Key name ****";
+
         try {
-            // Make the bucket version-enabled.
-            enableVersioningOnBucket(s3Client, bucketName);
-            
-            // Add a sample object.
-            String versionId = putAnObject(keyName);
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .withRegion(clientRegion)
+                    .build();
 
-            s3Client.deleteVersion(
-                    new DeleteVersionRequest(
-                            bucketName, 
-                            keyName,
-                            versionId));
-            
-        } catch (AmazonServiceException ase) {
-            System.out.println("Caught an AmazonServiceException.");
-            System.out.println("Error Message:    " + ase.getMessage());
-            System.out.println("HTTP Status Code: " + ase.getStatusCode());
-            System.out.println("AWS Error Code:   " + ase.getErrorCode());
-            System.out.println("Error Type:       " + ase.getErrorType());
-            System.out.println("Request ID:       " + ase.getRequestId());
-        } catch (AmazonClientException ace) {
-            System.out.println("Caught an AmazonClientException.");
-            System.out.println("Error Message: " + ace.getMessage());
+            // Check to ensure that the bucket is versioning-enabled.
+            String bucketVersionStatus = s3Client.getBucketVersioningConfiguration(bucketName).getStatus();
+            if (!bucketVersionStatus.equals(BucketVersioningConfiguration.ENABLED)) {
+                System.out.printf("Bucket %s is not versioning-enabled.", bucketName);
+            } else {
+                // Add an object.
+                PutObjectResult putResult = s3Client.putObject(bucketName, keyName, "Sample content for deletion example.");
+                System.out.printf("Object %s added to bucket %s\n", keyName, bucketName);
+
+                // Delete the version of the object that we just created.
+                System.out.println("Deleting versioned object " + keyName);
+                s3Client.deleteVersion(new DeleteVersionRequest(bucketName, keyName, putResult.getVersionId()));
+                System.out.printf("Object %s, version %s deleted\n", keyName, putResult.getVersionId());
+            }
+        } catch (AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
         }
-
-    }
-    
-    static void enableVersioningOnBucket(AmazonS3Client s3Client,
-            String bucketName) {
-        BucketVersioningConfiguration config = new BucketVersioningConfiguration()
-                .withStatus(BucketVersioningConfiguration.ENABLED);
-        SetBucketVersioningConfigurationRequest setBucketVersioningConfigurationRequest = new SetBucketVersioningConfigurationRequest(
-                bucketName, config);
-        s3Client.setBucketVersioningConfiguration(setBucketVersioningConfigurationRequest);
-    }
-    
-    static String putAnObject(String keyName) {
-        String content = "This is the content body!";
-        String key = "ObjectToDelete-" + new Random().nextInt();
-        ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setHeader("Subject", "Content-As-Object");
-        metadata.setHeader("Content-Length", content.length());
-        PutObjectRequest request = new PutObjectRequest(bucketName, key,
-                new ByteArrayInputStream(content.getBytes()), metadata)
-                .withCannedAcl(CannedAccessControlList.AuthenticatedRead);
-        PutObjectResult response = s3Client.putObject(request);
-        return response.getVersionId();
     }
 }
 ```

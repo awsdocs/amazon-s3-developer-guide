@@ -1,3 +1,0 @@
-# Return Code for Lost Data<a name="RtnCodeLostData"></a>
-
-If Amazon S3 detects that an object has been lost, any subsequent `GET`, or `HEAD` operations, or `PUT Object copy` operation that uses the lost object as the source object, will result in a `405 Method Not Allowed` error\. Once an object is marked lost, Amazon S3 will never be able to recover the object\. In this situation, you can either delete the key, or upload a copy of the object\.

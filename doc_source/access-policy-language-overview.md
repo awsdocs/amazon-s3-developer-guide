@@ -1,6 +1,6 @@
 # Access Policy Language Overview<a name="access-policy-language-overview"></a>
 
-The topics in this section describe the basic elements used in bucket and user policies as used in Amazon S3\. For complete policy language information, see the [Overview of IAM Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) and the [AWS IAM Policy Reference](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) topics in the *IAM User Guide*\.
+The topics in this section describe the basic elements used in bucket and user policies as used in Amazon S3\. For complete policy language information, see the [Overview of IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) and the [AWS IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) topics in the *IAM User Guide*\.
 
 **Note**  
 Bucket policies are limited to 20 KB in size\.
@@ -11,7 +11,7 @@ In its most basic sense, a policy contains the following elements:
 + **Resources** – Buckets and objects are the Amazon S3 resources for which you can allow or deny permissions\. In a policy, you use the Amazon Resource Name \(ARN\) to identify the resource\. 
 + **Actions** – For each resource, Amazon S3 supports a set of operations\. You identify resource operations that you will allow \(or deny\) by using action keywords \(see [Specifying Permissions in a Policy](using-with-s3-actions.md)\)\. 
 
-  For example, the `s3:ListBucket` permission allows the user permission to the Amazon S3 [GET Bucket \(List Objects\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html) operation\. 
+  For example, the `s3:ListBucket` permission allows the user permission to the Amazon S3 [GET Bucket \(List Objects\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html) operation\. 
 + **Effect** – What the effect will be when the user requests the specific action—this can be either allow or deny\. 
 
   If you do not explicitly grant access to \(allow\) a resource, access is implicitly denied\. You can also explicitly deny access to a resource, which you might do in order to make sure that a user cannot access it, even if a different policy grants access\.

@@ -1,11 +1,13 @@
-# Cross\-Region Replication Examples<a name="crr-example-walkthroughs"></a>
+# Cross\-Region Replication \(CRR\) Walkthroughs<a name="crr-example-walkthroughs"></a>
 
-This section provides the following example walkthroughs to set up cross\-region replication\.
+The following examples show how to configure cross\-region replication \(CRR\) for common use cases\. The examples show setting replication configuration using the Amazon S3 console, AWS Command Line Interface \(CLI\), and AWS SDKs \(example of Java and \.NET SDK are shown\)\. For information about installing and configuring AWS CLI, see the following topics in the AWS Command Line Interface User Guide\.
++  [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) 
++  [Configuring the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) \- You will need to set up at least one profile\. You will need to set two profiles if you are exploring cross\-account scenarios\.
+
+For information about AWS SDK, see [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/) and [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)\.
 
 **Topics**
-+ [Walkthrough 1: Configure Cross\-Region Replication Where Source and Destination Buckets Are Owned by the Same AWS Account](crr-walkthrough1.md)
-+ [Walkthrough 2: Configure Cross\-Region Replication Where Source and Destination Buckets Are Owned by Different AWS Accounts](crr-walkthrough-2.md)
-+ [Cross\-Region Replication: Additional Walkthroughs](crr-addtional-walkthroughs.md)
-+ [Setting Up Cross\-Region Replication Using the Console](crr-using-console.md)
-+ [Setting Up Cross\-Region Replication Using the AWS SDK for Java](crr-using-java.md)
-+ [Setting Up Cross\-Region Replication Using the AWS SDK for \.NET](crr-using-dotnet.md)
++ [CRR Example 1: Same AWS Account](crr-walkthrough1.md)
++ [CRR Example 2: Different AWS Accounts](crr-walkthrough-2.md)
++ [CRR Example 3: Change Replica Owner](crr-walkthrough-3.md)
++ [CRR Example 4: Replicating Encrypted Objects](crr-walkthrough-4.md)

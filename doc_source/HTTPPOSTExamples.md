@@ -6,7 +6,7 @@
 
 **Note**  
 The request authentication discussed in this section is based on AWS Signature Version 2, a protocol for authenticating inbound API requests to AWS services\.   
-Amazon S3 now supports Signature Version 4, a protocol for authenticating inbound API requests to AWS services, in all AWS regions\. At this time, AWS regions created before January 30, 2014 will continue to support the previous protocol, Signature Version 2\. Any new regions after January 30, 2014 will support only Signature Version 4 and therefore all requests to those regions must be made with Signature Version 4\. For more information, see [Examples: Browser\-Based Upload using HTTP POST \(Using AWS Signature Version 4\)](http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html) in the *Amazon Simple Storage Service API Reference*\. 
+Amazon S3 now supports Signature Version 4, a protocol for authenticating inbound API requests to AWS services, in all AWS regions\. At this time, AWS regions created before January 30, 2014 will continue to support the previous protocol, Signature Version 2\. Any new regions after January 30, 2014 will support only Signature Version 4 and therefore all requests to those regions must be made with Signature Version 4\. For more information, see [Examples: Browser\-Based Upload using HTTP POST \(Using AWS Signature Version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html) in the *Amazon Simple Storage Service API Reference*\. 
 
 ## File Upload<a name="HTTPPOSTExamplesFileUpload"></a>
 

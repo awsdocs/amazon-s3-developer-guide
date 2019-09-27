@@ -14,13 +14,13 @@ You can configure an Amazon S3 bucket to function like a website\. This example 
 
 1. Create a bucket\.
 
-   For step\-by\-step instructions, see [How Do I Create an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in *Amazon Simple Storage Service Console User Guide*\.
+   For step\-by\-step instructions, see [How Do I Create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in *Amazon Simple Storage Service Console User Guide*\.
 
    For bucket naming guidelines, see [Bucket Restrictions and Limitations](BucketRestrictions.md)\. If you have a registered domain name, for additional information about bucket naming, see [Customizing Amazon S3 URLs with CNAMEs](VirtualHosting.md#VirtualHostingCustomURLs)\.
 
 1. Open the bucket **Properties** pane, choose **Static Website Hosting**, and do the following:
 
-   1. Choose **Enable website hosting**\.
+   1. Choose **Use this bucket to host a website**\.
 
    1. In the **Index Document** box, type the name of your index document\. The name is typically `index.html`\.
 
@@ -36,7 +36,7 @@ You can configure an Amazon S3 bucket to function like a website\. This example 
 
 1. Choose **Add Bucket Policy**\.
 
-1. Copy the following bucket policy, and then paste it in the Bucket Policy Editor\.
+1. To host a website, your bucket must have public read access\. It is intentional that everyone in the world will have read access to this bucket\. Copy the following bucket policy, and then paste it in the Bucket Policy Editor\. 
 
    ```
     1. {
@@ -63,14 +63,20 @@ You can configure an Amazon S3 bucket to function like a website\. This example 
 
 1. Using the console, upload the index document to your bucket\.
 
-   For instructions, see [Uploading S3 Objects](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
+   For instructions, see [Uploading S3 Objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Step 4: Testing Your Website<a name="step4-test-web-site"></a>
 
 Type the following URL in the browser, replacing *example\-bucket* with the name of your bucket and *website\-region* with the name of the AWS Region where you deployed your bucket\. For information about AWS Region names, see [Website Endpoints](WebsiteEndpoints.md) \)\. 
 
+The two general forms of an Amazon S3 website endpoint are as follows: 
+
 ```
 1. http://example-bucket.s3-website-region.amazonaws.com
+```
+
+```
+1. http://example-bucket.s3-website.region.amazonaws.com
 ```
 
 If your browser displays your `index.html` page, the website was successfully deployed\.

@@ -8,7 +8,7 @@ Bucket policies are limited to 20 KB in size\.
 You can use the [AWS Policy Generator](https://awspolicygen.s3.amazonaws.com/policygen.html) to create a bucket policy for your Amazon S3 bucket\. You can then use the generated document to set your bucket policy by using the [Amazon S3 console](https://console.aws.amazon.com/s3/home), by a number of third\-party tools, or via your application\. 
 
 **Important**  
-When testing permissions using the Amazon S3 console, you will need to grant additional permissions that the console requires—`s3:ListAllMyBuckets`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions\. For an example walkthrough that grants permissions to users and tests them using the console, see [An Example Walkthrough: Using user policies to control access to your bucket](walkthrough1.md)\.
+When testing permissions using the Amazon S3 console, you will need to grant additional permissions that the console requires—`s3:ListAllMyBuckets`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions\. For an example walkthrough that grants permissions to users and tests them using the console, see [Walkthrough: Controlling Access to a Bucket with User Policies](walkthrough1.md)\.
 
 **Topics**
 + [Granting Permissions to Multiple Accounts with Added Conditions](#example-bucket-policies-use-case-1)
@@ -69,7 +69,7 @@ The following example grants permissions to any user to perform any Amazon S3 op
 
 The condition in this statement identifies the 54\.240\.143\.\* range of allowed Internet Protocol version 4 \(IPv4\) IP addresses, with one exception: 54\.240\.143\.188\.
 
-The `Condition` block uses the `IpAddress` and `NotIpAddress` conditions and the `aws:SourceIp` condition key, which is an AWS\-wide condition key\. For more information about these condition keys, see [Specifying Conditions in a Policy](amazon-s3-policy-keys.md)\. The `aws:sourceIp` IPv4 values use the standard CIDR notation\. For more information, see [ IP Address Condition Operators](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_IPAddress) in the *IAM User Guide*\. 
+The `Condition` block uses the `IpAddress` and `NotIpAddress` conditions and the `aws:SourceIp` condition key, which is an AWS\-wide condition key\. For more information about these condition keys, see [Specifying Conditions in a Policy](amazon-s3-policy-keys.md)\. The `aws:SourceIp` IPv4 values use the standard CIDR notation\. For more information, see [ IP Address Condition Operators](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_IPAddress) in the *IAM User Guide*\. 
 
 ```
  1. {
@@ -97,7 +97,7 @@ When you start using IPv6 addresses, we recommend that you update all of your or
 
 The following example bucket policy shows how to mix IPv4 and IPv6 address ranges to cover all of your organization's valid IP addresses\. The example policy would allow access to the example IP addresses `54.240.143.1` and `2001:DB8:1234:5678::1` and would deny access to the addresses `54.240.143.129` and `2001:DB8:1234:5678:ABCD::1`\.
 
-The IPv6 values for `aws:sourceIp` must be in standard CIDR format\. For IPv6 we support using :: to represent a range of 0s, for example, 2032001:DB8:1234:5678::/64\. For more information, see [ IP Address Condition Operators](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_IPAddress) in the *IAM User Guide*\.
+The IPv6 values for `aws:SourceIp` must be in standard CIDR format\. For IPv6 we support using :: to represent a range of 0s, for example, 2032001:DB8:1234:5678::/64\. For more information, see [ IP Address Condition Operators](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_IPAddress) in the *IAM User Guide*\.
 
 ```
  1. {
@@ -131,7 +131,7 @@ The IPv6 values for `aws:sourceIp` must be in standard CIDR format\. For IPv6 we
 
 ## Restricting Access to a Specific HTTP Referrer<a name="example-bucket-policies-use-case-4"></a>
 
-Suppose you have a website with domain name \(`www.example.com` or `example.com`\) with links to photos and videos stored in your S3 bucket, `examplebucket`\. By default, all the S3 resources are private, so only the AWS account that created the resources can access them\. To allow read access to these objects from your website, you can add a bucket policy that allows `s3:GetObject` permission with a condition, using the `aws:referer` key, that the get request must originate from specific webpages\. The following policy specifies the `StringLike` condition with the `aws:Referer` condition key\.
+Suppose you have a website with domain name \(`www.example.com` or `example.com`\) with links to photos and videos stored in your S3 bucket, `examplebucket`\. By default, all the S3 resources are private, so only the AWS account that created the resources can access them\. To allow read access to these objects from your website, you can add a bucket policy that allows `s3:GetObject` permission with a condition, using the `aws:Referer` key, that the get request must originate from specific webpages\. The following policy specifies the `StringLike` condition with the `aws:Referer` condition key\.
 
 ```
  1. {
@@ -155,6 +155,9 @@ Suppose you have a website with domain name \(`www.example.com` or `example.com`
 Make sure the browsers you use include the http `referer` header in the request\.
 
 You can further secure access to objects in the `examplebucket` bucket by adding explicit deny to the bucket policy as shown in the following example\. Explicit deny supersedes any permission you might grant to objects in the `examplebucket` bucket using other means such as ACLs or user policies\.
+
+**Important**  
+Be aware that this example will prevent all users \(including the root user\) from performing all Amazon S3 actions, including managing bucket policies\. Consider adding a third `Sid` that grants the root user `s3:*` actions\. 
 
 ```
 {
@@ -187,7 +190,7 @@ You can further secure access to objects in the `examplebucket` bucket by adding
 
 ## Granting Permission to an Amazon CloudFront Origin Identity<a name="example-bucket-policies-use-case-6"></a>
 
-The following example bucket policy grants a CloudFront Origin Identity permission to get \(list\) all objects in your Amazon S3 bucket\. The CloudFront Origin Identity is used to enable the CloudFront private content feature\. The policy uses the CanonicalUser prefix, instead of AWS, to specify a Canonical User ID\. To learn more about CloudFront support for serving private content, go to the [Serving Private Content](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) topic in the *Amazon CloudFront Developer Guide*\. You must specify the canonical user ID for your CloudFront distribution's origin access identity\. For instructions about finding the canonical user ID, see [Specifying a Principal in a Policy](s3-bucket-user-policy-specifying-principal-intro.md)\.
+The following example bucket policy grants a CloudFront Origin Identity permission to get \(list\) all objects in your Amazon S3 bucket\. The CloudFront Origin Identity is used to enable the CloudFront private content feature\. The policy uses the CanonicalUser prefix, instead of AWS, to specify a Canonical User ID\. To learn more about CloudFront support for serving private content, go to the [Serving Private Content](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) topic in the *Amazon CloudFront Developer Guide*\. You must specify the canonical user ID for your CloudFront distribution's origin access identity\. For instructions about finding the canonical user ID, see [Specifying a Principal in a Policy](s3-bucket-user-policy-specifying-principal-intro.md)\.
 
 ```
  1. {
@@ -197,9 +200,9 @@ The following example bucket policy grants a CloudFront Origin Identity permissi
  5.      {
  6.        "Sid":" Grant a CloudFront Origin Identity access to support private content",
  7.        "Effect":"Allow",
- 8.        "Principal":{"CanonicalUser":"79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be"},
+ 8.        "Principal":{"CanonicalUser":"CloudFront Origin Identity Canonical User ID"},
  9.        "Action":"s3:GetObject",
-10.        "Resource":"arn:aws:s3:::example-bucket/*"
+10.        "Resource":"arn:aws:s3:::examplebucket/*"
 11.      }
 12.    ]
 13. }
@@ -211,7 +214,7 @@ Amazon S3 supports MFA\-protected API access, a feature that can enforce multi\-
 
 You can enforce the MFA authentication requirement using the `aws:MultiFactorAuthAge` key in a bucket policy\. IAM users can access Amazon S3 resources by using temporary credentials issued by the AWS Security Token Service \(STS\)\. You provide the MFA code at the time of the STS request\. 
 
-When Amazon S3 receives a request with MFA authentication, the `aws:MultiFactorAuthAge` key provides a numeric value indicating how long ago \(in seconds\) the temporary credential was created\. If the temporary credential provided in the request was not created using an MFA device, this key value is null \(absent\)\. In a bucket policy, you can add a condition to check this value, as shown in the following example bucket policy\. The policy denies any Amazon S3 operation on the `/taxdocuments` folder in the `examplebucket` bucket if the request is not MFA authenticated\. To learn more about MFA authentication, see [Using Multi\-Factor Authentication \(MFA\) in AWS](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
+When Amazon S3 receives a request with MFA authentication, the `aws:MultiFactorAuthAge` key provides a numeric value indicating how long ago \(in seconds\) the temporary credential was created\. If the temporary credential provided in the request was not created using an MFA device, this key value is null \(absent\)\. In a bucket policy, you can add a condition to check this value, as shown in the following example bucket policy\. The policy denies any Amazon S3 operation on the `/taxdocuments` folder in the `examplebucket` bucket if the request is not MFA authenticated\. To learn more about MFA authentication, see [Using Multi\-Factor Authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
 
 ```
 {

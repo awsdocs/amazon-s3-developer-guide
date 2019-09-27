@@ -14,7 +14,7 @@ If you enable Requester Pays on a bucket, anonymous access to that bucket is not
 
 You must authenticate all requests involving Requester Pays buckets\. The request authentication enables Amazon S3 to identify and charge the requester for their use of the Requester Pays bucket\. 
 
-When the requester assumes an AWS Identity and Access Management \(IAM\) role prior to making their request, the account to which the role belongs is charged for the request\. For more information about IAM roles, see [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. 
+When the requester assumes an AWS Identity and Access Management \(IAM\) role prior to making their request, the account to which the role belongs is charged for the request\. For more information about IAM roles, see [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. 
 
 After you configure a bucket to be a Requester Pays bucket, requesters must include `x-amz-request-payer` in their requests either in the header, for POST, GET and HEAD requests, or as a parameter in a REST request to show that they understand that they will be charged for the request and the data download\.
 

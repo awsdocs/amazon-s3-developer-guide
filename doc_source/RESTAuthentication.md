@@ -13,7 +13,7 @@
 + [Query String Request Authentication Alternative](#RESTAuthenticationQueryStringAuth)
 
 **Note**  
-This topic explains authenticating requests using Signature Version 2\. Amazon S3 now supports the latest Signature Version 4\. This latest signature version is supported in all regions and any new regions after January 30, 2014 will support only Signature Version 4\. For more information, go to [Authenticating Requests \(AWS Signature Version 4\)](http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html) in the *Amazon Simple Storage Service API Reference*\.
+This topic explains authenticating requests using Signature Version 2\. Amazon S3 now supports the latest Signature Version 4\. This latest signature version is supported in all regions and any new regions after January 30, 2014 will support only Signature Version 4\. For more information, go to [Authenticating Requests \(AWS Signature Version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html) in the *Amazon Simple Storage Service API Reference*\.
 
  Authentication is the process of proving your identity to the system\. Identity is an important factor in Amazon S3 access control decisions\. Requests are allowed or denied in part based on the identity of the requester\. For example, the right to create buckets is reserved for registered developers and \(by default\) the right to create objects in a bucket is reserved for the owner of the bucket in question\. As a developer, you'll be making requests that invoke these privileges, so you'll need to prove your identity to the system by authenticating your requests\. This section shows you how\. 
 
@@ -38,7 +38,7 @@ This topic explains authenticating requests using Signature Version 2\. Amazon S
 
 If you are signing your request using temporary security credentials \(see [Making Requests](MakingRequests.md)\), you must include the corresponding security token in your request by adding the `x-amz-security-token` header\. 
 
-When you obtain temporary security credentials using the AWS Security Token Service API, the response includes temporary security credentials and a session token\. You provide the session token value in the `x-amz-security-token` header when you send requests to Amazon S3\. For information about the AWS Security Token Service API provided by IAM, go to [Action](http://docs.aws.amazon.com/STS/latest/APIReference/API_Operations.html) in the *AWS Security Token Service API Reference Guide *\.
+When you obtain temporary security credentials using the AWS Security Token Service API, the response includes temporary security credentials and a session token\. You provide the session token value in the `x-amz-security-token` header when you send requests to Amazon S3\. For information about the AWS Security Token Service API provided by IAM, go to [Action](https://docs.aws.amazon.com/STS/latest/APIReference/API_Operations.html) in the *AWS Security Token Service API Reference Guide *\.
 
 ## The Authentication Header<a name="ConstructingTheAuthenticationHeader"></a>
 
@@ -57,7 +57,7 @@ Following is pseudogrammar that illustrates the construction of the `Authorizati
 ```
  1. Authorization = "AWS" + " " + AWSAccessKeyId + ":" + Signature;
  2. 
- 3. Signature = Base64( HMAC-SHA1( YourSecretAccessKeyID, UTF-8-Encoding-Of( StringToSign ) ) );
+ 3. Signature = Base64( HMAC-SHA1( YourSecretAccessKey, UTF-8-Encoding-Of( StringToSign ) ) );
  4. 
  5. StringToSign = HTTP-Verb + "\n" +
  6. 	Content-MD5 + "\n" +
@@ -73,7 +73,7 @@ Following is pseudogrammar that illustrates the construction of the `Authorizati
 16. CanonicalizedAmzHeaders = <described below>
 ```
 
- HMAC\-SHA1 is an algorithm defined by [ RFC 2104 \- Keyed\-Hashing for Message Authentication ](http://www.ietf.org/rfc/rfc2104.txt)\. The algorithm takes as input two byte\-strings, a key and a message\. For Amazon S3 request authentication, use your AWS secret access key \(`YourSecretAccessKeyID`\) as the key, and the UTF\-8 encoding of the `StringToSign` as the message\. The output of HMAC\-SHA1 is also a byte string, called the digest\. The `Signature` request parameter is constructed by Base64 encoding this digest\. 
+ HMAC\-SHA1 is an algorithm defined by [ RFC 2104 \- Keyed\-Hashing for Message Authentication ](http://www.ietf.org/rfc/rfc2104.txt)\. The algorithm takes as input two byte\-strings, a key and a message\. For Amazon S3 request authentication, use your AWS secret access key \(`YourSecretAccessKey`\) as the key, and the UTF\-8 encoding of the `StringToSign` as the message\. The output of HMAC\-SHA1 is also a byte string, called the digest\. The `Signature` request parameter is constructed by Base64 encoding this digest\. 
 
 ## Request Canonicalization for Signing<a name="RESTAuthenticationRequestCanonicalization"></a>
 
@@ -90,8 +90,8 @@ Following is pseudogrammar that illustrates the construction of the `Authorizati
 | --- |--- |
 |  1  |  Start with an empty string \(`""`\)\.  | 
 |  2  |  If the request specifies a bucket using the HTTP Host header \(virtual hosted\-style\), append the bucket name preceded by a `"/"` \(e\.g\., "/bucketname"\)\. For path\-style requests and requests that don't address a bucket, do nothing\. For more information about virtual hosted\-style requests, see [Virtual Hosting of Buckets](VirtualHosting.md)\.  For a virtual hosted\-style request "https://johnsmith\.s3\.amazonaws\.com/photos/puppy\.jpg", the `CanonicalizedResource` is "/johnsmith"\.  For the path\-style request, "https://s3\.amazonaws\.com/johnsmith/photos/puppy\.jpg", the `CanonicalizedResource` is ""\.  | 
-|  3  |  Append the path part of the un\-decoded HTTP Request\-URI, up\-to but not including the query string\. For a virtual hosted\-style request "https://johnsmith\.s3\.amazonaws\.com/photos/puppy\.jpg", the `CanonicalizedResource` is "/johnsmith/photos/puppy\.jpg"\. For a path\-style request, "https://s3\.amazonaws\.com/johnsmith/photos/puppy\.jpg", the `CanonicalizedResource` is "/johnsmith/photos/puppy\.jpg"\. At this point, the `CanonicalizedResource` is the same for both the virtual hosted\-style and path\-style request\. For a request that does not address a bucket, such as [GET Service](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html), append "/"\.  | 
-|  4  |  If the request addresses a subresource, such as `?versioning`, `?location`, `?acl`, `?torrent`, `?lifecycle`, or `?versionid`, append the subresource, its value if it has one, and the question mark\. Note that in case of multiple subresources, subresources must be lexicographically sorted by subresource name and separated by '&', e\.g\., ?acl&versionId=*value*\.  The subresources that must be included when constructing the CanonicalizedResource Element are acl, lifecycle, location, logging, notification, partNumber, policy, requestPayment, torrent, uploadId, uploads, versionId, versioning, versions, and website\.  If the request specifies query string parameters overriding the response header values \(see [Get Object](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html)\), append the query string parameters and their values\. When signing, you do not encode these values; however, when making the request, you must encode these parameter values\. The query string parameters in a GET request include `response-content-type`, `response-content-language`, `response-expires`, `response-cache-control`, `response-content-disposition`, and `response-content-encoding`\. The `delete` query string parameter must be included when you create the CanonicalizedResource for a multi\-object Delete request\.  | 
+|  3  |  Append the path part of the un\-decoded HTTP Request\-URI, up\-to but not including the query string\. For a virtual hosted\-style request "https://johnsmith\.s3\.amazonaws\.com/photos/puppy\.jpg", the `CanonicalizedResource` is "/johnsmith/photos/puppy\.jpg"\. For a path\-style request, "https://s3\.amazonaws\.com/johnsmith/photos/puppy\.jpg", the `CanonicalizedResource` is "/johnsmith/photos/puppy\.jpg"\. At this point, the `CanonicalizedResource` is the same for both the virtual hosted\-style and path\-style request\. For a request that does not address a bucket, such as [GET Service](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html), append "/"\.  | 
+|  4  |  If the request addresses a subresource, such as `?versioning`, `?location`, `?acl`, `?torrent`, `?lifecycle`, or `?versionid`, append the subresource, its value if it has one, and the question mark\. Note that in case of multiple subresources, subresources must be lexicographically sorted by subresource name and separated by '&', e\.g\., ?acl&versionId=*value*\.  The subresources that must be included when constructing the CanonicalizedResource Element are acl, lifecycle, location, logging, notification, partNumber, policy, requestPayment, torrent, uploadId, uploads, versionId, versioning, versions, and website\.  If the request specifies query string parameters overriding the response header values \(see [Get Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html)\), append the query string parameters and their values\. When signing, you do not encode these values; however, when making the request, you must encode these parameter values\. The query string parameters in a GET request include `response-content-type`, `response-content-language`, `response-expires`, `response-cache-control`, `response-content-disposition`, and `response-content-encoding`\. The `delete` query string parameter must be included when you create the CanonicalizedResource for a multi\-object Delete request\.  | 
 
 Elements of the CanonicalizedResource that come from the HTTP Request\-URI should be signed literally as they appear in the HTTP request, including URL\-Encoding meta characters\. 
 
@@ -235,10 +235,10 @@ Some toolkits silently insert headers that you do not know about beforehand, suc
 
 ## Query String Request Authentication Alternative<a name="RESTAuthenticationQueryStringAuth"></a>
 
-You can authenticate certain types of requests by passing the required information as query\-string parameters instead of using the `Authorization` HTTP header\. This is useful for enabling direct third\-party browser access to your private Amazon S3 data without proxying the request\. The idea is to construct a "pre\-signed" request and encode it as a URL that an end\-user's browser can retrieve\. Additionally, you can limit a pre\-signed request by specifying an expiration time\. 
+You can authenticate certain types of requests by passing the required information as query\-string parameters instead of using the `Authorization` HTTP header\. This is useful for enabling direct third\-party browser access to your private Amazon S3 data without proxying the request\. The idea is to construct a "presigned" request and encode it as a URL that an end\-user's browser can retrieve\. Additionally, you can limit a presigned request by specifying an expiration time\. 
 
 **Note**  
-For examples of using the AWS SDKs to generating pre\-signed URLs, see [Share an Object with Others](ShareObjectPreSignedURL.md)\. 
+For examples of using the AWS SDKs to generating presigned URLs, see [Share an Object with Others](ShareObjectPreSignedURL.md)\. 
 
 ### Creating a Signature<a name="CreatingASignature"></a>
 
@@ -263,7 +263,7 @@ The query string request authentication method doesn't require any special HTTP 
 The query string request authentication method differs slightly from the ordinary method but only in the format of the `Signature` request parameter and the `StringToSign` element\. Following is pseudo\-grammar that illustrates the query string request authentication method\. 
 
 ```
-1. Signature = URL-Encode( Base64( HMAC-SHA1( YourSecretAccessKeyID, UTF-8-Encoding-Of( StringToSign ) ) ) );
+1. Signature = URL-Encode( Base64( HMAC-SHA1( YourSecretAccessKey, UTF-8-Encoding-Of( StringToSign ) ) ) );
 2. 
 3. StringToSign = HTTP-VERB + "\n" +
 4.     Content-MD5 + "\n" +
@@ -273,7 +273,7 @@ The query string request authentication method differs slightly from the ordinar
 8.     CanonicalizedResource;
 ```
 
-`YourSecretAccessKeyID` is the AWS secret access key ID that Amazon assigns to you when you sign up to be an Amazon Web Service developer\. Notice how the `Signature` is URL\-Encoded to make it suitable for placement in the query string\. Note also that in `StringToSign`, the HTTP `Date` positional element has been replaced with `Expires`\. The `CanonicalizedAmzHeaders` and `CanonicalizedResource` are the same\. 
+`YourSecretAccessKey` is the AWS secret access key ID that Amazon assigns to you when you sign up to be an Amazon Web Service developer\. Notice how the `Signature` is URL\-Encoded to make it suitable for placement in the query string\. Note also that in `StringToSign`, the HTTP `Date` positional element has been replaced with `Expires`\. The `CanonicalizedAmzHeaders` and `CanonicalizedResource` are the same\. 
 
 **Note**  
 In the query string authentication method, you do not use the `Date` or the `x-amz-date request` header when calculating the string to sign\.

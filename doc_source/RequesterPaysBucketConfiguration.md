@@ -37,4 +37,4 @@ You can set Requester Pays only at the bucket level; you cannot set Requester Pa
 You can configure a bucket to be `BucketOwner` or `Requester` at any time\. Realize, however, that there might be a small delay, on the order of minutes, before the new configuration value takes effect\.
 
 **Note**  
-Bucket owners who give out pre\-signed URLs should think twice before configuring a bucket to be Requester Pays, especially if the URL has a very long lifetime\. The bucket owner is charged each time the requester uses a pre\-signed URL that uses the bucket owner's credentials\. 
+Bucket owners who give out presigned URLs should think twice before configuring a bucket to be Requester Pays, especially if the URL has a very long lifetime\. The bucket owner is charged each time the requester uses a presigned URL that uses the bucket owner's credentials\. 

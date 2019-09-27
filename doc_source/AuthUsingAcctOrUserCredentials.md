@@ -5,7 +5,7 @@ You can use your AWS account or IAM user security credentials to send authentica
 **Topics**
 + [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for Java](AuthUsingAcctOrUserCredJava.md)
 + [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for \.NET](AuthUsingAcctOrUserCredDotNet.md)
-+ [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for PHP](AuthUsingAcctOrUserCredPHP.md)
++ [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for PHP](AuthUsingAcctOrUserCredPHP3.md)
 + [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for Ruby](AuthUsingAcctOrUserCredRuby.md)
 
 Each of these AWS SDKs uses an SDK\-specific credentials provider chain to find and use credentials and perform actions on behalf of the credentials owner\. What all these credentials provider chains have in common is that they all look for your local AWS credentials file\. 
@@ -16,7 +16,7 @@ The easiest way to configure credentials for your AWS SDKs is to use an AWS cred
 
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-1. Create a new user with permissions limited to the services and actions that you want your code to have access to\. For more information about creating a new IAM user, see [Creating IAM Users \(Console\)](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console), and follow the instructions through step 8\.
+1. Create a new user with permissions limited to the services and actions that you want your code to have access to\. For more information about creating a new IAM user, see [Creating IAM Users \(Console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console), and follow the instructions through step 8\.
 
 1. Choose **Download \.csv** to save a local copy of your AWS credentials\.
 

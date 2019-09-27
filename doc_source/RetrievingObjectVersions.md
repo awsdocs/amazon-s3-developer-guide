@@ -10,7 +10,7 @@ To retrieve a specific version, you have to specify its version ID\. The followi
 
 ## Using the Console<a name="retrieve-obj-versioning-enabled-console"></a>
 
-For instructions see, [How Do I See the Versions of an S3 Object?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/view-object-versions.html) in the Amazon Simple Storage Service Console User Guide\.
+For instructions see, [How Do I See the Versions of an S3 Object?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/view-object-versions.html) in the Amazon Simple Storage Service Console User Guide\.
 
 ## Using the AWS SDKs<a name="retrieve-obj-version-sdks"></a>
 

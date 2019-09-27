@@ -1,6 +1,6 @@
 # Versioned Object Permissions<a name="VersionedObjectPermissionsandACLs"></a>
 
-Permissions are set at the version level\. Each version has its own object owner; an AWS account that creates the object version is the owner\. So, you can set different permissions for different versions of the same object\. To do so, you must specify the version ID of the object whose permissions you want to set in a `PUT Object versionId acl` request\. For a detailed description and instructions on using ACLs, see [Managing Access Permissions to Your Amazon S3 Resources](s3-access-control.md)\.
+Permissions are set at the version level\. Each version has its own object owner; an AWS account that creates the object version is the owner\. So, you can set different permissions for different versions of the same object\. To do so, you must specify the version ID of the object whose permissions you want to set in a `PUT Object versionId acl` request\. For a detailed description and instructions on using ACLs, see [Identity and Access Management in Amazon S3](s3-access-control.md)\.
 
 **Example Setting Permissions for an Object Version**  
 The following request sets the permission of the grantee, `BucketOwner@amazon.com`, to `FULL_CONTROL` on the key, `my-image.jpg`, version ID, 3HL4kqtJvjVBH40Nrjfkd\.  
@@ -41,4 +41,4 @@ In the following example, Amazon S3 returns the permissions for the key, `my-ima
 4. Authorization: AWS AKIAIOSFODNN7EXAMPLE:0RQf4/cRonhpaBX5sCYVf1bNRuU
 ```
 
-For more information, see [GET Object acl](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETacl.html)\.
+For more information, see [GET Object acl](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETacl.html)\.

@@ -1,103 +1,39 @@
 # Managing Websites with the AWS SDK for \.NET<a name="ConfigWebSiteDotNet"></a>
 
-The following tasks guide you through using the \.NET classes to manage website configuration on your bucket\. For more information about the Amazon S3 website feature, see [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\.
-
-
-**Managing Bucket Website Configuration**  
-
-|  |  | 
-| --- |--- |
-|  1  |  Create an instance of the `AmazonS3Client` class\.   | 
-|  2  |  To add website configuration to a bucket, execute the `PutBucketWebsite` method\. You need to provide the bucket name and the website configuration information, including the index document and the error document names\. You must provide the index document, but the error document is optional\. You provide this information by creating a `PutBucketWebsiteRequest` object\. To retrieve website configuration, execute the `GetBucketWebsite` method by providing the bucket name\. To delete your bucket website configuration, execute the `DeleteBucketWebsite` method by providing the bucket name\. After you remove the website configuration, the bucket is no longer available from the website endpoint\. For more information, see [Website Endpoints](WebsiteEndpoints.md)\.   | 
-
-The following C\# code sample demonstrates the preceding tasks\.
-
-**Example**  
-
-```
- 1. static IAmazonS3 client;
- 2. client = new AmazonS3Client(Amazon.RegionEndpoint.USWest2);
- 3. 
- 4. // Add website configuration.
- 5. PutBucketWebsiteRequest putRequest = new PutBucketWebsiteRequest()
- 6. {
- 7.     BucketName = bucketName,
- 8.     WebsiteConfiguration = new WebsiteConfiguration()
- 9.     {
-10.         IndexDocumentSuffix = indexDocumentSuffix,
-11.         ErrorDocument = errorDocument
-12.     }
-13. };
-14. client.PutBucketWebsite(putRequest);
-15. 
-16. // Get bucket website configuration.
-17. GetBucketWebsiteRequest getRequest = new GetBucketWebsiteRequest()
-18. {
-19.     BucketName = bucketName
-20. };
-21. 
-22. GetBucketWebsiteResponse getResponse = client.GetBucketWebsite(getRequest);
-23. 
-24. // Print configuration data.
-25. Console.WriteLine("Index document: {0}", getResponse.WebsiteConfiguration.IndexDocumentSuffix);
-26. Console.WriteLine("Error document: {0}", getResponse.WebsiteConfiguration.ErrorDocument);
-27. 
-28. // Delete website configuration.
-29. DeleteBucketWebsiteRequest deleteRequest = new DeleteBucketWebsiteRequest()
-30. {
-31.     BucketName = bucketName
-32. };        
-33. client.DeleteBucketWebsite(deleteRequest);
-```
+The following example shows how to use the AWS SDK for \.NET to manage website configuration for a bucket\. To add a website configuration to a bucket, you provide a bucket name and a website configuration\. The website configuration must include an index document and can contain an optional error document\. These documents must be stored in the bucket\. For more information, see [PUT Bucket website](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html)\. For more information about the Amazon S3 website feature, see [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\. 
 
 **Example**  
 The following C\# code example adds a website configuration to the specified bucket\. The configuration specifies both the index document and the error document names\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```
-using System;
-using System.Configuration;
-using System.Collections.Specialized;
 using Amazon.S3;
 using Amazon.S3.Model;
+using System;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class AddWebsiteConfig
+    class WebsiteConfigTest
     {
-        static string bucketName          = "*** Provide existing bucket name ***";
-        static string indexDocumentSuffix = "*** Provide index document name ***";
-        static string errorDocument       = "*** Provide error document name ***";
-        static IAmazonS3 client;
-
-        public static void Main(string[] args)
+        private const string bucketName = "*** bucket name ***";
+        private const string indexDocumentSuffix = "*** index object key ***"; // For example, index.html.
+        private const string errorDocument = "*** error object key ***"; // For example, error.html.
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 client;
+        public static void Main()
         {
-            using (client = new AmazonS3Client(Amazon.RegionEndpoint.USWest2))
-            {
-                Console.WriteLine("Adding website configuration");
-                AddWebsiteConfiguration(bucketName, indexDocumentSuffix, errorDocument); 
-            }
-            
-            // Get bucket website configuration.
-            GetBucketWebsiteRequest getRequest = new GetBucketWebsiteRequest()
-            {
-                BucketName = bucketName
-            };
-
-            GetBucketWebsiteResponse getResponse = client.GetBucketWebsite(getRequest);
-           // Print configuration data.
-            Console.WriteLine("Index document: {0}", getResponse.WebsiteConfiguration.IndexDocumentSuffix);
-            Console.WriteLine("Error document: {0}", getResponse.WebsiteConfiguration.ErrorDocument);
-           
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            client = new AmazonS3Client(bucketRegion);
+            AddWebsiteConfigurationAsync(bucketName, indexDocumentSuffix, errorDocument).Wait();
         }
 
-        static void AddWebsiteConfiguration(string bucketName,
+        static async Task AddWebsiteConfigurationAsync(string bucketName,
                                             string indexDocumentSuffix,
                                             string errorDocument)
         {
             try
             {
+                // 1. Put the website configuration.
                 PutBucketWebsiteRequest putRequest = new PutBucketWebsiteRequest()
                 {
                     BucketName = bucketName,
@@ -107,23 +43,24 @@ namespace s3.amazon.com.docsamples
                         ErrorDocument = errorDocument
                     }
                 };
-                client.PutBucketWebsite(putRequest);
+                PutBucketWebsiteResponse response = await client.PutBucketWebsiteAsync(putRequest);
+
+                // 2. Get the website configuration.
+                GetBucketWebsiteRequest getRequest = new GetBucketWebsiteRequest()
+                {
+                    BucketName = bucketName
+                };
+                GetBucketWebsiteResponse getResponse = await client.GetBucketWebsiteAsync(getRequest);
+                Console.WriteLine("Index document: {0}", getResponse.WebsiteConfiguration.IndexDocumentSuffix);
+                Console.WriteLine("Error document: {0}", getResponse.WebsiteConfiguration.ErrorDocument);
             }
-            catch (AmazonS3Exception amazonS3Exception)
+            catch (AmazonS3Exception e)
             {
-                if (amazonS3Exception.ErrorCode != null &&
-                    (amazonS3Exception.ErrorCode.Equals("InvalidAccessKeyId")
-                    || amazonS3Exception.ErrorCode.Equals("InvalidSecurity")))
-                {
-                    Console.WriteLine("Check the provided AWS Credentials.");
-                    Console.WriteLine("Sign up for service at http://aws.amazon.com/s3");
-                }
-                else
-                {
-                    Console.WriteLine(
-                        "Error:{0}, occurred when adding website configuration. Message:'{1}",
-                        amazonS3Exception.ErrorCode, amazonS3Exception.Message);
-                }
+                Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
             }
         }
     }

@@ -1,83 +1,131 @@
-# Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the \.NET SDK<a name="sse-c-using-dot-net-sdk"></a>
+# Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the AWS SDK for \.NET<a name="sse-c-using-dot-net-sdk"></a>
 
-The following C\# code example illustrates server\-side encryption with customer\-provided keys \(SSE\-C\) \(see [Protecting Data Using Server\-Side Encryption with Customer\-Provided Encryption Keys \(SSE\-C\)](ServerSideEncryptionCustomerKeys.md)\)\. The example performs the following operations, each operation shows how you specify SSE\-C–related headers in the request:
-+ **Put object** – upload an object requesting server\-side encryption using customer\-provided encryption keys\.
-+ **Get object** – download the object uploaded in the previous step\. It shows that the request must provide the same encryption information for Amazon S3 to decrypt the object so that it can return it to you\.
-+ **Get object metadata** – The request shows that the same encryption information you specified when creating the object is required to retrieve the object metadata\.
-+ **Copy object** – This example makes a copy of the previously uploaded object\. Because the source object is stored using SSE\-C, you must provide encryption information in your copy request\. By default, the object copy will not be encrypted\. But in this example, you request that Amazon S3 store the object copy encrypted using SSE\-C, and therefore you provide encryption\-related information for the target as well\. 
+The following C\# example shows how server\-side encryption with customer\-provided keys \(SSE\-C\) works\. The example performs the following operations\. Each operation shows how to specify SSE\-C–related headers in the request\.
++ **Put object**—Uploads an object and requests server\-side encryption using customer\-provided encryption keys\. 
++ **Get object**—Downloads the object that was uploaded in the previous step\. The request provides the same encryption information that was provided when the object was uploaded\. Amazon S3 needs this information to decrypt the object and return it to you\.
++ **Get object metadata**—Provides the same encryption information used when the object was created to retrieve the object's metadata\.
++ **Copy object**—Makes a copy of the uploaded object\. Because the source object is stored using SSE\-C, the copy request must provide encryption information\. By default, Amazon S3 does not encrypt a copy of an object\. The code directs Amazon S3 to encrypt the copied object using SSE\-C by providing encryption\-related information for the target\. It also stores the target\.
 
 **Note**  
-When using multipart upload API to upload large objects, you provide the same encryption information that you provide in your request as shown in the following example\. For multipart upload \.NET SDK examples, see [Using the AWS \.NET SDK for Multipart Upload \(High\-Level API\)](usingHLmpuDotNet.md) and [Using the AWS \.NET SDK for Multipart Upload \(Low\-Level API\)](usingLLmpuDotNet.md)\.
+For examples of uploading large objects using the multipart upload API, see [Using the AWS SDK for \.NET for Multipart Upload \(High\-Level API\)](usingHLmpuDotNet.md) and [Using the AWS SDK for \.NET for Multipart Upload \(Low\-Level API\)](usingLLmpuDotNet.md)\.
 
-For information about how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\. 
+For information about SSE\-C, see [Protecting Data Using Server\-Side Encryption with Customer\-Provided Encryption Keys \(SSE\-C\)](ServerSideEncryptionCustomerKeys.md)\)\. For information about creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\. 
 
 **Example**  
 
 ```
+using Amazon.S3;
+using Amazon.S3.Model;
 using System;
 using System.IO;
 using System.Security.Cryptography;
-using Amazon.S3;
-using Amazon.S3.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class SSEClientEncryptionKeyObjectOperations
+    class SSEClientEncryptionKeyObjectOperationsTest
     {
-        static string bucketName        = "*** bucket name ***"; 
-        static string keyName           = "*** object key name for new object ***"; 
-        static string copyTargetKeyName = "*** copy operation target object key name ***"; 
+        private const string bucketName = "*** bucket name ***"; 
+        private const string keyName = "*** key name for new object created ***"; 
+        private const string copyTargetKeyName = "*** key name for object copy ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 client;
 
-        static IAmazonS3 client;
-
-        public static void Main(string[] args)
+        public static void Main()
         {
-            using (client = new AmazonS3Client(Amazon.RegionEndpoint.USWest2))
+            client = new AmazonS3Client(bucketRegion);
+            ObjectOpsUsingClientEncryptionKeyAsync().Wait();
+        }
+        private static async Task ObjectOpsUsingClientEncryptionKeyAsync()
+        {
+            try
             {
-                try
-                {
-                    // Create encryption key.
-                    Aes aesEncryption = Aes.Create();
-                    aesEncryption.KeySize = 256;
-                    aesEncryption.GenerateKey();
-                    string base64Key = Convert.ToBase64String(aesEncryption.Key);
+                // Create an encryption key.
+                Aes aesEncryption = Aes.Create();
+                aesEncryption.KeySize = 256;
+                aesEncryption.GenerateKey();
+                string base64Key = Convert.ToBase64String(aesEncryption.Key);
 
-                    // 1. Upload object.
-                    PutObjectRequest putObjectRequest = UploadObject(base64Key);
-                    // 2. Download object (and also verify content is same as what you uploaded).
-                    DownloadObject(base64Key, putObjectRequest);
-                    // 3. Get object metadata (and also verify AES256 encryption).
-                    GetObjectMetadata(base64Key);
-                    // 4. Copy object (both source and target objects use server-side encryption with 
-                    //    customer-provided encryption key.
-                    CopyObject(aesEncryption, base64Key);
-                }
-                catch (AmazonS3Exception amazonS3Exception)
-                {
-                    if (amazonS3Exception.ErrorCode != null &&
-                        (amazonS3Exception.ErrorCode.Equals("InvalidAccessKeyId")
-                        ||
-                        amazonS3Exception.ErrorCode.Equals("InvalidSecurity")))
-                    {
-                        Console.WriteLine("Check the provided AWS Credentials.");
-                        Console.WriteLine(
-                            "For service sign up go to http://aws.amazon.com/s3");
-                    }
-                    else
-                    {
-                        Console.WriteLine(
-                            "Error occurred. Message:'{0}' when writing an object"
-                            , amazonS3Exception.Message);
-                    }
-                }
+                // 1. Upload the object.
+                PutObjectRequest putObjectRequest = await UploadObjectAsync(base64Key);
+                // 2. Download the object and verify that its contents matches what you uploaded.
+                await DownloadObjectAsync(base64Key, putObjectRequest);
+                // 3. Get object metadata and verify that the object uses AES-256 encryption.
+                await GetObjectMetadataAsync(base64Key);
+                // 4. Copy both the source and target objects using server-side encryption with 
+                //    a customer-provided encryption key.
+                await CopyObjectAsync(aesEncryption, base64Key);
             }
-
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            catch (AmazonS3Exception e)
+            {
+                Console.WriteLine("Error encountered ***. Message:'{0}' when writing an object", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
+            }
         }
 
-        private static void CopyObject(Aes aesEncryption, string base64Key)
+        private static async Task<PutObjectRequest> UploadObjectAsync(string base64Key)
+        {
+            PutObjectRequest putObjectRequest = new PutObjectRequest
+            {
+                BucketName = bucketName,
+                Key = keyName,
+                ContentBody = "sample text",
+                ServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
+                ServerSideEncryptionCustomerProvidedKey = base64Key
+            };
+            PutObjectResponse putObjectResponse = await client.PutObjectAsync(putObjectRequest);
+            return putObjectRequest;
+        }
+        private static async Task DownloadObjectAsync(string base64Key, PutObjectRequest putObjectRequest)
+        {
+            GetObjectRequest getObjectRequest = new GetObjectRequest
+            {
+                BucketName = bucketName,
+                Key = keyName,
+                // Provide encryption information for the object stored in Amazon S3.
+                ServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
+                ServerSideEncryptionCustomerProvidedKey = base64Key
+            };
+
+            using (GetObjectResponse getResponse = await client.GetObjectAsync(getObjectRequest))
+            using (StreamReader reader = new StreamReader(getResponse.ResponseStream))
+            {
+                string content = reader.ReadToEnd();
+                if (String.Compare(putObjectRequest.ContentBody, content) == 0)
+                    Console.WriteLine("Object content is same as we uploaded");
+                else
+                    Console.WriteLine("Error...Object content is not same.");
+
+                if (getResponse.ServerSideEncryptionCustomerMethod == ServerSideEncryptionCustomerMethod.AES256)
+                    Console.WriteLine("Object encryption method is AES256, same as we set");
+                else
+                    Console.WriteLine("Error...Object encryption method is not the same as AES256 we set");
+
+                // Assert.AreEqual(putObjectRequest.ContentBody, content);
+                // Assert.AreEqual(ServerSideEncryptionCustomerMethod.AES256, getResponse.ServerSideEncryptionCustomerMethod);
+            }
+        }
+        private static async Task GetObjectMetadataAsync(string base64Key)
+        {
+            GetObjectMetadataRequest getObjectMetadataRequest = new GetObjectMetadataRequest
+            {
+                BucketName = bucketName,
+                Key = keyName,
+
+                // The object stored in Amazon S3 is encrypted, so provide the necessary encryption information.
+                ServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
+                ServerSideEncryptionCustomerProvidedKey = base64Key
+            };
+
+            GetObjectMetadataResponse getObjectMetadataResponse = await client.GetObjectMetadataAsync(getObjectMetadataRequest);
+            Console.WriteLine("The object metadata show encryption method used is: {0}", getObjectMetadataResponse.ServerSideEncryptionCustomerMethod);
+            // Assert.AreEqual(ServerSideEncryptionCustomerMethod.AES256, getObjectMetadataResponse.ServerSideEncryptionCustomerMethod);
+        }
+        private static async Task CopyObjectAsync(Aes aesEncryption, string base64Key)
         {
             aesEncryption.GenerateKey();
             string copyBase64Key = Convert.ToBase64String(aesEncryption.Key);
@@ -88,64 +136,14 @@ namespace s3.amazon.com.docsamples
                 SourceKey = keyName,
                 DestinationBucket = bucketName,
                 DestinationKey = copyTargetKeyName,
-                // Source object encryption information.
+                // Information about the source object's encryption.
                 CopySourceServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
                 CopySourceServerSideEncryptionCustomerProvidedKey = base64Key,
-                // Target object encryption information.
+                // Information about the target object's encryption.
                 ServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
                 ServerSideEncryptionCustomerProvidedKey = copyBase64Key
             };
-            client.CopyObject(copyRequest);
-        }
-
-        private static void DownloadObject(string base64Key, PutObjectRequest putObjectRequest)
-        {
-            GetObjectRequest getObjectRequest = new GetObjectRequest
-            {
-                BucketName = bucketName,
-                Key = keyName,
-                // Provide encryption information of the object stored in S3.
-                ServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
-                ServerSideEncryptionCustomerProvidedKey = base64Key
-            };
-
-            using (GetObjectResponse getResponse = client.GetObject(getObjectRequest))
-            using (StreamReader reader = new StreamReader(getResponse.ResponseStream))
-            {
-                string content = reader.ReadToEnd();
-                Assert.AreEqual(putObjectRequest.ContentBody, content);
-                Assert.AreEqual(ServerSideEncryptionCustomerMethod.AES256, getResponse.ServerSideEncryptionCustomerMethod);
-            }
-        }
-
-        private static void GetObjectMetadata(string base64Key)
-        {
-            GetObjectMetadataRequest getObjectMetadataRequest = new GetObjectMetadataRequest
-            {
-                BucketName = bucketName,
-                Key = keyName,
-
-                // Object stored in S3 is encrypted. So provide necessary encryption information.
-                ServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
-                ServerSideEncryptionCustomerProvidedKey = base64Key
-            };
-
-            GetObjectMetadataResponse getObjectMetadataResponse = client.GetObjectMetadata(getObjectMetadataRequest);
-            Assert.AreEqual(ServerSideEncryptionCustomerMethod.AES256, getObjectMetadataResponse.ServerSideEncryptionCustomerMethod);
-        }
-
-        private static PutObjectRequest UploadObject(string base64Key)
-        {
-            PutObjectRequest putObjectRequest = new PutObjectRequest
-            {
-                BucketName = bucketName,
-                Key = keyName,
-                ContentBody = "sample text",
-                ServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
-                ServerSideEncryptionCustomerProvidedKey = base64Key
-            };
-            PutObjectResponse putObjectResponse = client.PutObject(putObjectRequest);
-            return putObjectRequest;
+            await client.CopyObjectAsync(copyRequest);
         }
     }
 }
@@ -153,10 +151,10 @@ namespace s3.amazon.com.docsamples
 
 ## Other Amazon S3 Operations and SSE\-C<a name="sse-c-dotnet-other-api"></a>
 
-The example in the preceding section shows how to request server\-side encryption with customer\-provided key \(SSE\-C\) in the PUT, GET, Head, and Copy operations\. This section describes other APIs that support SSE\-C\.
+The example in the preceding section shows how to request server\-side encryption with customer\-provided key \(SSE\-C\) in the PUT, GET, Head, and Copy operations\. This section describes other Amazon S3 APIs that support SSE\-C\.
 
-To upload large objects, you can use multipart upload API \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\)\. You can use either high\-level or low\-level APIs to upload large objects\. These APIs support encryption\-related headers in the request\.
-+ When using high\-level Transfer\-Utility API, you provide the encryption\-specific headers in the `TransferUtilityUploadRequest` as shown\. For code examples, see [Using the AWS \.NET SDK for Multipart Upload \(High\-Level API\)](usingHLmpuDotNet.md)\.
+To upload large objects, you can use multipart upload API \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\)\. AWS SDK for \.NET provides both high\-level or low\-level APIs to upload large objects\. These APIs support encryption\-related headers in the request\.
++ When using high\-level `Transfer-Utility `API, you provide the encryption\-specific headers in the `TransferUtilityUploadRequest` as shown\. For code examples, see [Using the AWS SDK for \.NET for Multipart Upload \(High\-Level API\)](usingHLmpuDotNet.md)\.
 
   ```
   TransferUtilityUploadRequest request = new TransferUtilityUploadRequest()
@@ -169,7 +167,7 @@ To upload large objects, you can use multipart upload API \(see [Uploading Objec
       ServerSideEncryptionCustomerProvidedKey = base64Key,
   };
   ```
-+ When using the low\-level API, you provide encryption\-related information in the initiate multipart upload request, followed by identical encryption information in the subsequent upload part requests\. You do not need to provide any encryption\-specific headers in your complete multipart upload request\. For examples, see [Using the AWS \.NET SDK for Multipart Upload \(Low\-Level API\)](usingLLmpuDotNet.md)\.
++ When using the low\-level API, you provide encryption\-related information in the initiate multipart upload request, followed by identical encryption information in the subsequent upload part requests\. You do not need to provide any encryption\-specific headers in your complete multipart upload request\. For examples, see [Using the AWS SDK for \.NET for Multipart Upload \(Low\-Level API\)](usingLLmpuDotNet.md)\.
 
   The following is a low\-level multipart upload example that makes a copy of an existing large object\. In the example, the object to be copied is stored in Amazon S3 using SSE\-C, and you want to save the target object also using SSE\-C\. In the example, you do the following:
   + Initiate a multipart upload request by providing an encryption key and related information\.
@@ -179,29 +177,45 @@ To upload large objects, you can use multipart upload API \(see [Uploading Objec
 **Example**  
 
   ```
-  using System;
-  using System.Collections.Generic;
-  using System.Security.Cryptography;
   using Amazon.S3;
   using Amazon.S3.Model;
+  using System;
+  using System.Collections.Generic;
+  using System.IO;
+  using System.Security.Cryptography;
+  using System.Threading.Tasks;
   
-  namespace s3.amazon.com.docsamples
+  namespace Amazon.DocSamples.S3
   {
-      class SSECLowLevelMPUcopyObject
+      class SSECLowLevelMPUcopyObjectTest
       {
-          static string existingBucketName     = "*** bucket name ***";
-          static string sourceKeyName          = "*** key name ***";
-          static string targetKeyName          = "*** key name ***";
-  
-          static void Main(string[] args)
+          private const string existingBucketName = "*** bucket name ***";
+          private const string sourceKeyName      = "*** source object key name ***"; 
+          private const string targetKeyName      = "*** key name for the target object ***";
+          private const string filePath           = @"*** file path ***";
+          // Specify your bucket region (an example region is shown).
+          private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+          private static IAmazonS3 s3Client;
+          static void Main()
           {
-              IAmazonS3 s3Client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1);
-              List<CopyPartResponse> uploadResponses = new List<CopyPartResponse>();
+              s3Client = new AmazonS3Client(bucketRegion);
+              CopyObjClientEncryptionKeyAsync().Wait();
+          }
   
+          private static async Task CopyObjClientEncryptionKeyAsync()
+          {
               Aes aesEncryption = Aes.Create();
               aesEncryption.KeySize = 256;
               aesEncryption.GenerateKey();
               string base64Key = Convert.ToBase64String(aesEncryption.Key);
+  
+              await CreateSampleObjUsingClientEncryptionKeyAsync(base64Key, s3Client);
+  
+              await CopyObjectAsync(s3Client, base64Key);
+          }
+          private static async Task CopyObjectAsync(IAmazonS3 s3Client, string base64Key)
+          {
+              List<CopyPartResponse> uploadResponses = new List<CopyPartResponse>();
   
               // 1. Initialize.
               InitiateMultipartUploadRequest initiateRequest = new InitiateMultipartUploadRequest
@@ -210,11 +224,10 @@ To upload large objects, you can use multipart upload API \(see [Uploading Objec
                   Key = targetKeyName,
                   ServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
                   ServerSideEncryptionCustomerProvidedKey = base64Key,
-  
               };
   
               InitiateMultipartUploadResponse initResponse =
-                  s3Client.InitiateMultipartUpload(initiateRequest);
+                  await s3Client.InitiateMultipartUploadAsync(initiateRequest);
   
               // 2. Upload Parts.
               long partSize = 5 * (long)Math.Pow(2, 20); // 5 MB
@@ -230,12 +243,12 @@ To upload large objects, you can use multipart upload API \(see [Uploading Objec
                       BucketName = existingBucketName,
                       Key = sourceKeyName,
                       ServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
-                      ServerSideEncryptionCustomerProvidedKey = "***source object encryption key ***"
+                      ServerSideEncryptionCustomerProvidedKey = base64Key // " * **source object encryption key ***"
                   };
   
-                  GetObjectMetadataResponse getObjectMetadataResponse = s3Client.GetObjectMetadata(getObjectMetadataRequest);
+                  GetObjectMetadataResponse getObjectMetadataResponse = await s3Client.GetObjectMetadataAsync(getObjectMetadataRequest);
   
-                  long filePosition = 0; 
+                  long filePosition = 0;
                   for (int i = 1; filePosition < getObjectMetadataResponse.ContentLength; i++)
                   {
                       CopyPartRequest copyPartRequest = new CopyPartRequest
@@ -246,7 +259,7 @@ To upload large objects, you can use multipart upload API \(see [Uploading Objec
                           SourceKey = sourceKeyName,
                           // Source object is stored using SSE-C. Provide encryption information.
                           CopySourceServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
-                          CopySourceServerSideEncryptionCustomerProvidedKey = "***source object encryption key ***",
+                          CopySourceServerSideEncryptionCustomerProvidedKey = base64Key, //"***source object encryption key ***",
                           FirstByte = firstByte,
                           // If the last part is smaller then our normal part size then use the remaining size.
                           LastByte = lastByte > getObjectMetadataResponse.ContentLength ?
@@ -256,11 +269,11 @@ To upload large objects, you can use multipart upload API \(see [Uploading Objec
                           DestinationBucket = existingBucketName,
                           DestinationKey = targetKeyName,
                           PartNumber = i,
-                          // Ecnryption information for the target object.
+                          // Encryption information for the target object.
                           ServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
                           ServerSideEncryptionCustomerProvidedKey = base64Key
                       };
-                      uploadResponses.Add(s3Client.CopyPart(copyPartRequest));
+                      uploadResponses.Add(await s3Client.CopyPartAsync(copyPartRequest));
                       filePosition += partSize;
                       firstByte += partSize;
                       lastByte += partSize;
@@ -276,7 +289,7 @@ To upload large objects, you can use multipart upload API \(see [Uploading Objec
                   completeRequest.AddPartETags(uploadResponses);
   
                   CompleteMultipartUploadResponse completeUploadResponse =
-                      s3Client.CompleteMultipartUpload(completeRequest);
+                      await s3Client.CompleteMultipartUploadAsync(completeRequest);
               }
               catch (Exception exception)
               {
@@ -288,6 +301,78 @@ To upload large objects, you can use multipart upload API \(see [Uploading Objec
                       UploadId = initResponse.UploadId
                   };
                   s3Client.AbortMultipartUpload(abortMPURequest);
+              }
+          }
+          private static async Task CreateSampleObjUsingClientEncryptionKeyAsync(string base64Key, IAmazonS3 s3Client)
+          {
+              // List to store upload part responses.
+              List<UploadPartResponse> uploadResponses = new List<UploadPartResponse>();
+  
+              // 1. Initialize.
+              InitiateMultipartUploadRequest initiateRequest = new InitiateMultipartUploadRequest
+              {
+                  BucketName = existingBucketName,
+                  Key = sourceKeyName,
+                  ServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
+                  ServerSideEncryptionCustomerProvidedKey = base64Key
+              };
+  
+              InitiateMultipartUploadResponse initResponse =
+                 await s3Client.InitiateMultipartUploadAsync(initiateRequest);
+  
+              // 2. Upload Parts.
+              long contentLength = new FileInfo(filePath).Length;
+              long partSize = 5 * (long)Math.Pow(2, 20); // 5 MB
+  
+              try
+              {
+                  long filePosition = 0;
+                  for (int i = 1; filePosition < contentLength; i++)
+                  {
+                      UploadPartRequest uploadRequest = new UploadPartRequest
+                      {
+                          BucketName = existingBucketName,
+                          Key = sourceKeyName,
+                          UploadId = initResponse.UploadId,
+                          PartNumber = i,
+                          PartSize = partSize,
+                          FilePosition = filePosition,
+                          FilePath = filePath,
+                          ServerSideEncryptionCustomerMethod = ServerSideEncryptionCustomerMethod.AES256,
+                          ServerSideEncryptionCustomerProvidedKey = base64Key
+                      };
+  
+                      // Upload part and add response to our list.
+                      uploadResponses.Add(await s3Client.UploadPartAsync(uploadRequest));
+  
+                      filePosition += partSize;
+                  }
+  
+                  // Step 3: complete.
+                  CompleteMultipartUploadRequest completeRequest = new CompleteMultipartUploadRequest
+                  {
+                      BucketName = existingBucketName,
+                      Key = sourceKeyName,
+                      UploadId = initResponse.UploadId,
+                      //PartETags = new List<PartETag>(uploadResponses)
+  
+                  };
+                  completeRequest.AddPartETags(uploadResponses);
+  
+                  CompleteMultipartUploadResponse completeUploadResponse =
+                      await s3Client.CompleteMultipartUploadAsync(completeRequest);
+  
+              }
+              catch (Exception exception)
+              {
+                  Console.WriteLine("Exception occurred: {0}", exception.Message);
+                  AbortMultipartUploadRequest abortMPURequest = new AbortMultipartUploadRequest
+                  {
+                      BucketName = existingBucketName,
+                      Key = sourceKeyName,
+                      UploadId = initResponse.UploadId
+                  };
+                  await s3Client.AbortMultipartUploadAsync(abortMPURequest);
               }
           }
       }

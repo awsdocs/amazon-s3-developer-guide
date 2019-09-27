@@ -1,6 +1,6 @@
 # Copy an Object Using the REST API<a name="CopyingObjectUsingREST"></a>
 
-This example describes how to copy an object using REST\. For more information about the REST API, go to [PUT Object \(Copy\)](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\.
+This example describes how to copy an object using REST\. For more information about the REST API, go to [PUT Object \(Copy\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\.
 
 This example copies the `flotsam` object from the `pacific` bucket to the `jetsam` object of the `atlantic` bucket, preserving its metadata\.
 

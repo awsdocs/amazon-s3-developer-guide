@@ -1,6 +1,6 @@
 # Deleting or Emptying a Bucket<a name="delete-or-empty-bucket"></a>
 
-It is easy to delete an empty bucket, however in some situations you may need to delete or empty a bucket that contains objects\. In this section, we'll explain how to delete objects in an unversioned bucket \(the default\), and how to delete object versions and delete markers in a bucket that has versioning enabled\. For more information about versioning, see [Using Versioning](Versioning.md)\. In some situations, you may choose to empty a bucket instead of deleting it\. This section explains various options you can use to delete or empty a bucket that contains objects\.
+It is easy to delete an empty bucket\. However, in some situations, you may need to delete or empty a bucket that contains objects\. In this section, we'll explain how to delete objects in an unversioned bucket, and how to delete object versions and delete markers in a bucket that has versioning enabled\. For more information about versioning, see [Using Versioning](Versioning.md)\. In some situations, you may choose to empty a bucket instead of deleting it\. This section explains various options you can use to delete or empty a bucket that contains objects\.
 
 **Topics**
 + [Delete a Bucket](#delete-bucket)
@@ -8,17 +8,11 @@ It is easy to delete an empty bucket, however in some situations you may need to
 
 ## Delete a Bucket<a name="delete-bucket"></a>
 
-You can delete a bucket and its content programmatically using AWS SDK\. You can also use lifecycle configuration on a bucket to empty its content and then delete the bucket\. There are additional options, such as using Amazon S3 console and AWS CLI, but there are limitations on this method based on the number of objects in your bucket and the bucket's versioning status\.
-
-**Topics**
-+ [Delete a Bucket: Using the Amazon S3 Console](#delete-bucket-console)
-+ [Delete a Bucket: Using the AWS CLI](#delete-bucket-awscli)
-+ [Delete a Bucket: Using Lifecycle Configuration](#delete-bucket-lifecycle)
-+ [Delete a Bucket: Using the AWS SDKs](#delete-bucket-awssdks)
+You can delete a bucket and its content programmatically using the AWS SDKs\. You can also use lifecycle configuration on a bucket to empty its content and then delete the bucket\. There are additional options, such as using Amazon S3 console and AWS CLI, but there are limitations on these methods based on the number of objects in your bucket and the bucket's versioning status\.
 
 ### Delete a Bucket: Using the Amazon S3 Console<a name="delete-bucket-console"></a>
 
-The Amazon S3 console supports deleting a bucket that may or may not be empty\. For information about using the Amazon S3 console to delete a bucket, see [How Do I Delete an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
+The Amazon S3 console supports deleting a bucket that may or may not be empty\. For information about using the Amazon S3 console to delete a bucket, see [How Do I Delete an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/delete-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ### Delete a Bucket: Using the AWS CLI<a name="delete-bucket-awscli"></a>
 
@@ -28,11 +22,11 @@ You can delete a bucket that contains objects using the AWS CLI only if the buck
   $ aws s3 rb s3://bucket-name --force  
 ```
 
-For more information, see [Using High\-Level S3 Commands with the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/using-s3-commands.html) in the AWS Command Line Interface User Guide\.
+For more information, see [Using High\-Level S3 Commands with the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/using-s3-commands.html) in the AWS Command Line Interface User Guide\.
 
 To delete a non\-empty bucket that does not have versioning enabled, you have the following options:
 + Delete the bucket programmatically using the AWS SDK\. 
-+ First, delete all of the objects using the bucket's lifecycle configuration and then delete the empty bucket using the Amazon S3 console\. 
++ Delete all of the objects using the bucket's lifecycle configuration and then delete the empty bucket using the Amazon S3 console\. 
 
 ### Delete a Bucket: Using Lifecycle Configuration<a name="delete-bucket-lifecycle"></a>
 
@@ -49,100 +43,90 @@ For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md
 
 ### Delete a Bucket: Using the AWS SDKs<a name="delete-bucket-awssdks"></a>
 
-You can use the AWS SDKs to delete a bucket\. The following sections provide examples of how to delete a bucket using the AWS SDK for \.NET and Java\. First, the code deletes objects in the bucket and then it deletes the bucket\. For information about other AWS SDKs, see [Tools for Amazon Web Services](https://aws.amazon.com/tools/)\.
+You can use the AWS SDKs to delete a bucket\. The following sections provide examples of how to delete a bucket using the AWS SDK for Java and \.NET\. First, the code deletes objects in the bucket and then it deletes the bucket\. For information about other AWS SDKs, see [Tools for Amazon Web Services](https://aws.amazon.com/tools/)\.
 
 #### Delete a Bucket Using the AWS SDK for Java<a name="delete-bucket-sdk-java"></a>
 
-The following Java example deletes a non\-empty bucket\. First, the code deletes all objects and then it deletes the bucket\. The code example also works for buckets with versioning enabled\.
+The following Java example deletes a bucket that contains objects\. The example deletes all objects, and then it deletes the bucket\. The example works for buckets with or without versioning enabled\.
 
-For instructions on how to create and test a working sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\. 
+**Note**  
+For buckets without versioning enabled, you can delete all objects directly and then delete the bucket\. For buckets with versioning enabled, you must delete all object versions before deleting the bucket\.
+
+For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 ```
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.ListVersionsRequest;
-import com.amazonaws.services.s3.model.ObjectListing;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
-import com.amazonaws.services.s3.model.S3VersionSummary;
-import com.amazonaws.services.s3.model.VersionListing;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.*;
+
 import java.util.Iterator;
 
-/**
- * Delete an Amazon S3 bucket.
- *
- * This code expects that you have AWS credentials set up per:
- * http://docs.aws.amazon.com/java-sdk/latest/developer-guide/setup-credentials.html
- *
- * ++ Warning ++ This code will actually delete the bucket that you specify, as
- *               well as any objects within it!
- */
-public class DeleteBucket
-{
-    public static void main(String[] args)
-    {
-        final String USAGE = "\n" +
-            "To run this example, supply the name of an S3 bucket\n" +
-            "\n" +
-            "Ex: DeleteBucket <bucketname>\n";
+public class DeleteBucket {
 
-        if (args.length < 1) {
-            System.out.println(USAGE);
-            System.exit(1);
-        }
-
-        String bucket_name = args[0];
-
-        System.out.println("Deleting S3 bucket: " + bucket_name);
-        final AmazonS3 s3 = new AmazonS3Client();
+    public static void main(String[] args) {
+        Regions clientRegion = Regions.DEFAULT_REGION;
+        String bucketName = "*** Bucket name ***";
 
         try {
-            System.out.println(" - removing objects from bucket");
-            ObjectListing object_listing = s3.listObjects(bucket_name);
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .withRegion(clientRegion)
+                    .build();
+
+            // Delete all objects from the bucket. This is sufficient
+            // for unversioned buckets. For versioned buckets, when you attempt to delete objects, Amazon S3 inserts
+            // delete markers for all objects, but doesn't delete the object versions.
+            // To delete objects from versioned buckets, delete all of the object versions before deleting
+            // the bucket (see below for an example).
+            ObjectListing objectListing = s3Client.listObjects(bucketName);
             while (true) {
-                for (Iterator<?> iterator =
-                        object_listing.getObjectSummaries().iterator();
-                        iterator.hasNext();) {
-                    S3ObjectSummary summary = (S3ObjectSummary)iterator.next();
-                    s3.deleteObject(bucket_name, summary.getKey());
+                Iterator<S3ObjectSummary> objIter = objectListing.getObjectSummaries().iterator();
+                while (objIter.hasNext()) {
+                    s3Client.deleteObject(bucketName, objIter.next().getKey());
                 }
 
-                // more object_listing to retrieve?
-                if (object_listing.isTruncated()) {
-                    object_listing = s3.listNextBatchOfObjects(object_listing);
-                } else {
-                    break;
-                }
-            };
-
-            System.out.println(" - removing versions from bucket");
-            VersionListing version_listing = s3.listVersions(
-                    new ListVersionsRequest().withBucketName(bucket_name));
-            while (true) {
-                for (Iterator<?> iterator =
-                        version_listing.getVersionSummaries().iterator();
-                        iterator.hasNext();) {
-                    S3VersionSummary vs = (S3VersionSummary)iterator.next();
-                    s3.deleteVersion(
-          
-                  bucket_name, vs.getKey(), vs.getVersionId());
-                }
-
-                if (version_listing.isTruncated()) {
-                    version_listing = s3.listNextBatchOfVersions(
-                            version_listing);
+                // If the bucket contains many objects, the listObjects() call
+                // might not return all of the objects in the first listing. Check to
+                // see whether the listing was truncated. If so, retrieve the next page of objects 
+                // and delete them.
+                if (objectListing.isTruncated()) {
+                    objectListing = s3Client.listNextBatchOfObjects(objectListing);
                 } else {
                     break;
                 }
             }
 
-            System.out.println(" OK, bucket ready to delete!");
-            s3.deleteBucket(bucket_name);
+            // Delete all object versions (required for versioned buckets).
+            VersionListing versionList = s3Client.listVersions(new ListVersionsRequest().withBucketName(bucketName));
+            while (true) {
+                Iterator<S3VersionSummary> versionIter = versionList.getVersionSummaries().iterator();
+                while (versionIter.hasNext()) {
+                    S3VersionSummary vs = versionIter.next();
+                    s3Client.deleteVersion(bucketName, vs.getKey(), vs.getVersionId());
+                }
+
+                if (versionList.isTruncated()) {
+                    versionList = s3Client.listNextBatchOfVersions(versionList);
+                } else {
+                    break;
+                }
+            }
+
+            // After all objects and object versions are deleted, delete the bucket.
+            s3Client.deleteBucket(bucketName);
         } catch (AmazonServiceException e) {
-            System.err.println(e.getErrorMessage());
-            System.exit(1);
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client couldn't
+            // parse the response from Amazon S3.
+            e.printStackTrace();
         }
-        System.out.println("Done!");
     }
 }
 ```
@@ -159,7 +143,7 @@ You can empty a bucket's content \(that is, delete all content, but keep the buc
 
 ### Empty a Bucket: Using the Amazon S3 console<a name="empty-bucket-console"></a>
 
-For information about using the Amazon S3 console to empty a bucket, see [How Do I Empty an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/empty-bucket.html.html) in the *Amazon Simple Storage Service Console User Guide*
+For information about using the Amazon S3 console to empty a bucket, see [How Do I Empty an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/empty-bucket.html) in the *Amazon Simple Storage Service Console User Guide*
 
 ### Empty a Bucket: Using the AWS CLI<a name="empty-bucket-awscli"></a>
 
@@ -177,7 +161,7 @@ Use the following command to remove all objects without specifying a prefix\.
 $ aws s3 rm s3://bucket-name --recursive
 ```
 
-For more information, see [Using High\-Level S3 Commands with the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/using-s3-commands.html) in the AWS Command Line Interface User Guide\.
+For more information, see [Using High\-Level S3 Commands with the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/using-s3-commands.html) in the AWS Command Line Interface User Guide\.
 
 **Note**  
 You cannot remove objects from a bucket with versioning enabled\. Amazon S3 adds a delete marker when you delete an object, which is what this command will do\. For more information about versioning, see [Using Versioning](Versioning.md)\.
@@ -185,7 +169,7 @@ You cannot remove objects from a bucket with versioning enabled\. Amazon S3 adds
 To empty a bucket with versioning enabled, you have the following options:
 + Delete the bucket programmatically using the AWS SDK\. 
 + Use the bucket's lifecycle configuration to request that Amazon S3 delete the objects\. 
-+ Use the Amazon S3 console \(can only use this option if your bucket contains less than 100,000 items—including both object versions and delete markers\)\.
++ Use the Amazon S3 console\. For more information, see [How Do I Empty an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/empty-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ### Empty a Bucket: Using Lifecycle Configuration<a name="empty-bucket-lifecycle"></a>
 

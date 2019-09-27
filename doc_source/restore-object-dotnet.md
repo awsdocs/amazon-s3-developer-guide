@@ -1,90 +1,48 @@
 # Restore an Archived Object Using the AWS SDK for \.NET<a name="restore-object-dotnet"></a>
 
-The following tasks guide you through using the AWS SDK for \.NET to initiate a restoration of an archived object\.
-
-
-**Downloading Objects**  
-
-|  |  | 
-| --- |--- |
-| 1 | Create an instance of the `AmazonS3` class\.  | 
-| 2 | Create an instance of `RestoreObjectRequest` class by providing bucket name, object key to restore and the number of days for which you the object copy restored\. | 
-| 3 | Execute one of the `AmazonS3.RestoreObject` methods to initiate the archive restoration\. | 
-
-The following C\# code sample demonstrates the preceding tasks\.
-
 **Example**  
+The following C\# example initiates a request to restore an archived object for 2 days\. Amazon S3 maintains the restoration status in the object metadata\. After initiating the request, the example retrieves the object metadata and checks the value of the `RestoreInProgress` property\. For instructions on creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```
- 1. IAmazonS3 client;
- 2. string bucketName = "examplebucket";
- 3. string objectKey = "examplekey";
- 4. 
- 5. client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1);
- 6. 
- 7. RestoreObjectRequest restoreRequest = new RestoreObjectRequest()
- 8.  {
- 9.      BucketName = bucketName,
-10.      Key = objectKey,
-11.      Days = 2
-12.  };
-13. 
-14. client.RestoreObject(restoreRequest);
-```
-
-Amazon S3 maintains the restoration status in the object metadata\. You can retrieve object metadata and check the value of the `RestoreInProgress` property as shown in the following C\# code snippet\.
-
-```
- 1. IAmazonS3 client;
- 2. string bucketName = "examplebucket";
- 3. string objectKey = "examplekey";
- 4. 
- 5. client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1);
- 6. 
- 7. GetObjectMetadataRequest metadataRequest = new GetObjectMetadataRequest()
- 8. {
- 9.       BucketName = bucketName,
-10.       Key = objectKey
-11. };
-12. GetObjectMetadataResponse response = client.GetObjectMetadata(metadataRequest);
-13. Console.WriteLine("Restoration status: {0}", response.RestoreInProgress);
-14. if (response.RestoreInProgress == false)
-15.     Console.WriteLine("Restored object copy expires on: {0}", response.RestoreExpiration);
-```
-
-**Example**  
-The following C\# code example initiates a restoration request for the specified archived object\. You must update the code and provide a bucket name and an archived object key name\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
-
-```
-using System;
 using Amazon.S3;
 using Amazon.S3.Model;
+using System;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class RestoreArchivedObject
+    class RestoreArchivedObjectTest
     {
-        static string bucketName = "*** provide bucket name ***";
-        static string objectKey  = "*** archived object keyname ***";
+        private const string bucketName = "*** bucket name ***"; 
+        private const string objectKey = "** archived object key name ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 client;
 
-        static IAmazonS3 client;
+        public static void Main()
+        {
+            client = new AmazonS3Client(bucketRegion);
+            RestoreObjectAsync(client, bucketName, objectKey).Wait();
+        }
 
-        public static void Main(string[] args)
+        static async Task RestoreObjectAsync(IAmazonS3 client, string bucketName, string objectKey)
         {
             try
             {
-                using (client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1))
+                var restoreRequest = new RestoreObjectRequest
                 {
-                    RestoreObject(client, bucketName, objectKey);
-                    CheckRestorationStatus(client, bucketName, objectKey);
-                }
+                    BucketName = bucketName,
+                    Key = objectKey,
+                    Days = 2
+                };
+                RestoreObjectResponse response = await client.RestoreObjectAsync(restoreRequest);
 
-                Console.WriteLine("Example complete. To continue, click Enter...");
-                Console.ReadKey();
+                // Check the status of the restoration.
+                await CheckRestorationStatusAsync(client, bucketName, objectKey);
             }
             catch (AmazonS3Exception amazonS3Exception)
             {
-                Console.WriteLine("S3 error occurred. Exception: " + amazonS3Exception.ToString());
+                Console.WriteLine("An AmazonS3Exception was thrown. Exception: " + amazonS3Exception.ToString());
             }
             catch (Exception e)
             {
@@ -92,28 +50,15 @@ namespace s3.amazon.com.docsamples
             }
         }
 
-        static void RestoreObject(IAmazonS3 client, string bucketName, string objectKey)
-        {
-            RestoreObjectRequest restoreRequest = new RestoreObjectRequest
-            {
-                BucketName = bucketName,
-                Key = objectKey,
-                Days = 2
-            };
-            RestoreObjectResponse response = client.RestoreObject(restoreRequest);
-        }
-
-        static void CheckRestorationStatus(IAmazonS3 client, string bucketName, string objectKey)
+        static async Task CheckRestorationStatusAsync(IAmazonS3 client, string bucketName, string objectKey)
         {
             GetObjectMetadataRequest metadataRequest = new GetObjectMetadataRequest
             {
                 BucketName = bucketName,
                 Key = objectKey
             };
-            GetObjectMetadataResponse response = client.GetObjectMetadata(metadataRequest);
-            Console.WriteLine("Restoration status: {0}", response.RestoreInProgress);
-            if (response.RestoreInProgress == false)
-                Console.WriteLine("Restored object copy expires on: {0}", response.RestoreExpiration);
+            GetObjectMetadataResponse response = await client.GetObjectMetadataAsync(metadataRequest);
+            Console.WriteLine("restoration status: {0}", response.RestoreInProgress ? "in-progress" : "finished or failed");
         }
     }
 }

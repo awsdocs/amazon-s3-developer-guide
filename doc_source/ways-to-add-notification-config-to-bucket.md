@@ -37,13 +37,13 @@ You will do the following in this walkthrough:
 
 Follow the steps to create and subscribe to an Amazon Simple Notification Service \(Amazon SNS\) topic\.
 
-1. Using Amazon SNS console create a topic\. For instructions, see [Create a Topic](http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in the *Amazon Simple Notification Service Developer Guide*\. 
+1. Using Amazon SNS console create a topic\. For instructions, see [Create a Topic](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in the *Amazon Simple Notification Service Developer Guide*\. 
 
-1. Subscribe to the topic\. For this exercise, use email as the communications protocol\. For instructions, see [Subscribe to a Topic](http://docs.aws.amazon.com/sns/latest/dg/SubscribeTopic.html) in the *Amazon Simple Notification Service Developer Guide*\. 
+1. Subscribe to the topic\. For this exercise, use email as the communications protocol\. For instructions, see [Subscribe to a Topic](https://docs.aws.amazon.com/sns/latest/dg/SubscribeTopic.html) in the *Amazon Simple Notification Service Developer Guide*\. 
 
    You will get email requesting you to confirm your subscription to the topic\. Confirm the subscription\. 
 
-1. Replace the access policy attached to the topic by the following policy\. You must update the policy by providing your SNS topic ARN and bucket name:
+1. Replace the access policy attached to the topic with the following policy\. You must update the policy by providing your SNS topic Amazon Resource Name \(ARN\) and bucket name:
 
    ```
    {
@@ -61,9 +61,7 @@ Follow the steps to create and subscribe to an Amazon Simple Notification Servic
       ],
       "Resource": "SNS-topic-ARN",
       "Condition": {
-         "ArnLike": {          
-         "aws:SourceArn": "arn:aws:s3:*:*:bucket-name"    
-       }
+         "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
       }
      }
     ]
@@ -82,13 +80,13 @@ Follow the steps to create and subscribe to an Amazon Simple Notification Servic
 
 Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Amazon SQS\) queue\.
 
-1. Using the Amazon SQS console, create a queue\. For instructions, see [Getting Started with Amazon SQS](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-getting-started.html) in the *Amazon Simple Queue Service Developer Guide*\. 
+1. Using the Amazon SQS console, create a queue\. For instructions, see [Getting Started with Amazon SQS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-getting-started.html) in the *Amazon Simple Queue Service Developer Guide*\. 
 
 1. Replace the access policy attached to the queue with the following policy \(in the SQS console, you select the queue, and in the **Permissions** tab, click **Edit Policy Document \(Advanced\)**\.
 
    ```
    {
-    "Version": "2008-10-17",
+    "Version": "2012-10-17",
     "Id": "example-ID",
     "Statement": [
      {
@@ -102,16 +100,14 @@ Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Ama
       ],
       "Resource": "SQS-queue-ARN",
       "Condition": {
-         "ArnLike": {          
-         "aws:SourceArn": "arn:aws:s3:*:*:bucket-name"    
-       }
+         "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
       }
      }
     ]
    }
    ```
 
-1. \(Optional\) If the SQS queue is SSE enabled, add the following policy to the associated KMS key\.
+1. \(Optional\) If the Amazon SQS queue is server\-side encryption \(SSE\) enabled, add the following policy to the associated custom AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. You must add the policy to a custom CMK because the default AWS managed CMK for Amazon SQS cannot be modified\. For more information about using SSE for Amazon SQS with AWS KMS, see [Protecting Data Using Server\-Side Encryption \(SSE\) and AWS KMS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html)\. 
 
    ```
    {
@@ -134,7 +130,7 @@ Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Ama
    }
    ```
 
-1. Note the queue ARN 
+1. Note the queue ARN\. 
 
    The SQS queue you created is another resource in your AWS account, and it has a unique Amazon Resource Name \(ARN\)\. You will need this ARN in the next step\. The ARN will be of the following format:
 
@@ -154,7 +150,7 @@ Using the Amazon S3 console, add a notification configuration requesting Amazon 
 
 After you save the notification configuration, Amazon S3 will post a test message, which you will get via email\. 
 
-For instructions, see [How Do I Enable and Configure Event Notifications for an S3 Bucket?](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\. 
+For instructions, see [How Do I Enable and Configure Event Notifications for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
 ### Step 3 \(option b\): Enable Notifications on a Bucket Using the AWS SDK for \.NET<a name="step2-enable-notification-using-awssdk-dotnet"></a>
 
@@ -163,79 +159,61 @@ The following C\# code example provides a complete code listing that adds a noti
 **Example**  
 
 ```
-using System;
-using System.Collections.Generic;
 using Amazon.S3;
 using Amazon.S3.Model;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace s3.amazon.com.docsamples
+namespace Amazon.DocSamples.S3
 {
-    class EnableNotifications
+    class EnableNotificationsTest
     {
-        static string bucketName = "***bucket name***";
-        static string snsTopic = "***SNS topic ARN***";
-        static string sqsQueue = "***SQS queue ARN***";
-        
-        static string putEventType = "s3:ObjectCreated:Put";
-        static string rrsObjectLostType = "s3:ObjectCreated:Copy";
+        private const string bucketName = "*** bucket name ***";
+        private const string snsTopic = "*** SNS topic ARN ***";
+        private const string sqsQueue = "*** SQS topic ARN ***";
+        // Specify your bucket region (an example region is shown).
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+        private static IAmazonS3 client;
 
-        public static void Main(string[] args)
+        public static void Main()
         {
-            using (var client = new AmazonS3Client(Amazon.RegionEndpoint.USEast1))
-            {
-                Console.WriteLine("Enabling Notification on a bucket");
-                EnableNotification(client);
-            }
-
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            client = new AmazonS3Client(bucketRegion);
+            EnableNotificationAsync().Wait();
         }
 
-        static void EnableNotification(IAmazonS3 client)
+        static async Task EnableNotificationAsync()
         {
             try
             {
-                List<Amazon.S3.Model.TopicConfiguration> topicConfigurations = new List<TopicConfiguration>();
-
-                topicConfigurations.Add(new TopicConfiguration()
+               PutBucketNotificationRequest request = new PutBucketNotificationRequest
                 {
-                    Event = rrsObjectLostType,
-                    Topic = snsTopic
-                });
-
-                List<Amazon.S3.Model.QueueConfiguration> queueConfigurations = new List<QueueConfiguration>();
-                queueConfigurations.Add(new QueueConfiguration()
-                {
-                    Events = new List<string> { putEventType },
-                     Queue = sqsQueue
-                });
-
-                PutBucketNotificationRequest request = new PutBucketNotificationRequest
-                {
-                    BucketName = bucketName,
-                    TopicConfigurations = topicConfigurations,
-                    QueueConfigurations = queueConfigurations
+                    BucketName = bucketName
                 };
 
-                PutBucketNotificationResponse response = client.PutBucketNotification(request);
+                TopicConfiguration c = new TopicConfiguration
+                {
+                    Events = new List<EventType> { EventType.ObjectCreatedCopy },
+                    Topic = snsTopic
+                };
+                request.TopicConfigurations = new List<TopicConfiguration>();
+                request.TopicConfigurations.Add(c);
+                request.QueueConfigurations = new List<QueueConfiguration>();
+                request.QueueConfigurations.Add(new QueueConfiguration()
+                {
+                    Events = new List<EventType> { EventType.ObjectCreatedPut },
+                    Queue = sqsQueue
+                });
+                
+                PutBucketNotificationResponse response = await client.PutBucketNotificationAsync(request);
             }
-            catch (AmazonS3Exception amazonS3Exception)
+            catch (AmazonS3Exception e)
             {
-                if (amazonS3Exception.ErrorCode != null &&
-                    (amazonS3Exception.ErrorCode.Equals("InvalidAccessKeyId")
-                    ||
-                    amazonS3Exception.ErrorCode.Equals("InvalidSecurity")))
-                {
-                    Console.WriteLine("Check the provided AWS Credentials.");
-                    Console.WriteLine(
-                    "To sign up for service, go to http://aws.amazon.com/s3");
-                }
-                else
-                {
-                    Console.WriteLine(
-                     "Error occurred. Message:'{0}' when enabling notifications.",
-                     amazonS3Exception.Message);
-                }
+                Console.WriteLine("Error encountered on server. Message:'{0}' ", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unknown error encountered on server. Message:'{0}' ", e.Message);
             }
         }
     }
@@ -244,71 +222,57 @@ namespace s3.amazon.com.docsamples
 
 ### Step 3 \(option c\): Enable Notifications on a Bucket Using the AWS SDK for Java<a name="step2-enable-notification-using-java"></a>
 
-The following Java code example provides a complete code listing that adds a notification configuration to a bucket\. You will need to update the code and provide your bucket name and SNS topic ARN\. For instructions on how to create and test a working sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\.
+The following example shows how to add a notification configuration to a bucket\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.
 
 **Example**  
 
 ```
-import java.io.IOException;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.LinkedList;
-
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.AmazonS3Exception;
-import com.amazonaws.services.s3.model.BucketNotificationConfiguration;
-import com.amazonaws.services.s3.model.TopicConfiguration;
-import com.amazonaws.services.s3.model.QueueConfiguration;
-import com.amazonaws.services.s3.model.S3Event;
-import com.amazonaws.services.s3.model.SetBucketNotificationConfigurationRequest;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.*;
 
-public class NotificationConfigurationOnABucket {
-    private static String bucketName = "*** bucket name ***";
-    private static String snsTopicARN = "*** SNS Topic ARN ***";
-    private static String sqsQueueARN = "*** SQS Queue ARN ***";
+import java.io.IOException;
+import java.util.EnumSet;
+
+public class EnableNotificationOnABucket {
 
     public static void main(String[] args) throws IOException {
-        AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
+        String bucketName = "*** Bucket name ***";
+        Regions clientRegion = Regions.DEFAULT_REGION;
+        String snsTopicARN = "*** SNS Topic ARN ***";
+        String sqsQueueARN = "*** SQS Queue ARN ***";
+
         try {
-            System.out.println("Setting notification configuration on a bucket.\n");
-
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .withRegion(clientRegion)
+                    .build();
             BucketNotificationConfiguration notificationConfiguration = new BucketNotificationConfiguration();
-            notificationConfiguration.addConfiguration(
-                    "snsTopicConfig",
-                    new TopicConfiguration(snsTopicARN, EnumSet
-                            .of(S3Event.ReducedRedundancyLostObject)));
 
-            notificationConfiguration.addConfiguration(
-                    "sqsQueueConfig",
-                    new QueueConfiguration(sqsQueueARN, EnumSet
-                            .of(S3Event.ObjectCreated)));
+            // Add an SNS topic notification.
+            notificationConfiguration.addConfiguration("snsTopicConfig",
+                    new TopicConfiguration(snsTopicARN, EnumSet.of(S3Event.ObjectCreated)));
 
-            SetBucketNotificationConfigurationRequest request = 
-                    new SetBucketNotificationConfigurationRequest(bucketName, notificationConfiguration);
+            // Add an SQS queue notification.
+            notificationConfiguration.addConfiguration("sqsQueueConfig",
+                    new QueueConfiguration(sqsQueueARN, EnumSet.of(S3Event.ObjectCreated)));
 
-            s3client.setBucketNotificationConfiguration(request);
-
-        } catch (AmazonS3Exception ase) {
-            System.out.println("Caught an AmazonServiceException, which "
-                    + "means your request made it "
-                    + "to Amazon S3, but was rejected with an error response"
-                    + " for some reason.");
-            System.out.println("Error Message:    " + ase.getMessage());
-            System.out.println("HTTP Status Code: " + ase.getStatusCode());
-            System.out.println("AWS Error Code:   " + ase.getErrorCode());
-            System.out.println("Error Type:       " + ase.getErrorType());
-            System.out.println("Request ID:       " + ase.getRequestId());
-            System.out.println("Error XML" + ase.getErrorResponseXml());
-        } catch (AmazonClientException ace) {
-            System.out.println("Caught an AmazonClientException, which "
-                    + "means the client encountered "
-                    + "an internal error while trying to "
-                    + "communicate with S3, "
-                    + "such as not being able to access the network.");
-            System.out.println("Error Message: " + ace.getMessage());
+            // Create the notification configuration request and set the bucket notification configuration.
+            SetBucketNotificationConfigurationRequest request = new SetBucketNotificationConfigurationRequest(
+                    bucketName, notificationConfiguration);
+            s3Client.setBucketNotificationConfiguration(request);
+        } catch (AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
         }
     }
 }
@@ -316,4 +280,4 @@ public class NotificationConfigurationOnABucket {
 
 ## Step 4: Test the Setup<a name="notification-walkthrough-1-test"></a>
 
-Now you can test the setup by uploading an object to your bucket and verify the event notification in the Amazon SQS console\. For instructions, see [Receiving a Message](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-getting-started.htmlReceiveMessage.html) in the *Amazon Simple Queue Service Developer Guide "Getting Started" section*\. 
+Now you can test the setup by uploading an object to your bucket and verify the event notification in the Amazon SQS console\. For instructions, see [Receiving a Message](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-getting-started.htmlReceiveMessage.html) in the *Amazon Simple Queue Service Developer Guide "Getting Started" section*\. 

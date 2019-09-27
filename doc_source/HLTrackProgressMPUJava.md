@@ -1,78 +1,66 @@
 # Track Multipart Upload Progress<a name="HLTrackProgressMPUJava"></a>
 
-The high\-level multipart upload API provides a listen interface, `ProgressListener`, to track the upload progress when uploading data using the `TransferManager` class\. To use the event in your code, you must import the `com.amazonaws.services.s3.model.ProgressEvent` and `com.amazonaws.services.s3.model.ProgressListener ` types\.
+The high\-level Java multipart upload API provides a listen interface, `ProgressListener`, to track progress when uploading an object to Amazon S3\. Progress events periodically notify the listener that bytes have been transferred\.
 
-Progress events occurs periodically and notify the listener that bytes have been transferred\. 
-
-The following Java code sample demonstrates how you can subscribe to the `ProgressEvent` event and write a handler\.
+The following example demonstrates how to subscribe to a `ProgressEvent` event and write a handler:
 
 **Example**  
 
 ```
- 1. TransferManager tm = new TransferManager(new ProfileCredentialsProvider());        
- 2. 
- 3. PutObjectRequest request = new PutObjectRequest(
- 4.   		existingBucketName, keyName, new File(filePath));
- 5. 
- 6. // Subscribe to the event and provide event handler.        
- 7. request.setProgressListener(new ProgressListener() {
- 8. 			public void progressChanged(ProgressEvent event) {
- 9. 				System.out.println("Transferred bytes: " + 
-10. 						event.getBytesTransfered());
-11.              }
-12. });
-```
-
-**Example**  
-The following Java code uploads a file and uses the `ProgressListener` to track the upload progress\. For instructions on how to create and test a working sample, see [Testing the Java Code Examples](UsingTheMPDotJavaAPI.md#TestingJavaSamples)\.   
-
-```
-import java.io.File;
-
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.event.ProgressEvent;
 import com.amazonaws.event.ProgressListener;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.transfer.TransferManager;
+import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 import com.amazonaws.services.s3.transfer.Upload;
 
-public class TrackMPUProgressUsingHighLevelAPI {
+import java.io.File;
+
+public class HighLevelTrackMultipartUpload {
 
     public static void main(String[] args) throws Exception {
-        String existingBucketName = "*** Provide bucket name ***";
-        String keyName            = "*** Provide object key ***";
-        String filePath           = "*** file to upload ***";  
-        
-        TransferManager tm = new TransferManager(new ProfileCredentialsProvider());        
+        Regions clientRegion = Regions.DEFAULT_REGION;
+        String bucketName = "*** Bucket name ***";
+        String keyName = "*** Object key ***";
+        String filePath = "*** Path to file to upload ***";
 
-        // For more advanced uploads, you can create a request object 
-        // and supply additional request parameters (ex: progress listeners,
-        // canned ACLs, etc.)
-        PutObjectRequest request = new PutObjectRequest(
-        		existingBucketName, keyName, new File(filePath));
-        
-        // You can ask the upload for its progress, or you can 
-        // add a ProgressListener to your request to receive notifications 
-        // when bytes are transferred.
-        request.setGeneralProgressListener(new ProgressListener() {
-			@Override
-			public void progressChanged(ProgressEvent progressEvent) {
-				System.out.println("Transferred bytes: " + 
-						progressEvent.getBytesTransferred());
-			}
-		});
-
-        // TransferManager processes all transfers asynchronously, 
-        // so this call will return immediately.
-        Upload upload = tm.upload(request);
-        
         try {
-        	// You can block and wait for the upload to finish
-        	upload.waitForCompletion();
-        } catch (AmazonClientException amazonClientException) {
-        	System.out.println("Unable to upload file, upload aborted.");
-        	amazonClientException.printStackTrace();
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withRegion(clientRegion)
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .build();
+            TransferManager tm = TransferManagerBuilder.standard()
+                    .withS3Client(s3Client)
+                    .build();
+            PutObjectRequest request = new PutObjectRequest(bucketName, keyName, new File(filePath));
+
+            // To receive notifications when bytes are transferred, add a  
+            // ProgressListener to your request.
+            request.setGeneralProgressListener(new ProgressListener() {
+                public void progressChanged(ProgressEvent progressEvent) {
+                    System.out.println("Transferred bytes: " + progressEvent.getBytesTransferred());
+                }
+            });
+            // TransferManager processes all transfers asynchronously,
+            // so this call returns immediately.
+            Upload upload = tm.upload(request);
+
+            // Optionally, you can wait for the upload to finish before continuing.
+            upload.waitForCompletion();
+        } catch (AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client 
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
         }
     }
 }

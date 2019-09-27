@@ -1,6 +1,6 @@
 # SQL Functions<a name="s3-glacier-select-sql-reference-sql-functions"></a>
 
-Amazon S3 Select and Amazon Glacier Select support several SQL functions\.
+Amazon S3 Select and Glacier Select support several SQL functions\.
 
 **Topics**
 + [Aggregate Functions \(Amazon S3 Select only\)](s3-glacier-select-sql-reference-aggregate.md)
