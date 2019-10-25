@@ -1,7 +1,7 @@
 # Protecting Data Using Client\-Side Encryption<a name="UsingClientSideEncryption"></a>
 
 *Client\-side encryption* is the act of encrypting data before sending it to Amazon S3\. To enable client\-side encryption, you have the following options:
-+ Use a master key stored in AWS KMS\.
++ Use a customer master key \(CMK\) stored in AWS Key Management Service \(AWS KMS\)\.
 + Use a master key you store within your application\.
 
 The following AWS SDKs support client\-side encryption:
@@ -12,19 +12,19 @@ The following AWS SDKs support client\-side encryption:
 + [AWS SDK for Ruby](https://aws.amazon.com/sdk-for-ruby/)
 + [AWS SDK for C\+\+](https://aws.amazon.com/sdk-for-cpp/)
 
-## Option 1: Using a Master Key stored in AWS KMS<a name="client-side-encryption-kms-managed-master-key-intro"></a>
-+ **When uploading an object**—Using the Customer Master Key \(CMK\) ID, the client first sends a request to the AWS Key Management Service \(AWS KMS\) for a key that it can use to encrypt your object data\. AWS KMS returns two versions of a randomly generated data encryption key:
-  + A plaintext version that the client uses to encrypt the object data
-  + A cipher blob of the same data encryption key that the client uploads to Amazon S3 as object metadata
+## Option 1: Using a CMK Stored in AWS KMS<a name="client-side-encryption-kms-managed-master-key-intro"></a>
++ **When uploading an object**—Using the customer master key \(CMK\) ID, the client first sends a request to AWS KMS for a CMK that it can use to encrypt your object data\. AWS KMS returns two versions of a randomly generated data key:
+  + A plaintext version of the data key that the client uses to encrypt the object data
+  + A cipher blob of the same data key that the client uploads to Amazon S3 as object metadata
 **Note**  
-The client obtains a unique data encryption key for each object that it uploads\.
-+  **When downloading an object**—The client downloads the encrypted object from Amazon S3 along with the cipher blob version of the data encryption key stored as object metadata\. The client then sends the cipher blob to AWS KMS to get the plaintext version of the key so that it can decrypt the object data\.
+The client obtains a unique data key for each object that it uploads\.
++  **When downloading an object**—The client downloads the encrypted object from Amazon S3 along with the cipher blob version of the data key stored as object metadata\. The client then sends the cipher blob to AWS KMS to get the plaintext version of the data key so that it can decrypt the object data\.
 
-For more information about AWS KMS, see [What is the AWS Key Management Service?](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide*\.
+For more information about AWS KMS, see [What is AWS Key Management Service?](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide*\.
 
 **Example**  
-The following example uploads an object to Amazon S3 using AWS KMS with the AWS SDK for Java\. The example uses a AWS\-managed customer master key \(CMK\) to encrypt data on the client side before uploading it to Amazon S3\. If you already have a CMK, you can use that by specifying the value of the `kms_cmk_id` variable in the sample code\. If you don't have a CMK, or you need another one, you can generate one through the Java API\. The example shows how to generate a CMK\.  
-For more information about key material, see [Importing Key Material in AWS Key Management Service \(AWS KMS\)](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
+The following example uploads an object to Amazon S3 using AWS KMS with the AWS SDK for Java\. The example uses an AWS managed CMK to encrypt data on the client side before uploading it to Amazon S3\. If you already have a CMK, you can use that by specifying the value of the `kms_cmk_id` variable in the sample code\. If you don't have a CMK, or you need another one, you can generate one through the Java API\. The example shows how to generate a CMK\.  
+For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
 import com.amazonaws.AmazonServiceException;

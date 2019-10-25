@@ -60,19 +60,19 @@ The easiest way to set up an inventory is by using the AWS Management Console, b
 
    When you configure an inventory list for a source bucket, you specify the destination bucket where you want the list to be stored, and whether you want to generate the list daily or weekly\. You can also configure what object metadata to include and whether to list all object versions or only current versions\. 
 
-   You can specify that the inventory list file be encrypted by using Amazon S3\-managed keys \(SSE\-S3\) or keys stored in AWS KMS \(SSE\-KMS\)\. For more information about SSE\-S3 and SSE\-KMS, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. If you plan to use SSE\-KMS encryption, see Step 3\.
+   You can specify that the inventory list file be encrypted by using Amazon S3 managed keys \(SSE\-S3\) or customer managed keys \(CMKs\) stored in AWS Key Management Service \(AWS KMS\)\. For more information about SSE\-S3 and SSE\-KMS, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. If you plan to use SSE\-KMS encryption, see Step 3\.
    + For information about how to use the console to configure an inventory list, see [How Do I Configure Amazon S3 Inventory?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-inventory.html) in the *Amazon Simple Storage Service Console User Guide*\.
    + To use the Amazon S3 API to configure an inventory list, use the [PUT Bucket inventory configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTInventoryConfig.html) REST API, or the equivalent from the AWS CLI or AWS SDKs\. 
 
-1. **To encrypt the inventory list file with SSE\-KMS, grant Amazon S3 permission to use the AWS KMS key\.**
+1. **To encrypt the inventory list file with SSE\-KMS, grant Amazon S3 permission to use the CMK stored in AWS KMS\.**
 
-   You can configure encryption for the inventory list file by using the AWS Management Console, REST API, AWS CLI, or AWS SDKs\. Whichever way you choose, you must grant Amazon S3 permission to use the AWS KMS customer master key \(CMK\) to encrypt the inventory file\. You grant Amazon S3 permission by modifying the key policy for the AWS KMS CMK that is being used to encrypt the inventory file\. For more information, see the next section, [Grant Amazon S3 Permission to Encrypt Using Your AWS KMS Key](#storage-inventory-kms-key-policy)\.
+   You can configure encryption for the inventory list file by using the AWS Management Console, REST API, AWS CLI, or AWS SDKs\. Whichever way you choose, you must grant Amazon S3 permission to use the AWS KMS CMK to encrypt the inventory file\. You grant Amazon S3 permission by modifying the key policy for the AWS KMS CMK that is being used to encrypt the inventory file\. For more information, see the next section, [Grant Amazon S3 Permission to Encrypt Using Your AWS KMS CMK](#storage-inventory-kms-key-policy)\.
 
-#### Grant Amazon S3 Permission to Encrypt Using Your AWS KMS Key<a name="storage-inventory-kms-key-policy"></a>
+#### Grant Amazon S3 Permission to Encrypt Using Your AWS KMS CMK<a name="storage-inventory-kms-key-policy"></a>
 
-You must grant Amazon S3 permission to encrypt using your AWS KMS key with a key policy\. The following procedure describes how to use the AWS Identity and Access Management \(IAM\) console to modify the key policy for the AWS KMS CMK that is used to encrypt the inventory file\.
+You must grant Amazon S3 permission to encrypt using your AWS KMS CMK with a key policy\. The following procedure describes how to use the AWS Identity and Access Management \(IAM\) console to modify the key policy for the AWS KMS CMK that is used to encrypt the inventory file\.
 
-**To grant permissions to encrypt using your AWS KMS key**
+**To grant permissions to encrypt using your AWS KMS CMK**
 
 1. Sign in to the AWS Management Console using the AWS account that owns the AWS KMS CMK, and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 

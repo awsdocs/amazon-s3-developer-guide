@@ -21,13 +21,13 @@ For more information about the endpoints, see [Key Differences Between the Amazo
 
  You can use the Amazon S3 console to set the website redirect location in the metadata of the object\. When you set a page redirect, you can either keep or delete the source object content\. For example, suppose that you have a` page1.html` object in your bucket\. To redirect any requests for this page to another object, `page2.html`, you can do one of the following:
 +  To keep the content of the `page1.html` object and only redirect page requests, choose the `page1.html` object\.  
-![\[Objects tab with page1.html object highlighted\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/sws-website-redirect-metadata-1.png)
+![\[Objects tab with page1.html object highlighted.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/sws-website-redirect-metadata-1.png)
 
   Choose the **Properties** tab for `page1.html`, and then choose the **Metadata** box\. Add `Website Redirect Location` to the metadata, as shown in the following example, and set its value to` /page2.html`\. The `/` prefix in the value is required\.   
-![\[Metadata box with website redirect location value\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/sws-website-redirect-metadata-2.png)
+![\[Metadata box with website redirect location value.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/sws-website-redirect-metadata-2.png)
 
-  You can also set the value to an external URL, such as `http://www.example.com`\. For example, if your root domain is `example.com`, and you want to serve requests for both `http://example.com` and `http://www.example.com`, you can create two buckets named `example.com` and `www.example.com`\. Then, maintain the content in one of the buckets \(say `example.com`\), and configure the other bucket to redirect all requests to the `example.com` bucket\. 
-+ To delete the content of the `page1.html` object and redirect requests, you can upload a new zero\-byte object with the same key, `page1.html`, to replace the existing object\. Then specify `Website Redirect Location` for `page1.html` in the upload process\. For information about uploading an object, see [Uploading S3 Objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
+  You can also set the value to an external URL, such as `http://www.example.com`\. For example, if your root domain is `example.com`, and you want to serve requests for both `http://example.com` and `http://www.example.com`, you can create two buckets named `example.com` and `www.example.com`\. Then, maintain the content in one of the buckets \(say, `example.com`\), and configure the other bucket to redirect all requests to the `example.com` bucket\. 
++ To delete the content of the `page1.html` object and redirect requests, you can upload a new zero\-byte object with the same key, `page1.html`, to replace the existing object\. Then specify `Website Redirect Location` for `page1.html` in the upload process\. For information about uploading an object, see [How Do I Upload Files and Folders to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Setting a Page Redirect from the REST API<a name="page-redirect-using-rest-api"></a>
 
@@ -37,9 +37,9 @@ The following Amazon S3 API actions support the `x-amz-website-redirect-location
 + [POST Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html)
 + [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)
 
-When setting a page redirect, you can either keep or delete the object content\. For example, suppose you have a `page1.html` object in your bucket\.
+When setting a page redirect, you can either keep or delete the object content\. For example, suppose that you have a `page1.html` object in your bucket\.
 + To keep the content of `page1.html` and only redirect page requests, you can submit a [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html) request to create a new `page1.html` object that uses the existing `page1.html` object as the source\. In your request, you set the `x-amz-website-redirect-location` header\. When the request is complete, you have the original page with its content unchanged, but Amazon S3 redirects any requests for the page to the redirect location that you specify\.
-+ To delete the content of the `page1.html` object and redirect requests for the page, you can send a PUT Object request to upload a zero\-byte object that has the same object key:`page1.html`\. In the PUT request, you set `x-amz-website-redirect-location` for `page1.html` to the new object\. When the request is complete, `page1.html` has no content, and requests are redirected to the location that is specified by `x-amz-website-redirect-location`\.
++ To delete the content of the `page1.html` object and redirect requests for the page, you can send a PUT Object request to upload a zero\-byte object that has the same object key: `page1.html`\. In the PUT request, you set `x-amz-website-redirect-location` for `page1.html` to the new object\. When the request is complete, `page1.html` has no content, and requests are redirected to the location that is specified by `x-amz-website-redirect-location`\.
 
 When you retrieve the object using the [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html) action, along with other object metadata, Amazon S3 returns the `x-amz-website-redirect-location` header in the response\.
 
@@ -49,17 +49,17 @@ Using advanced redirection rules, you can route requests conditionally according
 
 When configuring a bucket for website hosting, you have the option of specifying advanced redirection rules\.
 
-![\[Static website hosting screen showing optional redirection rules\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/staticwebsitehosting30.png)
+![\[Static website hosting screen showing optional redirection rules.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/staticwebsitehosting30.png)
 
-To redirect all requests to the bucket's website endpoint to another host, you only need to provide the host name\.
+To redirect all requests to the bucket's website endpoint to another host, you only need to provide the hostname\.
 
-![\[Static website hosting screen with redirect requests selected\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/staticwebsitehosting40.png)
+![\[Static website hosting screen with redirect requests selected.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/staticwebsitehosting40.png)
 
 You describe the rules using XML\. The following section provides general syntax and examples of specifying redirection rules\.
 
 ### Syntax for Specifying Routing Rules<a name="configure-bucket-as-website-routing-rule-syntax"></a>
 
-The following is general syntax for defining the routing rules in a website configuration:
+The following is general syntax for defining the routing rules in a website configuration\.
 
 ```
 <RoutingRules> =
@@ -106,11 +106,11 @@ The following table describes the elements in the routing rule\.
 | KeyPrefixEquals |  The prefix of the object key name from which requests are redirected\.  `KeyPrefixEquals` is required if `HttpErrorCodeReturnedEquals` is not specified\. If both `KeyPrefixEquals` and `HttpErrorCodeReturnedEquals` are specified, both must be true for the condition to be met\.  | 
 | HttpErrorCodeReturnedEquals |  The HTTP error code that must match for the redirect to apply\. If an error occurs, and if the error code meets this value, then the specified redirect applies\. `HttpErrorCodeReturnedEquals` is required if `KeyPrefixEquals` is not specified\. If both `KeyPrefixEquals` and `HttpErrorCodeReturnedEquals` are specified, both must be true for the condition to be met\.  | 
 | Redirect |  Container element that provides instructions for redirecting the request\. You can redirect requests to another host or another page, or you can specify another protocol to use\. A `RoutingRule` must have a `Redirect` element\. A `Redirect` element must contain at least one of the following sibling elements: `Protocol`, `HostName`, `ReplaceKeyPrefixWith`, `ReplaceKeyWith`, or `HttpRedirectCode`\.  | 
-| Protocol |  The protocol, http or https, to be used in the `Location` header that is returned in the response\.  If one of its siblings is supplied, `Protocol` is not required\.  | 
-| HostName |  The hostname to be used in the Location header that is returned in the response\. If one of its siblings is supplied, `HostName` is not required\.  | 
+| Protocol |  The protocol, `http` or `https`, to be used in the `Location` header that is returned in the response\.  If one of its siblings is supplied, `Protocol` is not required\.  | 
+| HostName |  The hostname to be used in the `Location` header that is returned in the response\. If one of its siblings is supplied, `HostName` is not required\.  | 
 | ReplaceKeyPrefixWith |  The prefix of the object key name that replaces the value of `KeyPrefixEquals` in the redirect request\.  If one of its siblings is supplied, `ReplaceKeyPrefixWith` is not required\. It can be supplied only if `ReplaceKeyWith` is not supplied\.  | 
-| ReplaceKeyWith |  The object key to be used in the Location header that is returned in the response\.  If one of its siblings is supplied, `ReplaceKeyWith` is not required\. It can be supplied only if `ReplaceKeyPrefixWith` is not supplied\.  | 
-| HttpRedirectCode |  The HTTP redirect code to be used in the Location header that is returned in the response\. If one of its siblings is supplied, `HttpRedirectCode` is not required\.  | 
+| ReplaceKeyWith |  The object key to be used in the `Location` header that is returned in the response\.  If one of its siblings is supplied, `ReplaceKeyWith` is not required\. It can be supplied only if `ReplaceKeyPrefixWith` is not supplied\.  | 
+| HttpRedirectCode |  The HTTP redirect code to be used in the `Location` header that is returned in the response\. If one of its siblings is supplied, `HttpRedirectCode` is not required\.  | 
 
 The following examples explain common redirection tasks:
 
@@ -120,7 +120,7 @@ Suppose that your bucket contains the following objects:
 + docs/article1\.html
 + docs/article2\.html
 You decide to rename the folder from `docs/` to `documents/`\. After you make this change, you need to redirect requests for prefix `docs/` to `documents/`\. For example, request for `docs/article1.html` will be redirected to `documents/article1.html`\.  
-In this case, you add the following routing rule to the website configuration:  
+In this case, you add the following routing rule to the website configuration\.  
 
 ```
   <RoutingRules>

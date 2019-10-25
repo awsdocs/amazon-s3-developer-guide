@@ -1,6 +1,6 @@
 # Specifying the AWS Key Management Service in Amazon S3 Using the REST API<a name="KMSUsingRESTAPI"></a>
 
-At the time of object creation—that is, when you are uploading a new object or making a copy of an existing object—you can specify the use of server\-side encryption with AWS KMS–managed encryption keys \(SSE\-KMS\) to encrypt your data by adding the `x-amz-server-side-encryption` header to the request\. Set the value of the header to the encryption algorithm `aws:kms`\. Amazon S3 confirms that your object is stored using SSE\-KMS by returning the response header `x-amz-server-side-encryption`\. 
+At the time of object creation—that is, when you are uploading a new object or making a copy of an existing object—you can specify the use of server\-side encryption with AWS Key Management Service \(SSE\-KMS\) customer master keys \(CMKs\) to encrypt your data by adding the `x-amz-server-side-encryption` header to the request\. Set the value of the header to the encryption algorithm `aws:kms`\. Amazon S3 confirms that your object is stored using SSE\-KMS by returning the response header `x-amz-server-side-encryption`\. 
 
 The following REST upload APIs accept the `x-amz-server-side-encryption` request header\.
 + [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)

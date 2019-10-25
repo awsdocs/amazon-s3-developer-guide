@@ -12,8 +12,7 @@ If your application requires particular semantics \(for example, ensuring that n
 + [Event Notification Types and Destinations](#notification-how-to-event-types-and-destinations)
 + [Configuring Notifications with Object Key Name Filtering](#notification-how-to-filtering)
 + [Granting Permissions to Publish Event Notification Messages to a Destination](#grant-destinations-permissions-to-s3)
-+ [Example Walkthrough 1: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)](ways-to-add-notification-config-to-bucket.md)
-+ [Example Walkthrough 2: Configure a Bucket for Notifications \(Message Destination: AWS Lambda\)](notification-walkthrough-2.md)
++ [Example Walkthrough: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)](ways-to-add-notification-config-to-bucket.md)
 + [Event Message Structure](notification-content-structure.md)
 
 ## Overview<a name="notification-how-to-overview"></a>
@@ -49,13 +48,9 @@ Amazon S3 supports the following destinations where it can publish events:
 
   AWS Lambda is a compute service that makes it easy for you to build applications that respond quickly to new information\. AWS Lambda runs your code in response to events such as image uploads, in\-app activity, website clicks, or outputs from connected devices\. You can use AWS Lambda to extend other AWS services with custom logic, or create your own back\-end that operates at AWS scale, performance, and security\. With AWS Lambda, you can easily create discrete, event\-driven applications that execute only when needed and scale automatically from a few requests per day to thousands per second\. 
 
-  AWS Lambda can run custom code in response to Amazon S3 bucket events\. You upload your custom code to AWS Lambda and create what is called a Lambda function\. When Amazon S3 detects an event of a specific type \(for example, an object created event\), it can publish the event to AWS Lambda and invoke your function in Lambda\. In response, AWS Lambda executes your function\. For more information, see [AWS Lambda](https://aws.amazon.com/lambda/) product detail page\. 
+  AWS Lambda can run custom code in response to Amazon S3 bucket events\. You upload your custom code to AWS Lambda and create what is called a Lambda function\. When Amazon S3 detects an event of a specific type \(for example, an object created event\), it can publish the event to AWS Lambda and invoke your function in Lambda\. In response, AWS Lambda executes your function\. For an example of using Amazon S3 notifications with AWS Lambda, see [Using AWS Lambda with Amazon S3](https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html) in the *AWS Lambda Developer Guide*\. 
 
    
-
-The following sections offer more detail about how to enable event notifications on a bucket\. The subtopics also provide example walkthroughs to help you explore the notification feature\.
-+  [Example Walkthrough 1: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)](ways-to-add-notification-config-to-bucket.md)
-+  [Example Walkthrough 2: Configure a Bucket for Notifications \(Message Destination: AWS Lambda\)](notification-walkthrough-2.md) 
 
 ## How to Enable Event Notifications<a name="how-to-enable-disable-notification-intro"></a>
 
@@ -146,7 +141,7 @@ Amazon S3 can send event notification messages to the following destinations\. Y
 + Publish event messages to an Amazon Simple Notification Service \(Amazon SNS\) topic
 + Publish event messages to an Amazon Simple Queue Service \(Amazon SQS\) queue
 **Note**  
-If the destination queue or topic is SSE enabled, Amazon S3 will need access to the associated KMS key to enable message encryption\.
+If the destination queue or topic is SSE enabled, Amazon S3 will need access to the associated AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) to enable message encryption\.
 + Publish event messages to AWS Lambda by invoking a Lambda function and providing the event message as an argument
 
 You must grant Amazon S3 permissions to post messages to an Amazon SNS topic or an Amazon SQS queue\. You must also grant Amazon S3 permission to invoke an AWS Lambda function on your behalf\. For information about granting these permissions, see [Granting Permissions to Publish Event Notification Messages to a Destination](#grant-destinations-permissions-to-s3)\. 
@@ -465,7 +460,7 @@ Note that for both the Amazon SNS and Amazon SQS IAM policies, you can specify t
   }
 ```
 
-Example of a key policy that you attach to the associated KMS key if the SQS queue is SSE enabled\. 
+Example of a key policy that you attach to the associated AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) if the SQS queue is SSE enabled\. 
 
 ```
 {
@@ -488,9 +483,9 @@ Example of a key policy that you attach to the associated KMS key if the SQS que
 }
 ```
 
-The policy grants Amazon S3 service principal permission for specific KMS actions that are necessary to encrypt messages added to the queue\.
+The policy grants Amazon S3 service principal permission for specific AWS KMS actions that are necessary to encrypt messages added to the queue\.
 
-For an example of how to attach a policy to a SNS topic or an SQS queue, see [Example Walkthrough 1: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)](ways-to-add-notification-config-to-bucket.md)\.
+For an example of how to attach a policy to a SNS topic or an SQS queue, see [Example Walkthrough: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)](ways-to-add-notification-config-to-bucket.md)\.
 
 For more information about permissions, see the following topics:
 + [Example Cases for Amazon SNS Access Control](https://docs.aws.amazon.com/sns/latest/dg/AccessPolicyLanguage_UseCases_Sns.html) in the *Amazon Simple Notification Service Developer Guide*

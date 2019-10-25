@@ -4,7 +4,7 @@ You can configure an Amazon S3 bucket to function like a website\. This example 
 
 **Topics**
 + [Step 1: Creating a Bucket and Configuring It as a Website](#step1-create-bucket-config-as-website)
-+ [Step 2: Adding a Bucket Policy That Makes Your Bucket Content Publicly Available](#step2-add-bucket-policy-make-content-public)
++ [Step 2: Adding a Bucket Policy That Makes Your Bucket Content Publicly Available](#step3-add-bucket-policy-make-content-public)
 + [Step 3: Uploading an Index Document](#step3-upload-index-doc)
 + [Step 4: Testing Your Website](#step4-test-web-site)
 
@@ -14,7 +14,7 @@ You can configure an Amazon S3 bucket to function like a website\. This example 
 
 1. Create a bucket\.
 
-   For step\-by\-step instructions, see [How Do I Create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in *Amazon Simple Storage Service Console User Guide*\.
+   For step\-by\-step instructions, see [How Do I Create an Amazon S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in *Amazon Simple Storage Service Console User Guide*\.
 
    For bucket naming guidelines, see [Bucket Restrictions and Limitations](BucketRestrictions.md)\. If you have a registered domain name, for additional information about bucket naming, see [Customizing Amazon S3 URLs with CNAMEs](VirtualHosting.md#VirtualHostingCustomURLs)\.
 
@@ -24,19 +24,36 @@ You can configure an Amazon S3 bucket to function like a website\. This example 
 
    1. In the **Index Document** box, type the name of your index document\. The name is typically `index.html`\.
 
-   1. Choose **Save** to save the website configuration\.
+   1.  Choose **Save** to save the website configuration\.
 
    1. Write down the **Endpoint**\.
 
       This is the Amazon S3\-provided website endpoint for your bucket\. You use this endpoint in the following steps to test your website\.
 
-## Step 2: Adding a Bucket Policy That Makes Your Bucket Content Publicly Available<a name="step2-add-bucket-policy-make-content-public"></a>
+### Editing Block Public Access Settings<a name="step2-edit-block-public-access"></a>
+
+By default, Amazon S3 blocks public access to your account and buckets\. If you want to use a bucket to host a static website, you can use these steps to edit block public access settings: 
+
+1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
+
+1. Select the bucket that you have configured as a static website, and choose **Edit public access settings\.**   
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/edit-public-access.png)
+
+1. Clear **Block *all* public access**, and choose **Save**\.  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/edit-public-access-clear.png)
+
+1. In the confirmation text box, enter **confirm**, and then choose **Confirm**\.  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/edit-public-access-confirm.png)
+
+   In your Amazon S3 bucket listing, the **Access** for your bucket updates to **Objects can be public**\. You can now add a bucket policy to make the objects in the bucket publicly readable\. If the **Access** still displays as **Bucket and objects not public**, you might have to [edit your block public access account settings](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/block-public-access-account.html) before adding a bucket policy\.
+
+## Step 2: Adding a Bucket Policy That Makes Your Bucket Content Publicly Available<a name="step3-add-bucket-policy-make-content-public"></a>
 
 1. In the **Properties** pane for the bucket, choose **Permissions**\.
 
-1. Choose **Add Bucket Policy**\.
+1. Choose **Bucket Policy**\.
 
-1. To host a website, your bucket must have public read access\. It is intentional that everyone in the world will have read access to this bucket\. Copy the following bucket policy, and then paste it in the Bucket Policy Editor\. 
+1. To grant public read access for your website, copy the following bucket policy, paste it in the **Bucket policy editor**, and choose **Save**\. 
 
    ```
     1. {
@@ -57,17 +74,19 @@ You can configure an Amazon S3 bucket to function like a website\. This example 
 
 1. Choose **Save**\.
 
+   In your Amazon S3 bucket listing, the **Access** for your bucket updates to **Public**\. 
+
 ## Step 3: Uploading an Index Document<a name="step3-upload-index-doc"></a>
 
 1. Create a document\. Give it the same name that you gave the index document earlier\.
 
 1. Using the console, upload the index document to your bucket\.
 
-   For instructions, see [Uploading S3 Objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
+   For instructions, see [How Do I Upload Files and Folders to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Step 4: Testing Your Website<a name="step4-test-web-site"></a>
 
-Type the following URL in the browser, replacing *example\-bucket* with the name of your bucket and *website\-region* with the name of the AWS Region where you deployed your bucket\. For information about AWS Region names, see [Website Endpoints](WebsiteEndpoints.md) \)\. 
+Enter the following URL in the browser, replacing *example\-bucket* with the name of your bucket and *website\-region* with the name of the AWS Region where you deployed your bucket\. For information about AWS Region names, see [Website Endpoints](WebsiteEndpoints.md) \)\. 
 
 The two general forms of an Amazon S3 website endpoint are as follows: 
 
@@ -84,4 +103,4 @@ If your browser displays your `index.html` page, the website was successfully de
 **Note**  
 HTTPS access to the website is not supported\.
 
-You now have a website hosted on Amazon S3\. This website is available at the Amazon S3 website endpoint\. However, you might have a domain, such as `example.com`, that you want to use to serve the content from the website you created\. You might also want to use Amazon S3 root domain support to serve requests for both `http://www.example.com` and `http://example.com`\. This requires additional steps\. For an example, see [Example: Setting up a Static Website Using a Custom Domain](website-hosting-custom-domain-walkthrough.md)\. 
+You now have a website hosted on Amazon S3\. This website is available at the Amazon S3 website endpoint\. However, you might have a domain, such as `example.com`, that you want to use to serve the content from the website you created\. You might also want to use Amazon S3 root domain support to serve requests for both `http://www.example.com` and `http://example.com`\. This requires additional steps\. For an example, see [Example: Setting Up a Static Website Using a Custom Domain](website-hosting-custom-domain-walkthrough.md)\. 

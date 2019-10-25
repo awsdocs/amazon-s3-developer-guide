@@ -1,6 +1,6 @@
 # Example 4: Replicating Encrypted Objects<a name="replication-walkthrough-4"></a>
 
-By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with AWS KMS\-managed keys\. To replicate encrypted objects, you modify the bucket replication configuration to tell Amazon S3 to replicate these objects\. This example explains how to use the Amazon S3 console and the AWS Command Line Interface \(AWS CLI\) to change the bucket replication configuration to enable replicating encrypted objects\. For more information, see [Additional Replication Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](replication-config-for-kms-objects.md)\. 
+By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with AWS Key Management Service \(AWS KMS\) customer master keys \(CMKs\)\. To replicate encrypted objects, you modify the bucket replication configuration to tell Amazon S3 to replicate these objects\. This example explains how to use the Amazon S3 console and the AWS Command Line Interface \(AWS CLI\) to change the bucket replication configuration to enable replicating encrypted objects\. For more information, see [Additional Replication Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](replication-config-for-kms-objects.md)\. 
 
 **Topics**
 
@@ -12,7 +12,7 @@ For step\-by\-step instructions, see [How Do I Add a Replication Rule to an S3 B
 
 To replicate encrypted objects with the AWS CLI, you create buckets, enable versioning on the buckets, create an IAM role that gives Amazon S3 permission to replicate objects, and add the replication configuration to the source bucket\. The replication configuration provides information related to replicating objects encrypted using KMS keys\. The IAM role permissions include necessary permissions to replicate the encrypted objects\. You also test the setup\.
 
-**To replicate encrypted objects \(AWS CLI\)**
+**To replicate server\-side encrypted objects \(AWS CLI\)**
 
 1. In this example, we create both the *source* and *destination* buckets in the same AWS account\. Set a credentials profile for the AWS CLI\. In this example, we use the profile name `acctA`\. For more information about setting credential profiles, see [Named Profiles](https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html) in the AWS Command Line Interface User Guide\. 
 
@@ -74,7 +74,7 @@ To set up replication configuration when both *source* and *destination* buckets
          }
          ```
 
-      1. Create a role:
+      1. Create a role\.
 
          ```
          $ aws iam create-role \
@@ -87,7 +87,7 @@ To set up replication configuration when both *source* and *destination* buckets
 
       1. Copy the following permissions policy and save it to a file named `s3-role-permissions-policykmsobj.json` in the current directory on your local computer\. You create an IAM role and attach the policy to it later\. 
 **Important**  
- In the permissions policy, you specify the AWS KMS key IDs that will be used for encryption of *source* and `destination` buckets\. You must create two separate KMS keys for the `source` and `destination` buckets\. KMS keys are never shared outside the AWS Region in which they were created\. 
+ In the permissions policy, you specify the AWS KMS key IDs that will be used for encryption of *source* and `destination` buckets\. You must create two separate AWS KMS CMKs for the `source` and `destination` buckets\. AWS KMS CMKs are never shared outside the AWS Region in which they were created\. 
 
          ```
          {
@@ -165,7 +165,7 @@ To set up replication configuration when both *source* and *destination* buckets
          }
          ```
 
-      1. Create a policy and attach it to the role:
+      1. Create a policy and attach it to the role\.
 
          ```
          $ aws iam put-role-policy \
@@ -257,9 +257,9 @@ In the replication configuration you specify the IAM role that Amazon S3 can ass
 
    1. In the *source* bucket, create a folder named `Tax`\. 
 
-   1. Add sample objects to the folder\. Be sure to choose the encryption option and specify your KMS key to encrypt the objects\. 
+   1. Add sample objects to the folder\. Be sure to choose the encryption option and specify your AWS KMS CMK to encrypt the objects\. 
 
-   1. Verify that the *destination* bucket contains the object replicas and that they are encrypted using the KMS encryption key that you specified in the configuration\.
+   1. Verify that the *destination* bucket contains the object replicas and that they are encrypted using the AWS KMS CMK that you specified in the configuration\.
 
 ## Replicate Encrypted Objects \(AWS SDK\)<a name="replication-ex4-sdk"></a>
 

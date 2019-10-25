@@ -23,7 +23,7 @@ To configure your bucket to allow cross\-origin requests, you create a CORS conf
 
 You can add up to 100 rules to the configuration\. You add the XML document as the `cors` subresource to the bucket  either programmatically or by using the Amazon S3 console\. For more information, see [Enabling Cross\-Origin Resource Sharing \(CORS\)](ManageCorsUsing.md)\.
 
-Instead of accessing a website by using an Amazon S3 website endpoint, you can use your own domain, such as `example1.com` to serve your content\. For information about using your own domain, see [Example: Setting up a Static Website Using a Custom Domain](website-hosting-custom-domain-walkthrough.md)\. The following example `cors` configuration has three rules, which are specified as `CORSRule` elements:
+Instead of accessing a website by using an Amazon S3 website endpoint, you can use your own domain, such as `example1.com` to serve your content\. For information about using your own domain, see [Example: Setting Up a Static Website Using a Custom Domain](website-hosting-custom-domain-walkthrough.md)\. The following example `cors` configuration has three rules, which are specified as `CORSRule` elements:
 + The first rule allows cross\-origin PUT, POST, and DELETE requests from the `http://www.example1.com` origin\. The rule also allows all headers in a preflight OPTIONS request through the `Access-Control-Request-Headers` header\. In response to preflight OPTIONS requests, Amazon S3 returns requested headers\.
 + The second rule allows the same cross\-origin requests as the first rule, but the rule applies to another origin, `http://www.example2.com`\. 
 + The third rule allows cross\-origin GET requests from all origins\. The `*` wildcard character refers to all origins\. 

@@ -272,7 +272,7 @@ The following example shows a CloudTrail log entry that demonstrates the [GET Se
           "host": [
               "s3.us-west-2.amazonaws.com"
           ],
-          "bucketName": "myawsbucket",
+          "bucketName": "aws-s3-bucket1",
           "versioning": [
               ""
           ]

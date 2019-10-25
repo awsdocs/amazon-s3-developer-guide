@@ -1,6 +1,6 @@
 # Object Key and Metadata<a name="UsingMetadata"></a>
 
-Each Amazon S3 object has data, a key, and metadata\. Object key \(or key name\) uniquely identifies the object in a bucket\. Object metadata is a set of name\-value pairs\. You can set object metadata at the time you upload it\. After you upload the object, you cannot modify object metadata\. The only way to modify object metadata is to make a copy of the object and set the metadata\. 
+Each Amazon S3 object has data, a key, and metadata\. The object key \(or key name\) uniquely identifies the object in a bucket\. Object metadata is a set of name\-value pairs\. You can set object metadata at the time you upload it\. After you upload the object, you cannot modify object metadata\. The only way to modify object metadata is to make a copy of the object and set the metadata\. 
 
 **Topics**
 + [Object Keys](#object-keys)
@@ -8,7 +8,7 @@ Each Amazon S3 object has data, a key, and metadata\. Object key \(or key name\)
 
 ## Object Keys<a name="object-keys"></a>
 
-When you create an object, you specify the key name, which uniquely identifies the object in the bucket\. For example, in the Amazon S3 console \(see [AWS Management Console](https://console.aws.amazon.com/s3/home)\), when you highlight a bucket, a list of objects in your bucket appears\. These names are the object keys\. The name for a key is a sequence of Unicode characters whose UTF\-8 encoding is at most 1024 bytes long\. 
+When you create an object, you specify the key name, which uniquely identifies the object in the bucket\. For example, in the [Amazon S3 console](https://console.aws.amazon.com/s3/home), when you highlight a bucket, a list of objects in your bucket appears\. These names are the object keys\. The name for a key is a sequence of Unicode characters whose UTF\-8 encoding is at most 1024 bytes long\. 
 
 The Amazon S3 data model is a flat structure: you create a bucket, and the bucket stores objects\. There is no hierarchy of subbuckets or subfolders\. However, you can infer logical hierarchy using key name prefixes and delimiters as the Amazon S3 console does\. The Amazon S3 console supports a concept of folders\. Suppose that your bucket \(`admin-created`\) has four objects with the following object keys:
 
@@ -20,7 +20,7 @@ The Amazon S3 data model is a flat structure: you create a bucket, and the bucke
 
 `s3-dg.pdf`
 
-The console uses the key name prefixes \(`Development/`, `Finance/`, and `Private/`\) and delimiter \('/'\) to present a folder structure as shown:
+The console uses the key name prefixes \(`Development/`, `Finance/`, and `Private/`\) and delimiter \('/'\) to present a folder structure as shown\.
 
 ![\[Screenshot of Amazon S3 console with Development, Finance, and Private folders.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/ui-folder.png)![\[Screenshot of Amazon S3 console with Development, Finance, and Private folders.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screenshot of Amazon S3 console with Development, Finance, and Private folders.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
 
@@ -112,12 +112,12 @@ The following table provides a list of system\-defined metadata and whether you 
 | Content\-Length | Object size in bytes\. | No | 
 | Last\-Modified |  Object creation date or the last modified date, whichever is the latest\.  | No | 
 | Content\-MD5 | The base64\-encoded 128\-bit MD5 digest of the object\. | No | 
-| x\-amz\-server\-side\-encryption | Indicates whether server\-side encryption is enabled for the object, and whether that encryption is from the AWS Key Management Service \(SSE\-KMS\) or from AWS managed encryption \(SSE\-S3\)\. For more information, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.  | Yes | 
+| x\-amz\-server\-side\-encryption | Indicates whether server\-side encryption is enabled for the object, and whether that encryption is from the AWS Key Management Service \(AWS KMS\) or from Amazon S3 managed encryption \(SSE\-S3\)\. For more information, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.  | Yes | 
 | x\-amz\-version\-id | Object version\. When you enable versioning on a bucket, Amazon S3 assigns a version number to objects added to the bucket\. For more information, see [Using Versioning](Versioning.md)\. | No | 
 | x\-amz\-delete\-marker | In a bucket that has versioning enabled, this Boolean marker indicates whether the object is a delete marker\.  | No | 
 | x\-amz\-storage\-class | Storage class used for storing the object\. For more information, see [Amazon S3 Storage Classes](storage-class-intro.md)\. | Yes | 
 | x\-amz\-website\-redirect\-location |  Redirects requests for the associated object to another object in the same bucket or an external URL\. For more information, see [\(Optional\) Configuring a Webpage Redirect](how-to-page-redirect.md)\. | Yes | 
-| x\-amz\-server\-side\-encryption\-aws\-kms\-key\-id | If x\-amz\-server\-side\-encryption is present and has the value of aws:kms, this indicates the ID of the AWS Key Management Service \(AWS KMS\) master encryption key that was used for the object\. | Yes | 
+| x\-amz\-server\-side\-encryption\-aws\-kms\-key\-id | If x\-amz\-server\-side\-encryption is present and has the value of aws:kms, this indicates the ID of the AWS KMS customer master key \(CMK\) that was used for the object\. | Yes | 
 | x\-amz\-server\-side\-encryption\-customer\-algorithm | Indicates whether server\-side encryption with customer\-provided encryption keys \(SSE\-C\) is enabled\. For more information, see [Protecting Data Using Server\-Side Encryption with Customer\-Provided Encryption Keys \(SSE\-C\)](ServerSideEncryptionCustomerKeys.md)\.  | Yes | 
 
 ### User\-Defined Object Metadata<a name="UserMetadata"></a>

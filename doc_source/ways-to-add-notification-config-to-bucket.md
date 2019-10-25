@@ -1,4 +1,4 @@
-# Example Walkthrough 1: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)<a name="ways-to-add-notification-config-to-bucket"></a>
+# Example Walkthrough: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)<a name="ways-to-add-notification-config-to-bucket"></a>
 
 **Topics**
 + [Walkthrough Summary](#notification-walkthrough-summary)
@@ -107,7 +107,7 @@ Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Ama
    }
    ```
 
-1. \(Optional\) If the Amazon SQS queue is server\-side encryption \(SSE\) enabled, add the following policy to the associated custom AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. You must add the policy to a custom CMK because the default AWS managed CMK for Amazon SQS cannot be modified\. For more information about using SSE for Amazon SQS with AWS KMS, see [Protecting Data Using Server\-Side Encryption \(SSE\) and AWS KMS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html)\. 
+1. \(Optional\) If the Amazon SQS queue is server\-side encryption \(SSE\) enabled, add the following policy to the associated customer managed AWS KMS CMK\. You must add the policy to a customer managed CMK because the AWS managed CMK for Amazon SQS cannot be modified\. For more information about using SSE for Amazon SQS with AWS KMS, see [Protecting Data Using Server\-Side Encryption \(SSE\) and AWS KMS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html)\. 
 
    ```
    {

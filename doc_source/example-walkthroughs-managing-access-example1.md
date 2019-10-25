@@ -5,7 +5,7 @@
 + [Step 1: Create Resources \(a Bucket and an IAM User\) in Account A and Grant Permissions](#grant-permissions-to-user-in-your-account-step1)
 + [Step 2: Test Permissions](#grant-permissions-to-user-in-your-account-test)
 
-In this exercise, an AWS account owns a bucket, and it has an IAM user in the account\. The user by default has no permissions\. The parent account must grant permissions to the user to perform any tasks\. Both the bucket owner and the parent account to which the user belongs are the same\. Therefore, the AWS account can use a bucket policy, a user policy, or both to grant its user permissions on the bucket\. You will grant some permissions using a bucket policy and grant other permissions using a user policy\.
+In this exercise, an AWS account owns a bucket, and it has an IAM user in the account\. By default, the user has no permissions\. For the user to perform any tasks, the parent account must grant them permissions\. The bucket owner and parent account are the same\. Therefore, to grant the user permissions on the bucket, the AWS account can use a bucket policy, a user policy, or both\. The account owner will grant some permissions using a bucket policy and other permissions using a user policy\.
 
 The following steps summarize the walkthrough:
 

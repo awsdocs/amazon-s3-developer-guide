@@ -1,6 +1,6 @@
 # Configuring a Bucket for Website Hosting<a name="HowDoIWebsiteConfiguration"></a>
 
-You can host a static website in an Amazon Simple Storage Service \(Amazon S3\) bucket\. However, to do so requires some configuration\. Some optional configurations are also available, depending on your website requirements\.
+You can host a static website in an Amazon S3 bucket\. However, to do so requires some configuration\. Some optional configurations are also available, depending on your website requirements\.
 
 **Required configurations:**
 + [Enabling Website Hosting](EnableWebsiteHosting.md)

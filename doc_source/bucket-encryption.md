@@ -1,16 +1,11 @@
 # Amazon S3 Default Encryption for S3 Buckets<a name="bucket-encryption"></a>
 
-Amazon S3 default encryption provides a way to set the default encryption behavior for an S3 bucket\. You can set default encryption on a bucket so that all objects are encrypted when they are stored in the bucket\. The objects are encrypted using server\-side encryption with either Amazon S3\-managed keys \(SSE\-S3\) or AWS KMS\-managed keys \(SSE\-KMS\)\. 
+Amazon S3 default encryption provides a way to set the default encryption behavior for an S3 bucket\. You can set default encryption on a bucket so that all new objects are encrypted when they are stored in the bucket\. The objects are encrypted using server\-side encryption with either Amazon S3\-managed keys \(SSE\-S3\) or customer master keys \(CMKs\) stored in AWS Key Management Service \(AWS KMS\)\. 
 
-When you use server\-side encryption, Amazon S3 encrypts an object before saving it to disk in its data centers and decrypts it when you download the objects\. For more information about protecting data using server\-side encryption and encryption key management, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.
-
-Default encryption works with all existing and new S3 buckets\. Without default encryption, to encrypt all objects stored in a bucket, you must include encryption information with every object storage request\. You must also set up an S3 bucket policy to reject storage requests that don't include encryption information\. 
-
-There are no new charges for using default encryption for S3 buckets\. Requests to configure the default encryption feature incur standard Amazon S3 request charges\. For information about pricing, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. For SSE\-KMS encryption key storage, AWS Key Management Service charges apply and are listed at [AWS KMS Pricing](https://aws.amazon.com/kms/pricing/)\. 
+When you use server\-side encryption, Amazon S3 encrypts an object before saving it to disk and decrypts it when you download the objects\. For more information about protecting data using server\-side encryption and encryption key management, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.
 
 **Topics**
 + [How Do I Set Up Amazon S3 Default Encryption for an S3 Bucket?](#bucket-encryption-how-to-set-up)
-+ [Moving to Default Encryption from Using Bucket Policies for Encryption Enforcement](#bucket-encryption-update-bucket-policy)
 + [Using Default Encryption with Replication](#bucket-encryption-update-bucket-policy)
 + [Monitoring Default Encryption with CloudTrail and CloudWatch](#bucket-encryption-tracking)
 + [More Info](#bucket-encryption-related-resources)
@@ -19,44 +14,27 @@ There are no new charges for using default encryption for S3 buckets\. Requests 
 
 This section describes how to set up Amazon S3 default encryption\. You can use the AWS SDKs, the Amazon S3 REST API, the AWS Command Line Interface \(AWS CLI\), or the Amazon S3 console to enable the default encryption\. The easiest way to set up default encryption for an S3 bucket is by using the AWS Management Console\.
 
-You can set up default encryption on a bucket using any of the following ways:
+To set up default encryption on a bucket, you can use any of these methods:
 + Use the Amazon S3 console\. For more information, see [How Do I Enable Default Encryption for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/default-bucket-encryption.html) in the *Amazon Simple Storage Service Console User Guide*\.
-+ Use the following REST APIs:
-  + Use the REST API [PUT Bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html) operation to enable default encryption and to set the type of server\-side encryption to use—SSE\-S3 or SSE\-KMS\.
-  + Use the REST API [DELETE Bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEencryption.html) to disable the default encryption of objects\. After you disable default encryption, Amazon S3 encrypts objects only if `PUT` requests include the encryption information\. For more information, see [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) and [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\.
-  + Use the REST API [GET Bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETencryption.html) to check the current default encryption configuration\.
++ Use the REST API [PUT Bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html) operation to enable default encryption and set the type of server\-side encryption to use—SSE\-S3 or SSE\-KMS\.
 + Use the AWS CLI and AWS SDKs\. For more information, see [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)\. 
 
 After you enable default encryption for a bucket, the following encryption behavior applies:
 + There is no change to the encryption of the objects that existed in the bucket before default encryption was enabled\. 
 + When you upload objects after enabling default encryption:
   + If your `PUT` request headers don't include encryption information, Amazon S3 uses the bucket’s default encryption settings to encrypt the objects\. 
-  + If your `PUT` request headers include encryption information, Amazon S3 uses the encryption information from the `PUT` request to encrypt objects before storing them in Amazon S3\. If the `PUT` succeeds, the response is an `HTTP/1.1 200 OK` with the encryption information in the response headers\. For more information, see [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\.
+  + If your `PUT` request headers include encryption information, Amazon S3 uses the encryption information from the `PUT` request to encrypt objects before storing them in Amazon S3\.
 + If you use the SSE\-KMS option for your default encryption configuration, you are subject to the RPS \(requests per second\) limits of AWS KMS\. For more information about AWS KMS limits and how to request a limit increase, see [AWS KMS limits](https://docs.aws.amazon.com/kms/latest/developerguide/limits.html)\. 
 
-## Moving to Default Encryption from Using Bucket Policies for Encryption Enforcement<a name="bucket-encryption-update-bucket-policy"></a>
-
-If you currently enforce object encryption for an S3 bucket by using a bucket policy to reject `PUT` requests without encryption headers, we recommend that you use the following procedure to start using default encryption\.
-
-**To change from using a bucket policy to reject `PUT` requests without encryption headers to using default encryption**
-
-1. If you plan to specify that default encryption use SSE\-KMS, make sure that all `PUT` and `GET` object requests are signed using Signature Version 4 and sent over an SSL connection to Amazon S3\. For information about using AWS KMS, see [Protecting Data Using Server\-Side Encryption with keys stored in AWS KMS\(SSE\-KMS\)](UsingKMSEncryption.md)\. 
-**Note**  
-By default, the Amazon S3 console, the AWS CLI version 1\.11\.108 and later, and all AWS SDKs released after May 2016 use Signature Version 4 signed requests sent to Amazon S3 over an SSL connection\. 
-
-1. Delete the bucket policy statements that reject `PUT` requests without encryption headers\. \(We recommend that you save a backup copy of the bucket policy that is being replaced\.\)
-
-1. To ensure that the encryption behavior is set as you want, test multiple `PUT` requests to closely simulate your actual workload\. 
-
-1. If you are using default encryption with SSE\-KMS, monitor your clients for failing `PUT` and `GET` requests that weren’t failing before your changes\. Most likely these are the requests that you didn't update according to Step 1\. Change the failing `PUT` or `GET` requests to be signed with AWS Signature Version 4 and sent over SSL\.
-
-After you enable default encryption for your S3 bucket, objects stored in Amazon S3 through any `PUT` requests without encryption headers are encrypted using the bucket\-level default encryption settings\.
+To encrypt your existing Amazon S3 objects with a single request, you can use Amazon S3 batch operations\. You provide Amazon S3 batch operations with a list of objects to operate on, and Amazon S3 batch operations calls the respective API to perform the specified operation\. You can use the copy operation to copy the existing unencrypted objects and write the new encrypted objects to the same bucket\. A single Amazon S3 batch operations job can perform the specified operation on billions of objects containing exabytes of data\.
 
 ## Using Default Encryption with Replication<a name="bucket-encryption-update-bucket-policy"></a>
 
 After you enable default encryption for a replication destination bucket, the following encryption behavior applies: 
 + If objects in the source bucket are not encrypted, the replica objects in the destination bucket are encrypted using the default encryption settings of the destination bucket\. This results in the `ETag` of the source object being different from the `ETag` of the replica object\. You must update applications that use the `ETag` to accommodate for this difference\.
 + If objects in the source bucket are encrypted using SSE\-S3 or SSE\-KMS, the replica objects in the destination bucket use the same encryption as the source object encryption\. The default encryption settings of the destination bucket are not used\.
+
+For more information about using default encruption with SSE\-KMS, see [Replicating Encrypted Objects](replication-config-for-kms-objects.md)\.
 
 ## Monitoring Default Encryption with CloudTrail and CloudWatch<a name="bucket-encryption-tracking"></a>
 

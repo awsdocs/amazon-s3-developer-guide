@@ -109,7 +109,7 @@ Amazon S3 supports both virtual\-hosted–style and path\-style URLs to access a
 
    
 +  In a path\-style URL, the bucket name is not part of the domain\. For example:
-  + Region\-specific endpoint, `http://s3-aws-region.amazonaws.com/bucket`
+  + Region\-specific endpoint, `http://s3.aws-region.amazonaws.com/bucket`
   + US East \(N\. Virginia\) Region endpoint, `http://s3.amazonaws.com/bucket `
 
    In a path\-style URL, the endpoint you use must match the Region in which the bucket resides\. For example, if your bucket is in the South America \(São Paulo\) Region, you must use the `http://s3.sa-east-1.amazonaws.com/bucket` endpoint\. If your bucket is in the US East \(N\. Virginia\) Region, you must use the `http://s3.amazonaws.com/bucket` endpoint\.

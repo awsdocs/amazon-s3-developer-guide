@@ -26,7 +26,7 @@ When you `DELETE` an object, all versions remain in the bucket and Amazon S3 ins
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/versioning_DELETE_versioningEnabled.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
 
-The delete marker becomes the current version of the object\. By default, `GET` requests retrieve the most recently stored version\. Performing a simple `GET Object` request when the current version is a delete marker returns a `403 Forbidden` error, as shown in the following figure\.
+The delete marker becomes the current version of the object\. By default, `GET` requests retrieve the most recently stored version\. Performing a simple `GET Object` request when the current version is a delete marker returns a `404 Forbidden` error, as shown in the following figure\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/versioning_DELETE_NoObjectFound2.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
 

@@ -8,7 +8,10 @@ Amazon S3 replicates the following:
 + Objects created after you add a replication configuration, with exceptions described in the next section\.
 
    
-+ Both unencrypted objects and objects encrypted using Amazon S3 managed keys \(SSE\-S3\) or AWS KMS managed keys \(SSE\-KMS\), although you must explicitly enable the option to replicate objects encrypted using KMS keys\. The replicated copy of the object is encrypted using the same type of server\-side encryption that was used for the source object\. For more information about server\-side encryption, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.
++ Unencrypted objects\. 
+
+   
++ Objects encrypted at rest under Amazon S3 managed keys \(SSE\-S3\) or customer master keys \(CMKs\) stored in AWS Key Management Service \(SSE\-KMS\)\. To replicate objects encrypted with CMKs stored in AWS KMS, you must explicitly enable the option\. The replicated copy of the object is encrypted using the same type of server\-side encryption that was used for the source object\. For more information about server\-side encryption, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.
 
    
 + Object metadata\.
@@ -45,7 +48,7 @@ Amazon S3 doesn't replicate the following:
    
 + The following encrypted objects:
   + Objects created with server\-side encryption using customer\-provided \(SSE\-C\) encryption keys\.
-  + Objects created with server\-side encryption using AWS KMS managed encryption \(SSE\-KMS\) keys\. By default, Amazon S3 does not replicate objects encrypted using KMS keys\. However, you can explicitly enable replication of these objects in the replication configuration, and provide relevant information so that Amazon S3 can replicate these objects\.
+  + Objects created with server\-side encryption using CMKs stored in AWS KMS\. By default, Amazon S3 does not replicate objects encrypted using KMS CMKs\. However, you can explicitly enable replication of these objects in the replication configuration, and provide relevant information so that Amazon S3 can replicate these objects\.
 
    For more information about server\-side encryption, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. 
 

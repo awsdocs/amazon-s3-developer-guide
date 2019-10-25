@@ -168,7 +168,7 @@ You can add the following options in the `<Destination>` element:
   ```
 
   If you don't add this element to the replication configuration, the replicas are owned by same AWS account that owns the source object\. For more information, see [Additional Replication Configuration: Changing the Replica Owner](replication-change-owner.md)\.
-+ Your source bucket might contain objects that were created with server\-side encryption using keys stored in AWS KMS\. By default, Amazon S3 doesn't replicate these objects\. You can optionally direct Amazon S3 to replicate these objects by first explicitly opting into this feature by adding the SourceSelectionCriteria element and then providing the AWS KMS key \(for the AWS Region of the destination bucket\) to use for encrypting object replicas\. 
++ Your source bucket might contain objects that were created with server\-side encryption using keys stored in AWS KMS\. By default, Amazon S3 doesn't replicate these objects\. You can optionally direct Amazon S3 to replicate these objects by first explicitly opting into this feature by adding the SourceSelectionCriteria element and then providing the AWS KMS CMK \(for the AWS Region of the destination bucket\) to use for encrypting object replicas\. 
 
   ```
   ...

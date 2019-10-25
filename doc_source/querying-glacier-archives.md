@@ -17,7 +17,7 @@ You can use the select type of restore with the AWS SDKs, the Glacier REST API, 
 
 The following are requirements for using select:
 + Archive objects that are queried by select must be formatted as uncompressed comma\-separated values \(CSV\)\. 
-+ An S3 bucket for output\. The AWS account that you use to initiate an Glacier select job must have write permissions for the S3 bucket\. The Amazon S3 bucket must be in the same AWS Region as the bucket that contains the archived object that is being queried\.
++ An S3 bucket for output\. The AWS account that you use to initiate a Glacier select job must have write permissions for the S3 bucket\. The Amazon S3 bucket must be in the same AWS Region as the bucket that contains the archived object that is being queried\.
 + The requesting AWS account must have permissions to perform the `s3:RestoreObject` and `s3:GetObject` actions\. For more information about these permissions, see [Permissions Related to Bucket Subresource Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-bucket-subresources)\. 
 + The archive must not be encrypted with SSE\-C or client\-side encryption\. 
 
@@ -44,11 +44,11 @@ Glacier Select supports a subset of the ANSI SQL language\. It supports common f
 
 When you initiate a select request, you define an output location for the results of your select query\. This location must be an Amazon S3 bucket in the same AWS Region as the bucket that contains the archived object that is being queried\. The AWS account that initiates the job must have permissions to write to the S3 bucket\. 
 
-You can specify the Amazon S3 storage class and encryption for the output objects stored in Amazon S3\. Select supports SSE\-KMS and SSE\-S3 encryption\. Select doesn't support SSE\-C and client\-side encryption\. For more information about Amazon S3 storage classes and encryption, see [Amazon S3 Storage Classes](storage-class-intro.md) and [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.
+You can specify the Amazon S3 storage class and encryption for the output objects stored in Amazon S3\. Select supports AWS Key Management Service \(SSE\-KMS\) and Amazon S3 \(SSE\-S3\) encryption\. Select doesn't support SSE\-C and client\-side encryption\. For more information about Amazon S3 storage classes and encryption, see [Amazon S3 Storage Classes](storage-class-intro.md) and [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.
 
 Glacier Select results are stored in the S3 bucket using the prefix provided in the output location specified in [POST Object restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html)\. From this information, select creates a unique prefix referring to the job ID\. \(Prefixes are used to group Amazon S3 objects together by beginning object names with a common string\.\) Under this unique prefix, there are two new prefixes created, `results` for results and `errors` for logs and errors\. Upon completion of the job, a result manifest is written which contains the location of all results\.
 
-There is also a placeholder file named `job.txt` that is written to the output location\. After it is written it is never updated\. The placeholder file is used for the following:
+There is also a placeholder file named `job.txt` that is written to the output location\. After it is written, it is never updated\. The placeholder file is used for the following:
 + Validation of the write permission and majority of SQL syntax errors synchronously\. 
 + Providing a static output about your select request that you can easily reference whenever you want\. 
 

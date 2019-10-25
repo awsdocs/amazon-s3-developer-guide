@@ -14,5 +14,11 @@ Anyone who receives the presigned URL can then access the object\. For example, 
 
 **Note**  
 Anyone with valid security credentials can create a presigned URL\. However, in order to successfully access an object, the presigned URL must be created by someone who has permission to perform the operation that the presigned URL is based upon\.
+The credentials that you can use to create a presigned URL include:  
+IAM instance profile: Valid up to 6 hours
+AWS Security Token Service : Valid up to 36 hours when signed with permanent credentials, such as the credentials of the AWS account root user or an IAM user
+IAM user: Valid up to 7 days when using AWS Signature Version 4  
+To create a presigned URL that's valid for up to 7 days, first designate IAM user credentials \(the access key and secret access key\) to the SDK that you're using\. Then, generate a presigned URL using AWS Signature Version 4\.
+If you created a presigned URL using a temporary token, then the URL expires when the token expires, even if the URL was created with a later expiration time\.
 
 You can generate presigned URL programmatically using the AWS SDK for Java and \.NET\. 
