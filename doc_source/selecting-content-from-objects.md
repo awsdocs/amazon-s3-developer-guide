@@ -16,13 +16,13 @@ The following are requirements for using Amazon S3 Select:
 
 The following limits apply when using Amazon S3 Select:
 + The maximum length of a SQL expression is 256 KB\.
-+ The maximum length of a record in the result is 1 MB\.
++ The maximum length of a record in the input or result is 1 MB\.
++ Amazon S3 Select can only emit nested data using the JSON output format\.
 
 Additional limitations apply when using Amazon S3 Select with Parquet objects:
 + Amazon S3 Select supports only columnar compression using GZIP or Snappy\. Amazon S3 Select doesn't support whole\-object compression for Parquet objects\.
 + Amazon S3 Select doesn't support Parquet output\. You must specify the output format as CSV or JSON\.
-+ The maximum uncompressed block size is 256 MB\.
-+ The maximum number of columns is 100\.
++ The maximum uncompressed row group size is 256 MB\.
 + You must use the data types specified in the object's schema\.
 + Selecting on a repeated field returns only the last value\.
 
@@ -31,6 +31,25 @@ Additional limitations apply when using Amazon S3 Select with Parquet objects:
 When you construct a request, you provide details of the object that is being queried using an `InputSerialization` object\. You provide details of how the results are to be returned using an `OutputSerialization` object\. You also include the SQL expression that Amazon S3 uses to filter the request\.
 
 For more information about constructing an Amazon S3 Select request, see [ SELECT Object Content](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html) in the *Amazon Simple Storage Service API Reference*\. You can also see one of the SDK code examples in the following sections\.
+
+### Requests Using Scan Ranges<a name="selecting-content-from-objects-using-byte-range"></a>
+
+Amazon S3 Select allows you to scan a subset of an object by specifying a range of bytes to query\. This lets you parallelize scanning the whole object by splitting the work into separate Amazon S3 Select requests for a series of non\-overlapping scan ranges\. Scan ranges do not need to be aligned with record boundaries\. An Amazon S3 Select scan range request will run across the byte range specified\. A record which starts within the scan range specified but extends beyond the scan range will be processed by the query\. For example; you have an Amazon S3 object containing a series of records in line\-delimited CSV format:
+
+```
+A,B
+C,D
+D,E
+E,F
+G,H
+I,J
+```
+
+ You use the Amazon S3 Select `ScanRange` parameter and *Start* at \(Byte\) 1 and *End* at \(Byte\) 4\. So scan range would start at **","** and scan till the end of record starting at **"C"** and return the result **C, D** because that is the end of the record\. 
+
+ Amazon S3 Select scan range requests support Parquet, CSV \(without quoted delimiters\), and JSON objects \(in LINES mode only\)\. CSV and JSON objects must be uncompressed\. For line\-based CSV and JSON objects, when a scan range is specified as part of the Amazon S3 Select request, all records which start within the scan range are processed\. For Parquet objects, all of the row groups that start within the scan range requested are processed\. 
+
+Amazon S3 Select scan range requests may be executed on the Amazon S3 CLI, API and SDK\. You can use the `ScanRange` parameter in the Amazon S3 Select request for this feature\. For more information, see the [ Amazon S3 SELECT Object Content](https://docs.aws.amazon.com/AmazonS3/latest/API/API_SelectObjectContent.html) in the *Amazon Simple Storage Service API Reference*\.
 
 ## Errors<a name="selecting-content-from-objects-errors"></a>
 

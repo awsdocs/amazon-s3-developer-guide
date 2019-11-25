@@ -4,8 +4,8 @@ Amazon S3 replicates only specific items in buckets that are configured for repl
 
 ## What Is Replicated?<a name="replication-what-is-replicated"></a>
 
-Amazon S3 replicates the following:
-+ Objects created after you add a replication configuration, with exceptions described in the next section\.
+By default Amazon S3 replicates the following:
++ Objects created after you add a replication configuration\.
 
    
 + Unencrypted objects\. 
@@ -42,7 +42,7 @@ If you delete an object from the source bucket, the following occurs:
 
 ## What Isn't Replicated?<a name="replication-what-is-not-replicated"></a>
 
-Amazon S3 doesn't replicate the following:
+By default Amazon S3 doesn't replicate the following:
 +  Objects that existed before you added the replication configuration to the bucket\. In other words, Amazon S3 doesn't replicate objects retroactively\.
 
    
@@ -74,6 +74,14 @@ If using the latest version of the replication configuration \(the XML specifies
   You can replicate objects from a source bucket to *only one* destination bucket\. After Amazon S3 replicates an object, the object can't be replicated again\. For example, if you change the destination bucket in an existing replication configuration, Amazon S3 won't replicate the object again\.
 
   Another example: Suppose that you configure replication where bucket A is the source and bucket B is the destination\. Now suppose that you add another replication configuration where bucket B is the source and bucket C is the destination\. In this case, objects in bucket B that are replicas of objects in bucket A are not replicated to bucket C\. 
+
+## Replicating Existing Objects<a name="existing-object-replication"></a>
+
+ To enable existing object replication for your account, you must contact [AWS Support](https://console.aws.amazon.com/support/home)\. To prevent your request from being delayed, title your AWS Support case "Replication for Existing Objects" and be sure to include the following information:
++ Source bucket
++ Destination bucket
++ Estimated storage volume to replicate \(in terabytes\) 
++ Estimated storage object count to replicate
 
 ## Related Topics<a name="replication-whatis-isnot-related-topics"></a>
 

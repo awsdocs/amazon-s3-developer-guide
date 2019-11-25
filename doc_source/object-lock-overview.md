@@ -4,6 +4,9 @@ You can use Amazon S3 object lock to store objects using a *write\-once\-read\-m
 
 For information about managing the lock status of your Amazon S3 objects, see [Managing Amazon S3 Object Locks](object-lock-managing.md)\.
 
+**Note**  
+ S3 buckets with Amazon S3 object lock cannot be used as destination buckets for [Amazon S3 Server Access Logging](ServerLogs.md)
+
 The following sections describe the main features of Amazon S3 object lock\.
 
 **Topics**

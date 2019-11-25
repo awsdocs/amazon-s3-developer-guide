@@ -31,12 +31,17 @@ If your application requires particular semantics \(for example, ensuring that n
    
 + A Reduced Redundancy Storage \(RRS\) object lost event—Amazon S3 sends a notification message when it detects that an object of the RRS storage class has been lost\. 
 
+   
++ Replication Events—Amazon S3 sends event notifications for replication configurations that have S3 Replication Time Control \(S3 RTC\) enabled when an object fails replication, when an object exceeds the 15 minute threshold, when an object is replicated after the 15 minute threshold and, when an object is no longer tracked by replication metrics\. and publishes a second event when that object replicates to the destination Region\. \. 
+
+   
+
 For a list of supported event types, see [Supported Event Types](#supported-notification-event-types)\. 
 
 Amazon S3 supports the following destinations where it can publish events:
 + Amazon Simple Notification Service \(Amazon SNS\) topic
 
-  Amazon SNS is a flexible, fully managed push messaging service\. Using this service, you can push messages to mobile devices or distributed services\. With SNS you can publish a message once, and deliver it one or more times\. An SNS topic is an access point that recipients can dynamically subscribe to in order to receive event notifications\. For more information about SNS, see the [Amazon SNS](https://aws.amazon.com/sns/) product detail page\.
+  Amazon SNS is a flexible, fully managed push messaging service\. Using this service, you can push messages to mobile devices or distributed services\. With SNS you can publish a message once, and deliver it one or more times\. For more information about SNS, see the [Amazon SNS](https://aws.amazon.com/sns/) product detail page\.
 
    
 + Amazon Simple Queue Service \(Amazon SQS\) queue
@@ -134,6 +139,10 @@ Amazon S3 can publish events of the following types\. You specify these event ty
 |  *s3:ObjectRemoved:\** *s3:ObjectRemoved:Delete* *s3:ObjectRemoved:DeleteMarkerCreated*  | By using the *ObjectRemoved* event types, you can enable notification when an object or a batch of objects is removed from a bucket\.  You can request notification when an object is deleted or a versioned object is permanently deleted by using the *s3:ObjectRemoved:Delete* event type\. Or you can request notification when a delete marker is created for a versioned object by using *s3:ObjectRemoved:DeleteMarkerCreated*\. For information about deleting versioned objects, see [Deleting Object Versions](DeletingObjectVersions.md)\. You can also use a wildcard `s3:ObjectRemoved:*` to request notification anytime an object is deleted\.  You will not receive event notifications from automatic deletes from lifecycle policies or from failed operations\.  | 
 |  *s3:ObjectRestore:Post* *s3:ObjectRestore:Completed*  |  Using restore object event types you can receive notifications for initiation and completion when restoring objects from the GLACIER storage class\. You use `s3:ObjectRestore:Post` to request notification of object restoration initiation\. You use `s3:ObjectRestore:Completed` to request notification of restoration completion\.   | 
 | s3:ReducedRedundancyLostObject | You can use this event type to request Amazon S3 to send a notification message when Amazon S3 detects that an object of the RRS storage class is lost\. | 
+| s3:Replication:OperationFailedReplication | You will receive this notification event for an object that was eligible for replication using the Amazon S3 Retention Time Control feature that failed to replicate\. | 
+| s3:Replication:OperationMissedThreshold | You will receive this notification event when an object that was eligible for replication using the Amazon S3 Retention Time Control feature exceeded the 15 minute threshold for replication\. | 
+| s3:Replication:OperationReplicatedAfterThreshold | You will receive this notification event for an object that was eligible for replication using the Amazon S3 Replication Time Control feature replicated after the 15 minute threshold\. | 
+| s3:Replication:OperationNotTracked | You will receive this notification event for an object that was eligible for replication using the Amazon S3 Replication Time Control feature but is no longer tracked by replication metrics\. | 
 
 ### Supported Destinations<a name="supported-notification-destinations"></a>
 

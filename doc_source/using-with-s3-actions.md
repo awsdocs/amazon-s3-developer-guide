@@ -1,6 +1,6 @@
 # Specifying Permissions in a Policy<a name="using-with-s3-actions"></a>
 
-Amazon S3 defines a set of permissions that you can specify in a policy\. These are keywords, each of which maps to specific Amazon S3 operations \(see [Operations on Buckets](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketOps.html), and [Operations on Objects](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectOps.html) in the *Amazon Simple Storage Service API Reference*\)\. 
+Amazon S3 defines a set of permissions that you can specify in a policy\. These are keywords, each of which maps to specific Amazon S3 operations\. For more information, see [Actions](https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations.html) in the *Amazon Simple Storage Service API Reference*\.
 
 **Topics**
 + [Permissions for Object Operations](#using-with-s3-actions-related-to-objects)

@@ -17,7 +17,7 @@ The following table lists the key properties of AWS CloudTrail logs and Amazon S
 |  Bucket operations \(using Amazon S3 APIs\)  |  Yes  |  Yes  | 
 |  Searchable UI for logs  |  Yes  |  | 
 |  Fields for object lock parameters, Amazon S3 select properties for log records  |  Yes  |  | 
-|  Fields for `Object Size`, `Total Time`, `Turn-Around Time`, and `HTTP Referrer` for log records  |  |  Yes  | 
+|  Fields for `Object Size`, `Total Time`, `Turn-Around Time`, and `HTTP Referer` for log records  |  |  Yes  | 
 |  Lifecycle transitions, expirations, restores  |  |  Yes  | 
 |  Logging of keys in a batch delete operation  |  |  Yes  | 
 |  Authentication failures1  |  |  Yes  | 

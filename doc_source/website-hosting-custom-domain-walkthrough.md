@@ -2,13 +2,6 @@
 
 Suppose that you want to host your static website on Amazon S3\. You registered a domain \(for example, `example.com`\), and you want requests for `http://www.example.com` and `http://example.com` to be served from your Amazon S3 content\. Whether you have an existing static website that you want to host on Amazon S3 or you are starting from scratch, you can use this example to learn how to host websites and create redirects on Amazon S3\.
 
-**Topics**
-+ [Before You Begin](#root-domain-walkthrough-before-you-begin)
-+ [Step 1: Register a Domain](#website-hosting-custom-domain-walkthrough-domain-registry)
-+ [Step 2: Create and Configure Buckets and Upload Website Content](#root-domain-walkthrough-s3-tasks)
-+ [Step 3: Add Alias Records for example\.com and www\.example\.com](#root-domain-walkthrough-add-arecord-to-hostedzone)
-+ [Step 4: Test the Website](#root-domain-testing)
-
 ## Before You Begin<a name="root-domain-walkthrough-before-you-begin"></a>
 
 As you follow the steps in this example, you work with the following services:
@@ -86,8 +79,9 @@ Now that you have configured your domain bucket for website hosting, you can con
 
 1. In the **Target bucket or domain** box, enter your domain \(for example, *example\.com*\)\.
 
-1. Choose **Save**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/swsRootDomainWebsiteEndpoint12.png)
+1. In the **Protocol** box, enter `http`\.
+
+1. Choose **Save**\.
 
 ### Step 2\.4: Configure Logging for Website Traffic<a name="root-domain-walkthrough-configure-logging"></a>
 
@@ -192,50 +186,69 @@ In the next step, you use Amazon Route 53 to enable customers to use both of yo
 
 ## Step 3: Add Alias Records for example\.com and www\.example\.com<a name="root-domain-walkthrough-add-arecord-to-hostedzone"></a>
 
-In this step, you create the alias records that you add to the hosted zone for your domain maps `example.com` and `www.example.com`\. Instead of using IP addresses, the alias records use the Amazon S3 website endpoints\. Amazon Route 53 maintains a mapping between the alias records and the IP addresses where the Amazon S3 buckets reside\. You create two alias records, one for your domain and one for your subdomain\.
+In this step, you create the alias records that you add to the hosted zone for your domain maps `example.com` and `www.example.com`\. Instead of using IP addresses, the alias records use the Amazon S3 website endpoints\. Amazon Route 53 maintains a mapping between the alias records and the IP addresses where the Amazon S3 buckets reside\. You create two alias records, one for your root domain and one for your subdomain\.
 
-**To route traffic to your website**
+**To add an Alias record for your root domain \(`example.com`\)**
 
 1. Open the Route 53 console at [https://console\.aws\.amazon\.com/route53/](https://console.aws.amazon.com/route53/)\.
 **Note**  
 If you don't already use Route 53, see [Step 1: Register a Domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide//getting-started.html#getting-started-find-domain-name) in the *Amazon Route 53 Developer Guide*\. After completing your setup, you can resume the instructions\.
 
-1. In the list of hosted zones, choose the name of your domain\.
+1. Choose **Hosted Zones**\.
+
+1. In the list of hosted zones, choose the name of the hosted zone that matches your domain name\.
 
 1. Choose **Create Record Set**\.
-**Note**  
-Each record contains information about how you want to route traffic for one domain \(`example.com`\) or subdomain \(`www.example.com`\)\. Records are stored in the hosted zone for your domain\.
 
 1. Specify the following values:  
 **Name**  
-For the first record that you create, accept the default value, which is the name of your hosted zone and your domain\. This routes internet traffic to the bucket that has the same name as your domain\.  
-Repeat this step to create a second record for your subdomain\. For the second record, enter **www**\. This routes internet traffic to the *www\.example\.com* bucket\.  
+Accept the default value, which is the name of your hosted zone and your domain\.   
+For the root domain, you do not need to enter any additional information in the **Name** field\.  
 **Type**  
 Choose **A – IPv4 address**\.  
 **Alias**  
 Choose **Yes**\.  
 **Alias Target**  
-Enter the name of your Amazon S3 bucket endpoint, for example `example.com (s3-website-us-west-2)`\.  
-You specify the same value for **Alias Target** for both records\. Route 53 figures out which bucket to route traffic to based on the name of the record\.  
+In the **S3 website endpoints**section of the list, choose the same bucket name that appears in the **Name** field, for example `example.com (s3-website-us-west-2)`\.  
 **Routing Policy**  
 Accept the default value of **Simple**\.  
 **Evaluate Target Health**  
 Accept the default value of **No**\.
 
+   The screenshot below shows the alias record for the root domain, `example.com`:  
+![\[Screenshot showing record set for root domain.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/route-53-domain.png)
+
 1. Choose **Create**\.
 
-1. For *www\.example\.com*, repeat steps 3–5 to create a record\.
+**To add an alias record for your subdomain \(`www.example.com`\)**
 
-The following screenshot shows the alias record for `example.com` as an illustration\. You also need to create an alias record for `www.example.com`\.
+1. In the hosted zone for your root domain \(`example.com`\), choose **Create Record Set**\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/RootDomainAliasRecord.png)
+1. Specify the following values:  
+**Name**  
+For the subdomain, enter `www` in the box\.   
+**Type**  
+Choose **A – IPv4 address**\.  
+**Alias**  
+Choose **Yes**\.  
+**Alias Target**  
+In the **S3 website endpoints** section of the list, choose the same bucket name that appears in the **Name** field, for example, `www.example.com (s3-website-us-west-2)`\)\.  
+**Routing Policy**  
+Accept the default value of **Simple**\.  
+**Evaluate Target Health**  
+Accept the default value of **No**\.
+
+   The screenshot below shows the alias record for `www.example.com`, the subdomain:  
+![\[Screenshot showing record set for subdomain.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/route-53-subdomain.png)
+
+1. Choose **Create**\.
 
 **Note**  
-Creating, changing, and deleting resource record sets take time to propagate to the Route 53 DNS servers\. Changes generally propagate to all Route 53 name servers in a couple of minutes\. In rare circumstances, propagation can take up to 30 minutes\.
+Changes generally propagate to all Route 53 servers within 60 seconds\. When propagation is done, you'll be able to route traffic to your Amazon S3 bucket by using the names of the alias records that you created in this procedure\. \.
 
 ## Step 4: Test the Website<a name="root-domain-testing"></a>
 
-To verify that the website is working correctly, in your browser, try your URLs\. In this example, you try the following URLs:
+Verify that the website and the redirect work correctly\. In your browser, enter your URLs\. In this example, you try the following URLs:
 + `http://example.com` – Displays the index document in the `example.com` bucket\.
 + `http://www.example.com` – Redirects your request to `http://example.com`\. You see the index document in the `example.com` bucket\.
 

@@ -33,14 +33,15 @@ Note the following about the example:
 
    
 + The `restoreEventData` key contains attributes related to your restore request\.
++ The `replicationEventData` key is only visible for replication events\.
 
-The following example shows version 2\.1 of the event message JSON structure, which is the version currently being used by Amazon S3\.
+The following example shows version 2\.2 of the event message JSON structure, which is the version currently being used by Amazon S3\.
 
 ```
 {  
    "Records":[  
       {  
-         "eventVersion":"2.1",
+         "eventVersion":"2.2",
          "eventSource":"aws:s3",
          "awsRegion":"us-west-2",
          "eventTime":The time, in ISO-8601 format, for example, 1970-01-01T00:00:00.000Z, when Amazon S3 finished processing the request,

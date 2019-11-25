@@ -5,6 +5,7 @@ Amazon CloudWatch metrics for Amazon S3 can help you understand and improve the 
 + **Request metrics** ‐ You can choose to monitor Amazon S3 requests to quickly identify and act on operational issues\. The metrics are available at 1\-minute intervals after some latency to process\. These CloudWatch metrics are billed at the same rate as the Amazon CloudWatch custom metrics\. For information about CloudWatch pricing, see [Amazon CloudWatch Pricing](https://aws.amazon.com/cloudwatch/pricing/)\. To learn how to opt in to getting these metrics, see [Metrics Configurations for Buckets](metrics-configurations.md)\.
 
   When enabled, request metrics are reported for all object operations\. By default, these 1\-minute metrics are available at the Amazon S3 bucket level\. You can also define a filter for the metrics collected using a shared prefix or object tag\. This allows you to align metrics filters to specific business applications, workflows, or internal organizations\.
++ **Replication metrics** ‐ With replication metrics, you can monitor the total number and size of objects that are pending replication, and the maximum replication time to the destination Region\. Only replication rules that have S3 Replication Time Control \(S3 RTC\) enabled will publish replication metrics\. Unlike CloudWatch storage and request metrics, you cannot filter replication metrics by prefix\(es\) and/or tag\(s\)\. However, you can set up a replication rule based on prefix\(es\) and/or tag\(s\) and your replication metrics will monitor replication for the specified prefix\(es\) and/or tag\(s\)\. For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
 
 All CloudWatch statistics are retained for a period of 15 months so that you can access historical information and gain a better perspective on how your web application or service is performing\. For more information, see [What Is Amazon CloudWatch?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
 
@@ -45,6 +46,20 @@ The `AWS/S3` namespace includes the following request metrics\.
 | 5xxErrors |  The number of HTTP 5xx server error status code requests made to an Amazon S3 bucket with a value of either 0 or 1\. The `average` statistic shows the error rate, and the `sum` statistic shows the count of that type of error, during each period\. Units: Counts Valid statistics: Average \(reports per request\), Sum \(reports per period\), Min, Max, Sample Count  | 
 | FirstByteLatency |  The per\-request time from the complete request being received by an Amazon S3 bucket to when the response starts to be returned\. Units: Milliseconds Valid statistics: Average, Sum, Min, Max\(same as p100\), Sample Count, any percentile between p0\.0 and p100  | 
 | TotalRequestLatency |  The elapsed per\-request time from the first byte received to the last byte sent to an Amazon S3 bucket\. This includes the time taken to receive the request body and send the response body, which is not included in `FirstByteLatency`\. Units: Milliseconds Valid statistics: Average, Sum, Min, Max\(same as p100\), Sample Count, any percentile between p0\.0 and p100  | 
+
+## Amazon S3 CloudWatch Replication Metrics<a name="s3-cloudwatch-replication-metrics"></a>
+
+With replication metrics, you can monitor the total number and size of objects that are pending replication, and the maximum replication time to the destination Region\. Only replication rules that have S3 Replication Time Control \(S3 RTC\) enabled will publish replication metrics\. Unlike CloudWatch storage and request metrics, you cannot filter replication metrics by prefix\(es\) and/or tag\(s\)\. However, you can set up a replication rule based on prefix\(es\) and/or tag\(s\) and your replication metrics will monitor replication for the specified prefix\(es\) and/or tag\(s\)\. For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
+
+**Note**  
+You can enable alarms for your replication metrics on Amazon CloudWatch\. When you set up alarms for your replication metrics, set the **Missing data treatment** field to *Treat missing data as ignore \(maintain the alarm state\)*\.
+
+
+| Metric | Description | 
+| --- | --- | 
+| ReplicationLatency |  The maximum number of seconds by which the replication destination Region is behind the source Region for a given replication rule\.  Units: Seconds Valid statistics: Max  | 
+| BytesPendingReplication |  The total number of bytes of objects pending replication for a given replication rule\. Units: Bytes Valid statistics: Max  | 
+| OperationsPendingReplication |  The number of operations pending replication for a given replication rule\. Units: Counts Valid statistics: Max  | 
 
 ## Amazon S3 CloudWatch Dimensions<a name="s3-cloudwatch-dimensions"></a>
 

@@ -20,6 +20,12 @@ Amazon S3 Select and Glacier Select support the following operators\.
 
 ## Pattern Matching Operators<a name="s3-glacier-select-sql-reference-pattern"></a>
 + `LIKE`
++ `_` \(Matches any character\)
++ `%` \(Matches any sequence of characters\)
+
+## Unitary Operators<a name="s3-glacier-select-sql-reference-unitary-ops"></a>
++ IS NULL
++ IS NOT NULL
 
 ## Math Operators<a name="s3-glacier-select-sql-referencemath-ops"></a>
 

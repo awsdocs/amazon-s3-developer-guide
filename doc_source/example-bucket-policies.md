@@ -14,7 +14,7 @@ When testing permissions using the Amazon S3 console, you will need to grant add
 + [Granting Permissions to Multiple Accounts with Added Conditions](#example-bucket-policies-use-case-1)
 + [Granting Read\-Only Permission to an Anonymous User](#example-bucket-policies-use-case-2)
 + [Restricting Access to Specific IP Addresses](#example-bucket-policies-use-case-3)
-+ [Restricting Access to a Specific HTTP Referrer](#example-bucket-policies-use-case-4)
++ [Restricting Access to a Specific HTTP Referer](#example-bucket-policies-use-case-4)
 + [Granting Permission to an Amazon CloudFront Origin Identity](#example-bucket-policies-use-case-6)
 + [Adding a Bucket Policy to Require MFA](#example-bucket-policies-use-case-7)
 + [Granting Cross\-Account Permissions to Upload Objects While Ensuring the Bucket Owner Has Full Control](#example-bucket-policies-use-case-8)
@@ -65,30 +65,32 @@ Use caution when granting anonymous access to your Amazon S3 bucket or disabling
 
 ## Restricting Access to Specific IP Addresses<a name="example-bucket-policies-use-case-3"></a>
 
-The following example grants permissions to any user to perform any Amazon S3 operations on objects in the specified bucket\. However, the request must originate from the range of IP addresses specified in the condition\. 
+The following example grants permissions to any user to perform any Amazon S3 operations on objects in the specified S3 bucket\. However, the request must not originate from the range of IP addresses specified in the condition\. 
 
-The condition in this statement identifies the 54\.240\.143\.\* range of allowed Internet Protocol version 4 \(IPv4\) IP addresses, with one exception: 54\.240\.143\.188\.
+The condition in this statement identifies the 54\.240\.143\.\* range of disallowed Internet Protocol version 4 \(IPv4\) IP addresses\. 
 
-The `Condition` block uses the `IpAddress` and `NotIpAddress` conditions and the `aws:SourceIp` condition key, which is an AWS\-wide condition key\. For more information about these condition keys, see [Specifying Conditions in a Policy](amazon-s3-policy-keys.md)\. The `aws:SourceIp` IPv4 values use the standard CIDR notation\. For more information, see [IAM JSON Policy Elements Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_IPAddress) in the *IAM User Guide*\. 
+The `Condition` block uses the `NotIpAddress` condition and the `aws:SourceIp` condition key, which is an AWS\-wide condition key\. For more information about these condition keys, see [Specifying Conditions in a Policy](amazon-s3-policy-keys.md)\. The `aws:SourceIp` IPv4 values use the standard CIDR notation\. For more information, see [IAM JSON Policy Elements Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_IPAddress) in the *IAM User Guide*\. 
 
 ```
  1. {
  2.   "Version": "2012-10-17",
  3.   "Id": "S3PolicyId1",
- 4.   "Statement": [
- 5.     {
- 6.       "Sid": "IPAllow",
- 7.       "Effect": "Allow",
- 8.       "Principal": "*",
- 9.       "Action": "s3:*",
-10.       "Resource": "arn:aws:s3:::examplebucket/*",
-11.       "Condition": {
-12.          "IpAddress": {"aws:SourceIp": "54.240.143.0/24"},
-13.          "NotIpAddress": {"aws:SourceIp": "54.240.143.188/32"} 
-14.       } 
-15.     } 
-16.   ]
-17. }
+ 4. 
+ 5.   "Statement": [
+ 6. 
+ 7.     {
+ 8.       "Sid": "IPAllow",
+ 9.       "Effect": "Deny",
+10.       "Principal": "*",
+11.       "Action": "s3:*",
+12.       "Resource": "arn:aws:s3:::examplebucket/*",
+13.       "Condition": {
+14.          "NotIpAddress": {"aws:SourceIp": "54.240.143.0/24"},
+15. 
+16.       }
+17.     }
+18.   ]
+19. }
 ```
 
 ### Allowing IPv4 and IPv6 Addresses<a name="example-bucket-policies-use-case-ipv6"></a>
@@ -129,7 +131,7 @@ The IPv6 values for `aws:SourceIp` must be in standard CIDR format\. For IPv6, w
 27. }
 ```
 
-## Restricting Access to a Specific HTTP Referrer<a name="example-bucket-policies-use-case-4"></a>
+## Restricting Access to a Specific HTTP Referer<a name="example-bucket-policies-use-case-4"></a>
 
 Suppose that you have a website with a domain name \(`www.example.com` or `example.com`\) with links to photos and videos stored in your Amazon S3 bucket, `examplebucket`\. By default, all the Amazon S3 resources are private, so only the AWS account that created the resources can access them\. To allow read access to these objects from your website, you can add a bucket policy that allows `s3:GetObject` permission with a condition, using the `aws:Referer` key, that the get request must originate from specific webpages\. The following policy specifies the `StringLike` condition with the `aws:Referer` condition key\.
 

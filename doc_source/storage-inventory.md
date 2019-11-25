@@ -115,6 +115,7 @@ The inventory list contains a list of the objects in an S3 bucket and the follow
 + **Last modified date** – Object creation date or the last modified date, whichever is the latest\.
 + **ETag** – The entity tag is a hash of the object\. The ETag reflects changes only to the contents of an object, not its metadata\. The ETag may or may not be an MD5 digest of the object data\. Whether it is depends on how the object was created and how it is encrypted\.
 + **Storage class** – Storage class used for storing the object\. For more information, see [Amazon S3 Storage Classes](storage-class-intro.md)\.
++ **Intelligent\-Tiering access tier** – Access tier \(frequent or infrequent\) of the object if stored in Intelligent\-Tiering\. For more information, see [Amazon S3 Intelligent\-Tiering](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access)\.
 + **Multipart upload flag** – Set to `True` if the object was uploaded as a multipart upload\. For more information, see [Multipart Upload Overview](mpuoverview.md)\.
 + **Delete marker** – Set to `True`, if the object is a delete marker\. For more information, see [Object Versioning](ObjectVersioning.md)\. \(This field is automatically added to your report if you've configured the report to include all versions of your objects\)\.
 + **Replication status** – Set to `PENDING`, `COMPLETED`, `FAILED`, or `REPLICA.` For more information, see [Replication Status Information](replication-status.md)\.
@@ -147,7 +148,7 @@ When an inventory list is published, the manifest files are published to the fol
 + *destination\-prefix* is the \(object key name\) prefix set in the inventory configuration, which can be used to group all the inventory list files in a common location within the destination bucket\.
 + *source\-bucket* is the source bucket that the inventory list is for\. It is added to prevent collisions when multiple inventory reports from different source buckets are sent to the same destination bucket\.
 + *config\-ID* is added to prevent collisions with multiple inventory reports from the same source bucket that are sent to the same destination bucket\. The *config\-ID* comes from the inventory report configuration, and is the name for the report that is defined on setup\.
-+ *YYYY\-MM\-DDTHH\-MMZ* is the timestamp that consists of the start time and the date when the inventory report generation begins scanning the bucket; for example, `2016-11-06T21-32Z`\. Storage added after the timestamp is not in the report\.
++ *YYYY\-MM\-DDTHH\-MMZ* is the timestamp that consists of the start time and the date when the inventory report generation begins scanning the bucket; for example, `2016-11-06T21-32Z`\.
 + `manifest.json` is the manifest file\. 
 + `manifest.checksum` is the MD5 of the content of the `manifest.json` file\. 
 + `symlink.txt` is the Apache Hive\-compatible manifest file\. 

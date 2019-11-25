@@ -11,3 +11,4 @@ For information about AWS SDKs, see [AWS SDK for Java](https://aws.amazon.com/sd
 + [Example 2: Configuring for Buckets in Different Accounts](replication-walkthrough-2.md)
 + [Example 3: Changing Replica Owner](replication-walkthrough-3.md)
 + [Example 4: Replicating Encrypted Objects](replication-walkthrough-4.md)
++ [Example 5: S3 Replication Time Control \(S3 RTC\)](replication-walkthrough-5.md)

@@ -142,8 +142,8 @@ The number of milliseconds that Amazon S3 spent processing your request\. This v
 10
 ```
 
-**Referrer**  
-The value of the HTTP Referrer header, if present\. HTTP user\-agents \(for example, browsers\) typically set this header to the URL of the linking or embedding page when making a request\.  
+**Referer**  
+The value of the HTTP Referer header, if present\. HTTP user\-agents \(for example, browsers\) typically set this header to the URL of the linking or embedding page when making a request\.  
 **Example Entry**  
 
 ```
@@ -338,8 +338,8 @@ The number of milliseconds that Amazon S3 spent processing your request\. This v
 10
 ```
 
-**Referrer**  
-The value of the HTTP Referrer header, if present\. HTTP user\-agents \(for example, browsers\) typically set this header to the URL of the linking or embedding page when making a request\.  
+**Referer**  
+The value of the HTTP Referer header, if present\. HTTP user\-agents \(for example, browsers\) typically set this header to the URL of the linking or embedding page when making a request\.  
 **Example Entry**  
 
 ```

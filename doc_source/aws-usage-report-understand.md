@@ -13,6 +13,7 @@ Amazon S3 billing and usage reports use codes and abbreviations\. For example, f
 + **EU:** EU \(Ireland\)
 + **EUW2:** EU \(London\)
 + **EUW3:** EU \(Paris\)
++ **MES1:** Middle East \(Bahrain\)
 + **SAE1:** South America \(São Paulo\)
 + **UGW1:** AWS GovCloud \(US\-West\)
 + **UGE1:** AWS GovCloud \(US\-East\)

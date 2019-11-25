@@ -62,9 +62,9 @@ The profiles you use for this exercise must have the necessary permissions\. For
         "Version": "2012-10-17",
         "Statement": [
           {
-            "Sid": "<destination_bucket_policy_sid>",
+            "Sid": "destination_bucket_policy_sid",
             "Principal": {
-              "AWS": "<src_account>"
+              "AWS": "source-bucket-owner-account-id"
             },
             "Action": [
               "s3:ReplicateObject",
@@ -72,7 +72,7 @@ The profiles you use for this exercise must have the necessary permissions\. For
             ],
             "Effect": "Allow",
             "Resource": [
-              "arn:<partition>:s3:::<destination_bucket_name>/*"
+              "arn:aws:s3:::destination/*"
             ]
           }
         ]
@@ -82,7 +82,7 @@ The profiles you use for this exercise must have the necessary permissions\. For
    1. Put the above policy to *destination* bucket:
 
       ```
-      aws s3api put-bucket-policy --region ${destination_region} --bucket ${destination_bucket_name} --policy file://destination_bucket_policy.json
+      aws s3api put-bucket-policy --region ${destination_region} --bucket ${destination} --policy file://destination_bucket_policy.json
       ```
 
 1. Create an IAM role\. You specify this role in the replication configuration that you add to the *source* bucket later\. Amazon S3 assumes this role to replicate objects on your behalf\. You create an IAM role in two steps:

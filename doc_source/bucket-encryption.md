@@ -28,13 +28,16 @@ After you enable default encryption for a bucket, the following encryption behav
 
 To encrypt your existing Amazon S3 objects with a single request, you can use Amazon S3 batch operations\. You provide Amazon S3 batch operations with a list of objects to operate on, and Amazon S3 batch operations calls the respective API to perform the specified operation\. You can use the copy operation to copy the existing unencrypted objects and write the new encrypted objects to the same bucket\. A single Amazon S3 batch operations job can perform the specified operation on billions of objects containing exabytes of data\.
 
+**Note**  
+ S3 buckets with default bucket encryption cannot be used as destination buckets for [Amazon S3 Server Access Logging](ServerLogs.md)
+
 ## Using Default Encryption with Replication<a name="bucket-encryption-update-bucket-policy"></a>
 
 After you enable default encryption for a replication destination bucket, the following encryption behavior applies: 
 + If objects in the source bucket are not encrypted, the replica objects in the destination bucket are encrypted using the default encryption settings of the destination bucket\. This results in the `ETag` of the source object being different from the `ETag` of the replica object\. You must update applications that use the `ETag` to accommodate for this difference\.
 + If objects in the source bucket are encrypted using SSE\-S3 or SSE\-KMS, the replica objects in the destination bucket use the same encryption as the source object encryption\. The default encryption settings of the destination bucket are not used\.
 
-For more information about using default encruption with SSE\-KMS, see [Replicating Encrypted Objects](replication-config-for-kms-objects.md)\.
+For more information about using default encryption with SSE\-KMS, see [Replicating Encrypted Objects](replication-config-for-kms-objects.md)\.
 
 ## Monitoring Default Encryption with CloudTrail and CloudWatch<a name="bucket-encryption-tracking"></a>
 
