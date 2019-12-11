@@ -132,7 +132,7 @@ The following example shows version 2\.0 of the event message structure, which i
 ```
 
 The following are example messages:
-+ Test message—When you configure an event notification on a bucket, Amazon S3 sends the following test message:
++ Test message—When you configure an event notification on a bucket, Amazon S3 sends the following test message\.
 
   ```
   1. {  
@@ -144,7 +144,7 @@ The following are example messages:
   7.    "HostId":"8cLeGAmw098X5cv4Zkwcmo8vvZa3eH3eKxsPzbB9wrR+YstdA6Knx4Ip8EXAMPLE"
   8. }
   ```
-+ Example message when an object is created using the PUT request—The following message is an example of a message Amazon S3 sends to publish an `s3:ObjectCreated:Put` event:
++ Example message when an object is created using the PUT request—The following message is an example of a message Amazon S3 sends to publish an `s3:ObjectCreated:Put` event\.
 
   ```
    1. {  
@@ -188,4 +188,4 @@ The following are example messages:
   39. }
   ```
 
-You can find a definition of each IAM identification prefix \(AIDA, AROA, AGPA, etc\.\) here: [Understanding Unique ID Prefixes](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-prefixesl)\.
+For a definition of each IAM identification prefix \(AIDA, AROA, AGPA, etc\.\), see [Understanding Unique ID Prefixes](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-prefixesl)\.

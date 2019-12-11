@@ -107,7 +107,7 @@ To specify a rule with a filter based on object tags, use the following code\. Y
 ...
 ```
 
-To specify a rule filter with a combination of a key prefix and object tags, use this code\. You wrap these filters in an `AND` parent element\. Amazon S3 performs a logical `AND` operation to combine these filters\. In other words, the rule applies to a subset of objects with a specific key prefix and specific tags\. 
+To specify a rule filter with a combination of a key prefix and object tags, use the following code\. You wrap these filters in an `AND` parent element\. Amazon S3 performs a logical `AND` operation to combine these filters\. In other words, the rule applies to a subset of objects with a specific key prefix and specific tags\. 
 
 ```
 <Rule>
@@ -167,8 +167,8 @@ You can add the following options in the `<Destination>` element:
   ...
   ```
 
-  If you don't add this element to the replication configuration, the replicas are owned by same AWS account that owns the source object\. For more information, see [Additional Replication Configuration: Changing the Replica Owner](replication-change-owner.md)\.
-+ You can enable S3 Replication Time Control \(S3 RTC\) in your replication configuration\. S3 RTC replicates most objects in seconds and 99\.99 percent of objects within 15 minutes \(backed by a Service Level Agreement\)\. 
+  If you don't add this element to the replication configuration, the replicas are owned by the same AWS account that owns the source object\. For more information, see [Changing the Replica Owner](replication-change-owner.md)\.
++ You can enable S3 Replication Time Control \(S3 RTC\) in your replication configuration\. S3 RTC replicates most objects in seconds and 99\.99 percent of objects within 15 minutes \(backed by a service level agreement\)\. 
 **Note**  
 Only a valid value of `<Minutes>15</Minutes>` is accepted for `EventThreshold` and `Time`\.
 
@@ -194,8 +194,8 @@ Only a valid value of `<Minutes>15</Minutes>` is accepted for `EventThreshold` a
   ...
   ```
 
-  For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md) and [PutBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html) for API examples in the *Amazon Simple Storage Service API Reference*\.
-+ Your source bucket might contain objects that were created with server\-side encryption using keys stored in AWS KMS\. By default, Amazon S3 doesn't replicate these objects\. You can optionally direct Amazon S3 to replicate these objects by first explicitly opting into this feature by adding the SourceSelectionCriteria element and then providing the AWS KMS CMK \(for the AWS Region of the destination bucket\) to use for encrypting object replicas\. 
+  For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\. For API examples, see [PutBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html) in the *Amazon Simple Storage Service API Reference*\.
++ Your source bucket might contain objects that were created with server\-side encryption using keys stored in AWS KMS\. By default, Amazon S3 doesn't replicate these objects\. You can optionally direct Amazon S3 to replicate these objects\. First, explicitly opt into this feature by adding the `SourceSelectionCriteria` element, and then provide the AWS KMS CMK \(for the AWS Region of the destination bucket\) to use for encrypting object replicas\. 
 
   ```
   ...
@@ -213,7 +213,7 @@ Only a valid value of `<Minutes>15</Minutes>` is accepted for `EventThreshold` a
   ...
   ```
 
-  For more information, see [Additional Replication Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](replication-config-for-kms-objects.md)\.
+  For more information, see [Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys Stored in AWS KMS](replication-config-for-kms-objects.md)\.
 
 ## Example Replication Configurations<a name="replication-config-example-configs"></a>
 

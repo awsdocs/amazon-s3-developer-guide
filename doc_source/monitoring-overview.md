@@ -13,5 +13,5 @@ Monitoring is an important part of maintaining the reliability, availability, an
 + [Monitoring Metrics with Amazon CloudWatch](cloudwatch-monitoring.md)
 + [Metrics Configurations for Buckets](metrics-configurations.md)
 + [Logging with Amazon S3](logging-with-S3.md)
-+ [Logging Amazon S3 API Calls by Using AWS CloudTrail](cloudtrail-logging.md)
++ [Logging Amazon S3 API Calls Using AWS CloudTrail](cloudtrail-logging.md)
 + [Using AWS CloudTrail to Identify Amazon S3 Requests](cloudtrail-request-identification.md)

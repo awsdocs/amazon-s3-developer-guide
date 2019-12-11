@@ -267,6 +267,7 @@ my-bucket,%7B%22origKey%22%3A%20%22object3key%22%2C%20%22newKey%22%3A%20%22newOb
 ```
 
 **Example — Lambda function with manifest format writing results to the job report**  
+ This Lambda function shows how to parse JSON that is encoded into the Amazon S3 batch operations manifest\.  
 
 ```
 import json
@@ -329,7 +330,7 @@ def lambda_handler(event, context):
         resultString = origKey + " --> " + newKey
 
     except Exception as e:
-        # If we run into any exceptions, fail this task so batch operations does retry it and
+        # If we run into any exceptions, fail this task so batch operations does not retry it and
         # return the exception string so we can see the failure message in the final report
         # created by batch operations.
         resultCode = 'PermanentFailure'

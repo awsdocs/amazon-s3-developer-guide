@@ -20,7 +20,7 @@ By default Amazon S3 replicates the following:
 + Only objects in the source bucket for which the bucket owner has permissions to read objects and access control lists \(ACLs\)\. For more information about resource ownership, see [Amazon S3 Bucket and Object Ownership](access-control-overview.md#about-resource-owner)\.
 
    
-+ Object ACL updates, unless you direct Amazon S3 to change the replica ownership when source and destination buckets aren't owned by the same accounts\. For more information, see [Additional Replication Configuration: Changing the Replica Owner](replication-change-owner.md)\)\. 
++ Object ACL updates, unless you direct Amazon S3 to change the replica ownership when source and destination buckets aren't owned by the same accounts\. For more information, see [Changing the Replica Owner](replication-change-owner.md)\. 
 
    
 
@@ -77,16 +77,13 @@ If using the latest version of the replication configuration \(the XML specifies
 
 ## Replicating Existing Objects<a name="existing-object-replication"></a>
 
- To enable existing object replication for your account, you must contact [AWS Support](https://console.aws.amazon.com/support/home)\. To prevent your request from being delayed, title your AWS Support case "Replication for Existing Objects" and be sure to include the following information:
+ To enable existing object replication for your account, you must contact [AWS Support](https://console.aws.amazon.com/support/home#/case/create?issueType=customer-service&serviceCode=general-info&getting-started&categoryCode=using-aws&services)\. To prevent your request from being delayed, title your AWS Support case "Replication for Existing Objects" and be sure to include the following information:
 + Source bucket
 + Destination bucket
 + Estimated storage volume to replicate \(in terabytes\) 
 + Estimated storage object count to replicate
 
 ## Related Topics<a name="replication-whatis-isnot-related-topics"></a>
-
-[Replication](replication.md)
-
-[Overview of Setting Up Replication](replication-how-setup.md)
-
-[Replication Status Information](replication-status.md)
++ [Replication](replication.md)
++ [Overview of Setting Up Replication](replication-how-setup.md)
++ [Replication Status Information](replication-status.md)

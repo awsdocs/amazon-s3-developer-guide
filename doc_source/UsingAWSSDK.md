@@ -103,11 +103,11 @@ The following table lists the SDKs with the necessary minimum version to use Sig
 
 | If you use this SDK/Product | Upgrade to this SDK version | Code change needed to the client to use Sigv4? | Link to SDK documentation | 
 | --- | --- | --- | --- | 
-|  AWS SDK for Java v1  | Upgrade to Java 1\.11\.x or v2 in Q4 2018\. | Yes | [Specifying the Signature Version in Request Authentication](#specify-signature-version) | 
+|  AWS SDK for Java v1  | Upgrade to Java 1\.11\.201\+ or v2 in Q4 2018\. | Yes | [Specifying the Signature Version in Request Authentication](#specify-signature-version) | 
 |  AWS SDK for Java v2 \(preview\)  | No SDK upgrade is needed\. | No | [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/) | 
 |  AWS SDK for \.NET v1   | Upgrade to 3\.1\.10 or later\. | Yes | [AWS SDK for \.NET](https://github.com/aws/aws-sdk-net/tree/aws-sdk-net-v1/) | 
 |  AWS SDK for \.NET v2   | Upgrade to 3\.1\.10 or later\. | No | [AWS SDK for \.NET v2](https://github.com/aws/aws-sdk-net/tree/aws-sdk-net-v2/) | 
-|  AWS SDK for \.NET v3   | No SDK upgrade is needed\. | Yes | [AWS SDK for \.NET v3](https://github.com/aws/aws-sdk-net) | 
+|  AWS SDK for \.NET v3   | Upgrade to 3\.3\.0\.0 or later\. | Yes | [AWS SDK for \.NET v3](https://github.com/aws/aws-sdk-net) | 
 |  AWS SDK for JavaScript v1   | Upgrade to 2\.68\.0 or later\. | Yes | [AWS SDK for JavaScript](https://github.com/aws/aws-sdk-js) | 
 |  AWS SDK for JavaScript v2   | Upgrade to 2\.68\.0 or later\. | Yes | [AWS SDK for JavaScript](https://github.com/aws/aws-sdk-js) | 
 |  AWS SDK for JavaScript v3   | No action is currently needed\. Upgrade to major version V3 in Q3 2019\. | No | [AWS SDK for JavaScript](https://github.com/aws/aws-sdk-js) | 
@@ -125,7 +125,7 @@ The following table lists the SDKs with the necessary minimum version to use Sig
 |  C\+\+   | No SDK upgrade is needed\. | No | [AWS SDK for C\+\+](https://aws.amazon.com/sdk-for-cpp/) | 
 
 **AWS Tools for Windows PowerShell or AWS Tools for PowerShell Core**  
-If you are using module versions *earlier* than 3\.3\.99, you must upgrade to 3\.3\.99\. 
+If you are using module versions *earlier* than 3\.3\.0\.0, you must upgrade to 3\.3\.0\.0\. 
 
 To get the version information, use the `Get-Module` cmdlet: 
 
@@ -134,7 +134,7 @@ To get the version information, use the `Get-Module` cmdlet:
           Get-Module –Name AWSPowershell.NetCore
 ```
 
-To update the 3\.3\.99 version, use the `Update-Module` cmdlet: 
+To update the 3\.3\.0\.0 version, use the `Update-Module` cmdlet: 
 
 ```
           Update-Module –Name AWSPowershell

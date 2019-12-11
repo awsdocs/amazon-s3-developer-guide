@@ -15,7 +15,7 @@ If your Initiate Restore Object job tries to restore an object that is already i
 
 The restore operation succeeds for the object if either of the following conditions are true:
 + Compared to the restoration request already in progress, this job's `ExpirationInDays` is the same and `GlacierJobTier` is faster\.
-+ The previous restoration request has already completed and the object is currently available in Reduced Redundancy Storage mode\. In this case, Amazon S3 batch operations update the expiration date of the restored object to match the `ExpirationInDays` specified in this job\.
++ The previous restoration request has already completed and the object is currently available\. In this case, Amazon S3 batch operations update the expiration date of the restored object to match the `ExpirationInDays` specified in this job\.
 
 The restore operation fails for the object if any of the following conditions are true:
 + The restoration request already in progress has not yet completed and the restoration duration for this job \(specified by `ExpirationInDays`\) is different than the restoration duration that is specified in the in\-progress restoration request\.

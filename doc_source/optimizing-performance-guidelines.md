@@ -1,6 +1,6 @@
 # Performance Guidelines for Amazon S3<a name="optimizing-performance-guidelines"></a>
 
-When building applications that upload and retrieve storage from Amazon S3, follow our best practices guidelines to optimize performance\. We also offer more detailed [Performance Design Patterns](optimizing-performance-design-patterns.md)\. 
+When building applications that upload and retrieve objects from Amazon S3, follow our best practices guidelines to optimize performance\. We also offer more detailed [Performance Design Patterns](optimizing-performance-design-patterns.md)\. 
 
 To obtain the best performance for your application on Amazon S3, we recommend the following guidelines\.
 

@@ -4,7 +4,25 @@ By default, all Amazon S3 resources—buckets, objects, and related subresources
 
 Amazon S3 offers access policy options broadly categorized as resource\-based policies and user policies\. Access policies you attach to your resources \(buckets and objects\) are referred to as resource\-based policies\. For example, bucket policies and access control lists \(ACLs\) are resource\-based policies\. You can also attach access policies to users in your account\. These are called user policies\. You may choose to use resource\-based policies, user policies, or some combination of these to manage permissions to your Amazon S3 resources\. The introductory topics provide general guidelines for managing permissions\.
 
-We recommend you first review the access control overview topics\. For more information, see [Introduction to Managing Access Permissions to Your Amazon S3 Resources](intro-managing-access-s3-resources.md)\. Then for more information about specific access policy options, see the following topics:
-+  [Using Bucket Policies and User Policies](using-iam-policies.md) 
+## Introduction to Managing Access to Amazon S3 Resources<a name="intro-managing-access-s3-resources"></a>
+
+We recommend you first review the introductory topics that explain the options for managing access to your Amazon S3 resources:
++ [Overview of Managing Access](access-control-overview.md)
++ [How Amazon S3 Authorizes a Request](how-s3-evaluates-access-control.md)
++ [Guidelines for Using the Available Access Policy Options](access-policy-alternatives-guidelines.md)
++ [Example Walkthroughs: Managing Access to Your Amazon S3 Resources ](example-walkthroughs-managing-access.md)
+
+Several security best practices also address access control, including:
++ [Ensure Amazon S3 buckets are not publicly accessible](security-best-practices.md#public)
++ [Implement least privilege access](security-best-practices.md#least)
++ [Use IAM roles](security-best-practices.md#roles)
++ [Enable MFA (Multi-Factor Authentication) Delete](security-best-practices.md#mfa)
++ [Identify and audit all your Amazon S3 buckets](security-best-practices.md#audit)
++ [Monitor AWS security advisories](security-best-practices.md#advisories)
+
+## Amazon S3 Resource Access Options<a name="s3-resource-access-options"></a>
+
+After you've reviewed introductory topics about managing access to Amazon S3 resources, you can then use the following topics to get more information about specific access policy options:
++ [Using Bucket Policies and User Policies](using-iam-policies.md)
 + [Managing Access with ACLs](S3_ACLs_UsingACLs.md)
 + [Using Amazon S3 Block Public Access](access-control-block-public-access.md)

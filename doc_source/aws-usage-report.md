@@ -44,7 +44,7 @@ You can download a usage report as an \.xml or a \.csv file\.
 
 1. In the title bar, choose your AWS Identity and Access Management \(IAM\) user name, and then choose **My Billing Dashboard**\. 
 
-1. In the navigation pane, choose **Reports**\.
+1. In the navigation pane, choose **AWS Cost and Usage Reports**\.
 
 1. In the **Other Reports** section, choose **AWS Usage Report**\.
 

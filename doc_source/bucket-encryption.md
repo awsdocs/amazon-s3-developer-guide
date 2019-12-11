@@ -29,7 +29,7 @@ After you enable default encryption for a bucket, the following encryption behav
 To encrypt your existing Amazon S3 objects with a single request, you can use Amazon S3 batch operations\. You provide Amazon S3 batch operations with a list of objects to operate on, and Amazon S3 batch operations calls the respective API to perform the specified operation\. You can use the copy operation to copy the existing unencrypted objects and write the new encrypted objects to the same bucket\. A single Amazon S3 batch operations job can perform the specified operation on billions of objects containing exabytes of data\.
 
 **Note**  
- S3 buckets with default bucket encryption cannot be used as destination buckets for [Amazon S3 Server Access Logging](ServerLogs.md)
+ S3 buckets with default bucket encryption cannot be used as destination buckets for [Amazon S3 Server Access Logging](ServerLogs.md)\.
 
 ## Using Default Encryption with Replication<a name="bucket-encryption-update-bucket-policy"></a>
 

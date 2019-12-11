@@ -1,11 +1,13 @@
 # Monitoring Metrics with Amazon CloudWatch<a name="cloudwatch-monitoring"></a>
 
-Amazon CloudWatch metrics for Amazon S3 can help you understand and improve the performance of applications that use Amazon S3\. There are two ways that you can use CloudWatch with Amazon S3\.
-+ **Daily Storage Metrics for Buckets** ‐ You can monitor bucket storage using CloudWatch, which collects and processes storage data from Amazon S3 into readable, daily metrics\. These storage metrics for Amazon S3 are reported once per day and are provided to all customers at no additional cost\.
-+ **Request metrics** ‐ You can choose to monitor Amazon S3 requests to quickly identify and act on operational issues\. The metrics are available at 1\-minute intervals after some latency to process\. These CloudWatch metrics are billed at the same rate as the Amazon CloudWatch custom metrics\. For information about CloudWatch pricing, see [Amazon CloudWatch Pricing](https://aws.amazon.com/cloudwatch/pricing/)\. To learn how to opt in to getting these metrics, see [Metrics Configurations for Buckets](metrics-configurations.md)\.
+Amazon CloudWatch metrics for Amazon S3 can help you understand and improve the performance of applications that use Amazon S3\. There are several ways that you can use CloudWatch with Amazon S3\.
++ **Daily storage metrics for buckets** ‐ Monitor bucket storage using CloudWatch, which collects and processes storage data from Amazon S3 into readable, daily metrics\. These storage metrics for Amazon S3 are reported once per day and are provided to all customers at no additional cost\.
++ **Request metrics** ‐ Monitor Amazon S3 requests to quickly identify and act on operational issues\. The metrics are available at 1\-minute intervals after some latency to process\. These CloudWatch metrics are billed at the same rate as the Amazon CloudWatch custom metrics\. For information about CloudWatch pricing, see [Amazon CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/)\. To learn how to opt in to getting these metrics, see [Metrics Configurations for Buckets](metrics-configurations.md)\.
 
   When enabled, request metrics are reported for all object operations\. By default, these 1\-minute metrics are available at the Amazon S3 bucket level\. You can also define a filter for the metrics collected using a shared prefix or object tag\. This allows you to align metrics filters to specific business applications, workflows, or internal organizations\.
-+ **Replication metrics** ‐ With replication metrics, you can monitor the total number and size of objects that are pending replication, and the maximum replication time to the destination Region\. Only replication rules that have S3 Replication Time Control \(S3 RTC\) enabled will publish replication metrics\. Unlike CloudWatch storage and request metrics, you cannot filter replication metrics by prefix\(es\) and/or tag\(s\)\. However, you can set up a replication rule based on prefix\(es\) and/or tag\(s\) and your replication metrics will monitor replication for the specified prefix\(es\) and/or tag\(s\)\. For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
++ **Replication metrics** ‐ Monitor the total number and size of objects that are pending replication, and the maximum replication time to the destination Region\. Only replication rules that have S3 Replication Time Control \(S3 RTC\) enabled will publish replication metrics\. 
+
+  Unlike CloudWatch storage and request metrics, you can't filter replication metrics by prefixes and tags\. However, you can set up a replication rule based on prefixes and tags\. Your replication metrics will then monitor replication for the prefixes and tags that you specified\. For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
 
 All CloudWatch statistics are retained for a period of 15 months so that you can access historical information and gain a better perspective on how your web application or service is performing\. For more information, see [What Is Amazon CloudWatch?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
 
@@ -49,10 +51,12 @@ The `AWS/S3` namespace includes the following request metrics\.
 
 ## Amazon S3 CloudWatch Replication Metrics<a name="s3-cloudwatch-replication-metrics"></a>
 
-With replication metrics, you can monitor the total number and size of objects that are pending replication, and the maximum replication time to the destination Region\. Only replication rules that have S3 Replication Time Control \(S3 RTC\) enabled will publish replication metrics\. Unlike CloudWatch storage and request metrics, you cannot filter replication metrics by prefix\(es\) and/or tag\(s\)\. However, you can set up a replication rule based on prefix\(es\) and/or tag\(s\) and your replication metrics will monitor replication for the specified prefix\(es\) and/or tag\(s\)\. For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
+With replication metrics, you can monitor the total number and size of objects that are pending replication, and the maximum replication time to the destination Region\. Only replication rules that have S3 Replication Time Control \(S3 RTC\) enabled can publish replication metrics\. 
+
+Unlike CloudWatch storage and request metrics, you can't filter replication metrics by prefixes or tags\. However, you can set up a replication rule based on prefixes and tags\. Your replication metrics then monitor replication for the prefixes and tags that you specified\. For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
 
 **Note**  
-You can enable alarms for your replication metrics on Amazon CloudWatch\. When you set up alarms for your replication metrics, set the **Missing data treatment** field to *Treat missing data as ignore \(maintain the alarm state\)*\.
+You can enable alarms for your replication metrics on Amazon CloudWatch\. When you set up alarms for your replication metrics, set the **Missing data treatment** field to **Treat missing data as ignore \(maintain the alarm state\)**\.
 
 
 | Metric | Description | 
@@ -76,7 +80,7 @@ The following dimensions are used to filter Amazon S3 metrics\.
 
  You can use the following procedures to view the storage metrics for Amazon S3\. To get the Amazon S3 metrics involved, you must set a start and end timestamp\. For metrics for any given 24\-hour period, set the time period to 86400 seconds, the number of seconds in a day\. Also, remember to set the `BucketName` and `StorageType` dimensions\.
 
-For example, if you use the AWS CLI to get the average of a specific bucket's size, in bytes, you could use the following command\.
+For example, if you use the AWS CLI to get the average of a specific bucket's size in bytes, you could use the following command\.
 
 ```
 aws cloudwatch get-metric-statistics --metric-name BucketSizeBytes --namespace AWS/S3 --start-time 2016-10-19T00:00:00Z --end-time 2016-10-20T00:00:00Z --statistics Average --unit Bytes --region us-west-2 --dimensions Name=BucketName,Value=ExampleBucket Name=StorageType,Value=StandardStorage --period 86400 --output json
@@ -105,9 +109,9 @@ This example produces the following output\.
 
 1. Choose the **S3** namespace\.
 
-1. \(Optional\) To view a metric, enter the metric name in the search field\.
+1. \(Optional\) To view a metric, enter the metric name in the search box\.
 
-1. \(Optional\) To filter by the **StorageType** dimension, enter the name of the storage class in the search field\.
+1. \(Optional\) To filter by the **StorageType** dimension, enter the name of the storage class in the search box\.
 
 **To view a list of valid metrics stored for your AWS account using the AWS CLI**
 + At a command prompt, use the following command\.

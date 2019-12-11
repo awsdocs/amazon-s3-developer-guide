@@ -1,6 +1,6 @@
 # Example 3: Changing the Replica Owner When the Source and Destination Buckets Are Owned by Different Accounts<a name="replication-walkthrough-3"></a>
 
-When the *source* and *destination* buckets in a replication configuration are owned by different AWS accounts, you can tell Amazon S3 to change replica ownership to the AWS account that owns the *destination* bucket\. This example explains how to use the Amazon S3 console and the AWS CLI to change replica ownership\. For more information, see [Additional Replication Configuration: Changing the Replica Owner](replication-change-owner.md)\. 
+When the *source* and *destination* buckets in a replication configuration are owned by different AWS accounts, you can tell Amazon S3 to change replica ownership to the AWS account that owns the *destination* bucket\. This example explains how to use the Amazon S3 console and the AWS CLI to change replica ownership\. For more information, see [Changing the Replica Owner](replication-change-owner.md)\. 
 
 **Topics**
 
@@ -221,4 +221,4 @@ The profiles you use for this exercise must have the necessary permissions\. For
 
 ## Change the Replica Owner When Buckets Are Owned by Different Accounts \(AWS SDK\)<a name="replication-ex3-sdk"></a>
 
- For a code example to add replication configuration, see [Configure Replication When Buckets Are Owned by the Same Account \(AWS SDK\)](replication-walkthrough1.md#replication-ex1-sdk)\. You need to modify the replication configuration appropriately\. For conceptual information, see [Additional Replication Configuration: Changing the Replica Owner](replication-change-owner.md)\. 
+ For a code example to add replication configuration, see [Configure Replication When Buckets Are Owned by the Same Account \(AWS SDK\)](replication-walkthrough1.md#replication-ex1-sdk)\. You need to modify the replication configuration appropriately\. For conceptual information, see [Changing the Replica Owner](replication-change-owner.md)\. 

@@ -1,4 +1,4 @@
-# Logging Amazon S3 API Calls by Using AWS CloudTrail<a name="cloudtrail-logging"></a>
+# Logging Amazon S3 API Calls Using AWS CloudTrail<a name="cloudtrail-logging"></a>
 
 Amazon S3 is integrated with AWS CloudTrail, a service that provides a record of actions taken by a user, role, or an AWS service in Amazon S3\. CloudTrail captures a subset of API calls for Amazon S3 as events, including calls from the Amazon S3 console and from code calls to the Amazon S3 APIs\. If you create a trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for Amazon S3\. If you don't configure a trail, you can still view the most recent events in the CloudTrail console in **Event history**\. Using the information collected by CloudTrail, you can determine the request that was made to Amazon S3, the IP address from which the request was made, who made the request, when it was made, and additional details\. 
 
@@ -51,7 +51,7 @@ The tables in this section list the Amazon S3 bucket\-level actions that are sup
 |  [GET Bucket notification](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETnotification.html)  | GetBucketNotification | 
 |  [GET Bucket policy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETpolicy.html)  | GetBucketPolicy | 
 |  [GET Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETreplication.html)  | GetBucketReplication | 
-|  [GET Bucket requestPayment](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTrequestPaymentGET.html)  | GetBucketRequestPay  | 
+|  [GET Bucket request payment](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTrequestPaymentGET.html)  | GetBucketRequestPayment | 
 |  [GET Bucket tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETtagging.html)  | GetBucketTagging  | 
 |  [GET Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html)  | GetBucketVersioning  | 
 |  [GET Bucket website](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETwebsite.html)  | GetBucketWebsite  | 
@@ -65,7 +65,7 @@ The tables in this section list the Amazon S3 bucket\-level actions that are sup
 |  [PUT Bucket notification](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTnotification.html)  | PutBucketNotification  | 
 |  [PUT Bucket policy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html)  | PutBucketPolicy  | 
 |  [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html)  | PutBucketReplication  | 
-|  [PUT Bucket requestPayment](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTrequestPaymentPUT.html)  | PutBucketRequestPay  | 
+|  [PUT Bucket request payment](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTrequestPaymentPUT.html)  | PutBucketRequestPayment | 
 |  [PUT Bucket tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTtagging.html)  | PutBucketTagging  | 
 |  [PUT Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)  | PutBucketVersioning | 
 |  [PUT Bucket website](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html)  | PutBucketWebsite  | 
@@ -74,7 +74,9 @@ In addition to these API operations, you can also use the [OPTIONS object](https
 
 ### Amazon S3 Object\-Level Actions Tracked by CloudTrail Logging<a name="cloudtrail-object-level-tracking"></a>
 
-You can also get CloudTrail logs for object\-level Amazon S3 actions\. To do this, specify the Amazon S3 object for your trail\. When an object\-level action occurs in your account, CloudTrail evaluates your trail settings\. If the event matches the object that you specified in a trail, the event is logged\. For more information, see [How Do I Enable Object\-Level Logging for an S3 Bucket with AWS CloudTrail Data Events?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-cloudtrail-events.html) in the *Amazon Simple Storage Service Console User Guide* and [Data Events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events) in the *AWS CloudTrail User Guide*\. The following table lists the object\-level actions that CloudTrail can log:
+You can also get CloudTrail logs for object\-level Amazon S3 actions\. To do this, specify the Amazon S3 object for your trail\. When an object\-level action occurs in your account, CloudTrail evaluates your trail settings\. If the event matches the object that you specified in a trail, the event is logged\. For more information, see [How Do I Enable Object\-Level Logging for an S3 Bucket with AWS CloudTrail Data Events?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-cloudtrail-events.html) in the *Amazon Simple Storage Service Console User Guide* and [Logging Data Events for Trails](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html) in the *AWS CloudTrail User Guide*\. 
+
+The following table lists the object\-level actions that CloudTrail can log:
 
 
 | REST API Name | API Event Name Used in CloudTrail Log | 
@@ -156,7 +158,9 @@ Newer Amazon S3 features are not supported for SOAP\. We recommend that you use 
 
 ## Using CloudTrail Logs with Amazon S3 Server Access Logs and CloudWatch Logs<a name="cloudtrail-logging-vs-server-logs"></a>
 
-AWS CloudTrail logs provide a record of actions taken by a user, role, or an AWS service in Amazon S3, while Amazon S3 server access logs provides detailed records for the requests that are made to an S3 bucket\. For more information on how the different logs work and their properties, performance and costs, see [Logging with Amazon S3](logging-with-S3.md)\. You can use AWS CloudTrail logs together with server access logs for Amazon S3\. CloudTrail logs provide you with detailed API tracking for Amazon S3 bucket\-level and object\-level operations\. Server access logs for Amazon S3 provide you visibility into object\-level operations on your data in Amazon S3\. For more information about server access logs, see [Amazon S3 Server Access Logging](ServerLogs.md)\.
+AWS CloudTrail logs provide a record of actions taken by a user, role, or an AWS service in Amazon S3, while Amazon S3 server access logs provide detailed records for the requests that are made to an S3 bucket\. For more information about how the different logs work, and their properties, performance and costs, see [Logging with Amazon S3](logging-with-S3.md)\. 
+
+You can use AWS CloudTrail logs together with server access logs for Amazon S3\. CloudTrail logs provide you with detailed API tracking for Amazon S3 bucket\-level and object\-level operations\. Server access logs for Amazon S3 provide you visibility into object\-level operations on your data in Amazon S3\. For more information about server access logs, see [Amazon S3 Server Access Logging](ServerLogs.md)\.
 
 You can also use CloudTrail logs together with CloudWatch for Amazon S3\. CloudTrail integration with CloudWatch Logs delivers S3 bucket\-level API activity captured by CloudTrail to a CloudWatch log stream in the CloudWatch log group that you specify\. You can create CloudWatch alarms for monitoring specific API activity and receive email notifications when the specific API activity occurs\. For more information about CloudWatch alarms for monitoring specific API activity, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\. For more information about using CloudWatch with Amazon S3, see [Monitoring Metrics with Amazon CloudWatch](cloudwatch-monitoring.md)\.
 

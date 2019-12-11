@@ -1,6 +1,6 @@
 # Guidelines for Using the Available Access Policy Options<a name="access-policy-alternatives-guidelines"></a>
 
-Amazon S3 supports resource\-based policies and user policies to manage access to your Amazon S3 resources \(see [Managing Access to Resources \(Access Policy Options\)](access-control-overview.md#access-control-resources-manage-permissions-basics)\)\. Resource\-based policies include bucket policies, bucket ACLs, and object ACLs\. This section describes specific scenarios for using resource\-based access policies to manage access to your Amazon S3 resources\. 
+Amazon S3 supports resource\-based policies and user policies to manage access to your Amazon S3 resources \(see [Managing Access to Resources](access-control-overview.md#access-control-resources-manage-permissions-basics)\)\. Resource\-based policies include bucket policies, bucket ACLs, and object ACLs\. This section describes specific scenarios for using resource\-based access policies to manage access to your Amazon S3 resources\. 
 
 ## When to Use an ACL\-based Access Policy \(Bucket and Object ACLs\)<a name="when-to-use-acl"></a>
 
@@ -70,6 +70,7 @@ If an AWS account owns a resource, it can grant those permissions to another AWS
 
 ## Related Topics<a name="access-control-guidelines-related-topics"></a>
 
- We recommend you first review all introductory topics that explain how you manage access to your Amazon S3 resources and related guidelines\. For more information, see [Introduction to Managing Access Permissions to Your Amazon S3 Resources](intro-managing-access-s3-resources.md)\. You can then use the following topics for more information about specific access policy options\. 
+We recommend you first review all introductory topics that explain how you manage access to your Amazon S3 resources and related guidelines\. For more information, see [Introduction to Managing Access to Amazon S3 Resources](s3-access-control.md#intro-managing-access-s3-resources)\. You can then use the following topics for more information about specific access policy options\. 
 + [Using Bucket Policies and User Policies](using-iam-policies.md)
++ [Access Control List \(ACL\) Overview](acl-overview.md)
 + [Managing Access with ACLs](S3_ACLs_UsingACLs.md)

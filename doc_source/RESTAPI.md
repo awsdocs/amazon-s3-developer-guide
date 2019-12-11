@@ -31,7 +31,7 @@ Following is an example of a path\-style version of the same request\.
 5. Authorization: authorization string
 ```
 
- Currently Amazon S3 supports virtual hosted\-style and path\-style access in all Regions but this will be changing \(see the following **Important** note\.\) The path\-style syntax requires that you use the Region\-specific endpoint when attempting to access a bucket\. For example, if you have a bucket called `mybucket` that resides in the EU \(Ireland\) Region, you want to use path\-style syntax, and the object is named `puppy.jpg`, the correct URI is `http://s3-eu-west-1.amazonaws.com/mybucket/puppy.jpg`\. 
+ Currently Amazon S3 supports virtual hosted\-style and path\-style access in all Regions but this will be changing \(see the following **Important** note\.\) The path\-style syntax requires that you use the Region\-specific endpoint when attempting to access a bucket\. For example, if you have a bucket called `mybucket` that resides in the Europe \(Ireland\) Region, you want to use path\-style syntax, and the object is named `puppy.jpg`, the correct URI is `http://s3-eu-west-1.amazonaws.com/mybucket/puppy.jpg`\. 
 
 You will receive an HTTP response code 307 Temporary Redirect error and a message indicating what the correct URI is for your resource if you try to access a bucket outside the US East \(N\. Virginia\) Region with path\-style syntax that uses either of the following: 
 +  `http://s3.amazonaws.com` 

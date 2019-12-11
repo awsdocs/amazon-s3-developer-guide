@@ -55,7 +55,7 @@ With CloudTrail event logs, you can now create an Athena database and table to q
 
 1. Change the AWS Region to be the same as your CloudTrail destination S3 bucket\.
 
-1. In the query window, create an Athena database for your CloudTrail events:
+1. In the query window, create an Athena database for your CloudTrail events\.
 
    ```
    CREATE DATABASE s3_cloudtrail_events_db
@@ -129,7 +129,7 @@ With CloudTrail event logs, you can now create an Athena database and table to q
 
 Amazon S3 lets you identify what API signature version was used to sign a request using an AWS CloudTrail event log\. This capability is important because support for Signature Version 2 will be turned off \(deprecated\)\. After that, Amazon S3 will no longer accept requests that use Signature Version 2, and all requests must use *Signature Version 4* signing\. 
 
-We ****strongly recommend that you use CloudTrail to help determine whether any of your workflows are using Signature Version 2 signing\. Remediate them by upgrading your libraries and code to use Signature Version 4 instead to prevent any impact to your business\. 
+We *strongly* recommend that you use CloudTrail to help determine whether any of your workflows are using Signature Version 2 signing\. Remediate them by upgrading your libraries and code to use Signature Version 4 instead to prevent any impact to your business\. 
 
 For more information, see [Announcement: AWS CloudTrail for Amazon S3 adds new fields for enhanced security auditing](https://forums.aws.amazon.com/ann.jspa?annID=6551) in the AWS Discussion Forums\.
 

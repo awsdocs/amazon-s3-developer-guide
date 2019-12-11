@@ -1,6 +1,6 @@
 # Metrics Configurations for Buckets<a name="metrics-configurations"></a>
 
-With CloudWatch request metrics for Amazon S3, you can receive 1\-minute CloudWatch metrics, set CloudWatch alarms, and access CloudWatch dashboards to view near\-real\-time operations and performance of your Amazon S3 storage\. For applications that depend on cloud storage, these metrics let you quickly identify and act on operational issues\. When enabled, these 1\-minute metrics are available at the Amazon S3 bucket\-level, by default\.
+With Amazon CloudWatch request metrics for Amazon S3, you can receive 1\-minute CloudWatch metrics, set CloudWatch alarms, and access CloudWatch dashboards to view near\-real\-time operations and performance of your Amazon S3 storage\. For applications that depend on cloud storage, these metrics let you quickly identify and act on operational issues\. When enabled, these 1\-minute metrics are available at the Amazon S3 bucket\-level, by default\.
 
 If you want to get the CloudWatch request metrics for the objects in a bucket, you must create a metrics configuration for the bucket\. You can also define a filter for the metrics collected using a shared prefix or object tags\. This allows you to align metrics filters to specific business applications, workflows, or internal organizations\.
 
@@ -12,7 +12,7 @@ Keep the following in mind when using metrics configurations:
 + Metrics configurations are necessary only to enable request metrics\. Bucket\-level daily storage metrics are always turned on, and are provided at no additional cost\. Currently, it's not possible to get daily storage metrics for a filtered subset of objects\.
 + Each metrics configuration enables the full set of [available request metrics](cloudwatch-monitoring.md#s3-request-cloudwatch-metrics)\. Operation\-specific metrics \(such as `PostRequests`\) are reported only if there are requests of that type for your bucket or your filter\.
 + Request metrics are reported for object\-level operations\. They are also reported for operations that list bucket contents, like [GET Bucket \(List Objects\)](https://docs.aws.amazon.com/AmazonS3/latest/API/v2-RESTBucketGET.html), [GET Bucket Object Versions](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETVersion.html), and [List Multipart Uploads](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadListMPUpload.html), but they are not reported for other operations on buckets\.
-+ Request metrics support filtering by prefixes but storage metrics do not\.
++ Request metrics support filtering by prefixes, but storage metrics do not\.
 
 ## Best\-Effort CloudWatch Metrics Delivery<a name="metrics-configurations-delivery"></a>
 
@@ -28,13 +28,13 @@ When working with CloudWatch metric configurations, you have the option of filte
 + **Object key name prefix** – Although the Amazon S3 data model is a flat structure, you can infer hierarchy by using a prefix\. The Amazon S3 console supports these prefixes with the concept of folders\. If you filter by prefix, objects that have the same prefix are included in the metrics configuration\.
 + **Tag** – You can add tags, which are key\-value name pairs, to objects\. Tags help you find and organize objects easily\. You can also use tags as a filter for metrics configurations\.
 
-If you specify a filter, only requests that operate on single objects can match the filter and be included in the reported metrics\. Requests like [Delete Multiple Objects](https://docs.aws.amazon.com/AmazonS3/latest/API/multiobjectdeleteapi.html) and List requests don't return any metrics for configurations with filters\.
+If you specify a filter, only requests that operate on single objects can match the filter and be included in the reported metrics\. Requests like [Delete Multiple Objects](https://docs.aws.amazon.com/AmazonS3/latest/API/multiobjectdeleteapi.html) and `List` requests don't return any metrics for configurations with filters\.
 
 To request more complex filtering, choose two or more elements\. Only objects that have all of those elements are included in the metrics configuration\. If you don't set filters, all of the objects in the bucket are included in the metrics configuration\.
 
 ## How to Add Metrics Configurations<a name="add-metrics-configurations"></a>
 
-You can add metrics configurations to a bucket through the Amazon S3 console, with the AWS CLI, or with the Amazon S3 REST API\. For information about how to do this in the AWS Management Console, see the [How Do I Configure Request Metrics for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-metrics.html) in the Amazon Simple Storage Service Console User Guide\.
+You can add metrics configurations to a bucket through the Amazon S3 console, with the AWS CLI, or with the Amazon S3 REST API\. For information about how to do this in the AWS Management Console, see the [How Do I Configure Request Metrics for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-metrics.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 **To add metrics configurations using the AWS CLI**
 

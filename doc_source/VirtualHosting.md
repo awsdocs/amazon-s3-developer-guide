@@ -11,7 +11,7 @@ In general, virtual hosting is the practice of serving multiple websites from a 
 
 Besides the attractiveness of customized URLs, a second benefit of virtual hosting is the ability to publish to the "root directory" of your bucket's virtual server\. This ability can be important because many existing applications search for files in this standard location\. For example, `favicon.ico`, `robots.txt`, `crossdomain.xml` are all expected to be found at the root\. 
 
- Currently Amazon S3 supports virtual hosted\-style and path\-style access in all Regions but this will be changing \(see the following **Important** note\.\) The path\-style syntax requires that you use the Region\-specific endpoint when attempting to access a bucket\. For example, if you have a bucket called `mybucket` that resides in the EU \(Ireland\) Region, you want to use path\-style syntax, and the object is named `puppy.jpg`, the correct URI is `http://s3-eu-west-1.amazonaws.com/mybucket/puppy.jpg`\. 
+ Currently Amazon S3 supports virtual hosted\-style and path\-style access in all Regions but this will be changing \(see the following **Important** note\.\) The path\-style syntax requires that you use the Region\-specific endpoint when attempting to access a bucket\. For example, if you have a bucket called `mybucket` that resides in the Europe \(Ireland\) Region, you want to use path\-style syntax, and the object is named `puppy.jpg`, the correct URI is `http://s3-eu-west-1.amazonaws.com/mybucket/puppy.jpg`\. 
 
 You will receive an HTTP response code 307 Temporary Redirect error and a message indicating what the correct URI is for your resource if you try to access a bucket outside the US East \(N\. Virginia\) Region with path\-style syntax that uses either of the following: 
 +  `http://s3.amazonaws.com` 
@@ -76,7 +76,7 @@ The request is as follows:
 The virtual hosted–style method requires the bucket name to be DNS\-compliant\. 
 
 **Example Virtual Hosted–Style Method for a Bucket in a Region Other Than US East \(N\. Virginia\) Region**  
-This example uses `johnsmith.eu` as the name for a bucket in the EU \(Ireland\) Region and `homepage.html` as the key name\.  
+This example uses `johnsmith.eu` as the name for a bucket in the Europe \(Ireland\) Region and `homepage.html` as the key name\.  
 The URL is as follows:  
 
 ```

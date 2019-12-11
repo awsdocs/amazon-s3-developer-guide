@@ -50,7 +50,7 @@ US West \(Oregon\)
 Asia Pacific \(Singapore\)
 Asia Pacific \(Sydney\)
 Asia Pacific \(Tokyo\)
-EU \(Ireland\)
+Europe \(Ireland\)
 South America \(São Paulo\)
 For a list of all the Amazon S3 supported regions and endpoints, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
 

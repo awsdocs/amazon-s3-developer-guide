@@ -37,7 +37,7 @@ Both the source and destination buckets must be versioning\-enabled when you con
 
 If Amazon S3 delivers logs to a bucket that has replication enabled, it replicates the log objects\.
 
-If server access logs \([Amazon S3 Server Access Logging](ServerLogs.md)\) or AWS CloudTrail Logs \( [Logging Amazon S3 API Calls by Using AWS CloudTrail](cloudtrail-logging.md)\) are enabled on your source or destination bucket, Amazon S3 includes replication\-related requests in the logs\. For example, Amazon S3 logs each object that it replicates\. 
+If server access logs \([Amazon S3 Server Access Logging](ServerLogs.md)\) or AWS CloudTrail Logs \( [Logging Amazon S3 API Calls Using AWS CloudTrail](cloudtrail-logging.md)\) are enabled on your source or destination bucket, Amazon S3 includes replication\-related requests in the logs\. For example, Amazon S3 logs each object that it replicates\. 
 
 ## CRR and the Destination Region<a name="replication-and-dest-region"></a>
 

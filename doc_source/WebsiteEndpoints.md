@@ -23,7 +23,7 @@ Which form is used for the endpoint depends on what Region the bucket is in\. Fo
 1. http://example-bucket.s3-website-us-west-2.amazonaws.com/
 ```
 
-Or, if your bucket is named `example-bucket` and it resides in the EU \(Frankfurt\) Region, the website is available at the following Amazon S3 website endpoint: 
+Or, if your bucket is named `example-bucket` and it resides in the Europe \(Frankfurt\) Region, the website is available at the following Amazon S3 website endpoint: 
 
 ```
 1. http://example-bucket.s3-website.eu-central-1.amazonaws.com/

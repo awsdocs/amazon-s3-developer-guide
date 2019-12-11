@@ -147,4 +147,4 @@ If objects in the source bucket are tagged, note the following:
 
 ### Changing Replica Ownership<a name="change-replica-ownership"></a>
 
-When different AWS accounts own the source and destination buckets, you can tell Amazon S3 to change the ownership of the replica to the AWS account that owns the destination bucket\. This is called the *owner override* option\. For more information, see [Additional Replication Configuration: Changing the Replica Owner](replication-change-owner.md)\.
+When different AWS accounts own the source and destination buckets, you can tell Amazon S3 to change the ownership of the replica to the AWS account that owns the destination bucket\. This is called the *owner override* option\. For more information, see [Changing the Replica Owner](replication-change-owner.md)\.

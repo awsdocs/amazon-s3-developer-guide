@@ -1,6 +1,6 @@
 # Example 4: Replicating Encrypted Objects<a name="replication-walkthrough-4"></a>
 
-By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with AWS Key Management Service \(AWS KMS\) customer master keys \(CMKs\)\. To replicate encrypted objects, you modify the bucket replication configuration to tell Amazon S3 to replicate these objects\. This example explains how to use the Amazon S3 console and the AWS Command Line Interface \(AWS CLI\) to change the bucket replication configuration to enable replicating encrypted objects\. For more information, see [Additional Replication Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](replication-config-for-kms-objects.md)\. 
+By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with AWS Key Management Service \(AWS KMS\) customer master keys \(CMKs\)\. To replicate encrypted objects, you modify the bucket replication configuration to tell Amazon S3 to replicate these objects\. This example explains how to use the Amazon S3 console and the AWS Command Line Interface \(AWS CLI\) to change the bucket replication configuration to enable replicating encrypted objects\. For more information, see [Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys Stored in AWS KMS](replication-config-for-kms-objects.md)\. 
 
 **Topics**
 
@@ -265,4 +265,4 @@ In the replication configuration you specify the IAM role that Amazon S3 can ass
 
  For a code example to add replication configuration, see [Configure Replication When Buckets Are Owned by the Same Account \(AWS SDK\)](replication-walkthrough1.md#replication-ex1-sdk)\. You need to modify the replication configuration appropriately\. 
 
-For conceptual information, see [Additional Replication Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS](replication-config-for-kms-objects.md)\. 
+For conceptual information, see [Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys Stored in AWS KMS](replication-config-for-kms-objects.md)\. 

@@ -67,7 +67,7 @@ A key is the unique identifier for an object within a bucket\. Every object in a
 
 ### Regions<a name="Regions"></a>
 
-You can choose the geographical AWS Region where Amazon S3 will store the buckets that you create\. You might choose a Region to optimize latency, minimize costs, or address regulatory requirements\. Objects stored in a Region never leave the Region unless you explicitly transfer them to another Region\. For example, objects stored in the EU \(Ireland\) Region never leave it\. 
+You can choose the geographical AWS Region where Amazon S3 will store the buckets that you create\. You might choose a Region to optimize latency, minimize costs, or address regulatory requirements\. Objects stored in a Region never leave the Region unless you explicitly transfer them to another Region\. For example, objects stored in the Europe \(Ireland\) Region never leave it\. 
 
 **Note**  
 You can only access Amazon S3 and its features in AWS Regions that are enabled for your account\.

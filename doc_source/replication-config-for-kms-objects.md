@@ -1,4 +1,4 @@
-# Additional Replication Configuration: Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys stored in AWS KMS<a name="replication-config-for-kms-objects"></a>
+# Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys Stored in AWS KMS<a name="replication-config-for-kms-objects"></a>
 
 By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with customer master keys \(CMKs\) stored in AWS KMS\. This section explains additional configuration that you add to direct Amazon S3 to replicate these objects\. 
 

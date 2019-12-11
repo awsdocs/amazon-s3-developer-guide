@@ -8,10 +8,10 @@ This section explains how to work with buckets\. For information about working w
 
 An Amazon S3 bucket name is globally unique, and the namespace is shared by all AWS accounts\. This means that after a bucket is created, the name of that bucket cannot be used by another AWS account in any AWS Region until the bucket is deleted\. You should not depend on specific bucket naming conventions for availability or security verification purposes\. For bucket naming guidelines, see [Bucket Restrictions and Limitations](BucketRestrictions.md)\.
 
-Amazon S3 creates buckets in a Region you specify\. To optimize latency, minimize costs, or address regulatory requirements, choose any AWS Region that is geographically close to you\. For example, if you reside in Europe, you might find it advantageous to create buckets in the EU \(Ireland\) or EU \(Frankfurt\) Regions\. For a list of Amazon S3 Regions, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
+Amazon S3 creates buckets in a Region you specify\. To optimize latency, minimize costs, or address regulatory requirements, choose any AWS Region that is geographically close to you\. For example, if you reside in Europe, you might find it advantageous to create buckets in the Europe \(Ireland\) or Europe \(Frankfurt\) Regions\. For a list of Amazon S3 Regions, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
 
 **Note**  
-Objects that belong to a bucket that you create in a specific AWS Region never leave that Region, unless you explicitly transfer them to another Region\. For example, objects that are stored in the EU \(Ireland\) Region never leave it\. 
+Objects that belong to a bucket that you create in a specific AWS Region never leave that Region, unless you explicitly transfer them to another Region\. For example, objects that are stored in the Europe \(Ireland\) Region never leave it\. 
 
 **Topics**
 + [Creating a Bucket](#create-bucket-intro)
@@ -37,10 +37,11 @@ When you create a bucket, you provide a name and the AWS Region where you want t
 You can store any number of objects in a bucket\.
 
 You can create a bucket using any of the following methods:
-+ Using the console
-+ Programmatically, using the AWS SDKs
++ Using the AWS Management Console
++ Using the REST API
 **Note**  
-If you need to, you can also make the Amazon S3 REST API calls directly from your code\. However, this can be cumbersome because it requires you to write code to authenticate your requests\. For more information, see [PUT Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html) in the *Amazon Simple Storage Service API Reference*\.
+Creating a bucket using the REST API can be cumbersome because it requires you to write code to authenticate your requests\. For more information, see [PUT Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html) in the *Amazon Simple Storage Service API Reference*\. We recommend that you use the AWS Management Console or AWS SDKs instead\. 
++ Programmatically, using the AWS SDKs
 
   When using the AWS SDKs, you first create a client and then use the client to send a request to create a bucket\.  When you create the client, you can specify an AWS Region\. US East \(N\. Virginia\) is the default Region\. Note the following: 
   + If you create a client by specifying the US East \(N\. Virginia\) Region, the client uses the following endpoint to communicate with Amazon S3: 
@@ -119,6 +120,15 @@ Because buckets can be accessed using path\-style and virtual\-hosted–style UR
 
 **Accessing an S3 Bucket over IPv6**  
 Amazon S3 has a set of dual\-stack endpoints, which support requests to S3 buckets over both Internet Protocol version 6 \(IPv6\) and IPv4\. For more information, see [Making Requests over IPv6](ipv6-access.md)\.
+
+**Accessing a Bucket through an S3 Access Point**
+
+In addition to accessing a bucket directly, you can access a bucket through an S3 access point\. For more information about S3 access points, see [Managing Data Access with Amazon S3 Access Points ](access-points.md)\.
+
+S3 access points only support virtual\-host\-style addressing\. To address a bucket through an access point, use the format https://`access-point-name.s3-accesspoint.region.amazonaws.com`\.
+
+**Note**  
+S3 access points only support secure access by HTTPS\. HTTP isn't supported\.
 
 ## Bucket Configuration Options<a name="bucket-config-options-intro"></a>
 
