@@ -10,4 +10,4 @@ S3 access points have the following restrictions and limitations:
 + APIs that control access point functionality \(for example, `PutAccessPoint` and `GetAccessPointPolicy`\) don't support cross\-account calls\.
 + You must use AWS Signature Version 4 when making requests to an access point using the REST APIs\. For more information about authenticating requests, see [Authenticating Requests \(AWS Signature Version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html) in the *Amazon Simple Storage Service API Reference*\.
 + Access points only support access over HTTPS\.
-+ Access points don't support anonymous access\.
++ Access points don't support anonymous access\.  Accordingly, public access to a bucket via an access point is not supported\.
