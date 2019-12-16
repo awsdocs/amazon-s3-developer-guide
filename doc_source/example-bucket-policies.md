@@ -65,9 +65,9 @@ Use caution when granting anonymous access to your Amazon S3 bucket or disabling
 
 ## Restricting Access to Specific IP Addresses<a name="example-bucket-policies-use-case-3"></a>
 
-The following example grants permissions to any user to perform any Amazon S3 operations on objects in the specified S3 bucket\. However, the request must not originate from the range of IP addresses specified in the condition\. 
+The following example denies permissions to any user to perform any Amazon S3 operations on objects in the specified S3 bucket\. However, the request must not originate from the range of IP addresses specified in the condition\. 
 
-The condition in this statement identifies the 54\.240\.143\.\* range of disallowed Internet Protocol version 4 \(IPv4\) IP addresses\. 
+The double negative of the condition in this statement identifies the 54\.240\.143\.\* range of allowed Internet Protocol version 4 \(IPv4\) IP addresses\. 
 
 The `Condition` block uses the `NotIpAddress` condition and the `aws:SourceIp` condition key, which is an AWS\-wide condition key\. For more information about these condition keys, see [Specifying Conditions in a Policy](amazon-s3-policy-keys.md)\. The `aws:SourceIp` IPv4 values use the standard CIDR notation\. For more information, see [IAM JSON Policy Elements Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_IPAddress) in the *IAM User Guide*\. 
 
