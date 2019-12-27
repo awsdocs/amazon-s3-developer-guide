@@ -91,7 +91,7 @@ The `put-bucket-acl` command is required to grant the Amazon S3 log delivery sys
           buckets="$(aws s3 ls | awk '{print $3}')"
           
           # Put bucket logging on each bucket
-          for bucket in $bucenable-logging-programmingkets
+          for bucket in $buckets
               do printf '{
              "LoggingEnabled": {
                  "TargetBucket": "%s",
