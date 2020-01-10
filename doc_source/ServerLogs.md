@@ -57,6 +57,14 @@ Both the source and target buckets must be owned by the same AWS account, and th
 
 For more information about enabling server access logging, see [Enabling Logging Using the Console](enable-logging-console.md) and [Enabling Logging Programmatically](enable-logging-programming.md)\. 
 
+### Additional logging considerations<a name="additional-logging-considerations"></a>
+
+**Note**  
+Both the source and target S3 buckets must be owned by the same AWS account, and the S3 buckets must both be in the same Region\.
+Amazon S3 only supports granting permission to deliver access logs via bucket ACL, not via bucket policy\.
+Adding deny conditions to a bucket policy may prevent Amazon S3 from delivering access logs\.
+Default bucket encryption on the destination bucket may only be used if AES256 \(SSE\-S3\) is selected\. SSE\-KMS encryption is not supported
+
 ## Log Object Key Format<a name="server-log-keyname-format"></a>
 
 Amazon S3 uses the following object key format for the log objects it uploads in the target bucket:

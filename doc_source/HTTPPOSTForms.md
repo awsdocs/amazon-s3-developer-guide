@@ -49,7 +49,7 @@ The following is an example of UTF\-8 encoding in a request header:
 
 The form declaration has three components: the action, the method, and the enclosure type\. If any of these values is improperly set, the request fails\.
 
-The action specifies the URL that processes the request, which must be set to the URL of the bucket\. For example, if the name of your bucket is "johnsmith", the URL is "http://johnsmith\.s3\.amazonaws\.com/"\.
+The action specifies the URL that processes the request, which must be set to the URL of the bucket\. For example, if the name of your bucket is `johnsmith` and the Region is US West \(N\. California\), the URL is `https://johnsmith.s3.us-west-1.amazonaws.com/`\.
 
 **Note**  
 The key name is specified in a form field\.
@@ -62,7 +62,7 @@ The enclosure type \(enctype\) must be specified and must be set to multipart/fo
 The following example is a form declaration for the bucket "johnsmith"\.  
 
 ```
-1. <form action="http://johnsmith.s3.amazonaws.com/" method="post"
+1. <form action="https://johnsmith.s3.us-west-1.amazonaws.com/" method="post"
 2. 
 3. enctype="multipart/form-data">
 ```

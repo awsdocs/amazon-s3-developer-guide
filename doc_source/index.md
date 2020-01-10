@@ -1,7 +1,7 @@
 # Amazon Simple Storage Service Developer Guide
 
 -----
-*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -80,7 +80,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Object Lifecycle Management](object-lifecycle-mgmt.md)
       + [Additional Considerations for Lifecycle Configuration](lifecycle-additional-considerations.md)
          + [Transitioning Objects Using Amazon S3 Lifecycle](lifecycle-transition-general-considerations.md)
-         + [Configuring Object Expiration](lifecycle-expire-general-considerations.md)
+         + [Understanding Object Expiration](lifecycle-expire-general-considerations.md)
          + [Lifecycle and Other Bucket Configurations](lifecycle-and-other-bucket-config.md)
       + [Lifecycle Configuration Elements](intro-lifecycle-rules.md)
       + [Examples of Lifecycle Configuration](lifecycle-configuration-examples.md)

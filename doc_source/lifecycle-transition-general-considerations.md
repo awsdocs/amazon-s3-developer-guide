@@ -14,54 +14,56 @@ Amazon S3 supports a waterfall model for transitioning between storage classes, 
 
 ![\[Amazon S3 storage class waterfall graphic.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/SupportedTransitionsWaterfallModel.png)
 
-Amazon S3 supports the following lifecycle transitions between storage classes using a lifecycle configuration:
-+ You can transition from the STANDARD storage class to any other storage class\.
-+ You can transition from any storage class to the GLACIER or DEEP\_ARCHIVE storage classes\. 
-+ You can transition from the STANDARD\_IA storage class to the INTELLIGENT\_TIERING or ONEZONE\_IA storage classes\.
-+ You can transition from the INTELLIGENT\_TIERING storage class to the ONEZONE\_IA storage class\.
-+ You can transition from the GLACIER storage class to the DEEP\_ARCHIVE storage class\.
+### Supported Lifecycle Transitions<a name="supported-lifecycle-transitions"></a>
 
-The following lifecycle transitions are not supported:
-+ You can't transition from any storage class to the STANDARD storage class\.
-+ You can't transition from any storage class to the REDUCED\_REDUNDANCY storage class\.
-+ You can't transition from the INTELLIGENT\_TIERING storage class to the STANDARD\_IA storage class\.
-+ You can't transition from the ONEZONE\_IA storage class to the STANDARD\_IA or INTELLIGENT\_TIERING storage classes\.
-+ You can transition from the GLACIER storage class to the DEEP\_ARCHIVE storage class only\.
-+ You can't transition from the DEEP\_ARCHIVE storage class to any other storage class\.
+Amazon S3 supports the following lifecycle transitions between storage classes using a lifecycle configuration\. 
 
-The lifecycle storage class transitions have the following constraints:
-+ From the STANDARD or STANDARD\_IA storage class to INTELLIGENT\_TIERING\. The following constraints apply:
-  + For larger objects, there is a cost benefit for transitioning to INTELLIGENT\_TIERING\. Amazon S3 does not transition objects that are smaller than 128 KB to the INTELLIGENT\_TIERING storage class because it's not cost effective\.
+You *can transition* from:
++ The STANDARD storage class to any other storage class\.
++ Any storage class to the GLACIER or DEEP\_ARCHIVE storage classes\. 
++ The STANDARD\_IA storage class to the INTELLIGENT\_TIERING or ONEZONE\_IA storage classes\.
++ The INTELLIGENT\_TIERING storage class to the ONEZONE\_IA storage class\.
++ The GLACIER storage class to the DEEP\_ARCHIVE storage class\.
 
-     
-+ From the STANDARD storage classes to STANDARD\_IA or ONEZONE\_IA\. The following constraints apply:
+### Unsupported Lifecycle Transitions<a name="unsupported-lifecycle-transitions"></a>
 
-   
-  + For larger objects, there is a cost benefit for transitioning to STANDARD\_IA or ONEZONE\_IA\. Amazon S3 does not transition objects that are smaller than 128 KB to the STANDARD\_IA or ONEZONE\_IA storage classes because it's not cost effective\.
+Amazon S3 does not support any of the following lifecycle transitions\. 
 
-     
-  + Objects must be stored at least 30 days in the current storage class before you can transition them to STANDARD\_IA or ONEZONE\_IA\. For example, you cannot create a lifecycle rule to transition objects to the STANDARD\_IA storage class one day after you create them\. 
+You *can't transition* from:
++ Any storage class to the STANDARD storage class\.
++ Any storage class to the REDUCED\_REDUNDANCY storage class\.
++ The INTELLIGENT\_TIERING storage class to the STANDARD\_IA storage class\.
++ The ONEZONE\_IA storage class to the STANDARD\_IA or INTELLIGENT\_TIERING storage classes\.
++ The GLACIER storage class to the DEEP\_ARCHIVE storage class only\.
 
-     
+### Constraints<a name="lifecycle-configuration-constraints"></a>
 
-    Amazon S3 doesn't transition objects within the first 30 days because newer objects are often accessed more frequently or deleted sooner than is suitable for STANDARD\_IA or ONEZONE\_IA storage\.
+Lifecycle storage class transitions have the following constraints:
 
-     
-  + If you are transitioning noncurrent objects \(in versioned buckets\), you can transition only objects that are at least 30 days noncurrent to STANDARD\_IA or ONEZONE\_IA storage\. 
+**Object Size and Transitions from STANDARD or STANDARD\_IA to INTELLIGENT\_TIERING, STANDARD\_IA, or ONEZONE\_IA**  
+When you transition objects from the STANDARD or STANDARD\_IA storage classes to INTELLIGENT\_TIERING, STANDARD\_IA, or ONEZONE\_IA, the following object size constraints apply:
++ **Larger objects** ‐ For the following transitions, there is a cost benefit to transitioning larger objects:
+  + From the STANDARD or STANDARD\_IA storage classes to INTELLIGENT\_TIERING\.
+  + From the STANDARD storage classe to STANDARD\_IA or ONEZONE\_IA\.
++  **Objects smaller than 128 KB ** ‐ For the following transitions, Amazon S3 does not transition objects that are smaller than 128 KB because it's not cost effective:
+  + From the STANDARD or STANDARD\_IA storage classes to INTELLIGENT\_TIERING\.
+  + From the STANDARD storage classe to STANDARD\_IA or ONEZONE\_IA\.
 
-     
-+ From the STANDARD\_IA storage class to ONEZONE\_IA\. The following constraints apply:
-  + Objects must be stored at least 30 days in the STANDARD\_IA storage class before you can transition them to the ONEZONE\_IA class\.
+**Minimum Days for Transition from STANDARD or STANDARD\_IA to STANDARD\_IA or ONEZONE\_IA**  
+Before you transition objects from the STANDARD or STANDARD\_IA storages classes to STANDARD\_IA or ONEZONE\_IA, you must store them at least 30 days in the STANDARD storage class\. For example, you cannot create a lifecycle rule to transition objects to the STANDARD\_IA storage class one day after you create them\. Amazon S3 doesn't transition objects within the first 30 days because newer objects are often accessed more frequently or deleted sooner than is suitable for STANDARD\_IA or ONEZONE\_IA storage\.
 
-     
+Similarly, if you are transitioning noncurrent objects \(in versioned buckets\), you can transition only objects that are at least 30 days noncurrent to STANDARD\_IA or ONEZONE\_IA storage\. 
+
+**Minimum 30\-Day Storage Charge for INTELLIGENT\_TIERING, STANDARD\_IA, and ONEZONE\_IA**  
+The INTELLIGENT\_TIERING, STANDARD\_IA, and ONEZONE\_IA storage classes have a minimum 30\-day storage charge\. Therefore, you can't specify a single lifecycle rule for both an INTELLIGENT\_TIERING, STANDARD\_IA, or ONEZONE\_IA transition and a GLACIER or DEEP\_ARCHIVE transition when the GLACIER or DEEP\_ARCHIVE transition occurs less than 30 days after the INTELLIGENT\_TIERING, STANDARD\_IA, or ONEZONE\_IA transition\.
+
+The same 30\-day minimum applies when you specify a transition from STANDARD\_IA storage to ONEZONE\_IA or INTELLIGENT\_TIERING storage\. You can specify two rules to accomplish this, but you pay minimum storage charges\. For more information about cost considerations, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
+
+### Manage an Object's Complete Lifecycle<a name="manage-complete-object-lifecycle"></a>
 
 You can combine these lifecycle actions to manage an object's complete lifecycle\.  For example, suppose that the objects you create have a well\-defined lifecycle\. Initially, the objects are frequently accessed for a period of 30 days\. Then, objects are infrequently accessed for up to 90 days\. After that, the objects are no longer needed, so you might choose to archive or delete them\. 
 
 In this scenario, you can create a lifecycle rule in which you specify the initial transition action to INTELLIGENT\_TIERING, STANDARD\_IA, or ONEZONE\_IA storage, another transition action to GLACIER storage for archiving, and an expiration action\. As you move the objects from one storage class to another, you save on storage cost\. For more information about cost considerations, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
-
-**Important**  
-You can't specify a single lifecycle rule for both INTELLIGENT\_TIERING \(or STANDARD\_IA or ONEZONE\_IA\) and GLACIER or DEEP\_ARCHIVE transitions when the GLACIER or DEEP\_ARCHIVE transition occurs less than 30 days after the INTELLIGENT\_TIERING, STANDARD\_IA, or ONEZONE\_IA transition\. That's because there is a minimum 30\-day storage charge associated with the INTELLIGENT\_TIERING, STANDARD\_IA, and ONEZONE\_IA storage classes\.   
-The same 30\-day minimum applies when you specify a transition from STANDARD\_IA storage to ONEZONE\_IA or INTELLIGENT\_TIERING storage\. You can specify two rules to accomplish this, but you pay minimum storage charges\. For more information about cost considerations, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 
 
 ## Transitioning to the GLACIER and DEEP ARCHIVE Storage Classes \(Object Archival\)<a name="before-deciding-to-archive-objects"></a>
 
@@ -73,8 +75,6 @@ Before you archive objects, review the following sections for relevant considera
 
 The following are the general considerations for you to consider before you archive objects:
 + Encrypted objects remain encrypted throughout the storage class transition process\.
-
-   
 + Objects that are stored in the GLACIER or DEEP\_ARCHIVE storage classes are not available in real time\.
 
    

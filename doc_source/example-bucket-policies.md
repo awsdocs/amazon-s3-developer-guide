@@ -85,7 +85,7 @@ The `Condition` block uses the `NotIpAddress` condition and the `aws:SourceIp` c
 11.       "Action": "s3:*",
 12.       "Resource": "arn:aws:s3:::examplebucket/*",
 13.       "Condition": {
-14.          "NotIpAddress": {"aws:SourceIp": "54.240.143.0/24"},
+14.          "NotIpAddress": {"aws:SourceIp": "54.240.143.0/24"}
 15. 
 16.       }
 17.     }

@@ -7,36 +7,24 @@ The Amazon S3 website endpoints do not support HTTPS\. For information about usi
 [How do I use CloudFront to serve HTTPS requests for my Amazon S3 bucket?](https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-https-requests-s3)
 [Requiring HTTPS for Communication Between CloudFront and Your Amazon S3 Origin](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-s3-origin.html)
 
-The two general forms of an Amazon S3 website endpoint are as follows: 
+Amazon S3 Region\-specific website endpoints follow this format:
 
 ```
-1. bucket-name.s3-website-region.amazonaws.com
+http://bucket-name.s3-website.Region.amazonaws.com
 ```
 
-```
-1. bucket-name.s3-website.region.amazonaws.com
-```
-
-Which form is used for the endpoint depends on what Region the bucket is in\. For example, if your bucket is named `example-bucket` and it resides in the US West \(Oregon\) Region, the website is available at the following Amazon S3 website endpoint: 
+For example, if you create a bucket named `example-bucket` in the US West \(Oregon\) Region, your website is available at the following URL:
 
 ```
-1. http://example-bucket.s3-website-us-west-2.amazonaws.com/
+http://example-bucket.s3-website.us-west-2.amazonaws.com
 ```
 
-Or, if your bucket is named `example-bucket` and it resides in the Europe \(Frankfurt\) Region, the website is available at the following Amazon S3 website endpoint: 
-
-```
-1. http://example-bucket.s3-website.eu-central-1.amazonaws.com/
-```
-
-For a list of the Amazon S3 website endpoints by Region, see [Amazon Simple Storage Service Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_website_region_endpoints) in the * AWS General Reference*\. 
-
- In order for your customers to access content at the website endpoint, you must make all your content publicly readable\. To do so, you can edit block public access settings for the account\. Then, you can use a bucket policy or an access control list \(ACL\) on an object to grant the necessary permissions\. For more information, see [Permissions Required for Website Access](WebsiteAccessPermissionsReqd.md)\.
+For a complete list of Amazon S3 website endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoint)\. In order for your customers to access content at the website endpoint, you must make all your content publicly readable\. To do so, you can edit block public access settings for the account\. Then, you can use a bucket policy or an access control list \(ACL\) on an object to grant the necessary permissions\. For more information, see [Permissions Required for Website Access](WebsiteAccessPermissionsReqd.md)\.
 
 **Note**  
 Requester Pays buckets  do not allow access through the website endpoint\. Any request to such a bucket receives a `403 Access Denied` response\. For more information, see [Requester Pays Buckets](RequesterPaysBuckets.md)\.
 
-If you have a registered domain, you can add a DNS CNAME entry to point to the Amazon S3 website endpoint\. For example, if you have registered domain, `www.example-bucket.com`, you could create a bucket `www.example-bucket.com`, and add a DNS CNAME record that points to `www.example-bucket.com.s3-website-<region>.amazonaws.com`\. All requests to `http://www.example-bucket.com` are routed to `www.example-bucket.com.s3-website-<region>.amazonaws.com`\. For more information, see [Virtual Hosting of Buckets](VirtualHosting.md)\. 
+If you have a registered domain, you can add a DNS CNAME entry to point to the Amazon S3 website endpoint\. For example, if you have registered domain, `www.example-bucket.com`, you could create a bucket `www.example-bucket.com`, and add a DNS CNAME record that points to `www.example-bucket.com.s3-website.Region.amazonaws.com`\. All requests to `http://www.example-bucket.com` are routed to `www.example-bucket.com.s3-website.Region.amazonaws.com`\. For more information, see [Virtual Hosting of Buckets](VirtualHosting.md)\. 
 
 ## Key Differences Between the Amazon Website and the REST API Endpoint<a name="WebsiteRestEndpointDiff"></a>
 

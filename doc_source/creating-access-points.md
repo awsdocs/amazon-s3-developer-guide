@@ -279,39 +279,48 @@ The following service control policy requires all new access points to be create
 ```
 
 **Example Bucket Policy to Limit S3 Operations to VPC Network Origins**  
-The following bucket policy limits access to all S3 object operations to access points with a VPC network origin\.  
+The following bucket policy limits access to all S3 object operations for bucket `examplebucket` to access points with a VPC network origin\.  
 Before using a statement like this example, make sure you don't need to use features that aren't supported by access points, such as Cross\-Region Replication\.
 
 ```
 {
     "Version": "2012-10-17",
     "Statement": [
-    {
-        "Effect": "Deny",
-        "Action": [
-            "s3:GetObject",
-            "s3:GetObjectAcl",
-            "s3:GetObjectVersionAcl",
-            "s3:PutObject",
-            "s3:PutObjectAcl",
-            "s3:PutObjectTagging",
-            "s3:PutObjectVersionTagging",
-            "s3:GetObjectVersion",
-            "s3:PutObjectVersionAcl",
-            "s3:DeleteObjectVersion",
-            "s3:DeleteObjectTagging",
-            "s3:DeleteObjectVersionTagging",
-            "s3:GetObjectTagging",
-            "s3:GetObjectVersionTagging",
-            "s3:PutObjectRetention",
-            "s3:CreateMultipartUpload"
-        ],
-        "Resource": "*",
-        "Condition": {
-            "StringNotEquals": {
-                "s3:AccessPointNetworkOrigin": "VPC"
+        {
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": [
+                "s3:AbortMultipartUpload",
+                "s3:BypassGovernanceRetention",
+                "s3:DeleteObject",
+                "s3:DeleteObjectTagging",
+                "s3:DeleteObjectVersion",
+                "s3:DeleteObjectVersionTagging",
+                "s3:GetObject",
+                "s3:GetObjectAcl",
+                "s3:GetObjectLegalHold",
+                "s3:GetObjectRetention",
+                "s3:GetObjectTagging",
+                "s3:GetObjectVersion",
+                "s3:GetObjectVersionAcl",
+                "s3:GetObjectVersionTagging",
+                "s3:ListMultipartUploadParts",
+                "s3:PutObject",
+                "s3:PutObjectAcl",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionAcl",
+                "s3:PutObjectVersionTagging",
+                "s3:RestoreObject"
+            ],
+            "Resource": "arn:aws:s3:::examplebucket/*",
+            "Condition": {
+                "StringNotEquals": {
+                    "s3:AccessPointNetworkOrigin": "VPC"
+                }
             }
         }
-    }]
+    ]
 }
 ```

@@ -12,7 +12,7 @@ To manage your objects so that they are stored cost effectively throughout their
 
    
 
-  The lifecycle expiration costs depend on when you choose to expire objects\. For more information, see [Configuring Object Expiration](lifecycle-expire-general-considerations.md)\.
+  The lifecycle expiration costs depend on when you choose to expire objects\. For more information, see [Understanding Object Expiration](lifecycle-expire-general-considerations.md)\.
 
 For more information about lifecycle rules, see [Lifecycle Configuration Elements](intro-lifecycle-rules.md)\. 
 

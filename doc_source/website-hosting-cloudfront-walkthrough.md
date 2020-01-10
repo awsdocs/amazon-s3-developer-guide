@@ -23,7 +23,7 @@ First, you create a CloudFront distribution\. This makes your website available 
 
 1. On the **Select a delivery method for your content** page, for **Web**, choose **Get Started**\.
 
-1. On the **Create Distribution** page, in the **Origin Settings** section, for **Origin Domain Name**, type the Amazon S3 static website hosting endpoint for your bucket\. For example, `example.com.s3.amazonaws.com`\.
+1. On the **Create Distribution** page, in the **Origin Settings** section, for **Origin Domain Name**, type the Amazon S3 static website hosting endpoint for your bucket\. For example, `example.com.s3-website.us-west-1.amazonaws.com`\.
 
    CloudFront fills in the **Origin ID** for you\.
 

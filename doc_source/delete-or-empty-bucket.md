@@ -160,7 +160,7 @@ You can configure lifecycle on your bucket to expire objects and request that Am
 
 If your bucket has versioning enabled, you can also configure the rule to expire noncurrent objects\. To fully empty the contents of a versioning enabled bucket, you will need to configure an expiration policy on both current and noncurrent objects in the bucket\.
 
-For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md) and [Configuring Object Expiration](lifecycle-expire-general-considerations.md)\.
+For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md) and [Understanding Object Expiration](lifecycle-expire-general-considerations.md)\.
 
 ### Empty a Bucket: Using the AWS SDKs<a name="empty-bucket-awssdks"></a>
 

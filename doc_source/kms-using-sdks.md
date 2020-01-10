@@ -2,6 +2,9 @@
 
 When using AWS SDKs, you can request Amazon S3 to use AWS Key Management Service \(AWS KMS\) customer master keys \(CMKs\)\. This section provides examples of using the AWS SDKs for Java and \.NET\. For information about other SDKs, go to [Sample Code and Libraries](https://aws.amazon.com/code)\.
 
+**Important**  
+When you use an AWS KMS CMK for server\-side encryption in Amazon S3, you must choose a symmetric CMK\. Amazon S3 only supports symmetric CMKs and not asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
+
 ## AWS SDK for Java<a name="kms-using-sdks-java"></a>
 
 This section explains various Amazon S3 operations using the AWS SDK for Java and how you use the AWS KMS CMKs\.
@@ -15,7 +18,7 @@ PutObjectRequest putRequest = new PutObjectRequest(bucketName,
    keyName, file).withSSEAwsKeyManagementParams(new SSEAwsKeyManagementParams());
 ```
 
-In this case, Amazon S3 uses the AWS managed CMK \(see [Using Server\-Side Encryption with CMKs Stored in AWS KMS ](UsingKMSEncryption.md)\. You can optionally create a customer managed CMK and specify that in the request\.
+In this case, Amazon S3 uses the AWS managed CMK \(see [Using Server\-Side Encryption with CMKs Stored in AWS KMS ](UsingKMSEncryption.md)\)\. You can optionally create a symmetric customer managed CMK and specify that in the request\.
 
 ```
 PutObjectRequest putRequest = new PutObjectRequest(bucketName,
@@ -66,7 +69,7 @@ PutObjectRequest putRequest = new PutObjectRequest
    };
 ```
 
-In this case, Amazon S3 uses the AWS managed CMK\. For more information, see [Protecting Data Using Server\-Side Encryption with CMKs Stored in AWS Key Management Service \(SSE\-KMS\)](UsingKMSEncryption.md)\. You can optionally create your own customer managed CMK and specify that in the request\. 
+In this case, Amazon S3 uses the AWS managed CMK\. For more information, see [Protecting Data Using Server\-Side Encryption with CMKs Stored in AWS Key Management Service \(SSE\-KMS\)](UsingKMSEncryption.md)\. You can optionally create your own symmetric customer managed CMK and specify that in the request\. 
 
 ```
 PutObjectRequest putRequest1 = new PutObjectRequest

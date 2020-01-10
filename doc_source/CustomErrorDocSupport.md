@@ -5,8 +5,8 @@ The following table lists the subset of HTTP response codes that Amazon S3 retur
 
 | HTTP Error Code | Description | 
 | --- | --- | 
-| 301 Moved Permanently | When a user sends a request directly to the Amazon S3 website endpoints \(http://s3\-website\-<region>\.amazonaws\.com/\), Amazon S3 returns a 301 Moved Permanently response and redirects those requests to https://aws\.amazon\.com/s3/\. | 
-| 302 Found |  When Amazon S3 receives a request for a key `x`, `http://<bucket>.s3-website-<region>.amazonaws.com/x`, without a trailing slash, it first looks for the object with the key name `x`\. If the object is not found, Amazon S3 determines that the request is for subfolder `x` and redirects the request by adding a slash at the end, and returns **302 Found**\.   | 
+| 301 Moved Permanently | When a user sends a request directly to the Amazon S3 website endpoint \(http://s3\-website\.Region\.amazonaws\.com/\), Amazon S3 returns a 301 Moved Permanently response and redirects those requests to https://aws\.amazon\.com/s3/\. | 
+| 302 Found |  When Amazon S3 receives a request for a key `x`, `http://bucket-name.s3-website.Region.amazonaws.com/x`, without a trailing slash, it first looks for the object with the key name `x`\. If the object is not found, Amazon S3 determines that the request is for subfolder `x` and redirects the request by adding a slash at the end, and returns **302 Found**\.   | 
 | 304 Not Modified |  Amazon S3 users request headers `If-Modified-Since`, `If-Unmodified-Since`, `If-Match` and/or `If-None-Match` to determine whether the requested object is same as the cached copy held by the client\. If the object is the same, the website endpoint returns a **304 Not Modified** response\.  | 
 | 400 Malformed Request |  The website endpoint responds with a **400 Malformed Request** when a user attempts to access a bucket through the incorrect regional endpoint\.   | 
 | 403 Forbidden |  The website endpoint responds with a **403 Forbidden** when a user request translates to an object that is not publicly readable\. The object owner must make the object publicly readable using a bucket policy or an ACL\.   | 

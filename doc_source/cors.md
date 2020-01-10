@@ -13,9 +13,19 @@ This section provides an overview of CORS\. The subtopics describe how you can e
 
 ## Cross\-Origin Resource Sharing: Use\-case Scenarios<a name="example-scenarios-cors"></a>
 
-The following are example scenarios for using CORS:
-+ Scenario 1: Suppose that you are hosting a website in an Amazon S3 bucket named `website` as described in [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\. Your users load the website endpoint `http://website.s3-website-us-east-1.amazonaws.com`\. Now you want to use JavaScript on the webpages that are stored in this bucket to be able to make authenticated GET and PUT requests against the same bucket by using the Amazon S3 API endpoint for the bucket, `website.s3.amazonaws.com`\. A browser would normally block JavaScript from allowing those requests, but with CORS you can configure your bucket to explicitly enable cross\-origin requests from `website.s3-website-us-east-1.amazonaws.com`\.
-+ Scenario 2: Suppose that you want to host a web font from your S3 bucket\. Again, browsers require a CORS check \(also called a preflight check\) for loading web fonts\. You would configure the bucket that is hosting the web font to allow any origin to make these requests\.
+The following are example scenarios for using CORS\.
+
+**Scenario 1**  
+Suppose that you are hosting a website in an Amazon S3 bucket named `website` as described in [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\. Your users load the website endpoint:
+
+```
+http://website.s3-website.us-east-1.amazonaws.com
+```
+
+Now you want to use JavaScript on the webpages that are stored in this bucket to be able to make authenticated GET and PUT requests against the same bucket by using the Amazon S3 API endpoint for the bucket, `website.s3.us-east-1.amazonaws.com`\. A browser would normally block JavaScript from allowing those requests, but with CORS you can configure your bucket to explicitly enable cross\-origin requests from `website.s3-website.us-east-1.amazonaws.com`\.
+
+**Scenario 2**  
+Suppose that you want to host a web font from your S3 bucket\. Again, browsers require a CORS check \(also called a preflight check\) for loading web fonts\. You would configure the bucket that is hosting the web font to allow any origin to make these requests\.
 
 ## How Do I Configure CORS on My Bucket?<a name="how-do-i-enable-cors"></a>
 

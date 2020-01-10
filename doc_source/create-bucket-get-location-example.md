@@ -9,7 +9,7 @@
 
 The following code examples create a bucket programmatically using the AWS SDKs for Java, \.NET, and Ruby\. The code examples perform the following tasks:
 + Create a bucket, if the bucket doesn't already exist—The examples create a bucket by performing the following tasks:
-  + Create a client by explicitly specifying an AWS Region \(the example uses the `s3-eu-west-1` Region\)\. Accordingly, the client communicates with Amazon S3 using the `s3-eu-west-1.amazonaws.com` endpoint\. You can specify any other AWS Region\. For a list of AWS Regions, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\. 
+  + Create a client by explicitly specifying an AWS Region \(the example uses the `s3.eu-west-1` Region\)\. Accordingly, the client communicates with Amazon S3 using the `s3.eu-west-1.amazonaws.com` endpoint\. You can specify any other AWS Region\. For a list of AWS Regions, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html) in the *AWS General Reference*\. 
   + Send a create bucket request by specifying only a bucket name\. The create bucket request doesn't specify another AWS Region\. The client sends a request to Amazon S3 to create the bucket in the Region you specified when creating the client\. Once you have created a bucket, you can't change its Region\.
 **Note**  
 If you explicitly specify an AWS Region in your create bucket request that is different from the Region you specified when you created the client, you might get an error\. For more information, see [Creating a Bucket](UsingBucket.md#create-bucket-intro)\.

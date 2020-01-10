@@ -41,7 +41,7 @@ This section describes key concepts and terminology you need to understand to us
 
 ### Buckets<a name="BasicsBucket"></a>
 
- A bucket is a container for objects stored in Amazon S3\. Every object is contained in a bucket\. For example, if the object named `photos/puppy.jpg` is stored in the `johnsmith` bucket, then it is addressable using the URL `http://johnsmith.s3.amazonaws.com/photos/puppy.jpg`\. 
+ A bucket is a container for objects stored in Amazon S3\. Every object is contained in a bucket\. For example, if the object named `photos/puppy.jpg` is stored in the `johnsmith` bucket in the US West \(Oregon\) Region, then it is addressable using the URL `https://johnsmith.s3.us-west-2.amazonaws.com/photos/puppy.jpg`\.
 
  Buckets serve several purposes: 
 + They organize the Amazon S3 namespace at the highest level\.

@@ -53,7 +53,7 @@ Requests made to Amazon S3 through an access point appear in your S3 server acce
 + An access point named `my-bucket-ap` that is associated with `my-bucket`
 + Your AWS account ID is `123456789012`
 
-A request made to retrieve `my-image.jpg` directly through the bucket appears in your logs with a hostname of `my-bucket.s3.amazonaws.com`\. If you make the request through the access point instead, Amazon S3 retrieves the same object but logs the request with a hostname of `my-bucket-ap-123456789012.s3-accesspoint.us-west-2.amazonaws.com`\.
+A request made to retrieve `my-image.jpg` directly through the bucket appears in your logs with a hostname of `my-bucket.s3.us-west-2.amazonaws.com`\. If you make the request through the access point instead, Amazon S3 retrieves the same object but logs the request with a hostname of `my-bucket-ap-123456789012.s3-accesspoint.us-west-2.amazonaws.com`\.
 
 For more information about S3 Server Access Logs, see [Amazon S3 Server Access Logging](ServerLogs.md)\. For more information about AWS CloudTrail, see [What is AWS CloudTrail?](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html) in the *AWS CloudTrail User Guide*\.
 
