@@ -60,7 +60,7 @@ As long as your `GET` request does not use the SSL endpoint, you can specify the
 This section provides example URLs and requests\.
 
 **Example Path Style**  
-This example uses the follolwing:  
+This example uses the following:  
 + Bucket Name ‐ `johnsmith.net`
 + Region ‐ US East \(N\. Virginia\) 
 + Key Name ‐ `homepage.html`
@@ -84,7 +84,7 @@ The request with HTTP 1\.0 and omitting the `host` header is as follows:
 For information about DNS\-compatible names, see [Limitations](#VirtualHostingLimitations)\. For more information about keys, see [Keys](Introduction.md#BasicsKeys)\.
 
 **Example Virtual Hosted–Style**  
-This example uses the follolwing:  
+This example uses the following:  
 + Bucket Name ‐ `johnsmith.eu` 
 + Region ‐ Europe \(Ireland\) 
 + Key Name ‐ `homepage.html`
