@@ -76,7 +76,7 @@ Using the IAM user sign\-in URL for Account A first sign in to the AWS Managemen
 
 1. Note down the Dave credentials\. 
 
-1. In the Amazon S3 console, attach the following bucket policy to `examplebucket` bucket\. For instructions, see [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) in the *Amazon Simple Storage Service Console User Guide*\. Follow the steps to add a bucket policy\. For information about how to find account IDs, see [Finding Your AWS Account ID](https://docs.aws.amazon.com//general/latest/gr/acct-identifiers.html#FindingYourAccountIdentifiers)\. 
+1. In the Amazon S3 console, attach the following bucket policy to `examplebucket` bucket\. For instructions, see [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) in the *Amazon Simple Storage Service Console User Guide*\. Follow the steps to add a bucket policy\. For information about how to find account IDs, see [Finding Your AWS Account ID](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingYourAccountIdentifiers)\. 
 
    The policy grants Account B the `s3:PutObject` and `s3:ListBucket` permissions\. The policy also grants user Dave the `s3:GetObject` permission\. 
 
@@ -130,7 +130,7 @@ Now that Account B has permissions to perform operations on Account A's bucket, 
    aws s3api put-object --bucket examplebucket --key HappyFace.jpg --body HappyFace.jpg --profile AccountBadmin
    ```
 
-1. Add a grant to the object ACL to allow the bucket owner full control of the object\. For information about how to find a canonical user ID, see [Finding Your Account Canonical User ID](https://docs.aws.amazon.com//general/latest/gr/acct-identifiers.html#FindingCanonicalId)\.
+1. Add a grant to the object ACL to allow the bucket owner full control of the object\. For information about how to find a canonical user ID, see [Finding Your Account Canonical User ID](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)\.
 
    ```
    aws s3api put-object-acl --bucket examplebucket --key HappyFace.jpg --grant-full-control id="AccountA-CanonicalUserID" --profile AccountBadmin

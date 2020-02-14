@@ -148,7 +148,7 @@ For information about how to create and test a working sample, see [Using the AW
 
 ```
 require 'aws-sdk-s3'
-	        
+
 s3 = Aws::S3::Client.new(region: 'us-west-2')
 s3.create_bucket(bucket: 'bucket-name')
 ```

@@ -13,6 +13,12 @@ The `Principal` element specifies the user, account, service, or other entity th
   "Principal":{"AWS":"arn:aws:iam::AccountNumber-WithoutHyphens:root"}
   ```
 
+  Or:
+
+  ```
+  "Principal":{"AWS":["arn:aws:iam::AccountNumber1-WithoutHyphens:root","arn:aws:iam::AccountNumber2-WithoutHyphens:root"]}
+  ```
+
   Amazon S3 also supports a canonical user ID, which is an obfuscated form of the AWS account ID\. You can specify this ID using the following format\.
 
   ```

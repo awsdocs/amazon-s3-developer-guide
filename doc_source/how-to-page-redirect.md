@@ -45,7 +45,7 @@ When you retrieve the object using the [GET Object](https://docs.aws.amazon.com/
 
 Using advanced redirection rules, you can route requests conditionally according to specific object key names, prefixes in the request, or response codes\. For example, suppose that you delete or rename an object in your bucket\. You can add a routing rule that redirects the request to another object\. If you want to make a folder unavailable, you can add a routing rule to redirect the request to another webpage\. You can also add a routing rule to handle error conditions by routing requests that return the error to another domain when the error is processed\.
 
-When configuring a bucket for website hosting, you have the option of specifying advanced redirection rules\.
+When configuring a bucket for website hosting, you have the option of specifying advanced redirection rules\. Amazon S3 has a limitation of 50 routing rules per website configuration\. If you require more than 50 routing rules, you can use object redirect\. For more information, see [\(Optional\) Configuring a Webpage Redirect](#how-to-page-redirect)\.
 
 ![\[Static website hosting screen showing optional redirection rules.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/staticwebsitehosting30.png)
 

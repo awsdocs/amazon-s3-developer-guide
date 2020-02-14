@@ -26,7 +26,7 @@ The console shows that a bucket named `companybucket` has three folders, `Privat
 + When you create the `Development` folder, the console creates an object with the key `Development/`\. Note the trailing slash \(`/`\) delimiter\.
 + When you upload an object named `Projects1.xls` in the `Development` folder, the console uploads the object and gives it the key `Development/Projects1.xls`\. 
 
-  In the key, `Development` is the prefix and `/` is the delimiter\. The Amazon S3 API supports prefixes and delimiters in its operations\. For example, you can get a list of all objects from a bucket with a specific prefix and delimiter\. On the console, when you open the `Development` folder, the console lists the objects in that folder\. In the following example, the `Development` folder contains one object\. 
+  In the key, `Development` is the [prefix](https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#keyprefix) and `/` is the delimiter\. The Amazon S3 API supports prefixes and delimiters in its operations\. For example, you can get a list of all objects from a bucket with a specific prefix and delimiter\. On the console, when you open the `Development` folder, the console lists the objects in that folder\. In the following example, the `Development` folder contains one object\. 
 
      
 ![\[Console screenshot showing a hierarchy of buckets, folders, and objects.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/walkthrough-50.png)

@@ -60,7 +60,7 @@ As long as your `GET` request does not use the SSL endpoint, you can specify the
 This section provides example URLs and requests\.
 
 **Example Path Style**  
-This example uses the follolwing:  
+This example uses the following:  
 + Bucket Name ‐ `johnsmith.net`
 + Region ‐ US East \(N\. Virginia\) 
 + Key Name ‐ `homepage.html`
@@ -84,7 +84,7 @@ The request with HTTP 1\.0 and omitting the `host` header is as follows:
 For information about DNS\-compatible names, see [Limitations](#VirtualHostingLimitations)\. For more information about keys, see [Keys](Introduction.md#BasicsKeys)\.
 
 **Example Virtual Hosted–Style**  
-This example uses the follolwing:  
+This example uses the following:  
 + Bucket Name ‐ `johnsmith.eu` 
 + Region ‐ Europe \(Ireland\) 
 + Key Name ‐ `homepage.html`
@@ -101,7 +101,7 @@ The request is as follows:
 ```
 
 **Example CNAME Method**  
-To use this method, you must configure your DNS name as a CNAME alias for `bucketname.s3.us-east-1.amazonaws.com`\. For more information, see [Customizing Amazon S3 URLs with CNAMEs](#VirtualHostingCustomURLs)\. This example uses the follolwing:  
+To use this method, you must configure your DNS name as a CNAME alias for `bucketname.s3.us-east-1.amazonaws.com`\. For more information, see [Customizing Amazon S3 URLs with CNAMEs](#VirtualHostingCustomURLs)\. This example uses the following:  
 + Bucket Name ‐ `johnsmith.net` 
 + Key Name ‐ `homepage.html`
 The URL is as follows:  
@@ -175,7 +175,7 @@ For request routing reasons, the CNAME record must be defined exactly as shown i
 
 ### Legacy Endpoints<a name="s3-legacy-endpoints"></a>
 
-Some Regions support legacy endpoints\. You might see these endpoints in your server access logs or CloudTrail logs\. For more information, review the the information below\. For a complete list of Amazon S3 Regions and endpoints, see [Amazon S3 Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html) in the *AWS General Reference*\.
+Some Regions support legacy endpoints\. You might see these endpoints in your server access logs or CloudTrail logs\. For more information, review the information below\. For a complete list of Amazon S3 Regions and endpoints, see [Amazon S3 Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html) in the *AWS General Reference*\.
 
 **Important**  
 Although you might see legacy endpoints in your logs, we recommend that you always use the standard endpoint syntax to access your buckets\.   

@@ -1,6 +1,6 @@
 # Conversion Functions<a name="s3-glacier-select-sql-reference-conversion"></a>
 
-Amazon S3 Select and Glacier Select support the following conversion functions\.
+Amazon S3 Select and S3 Glacier Select support the following conversion functions\.
 
 **Topics**
 + [CAST](#s3-glacier-select-sql-reference-cast)

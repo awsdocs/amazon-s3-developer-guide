@@ -47,7 +47,7 @@ Storage class analysis observes the access patterns of a filtered object data se
 ![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/storage-class-analysis-observe-bar.png)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
 
 When performing the analysis for infrequently accessed objects storage class analysis looks at the filtered set of objects grouped together based on age since they were uploaded to Amazon S3\. Storage class analysis determines if the age group is infrequently accessed by looking at the following factors for the filtered data set:
-+ Objects in the STANDARD storage class that are larger than 128K\.
++ Objects in the STANDARD storage class that are larger than 128 KB\.
 + How much average total storage you have per age group\.
 + Average number of bytes transferred out \(not frequency\) per age group\.
 + Analytics export data only includes requests with data relevant to storage class analysis\. This might cause differences in the number of requests, and the total upload and request bytes compared to what are shown in storage metrics or tracked by your own internal systems\.
@@ -105,7 +105,7 @@ Data in the exported file is sorted by date within object age group as shown in 
 
 ![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/storage-class-analysis-export-file2.png)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
 
-At the end of the report the object age group is ALL\. The ALL rows contain cumulative totals for all the age groups for that day as shown in the following example\. 
+At the end of the report the object age group is given as ALL\. The ALL rows contain cumulative totals, including objects smaller than 128 KB, for all the age groups for that day\.
 
 ![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/storage-class-analysis-export-file3.png)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
 

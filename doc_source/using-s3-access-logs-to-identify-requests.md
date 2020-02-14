@@ -30,27 +30,27 @@ In this example, you have the following five buckets:
    + `awsexamplebucket-logs-us-west-2`
 
 1. Then enable the Amazon S3 access logs as follows:
-   + `1-awsexamplebucket-us-east-1` logs to `s3://awsexamplebucket-logs-us-east-1/1-awsexamplebucket-us-east-1`
-   + `2-awsexamplebucket-us-east-1` logs to `s3://awsexamplebucket-logs-us-east-1/2-awsexamplebucket-us-east-1`
-   + `1-awsexamplebucket-us-east-1` logs to `s3://awsexamplebucket-logs-us-east-1/3-awsexamplebucket-us-east-1`
-   + `1-awsexamplebucket-us-west-2` logs to ` s3://awsexamplebucket-logs-us-west-2/1-awsexamplebucket-us-west-2`
-   + `2-awsexamplebucket-us-west-2` logs to `s3://awsexamplebucket-logs-us-west-2/2-awsexamplebucket-us-west-2`
+   + `1-awsexamplebucket-us-east-1` logs to the S3 bucket `awsexamplebucket-logs-us-east-1` with prefix `1-awsexamplebucket-us-east-1`
+   + `2-awsexamplebucket-us-east-1` logs to the S3 bucket `awsexamplebucket-logs-us-east-1` with prefix `2-awsexamplebucket-us-east-1`
+   + `1-awsexamplebucket-us-east-1` logs to the S3 bucket `awsexamplebucket-logs-us-east-1` with prefix `3-awsexamplebucket-us-east-1`
+   + `1-awsexamplebucket-us-west-2` logs to the S3 bucket `awsexamplebucket-logs-us-west-2` with prefix `1-awsexamplebucket-us-west-2`
+   + `2-awsexamplebucket-us-west-2` logs to the S3 bucket `awsexamplebucket-logs-us-west-2` with prefix `2-awsexamplebucket-us-west-2`
 
 1. You can then enable the Amazon S3 access logs using the following methods:
    + Using the [AWS Management Console](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/server-access-logging.html) or,
    + [Enabling Logging Programmatically](enable-logging-programming.md) or, 
-   + Using the [AWS CLI put\-bucket\-logging command](https://docs.aws.amazon.com//cli/latest/reference/s3api/put-bucket-logging.html) to programmatically enable access logs on a bucket using the following commands:
+   + Using the [AWS CLI put\-bucket\-logging command](https://docs.aws.amazon.com/cli/latest/reference/s3api/put-bucket-logging.html) to programmatically enable access logs on a bucket using the following commands:
 
      1. First, grant Amazon S3 permission using `put-bucket-acl`:
 
         ```
-         aws s3api put-bucket-acl --bucket awsexamplebucket-logs  --grant-write URI=http://acs.amazonaws.com/groups/s3/LogDelivery --grant-read-acp URI=http://acs.amazonaws.com/groups/s3/LogDelivery 
+        1.  aws s3api put-bucket-acl --bucket awsexamplebucket-logs  --grant-write URI=http://acs.amazonaws.com/groups/s3/LogDelivery --grant-read-acp URI=http://acs.amazonaws.com/groups/s3/LogDelivery 
         ```
 
      1. Then, apply the logging policy:
 
         ```
-        aws s3api put-bucket-logging --bucket awsexamplebucket --bucket-logging-status file://logging.json 
+        1. aws s3api put-bucket-logging --bucket awsexamplebucket --bucket-logging-status file://logging.json 
         ```
 
         `Logging.json` is a JSON document in the current folder that contains the logging policy:
@@ -91,7 +91,7 @@ The `put-bucket-acl` command is required to grant the Amazon S3 log delivery sys
           buckets="$(aws s3 ls | awk '{print $3}')"
           
           # Put bucket logging on each bucket
-          for bucket in $bucenable-logging-programmingkets
+          for bucket in $buckets
               do printf '{
              "LoggingEnabled": {
                  "TargetBucket": "%s",
@@ -155,14 +155,15 @@ It's a best practice to create the database in the same AWS Region as your S3 bu
          SigV STRING,
          CipherSuite STRING,
          AuthType STRING,
-         HostHeader STRING
+         EndPoint STRING,
+         TLSVersion STRING
      ) 
      ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.RegexSerDe'
      WITH SERDEPROPERTIES (
-         'serialization.format' = '1', 'input.regex' = '([^ ]*) ([^ ]*) 
-         \\[(.*?)\\] ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) 
-         \\\"([^ ]*) ([^ ]*) (- |[^ ]*)\\\" (-|[0-9]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) 
-         ([^ ]*) (\"[^\"]*\") ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*).*$' )
+                  'serialization.format' = '1', 'input.regex' = '([^ ]*) ([^ ]*) 
+                  \\[(.*?)\\] ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) \\\"([^ ]*) ([^ ]*) (- |[^ ]*)
+                  \\\" (-|[0-9]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) (\"[^\"]*\") ([^ ]*)
+                  (?: ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*))?.*$' )
          LOCATION 's3://awsexamplebucket-logs/prefix'
    ```
 

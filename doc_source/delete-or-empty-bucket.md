@@ -24,7 +24,7 @@ The Amazon S3 console supports deleting a bucket that may or may not be empty\. 
 You can delete a bucket that contains objects using the AWS CLI only if the bucket does not have versioning enabled\. If your bucket does not have versioning enabled, you can use the `rb` \(remove bucket\) AWS CLI command with `--force` parameter to remove a non\-empty bucket\. This command deletes all objects first and then deletes the bucket\.
 
 ```
-  $ aws s3 rb s3://bucket-name --force  
+$ aws s3 rb s3://bucket-name --force  
 ```
 
 For more information, see [Using High\-Level S3 Commands with the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/using-s3-commands.html) in the AWS Command Line Interface User Guide\.

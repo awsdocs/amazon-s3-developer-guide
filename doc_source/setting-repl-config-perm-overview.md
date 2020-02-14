@@ -37,7 +37,6 @@ This section explains the trust policy and minimum required permissions policy\.
   ```
   {
   
-  
      "Version":"2012-10-17",
      "Statement":[
         {

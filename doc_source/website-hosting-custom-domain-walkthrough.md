@@ -13,7 +13,7 @@ Suppose that you want to host your static website on Amazon S3\. You registered 
 + [Step 6: Edit Block Public Access Settings](#root-domain-walkthrough-configure-bucket-permissions)
 + [Step 7: Attach a Bucket Policy](#add-bucket-policy-root-domain)
 + [Step 8: Test Your Domain Endpoint](#root-domain-walkthrough-test-website)
-+ [Step 9: Add Alias Records for Your Domain and Subdomain](#root-domain-walkthrough-add-arecord-to-hostedzone)
++ [Step 9: Add Alias Records for Your Domain and Subdomain](#root-domain-walkthrough-add-record-to-hostedzone)
 + [Step 10: Test the Website](#root-domain-testing)
 
 ## Before You Begin<a name="root-domain-walkthrough-before-you-begin"></a>
@@ -140,7 +140,7 @@ For step\-by\-step instructions, see [How Do I Upload an Object to an S3 Bucket?
 The bucket that you use to host a website must have public read access\. It is intentional that everyone in the world will have read access to this bucket\. By default, Amazon S3 blocks public access to your account and buckets\. To grant public read access, you must disable block public access for the bucket and write a bucket policy that allows public read access\. In this example, `example.com` contains the website content\. Therefore, you need to make this bucket publicly readable\. 
 
 **Warning**  
-When you turn off all block public access settings and add a bucket policy that enables public read access to a bucket, the bucket can be public ally accessed by anyone connected to the internet\. Confirm your intent to make your bucket public\.
+When you turn off all block public access settings and add a bucket policy that enables public read access to a bucket, the bucket can be publicly accessed by anyone connected to the internet\. Confirm your intent to make your bucket public\.
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
@@ -191,17 +191,17 @@ The preceding policy is an example only and allows full access to the contents o
 
 After you configure your domain bucket to host a public website and your subdomain bucket to redirect, you can figure out your website endpoints and test your domain endpoint\. For more information, see [Website Endpoints](WebsiteEndpoints.md)\.
 
-Amazon S3 Region\-specific website endpoints follow this format:
+Depending on your Region, Amazon S3 website endpoints follow one of these two formats:
 
 ```
 http://bucket-name.s3-website.Region.amazonaws.com
 ```
 
-If the `example.com` domain bucket is in the US West \(Oregon\) Region, the Amazon S3 website endpoint is as follows:
+```
+http://bucket-name.s3-website-Region.amazonaws.com
+```
 
-```
-http://example.com.s3-website.us-west-2.amazonaws.com/
-```
+For a complete list of Amazon S3 website endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints)\.
 
 ## To test the domain endpoint
 + To test your domain endpoint, enter the endpoint URL in your browser\. 
@@ -210,7 +210,7 @@ http://example.com.s3-website.us-west-2.amazonaws.com/
 
 In the next step, you use Amazon Route 53 to enable customers to use both of your custom URLs to navigate to your site\. 
 
-## Step 9: Add Alias Records for Your Domain and Subdomain<a name="root-domain-walkthrough-add-arecord-to-hostedzone"></a>
+## Step 9: Add Alias Records for Your Domain and Subdomain<a name="root-domain-walkthrough-add-record-to-hostedzone"></a>
 
 In this step, you create the alias records that you add to the hosted zone for your domain maps `example.com` and `www.example.com`\. Instead of using IP addresses, the alias records use the Amazon S3 website endpoints\. Amazon Route 53 maintains a mapping between the alias records and the IP addresses where the Amazon S3 buckets reside\. You create two alias records, one for your root domain and one for your subdomain\.
 
@@ -218,7 +218,7 @@ In this step, you create the alias records that you add to the hosted zone for y
 
 1. Open the Route 53 console at [https://console\.aws\.amazon\.com/route53/](https://console.aws.amazon.com/route53/)\.
 **Note**  
-If you don't already use Route 53, see [Step 1: Register a Domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide//getting-started.html#getting-started-find-domain-name) in the *Amazon Route 53 Developer Guide*\. After completing your setup, you can resume the instructions\.
+If you don't already use Route 53, see [Step 1: Register a Domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started.html#getting-started-find-domain-name) in the *Amazon Route 53 Developer Guide*\. After completing your setup, you can resume the instructions\.
 
 1. Choose **Hosted Zones**\.
 
@@ -235,7 +235,12 @@ Choose **A – IPv4 address**\.
 **Alias**  
 Choose **Yes**\.  
 **Alias Target**  
-In the **S3 website endpoints**section of the list, choose the same bucket name that appears in the **Name** field, for example `example.com(s3-website.us-west-2)`\.  
+In the **S3 website endpoints**section of the list, choose the same bucket name that appears in the **Name** field, for example `example.com (s3-website-us-west-2)`\.  
+**Alias Target** lists a bucket if:  
+   + You configured the bucket as a static website\.
+   + The bucket name is the same as the name of the record that you're creating\.
+   + The current AWS account created the bucket\.
+If another AWS account created the bucket, in the **Alias Target**, you can enter the Amazon S3 website endpoint for the Region where the bucket was created\. For a complete list of Amazon S3 website endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints)\.  
 **Routing Policy**  
 Accept the default value of **Simple**\.  
 **Evaluate Target Health**  
@@ -257,7 +262,7 @@ Choose **A – IPv4 address**\.
 **Alias**  
 Choose **Yes**\.  
 **Alias Target**  
-In the **S3 website endpoints** section of the list, choose the same bucket name that appears in the **Name** field, for example, `www.example.com (s3-website.us-west-2)`\)\.  
+In the **S3 website endpoints** section of the list, choose the same bucket name that appears in the **Name** field, for example, `www.example.com (s3-website-us-west-2)`\.  
 **Routing Policy**  
 Accept the default value of **Simple**\.  
 **Evaluate Target Health**  

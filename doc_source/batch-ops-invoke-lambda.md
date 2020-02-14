@@ -44,7 +44,7 @@ You must create Lambda functions specifically for use with Amazon S3 batch opera
 The following are examples of the IAM permissions that are necessary to use a Lambda function with Amazon S3 batch operations\. 
 
 **Example — Amazon S3 batch operations trust policy**  
-The following is an example of the trust policy that you can use for the execution role\. It gives Lambda permission to execute the function invoked by an Amazon S3 batch operations job\.  
+The following is an example of the trust policy that you can use for the batch operations IAM role\. This IAM role is specified when you create the job and gives batch operations permission to assume the IAM role\.  
 
 ```
 {

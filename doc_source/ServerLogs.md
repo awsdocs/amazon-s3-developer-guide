@@ -41,7 +41,9 @@ To turn on log delivery, you provide the following logging configuration informa
 
   We recommend that you save access logs in a different bucket so that you can easily manage the logs\. If you choose to save access logs in the source bucket, we recommend that you specify a prefix for all log object keys so that the object names begin with a common string and the log objects are easier to identify\. 
 
-  When your source bucket and target bucket are the same bucket, additional logs are created for the logs that are written to the bucket\. This behavior might not be ideal for your use case because it could result in a small increase in your storage billing\. In addition, the extra logs about logs might make it harder to find the log that you're looking for\.
+  When your source bucket and target bucket are the same bucket, additional logs are created for the logs that are written to the bucket\. This behavior might not be ideal for your use case because it could result in a small increase in your storage billing\. In addition, the extra logs about logs might make it harder to find the log that you're looking for\. 
+
+  [Key prefixes](https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#keyprefix) are also useful to distinguish between source buckets when multiple buckets log to the same destination bucket\.
 **Note**  
 Both the source and target buckets must be owned by the same AWS account, and the buckets must both be in the same Region\.
 +  \(Optional\) A prefix for Amazon S3 to assign to all log object keys\. The prefix makes it simpler for you to locate the log objects\. 
@@ -52,7 +54,7 @@ Both the source and target buckets must be owned by the same AWS account, and th
   logs/2013-11-01-21-32-16-E568B2907131C0C0
   ```
 
-   The key prefix can help when you delete the logs\. For example, you can set a lifecycle configuration rule for Amazon S3 to delete objects with a specific key prefix\. For more information, see [Deleting Amazon S3 Log Files](deleting-log-files-lifecycle.md)\.
+   The key prefix can also help when you delete the logs\. For example, you can set a lifecycle configuration rule for Amazon S3 to delete objects with a specific key prefix\. For more information, see [Deleting Amazon S3 Log Files](deleting-log-files-lifecycle.md)\.
 +  \(Optional\) Permissions so that others can access the generated logs\. By default, the bucket owner always has full access to the log objects\. You can optionally grant access to other users\. 
 
 For more information about enabling server access logging, see [Enabling Logging Using the Console](enable-logging-console.md) and [Enabling Logging Programmatically](enable-logging-programming.md)\. 
@@ -70,7 +72,7 @@ Default bucket encryption on the destination bucket may only be used if AES256 \
 Amazon S3 uses the following object key format for the log objects it uploads in the target bucket:
 
 ```
-TargetPrefixYYYY-mm-DD-HH-MM-SS-UniqueString 
+TargetPrefixYYYY-mm-DD-HH-MM-SS-UniqueString/
 ```
 
  In the key, `YYYY`, `mm`, `DD`, `HH`, `MM`, and `SS` are the digits of the year, month, day, hour, minute, and seconds \(respectively\) when the log file was delivered, these dates and times are in Coordinated Universal time \(UTC\)\. 
@@ -78,6 +80,8 @@ TargetPrefixYYYY-mm-DD-HH-MM-SS-UniqueString
 A log file delivered at a specific time can contain records written at any point before that time\. There is no way to know whether all log records for a certain time interval have been delivered or not\. 
 
  The `UniqueString` component of the key is there to prevent overwriting of files\. It has no meaning, and log processing software should ignore it\. 
+
+The trailing slash */* is required to denote the end of the prefix\.
 
 ## How Are Logs Delivered?<a name="how-logs-delivered"></a>
 

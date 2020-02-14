@@ -1,6 +1,6 @@
 # Listing Keys Hierarchically Using a Prefix and Delimiter<a name="ListingKeysHierarchy"></a>
 
- The prefix and delimiter parameters limit the kind of results returned by a list operation\. The prefix limits the results to only those keys that begin with the specified prefix\. The delimiter causes a list operation to roll up all the keys that share a common prefix into a single summary list result\. 
+The [prefix](https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#keyprefix) and delimiter parameters limit the kind of results returned by a list operation\. The prefix limits the results to only those keys that begin with the specified prefix\. The delimiter causes a list operation to roll up all the keys that share a common prefix into a single summary list result\. 
 
  The purpose of the prefix and delimiter parameters is to help you organize and then browse your keys hierarchically\. To do this, first pick a delimiter for your bucket, such as slash \(/\), that doesn't occur in any of your anticipated key names\. Next, construct your key names by concatenating all containing levels of the hierarchy, separating each level with the delimiter\. 
 

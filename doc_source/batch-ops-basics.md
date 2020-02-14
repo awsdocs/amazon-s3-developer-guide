@@ -1,6 +1,6 @@
 # The Basics: Amazon S3 Batch Operations Jobs<a name="batch-ops-basics"></a>
 
-You can use Amazon S3 batch operations to perform large\-scale batch operations on Amazon S3 objects\. Amazon S3 batch operations can execute a single operation on lists of Amazon S3 objects that you specify\. 
+You can use Amazon S3 batch operations to perform large\-scale batch operations on Amazon S3 objects\. Amazon S3 batch operations can execute a single operation or action on lists of Amazon S3 objects that you specify\. 
 
 **Topics**
 + [How an Amazon S3 Batch Operations Job Works](#batch-ops-basics-how-it-works)
@@ -14,7 +14,7 @@ To create a job, you give Amazon S3 batch operations a list of objects and speci
 + [PUT copy object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)
 + [PUT object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html)
 + [PUT object ACL](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html)
-+ [Initiate Glacier restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html)
++ [Initiate S3 Glacier restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html)
 + [Invoke an AWS Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html)
 
 The objects that you want a job to act on are listed in a manifest object\. A job performs the specified operation on each object that is included in its manifest\. You can use a CSV\-formatted [ Amazon S3 Inventory](storage-inventory.md) report as a manifest, which makes it easy to create large lists of objects located in a bucket\. You can also specify a manifest in a simple CSV format that enables you to perform batch operations on a customized list of objects contained within a single bucket\. 

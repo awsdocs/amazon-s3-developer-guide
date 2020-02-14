@@ -27,6 +27,8 @@ For more information about AWS CloudFormation, see [What is AWS CloudFormation?]
 
 You can use access points to access a bucket using the following subset of Amazon S3 APIs:
 + `[AbortMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)`
++ `[CompleteMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)`
++ `[CreateMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)`
 + `[DeleteObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)`
 + `[DeleteObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html)`
 + `[GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)`
@@ -34,6 +36,7 @@ You can use access points to access a bucket using the following subset of Amazo
 + `[GetObjectLegalHold](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectLegalHold.html)`
 + `[GetObjectRetention](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectRetention.html)`
 + `[GetObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html)`
++ `[HeadObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadObject.html)`
 + `[ListMultipartUploads](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)`
 + `[ListObjectsV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)`
 + `[ListParts](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)`
@@ -43,6 +46,7 @@ You can use access points to access a bucket using the following subset of Amazo
 + `[PutObjectAcl](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectAcl.html)`
 + `[PutObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html)`
 + `[RestoreObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html)`
++ `[UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)`
 
 ## Monitoring and Logging<a name="access-points-monitoring-logging"></a>
 

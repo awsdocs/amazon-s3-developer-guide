@@ -61,12 +61,12 @@ This section provides answers to common questions regarding the end of support f
 **What is Signature Version 2/4, and What Does It Mean to Sign Requests?**  
 The Signature Version 2 or Signature Version 4 signing process is used to authenticate your Amazon S3 API requests\. Signing requests enables Amazon S3 to identify who is sending the request and protects your requests from bad actors\.
 
-For more information about signing AWS requests, see [Signing AWS API Requests](https://docs.aws.amazon.com//general/latest/gr/signing_aws_api_requests.html) in the *AWS General Reference*\. 
+For more information about signing AWS requests, see [Signing AWS API Requests](https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html) in the *AWS General Reference*\. 
 
 **What Update Are You Making?**  
 We currently support Amazon S3 API requests that are signed using Signature Version 2 and Signature Version 4 processes\. After that, Amazon S3 will only accept requests that are signed using Signature Version 4\. 
 
-For more information about signing AWS requests, see [Changes in Signature Version 4](https://docs.aws.amazon.com//general/latest/gr/sigv4_changes.html) in the *AWS General Reference*\. 
+For more information about signing AWS requests, see [Changes in Signature Version 4](https://docs.aws.amazon.com/general/latest/gr/sigv4_changes.html) in the *AWS General Reference*\. 
 
 **Why Are You Making the Update?**  
 Signature Version 4 provides improved security by using a signing key instead of your secret access key\. Signature Version 4 is currently supported in all AWS Regions, whereas Signature Version 2 is only supported in Regions that were launched before January 2014\. This update allows us to provide a more consistent experience across all Regions\. 
@@ -85,10 +85,10 @@ Requests signed with Signature Version 2 that are made after that will fail to a
 If you are using a presigned URL that requires you to sign for more than 7 days, no action is currently needed\. You can continue to use AWS Signature Version 2 to sign and authenticate the presigned URL\. We will follow up and provide more details on how to migrate to Signature Version 4 for a presigned URL scenario\. 
 
 #### More Info<a name="UsingAWSSDK-sev2-deprecation-more-info"></a>
-+ For more information about using Signature Version 4, see [Signing AWS API Requests](https://docs.aws.amazon.com//general/latest/gr/signing_aws_api_requests.html)\.
-+ View the list of changes between Signature Version 2 and Signature Version 4 in [Changes in Signature Version 4](https://docs.aws.amazon.com//general/latest/gr/sigv4_changes.html)\. 
-+ View the post [AWS Signature Version 4 to replace AWS Signature Version 2 for signing Amazon S3 API requests](https://forums.aws.amazon.com//ann.jspa?annID=5816) in the AWS forums\.
-+ If you have any questions or concerns, contact [AWS Support](https://docs.aws.amazon.com//awssupport/latest/user/getting-started.html)\.
++ For more information about using Signature Version 4, see [Signing AWS API Requests](https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html)\.
++ View the list of changes between Signature Version 2 and Signature Version 4 in [Changes in Signature Version 4](https://docs.aws.amazon.com/general/latest/gr/sigv4_changes.html)\. 
++ View the post [AWS Signature Version 4 to replace AWS Signature Version 2 for signing Amazon S3 API requests](https://forums.aws.amazon.com/ann.jspa?annID=5816) in the AWS forums\.
++ If you have any questions or concerns, contact [AWS Support](https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html)\.
 
    
 

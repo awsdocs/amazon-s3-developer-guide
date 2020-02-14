@@ -49,7 +49,7 @@ For more information about using default encryption with SSE\-KMS, see [Replicat
 
 ## Monitoring Default Encryption with CloudTrail and CloudWatch<a name="bucket-encryption-tracking"></a>
 
-You can track default encryption configuration requests through AWS CloudTrail events\. The API event names used in CloudTrail logs are `PutBucketEncryption`, `GetBucketEncryption`, and `DeleteBucketEncryption`\. You can also create Amazon CloudWatch Events with S3 bucket\-level operations as the event type\. For more information about CloudTrail events, see [How Do I Enable Object\-Level Logging for an S3 Bucket with CloudWatch Data Events?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-cloudtrail-events.html)
+You can track default encryption configuration requests through AWS CloudTrail events\. The API event names used in CloudTrail logs are `PutBucketEncryption`, `GetBucketEncryption`, and `DeleteBucketEncryption`\. You can also create Amazon CloudWatch Events with S3 bucket\-level operations as the event type\. For more information about CloudTrail events, see [How Do I Enable Object\-Level Logging for an S3 Bucket with CloudTrail Data Events?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-cloudtrail-events.html)
 
 You can use CloudTrail logs for object\-level Amazon S3 actions to track `PUT` and `POST` requests to Amazon S3 to verify whether default encryption is being used to encrypt objects when incoming `PUT` requests don't have encryption headers\. 
 

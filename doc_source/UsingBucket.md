@@ -155,6 +155,20 @@ https://access-point-name.s3-accesspoint.region.amazonaws.com.
 **Note**  
 S3 access points only support secure access by HTTPS\. HTTP isn't supported\.
 
+### Accessing a Bucket using S3://<a name="accessing-a-bucket-using-S3-format"></a>
+
+Some AWS services require specifying an Amazon S3 bucket using `S3://bucket`\. The correct format is shown below\. Be aware that when using this format, the bucket name does not include the region\.
+
+```
+S3://bucket-name/key-name
+```
+
+For example, using the sample bucket described in the earlier path\-style section:
+
+```
+S3://mybucket/puppy.jpg
+```
+
 ## Bucket Configuration Options<a name="bucket-config-options-intro"></a>
 
 Amazon S3 supports various options for you to configure your bucket\. For example, you can configure your bucket for website hosting, add configuration to manage lifecycle of objects in the bucket, and configure the bucket to log all access to the bucket\. Amazon S3 supports subresources for you to store and manage the bucket configuration information\. You can use the Amazon S3 API to create and manage these subresources\. However, you can also use the console or the AWS SDKs\. 

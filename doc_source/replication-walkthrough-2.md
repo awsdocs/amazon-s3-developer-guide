@@ -18,13 +18,22 @@ Setting up replication when *source* and *destination* buckets are owned by diff
       "Id":"",
       "Statement":[
          {
-            "Sid":"Stmt123",
+            "Sid":"1",
             "Effect":"Allow",
             "Principal":{
                "AWS":"arn:aws:iam::source-bucket-owner-AWS-acct-ID:root"
             },
             "Action":["s3:ReplicateObject", "s3:ReplicateDelete"],
             "Resource":"arn:aws:s3:::destination/*"
+         },
+         {
+            "Sid":"2",
+            "Effect":"Allow",
+            "Principal":{
+               "AWS":"arn:aws:iam::source-bucket-owner-AWS-acct-ID:root"
+            },
+            "Action":["s3:GetBucketVersioning", "s3:PutBucketVersioning"],
+            "Resource":"arn:aws:s3:::destination"
          }
       ]
    }

@@ -1,6 +1,8 @@
 # Initiate Restore Object<a name="batch-ops-initiate-restore-object"></a>
 
-The `InitiateRestore` operation sends a restore request to Amazon S3 Glacier for each object that is specified in the manifest\. To create an Initiate Restore Object job, you must include two elements with your request:
+You can use Amazon S3 batch operations to perform large\-scale batch operations on Amazon S3 objects\. Amazon S3 batch operations can execute a single operation on a list of Amazon S3 objects that you specify including initiating object restores from Amazon S3 Glacier\. For more information, see [Performing Batch Operations](batch-ops.md)\. 
+
+Objects that you archive to the GLACIER or DEEP ARCHIVE storage classes are not accessible in real time\. Using the `InitiateRestore` operation in your Amazon S3 batch operations sends a restore request to S3 Glacier for each object that is specified in the manifest\. To create an Initiate Restore Object job, you must include two elements with your request:
 + **ExpirationInDays**
   + When you restore an object from S3 Glacier, the restored object is only a temporary copy, which Amazon S3 deletes after a fixed period of time\. This element specifies how long the temporary copy will remain available in Amazon S3\. After the temporary copy expires, you can only retrieve the object by restoring it from S3 Glacier again\. For more information about object restoration, see [Restoring Archived Objects](restoring-objects.md)\.
 + **GlacierJobTier**

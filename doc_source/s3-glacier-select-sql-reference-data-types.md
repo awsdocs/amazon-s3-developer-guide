@@ -1,6 +1,6 @@
 # Data Types<a name="s3-glacier-select-sql-reference-data-types"></a>
 
-Amazon S3 Select and Glacier Select support several primitive data types\.
+Amazon S3 Select and S3 Glacier Select support several primitive data types\.
 
 ## Data Type Conversions<a name="s3-glacier-select-sql-reference-data-conversion"></a>
 
@@ -10,7 +10,7 @@ For more information about the `CAST` function, see [CAST](s3-glacier-select-sql
 
 ## Supported Data Types<a name="s3-glacier-select-sql-reference-supported-data-types"></a>
 
-Amazon S3 Select and Glacier Select support the following set of primitive data types\.
+Amazon S3 Select and S3 Glacier Select support the following set of primitive data types\.
 
 
 |  Name  |  Description  |  Examples  | 

@@ -7,19 +7,19 @@ You can host a static website on Amazon S3\. On a static website, individual web
 + [Configuring a Bucket for Website Hosting](HowDoIWebsiteConfiguration.md)
 + [Example Walkthroughs \- Hosting Websites on Amazon S3](hosting-websites-on-s3-examples.md)
 
-To host a static website, you configure an Amazon S3 bucket for website hosting and then upload your website content to the bucket\. For more information, see [Configuring a Bucket for Website Hosting](HowDoIWebsiteConfiguration.md)\. This bucket must have public read access\. It is intentional that everyone in the world will have read access to this bucket\. To learn how to configure public read access for your bucket, see [Permissions Required for Website Access](WebsiteAccessPermissionsReqd.md)\. The website is then available at the AWS Region\-specific website endpoint of the bucket\. For a complete list of Amazon S3 endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoint)\.
+To host a static website, you configure an Amazon S3 bucket for website hosting and then upload your website content to the bucket\. For more information, see [Configuring a Bucket for Website Hosting](HowDoIWebsiteConfiguration.md)\. This bucket must have public read access\. It is intentional that everyone in the world will have read access to this bucket\. To learn how to configure public read access for your bucket, see [Permissions Required for Website Access](WebsiteAccessPermissionsReqd.md)\. The website is then available at the AWS Region\-specific website endpoint of the bucket\. 
 
-Amazon S3 Region\-specific website endpoints follow this format:
+Depending on your Region, Amazon S3 website endpoints follow one of these two formats:
 
 ```
 http://bucket-name.s3-website.Region.amazonaws.com
 ```
 
-For example, if you create a bucket named `example-bucket` in the US West \(Oregon\) Region, your website is available at the following URL:
+```
+http://bucket-name.s3-website-Region.amazonaws.com
+```
 
-```
-http://example-bucket.s3-website.us-west-2.amazonaws.com
-```
+For a complete list of Amazon S3 website endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints)\.
 
 This URL will return the default index document that you configured for the website\.
 

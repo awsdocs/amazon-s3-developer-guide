@@ -26,7 +26,7 @@ The easiest way to get started with the Ruby script examples is to install the l
 
 |  |  | 
 | --- |--- |
-|  1  |  To access AWS, you must provide a set of credentials for your SDK for Ruby application\. For more information, see [ Configuring the AWS SDK for Ruby](https://docs.aws.amazon.com//sdk-for-ruby/v3/developer-guide/setup-config.html)\.   | 
+|  1  |  To access AWS, you must provide a set of credentials for your SDK for Ruby application\. For more information, see [ Configuring the AWS SDK for Ruby](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html)\.   | 
 |  2  |  Create a new SDK for Ruby script and add the following lines to the top of the script\.  <pre>#!/usr/bin/env ruby<br /><br />require 'rubygems'<br />require 'aws-sdk-s3'<br />								</pre> The first line is the interpreter directive and the two `require` statements import two required gems into your script\.  | 
 |  3  |  Copy the code from the section you are reading to your script\.   | 
 |  4  | Update the code by providing any required data\. For example, if uploading a file, provide the file path and the bucket name\. | 

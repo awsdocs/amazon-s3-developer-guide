@@ -87,19 +87,19 @@ By default, Amazon S3 blocks public access to your account and buckets\. If you 
 
 ## Step 5: Testing Your Website<a name="step4-test-web-site"></a>
 
-Enter the following URL in the browser, replacing *example\-bucket* with the name of your bucket and *website\-region* with the name of the AWS Region where you deployed your bucket\. For information about AWS Region names, see [Website Endpoints](WebsiteEndpoints.md) \)\. 
+Enter the following URL in the browser, replacing *example\-bucket* with the name of your bucket and *website\-region* with the name of the AWS Region where you deployed your bucket\. 
 
-Amazon S3 Region\-specific website endpoints follow this format:
+Depending on your Region, Amazon S3 website endpoints follow one of these two formats:
 
 ```
 http://bucket-name.s3-website.Region.amazonaws.com
 ```
 
-For example, if you create a bucket named `example-bucket` in the US West \(Oregon\) Region, your website is available at the following URL:
+```
+http://bucket-name.s3-website-Region.amazonaws.com
+```
 
-```
-http://example-bucket.s3-website.us-west-2.amazonaws.com
-```
+For a complete list of Amazon S3 website endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints)\.
 
 If your browser displays your `index.html` page, the website was successfully deployed\.
 

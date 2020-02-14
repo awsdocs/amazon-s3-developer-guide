@@ -17,8 +17,7 @@ Amazon S3 endpoints follow the structure shown below:
 s3.Region.amazonaws.com
 ```
 
-Website endpoints, Amazon S3 Access Points endpoints, and dual\-stack endpoints also follow the standard structure:
-+ **Website** ‐ `s3-website.Region.amazonaws.com`
+Amazon S3 Access Points endpoints and dual\-stack endpoints also follow the standard structure:
 + **Amazon S3 Access Points** ‐`s3-accesspoint.Region.amazonaws.com`
 + **Dual\-stack** ‐ `s3.dualstack.Region.amazonaws.com` 
 
