@@ -3,8 +3,8 @@
 The Amazon S3 notification feature enables you to receive notifications when certain events happen in your bucket\. To enable notifications, you must first add a notification configuration that identifies the events you want Amazon S3 to publish and the destinations where you want Amazon S3 to send the notifications\. You store this configuration in the *notification* subresource that is associated with a bucket\. \(For more information, see [Bucket Configuration Options](UsingBucket.md#bucket-config-options-intro)\.\) Amazon S3 provides an API for you to manage this subresource\. 
 
 **Important**  
-Amazon S3 event notifications typically deliver events in seconds but can sometimes take a minute or longer\. On very rare occasions, events might be lost\.   
-If your application requires particular semantics \(for example, ensuring that no events are missed, or that operations run only once\), we recommend that you account for missed and duplicate events when designing your application\. You can audit for missed events by using the [LIST Objects](https://docs.aws.amazon.com/AmazonS3/latest/API/v2-RESTBucketGET.html) API or [ Amazon S3 Inventory](storage-inventory.md) reports\. The LIST Objects API and Amazon S3 inventory reports are subject to [eventual consistency](https://docs.aws.amazon.com/AmazonS3/latest/dev/Introduction.html#ConsistencyModel) and might not reflect recently added or deleted objects\.
+Amazon S3 event notifications typically deliver events in seconds but can sometimes take a minute or longer\.  
+If two writes are made to a single non\-versioned object at the same time, it is possible that only a single event notification will be sent\. If you want to ensure that an event notification is sent for every successful write, you can enable versioning on your bucket\. With versioning, every successful write will create a new version of your object and will also send an event notification\.
 
 **Topics**
 + [Overview of Notifications](#notification-how-to-overview)
@@ -18,38 +18,26 @@ If your application requires particular semantics \(for example, ensuring that n
 ## Overview of Notifications<a name="notification-how-to-overview"></a>
 
  Currently, Amazon S3 can publish notifications for the following events:
-+ New object created events — Amazon S3 supports multiple APIs to create objects\. You can request notification when only a specific API is used \(for example, `s3:ObjectCreated:Put`\), or you can use a wildcard \(for example, `s3:ObjectCreated:*`\) to request notification when an object is created regardless of the API used\. 
-
-   
-+ Object removal events — Amazon S3 supports deletes of versioned and unversioned objects\. For information about object versioning, see [Object Versioning](ObjectVersioning.md) and [Using Versioning](Versioning.md)\. 
++ **New object created events** — Amazon S3 supports multiple APIs to create objects\. You can request notification when only a specific API is used \(for example, `s3:ObjectCreated:Put`\), or you can use a wildcard \(for example, `s3:ObjectCreated:*`\) to request notification when an object is created regardless of the API used\. 
++ **Object removal events** — Amazon S3 supports deletes of versioned and unversioned objects\. For information about object versioning, see [Object Versioning](ObjectVersioning.md) and [Using Versioning](Versioning.md)\. 
 
   You can request notification when an object is deleted or a versioned object is permanently deleted by using the `s3:ObjectRemoved:Delete` event type\. Or you can request notification when a delete marker is created for a versioned object by using `s3:ObjectRemoved:DeleteMarkerCreated`\. You can also use a wildcard `s3:ObjectRemoved:*` to request notification anytime an object is deleted\. For information about deleting versioned objects, see [Deleting Object Versions](DeletingObjectVersions.md)\. 
-
-   
-+ Restore object events — Amazon S3 supports the restoration of objects archived to the GLACIER storage class\. You request to be notified of object restoration completion by using `s3:ObjectRestore:Completed`\. You use `s3:ObjectRestore:Post` to request notification of the initiation of a restore\. 
-
-   
-+ Reduced Redundancy Storage \(RRS\) object lost events — Amazon S3 sends a notification message when it detects that an object of the RRS storage class has been lost\. 
-
-   
-+ Replication events — Amazon S3 sends event notifications for replication configurations that have S3 Replication Time Control \(S3 RTC\) enabled\. It sends these notifications when an object fails replication, when an object exceeds the 15\-minute threshold, when an object is replicated after the 15\-minute threshold, and when an object is no longer tracked by replication metrics\. It publishes a second event when that object replicates to the destination Region\.
++ **Restore object events **— Amazon S3 supports the restoration of objects archived to the GLACIER storage class\. You request to be notified of object restoration completion by using `s3:ObjectRestore:Completed`\. You use `s3:ObjectRestore:Post` to request notification of the initiation of a restore\. 
++ **Reduced Redundancy Storage \(RRS\) object lost events** — Amazon S3 sends a notification message when it detects that an object of the RRS storage class has been lost\. 
++ **Replication events** — Amazon S3 sends event notifications for replication configurations that have S3 Replication Time Control \(S3 RTC\) enabled\. It sends these notifications when an object fails replication, when an object exceeds the 15\-minute threshold, when an object is replicated after the 15\-minute threshold, and when an object is no longer tracked by replication metrics\. It publishes a second event when that object replicates to the destination Region\.
 
 For a list of supported event types, see [Supported Event Types](#supported-notification-event-types)\. 
 
 Amazon S3 supports the following destinations where it can publish events:
-+ Amazon Simple Notification Service \(Amazon SNS\) topic
++ **Amazon Simple Notification Service \(Amazon SNS\) topic**
 
   Amazon SNS is a flexible, fully managed push messaging service\. Using this service, you can push messages to mobile devices or distributed services\. With SNS you can publish a message once, and deliver it one or more times\. For more information about SNS, see the [Amazon SNS](https://aws.amazon.com/sns/) product detail page\.
-
-   
-+ Amazon Simple Queue Service \(Amazon SQS\) queue
++ **Amazon Simple Queue Service \(Amazon SQS\) queue**
 
   Amazon SQS is a scalable and fully managed message queuing service\. You can use SQS to transmit any volume of data without requiring other services to be always available\. In your notification configuration, you can request that Amazon S3 publish events to an SQS queue\. 
 
   Currently, Standard SQS queue is only allowed as an Amazon S3 event notification destination, whereas FIFO SQS queue is not allowed\. For more information about Amazon SQS, see the [Amazon SQS](https://aws.amazon.com/sqs/) product detail page\.
-
-   
-+ AWS Lambda
++ **AWS Lambda**
 
   AWS Lambda is a compute service that makes it easy for you to build applications that respond quickly to new information\. AWS Lambda runs your code in response to events such as image uploads, in\-app activity, website clicks, or outputs from connected devices\. 
 
@@ -62,10 +50,10 @@ Amazon S3 supports the following destinations where it can publish events:
 ## How to Enable Event Notifications<a name="how-to-enable-disable-notification-intro"></a>
 
 Enabling notifications is a bucket\-level operation; that is, you store notification configuration information in the *notification* subresource associated with a bucket\. You can use any of the following methods to manage notification configuration:
-+ Using the Amazon S3 console
++ **Using the Amazon S3 console**
 
   The console UI enables you to set a notification configuration on a bucket without having to write any code\. For more information, see [How Do I Enable and Configure Event Notifications for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\.
-+ Programmatically using the AWS SDKs
++ **Programmatically using the AWS SDKs**
 **Note**  
 If you need to, you can also make the Amazon S3 REST API calls directly from your code\. However, this can be cumbersome because it requires you to write code to authenticate your requests\. 
 
@@ -81,7 +69,7 @@ If you need to, you can also make the Amazon S3 REST API calls directly from you
   ```
 
   To enable notifications for events of specific types, you replace the XML with the appropriate configuration that identifies the event types you want Amazon S3 to publish and the destination where you want the events published\. For each destination, you add a corresponding XML configuration\. For example: 
-  + Publish event messages to an SQS queue — To set an SQS queue as the notification destination for one or more event types, you add the `QueueConfiguration`\.
+  + **Publish event messages to an SQS queue** — To set an SQS queue as the notification destination for one or more event types, you add the `QueueConfiguration`\.
 
     ```
     <NotificationConfiguration>
@@ -95,7 +83,7 @@ If you need to, you can also make the Amazon S3 REST API calls directly from you
        ...
     </NotificationConfiguration>
     ```
-  + Publish event messages to an SNS topic — To set an SNS topic as the notification destination for specific event types, you add the `TopicConfiguration`\.
+  + **Publish event messages to an SNS topic** — To set an SNS topic as the notification destination for specific event types, you add the `TopicConfiguration`\.
 
     ```
     <NotificationConfiguration>
@@ -109,7 +97,7 @@ If you need to, you can also make the Amazon S3 REST API calls directly from you
        ...
     </NotificationConfiguration>
     ```
-  + Invoke the AWS Lambda function and provide an event message as an argument — To set a Lambda function as the notification destination for specific event types, you add the `CloudFunctionConfiguration`\.
+  + **Invoke the AWS Lambda function and provide an event message as an argument **— To set a Lambda function as the notification destination for specific event types, you add the `CloudFunctionConfiguration`\.
 
     ```
     <NotificationConfiguration>
@@ -413,7 +401,13 @@ You can also grant Amazon S3 permissions from AWS Lambda to invoke your Lambda f
 
 ### Granting Permissions to Publish Messages to an SNS Topic or an SQS Queue<a name="grant-sns-sqs-permission-for-s3"></a>
 
-You attach an AWS Identity and Access Management \(IAM\) policy to the destination SNS topic or SQS queue to grant Amazon S3 permissions to publish messages to the SNS topic or SQS queue\. 
+To grant Amazon S3 permissions to publish messages to the SNS topic or SQS queue, you attach an AWS Identity and Access Management \(IAM\) policy to the destination SNS topic or SQS queue\. 
+
+For an example of how to attach a policy to an SNS topic or an SQS queue, see [Example Walkthrough: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)](ways-to-add-notification-config-to-bucket.md)\. For more information about permissions, see the following topics:
++ [Example Cases for Amazon SNS Access Control](https://docs.aws.amazon.com/sns/latest/dg/AccessPolicyLanguage_UseCases_Sns.html) in the *Amazon Simple Notification Service Developer Guide*
++ [Access Control Using AWS Identity and Access Management \(IAM\)](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/UsingIAM.html) in the *Amazon Simple Queue Service Developer Guide*
+
+#### IAM Policy for a Destination SNS Topic<a name="sns-topic-policy"></a>
 
 The following is an example of an IAM policy that you attach to the destination SNS topic\.
 
@@ -440,6 +434,8 @@ The following is an example of an IAM policy that you attach to the destination 
 }
 ```
 
+#### IAM Policy for a Destination SQS Queue<a name="sqs-queue-policy"></a>
+
 The following is an example of an IAM policy that you attach to the destination SQS queue\.
 
 ```
@@ -451,7 +447,7 @@ The following is an example of an IAM policy that you attach to the destination 
    "Sid": "example-statement-ID",
    "Effect": "Allow",
    "Principal": {
-     "AWS": "*"  
+     "Service": "s3.amazonaws.com"  
    },
    "Action": [
     "SQS:SendMessage"
@@ -473,7 +469,9 @@ Note that for both the Amazon SNS and Amazon SQS IAM policies, you can specify t
   }
 ```
 
-The following is an example of a key policy that you attach to the associated AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) if the SQS queue is SSE enabled\. 
+#### AWS KMS Key Policy<a name="key-policy-sns-sqs"></a>
+
+If the SQS queue is SSE enabled, you can attach the following key policy to the associated AWS Key Management Service \(AWS KMS\) customer managed customer master key \(CMK\)\. The policy grants the Amazon S3 service principal permission for specific AWS KMS actions that are necessary for to encrypt messages added to the queue\.
 
 ```
 {
@@ -496,10 +494,4 @@ The following is an example of a key policy that you attach to the associated AW
 }
 ```
 
-The policy grants Amazon S3 service principal permission for specific AWS KMS actions that are necessary to encrypt messages added to the queue\.
-
-For an example of how to attach a policy to an SNS topic or an SQS queue, see [Example Walkthrough: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)](ways-to-add-notification-config-to-bucket.md)\.
-
-For more information about permissions, see the following topics:
-+ [Example Cases for Amazon SNS Access Control](https://docs.aws.amazon.com/sns/latest/dg/AccessPolicyLanguage_UseCases_Sns.html) in the *Amazon Simple Notification Service Developer Guide*
-+ [Access Control Using AWS Identity and Access Management \(IAM\)](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/UsingIAM.html) in the *Amazon Simple Queue Service Developer Guide*
+For more information about AWS KMS key policies, see [Using Key Policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS Key Management Service Developer Guide*\.

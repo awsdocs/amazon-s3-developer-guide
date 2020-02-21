@@ -12,8 +12,6 @@ By default Amazon S3 does not allow public access to your account or buckets\. I
 **Important**  
 Before you turn off block public access, confirm that you want anyone on the internet to be able to access your bucket\. We recommend that you block all public access to your buckets unless you require a public bucket for a specific use case, such as a public static website\. If you only want certain users on your account to access your static website, you can edit your block public access settings rather than disabling block public access\. For more information, see [Using Amazon S3 Block Public Access](access-control-block-public-access.md)\.
 
-**To disable block public access for a bucket configured as a static website**
-
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
 1. Select the bucket that you have configured as a static website, and choose **Edit public access settings**\.  

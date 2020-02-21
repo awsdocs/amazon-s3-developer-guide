@@ -30,7 +30,7 @@ You can access the Speed Comparison tool using either of the following methods:
 
    
 
-  For a list of the regions supported by Amazon S3, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *Amazon Web Services General Reference*\.
+  For a list of the regions supported by Amazon S3, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html) in the *Amazon Web Services General Reference*\.
 + Use the Amazon S3 console\. For details, see [Enabling Transfer Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-transfer-acceleration.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Getting Started with Amazon S3 Transfer Acceleration<a name="transfer-acceleration-getting-started"></a>
@@ -52,7 +52,7 @@ Support for the dual\-stack accelerated endpoint currently is only available fro
 **Note**  
 You can continue to use the regular endpoint in addition to the accelerate endpoints\.
 
-   You can point your Amazon S3 PUT object and GET object requests to the s3\-accelerate endpoint domain name after you enable Transfer Acceleration\. For example, let's say you currently have a REST API application using [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) that uses the host name **mybucket\.s3\.amazonaws\.com ** in the `PUT` request\. To accelerate the `PUT` you simply change the host name in your request to **mybucket\.s3\-accelerate\.amazonaws\.com**\. To go back to using the standard upload speed, simply change the name back to **mybucket\.s3\.amazonaws\.com**\.
+   You can point your Amazon S3 PUT object and GET object requests to the s3\-accelerate endpoint domain name after you enable Transfer Acceleration\. For example, let's say you currently have a REST API application using [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) that uses the host name **mybucket\.s3\.us\-east\-1\.amazonaws\.com ** in the `PUT` request\. To accelerate the `PUT` you simply change the host name in your request to **mybucket\.s3\-accelerate\.amazonaws\.com**\. To go back to using the standard upload speed, simply change the name back to **mybucket\.s3\.us\-east\-1\.amazonaws\.com**\.
 
    After Transfer Acceleration is enabled, it can take up to 20 minutes for you to realize the performance benefit\. However, the accelerate endpoint will be available as soon as you enable Transfer Acceleration\.
 

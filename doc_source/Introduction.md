@@ -41,7 +41,7 @@ This section describes key concepts and terminology you need to understand to us
 
 ### Buckets<a name="BasicsBucket"></a>
 
- A bucket is a container for objects stored in Amazon S3\. Every object is contained in a bucket\. For example, if the object named `photos/puppy.jpg` is stored in the `johnsmith` bucket, then it is addressable using the URL `http://johnsmith.s3.amazonaws.com/photos/puppy.jpg`\. 
+ A bucket is a container for objects stored in Amazon S3\. Every object is contained in a bucket\. For example, if the object named `photos/puppy.jpg` is stored in the `johnsmith` bucket in the US West \(Oregon\) Region, then it is addressable using the URL `https://johnsmith.s3.us-west-2.amazonaws.com/photos/puppy.jpg`\.
 
  Buckets serve several purposes: 
 + They organize the Amazon S3 namespace at the highest level\.
@@ -76,7 +76,7 @@ You can only access Amazon S3 and its features in AWS Regions that are enabled f
 
 ### Amazon S3 Data Consistency Model<a name="ConsistencyModel"></a>
 
-Amazon S3 provides read\-after\-write consistency for PUTS of new objects in your S3 bucket in all Regions with one caveat\. The caveat is that if you make a HEAD or GET request to the key name \(to find if the object exists\) before creating the object, Amazon S3 provides eventual consistency for read\-after\-write\. 
+Amazon S3 provides read\-after\-write consistency for PUTS of new objects in your S3 bucket in all Regions with one caveat\. The caveat is that if you make a HEAD or GET request to a key name before the object is created, then create the object shortly after that, a subsequent GET might not return the object due to eventual consistency\. 
 
 Amazon S3 offers eventual consistency for overwrite PUTS and DELETES in all Regions\. 
 
@@ -91,6 +91,8 @@ Amazon S3 achieves high availability by replicating data across multiple servers
 **Note**  
 Amazon S3 does not currently support object locking\. If two PUT requests are simultaneously made to the same key, the request with the latest timestamp wins\. If this is an issue, you will need to build an object\-locking mechanism into your application\.   
 Updates are key\-based\. There is no way to make atomic updates across keys\. For example, you cannot make the update of one key dependent on the update of another key unless you design this functionality into your application\.
+
+Buckets have a similar consistency model, with the same caveats\. For example, if you delete a bucket and immediately list all buckets, Amazon S3 might still appear in the list\.
 
 The following table describes the characteristics of an eventually consistent read and a consistent read\.
 
@@ -148,7 +150,7 @@ Both individuals and companies can use bucket policies\. When companies register
 
 An account can grant one user limited read and write access, but allow another to create and delete buckets also\. An account could allow several field offices to store their daily reports in a single bucket\. It could allow each office to write only to a certain set of names \(for example, "Nevada/\*" or "Utah/\*"\) and only from the office's IP address range\.
 
-Unlike access control lists \(described later\), which can add \(grant\) permissions only on individual objects, policies can either add or deny permissions across all \(or a subset\) of objects within a bucket\. With one request, an account can set the permissions of any number of objects in a bucket\. An account can use wildcards \(similar to regular expression operators\) on Amazon Resource Names \(ARNs\) and other values\. The account could then control access to groups of objects that begin with a common prefix or end with a given extension, such as *\.html*\.
+Unlike access control lists \(described later\), which can add \(grant\) permissions only on individual objects, policies can either add or deny permissions across all \(or a subset\) of objects within a bucket\. With one request, an account can set the permissions of any number of objects in a bucket\. An account can use wildcards \(similar to regular expression operators\) on Amazon Resource Names \(ARNs\) and other values\. The account could then control access to groups of objects that begin with a common [prefix](https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#keyprefix) or end with a given extension, such as *\.html*\.
 
 Only the bucket owner is allowed to associate a policy with a bucket\. Policies \(written in the access policy language\) *allow* or *deny* requests based on the following:
 + Amazon S3 bucket operations \(such as `PUT ?acl`\), and object operations \(such as `PUT Object`, or `GET Object`\)

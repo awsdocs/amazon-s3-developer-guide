@@ -1,28 +1,48 @@
 # Protecting Data Using Server\-Side Encryption with CMKs Stored in AWS Key Management Service \(SSE\-KMS\)<a name="UsingKMSEncryption"></a>
 
-Server\-side encryption is the encryption of data at its destination by the application or service that receives it\. AWS Key Management Service \(AWS KMS\) is a service that combines secure, highly available hardware and software to provide a key management system scaled for the cloud\. Amazon S3 uses AWS KMS customer master keys \(CMKs\) to encrypt your Amazon S3 objects\. SSE\-KMS encrypts only the object data\. Any object metadata is not encrypted\. If you use customer managed CMKs, you use AWS KMS via the [AWS Management Console](https://console.aws.amazon.com/kms) or [AWS KMS APIs](https://docs.aws.amazon.com/kms/latest/APIReference/) to centrally create encryption keys, define the policies that control how keys can be used, and audit key usage to prove that they are being used correctly\. You can use these keys to protect your data in Amazon S3 buckets\.
+Server\-side encryption is the encryption of data at its destination by the application or service that receives it\. AWS Key Management Service \(AWS KMS\) is a service that combines secure, highly available hardware and software to provide a key management system scaled for the cloud\. Amazon S3 uses AWS KMS customer master keys \(CMKs\) to encrypt your Amazon S3 objects\. 
 
-The first time you add an SSE\-KMS–encrypted object to a bucket in a Region, Amazon S3 automatically creates an AWS managed CMK in your AWS account\. Amazon S3 uses this CMK for SSE\-KMS encryption unless you select a customer managed CMK that you created separately using AWS KMS\. Creating your own CMK gives you more flexibility\. For example, it lets you create, rotate, disable, and define access controls and audit the encryption keys that are used to protect your data\.
+If you use CMKs, you use AWS KMS via the [AWS Management Console](https://console.aws.amazon.com/kms) or [AWS KMS APIs](https://docs.aws.amazon.com/kms/latest/APIReference/) to centrally create CMKs, define the policies that control how CMKs can be used, and audit CMKs usage to prove that they are being used correctly\. You can use these CMKs to protect your data in Amazon S3 buckets\. 
 
-For more information, see [What is AWS Key Management Service?](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide*\. There are additional charges for using AWS KMS CMKs\. For more information, see [AWS Key Management Service Concepts \- Customer Master Keys \(CMKs\) ](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys) and [AWS Key Management Service pricing](https://aws.amazon.com/kms/pricing)\.
+There are additional charges for using AWS KMS CMKs\. For more information, see [AWS Key Management Service Concepts \- Customer Master Keys \(CMKs\) ](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys) and [AWS Key Management Service Pricing](https://aws.amazon.com/kms/pricing)\.
 
-**Note**  
+## AWS Managed CMKs and Customer Managed CMKs<a name="aws-managed-customer-managed-cmks"></a>
+
+The first time you add an object encrypted with server\-side encryption with customer master keys \(CMKs\) stored in AWS Key Management Service \(SSE\-KMS\) to a bucket in a Region, Amazon S3 automatically creates an AWS managed CMK in your AWS account\. By default, Amazon S3 uses this CMK for SSE\-KMS encryption\.
+
+You can also create customer managed CMKs in AWS KMS and choose them\. Creating your own CMK gives you more flexibility\. For example, you can create, rotate, and disable customer managed CMKs\. You can also define access controls and audit the customer managed CMKs that you use to protect your data\. For more information about customer managed and AWS managed CMKs, see [AWS KMS Concepts](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html) in the *AWS Key Management Service Developer Guide*\.
+
+**Important**  
+When you use an AWS KMS CMK for server\-side encryption in Amazon S3, you must choose a symmetric CMK\. Amazon S3 only supports symmetric CMKs and not asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
+
+## SSE\-KMS with Objects and Buckets<a name="sse-kms-objects-buckets"></a>
+
+KMS encrypts only the object data\. Any object metadata is not encrypted\. When you use SSE\-KMS encryption with an S3 bucket, the AWS KMS CMK must be in the same Region as the bucket\. For more information about AWS KMS, see [What is AWS Key Management Service?](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide*\. 
+
+## AWS Signature Version 4<a name="aws-signature-version-4-sse-kms"></a>
+
 If you are uploading or accessing objects encrypted by SSE\-KMS, you need to use AWS Signature Version 4 for added security\. For more information on how to do this using an AWS SDK, see [Specifying Signature Version in Request Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version)\.
- When you use SSE\-KMS encryption with an S3 bucket, the AWS KMS CMK must be in the same Region as the bucket\. 
 
-The highlights of SSE\-KMS are:
-+ You can choose a customer managed CMK that you create and manage or an AWS managed CMK that Amazon S3 creates in your AWS account and manages for you\. Like a customer managed CMK, your AWS CMK is unique to your AWS account and Region\. Only Amazon S3 has permission to use this CMK on your behalf\.
+**Important**  
+All GET and PUT requests for an object protected by AWS KMS will fail if they are not made via SSL or if they are not made using SigV4\.
+
+## SSE\-KMS Highlights<a name="sse-kms-highlights"></a>
+
+The highlights of SSE\-KMS are as follows:
++ You can choose a customer managed CMK that you create and manage, or you can choose an AWS managed CMK that Amazon S3 creates in your AWS account and manages for you\. Like a customer managed CMK, your AWS managed CMK is unique to your AWS account and Region\. Only Amazon S3 has permission to use this CMK on your behalf\. Amazon S3 only supports symmetric CMKs\.
++ You can create, rotate, and disable auditable customer managed CMKs from the AWS KMS console\. 
 + The ETag in the response is not the MD5 of the object data\.
 + The data keys used to encrypt your data are also encrypted and stored alongside the data they protect\. 
-+ You can create, rotate, and disable auditable CMKs from the AWS KMS console\. 
 + The security controls in AWS KMS can help you meet encryption\-related compliance requirements\.
+
+## Requiring Server\-Side Encryption<a name="require-sse-kms"></a>
 
 To require server\-side encryption of all objects in a particular Amazon S3 bucket, use a bucket policy\. For example, the following bucket policy denies upload object \(`s3:PutObject`\) permission to everyone if the request does not include the `x-amz-server-side-encryption` header requesting server\-side encryption with SSE\-KMS\.
 
 ```
  1. {
  2.    "Version":"2012-10-17",
- 3.    "Id":"PutObjPolicy",
+ 3.    "Id":"PutObjPolicy"
  4.    "Statement":[{
  5.          "Sid":"DenyUnEncryptedObjectUploads",
  6.          "Effect":"Deny",
@@ -44,14 +64,9 @@ To require that a particular AWS KMS CMK be used to encrypt the objects in a buc
 **Note**  
 When you upload an object, you can specify the AWS KMS CMK using the `x-amz-server-side-encryption-aws-kms-key-id` header\. If the header is not present in the request, Amazon S3 assumes the AWS managed CMK\. Regardless, the AWS KMS key ID that Amazon S3 uses for object encryption must match the AWS KMS key ID in the policy, otherwise Amazon S3 denies the request\.
 
-**Important**  
-All GET and PUT requests for an object protected by AWS KMS will fail if they are not made via SSL or if they are not made using SigV4\.
-
-SSE\-KMS encrypts only the object data\. Any object metadata is not encrypted\.
-
 ## Using AWS Key Management Service in the Amazon S3 Console<a name="kms-encryption-s3-console"></a>
 
-For more information about using the Amazon S3 console with CMKs stored in AWS KMS, see [How Do I Upload Files and Folders to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
+For more information about using the Amazon S3 console with CMKs stored in AWS KMS, see [How Do I Add Encryption to an S3 Object?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-object-encryption.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## API Support for AWS Key Management Service in Amazon S3<a name="APISupportforKMSEncryption"></a>
 
@@ -63,7 +78,9 @@ Also, Amazon S3 may append a predefined key of aws:s3:arn with the value equal t
 
 Having this predefined key as a part of your encryption context means that you can track relevant requests in CloudTrail, so you’ll always be able to see which Amazon S3 object's ARN was used with which encryption key\. In addition, this predefined key as a part of your encryption context guarantees that the encryption context is not identical between different Amazon S3 objects, which provides additional security for your objects\. Your full encryption context will be validated to have the value equal to the object's ARN\.
 
-The following Amazon S3 APIs support these request headers\.
+### Request Headers and the Amazon S3 API<a name="sse-request-headers-kms"></a>
+
+The following Amazon S3 APIs support the `x-amz-server-side-encryption`, `x-amz-server-side-encryption-aws-kms-key-id`, and `x-amz-server-side-encryption-context` request headers\.
 + PUT operation — When uploading data using the PUT API \(see [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\), you can specify these request headers\. 
 + Initiate Multipart Upload — When uploading large objects using the multipart upload API, you can specify these headers\. You specify these headers in the initiate request \(see [Initiate Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)\)\.
 + POST operation — When using a POST operation to upload an object \(see [POST Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html)\), instead of the request headers, you provide the same information in the form fields\.

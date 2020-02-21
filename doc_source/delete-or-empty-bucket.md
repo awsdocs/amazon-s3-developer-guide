@@ -24,7 +24,7 @@ The Amazon S3 console supports deleting a bucket that may or may not be empty\. 
 You can delete a bucket that contains objects using the AWS CLI only if the bucket does not have versioning enabled\. If your bucket does not have versioning enabled, you can use the `rb` \(remove bucket\) AWS CLI command with `--force` parameter to remove a non\-empty bucket\. This command deletes all objects first and then deletes the bucket\.
 
 ```
-  $ aws s3 rb s3://bucket-name --force  
+$ aws s3 rb s3://bucket-name --force  
 ```
 
 For more information, see [Using High\-Level S3 Commands with the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/using-s3-commands.html) in the AWS Command Line Interface User Guide\.
@@ -160,7 +160,7 @@ You can configure lifecycle on your bucket to expire objects and request that Am
 
 If your bucket has versioning enabled, you can also configure the rule to expire noncurrent objects\. To fully empty the contents of a versioning enabled bucket, you will need to configure an expiration policy on both current and noncurrent objects in the bucket\.
 
-For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md) and [Configuring Object Expiration](lifecycle-expire-general-considerations.md)\.
+For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md) and [Understanding Object Expiration](lifecycle-expire-general-considerations.md)\.
 
 ### Empty a Bucket: Using the AWS SDKs<a name="empty-bucket-awssdks"></a>
 

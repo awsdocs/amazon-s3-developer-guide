@@ -23,25 +23,25 @@ When applying the Amazon S3 bucket policies for VPC endpoints described in this 
 The following is an example of an Amazon S3 bucket policy that restricts access to a specific bucket, `examplebucket`, only from the VPC endpoint with the ID `vpce-1a2b3c4d`\. The policy denies all access to the bucket if the specified endpoint is not being used\. The `aws:sourceVpce` condition is used to specify the endpoint\. The `aws:sourceVpce` condition does not require an Amazon Resource Name \(ARN\) for the VPC endpoint resource, only the VPC endpoint ID\. For more information about using conditions in a policy, see [Specifying Conditions in a Policy](amazon-s3-policy-keys.md)\.
 
 ```
-{
-   "Version": "2012-10-17",
-   "Id": "Policy1415115909152",
-   "Statement": [
-     {
-       "Sid": "Access-to-specific-VPCE-only",
-       "Principal": "*",
-       "Action": "s3:*",
-       "Effect": "Deny",
-       "Resource": ["arn:aws:s3:::examplebucket",
-                    "arn:aws:s3:::examplebucket/*"],
-       "Condition": {
-         "StringNotEquals": {
-           "aws:sourceVpce": "vpce-1a2b3c4d"
-         }
-       }
-     }
-   ]
-}
+ 1. {
+ 2.    "Version": "2012-10-17",
+ 3.    "Id": "Policy1415115909152",
+ 4.    "Statement": [
+ 5.      {
+ 6.        "Sid": "Access-to-specific-VPCE-only",
+ 7.        "Principal": "*",
+ 8.        "Action": "s3:*",
+ 9.        "Effect": "Deny",
+10.        "Resource": ["arn:aws:s3:::examplebucket",
+11.                     "arn:aws:s3:::examplebucket/*"],
+12.        "Condition": {
+13.          "StringNotEquals": {
+14.            "aws:sourceVpce": "vpce-1a2b3c4d"
+15.          }
+16.        }
+17.      }
+18.    ]
+19. }
 ```
 
 ## Restricting Access to a Specific VPC<a name="example-bucket-policies-restrict-access-vpc"></a>

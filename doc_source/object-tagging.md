@@ -105,7 +105,7 @@ or
 phototype=finished
 ```
 
-You might consider archiving the raw photos to Glacier sometime after they are created\. You can configure a lifecycle rule with a filter that identifies the subset of objects with the key name prefix \(`photos/`\) that have a specific tag \(`phototype=raw`\)\. 
+You might consider archiving the raw photos to S3 Glacier sometime after they are created\. You can configure a lifecycle rule with a filter that identifies the subset of objects with the key name prefix \(`photos/`\) that have a specific tag \(`phototype=raw`\)\. 
 
 For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\. 
 
@@ -143,85 +143,88 @@ security : public
 Note that the policy uses the Amazon S3 condition key, `s3:ExistingObjectTag/<tag-key>` to specify the key and value\.  
 
 ```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:GetObject"
-      ],
-      "Resource": [
-        "arn:aws:s3:::examplebucket/*"
-      ],
-      "Condition": {
-        "StringEquals": {
-          "s3:ExistingObjectTag/security": "public"
-        }
-      }
-    }
-  ]
-}
+ 1. {
+ 2.   "Version": "2012-10-17",
+ 3.   "Statement": [
+ 4.     {
+ 5.       "Effect":     "Allow",
+ 6.       "Action":     "s3:GetObject",
+ 7.       "Resource":    "arn:aws:s3:::examplebucket/*",
+ 8.       "Principal":   "*",
+ 9.       "Condition": {  "StringEquals": {"s3:ExistingObjectTag/security": "public" } }
+10.     }
+11.   ]
+12. }bb
 ```
 
 **Example 2: Allow a user to add object tags with restrictions on the allowed tag keys**  
 The following permissions policy grants a user permissions to perform the `s3:PutObjectTagging` action, which allows user to add tags to an existing object\. The condition limits the tag keys that the user is allowed to use\. The condition uses the `s3:RequestObjectTagKeys` condition key to specify the set of tag keys\.  
 
 ```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:PutObjectTagging"
-      ],
-      "Resource": [
-        "arn:aws:s3:::examplebucket/*"
-      ],
-      "Condition": {
-        "ForAllValues:StringLike": {
-          "s3:RequestObjectTagKeys": [
-            "Owner",
-            "CreationDate"
-          ]
-        }
-      }
-    }
-  ]
-}
+ 1. {
+ 2.   "Version": "2012-10-17",
+ 3.   "Statement": [
+ 4.     {
+ 5.       "Effect": "Allow",
+ 6.       "Action": [
+ 7.         "s3:PutObjectTagging"
+ 8.       ],
+ 9.       "Resource": [
+10.         "arn:aws:s3:::examplebucket/*"
+11.       ],
+12.       "Principal":{
+13.         "CanonicalUser":[
+14.             "64-digit-alphanumeric-value"
+15.          ]
+16.        },
+17.       "Condition": {
+18.         "ForAllValues:StringLike": {
+19.           "s3:RequestObjectTagKeys": [
+20.             "Owner",
+21.             "CreationDate"
+22.           ]
+23.         }
+24.       }
+25.     }
+26.   ]
+27. }
 ```
 The policy ensures that the tag set, if specified in the request, has the specified keys\. A user might send an empty tag set in `PutObjectTagging`, which is allowed by this policy \(an empty tag set in the request removes any existing tags on the object\)\. If you want to prevent a user from removing the tag set, you can add another condition to ensure that the user provides at least one value\. The `ForAnyValue` in the condition ensures at least one of the specified values must be present in the request\.  
 
 ```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:PutObjectTagging"
-      ],
-      "Resource": [
-        "arn:aws:s3:::examplebucket/*"
-      ],
-      "Condition": {
-        "ForAllValues:StringLike": {
-          "s3:RequestObjectTagKeys": [
-            "Owner",
-            "CreationDate"
-          ]
-        },
-        "ForAnyValue:StringLike": {
-          "s3:RequestObjectTagKeys": [
-            "Owner",
-            "CreationDate"
-          ]
-        }
-      }
-    }
-  ]
-}
+ 1. {
+ 2.   "Version": "2012-10-17",
+ 3.   "Statement": [
+ 4.     {
+ 5.       "Effect": "Allow",
+ 6.       "Action": [
+ 7.         "s3:PutObjectTagging"
+ 8.       ],
+ 9.       "Resource": [
+10.         "arn:aws:s3:::examplebucket/*"
+11.       ],
+12.       "Principal":{
+13.         "AWS":[
+14.             "arn:aws:iam::account-number-without-hyphens:user/username"
+15.          ]
+16.        },
+17.       "Condition": {
+18.         "ForAllValues:StringLike": {
+19.           "s3:RequestObjectTagKeys": [
+20.             "Owner",
+21.             "CreationDate"
+22.           ]
+23.         },
+24.         "ForAnyValue:StringLike": {
+25.           "s3:RequestObjectTagKeys": [
+26.             "Owner",
+27.             "CreationDate"
+28.           ]
+29.         }
+30.       }
+31.     }
+32.   ]
+33. }
 ```
 For more information, see [Creating a Condition That Tests Multiple Key Values \(Set Operations\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_multi-value-conditions.html) in the *IAM User Guide*\.
 
@@ -229,25 +232,30 @@ For more information, see [Creating a Condition That Tests Multiple Key Values \
 The following user policy grants a user permissions to perform the `s3:PutObjectTagging` action, which allows user to add tags on an existing object\. The condition requires the user to include a specific tag \(`Project`\) with value set to `X`\.   
 
 ```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:PutObjectTagging"
-      ],
-      "Resource": [
-        "arn:aws:s3:::examplebucket/*"
-      ],
-      "Condition": {
-        "StringEquals": {
-          "s3:RequestObjectTag/Project": "X"
-        }
-      }
-    }
-  ]
-}
+ 1. {
+ 2.   "Version": "2012-10-17",
+ 3.   "Statement": [
+ 4.     {
+ 5.       "Effect": "Allow",
+ 6.       "Action": [
+ 7.         "s3:PutObjectTagging"
+ 8.       ],
+ 9.       "Resource": [
+10.         "arn:aws:s3:::examplebucket/*"
+11.       ],
+12.       "Principal":{
+13.         "AWS":[
+14.             "arn:aws:iam::account-number-without-hyphens:user/username"
+15.          ]
+16.        },
+17.       "Condition": {
+18.         "StringEquals": {
+19.           "s3:RequestObjectTag/Project": "X"
+20.         }
+21.       }
+22.     }
+23.   ]
+24. }
 ```
 
 **Related Topics**  

@@ -3,7 +3,7 @@
 The copy operation creates a copy of an object that is already stored in Amazon S3\. You can create a copy of your object up to 5 GB in a single atomic operation\. However, for copying an object that is greater than 5 GB, you must use the multipart upload API\. Using the `copy` operation, you can:
 + Create additional copies of objects 
 +  Rename objects by copying them and deleting the original ones 
-+  Move objects across Amazon S3 locations \(e\.g\., us\-west\-1 and EU\) 
++  Move objects across Amazon S3 locations \(e\.g\., us\-west\-1 and Europe\) 
 + Change object metadata
 
   Each Amazon S3 object has metadata\. It is a set of name\-value pairs\. You can set object metadata at the time you upload it\. After you upload the object, you cannot modify object metadata\. The only way to modify object metadata is to make a copy of the object and set the metadata\. In the copy operation you set the same object as the source and target\. 
@@ -16,9 +16,9 @@ For more information about the object metadata, see [Object Key and Metadata](Us
 
 **Note**  
 Copying objects across locations incurs bandwidth charges\. 
- If the source object is archived in `GLACIER` or `DEEP_ARCHIVE`, you must first restore a temporary copy before you can copy the object to another bucket\. For information about archiving objects, see [Transitioning to the GLACIER and DEEP ARCHIVE Storage Classes \(Object Archival\)](lifecycle-transition-general-considerations.md#before-deciding-to-archive-objects)\. 
+ If the source object is archived in `GLACIER` or `DEEP ARCHIVE`, you must first restore a temporary copy before you can copy the object to another bucket\. For information about archiving objects, see [Transitioning to the GLACIER and DEEP ARCHIVE Storage Classes \(Object Archival\)](lifecycle-transition-general-considerations.md#before-deciding-to-archive-objects)\. 
 
-When copying objects, you can request Amazon S3 to save the target object encrypted with a AWS Key Management Service \(AWS KMS\) customer master key \(CMK\), an Amazon S3\-managed encryption key, or a customer\-provided encryption key\. Accordingly, you must specify encryption information in your request\. If the copy source is an object that is stored in Amazon S3 using server\-side encryption with customer provided key, you will need to provide encryption information in your request so Amazon S3 can decrypt the object for copying\. For more information, see [Protecting Data Using Encryption](UsingEncryption.md)\.
+When copying objects, you can request Amazon S3 to save the target object encrypted with an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\), an Amazon S3\-managed encryption key, or a customer\-provided encryption key\. Accordingly, you must specify encryption information in your request\. If the copy source is an object that is stored in Amazon S3 using server\-side encryption with customer provided key, you will need to provide encryption information in your request so Amazon S3 can decrypt the object for copying\. For more information, see [Protecting Data Using Encryption](UsingEncryption.md)\.
 
 To copy more than one Amazon S3 object with a single request, you can use Amazon S3 batch operations\. You provide Amazon S3 batch operations with a list of objects to operate on\. Amazon S3 batch operations call the respective API to perform the specified operation\. A single Amazon S3 batch operations job can perform the specified operation on billions of objects containing exabytes of data\. 
 

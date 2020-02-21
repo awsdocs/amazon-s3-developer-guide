@@ -1,7 +1,7 @@
 # Amazon Simple Storage Service Developer Guide
 
 -----
-*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -80,7 +80,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Object Lifecycle Management](object-lifecycle-mgmt.md)
       + [Additional Considerations for Lifecycle Configuration](lifecycle-additional-considerations.md)
          + [Transitioning Objects Using Amazon S3 Lifecycle](lifecycle-transition-general-considerations.md)
-         + [Configuring Object Expiration](lifecycle-expire-general-considerations.md)
+         + [Understanding Object Expiration](lifecycle-expire-general-considerations.md)
          + [Lifecycle and Other Bucket Configurations](lifecycle-and-other-bucket-config.md)
       + [Lifecycle Configuration Elements](intro-lifecycle-rules.md)
       + [Examples of Lifecycle Configuration](lifecycle-configuration-examples.md)
@@ -115,6 +115,7 @@ Amazon's trademarks and trade dress may not be used in
             + [Upload an Object Using the AWS SDK for PHP](UploadObjSingleOpPHP.md)
             + [Upload an Object Using the AWS SDK for Ruby](UploadObjSingleOpRuby.md)
             + [Upload an Object Using the REST API](UploadObjSingleOpREST.md)
+            + [Upload an Object Using the CLI](UploadObjSingleOpCLI.md)
          + [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)
             + [Multipart Upload Overview](mpuoverview.md)
                + [Amazon S3 Multipart Upload Limits](qfacts.md)
@@ -375,7 +376,7 @@ Amazon's trademarks and trade dress may not be used in
          + [Upload Examples (AWS Signature Version 2)](HTTPPOSTExamples.md)
          + [POST with Adobe Flash](HTTPPOSTFlash.md)
 + [Amazon S3 Resources](RelatedResources012.md)
-+ [SQL Reference for Amazon S3 Select and Glacier Select](s3-glacier-select-sql-reference.md)
++ [SQL Reference for Amazon S3 Select and S3 Glacier Select](s3-glacier-select-sql-reference.md)
    + [SELECT Command](s3-glacier-select-sql-reference-select.md)
    + [Data Types](s3-glacier-select-sql-reference-data-types.md)
    + [Operators](s3-glacier-select-sql-reference-operators.md)

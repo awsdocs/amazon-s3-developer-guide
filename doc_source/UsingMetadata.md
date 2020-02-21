@@ -117,7 +117,7 @@ The following table provides a list of system\-defined metadata and whether you 
 | x\-amz\-delete\-marker | In a bucket that has versioning enabled, this Boolean marker indicates whether the object is a delete marker\.  | No | 
 | x\-amz\-storage\-class | Storage class used for storing the object\. For more information, see [Amazon S3 Storage Classes](storage-class-intro.md)\. | Yes | 
 | x\-amz\-website\-redirect\-location |  Redirects requests for the associated object to another object in the same bucket or an external URL\. For more information, see [\(Optional\) Configuring a Webpage Redirect](how-to-page-redirect.md)\. | Yes | 
-| x\-amz\-server\-side\-encryption\-aws\-kms\-key\-id | If x\-amz\-server\-side\-encryption is present and has the value of aws:kms, this indicates the ID of the AWS KMS customer master key \(CMK\) that was used for the object\. | Yes | 
+| x\-amz\-server\-side\-encryption\-aws\-kms\-key\-id | If x\-amz\-server\-side\-encryption is present and has the value of aws:kms, this indicates the ID of the AWS KMS symmetric customer master key \(CMK\) that was used for the object\. | Yes | 
 | x\-amz\-server\-side\-encryption\-customer\-algorithm | Indicates whether server\-side encryption with customer\-provided encryption keys \(SSE\-C\) is enabled\. For more information, see [Protecting Data Using Server\-Side Encryption with Customer\-Provided Encryption Keys \(SSE\-C\)](ServerSideEncryptionCustomerKeys.md)\.  | Yes | 
 
 ### User\-Defined Object Metadata<a name="UserMetadata"></a>

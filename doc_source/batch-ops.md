@@ -22,7 +22,7 @@ This section uses the terms *jobs*, *operations*, and *tasks*, which are defined
 A job is the basic unit of work for Amazon S3 batch operations\. A job contains all of the information necessary to execute the specified operation on the objects listed in the manifest\. After you provide this information and request that the job begin, the job executes the operation for each object in the manifest\. 
 
 **Operation**  
-An operation is a single command that you want a job to execute\. Each job contains only one type of operation with one set of parameters, which Amazon S3 batch operations execute for each object\.
+ The operation is the type of API [action](https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations.html), such as copying objects, that you want the batch operations job to execute\. Each job performs a single type of operation across all objects that are specified in the manifest\.
 
 **Task**  
 A task is the unit of execution for a job\. A task represents a single call to an Amazon S3 or AWS Lambda API operation to perform the job's operation on a single object\. Over the course of a job's lifetime, Amazon S3 batch operations create one task for each object specified in the manifest\.

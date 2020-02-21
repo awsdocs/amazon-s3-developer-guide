@@ -1,13 +1,13 @@
 # SELECT Command<a name="s3-glacier-select-sql-reference-select"></a>
 
-Amazon S3 Select and Glacier Select support only the `SELECT` SQL command\. The following ANSI standard clauses are supported for `SELECT`: 
+Amazon S3 Select and S3 Glacier Select support only the `SELECT` SQL command\. The following ANSI standard clauses are supported for `SELECT`: 
 + `SELECT` list
 + `FROM` clause 
 + `WHERE` clause
 + `LIMIT` clause \(Amazon S3 Select only\)
 
 **Note**  
-Amazon S3 Select and Glacier Select queries currently do not support subqueries or joins\.
+Amazon S3 Select and S3 Glacier Select queries currently do not support subqueries or joins\.
 
 ## SELECT List<a name="s3-glacier-select-sql-reference-select-list"></a>
 
@@ -22,7 +22,7 @@ The first form with `*` \(asterisk\) returns every row that passed the `WHERE` c
 
 ## FROM Clause<a name="s3-glacier-select-sql-reference-from"></a>
 
-Amazon S3 Select and Glacier Select support the following forms of the `FROM` clause:
+Amazon S3 Select and S3 Glacier Select support the following forms of the `FROM` clause:
 
 ```
 FROM table_name
@@ -30,7 +30,7 @@ FROM table_name alias
 FROM table_name AS alias
 ```
 
-Where `table_name` is one of `S3Object` \(for Amazon S3 Select\) or `ARCHIVE` or `OBJECT` \(for Glacier Select\) referring to the archive being queried over\. Users coming from traditional relational databases can think of this as a database schema that contains multiple views over a table\.
+Where `table_name` is one of `S3Object` \(for Amazon S3 Select\) or `ARCHIVE` or `OBJECT` \(for S3 Glacier Select\) referring to the archive being queried over\. Users coming from traditional relational databases can think of this as a database schema that contains multiple views over a table\.
 
 Following standard SQL, the `FROM` clause creates rows that are filtered in the `WHERE` clause and projected in the `SELECT` list\. 
 
@@ -61,17 +61,8 @@ Amazon S3 Select always treats a JSON document as an array of root\-level values
 This example shows results using the following dataset and query:  
 
 ```
-{
-    "Rules": [
-        {"id": "id-1", "condition": "x < 20"},
-        {"condition": "y > x"},
-        {"id": "id-2", "condition": "z = DEBUG"}
-    ]
-},
-{
-    "created": "June 27",
-    "modified": "July 6"
-}
+{ "Rules": [ {"id": "1"}, {"expr": "y > x"}, {"id": "2", "expr": "z = DEBUG"} ]}
+{ "created": "June 27", "modified": "July 6" }
 ```
 
 ```
@@ -79,9 +70,9 @@ SELECT id FROM S3Object[*].Rules[*].id
 ```
 
 ```
-{"id":"id-1"},
-{},
-{"id":"id-2"},
+{"id":"1"}
+{}
+{"id":"2"}
 {}
 ```
 Amazon S3 Select produces each result for the following reasons:  
@@ -96,51 +87,15 @@ SELECT id FROM S3Object[*].Rules[*].id WHERE id IS NOT MISSING
 ```
 
 ```
-{"id":"id-1"},
-{"id":"id-2"}
+{"id":"1"}
+{"id":"2"}
 ```
 *Example \#2*  
 This example shows results using the following dataset and queries:  
 
 ```
-{
-    "created": "936864000",
-    "dir_name": "important_docs",
-    "files": [
-        {
-            "name": "."
-        },
-        {
-            "name": ".."
-        },
-        {
-            "name": ".aws"
-        },
-        {
-            "name": "downloads"
-        }
-    ],
-    "owner": "AWS S3"
-},
-{
-    "created": "936864000",
-    "dir_name": "other_docs",
-    "files": [
-        {
-            "name": "."
-        },
-        {
-            "name": ".."
-        },
-        {
-            "name": "my stuff"
-        },
-        {
-            "name": "backup"
-        }
-    ],
-    "owner": "User"
-}
+{ "created": "936864000", "dir_name": "important_docs", "files": [ { "name": "." }, { "name": ".." }, { "name": ".aws" }, { "name": "downloads" } ], "owner": "AWS S3" }
+{ "created": "936864000", "dir_name": "other_docs", "files": [ { "name": "." }, { "name": ".." }, { "name": "my stuff" }, { "name": "backup" } ], "owner": "User" }
 ```
 
 ```
@@ -148,40 +103,8 @@ SELECT d.dir_name, d.files FROM S3Object[*] d
 ```
 
 ```
-{
-    "dir_name": "important_docs",
-    "files": [
-        {
-            "name": "."
-        },
-        {
-            "name": ".."
-        },
-        {
-            "name": ".aws"
-        },
-        {
-            "name": "downloads"
-        }
-    ]
-},
-{
-    "dir_name": "other_docs",
-    "files": [
-        {
-            "name": "."
-        },
-        {
-            "name": ".."
-        },
-        {
-            "name": "my stuff"
-        },
-        {
-            "name": "backup"
-        }
-    ]
-}
+{"dir_name":"important_docs","files":[{"name":"."},{"name":".."},{"name":".aws"},{"name":"downloads"}]}
+{"dir_name":"other_docs","files":[{"name":"."},{"name":".."},{"name":"my stuff"},{"name":"backup"}]}
 ```
 
 ```
@@ -189,14 +112,8 @@ SELECT _1.dir_name, _1.owner FROM S3Object[*]
 ```
 
 ```
-{
-    "dir_name": "important_docs",
-    "owner": "AWS S3"
-},
-{
-    "dir_name": "other_docs",
-    "owner": "User"
-}
+{"dir_name":"important_docs","owner":"AWS S3"}
+{"dir_name":"other_docs","owner":"User"}
 ```
 
 ## WHERE Clause<a name="s3-glacier-select-sql-reference-where"></a>
@@ -220,7 +137,7 @@ LIMIT number
 The `LIMIT` clause limits the number of records that you want the query to return based on *number*\.
 
 **Note**  
-Glacier Select does not support the `LIMIT` clause\.
+S3 Glacier Select does not support the `LIMIT` clause\.
 
 ## Attribute Access<a name="s3-glacier-select-sql-reference-attribute-access"></a>
 
@@ -274,9 +191,9 @@ The `SELECT` and `WHERE` clauses can refer to record data using one of the metho
 
 ## Case Sensitivity of Header/Attribute Names<a name="s3-glacier-select-sql-reference-case-sensitivity"></a>
 
-With Amazon S3 Select and Glacier Select, you can use double quotation marks to indicate that column headers \(for CSV objects\) and attributes \(for JSON objects\) are case sensitive\. Without double quotation marks, object headers/attributes are case insensitive\. An error is thrown in cases of ambiguity\.
+With Amazon S3 Select and S3 Glacier Select, you can use double quotation marks to indicate that column headers \(for CSV objects\) and attributes \(for JSON objects\) are case sensitive\. Without double quotation marks, object headers/attributes are case insensitive\. An error is thrown in cases of ambiguity\.
 
-The following examples are either 1\) Amazon S3 or Glacier objects in CSV format with the specified column header\(s\), and with `FileHeaderInfo` set to "Use" for the query request; or 2\) Amazon S3 objects in JSON format with the specified attributes\.
+The following examples are either 1\) Amazon S3 or S3 Glacier objects in CSV format with the specified column header\(s\), and with `FileHeaderInfo` set to "Use" for the query request; or 2\) Amazon S3 objects in JSON format with the specified attributes\.
 
 *Example \#1:* The object being queried has header/attribute "NAME"\.
 + The following expression successfully returns values from the object \(no quotation marks: case insensitive\):
@@ -304,11 +221,11 @@ The following examples are either 1\) Amazon S3 or Glacier objects in CSV format
 
 ## Using Reserved Keywords as User\-Defined Terms<a name="s3-glacier-select-sql-reference-using-keywords"></a>
 
-Amazon S3 Select and Glacier Select have a set of reserved keywords that are needed to execute the SQL expressions used to query object content\. Reserved keywords include function names, data types, operators, and so on\. In some cases, user\-defined terms like the column headers \(for CSV files\) or attributes \(for JSON object\) may clash with a reserved keyword\. When this happens, you must use double quotation marks to indicate that you are intentionally using a user\-defined term that clashes with a reserved keyword\. Otherwise a 400 parse error will result\.
+Amazon S3 Select and S3 Glacier Select have a set of reserved keywords that are needed to execute the SQL expressions used to query object content\. Reserved keywords include function names, data types, operators, and so on\. In some cases, user\-defined terms like the column headers \(for CSV files\) or attributes \(for JSON object\) may clash with a reserved keyword\. When this happens, you must use double quotation marks to indicate that you are intentionally using a user\-defined term that clashes with a reserved keyword\. Otherwise a 400 parse error will result\.
 
 For the full list of reserved keywords see [Reserved Keywords](s3-glacier-select-sql-reference-keyword-list.md)\.
 
-The following example is either 1\) an Amazon S3 or Glacier object in CSV format with the specified column headers, with `FileHeaderInfo` set to "Use" for the query request, or 2\) an Amazon S3 object in JSON format with the specified attributes\.
+The following example is either 1\) an Amazon S3 or S3 Glacier object in CSV format with the specified column headers, with `FileHeaderInfo` set to "Use" for the query request, or 2\) an Amazon S3 object in JSON format with the specified attributes\.
 
 *Example:* The object being queried has header/attribute named "CAST", which is a reserved keyword\.
 + The following expression successfully returns values from the object \(quotation marks: use user\-defined header/attribute\):

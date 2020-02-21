@@ -4,11 +4,11 @@ An *index document* is a webpage that Amazon S3 returns when a request is made t
 
 When you configure your bucket as a website, provide the name of the index document\. You then upload an object with this name and configure it to be publicly readable\. 
 
-The trailing slash at the root\-level URL is optional\. For example, if you configure your website with `index.html` as the index document, either of the following two URLs return `index.html`\.
+The trailing slash at the root\-level URL is optional\. For example, if you configure your website with `index.html` as the index document, either of the following URLs return `index.html`\.
 
 ```
-1. http://example-bucket.s3-website-region.amazonaws.com/
-2. http://example-bucket.s3-website-region.amazonaws.com
+1. http://example-bucket.s3-website.Region.amazonaws.com/
+2. http://example-bucket.s3-website.Region.amazonaws.com
 ```
 
 For more information about Amazon S3 website endpoints, see [Website Endpoints](WebsiteEndpoints.md)\.
@@ -36,7 +36,7 @@ You can upload objects to the bucket or to the `photos` folder within the bucket
 If you create such a folder structure in your bucket, you must have an index document at each level\. When a user specifies a URL that resembles a folder lookup, the presence or absence of a trailing slash determines the behavior of the website\. For example, the following URL, with a trailing slash, returns the `photos/index.html` index document\. 
 
 ```
-1. http://example-bucket.s3-website-region.amazonaws.com/photos/
+1. http://bucket-name.s3-website.Region.amazonaws.com/photos/
 ```
 
 However, if you exclude the trailing slash from the preceding URL, Amazon S3 first looks for an object `photos` in the bucket\. If the `photos` object is not found, then it searches for an index document, ` photos/index.html`\. If that document is found, Amazon S3 returns a `302 Found` message and points to the `photos/` key\. For subsequent requests to `photos/`, Amazon S3 returns `photos/index.html`\. If the index document is not found, Amazon S3 returns an error\.

@@ -9,7 +9,7 @@ This section describes how to handle HTTP redirects by using the Amazon S3 REST 
 
 ## Redirects and HTTP User\-Agents<a name="RESTRedirectHTTPUserAgents"></a>
 
- Programs that use the Amazon S3 REST API should handle redirects either at the application layer or the HTTP layer\. Many HTTP client libraries and user agents can be configured to correctly handle redirects automatically; however, many others have incorrect or incomplete redirect implementations\. 
+Programs that use the Amazon S3 REST API should handle redirects either at the application layer or the HTTP layer\. Many HTTP client libraries and user agents can be configured to correctly handle redirects automatically; however, many others have incorrect or incomplete redirect implementations\. 
 
  Before you rely on a library to fulfill the redirect requirement, test the following cases: 
 + Verify all HTTP request headers are correctly included in the redirected request \(the second request after receiving a redirect\) including HTTP standards such as Authorization and Date\.
@@ -21,14 +21,14 @@ This section describes how to handle HTTP redirects by using the Amazon S3 REST 
 
 ## Redirects and 100\-Continue<a name="RESTRedirect100Continue"></a>
 
- To simplify redirect handling, improve efficiencies, and avoid the costs associated with sending a redirected request body twice, configure your application to use 100\-continues for PUT operations\. When your application uses 100\-continue, it does not send the request body until it receives an acknowledgement\. If the message is rejected based on the headers, the body of the message is not sent\. For more information about 100\-continue, go to [RFC 2616 Section 8\.2\.3](http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.2.3) 
+To simplify redirect handling, improve efficiencies, and avoid the costs associated with sending a redirected request body twice, configure your application to use 100\-continues for PUT operations\. When your application uses 100\-continue, it does not send the request body until it receives an acknowledgement\. If the message is rejected based on the headers, the body of the message is not sent\. For more information about 100\-continue, go to [RFC 2616 Section 8\.2\.3](http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.2.3) 
 
 **Note**  
- According to RFC 2616, when using `Expect: Continue` with an unknown HTTP server, you should not wait an indefinite period before sending the request body\. This is because some HTTP servers do not recognize 100\-continue\. However, Amazon S3 does recognize if your request contains an `Expect: Continue` and will respond with a provisional 100\-continue status or a final status code\. Additionally, no redirect error will occur after receiving the provisional 100 continue go\-ahead\. This will help you avoid receiving a redirect response while you are still writing the request body\. 
+According to RFC 2616, when using `Expect: Continue` with an unknown HTTP server, you should not wait an indefinite period before sending the request body\. This is because some HTTP servers do not recognize 100\-continue\. However, Amazon S3 does recognize if your request contains an `Expect: Continue` and will respond with a provisional 100\-continue status or a final status code\. Additionally, no redirect error will occur after receiving the provisional 100 continue go\-ahead\. This will help you avoid receiving a redirect response while you are still writing the request body\. 
 
 ## Redirect Example<a name="RESTRedirectExample"></a>
 
- This section provides an example of client\-server interaction using HTTP redirects and 100\-continue\. 
+This section provides an example of client\-server interaction using HTTP redirects and 100\-continue\. 
 
 Following is a sample PUT to the `quotes.s3.amazonaws.com` bucket\.
 

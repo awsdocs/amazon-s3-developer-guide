@@ -1,6 +1,6 @@
 # Date Functions<a name="s3-glacier-select-sql-reference-date"></a>
 
-Amazon S3 Select and Glacier Select support the following date functions\.
+Amazon S3 Select and S3 Glacier Select support the following date functions\.
 
 **Topics**
 + [DATE\_ADD](#s3-glacier-select-sql-reference-date-add)

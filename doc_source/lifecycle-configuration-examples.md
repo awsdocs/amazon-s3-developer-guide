@@ -217,7 +217,7 @@ You might specify a lifecycle configuration in which you specify overlapping pre
 
 Generally, lifecycle will optimize for cost\. For example, if two expiration polices overlap, the shorter expiration policy will be honored so that data is not stored for longer than expected\. 
 
-Likewise, if two transition policies overlap, lifecycle will transition your objects to the lower cost storage class\. In both cases, lifecycle attempts to choose the path that is least expensive for you\. An exception to this general rule is with the INTELLIGENT\_TIERING storage class\. INTELLIGENT\_TIERING will be favored by lifecycle over any storage class, aside from GLACIER and DEEP\_ARCHIVE storage classes\.
+Likewise, if two transition policies overlap, lifecycle will transition your objects to the lower cost storage class\. In both cases, lifecycle attempts to choose the path that is least expensive for you\. An exception to this general rule is with the INTELLIGENT\_TIERING storage class\. INTELLIGENT\_TIERING will be favored by lifecycle over any storage class, aside from GLACIER and DEEP ARCHIVE storage classes\.
 
 The following examples show how Amazon S3 chooses to resolve potential conflicts\.
 

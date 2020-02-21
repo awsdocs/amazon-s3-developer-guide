@@ -47,7 +47,7 @@ The predefined keys available for specifying conditions in an Amazon S3 access p
 
   The new condition keys `aws:sourceVpce` and `aws:sourceVpc` are used in bucket policies for VPC endpoints\. For examples of using these condition keys, see [Example Bucket Policies for VPC Endpoints for Amazon S3](example-bucket-policies-vpc-endpoint.md)\.
 
-  The following example bucket policy allows authenticated users permission to use the `s3:GetObject` action if the request originates from a specific range of IP addresses \(192\.168\.143\.\*\), unless the IP address is 192\.168\.143\.188\. In the condition block, the `IpAddress` and the `NotIpAddress` are conditions, and each condition is provided a key\-value pair for evaluation\. Both the key\-value pairs in this example use the `aws:SourceIp` AWS\-wide key\.
+  The following example bucket policy allows authenticated users permission to use the `s3:GetObject` action if the request originates from a specific range of IP addresses \(192\.0\.2\.0\.\*\), unless the IP address is 192\.0\.2\.188\. In the condition block, the `IpAddress` and the `NotIpAddress` are conditions, and each condition is provided a key\-value pair for evaluation\. Both the key\-value pairs in this example use the `aws:SourceIp` AWS\-wide key\.
 **Note**  
 The `IPAddress` and `NotIpAddress` key values specified in the condition uses CIDR notation as described in RFC 4632\. For more information, go to [http://www\.rfc\-editor\.org/rfc/rfc4632\.txt](http://www.rfc-editor.org/rfc/rfc4632.txt)\.
 
@@ -64,10 +64,10 @@ The `IPAddress` and `NotIpAddress` key values specified in the condition uses CI
               "Resource": "arn:aws:s3:::examplebucket/*",
               "Condition" : {
                   "IpAddress" : {
-                      "aws:SourceIp": "192.168.143.0/24" 
+                      "aws:SourceIp": "192.0.2.0/24" 
                   },
                   "NotIpAddress" : {
-                      "aws:SourceIp": "192.168.143.188/32" 
+                      "aws:SourceIp": "192.0.2.188/32" 
                   } 
               } 
           } 
@@ -389,7 +389,7 @@ Suppose that an AWS account administrator wants to grant its user \(Dave\) permi
 **Note**  
 In this example, the bucket owner is granting permission to one of its users, so either a bucket policy or a user policy can be used\. This example shows a user policy\.
 
-For a list of Amazon S3 Regions, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\. 
+For a list of Amazon S3 Regions, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html) in the *AWS General Reference*\. 
 
 ```
 {

@@ -96,7 +96,7 @@ Option 2: Set up replication first\.
 
 1. Enable object lock on just the destination bucket, or on both the source and destination buckets\.
 
-To complete step 2 in the preceding options, you must contact [AWS Support](https://console.aws.amazon.com//support/home)\. This is required to make sure that replication is configured correctly\. 
+To complete step 2 in the preceding options, you must contact [AWS Support](https://console.aws.amazon.com/support/home)\. This is required to make sure that replication is configured correctly\. 
 
 Before you contact AWS Support, review the following requirements for setting up object lock with replication:
 + The Amazon S3 destination bucket must have object lock enabled on it\.

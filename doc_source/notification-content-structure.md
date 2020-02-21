@@ -12,14 +12,8 @@ Note the following about the example:
   If new event types are introduced but the structure of the event is otherwise unmodified, the event version does not change\.
 
   To ensure that your applications can parse the event structure correctly, we recommend that you do an equal\-to comparison on the major version number\. To ensure that the fields expected by your application are present, we also recommend doing a greater\-than\-or\-equal\-to comparison on the minor version\.
-
-   
 + The `responseElements` key value is useful if you want to trace a request by following up with AWS Support\. Both `x-amz-request-id` and `x-amz-id-2` help Amazon S3 trace an individual request\. These values are the same as those that Amazon S3 returns in the response to the request that initiates the events, so they can be used to match the event to the request\.
-
-   
 + The `s3` key provides information about the bucket and object involved in the event\. The object key name value is URL encoded\. For example, "red flower\.jpg" becomes "red\+flower\.jpg" \(Amazon S3 returns "`application/x-www-form-urlencoded`" as the content type in the response\)\.
-
-   
 + The `sequencer` key provides a way to determine the sequence of events\. Event notifications are not guaranteed to arrive in the order that the events occurred\. However, notifications from events that create objects \(`PUT`s\) and delete objects contain a `sequencer`, which can be used to determine the order of events for a given object key\. 
 
   If you compare the `sequencer` strings from two event notifications on the same object key, the event notification with the greater `sequencer` hexadecimal value is the event that occurred later\. If you are using event notifications to maintain a separate database or index of your Amazon S3 objects, you will probably want to compare and store the `sequencer` values as you process each event notification\. 
@@ -27,11 +21,7 @@ Note the following about the example:
   Note the following:
   + You cannot use `sequencer` to determine order for events on different object keys\.
   + The sequencers can be of different lengths\. So to compare these values, you first left pad the shorter value with zeros, and then do a lexicographical comparison\.
-
-   
 + The `glacierEventData` key is only visible for `s3:ObjectRestore:Completed` events\. 
-
-   
 + The `restoreEventData` key contains attributes related to your restore request\.
 + The `replicationEventData` key is only visible for replication events\.
 

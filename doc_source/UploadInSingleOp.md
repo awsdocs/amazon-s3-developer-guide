@@ -6,5 +6,6 @@
 + [Upload an Object Using the AWS SDK for PHP](UploadObjSingleOpPHP.md)
 + [Upload an Object Using the AWS SDK for Ruby](UploadObjSingleOpRuby.md)
 + [Upload an Object Using the REST API](UploadObjSingleOpREST.md)
++ [Upload an Object Using the CLI](UploadObjSingleOpCLI.md)
 
-You can use the AWS SDK to upload objects\. The SDK provides wrapper libraries for you to upload data easily\. However, if your application requires it, you can use the REST API directly in your application\.
+You can use the AWS SDK to upload objects\. The SDK provides wrapper libraries for you to upload data easily\. However, if your application requires it, you can use the REST API directly in your application\. You can also use the AWS Command Line Interface\.

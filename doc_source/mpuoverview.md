@@ -63,7 +63,7 @@ Amazon S3 supports a bucket lifecycle rule that you can use to direct Amazon S3 
 </LifecycleConfiguration>
 ```
 
-In the example, the rule does not specify a value for the `Prefix` element \(object key name prefix\) and therefore it applies to all objects in the bucket for which you initiated multipart uploads\. Any multipart uploads that were initiated and did not complete within seven days become eligible for an abort operation \(the action has no effect on completed multipart uploads\)\.
+In the example, the rule does not specify a value for the `Prefix` element \([object key name prefix](https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#keyprefix)\)\. Therefore, it applies to all objects in the bucket for which you initiated multipart uploads\. Any multipart uploads that were initiated and did not complete within seven days become eligible for an abort operation\. The abort action has no effect on completed multipart uploads\.
 
 For more information about the bucket lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 

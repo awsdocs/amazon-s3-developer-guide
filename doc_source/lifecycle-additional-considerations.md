@@ -4,5 +4,5 @@ When configuring the lifecycle of objects, you need to understand the following 
 
 **Topics**
 + [Transitioning Objects Using Amazon S3 Lifecycle](lifecycle-transition-general-considerations.md)
-+ [Configuring Object Expiration](lifecycle-expire-general-considerations.md)
++ [Understanding Object Expiration](lifecycle-expire-general-considerations.md)
 + [Lifecycle and Other Bucket Configurations](lifecycle-and-other-bucket-config.md)

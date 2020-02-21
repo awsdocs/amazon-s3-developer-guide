@@ -6,7 +6,7 @@ If you want to track the number of visitors who access your website, enable logg
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. Create a bucket for logging named `logs.example.com` in the same AWS Region that the `example.com` and `www.example.com` buckets were created in\.
+1. Create a bucket for logging named `logs.example.com` in the same AWS Region that you created the `example.com` and `www.example.com` buckets in\.
 
 1. Create two folders in the `logs.example.com` bucket; one named `root`, and the other named `cdn`\. If you configure Amazon CloudFront to speed up your website, you will use the `cdn` folder\.
 

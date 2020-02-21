@@ -1,6 +1,6 @@
 # Conditional Functions<a name="s3-glacier-select-sql-reference-conditional"></a>
 
-Amazon S3 Select and Glacier Select support the following conditional functions\.
+Amazon S3 Select and S3 Glacier Select support the following conditional functions\.
 
 **Topics**
 + [COALESCE](#s3-glacier-select-sql-reference-coalesce)

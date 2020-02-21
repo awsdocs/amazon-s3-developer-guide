@@ -1,6 +1,6 @@
 # String Functions<a name="s3-glacier-select-sql-reference-string"></a>
 
-Amazon S3 Select and Glacier Select support the following string functions\.
+Amazon S3 Select and S3 Glacier Select support the following string functions\.
 
 **Topics**
 + [CHAR\_LENGTH, CHARACTER\_LENGTH](#s3-glacier-select-sql-reference-char-length)

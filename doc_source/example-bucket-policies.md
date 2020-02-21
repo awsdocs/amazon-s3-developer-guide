@@ -5,7 +5,7 @@ This section presents a few examples of typical use cases for bucket policies\. 
 **Note**  
 Bucket policies are limited to 20 KB in size\.
 
-You can use the [AWS Policy Generator](https://awspolicygen.s3.amazonaws.com/policygen.html) to create a bucket policy for your Amazon S3 bucket\. You can then use the generated document to set your bucket policy by using the [Amazon S3 console](https://console.aws.amazon.com/s3/home), through several third\-party tools, or via your application\. 
+You can use the [AWS Policy Generator](http://aws.amazon.com/blogs/aws/aws-policy-generator/) to create a bucket policy for your Amazon S3 bucket\. You can then use the generated document to set your bucket policy by using the [Amazon S3 console](https://console.aws.amazon.com/s3/home), through several third\-party tools, or via your application\. 
 
 **Important**  
 When testing permissions using the Amazon S3 console, you will need to grant additional permissions that the console requires—`s3:ListAllMyBuckets`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions\. For an example walkthrough that grants permissions to users and tests them using the console, see [Walkthrough: Controlling Access to a Bucket with User Policies](walkthrough1.md)\.
@@ -67,7 +67,7 @@ Use caution when granting anonymous access to your Amazon S3 bucket or disabling
 
 The following example denies permissions to any user to perform any Amazon S3 operations on objects in the specified S3 bucket\. However, the request must not originate from the range of IP addresses specified in the condition\. 
 
-The double negative of the condition in this statement identifies the 54\.240\.143\.\* range of allowed Internet Protocol version 4 \(IPv4\) IP addresses\. 
+The condition in this statement identifies the 54\.240\.143\.\* as the range of allowed Internet Protocol version 4 \(IPv4\) IP addresses\. 
 
 The `Condition` block uses the `NotIpAddress` condition and the `aws:SourceIp` condition key, which is an AWS\-wide condition key\. For more information about these condition keys, see [Specifying Conditions in a Policy](amazon-s3-policy-keys.md)\. The `aws:SourceIp` IPv4 values use the standard CIDR notation\. For more information, see [IAM JSON Policy Elements Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_IPAddress) in the *IAM User Guide*\. 
 
@@ -85,7 +85,7 @@ The `Condition` block uses the `NotIpAddress` condition and the `aws:SourceIp` c
 11.       "Action": "s3:*",
 12.       "Resource": "arn:aws:s3:::examplebucket/*",
 13.       "Condition": {
-14.          "NotIpAddress": {"aws:SourceIp": "54.240.143.0/24"},
+14.          "NotIpAddress": {"aws:SourceIp": "54.240.143.0/24"}
 15. 
 16.       }
 17.     }
@@ -162,32 +162,32 @@ You can further secure access to objects in the `examplebucket` bucket by adding
 This example prevents all users \(including the root user\) from performing all Amazon S3 actions, including managing bucket policies\. Consider adding a third `Sid` that grants the root user `s3:*` actions\. 
 
 ```
-{
-   "Version": "2012-10-17",
-   "Id": "http referer policy example",
-   "Statement": [
-     {
-       "Sid": "Allow get requests referred by www.example.com and example.com.",
-       "Effect": "Allow",
-       "Principal": "*",
-       "Action": "s3:GetObject",
-       "Resource": "arn:aws:s3:::examplebucket/*",
-       "Condition": {
-         "StringLike": {"aws:Referer": ["http://www.example.com/*","http://example.com/*"]}
-       }
-     },
-      {
-        "Sid": "Explicit deny to ensure requests are allowed only from specific referer.",
-        "Effect": "Deny",
-        "Principal": "*",
-        "Action": "s3:*",
-        "Resource": "arn:aws:s3:::examplebucket/*",
-        "Condition": {
-          "StringNotLike": {"aws:Referer": ["http://www.example.com/*","http://example.com/*"]}
-        }
-      }
-   ]
-}
+ 1. {
+ 2.    "Version": "2012-10-17",
+ 3.    "Id": "http referer policy example",
+ 4.    "Statement": [
+ 5.      {
+ 6.        "Sid": "Allow get requests referred by www.example.com and example.com.",
+ 7.        "Effect": "Allow",
+ 8.        "Principal": "*",
+ 9.        "Action": "s3:GetObject",
+10.        "Resource": "arn:aws:s3:::examplebucket/*",
+11.        "Condition": {
+12.          "StringLike": {"aws:Referer": ["http://www.example.com/*","http://example.com/*"]}
+13.        }
+14.      },
+15.       {
+16.         "Sid": "Explicit deny to ensure requests are allowed only from specific referer.",
+17.         "Effect": "Deny",
+18.         "Principal": "*",
+19.         "Action": "s3:*",
+20.         "Resource": "arn:aws:s3:::examplebucket/*",
+21.         "Condition": {
+22.           "StringNotLike": {"aws:Referer": ["http://www.example.com/*","http://example.com/*"]}
+23.         }
+24.       }
+25.    ]
+26. }
 ```
 
 ## Granting Permission to an Amazon CloudFront Origin Identity<a name="example-bucket-policies-use-case-6"></a>
@@ -202,7 +202,7 @@ The following example bucket policy grants a CloudFront Origin Identity permissi
  5.      {
  6.        "Sid":" Grant a CloudFront Origin Identity access to support private content",
  7.        "Effect":"Allow",
- 8.        "Principal":{"CanonicalUser":"CloudFront Origin Identity Canonical User ID"},
+ 8.        "Principal":{ "AWS":"arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ID"},
  9.        "Action":"s3:GetObject",
 10.        "Resource":"arn:aws:s3:::examplebucket/*"
 11.      }
@@ -219,20 +219,20 @@ You can enforce the MFA requirement using the `aws:MultiFactorAuthAge` key in a 
 When Amazon S3 receives a request with multi\-factor authentication, the `aws:MultiFactorAuthAge` key provides a numeric value indicating how long ago \(in seconds\) the temporary credential was created\. If the temporary credential provided in the request was not created using an MFA device, this key value is null \(absent\)\. In a bucket policy, you can add a condition to check this value, as shown in the following example bucket policy\. The policy denies any Amazon S3 operation on the `/taxdocuments` folder in the `examplebucket` bucket if the request is not authenticated using MFA\. To learn more about MFA, see [Using Multi\-Factor Authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
 
 ```
-{
-    "Version": "2012-10-17",
-    "Id": "123",
-    "Statement": [
-      {
-        "Sid": "",
-        "Effect": "Deny",
-        "Principal": "*",
-        "Action": "s3:*",
-        "Resource": "arn:aws:s3:::examplebucket/taxdocuments/*",
-        "Condition": { "Null": { "aws:MultiFactorAuthAge": true }}
-      }
-    ]
- }
+ 1. {
+ 2.     "Version": "2012-10-17",
+ 3.     "Id": "123",
+ 4.     "Statement": [
+ 5.       {
+ 6.         "Sid": "",
+ 7.         "Effect": "Deny",
+ 8.         "Principal": "*",
+ 9.         "Action": "s3:*",
+10.         "Resource": "arn:aws:s3:::examplebucket/taxdocuments/*",
+11.         "Condition": { "Null": { "aws:MultiFactorAuthAge": true }}
+12.       }
+13.     ]
+14.  }
 ```
 
 The `Null` condition in the `Condition` block evaluates to true if the `aws:MultiFactorAuthAge` key value is null, indicating that the temporary security credentials in the request were created without the MFA key\. 
@@ -266,35 +266,35 @@ The following bucket policy is an extension of the preceding bucket policy\. It 
 You can optionally use a numeric condition to limit the duration for which the `aws:MultiFactorAuthAge` key is valid, independent of the lifetime of the temporary security credential used in authenticating the request\. For example, the following bucket policy, in addition to requiring MFA authentication, also checks how long ago the temporary session was created\. The policy denies any operation if the `aws:MultiFactorAuthAge` key value indicates that the temporary session was created more than an hour ago \(3,600 seconds\)\. 
 
 ```
-{
-    "Version": "2012-10-17",
-    "Id": "123",
-    "Statement": [
-      {
-        "Sid": "",
-        "Effect": "Deny",
-        "Principal": "*",
-        "Action": "s3:*",
-        "Resource": "arn:aws:s3:::examplebucket/taxdocuments/*",
-        "Condition": {"Null": {"aws:MultiFactorAuthAge": true }}
-      },
-      {
-        "Sid": "",
-        "Effect": "Deny",
-        "Principal": "*",
-        "Action": "s3:*",
-        "Resource": "arn:aws:s3:::examplebucket/taxdocuments/*",
-        "Condition": {"NumericGreaterThan": {"aws:MultiFactorAuthAge": 3600 }}
-       },
-       {
-         "Sid": "",
-         "Effect": "Allow",
-         "Principal": "*",
-         "Action": ["s3:GetObject"],
-         "Resource": "arn:aws:s3:::examplebucket/*"
-       }
-    ]
- }
+ 1. {
+ 2.     "Version": "2012-10-17",
+ 3.     "Id": "123",
+ 4.     "Statement": [
+ 5.       {
+ 6.         "Sid": "",
+ 7.         "Effect": "Deny",
+ 8.         "Principal": "*",
+ 9.         "Action": "s3:*",
+10.         "Resource": "arn:aws:s3:::examplebucket/taxdocuments/*",
+11.         "Condition": {"Null": {"aws:MultiFactorAuthAge": true }}
+12.       },
+13.       {
+14.         "Sid": "",
+15.         "Effect": "Deny",
+16.         "Principal": "*",
+17.         "Action": "s3:*",
+18.         "Resource": "arn:aws:s3:::examplebucket/taxdocuments/*",
+19.         "Condition": {"NumericGreaterThan": {"aws:MultiFactorAuthAge": 3600 }}
+20.        },
+21.        {
+22.          "Sid": "",
+23.          "Effect": "Allow",
+24.          "Principal": "*",
+25.          "Action": ["s3:GetObject"],
+26.          "Resource": "arn:aws:s3:::examplebucket/*"
+27.        }
+28.     ]
+29.  }
 ```
 
 ## Granting Cross\-Account Permissions to Upload Objects While Ensuring the Bucket Owner Has Full Control<a name="example-bucket-policies-use-case-8"></a>

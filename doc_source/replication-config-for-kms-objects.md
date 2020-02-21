@@ -16,8 +16,8 @@ For an example with step\-by\-step instructions, see [Example 4: Replicating Enc
 ## Specifying Additional Information in the Replication Configuration<a name="replication-kms-extra-config"></a>
 
 In the replication configuration, you do the following:
-+ In the `Destination` configuration, add the AWS KMS CMK that you want Amazon S3 to use to encrypt object replicas\. 
-+ Explicitly opt in by enabling replication of objects encrypted using the AWS KMS CMKs by adding the `SourceSelectionCriteria` element\.
++ In the `Destination` configuration, add the symmetric customer managed AWS KMS CMK that you want Amazon S3 to use to encrypt object replicas\. 
++ Explicitly opt in by enabling replication of objects encrypted using AWS KMS CMKs by adding the `SourceSelectionCriteria` element\.
 
 ```
 <ReplicationConfiguration>

@@ -2,11 +2,11 @@
 
 Amazon S3 inventory is one of the tools Amazon S3 provides to help manage your storage\. You can use it to audit and report on the replication and encryption status of your objects for business, compliance, and regulatory needs\. You can also simplify and speed up business workflows and big data jobs using Amazon S3 inventory, which provides a scheduled alternative to the Amazon S3 synchronous `List` API operation\. 
 
-Amazon S3 inventory provides comma\-separated values \(CSV\), [Apache optimized row columnar \(ORC\)](https://orc.apache.org/) or [Apache Parquet \(Parquet\)](https://parquet.apache.org/) output files that list your objects and their corresponding metadata on a daily or weekly basis for an S3 bucket or a shared prefix \(that is, objects that have names that begin with a common string\)\. For information about Amazon S3 inventory pricing, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
+Amazon S3 inventory provides comma\-separated values \(CSV\), [Apache optimized row columnar \(ORC\)](https://orc.apache.org/) or [Apache Parquet \(Parquet\)](https://parquet.apache.org/) output files that list your objects and their corresponding metadata on a daily or weekly basis for an S3 bucket or a shared prefix \(that is, objects that have names that begin with a common string\)\. If weekly, a report is generated every seven days after the initial report\. For information about Amazon S3 inventory pricing, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
 
 You can configure multiple inventory lists for a bucket\. You can configure what object metadata to include in the inventory, whether to list all object versions or only current versions, where to store the inventory list file output, and whether to generate the inventory on a daily or weekly basis\. You can also specify that the inventory list file be encrypted\.
 
-You can query Amazon S3 inventory using standard SQL by using [Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug//what-is.html), Amazon Redshift Spectrum, and other tools such as [Presto](https://prestodb.io/), [Apache Hive](https://hive.apache.org/), and [Apache Spark](https://databricks.com/spark/about/)\. It's easy to use Athena to run queries on your inventory files\. You can use Athena for Amazon S3 inventory queries in all Regions where Athena is available\. 
+You can query Amazon S3 inventory using standard SQL by using [Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug/what-is.html), Amazon Redshift Spectrum, and other tools such as [Presto](https://prestodb.io/), [Apache Hive](https://hive.apache.org/), and [Apache Spark](https://databricks.com/spark/about/)\. It's easy to use Athena to run queries on your inventory files\. You can use Athena for Amazon S3 inventory queries in all Regions where Athena is available\. 
 
 **Topics**
 + [How Do I Set Up Amazon S3 Inventory?](#storage-inventory-how-to-set-up)
@@ -284,7 +284,7 @@ Athena can query Amazon S3 inventory files in ORC, Parquet, or CSV format\. When
 
 **To get started using Athena to query Amazon S3 inventory**
 
-1. Create an Athena table\. For information about creating a table, see [Creating Tables in Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug//creating-tables.html) in the *Amazon Athena User Guide*\.
+1. Create an Athena table\. For information about creating a table, see [Creating Tables in Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug/creating-tables.html) in the *Amazon Athena User Guide*\.
 
    The following sample query includes all optional fields in an ORC\-formatted inventory report\. Drop any optional field that you did not choose for your inventory so that the query corresponds to the fields chosen for your inventory\. Also, you must use your bucket name and the location\. The location points to your inventory destination path; for example, `s3://destination-prefix/source-bucket/config-ID/hive/`\.
 

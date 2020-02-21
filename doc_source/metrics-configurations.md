@@ -45,13 +45,13 @@ You can add metrics configurations to a bucket through the Amazon S3 console, wi
 1. Run the following command to add a metrics configuration\.
 
    ```
-   aws s3api put-bucket-metrics-configuration --endpoint http://s3-us-west-2.amazonaws.com --bucket bucket-name --id metrics-config-id --metrics-configuration '{"Id":"metrics-config-id","Filter":{"Prefix":"prefix1"}}'
+   aws s3api put-bucket-metrics-configuration --endpoint https://s3.us-west-2.amazonaws.com --bucket bucket-name --id metrics-config-id --metrics-configuration '{"Id":"metrics-config-id","Filter":{"Prefix":"prefix1"}}'
    ```
 
 1. To verify that the configuration was added, execute the following command\.
 
    ```
-   aws s3api get-bucket-metrics-configuration --endpoint http://s3-us-west-2.amazonaws.com --bucket bucket-name --id metrics-config-id
+   aws s3api get-bucket-metrics-configuration --endpoint https://s3.us-west-2.amazonaws.com --bucket bucket-name --id metrics-config-id
    ```
 
    This returns the following response\.

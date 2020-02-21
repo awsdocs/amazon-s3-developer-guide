@@ -1,11 +1,6 @@
 # \(Optional\) Configuring a Webpage Redirect<a name="how-to-page-redirect"></a>
 
-If your Amazon S3 bucket is configured for website hosting, you can redirect requests for an object to another object in the same bucket or to an external URL\. 
-
-**Topics**
-+ [Page Redirect Support in the Amazon S3 Console](#page-redirect-using-console)
-+ [Setting a Page Redirect from the REST API](#page-redirect-using-rest-api)
-+ [Advanced Conditional Redirects](#advanced-conditional-redirects)
+If your Amazon S3 bucket is configured for website hosting, you can redirect requests for an object to another object in the same bucket or to an external URL\. You can set a page redirect from the Amazon S3 console or by using the Amazon S3 REST API\. 
 
 You set the redirect by adding the `x-amz-website-redirect-location` property to the object metadata\.  The website then interprets the object as 301 redirect\. To redirect a request to another object, you set the redirect location to the key of the target object\. To redirect a request to an external URL, you set the redirect location to the URL that you want\. For more information about object metadata, see [System\-Defined Object Metadata](UsingMetadata.md#SysMetadata)\.
 
@@ -13,9 +8,12 @@ A bucket configured for website hosting has both the website endpoint and the RE
 + **Region\-specific website endpoint – **Amazon S3 redirects the page request according to the value of the `x-amz-website-redirect-location` property\. 
 + **REST endpoint – **Amazon S3 doesn't redirect the page request\. It returns the requested object\.
 
-For more information about the endpoints, see [Key Differences Between the Amazon Website and the REST API Endpoint](WebsiteEndpoints.md#WebsiteRestEndpointDiff)\. 
+For more information about the endpoints, see [Key Differences Between the Amazon Website and the REST API Endpoint](WebsiteEndpoints.md#WebsiteRestEndpointDiff)\.
 
- You can set a page redirect from the Amazon S3 console or by using the Amazon S3 REST API\.
+**Topics**
++ [Page Redirect Support in the Amazon S3 Console](#page-redirect-using-console)
++ [Setting a Page Redirect from the REST API](#page-redirect-using-rest-api)
++ [Advanced Conditional Redirects](#advanced-conditional-redirects)
 
 ## Page Redirect Support in the Amazon S3 Console<a name="page-redirect-using-console"></a>
 
@@ -47,7 +45,7 @@ When you retrieve the object using the [GET Object](https://docs.aws.amazon.com/
 
 Using advanced redirection rules, you can route requests conditionally according to specific object key names, prefixes in the request, or response codes\. For example, suppose that you delete or rename an object in your bucket\. You can add a routing rule that redirects the request to another object\. If you want to make a folder unavailable, you can add a routing rule to redirect the request to another webpage\. You can also add a routing rule to handle error conditions by routing requests that return the error to another domain when the error is processed\.
 
-When configuring a bucket for website hosting, you have the option of specifying advanced redirection rules\.
+When configuring a bucket for website hosting, you have the option of specifying advanced redirection rules\. Amazon S3 has a limitation of 50 routing rules per website configuration\. If you require more than 50 routing rules, you can use object redirect\. For more information, see [\(Optional\) Configuring a Webpage Redirect](#how-to-page-redirect)\.
 
 ![\[Static website hosting screen showing optional redirection rules.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/staticwebsitehosting30.png)
 
@@ -101,7 +99,7 @@ The following table describes the elements in the routing rule\.
 |  Name  |  Description  | 
 | --- | --- | 
 | RoutingRules |  Container for a collection of RoutingRule elements\.  | 
-| RoutingRule |  A rule that identifies a condition and the redirect that is applied when the condition is met\.  Condition: A `RoutingRules` container must contain at least one routing rule\.   | 
+| RoutingRule |  A rule that identifies a condition and the redirect that is applied when the condition is met\.  Condition: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html)  | 
 | Condition |  Container for describing a condition that must be met for the specified redirect to be applied\. If the routing rule does not include a condition, the rule is applied to all requests\.  | 
 | KeyPrefixEquals |  The prefix of the object key name from which requests are redirected\.  `KeyPrefixEquals` is required if `HttpErrorCodeReturnedEquals` is not specified\. If both `KeyPrefixEquals` and `HttpErrorCodeReturnedEquals` are specified, both must be true for the condition to be met\.  | 
 | HttpErrorCodeReturnedEquals |  The HTTP error code that must match for the redirect to apply\. If an error occurs, and if the error code meets this value, then the specified redirect applies\. `HttpErrorCodeReturnedEquals` is required if `KeyPrefixEquals` is not specified\. If both `KeyPrefixEquals` and `HttpErrorCodeReturnedEquals` are specified, both must be true for the condition to be met\.  | 

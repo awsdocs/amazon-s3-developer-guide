@@ -239,7 +239,7 @@ The following example shows a CloudTrail log entry that demonstrates the [GET Se
               }
           }
           "host": [
-              "s3-us-west-2.amazonaws.com"
+              "s3.us-west-2.amazonaws.com"
           ],
           "acl": [
               ""

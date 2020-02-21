@@ -1,6 +1,6 @@
 # Operators<a name="s3-glacier-select-sql-reference-operators"></a>
 
-Amazon S3 Select and Glacier Select support the following operators\.
+Amazon S3 Select and S3 Glacier Select support the following operators\.
 
 ## Logical Operators<a name="s3-glacier-select-sql-reference-loical-ops"></a>
 + `AND`

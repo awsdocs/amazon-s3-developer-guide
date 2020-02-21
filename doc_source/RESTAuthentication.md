@@ -28,7 +28,7 @@ This topic explains authenticating requests using Signature Version 2\. Amazon S
 
 ```
 1. GET /photos/puppy.jpg HTTP/1.1
-2. Host: johnsmith.s3.amazonaws.com
+2. Host: johnsmith.s3.us-west-1.amazonaws.com
 3. Date: Mon, 26 Mar 2007 19:37:58 +0000
 4. 
 5. Authorization: AWS AKIAIOSFODNN7EXAMPLE:frJIUN8DYpKDtOLCwo//yllqDzg=
@@ -89,8 +89,8 @@ Following is pseudogrammar that illustrates the construction of the `Authorizati
 |  |  | 
 | --- |--- |
 |  1  |  Start with an empty string \(`""`\)\.  | 
-|  2  |  If the request specifies a bucket using the HTTP Host header \(virtual hosted\-style\), append the bucket name preceded by a `"/"` \(e\.g\., "/bucketname"\)\. For path\-style requests and requests that don't address a bucket, do nothing\. For more information about virtual hosted\-style requests, see [Virtual Hosting of Buckets](VirtualHosting.md)\.  For a virtual hosted\-style request "https://johnsmith\.s3\.amazonaws\.com/photos/puppy\.jpg", the `CanonicalizedResource` is "/johnsmith"\.  For the path\-style request, "https://s3\.amazonaws\.com/johnsmith/photos/puppy\.jpg", the `CanonicalizedResource` is ""\.  | 
-|  3  |  Append the path part of the un\-decoded HTTP Request\-URI, up\-to but not including the query string\. For a virtual hosted\-style request "https://johnsmith\.s3\.amazonaws\.com/photos/puppy\.jpg", the `CanonicalizedResource` is "/johnsmith/photos/puppy\.jpg"\. For a path\-style request, "https://s3\.amazonaws\.com/johnsmith/photos/puppy\.jpg", the `CanonicalizedResource` is "/johnsmith/photos/puppy\.jpg"\. At this point, the `CanonicalizedResource` is the same for both the virtual hosted\-style and path\-style request\. For a request that does not address a bucket, such as [GET Service](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html), append "/"\.  | 
+|  2  |  If the request specifies a bucket using the HTTP Host header \(virtual hosted\-style\), append the bucket name preceded by a `"/"` \(e\.g\., "/bucketname"\)\. For path\-style requests and requests that don't address a bucket, do nothing\. For more information about virtual hosted\-style requests, see [Virtual Hosting of Buckets](VirtualHosting.md)\.  For a virtual hosted\-style request "https://johnsmith\.s3\.us\-west\-1\.amazonaws\.com/photos/puppy\.jpg", the `CanonicalizedResource` is "/johnsmith"\.  For the path\-style request, "https://s3\.us\-west\-1\.amazonaws\.com/johnsmith/photos/puppy\.jpg", the `CanonicalizedResource` is ""\.  | 
+|  3  |  Append the path part of the un\-decoded HTTP Request\-URI, up\-to but not including the query string\. For a virtual hosted\-style request "https://johnsmith\.s3\.us\-west\-1\.amazonaws\.com/photos/puppy\.jpg", the `CanonicalizedResource` is "/johnsmith/photos/puppy\.jpg"\. For a path\-style request, "https://s3\.us\-west\-1\.amazonaws\.com/johnsmith/photos/puppy\.jpg", the `CanonicalizedResource` is "/johnsmith/photos/puppy\.jpg"\. At this point, the `CanonicalizedResource` is the same for both the virtual hosted\-style and path\-style request\. For a request that does not address a bucket, such as [GET Service](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html), append "/"\.  | 
 |  4  |  If the request addresses a subresource, such as `?versioning`, `?location`, `?acl`, `?torrent`, `?lifecycle`, or `?versionid`, append the subresource, its value if it has one, and the question mark\. Note that in case of multiple subresources, subresources must be lexicographically sorted by subresource name and separated by '&', e\.g\., ?acl&versionId=*value*\.  The subresources that must be included when constructing the CanonicalizedResource Element are acl, lifecycle, location, logging, notification, partNumber, policy, requestPayment, torrent, uploadId, uploads, versionId, versioning, versions, and website\.  If the request specifies query string parameters overriding the response header values \(see [Get Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html)\), append the query string parameters and their values\. When signing, you do not encode these values; however, when making the request, you must encode these parameter values\. The query string parameters in a GET request include `response-content-type`, `response-content-language`, `response-expires`, `response-cache-control`, `response-content-disposition`, and `response-content-encoding`\. The `delete` query string parameter must be included when you create the CanonicalizedResource for a multi\-object Delete request\.  | 
 
 Elements of the CanonicalizedResource that come from the HTTP Request\-URI should be signed literally as they appear in the HTTP request, including URL\-Encoding meta characters\. 
@@ -147,7 +147,7 @@ This example gets an object from the johnsmith bucket\.
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>GET /photos/puppy.jpg HTTP/1.1<br />Host: johnsmith.s3.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:36:42 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />bWq2s1WEIj+Ydj0vQ697zp+IXMU=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:36:42 +0000\n<br />/johnsmith/photos/puppy.jpg</pre>  | 
+|  <pre>GET /photos/puppy.jpg HTTP/1.1<br />Host: johnsmith.us-west-1.s3.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:36:42 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />bWq2s1WEIj+Ydj0vQ697zp+IXMU=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:36:42 +0000\n<br />/johnsmith/photos/puppy.jpg</pre>  | 
 
  Note that the CanonicalizedResource includes the bucket name, but the HTTP Request\-URI does not\. \(The bucket is specified by the Host header\.\) 
 
@@ -158,7 +158,7 @@ This example puts an object into the johnsmith bucket\.
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>PUT /photos/puppy.jpg HTTP/1.1<br />Content-Type: image/jpeg<br />Content-Length: 94328<br />Host: johnsmith.s3.amazonaws.com<br />Date: Tue, 27 Mar 2007 21:15:45 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />MyyxeRY7whkBe+bq8fHCL/2kKUg=<br /></pre>  |  <pre>PUT\n<br />\n<br />image/jpeg\n<br />Tue, 27 Mar 2007 21:15:45 +0000\n<br />/johnsmith/photos/puppy.jpg</pre>  | 
+|  <pre>PUT /photos/puppy.jpg HTTP/1.1<br />Content-Type: image/jpeg<br />Content-Length: 94328<br />Host: johnsmith.s3.us-west-1.amazonaws.com<br />Date: Tue, 27 Mar 2007 21:15:45 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />MyyxeRY7whkBe+bq8fHCL/2kKUg=<br /></pre>  |  <pre>PUT\n<br />\n<br />image/jpeg\n<br />Tue, 27 Mar 2007 21:15:45 +0000\n<br />/johnsmith/photos/puppy.jpg</pre>  | 
 
  Note the Content\-Type header in the request and in the StringToSign\. Also note that the Content\-MD5 is left blank in the StringToSign, because it is not present in the request\. 
 
@@ -169,7 +169,7 @@ This example lists the content of the johnsmith bucket\.
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>GET /?prefix=photos&max-keys=50&marker=puppy HTTP/1.1<br />User-Agent: Mozilla/5.0<br />Host: johnsmith.s3.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:42:41 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />htDYFYduRNen8P9ZfE/s9SuKy0U=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:42:41 +0000\n<br />/johnsmith/</pre>  | 
+|  <pre>GET /?prefix=photos&max-keys=50&marker=puppy HTTP/1.1<br />User-Agent: Mozilla/5.0<br />Host: johnsmith.s3.us-west-1.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:42:41 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />htDYFYduRNen8P9ZfE/s9SuKy0U=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:42:41 +0000\n<br />/johnsmith/</pre>  | 
 
  Note the trailing slash on the CanonicalizedResource and the absence of query string parameters\. 
 
@@ -180,7 +180,7 @@ This example fetches the access control policy subresource for the 'johnsmith' b
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>GET /?acl HTTP/1.1<br />Host: johnsmith.s3.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:44:46 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />c2WLPFtWHVgbEmeEG93a4cG37dM=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:44:46 +0000\n<br />/johnsmith/?acl</pre>  | 
+|  <pre>GET /?acl HTTP/1.1<br />Host: johnsmith.s3.us-west-1.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:44:46 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />c2WLPFtWHVgbEmeEG93a4cG37dM=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:44:46 +0000\n<br />/johnsmith/?acl</pre>  | 
 
  Notice how the subresource query string parameter is included in the CanonicalizedResource\. 
 
@@ -191,7 +191,7 @@ This example deletes an object from the 'johnsmith' bucket using the path\-style
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>DELETE /johnsmith/photos/puppy.jpg HTTP/1.1<br />User-Agent: dotnet<br />Host: s3.amazonaws.com<br />Date: Tue, 27 Mar 2007 21:20:27 +0000<br /><br />x-amz-date: Tue, 27 Mar 2007 21:20:26 +0000<br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:lx3byBScXR6KzyMaifNkardMwNk=</pre>  |  <pre>DELETE\n<br />\n<br />\n<br />Tue, 27 Mar 2007 21:20:26 +0000\n<br />/johnsmith/photos/puppy.jpg</pre>  | 
+|  <pre>DELETE /johnsmith/photos/puppy.jpg HTTP/1.1<br />User-Agent: dotnet<br />Host: s3.us-west-1.amazonaws.com<br />Date: Tue, 27 Mar 2007 21:20:27 +0000<br /><br />x-amz-date: Tue, 27 Mar 2007 21:20:26 +0000<br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:lx3byBScXR6KzyMaifNkardMwNk=</pre>  |  <pre>DELETE\n<br />\n<br />\n<br />Tue, 27 Mar 2007 21:20:26 +0000\n<br />/johnsmith/photos/puppy.jpg</pre>  | 
 
  Note how we used the alternate 'x\-amz\-date' method of specifying the date \(because our client library prevented us from setting the date, say\)\. In this case, the `x-amz-date` takes precedence over the `Date` header\. Therefore, date entry in the signature must contain the value of the `x-amz-date` header\. 
 
@@ -215,14 +215,14 @@ This example uploads an object to a CNAME style virtual hosted bucket with metad
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>GET / HTTP/1.1<br />Host: s3.amazonaws.com<br />Date: Wed, 28 Mar 2007 01:29:59 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:qGdzdERIC03wnaRNKh6OqZehG9s=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Wed, 28 Mar 2007 01:29:59 +0000\n<br />/</pre>  | 
+|  <pre>GET / HTTP/1.1<br />Host: s3.us-west-1.amazonaws.com<br />Date: Wed, 28 Mar 2007 01:29:59 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:qGdzdERIC03wnaRNKh6OqZehG9s=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Wed, 28 Mar 2007 01:29:59 +0000\n<br />/</pre>  | 
 
 ### Unicode Keys<a name="RESTAuthenticationExamples-8"></a>
 
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>GET /dictionary/fran%C3%A7ais/pr%c3%a9f%c3%a8re HTTP/1.1<br />Host: s3.amazonaws.com<br />Date: Wed, 28 Mar 2007 01:49:49 +0000<br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:DNEZGsoieTZ92F3bUfSPQcbGmlM=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Wed, 28 Mar 2007 01:49:49 +0000\n<br />/dictionary/fran%C3%A7ais/pr%c3%a9f%c3%a8re</pre>  | 
+|  <pre>GET /dictionary/fran%C3%A7ais/pr%c3%a9f%c3%a8re HTTP/1.1<br />Host: s3.us-west-1.amazonaws.com<br />Date: Wed, 28 Mar 2007 01:49:49 +0000<br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:DNEZGsoieTZ92F3bUfSPQcbGmlM=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Wed, 28 Mar 2007 01:49:49 +0000\n<br />/dictionary/fran%C3%A7ais/pr%c3%a9f%c3%a8re</pre>  | 
 
 **Note**  
 The elements in `StringToSign` that were derived from the Request\-URI are taken literally, including URL\-Encoding and capitalization\. 
@@ -247,7 +247,7 @@ Following is an example query string authenticated Amazon S3 REST request\.
 ```
 1. GET /photos/puppy.jpg
 2. ?AWSAccessKeyId=AKIAIOSFODNN7EXAMPLE&Expires=1141889120&Signature=vjbyPxybdZaNmGa%2ByT272YEAiv4%3D HTTP/1.1
-3. Host: johnsmith.s3.amazonaws.com
+3. Host: johnsmith.s3.us-west-1.amazonaws.com
 4. Date: Mon, 26 Mar 2007 19:37:58 +0000
 ```
 
@@ -283,7 +283,7 @@ In the query string authentication method, you do not use the `Date` or the `x-a
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>GET /photos/puppy.jpg?AWSAccessKeyId=AKIAIOSFODNN7EXAMPLE&<br />    Signature=NpgCjnDzrM%2BWFzoENXmpNDUsSn8%3D&<br />    Expires=1175139620 HTTP/1.1<br /><br />Host: johnsmith.s3.amazonaws.com</pre>  |  <pre>GET\n<br />\n<br />\n<br />1175139620\n<br /><br />/johnsmith/photos/puppy.jpg</pre>  | 
+|  <pre>GET /photos/puppy.jpg?AWSAccessKeyId=AKIAIOSFODNN7EXAMPLE&<br />    Signature=NpgCjnDzrM%2BWFzoENXmpNDUsSn8%3D&<br />    Expires=1175139620 HTTP/1.1<br /><br />Host: johnsmith.s3.us-west-1.amazonaws.com</pre>  |  <pre>GET\n<br />\n<br />\n<br />1175139620\n<br /><br />/johnsmith/photos/puppy.jpg</pre>  | 
 
 We assume that when a browser makes the GET request, it won't provide a Content\-MD5 or a Content\-Type header, nor will it set any x\-amz\- headers, so those parts of the `StringToSign` are left blank\. 
 

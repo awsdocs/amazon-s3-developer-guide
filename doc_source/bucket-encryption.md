@@ -6,6 +6,7 @@ When you use server\-side encryption, Amazon S3 encrypts an object before saving
 
 **Topics**
 + [How Do I Set Up Amazon S3 Default Encryption for an S3 Bucket?](#bucket-encryption-how-to-set-up)
++ [Using Encryption for Cross\-account Operations](#bucket-encryption-update-bucket-policy)
 + [Using Default Encryption with Replication](#bucket-encryption-update-bucket-policy)
 + [Monitoring Default Encryption with CloudTrail and CloudWatch](#bucket-encryption-tracking)
 + [More Info](#bucket-encryption-related-resources)
@@ -31,6 +32,13 @@ To encrypt your existing Amazon S3 objects with a single request, you can use Am
 **Note**  
  S3 buckets with default bucket encryption cannot be used as destination buckets for [Amazon S3 Server Access Logging](ServerLogs.md)\.
 
+## Using Encryption for Cross\-account Operations<a name="bucket-encryption-update-bucket-policy"></a>
+
+Be aware of the following when using encryption for cross\-account operations:
++ The aws/s3 AWS managed CMK is used when a CMK ARN or alias is not provided at request\-time, nor via the bucket's default encryption configuration\.
++ If specifying your own CMK, you should use a fully qualified CMK key ARN\. When using a CMK alias, be aware that KMS will resolve the key within the requestor's account\. This may result in data encrypted with a CMK that belongs to the requestor, and not the bucket administrator\.
++ You must specify a key that you \(the requester\) has been granted `Encrypt` permission to\. For more information, see [Allows Key Users to Use a CMK for Cryptographic Operations](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-users-crypto)\.
+
 ## Using Default Encryption with Replication<a name="bucket-encryption-update-bucket-policy"></a>
 
 After you enable default encryption for a replication destination bucket, the following encryption behavior applies: 
@@ -41,7 +49,7 @@ For more information about using default encryption with SSE\-KMS, see [Replicat
 
 ## Monitoring Default Encryption with CloudTrail and CloudWatch<a name="bucket-encryption-tracking"></a>
 
-You can track default encryption configuration requests through AWS CloudTrail events\. The API event names used in CloudTrail logs are `PutBucketEncryption`, `GetBucketEncryption`, and `DeleteBucketEncryption`\. You can also create Amazon CloudWatch Events with S3 bucket\-level operations as the event type\. For more information about CloudTrail events, see [How Do I Enable Object\-Level Logging for an S3 Bucket with CloudWatch Data Events?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-cloudtrail-events.html)
+You can track default encryption configuration requests through AWS CloudTrail events\. The API event names used in CloudTrail logs are `PutBucketEncryption`, `GetBucketEncryption`, and `DeleteBucketEncryption`\. You can also create Amazon CloudWatch Events with S3 bucket\-level operations as the event type\. For more information about CloudTrail events, see [How Do I Enable Object\-Level Logging for an S3 Bucket with CloudTrail Data Events?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-cloudtrail-events.html)
 
 You can use CloudTrail logs for object\-level Amazon S3 actions to track `PUT` and `POST` requests to Amazon S3 to verify whether default encryption is being used to encrypt objects when incoming `PUT` requests don't have encryption headers\. 
 
