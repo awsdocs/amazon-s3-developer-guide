@@ -432,7 +432,7 @@ For current object versions, you have the following options to manage their life
 
   Amazon S3 removes current versions 60 days after they are created by adding a delete marker for each of the current object versions\. This makes the current version noncurrent and the delete marker becomes the current version\. For more information, see [Using Versioning](Versioning.md)\. 
 
-  The `NoncurrentVersionExpiration` action in the same lifecycle configuration removes noncurrent objects 30 days after they become noncurrent\. Thus, all object versions are removed and you have expired object delete markers, but Amazon S3 detects and removes the expired object delete markers for you\. 
+  The `NoncurrentVersionExpiration` action in the same lifecycle configuration removes noncurrent objects 30 days after they become noncurrent\. Thus, all object versions are permanently removed after 90 days from object creation and you have expired object delete markers, but Amazon S3 detects and removes the expired object delete markers for you\. 
 + **Current object versions don't have a well\-defined lifecycle\.** 
 
   In this case you might remove the objects manually when you don't need them, creating a delete marker with one or more noncurrent versions\. If lifecycle configuration with `NoncurrentVersionExpiration` action removes all the noncurrent versions, you now have expired object delete markers\.
