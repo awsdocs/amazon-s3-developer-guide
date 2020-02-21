@@ -33,7 +33,7 @@ public class UploadObject {
             // Upload a file as a new object with ContentType and title specified.
             PutObjectRequest request = new PutObjectRequest(bucketName, fileObjKeyName, new File(fileName));
             ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentType("plain/text");
+            metadata.setContentType("text/plain");
             metadata.addUserMetadata("x-amz-meta-title", "someTitle");
             request.setMetadata(metadata);
             s3Client.putObject(request);
