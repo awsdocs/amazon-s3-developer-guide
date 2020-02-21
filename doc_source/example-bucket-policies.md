@@ -65,7 +65,7 @@ Use caution when granting anonymous access to your Amazon S3 bucket or disabling
 
 ## Restricting Access to Specific IP Addresses<a name="example-bucket-policies-use-case-3"></a>
 
-The following example grants permissions to any user to perform any Amazon S3 operations on objects in the specified S3 bucket\. However, the request must not originate from the range of IP addresses specified in the condition\. 
+The following example denies permissions to any user to perform any Amazon S3 operations on objects in the specified S3 bucket\. However, the request must not originate from the range of IP addresses specified in the condition\. 
 
 The condition in this statement identifies the 54\.240\.143\.\* as the range of allowed Internet Protocol version 4 \(IPv4\) IP addresses\. 
 
