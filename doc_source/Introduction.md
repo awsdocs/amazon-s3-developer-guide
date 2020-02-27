@@ -89,7 +89,7 @@ Amazon S3 achieves high availability by replicating data across multiple servers
 +  A process deletes an existing object and immediately lists keys within its bucket\. Until the deletion is fully propagated, Amazon S3 might list the deleted object\. 
 
 **Note**  
-Amazon S3 does not currently support object locking\. If two PUT requests are simultaneously made to the same key, the request with the latest timestamp wins\. If this is an issue, you will need to build an object\-locking mechanism into your application\.   
+Amazon S3 does not currently support object locking for concurrent updates\. If two PUT requests are simultaneously made to the same key, the request with the latest timestamp wins\. If this is an issue, you will need to build an object\-locking mechanism into your application\. Take note that object locking is different from the Amazon S3 Object Lock feature which allows you to store objects using a write-once-read-many (WORM) model and prevent an object from being deleted or overwritten for a fixed amount of time or indefinitely\.  
 Updates are key\-based\. There is no way to make atomic updates across keys\. For example, you cannot make the update of one key dependent on the update of another key unless you design this functionality into your application\.
 
 Buckets have a similar consistency model, with the same caveats\. For example, if you delete a bucket and immediately list all buckets, Amazon S3 might still appear in the list\.
