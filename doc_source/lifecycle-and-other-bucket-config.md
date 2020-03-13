@@ -21,15 +21,15 @@ Amazon S3 lifecycle actions are not captured by CloudTrail object level logging 
 If you have logging enabled on your bucket, Amazon S3 server access logs report the results of the following operations:
 
 
-| Operation log | Decription | 
+| Operation log | Description | 
 | --- | --- | 
 |  `S3.EXPIRE.OBJECT`  |  Amazon S3 permanently deletes the object due to the lifecycle expiration action\.  | 
 |  `S3.CREATE.DELETEMARKER`  |  Amazon S3 logically deletes the current version and adds a delete marker in a versioning enabled bucket\.  | 
 |  `S3.TRANSITION_SIA.OBJECT`  |  Amazon S3 transitions the object to the STANDARD\_IA storage class\.  | 
 |  `S3.TRANSITION_ZIA.OBJECT`  |  Amazon S3 transitions the object to the ONEZONE\_IA storage class\.  | 
 |  `S3.TRANSITION_INT.OBJECT`  |  Amazon S3 transitions the object to the Intelligent\-Tiering storage class\.  | 
-|  `S3.TRANSITION.OBJECT`  |  Amazon S3 initiates the transition of object to the GLACIER storage class\.  | 
-|  `S3.TRANSITION_GDA.OBJECT`  |  Amazon S3 initiates the transition of object to the GLACIER DEEP ARCHIVE storage class\.  | 
+|  `S3.TRANSITION.OBJECT`  |  Amazon S3 initiates the transition of object to the S3 Glacier storage class\.  | 
+|  `S3.TRANSITION_GDA.OBJECT`  |  Amazon S3 initiates the transition of object to the S3 Glacier S3 Glacier Deep Archive storage class\.  | 
 |  `S3.DELETE.UPLOAD`  |  Amazon S3 aborts incomplete multipart upload\.  | 
 
 **Note**  
@@ -37,5 +37,5 @@ Amazon S3 server access log records are generally delivered on a best effort bas
 
 ### More Info<a name="lifecycle-general-considerations-logging-more-info"></a>
 + [Lifecycle Configuration Elements](intro-lifecycle-rules.md) 
-+ [Transitioning to the GLACIER and DEEP ARCHIVE Storage Classes \(Object Archival\)](lifecycle-transition-general-considerations.md#before-deciding-to-archive-objects)
++ [Transitioning to the S3 Glacier and S3 Glacier Deep Archive Storage Classes \(Object Archival\)](lifecycle-transition-general-considerations.md#before-deciding-to-archive-objects)
 + [Setting Lifecycle Configuration on a Bucket](how-to-set-lifecycle-configuration-intro.md) 

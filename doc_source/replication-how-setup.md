@@ -18,9 +18,6 @@ In addition to these minimum requirements, you can choose the following options:
 
 Additional configuration options are available\. For more information, see [Additional Replication Configurations](replication-additional-configs.md)\.
 
-**Important**  
-If you have an object expiration lifecycle policy in your non\-versioned bucket and you want to maintain the same permanent delete behavior when you enable versioning, you must add a noncurrent expiration policy\. The noncurrent expiration lifecycle policy will manage the deletes of the noncurrent object versions in the version\-enabled bucket\. \(A version\-enabled bucket maintains one current and zero or more noncurrent object versions\.\) For more information, see [ How Do I Create a Lifecycle Policy for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html) in the *Amazon Simple Storage Service Console User Guide*\. 
-
 Amazon S3 also provides APIs to support setting up replication rules\. For more information, see the following topics in the *Amazon Simple Storage Service API Reference*:
 +  [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) 
 +  [GET Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETreplication.html) 

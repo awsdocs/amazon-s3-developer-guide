@@ -4,13 +4,17 @@ Server\-side encryption is the encryption of data at its destination by the appl
 
 If you use CMKs, you use AWS KMS via the [AWS Management Console](https://console.aws.amazon.com/kms) or [AWS KMS APIs](https://docs.aws.amazon.com/kms/latest/APIReference/) to centrally create CMKs, define the policies that control how CMKs can be used, and audit CMKs usage to prove that they are being used correctly\. You can use these CMKs to protect your data in Amazon S3 buckets\. 
 
-There are additional charges for using AWS KMS CMKs\. For more information, see [AWS Key Management Service Concepts \- Customer Master Keys \(CMKs\) ](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys) and [AWS Key Management Service Pricing](https://aws.amazon.com/kms/pricing)\.
+There are additional charges for using AWS KMS CMKs\. For more information, see [AWS Key Management Service Concepts \- Customer Master Keys \(CMKs\) ](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys) and [AWS Key Management Service Pricing](https://aws.amazon.com/kms/pricing) in the *AWS Key Management Service Developer Guide*\.
 
 ## AWS Managed CMKs and Customer Managed CMKs<a name="aws-managed-customer-managed-cmks"></a>
 
-The first time you add an object encrypted with server\-side encryption with customer master keys \(CMKs\) stored in AWS Key Management Service \(SSE\-KMS\) to a bucket in a Region, Amazon S3 automatically creates an AWS managed CMK in your AWS account\. By default, Amazon S3 uses this CMK for SSE\-KMS encryption\.
+When you use server\-side encryption with AWS KMS \(SSE\-KMS\), you can use the default [AWS managed CMK](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk), or you can specify a [customer managed CMK](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk) that you have already created\. 
 
-You can also create customer managed CMKs in AWS KMS and choose them\. Creating your own CMK gives you more flexibility\. For example, you can create, rotate, and disable customer managed CMKs\. You can also define access controls and audit the customer managed CMKs that you use to protect your data\. For more information about customer managed and AWS managed CMKs, see [AWS KMS Concepts](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html) in the *AWS Key Management Service Developer Guide*\.
+If you do not specify a customer managed CMK, Amazon S3 automatically creates an AWS managed CMK in your AWS account the first time that you add an object encrypted with SSE\-KMS to a bucket\. By default, Amazon S3 uses this CMK for SSE\-KMS\. 
+
+If you want to use a customer managed CMK for SSE\-KMS, you can create the CMK before you configure SSE\-KMS\. Then, when you configure SSE\-KMS for your bucket, you can specify the existing customer managed CMK\. 
+
+Creating your own customer managed CMK gives you more flexibility and control over the CMK\. For example, you can create, rotate, and disable customer managed CMKs\. You can also define access controls and audit the customer managed CMKs that you use to protect your data\. For more information about customer managed and AWS managed CMKs, see [AWS KMS Concepts](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html) in the *AWS Key Management Service Developer Guide*\.
 
 **Important**  
 When you use an AWS KMS CMK for server\-side encryption in Amazon S3, you must choose a symmetric CMK\. Amazon S3 only supports symmetric CMKs and not asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.

@@ -1,16 +1,10 @@
 # Object Lifecycle Management<a name="object-lifecycle-mgmt"></a>
 
 To manage your objects so that they are stored cost effectively throughout their lifecycle, configure their lifecycle\.  A *lifecycle configuration* is a set of rules that define actions that Amazon S3 applies to a group of objects\. There are two types of actions:
-+ **Transition actions**—Define when objects transition to another [storage class](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html)\. For example, you might choose to transition objects to the STANDARD\_IA storage class 30 days after you created them, or archive objects to the GLACIER storage class one year after creating them\. 
-
-   
++ **Transition actions**—Define when objects transition to another [storage class](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html)\. For example, you might choose to transition objects to the STANDARD\_IA storage class 30 days after you created them, or archive objects to the S3 Glacier storage class one year after creating them\. 
 
   There are costs associated with the lifecycle transition requests\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
-
-   
 + **Expiration actions**—Define when objects expire\. Amazon S3 deletes expired objects on your behalf\. 
-
-   
 
   The lifecycle expiration costs depend on when you choose to expire objects\. For more information, see [Understanding Object Expiration](lifecycle-expire-general-considerations.md)\.
 

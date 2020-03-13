@@ -135,7 +135,7 @@ This section describes important Amazon S3 features\.
 
 ### Storage Classes<a name="RRS"></a>
 
- Amazon S3 offers a range of storage classes designed for different use cases\. These include Amazon S3 STANDARD for general\-purpose storage of frequently accessed data, Amazon S3 STANDARD\_IA for long\-lived, but less frequently accessed data, and GLACIER for long\-term archive\.
+ Amazon S3 offers a range of storage classes designed for different use cases\. These include Amazon S3 STANDARD for general\-purpose storage of frequently accessed data, Amazon S3 STANDARD\_IA for long\-lived, but less frequently accessed data, and S3 Glacier for long\-term archive\.
 
 For more information, see [Amazon S3 Storage Classes](storage-class-intro.md)\.
 

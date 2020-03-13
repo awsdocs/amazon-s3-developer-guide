@@ -20,4 +20,4 @@ If you want to track the number of visitors who access your website, enable logg
 
 1. Choose **Save**\.
 
-You can now review your logs in the `logs.example.com` bucket, in both the `root` and `cdn folders.`
+You can now review your logs in the `logs.example.com` bucket, in both the `root` and `cdn` folders\.

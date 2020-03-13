@@ -22,7 +22,7 @@ If two writes are made to a single non\-versioned object at the same time, it is
 + **Object removal events** — Amazon S3 supports deletes of versioned and unversioned objects\. For information about object versioning, see [Object Versioning](ObjectVersioning.md) and [Using Versioning](Versioning.md)\. 
 
   You can request notification when an object is deleted or a versioned object is permanently deleted by using the `s3:ObjectRemoved:Delete` event type\. Or you can request notification when a delete marker is created for a versioned object by using `s3:ObjectRemoved:DeleteMarkerCreated`\. You can also use a wildcard `s3:ObjectRemoved:*` to request notification anytime an object is deleted\. For information about deleting versioned objects, see [Deleting Object Versions](DeletingObjectVersions.md)\. 
-+ **Restore object events **— Amazon S3 supports the restoration of objects archived to the GLACIER storage class\. You request to be notified of object restoration completion by using `s3:ObjectRestore:Completed`\. You use `s3:ObjectRestore:Post` to request notification of the initiation of a restore\. 
++ **Restore object events **— Amazon S3 supports the restoration of objects archived to the S3 Glacier storage class\. You request to be notified of object restoration completion by using `s3:ObjectRestore:Completed`\. You use `s3:ObjectRestore:Post` to request notification of the initiation of a restore\. 
 + **Reduced Redundancy Storage \(RRS\) object lost events** — Amazon S3 sends a notification message when it detects that an object of the RRS storage class has been lost\. 
 + **Replication events** — Amazon S3 sends event notifications for replication configurations that have S3 Replication Time Control \(S3 RTC\) enabled\. It sends these notifications when an object fails replication, when an object exceeds the 15\-minute threshold, when an object is replicated after the 15\-minute threshold, and when an object is no longer tracked by replication metrics\. It publishes a second event when that object replicates to the destination Region\.
 
@@ -45,7 +45,9 @@ Amazon S3 supports the following destinations where it can publish events:
 
   AWS Lambda can run custom code in response to Amazon S3 bucket events\. You upload your custom code to AWS Lambda and create what is called a Lambda function\. When Amazon S3 detects an event of a specific type \(for example, an object created event\), it can publish the event to AWS Lambda and invoke your function in Lambda\. In response, AWS Lambda executes your function\. 
 
-  For an example of using Amazon S3 notifications with AWS Lambda, see [Using AWS Lambda with Amazon S3](https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html) in the *AWS Lambda Developer Guide*\. 
+**Warning**  
+If your notification ends up writing to the bucket that triggers the notification, this could cause an execution loop\. For example, if the bucket triggers a Lambda function each time an object is uploaded, and the function uploads an object to the bucket, then the function indirectly triggers itself\. To avoid this, use two buckets, or configure the trigger to only apply to a prefix used for incoming objects\.  
+For more information and an example of using Amazon S3 notifications with AWS Lambda, see [Using AWS Lambda with Amazon S3](https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html) in the *AWS Lambda Developer Guide*\. 
 
 ## How to Enable Event Notifications<a name="how-to-enable-disable-notification-intro"></a>
 
@@ -129,7 +131,7 @@ Amazon S3 can publish events of the following types\. You specify these event ty
 | --- | --- | 
 |  *s3:ObjectCreated:\** *s3:ObjectCreated:Put* *s3:ObjectCreated:Post* *s3:ObjectCreated:Copy* *s3:ObjectCreated:CompleteMultipartUpload*  | Amazon S3 APIs such as PUT, POST, and COPY can create an object\. Using these event types, you can enable notification when an object is created using a specific API, or you can use the *s3:ObjectCreated:\** event type to request notification regardless of the API that was used to create an object\.  You do not receive event notifications from failed operations\.  | 
 |  *s3:ObjectRemoved:\** *s3:ObjectRemoved:Delete* *s3:ObjectRemoved:DeleteMarkerCreated*  | By using the *ObjectRemoved* event types, you can enable notification when an object or a batch of objects is removed from a bucket\.  You can request notification when an object is deleted or a versioned object is permanently deleted by using the *s3:ObjectRemoved:Delete* event type\. Or you can request notification when a delete marker is created for a versioned object by using *s3:ObjectRemoved:DeleteMarkerCreated*\. For information about deleting versioned objects, see [Deleting Object Versions](DeletingObjectVersions.md)\. You can also use a wildcard `s3:ObjectRemoved:*` to request notification anytime an object is deleted\.  You do not receive event notifications from automatic deletes from lifecycle policies or from failed operations\.  | 
-|  *s3:ObjectRestore:Post* *s3:ObjectRestore:Completed*  |  Using restore object event types you can receive notifications for initiation and completion when restoring objects from the GLACIER storage class\. You use `s3:ObjectRestore:Post` to request notification of object restoration initiation\. You use `s3:ObjectRestore:Completed` to request notification of restoration completion\.   | 
+|  *s3:ObjectRestore:Post* *s3:ObjectRestore:Completed*  |  Using restore object event types you can receive notifications for initiation and completion when restoring objects from the S3 Glacier storage class\. You use `s3:ObjectRestore:Post` to request notification of object restoration initiation\. You use `s3:ObjectRestore:Completed` to request notification of restoration completion\.   | 
 | s3:ReducedRedundancyLostObject | You can use this event type to request Amazon S3 to send a notification message when Amazon S3 detects that an object of the RRS storage class is lost\. | 
 | s3:Replication:OperationFailedReplication | You receive this notification event when an object that was eligible for replication using Amazon S3 Replication Time Control failed to replicate\. | 
 | s3:Replication:OperationMissedThreshold | You receive this notification event when an object that was eligible for replication using Amazon S3 Replication Time Control exceeded the 15\-minute threshold for replication\. | 
@@ -427,7 +429,8 @@ The following is an example of an IAM policy that you attach to the destination 
    ],
    "Resource": "arn:aws:sns:REGION:ACCOUNT-ID:TOPICNAME",
    "Condition": {
-      "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
+      "ArnLike": { "aws:SourceArn": "arn:aws:s3:::bucket-name" }
+      "StringEquals": { "aws:SourceAccount": "bucket-owner-account-id" }
    }
   }
  ]
@@ -471,7 +474,7 @@ Note that for both the Amazon SNS and Amazon SQS IAM policies, you can specify t
 
 #### AWS KMS Key Policy<a name="key-policy-sns-sqs"></a>
 
-If the SQS queue is SSE enabled, you can attach the following key policy to the associated AWS Key Management Service \(AWS KMS\) customer managed customer master key \(CMK\)\. The policy grants the Amazon S3 service principal permission for specific AWS KMS actions that are necessary for to encrypt messages added to the queue\.
+If the SQS queue or SNS topics are encrypted with an AWS Key Management Service \(AWS KMS\) customer managed customer master key \(CMK\), you must grant the Amazon S3 service principal permission to work with the encrypted topics and or queue\. To grant the Amazon S3 service principal permission, add the following statement to the key policy for the customer managed CMK:
 
 ```
 {
@@ -494,4 +497,7 @@ If the SQS queue is SSE enabled, you can attach the following key policy to the 
 }
 ```
 
-For more information about AWS KMS key policies, see [Using Key Policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS Key Management Service Developer Guide*\.
+For more information about AWS KMS key policies, see [Using Key Policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS Key Management Service Developer Guide*\. For more information about using server\-side encryption with AWS KMS for Amazon SQS and Amazon SNS, see the following:
++ [Configuring AWS KMS Permissions for Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-key-management.html) in the *Amazon Simple Notification Service Developer Guide*\.
++ [Configuring AWS KMS Permissions for Amazon SQS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-key-management.html) in the *Amazon Simple Queue Service Developer Guide*\.
++ [Encrypting messages published to Amazon SNS with AWS KMS](http://aws.amazon.com/blogs/compute/encrypting-messages-published-to-amazon-sns-with-aws-kms/) in the *AWS Compute Blog*\.

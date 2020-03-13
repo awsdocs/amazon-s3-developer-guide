@@ -15,7 +15,7 @@ When testing permissions using the Amazon S3 console, you will need to grant add
 + [Granting Read\-Only Permission to an Anonymous User](#example-bucket-policies-use-case-2)
 + [Restricting Access to Specific IP Addresses](#example-bucket-policies-use-case-3)
 + [Restricting Access to a Specific HTTP Referer](#example-bucket-policies-use-case-4)
-+ [Granting Permission to an Amazon CloudFront Origin Identity](#example-bucket-policies-use-case-6)
++ [Granting Permission to an Amazon CloudFront OAI](#example-bucket-policies-cloudfront)
 + [Adding a Bucket Policy to Require MFA](#example-bucket-policies-use-case-7)
 + [Granting Cross\-Account Permissions to Upload Objects While Ensuring the Bucket Owner Has Full Control](#example-bucket-policies-use-case-8)
 + [Granting Permissions for Amazon S3 Inventory and Amazon S3 Analytics](#example-bucket-policies-use-case-9)
@@ -67,7 +67,7 @@ Use caution when granting anonymous access to your Amazon S3 bucket or disabling
 
 The following example denies permissions to any user to perform any Amazon S3 operations on objects in the specified S3 bucket\. However, the request must not originate from the range of IP addresses specified in the condition\. 
 
-The condition in this statement identifies the 54\.240\.143\.\* as the range of allowed Internet Protocol version 4 \(IPv4\) IP addresses\. 
+This statement identifies the 54\.240\.143\.\* as the range of disallowed Internet Protocol version 4 \(IPv4\) IP addresses\. 
 
 The `Condition` block uses the `NotIpAddress` condition and the `aws:SourceIp` condition key, which is an AWS\-wide condition key\. For more information about these condition keys, see [Specifying Conditions in a Policy](amazon-s3-policy-keys.md)\. The `aws:SourceIp` IPv4 values use the standard CIDR notation\. For more information, see [IAM JSON Policy Elements Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_IPAddress) in the *IAM User Guide*\. 
 
@@ -190,24 +190,31 @@ This example prevents all users \(including the root user\) from performing all 
 26. }
 ```
 
-## Granting Permission to an Amazon CloudFront Origin Identity<a name="example-bucket-policies-use-case-6"></a>
+## Granting Permission to an Amazon CloudFront OAI<a name="example-bucket-policies-cloudfront"></a>
 
-The following example bucket policy grants a CloudFront Origin Identity permission to get \(list\) all objects in your Amazon S3 bucket\. The CloudFront Origin Identity is used to enable the CloudFront private content feature\. The policy uses the `CanonicalUser` prefix, instead of AWS, to specify a Canonical User ID\. To learn more about CloudFront support for serving private content, see [Serving Private Content with Signed URLs and Signed Cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*\. You must specify the canonical user ID for your CloudFront distribution's origin access identity\. For instructions about finding the canonical user ID, see [Specifying a Principal in a Policy](s3-bucket-user-policy-specifying-principal-intro.md)\.
+The following example bucket policy grants a CloudFront origin access identity \(OAI\) permission to get \(read\) all objects in your Amazon S3 bucket\. You can use a CloudFront OAI to allow users to access objects in your bucket through CloudFront but not directly through Amazon S3\. For more information, see [Restricting Access to Amazon S3 Content by Using an Origin Access Identity](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html) in the *Amazon CloudFront Developer Guide*\.
+
+The following policy uses the OAI’s ID as the policy’s `Principal`\. For more information about using S3 bucket policies to grant access to a CloudFront OAI, see [Using Amazon S3 Bucket Policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#private-content-updating-s3-bucket-policies) in the *Amazon CloudFront Developer Guide*\.
+
+To use this example:
++ Replace *EH1HDMB1FH2TC* with the OAI’s ID\. To find the OAI’s ID, see the [Origin Access Identity page](https://console.aws.amazon.com/cloudfront/home?region=us-east-1#oai:) on the CloudFront console, or use [ListCloudFrontOriginAccessIdentities](https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListCloudFrontOriginAccessIdentities.html) in the CloudFront API\.
++ Replace *aws\-example\-bucket* with the name of your Amazon S3 bucket\.
 
 ```
  1. {
- 2.    "Version":"2012-10-17",
- 3.    "Id":"PolicyForCloudFrontPrivateContent",
- 4.    "Statement":[
- 5.      {
- 6.        "Sid":" Grant a CloudFront Origin Identity access to support private content",
- 7.        "Effect":"Allow",
- 8.        "Principal":{ "AWS":"arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ID"},
- 9.        "Action":"s3:GetObject",
-10.        "Resource":"arn:aws:s3:::examplebucket/*"
-11.      }
-12.    ]
-13. }
+ 2.     "Version": "2012-10-17",
+ 3.     "Id": "PolicyForCloudFrontPrivateContent",
+ 4.     "Statement": [
+ 5.         {
+ 6.             "Effect": "Allow",
+ 7.             "Principal": {
+ 8.                 "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity EH1HDMB1FH2TC"
+ 9.             },
+10.             "Action": "s3:GetObject",
+11.             "Resource": "arn:aws:s3:::aws-example-bucket/*"
+12.         }
+13.     ]
+14. }
 ```
 
 ## Adding a Bucket Policy to Require MFA<a name="example-bucket-policies-use-case-7"></a>

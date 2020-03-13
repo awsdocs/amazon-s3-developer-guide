@@ -18,7 +18,7 @@ Each lifecycle rule includes a filter that you can use to identify a subset of o
 + In this lifecycle configuration rule, the filter specifies a key prefix \(`tax/`\)\. Therefore, the rule applies to objects with key name prefix `tax/`, such as `tax/doc1.txt` and `tax/doc2.txt`
 
   The rule specifies two actions that direct Amazon S3 to do the following:
-  + Transition objects to the GLACIER storage class 365 days \(one year\) after creation\.
+  + Transition objects to the S3 Glacier storage class 365 days \(one year\) after creation\.
   + Delete objects \(the `Expiration` action\) 3650 days \(10 years\) after creation\.
 
   ```
@@ -31,7 +31,7 @@ Each lifecycle rule includes a filter that you can use to identify a subset of o
       <Status>Enabled</Status>
       <Transition>
         <Days>365</Days>
-        <StorageClass>GLACIER</StorageClass>
+        <StorageClass>S3 Glacier</StorageClass>
       </Transition>
       <Expiration>
         <Days>3650</Days>
@@ -41,7 +41,7 @@ Each lifecycle rule includes a filter that you can use to identify a subset of o
   ```
 
   Instead of specifying object age in terms of days after creation, you can specify a date for each action\. However, you can't use both `Date` and `Days` in the same rule\. 
-+ If you want the lifecycle rule to apply to all objects in the bucket, specify an empty prefix\. In the following configuration, the rule specifies a `Transition` action directing Amazon S3 to transition objects to the GLACIER storage class 0 days after creation in which case objects are eligible for archival to Amazon S3 Glacier at midnight UTC following creation\. 
++ If you want the lifecycle rule to apply to all objects in the bucket, specify an empty prefix\. In the following configuration, the rule specifies a `Transition` action directing Amazon S3 to transition objects to the S3 Glacier storage class 0 days after creation in which case objects are eligible for archival to Amazon S3 Glacier at midnight UTC following creation\. 
 
   ```
   <LifecycleConfiguration>
@@ -53,7 +53,7 @@ Each lifecycle rule includes a filter that you can use to identify a subset of o
       <Status>Enabled</Status>
       <Transition>
         <Days>0</Days>
-        <StorageClass>GLACIER</StorageClass>
+        <StorageClass>S3 Glacier</StorageClass>
       </Transition>
     </Rule>
   </LifecycleConfiguration>
@@ -100,14 +100,14 @@ Each lifecycle rule includes a filter that you can use to identify a subset of o
 When you have multiple rules in a lifecycle configuration, an object can become eligible for multiple lifecycle actions\. The general rules that Amazon S3 follows in such cases are:  
 Permanent deletion takes precedence over transition\.
 Transition takes precedence over creation of delete markers\.
-When an object is eligible for both a GLACIER and STANDARD\_IA \(or ONEZONE\_IA\) transition, Amazon S3 chooses the GLACIER transition\.
+When an object is eligible for both a S3 Glacier and STANDARD\_IA \(or ONEZONE\_IA\) transition, Amazon S3 chooses the S3 Glacier transition\.
  For examples, see [Example 5: Overlapping Filters, Conflicting Lifecycle Actions, and What Amazon S3 Does ](#lifecycle-config-conceptual-ex5) 
 
 ## Example 2: Disabling a Lifecycle Rule<a name="lifecycle-config-conceptual-ex2"></a>
 
 You can temporarily disable a lifecycle rule\. The following lifecycle configuration specifies two rules:
-+ Rule 1 directs Amazon S3 to transition objects with the `logs/` prefix to the GLACIER storage class soon after creation\. 
-+ Rule 2 directs Amazon S3 to transition objects with the `documents/` prefix to the GLACIER storage class soon after creation\. 
++ Rule 1 directs Amazon S3 to transition objects with the `logs/` prefix to the S3 Glacier storage class soon after creation\. 
++ Rule 2 directs Amazon S3 to transition objects with the `documents/` prefix to the S3 Glacier storage class soon after creation\. 
 
 In the policy Rule 1 is enabled and Rule 2 is disable\. Amazon S3 will not take any action on disabled rules\.
 
@@ -121,7 +121,7 @@ In the policy Rule 1 is enabled and Rule 2 is disable\. Amazon S3 will not take 
     <Status>Enabled</Status>
     <Transition>
       <Days>0</Days>
-      <StorageClass>GLACIER</StorageClass>
+      <StorageClass>S3 Glacier</StorageClass>
     </Transition>
   </Rule>
   <Rule>
@@ -130,7 +130,7 @@ In the policy Rule 1 is enabled and Rule 2 is disable\. Amazon S3 will not take 
     <Status>Disabled</Status>
     <Transition>
       <Days>0</Days>
-      <StorageClass>GLACIER</StorageClass>
+      <StorageClass>S3 Glacier</StorageClass>
     </Transition>
   </Rule>
 </LifecycleConfiguration>
@@ -143,7 +143,7 @@ In this example, you leverage lifecycle configuration to tier down the storage c
 The following lifecycle configuration specifies a rule that applies to objects with key name prefix `logs/`\. The rule specifies the following actions:
 + Two transition actions:
   + Transition objects to the STANDARD\_IA storage class 30 days after creation\.
-  + Transition objects to the GLACIER storage class 90 days after creation\.
+  + Transition objects to the S3 Glacier storage class 90 days after creation\.
 + One expiration action that directs Amazon S3 to delete objects a year after creation\.
 
 ```
@@ -160,7 +160,7 @@ The following lifecycle configuration specifies a rule that applies to objects w
     </Transition>
     <Transition>
       <Days>90</Days>
-      <StorageClass>GLACIER</StorageClass>
+      <StorageClass>S3 Glacier</StorageClass>
     </Transition>
     <Expiration>
       <Days>365</Days>
@@ -175,7 +175,7 @@ You can use one rule to describe all lifecycle actions if all actions apply to t
 ## Example 4: Specifying Multiple Rules<a name="lifecycle-config-conceptual-ex4"></a>
 
 You can specify multiple rules if you want different lifecycle actions of different objects\. The following lifecycle configuration has two rules:
-+ Rule 1 applies to objects with the key name prefix `classA/`\. It directs Amazon S3 to transition objects to the GLACIER storage class one year after creation and expire these objects 10 years after creation\.
++ Rule 1 applies to objects with the key name prefix `classA/`\. It directs Amazon S3 to transition objects to the S3 Glacier storage class one year after creation and expire these objects 10 years after creation\.
 + Rule 2 applies to objects with key name prefix `classB/`\. It directs Amazon S3 to transition objects to the STANDARD\_IA storage class 90 days after creation and delete them one year after creation\.
 
 ```
@@ -188,7 +188,7 @@ You can specify multiple rules if you want different lifecycle actions of differ
         <Status>Enabled</Status>
         <Transition>        
            <Days>365</Days>        
-           <StorageClass>GLACIER</StorageClass>       
+           <StorageClass>S3 Glacier</StorageClass>       
         </Transition>    
         <Expiration>
              <Days>3650</Days>
@@ -217,7 +217,7 @@ You might specify a lifecycle configuration in which you specify overlapping pre
 
 Generally, lifecycle will optimize for cost\. For example, if two expiration polices overlap, the shorter expiration policy will be honored so that data is not stored for longer than expected\. 
 
-Likewise, if two transition policies overlap, lifecycle will transition your objects to the lower cost storage class\. In both cases, lifecycle attempts to choose the path that is least expensive for you\. An exception to this general rule is with the INTELLIGENT\_TIERING storage class\. INTELLIGENT\_TIERING will be favored by lifecycle over any storage class, aside from GLACIER and DEEP ARCHIVE storage classes\.
+Likewise, if two transition policies overlap, lifecycle will transition your objects to the lower cost storage class\. In both cases, lifecycle attempts to choose the path that is least expensive for you\. An exception to this general rule is with the INTELLIGENT\_TIERING storage class\. INTELLIGENT\_TIERING will be favored by lifecycle over any storage class, aside from S3 Glacier and S3 Glacier Deep Archive storage classes\.
 
 The following examples show how Amazon S3 chooses to resolve potential conflicts\.
 
@@ -321,7 +321,7 @@ In this case, Amazon S3 chooses to transition them 10 days after creation\.
 
 **Example 4: Tag\-based Filtering and Resulting Conflicting Lifecycle Actions**  
 Suppose that you have the following lifecycle policy that has two rules, each specifying a tag filter:  
-+ Rule 1 specifies a tag\-based filter \(`tag1/value1`\)\. This rule directs Amazon S3 to transition objects to the GLACIER storage class 365 days after creation\.
++ Rule 1 specifies a tag\-based filter \(`tag1/value1`\)\. This rule directs Amazon S3 to transition objects to the S3 Glacier storage class 365 days after creation\.
 + Rule 2 specifies a tag\-based filter \(`tag2/value2`\)\. This rule directs Amazon S3 to expire objects 14 days after creation\.
 The lifecycle configuration is shown following:  
 
@@ -337,7 +337,7 @@ The lifecycle configuration is shown following:
     </Filter>
     <Status>Enabled</Status>
     <Transition>
-      <StorageClass>GLACIER<StorageClass>
+      <StorageClass>S3 Glacier<StorageClass>
       <Days>365</Days> 
     </Transition>
   </Rule>
@@ -362,7 +362,7 @@ The policy is fine, but if there is an object with both tags, then S3 has to dec
 
 Suppose that you have a versioning\-enabled bucket, which means that for each object you have a current version and zero or more noncurrent versions\. You want to maintain one year's worth of history and then delete the noncurrent versions\. For more information about versioning, see [Object Versioning](ObjectVersioning.md)\. 
 
-Also, you want to save storage costs by moving noncurrent versions to GLACIER 30 days after they become noncurrent \(assuming cold data for which you don't need real\-time access\)\. In addition, you also expect frequency of access of the current versions to diminish 90 days after creation so you might choose to move these objects to the STANDARD\_IA storage class\.
+Also, you want to save storage costs by moving noncurrent versions to S3 Glacier 30 days after they become noncurrent \(assuming cold data for which you don't need real\-time access\)\. In addition, you also expect frequency of access of the current versions to diminish 90 days after creation so you might choose to move these objects to the STANDARD\_IA storage class\.
 
 ```
  1. <LifecycleConfiguration>
@@ -378,7 +378,7 @@ Also, you want to save storage costs by moving noncurrent versions to GLACIER 30
 11.         </Transition>
 12.         <NoncurrentVersionTransition>      
 13.             <NoncurrentDays>30</NoncurrentDays>      
-14.             <StorageClass>GLACIER</StorageClass>   
+14.             <StorageClass>S3 Glacier</StorageClass>   
 15.         </NoncurrentVersionTransition>    
 16.        <NoncurrentVersionExpiration>     
 17.             <NoncurrentDays>365</NoncurrentDays>    
@@ -431,8 +431,10 @@ For current object versions, you have the following options to manage their life
   ```
 
   Amazon S3 removes current versions 60 days after they are created by adding a delete marker for each of the current object versions\. This makes the current version noncurrent and the delete marker becomes the current version\. For more information, see [Using Versioning](Versioning.md)\. 
+**Note**  
+This rule will automatically perform `ExpiredObjectDeleteMarker` cleanup in a versioned bucket making the need to include an `ExpiredObjectDeleteMarker` tag unnecessary\.
 
-  The `NoncurrentVersionExpiration` action in the same lifecycle configuration removes noncurrent objects 30 days after they become noncurrent\. Thus, all object versions are permanently removed after 90 days from object creation and you have expired object delete markers, but Amazon S3 detects and removes the expired object delete markers for you\. 
+  The `NoncurrentVersionExpiration` action in the same lifecycle configuration removes noncurrent objects 30 days after they become noncurrent\. Thus, in this example, all object versions are permanently removed 90 days after object creation\. You will have expired object delete markers, but Amazon S3 detects and removes the expired object delete markers for you\. 
 + **Current object versions don't have a well\-defined lifecycle\.** 
 
   In this case you might remove the objects manually when you don't need them, creating a delete marker with one or more noncurrent versions\. If lifecycle configuration with `NoncurrentVersionExpiration` action removes all the noncurrent versions, you now have expired object delete markers\.

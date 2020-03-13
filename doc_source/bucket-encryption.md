@@ -30,13 +30,13 @@ After you enable default encryption for a bucket, the following encryption behav
 To encrypt your existing Amazon S3 objects with a single request, you can use Amazon S3 batch operations\. You provide Amazon S3 batch operations with a list of objects to operate on, and Amazon S3 batch operations calls the respective API to perform the specified operation\. You can use the copy operation to copy the existing unencrypted objects and write the new encrypted objects to the same bucket\. A single Amazon S3 batch operations job can perform the specified operation on billions of objects containing exabytes of data\.
 
 **Note**  
- S3 buckets with default bucket encryption cannot be used as destination buckets for [Amazon S3 Server Access Logging](ServerLogs.md)\.
+Amazon S3 buckets with default bucket encryption using SSE\-KMS cannot be used as destination buckets for [Amazon S3 Server Access Logging](ServerLogs.md)\. Only SSE\-S3 default encryption is supported for server access log destination buckets\.
 
 ## Using Encryption for Cross\-account Operations<a name="bucket-encryption-update-bucket-policy"></a>
 
 Be aware of the following when using encryption for cross\-account operations:
 + The aws/s3 AWS managed CMK is used when a CMK ARN or alias is not provided at request\-time, nor via the bucket's default encryption configuration\.
-+ If specifying your own CMK, you should use a fully qualified CMK key ARN\. When using a CMK alias, be aware that KMS will resolve the key within the requestor's account\. This may result in data encrypted with a CMK that belongs to the requestor, and not the bucket administrator\.
++ If specifying your own CMK, you should use a fully qualified CMK key ARN\. When using a CMK alias, be aware that KMS will resolve the key within the requester’s account\. This may result in data encrypted with a CMK that belongs to the requester, and not the bucket administrator\.
 + You must specify a key that you \(the requester\) has been granted `Encrypt` permission to\. For more information, see [Allows Key Users to Use a CMK for Cryptographic Operations](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-users-crypto)\.
 
 ## Using Default Encryption with Replication<a name="bucket-encryption-update-bucket-policy"></a>

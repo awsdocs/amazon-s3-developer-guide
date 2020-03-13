@@ -4,7 +4,7 @@ You can configure an Amazon S3 bucket to function like a website\. This example 
 
 **Topics**
 + [Step 1: Creating a Bucket and Configuring It as a Website](#step1-create-bucket-config-as-website)
-+ [Editing Block Public Access Settings](#step2-edit-block-public-access)
++ [Step 2: Editing Block Public Access Settings](#step2-edit-block-public-access)
 + [Step 3: Adding a Bucket Policy That Makes Your Bucket Content Publicly Available](#step3-add-bucket-policy-make-content-public)
 + [Step 4: Uploading an Index Document](#step3-upload-index-doc)
 + [Step 5: Testing Your Website](#step4-test-web-site)
@@ -31,7 +31,7 @@ You can configure an Amazon S3 bucket to function like a website\. This example 
 
       This is the Amazon S3\-provided website endpoint for your bucket\. You use this endpoint in the following steps to test your website\.
 
-## Editing Block Public Access Settings<a name="step2-edit-block-public-access"></a>
+## Step 2: Editing Block Public Access Settings<a name="step2-edit-block-public-access"></a>
 
 By default, Amazon S3 blocks public access to your account and buckets\. If you want to use a bucket to host a static website, you can use these steps to edit block public access settings: 
 
@@ -106,4 +106,4 @@ If your browser displays your `index.html` page, the website was successfully de
 **Note**  
 HTTPS access to the website is not supported\.
 
-You now have a website hosted on Amazon S3\. This website is available at the Amazon S3 website endpoint\. However, you might have a domain, such as `example.com`, that you want to use to serve the content from the website you created\. You might also want to use Amazon S3 root domain support to serve requests for both `http://www.example.com` and `http://example.com`\. This requires additional steps\. For an example, see [Example: Setting Up a Static Website Using a Custom Domain](website-hosting-custom-domain-walkthrough.md)\. 
+You now have a website hosted on Amazon S3\. This website is available at the Amazon S3 website endpoint\. However, you might have a domain, such as `example.com`, that you want to use to serve the content from the website you created\. You might also want to use Amazon S3 root domain support to serve requests for both `http://www.example.com` and `http://example.com`\. This requires additional steps\. For an example, see [Example: Setting Up a Static Website Using a Custom Domain Name Registered with Route 53](website-hosting-custom-domain-walkthrough.md)\. 

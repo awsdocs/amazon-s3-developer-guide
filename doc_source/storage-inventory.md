@@ -60,47 +60,57 @@ The easiest way to set up an inventory is by using the AWS Management Console, b
 
    When you configure an inventory list for a source bucket, you specify the destination bucket where you want the list to be stored, and whether you want to generate the list daily or weekly\. You can also configure what object metadata to include and whether to list all object versions or only current versions\. 
 
-   You can specify that the inventory list file be encrypted by using Amazon S3 managed keys \(SSE\-S3\) or customer managed keys \(CMKs\) stored in AWS Key Management Service \(AWS KMS\)\. For more information about SSE\-S3 and SSE\-KMS, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. If you plan to use SSE\-KMS encryption, see Step 3\.
+   You can specify that the inventory list file be encrypted by using an Amazon S3 managed key \(SSE\-S3\) or an AWS Key Management Service \(AWS KMS\) customer managed customer master key \(CMK\)\. For more information about SSE\-S3 and SSE\-KMS, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. If you plan to use SSE\-KMS encryption, see Step 3\.
    + For information about how to use the console to configure an inventory list, see [How Do I Configure Amazon S3 Inventory?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-inventory.html) in the *Amazon Simple Storage Service Console User Guide*\.
-   + To use the Amazon S3 API to configure an inventory list, use the [PUT Bucket inventory configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTInventoryConfig.html) REST API, or the equivalent from the AWS CLI or AWS SDKs\. 
+   + To use the Amazon S3 API to configure an inventory list, use the [PUT Bucket inventory configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTInventoryConfig.html) REST API or the equivalent from the AWS CLI or AWS SDKs\. 
 
 1. **To encrypt the inventory list file with SSE\-KMS, grant Amazon S3 permission to use the CMK stored in AWS KMS\.**
 
-   You can configure encryption for the inventory list file by using the AWS Management Console, REST API, AWS CLI, or AWS SDKs\. Whichever way you choose, you must grant Amazon S3 permission to use the AWS KMS CMK to encrypt the inventory file\. You grant Amazon S3 permission by modifying the key policy for the AWS KMS CMK that is being used to encrypt the inventory file\. For more information, see the next section, [Grant Amazon S3 Permission to Encrypt Using Your AWS KMS CMK](#storage-inventory-kms-key-policy)\.
+   You can configure encryption for the inventory list file by using the AWS Management Console, REST API, AWS CLI, or AWS SDKs\. Whichever way you choose, you must grant Amazon S3 permission to use the AWS KMS customer managed CMK to encrypt the inventory file\. You grant Amazon S3 permission by modifying the key policy for the customer managed CMK that you want to use to encrypt the inventory file\. For more information, see the next section, [Granting Amazon S3 Permission to Use Your AWS KMS CMK for Encryption](#storage-inventory-kms-key-policy)\.
 
-#### Grant Amazon S3 Permission to Encrypt Using Your AWS KMS CMK<a name="storage-inventory-kms-key-policy"></a>
+#### Granting Amazon S3 Permission to Use Your AWS KMS CMK for Encryption<a name="storage-inventory-kms-key-policy"></a>
 
-You must grant Amazon S3 permission to encrypt using your AWS KMS CMK with a key policy\. The following procedure describes how to use the AWS Identity and Access Management \(IAM\) console to modify the key policy for the AWS KMS CMK that is used to encrypt the inventory file\.
+To grant Amazon S3 permission to encrypt using a customer managed AWS Key Management Service \(AWS KMS\) customer master key \(CMK\), you must use a key policy\. To update your key policy so that you can use an AWS KMS customer managed CMK to encrypt the inventory file, follow these steps\.
 
 **To grant permissions to encrypt using your AWS KMS CMK**
 
-1. Sign in to the AWS Management Console using the AWS account that owns the AWS KMS CMK, and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+1. Using the AWS account that owns the customer managed CMK, sign into the AWS Management Console\.
 
-1. In the left navigation pane, choose **Encryption keys**\.
+1. Open the AWS KMS console at [https://console\.aws\.amazon\.com/kms](https://console.aws.amazon.com/kms)\.
 
-1. For **Region**, choose the appropriate AWS Region\. Do not use the region selector in the navigation bar \(upper\-right corner\)\.
+1. To change the AWS Region, use the Region selector in the upper\-right corner of the page\.
 
-1. Choose the alias of the CMK that you want to encrypt inventory with\.
+1. In the left navigation pane, choose **Customer managed keys**\.
 
-1. In the **Key Policy** section of the page, choose **Switch to policy view**\.
+1. Under **Customer managed keys**, choose the customer managed CMK that you want to use to encrypt the inventory file\.
 
-1. Using the **Key Policy** editor, insert following key policy into the existing policy and then choose **Save Changes**\. You might want to copy the policy to the end of the existing policy\. 
+1. Under **Key policy**, choose **Switch to policy view**\.
+
+1. To update the key policy, choose **Edit**\.
+
+1. Under **Edit key policy**, add the following key policy to the existing key policy\.
 
    ```
    {
-       "Sid": "Allow Amazon S3 use of the key",
+       "Sid": "Allow Amazon S3 use of the CMK",
        "Effect": "Allow",
        "Principal": {
            "Service": "s3.amazonaws.com"
        },
        "Action": [
-           "kms:GenerateDataKey*"
+           "kms:GenerateDataKey"
        ],
        "Resource": "*"
    }
    ```
 
-You can also use the AWS KMS PUT key policy API [PutKeyPolicy](https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html) to copy the key policy to the CMK that is being used to encrypt the inventory file\. For more information about creating and editing AWS KMS CMKs, see [Getting Started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the *AWS Key Management Service Developer Guide*\. 
+1. Choose **Save changes**\.
+
+   For more information about creating AWS KMS customer managed CMKs and using key policies, see the following topics in the *AWS Key Management Service Developer Guide*:
+   + [Getting Started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html)
+   + [Using Key Policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+
+   You can also use the AWS KMS PUT key policy API [PutKeyPolicy](https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html) to copy the key policy to the customer managed CMK that you want to use to encrypt the inventory file\. 
 
 ## What's Included in an Amazon S3 Inventory?<a name="storage-inventory-contents"></a>
 
@@ -123,10 +133,6 @@ The inventory list contains a list of the objects in an S3 bucket and the follow
 + **Object lock Retain until date** – The date until which the locked object cannot be deleted\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
 + **Object lock Mode** – Set to `Governance` or `Compliance` for objects that are locked\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
 + **Object lock Legal hold status ** – Set to `On` if a legal hold has been applied to an object; otherwise it is set to `Off`\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
-
-The following is an example CSV inventory list opened in a spreadsheet application\. The heading row is shown only to help clarify the example; it is not included in the actual list\.
-
-![\[Screenshot of an example inventory list opened in a spreadsheet application.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/inventory-list.png)
 
 We recommend that you create a lifecycle policy that deletes old inventory lists\. For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
@@ -325,10 +331,18 @@ Athena can query Amazon S3 inventory files in ORC, Parquet, or CSV format\. When
    MSCK REPAIR TABLE your-table-name;
    ```
 
-1. After performing the first two steps, you can run ad hoc queries on your inventory, as shown in the following example\. 
+1. After performing the first two steps, you can run ad hoc queries on your inventory, as shown in the following examples\. 
 
    ```
-   SELECT encryption_status, count(*) FROM your-table-name GROUP BY encryption_status;
+   # Get list of latest inventory report dates available
+   SELECT DISTINCT dt FROM your-table-name ORDER BY 1 DESC limit 10;
+             
+   # Get encryption status for a provided report date.
+   SELECT encryption_status, count(*) FROM your-table-name WHERE dt = 'YYYY-MM-DD-HH-MM' GROUP BY encryption_status;
+             
+   # Get encryption status for report dates in the provided range.
+   SELECT dt, encryption_status, count(*) FROM your-table-name 
+   WHERE dt > 'YYYY-MM-DD-HH-MM' AND dt < 'YYYY-MM-DD-HH-MM' GROUP BY dt, encryption_status;
    ```
 
 For more information about using Athena, see [Amazon Athena User Guide](https://docs.aws.amazon.com/athena/latest/ug/)\.

@@ -9,9 +9,11 @@ To customize your data retention approach and control storage costs, use object 
 
 If you have an object expiration lifecycle policy in your non\-versioned bucket and you want to maintain the same permanent delete behavior when you enable versioning, you must add a noncurrent expiration policy\. The noncurrent expiration lifecycle policy will manage the deletes of the noncurrent object versions in the version\-enabled bucket\. \(A version\-enabled bucket maintains one current and zero or more noncurrent object versions\.\)
 
-You must explicitly enable versioning on your bucket\. By default, versioning is disabled\. Regardless of whether you have enabled versioning, each object in your bucket has a version ID\. If you have not enabled versioning, Amazon S3 sets the value of the version ID to null\. If you have enabled versioning, Amazon S3 assigns a unique version ID value for the object\. When you enable versioning on a bucket, objects already stored in the bucket are unchanged\. The version IDs \(null\), contents, and permissions remain the same\.
+You must explicitly enable versioning on your bucket\. By default, versioning is disabled\. Regardless of whether you have enabled versioning, each object in your bucket has a version ID\. If you have not enabled versioning, Amazon S3 sets the value of the version ID to null\. If versioning is enabled, Amazon S3 assigns a version ID value for the object\. This value distinguishes it from other versions of the same key\.
 
-Enabling and suspending versioning is done at the bucket level\. When you enable versioning for a bucket, all objects added to it will have a unique version ID\. Unique version IDs are randomly generated, Unicode, UTF\-8 encoded, URL\-ready, opaque strings that are at most 1024 bytes long\. An example version ID is `3/L4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo`\. Only Amazon S3 generates version IDs\. They cannot be edited\. 
+Enabling and suspending versioning is done at the bucket level\. When you enable versioning on an existing bucket, objects that are already stored in the bucket are unchanged\. The version IDs \(null\), contents, and permissions remain the same\. After you enable versioning for a bucket, each object that is added to the bucket gets a version ID, which distinguishes it from other versions of the same key\. 
+
+Only Amazon S3 generates version IDs, and they can’t be edited\. Version IDs are Unicode, UTF\-8 encoded, URL\-ready, opaque strings that are no more than 1,024 bytes long\. The following is an example: `3/L4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo`\.
 
 **Note**  
 For simplicity, we will use much shorter IDs in all our examples\.

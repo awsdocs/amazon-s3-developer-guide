@@ -60,22 +60,22 @@ We recommend the following:
 
 ## Storage Classes for Archiving Objects<a name="sc-glacier"></a>
 
-The **GLACIER** and **DEEP ARCHIVE** storage classes are designed for low\-cost data archiving\. These storage classes offer the same durability and resiliency as the STANDARD storage class\. For a comparison of storage class durability and availability, see the Durability and Availability table at the end of this section\.
+The **S3 Glacier** and **S3 Glacier Deep Archive** storage classes are designed for low\-cost data archiving\. These storage classes offer the same durability and resiliency as the STANDARD storage class\. For a comparison of storage class durability and availability, see the Durability and Availability table at the end of this section\.
 
 These storage classes differ as follows:
-+ GLACIER—Use for archives where portions of the data might need to be retrieved in minutes\. Data stored in the GLACIER storage class has a minimum storage duration period of 90 days and can be accessed in as little as 1\-5 minutes using expedited retrieval\. If you have deleted, overwritten, or transitioned to a different storage class an object before the 90\-day minimum, you are charged for 90 days\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 
++ S3 Glacier—Use for archives where portions of the data might need to be retrieved in minutes\. Data stored in the S3 Glacier storage class has a minimum storage duration period of 90 days and can be accessed in as little as 1\-5 minutes using expedited retrieval\. If you have deleted, overwritten, or transitioned to a different storage class an object before the 90\-day minimum, you are charged for 90 days\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 
 
    
-+ DEEP ARCHIVE—Use for archiving data that rarely needs to be accessed\. Data stored in the DEEP ARCHIVE storage class has a minimum storage duration period of 180 days and a default retrieval time of 12 hours\. If you have deleted, overwritten, or transitioned to a different storage class an object before the 180\-day minimum, you are charged for 180 days\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 
++ S3 Glacier Deep Archive—Use for archiving data that rarely needs to be accessed\. Data stored in the S3 Glacier Deep Archive storage class has a minimum storage duration period of 180 days and a default retrieval time of 12 hours\. If you have deleted, overwritten, or transitioned to a different storage class an object before the 180\-day minimum, you are charged for 180 days\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 
 
-  DEEP ARCHIVE is the lowest cost storage option in AWS\. Storage costs for DEEP ARCHIVE are less expensive than using the GLACIER storage class\. You can reduce DEEP ARCHIVE retrieval costs by using bulk retrieval, which returns data within 48 hours\. 
+  S3 Glacier Deep Archive is the lowest cost storage option in AWS\. Storage costs for S3 Glacier Deep Archive are less expensive than using the S3 Glacier storage class\. You can reduce S3 Glacier Deep Archive retrieval costs by using bulk retrieval, which returns data within 48 hours\. 
 
 ### Retrieving Archived Objects<a name="sc-glacier-restore"></a>
 
-You can set the storage class of an object to GLACIER or DEEP ARCHIVE in the same ways that you do for the other storage classes as described in the section [Setting the Storage Class of an Object](#sc-howtoset)\. However, the GLACIER and DEEP ARCHIVE objects are not available for real\-time access\. You must first restore the GLACIER and DEEP ARCHIVE objects before you can access them \(STANDARD, RRS, STANDARD\_IA, ONEZONE\_IA, and INTELLIGENT\_TIERING objects are available for anytime access\)\. For more information about retrieving archived objects, see [Restoring Archived Objects](restoring-objects.md)\.
+You can set the storage class of an object to S3 Glacier or S3 Glacier Deep Archive in the same ways that you do for the other storage classes as described in the section [Setting the Storage Class of an Object](#sc-howtoset)\. However, the S3 Glacier and S3 Glacier Deep Archive objects are not available for real\-time access\. You must first restore the S3 Glacier and S3 Glacier Deep Archive objects before you can access them \(STANDARD, RRS, STANDARD\_IA, ONEZONE\_IA, and INTELLIGENT\_TIERING objects are available for anytime access\)\. For more information about retrieving archived objects, see [Restoring Archived Objects](restoring-objects.md)\.
 
 **Important**  
-When you choose the GLACIER or DEEP ARCHIVE storage class, your objects remain in Amazon S3\. You cannot access them directly through the separate Amazon S3 Glacier service\. 
+When you choose the S3 Glacier or S3 Glacier Deep Archive storage class, your objects remain in Amazon S3\. You cannot access them directly through the separate Amazon S3 Glacier service\. 
 
 To learn more about the Amazon S3 Glacier service, see the [Amazon S3 Glacier Developer Guide](https://docs.aws.amazon.com/amazonglacier/latest/dev/)\.
 
@@ -94,8 +94,8 @@ The following table compares the storage classes\.
 |  STANDARD\_IA  |  Long\-lived, infrequently accessed data  |  99\.999999999%   |  99\.9%  |  >= 3  |  30 days  |  128 KB  |  Per GB retrieval fees apply\.   | 
 |  INTELLIGENT\_TIERING  |  Long\-lived data with changing or unknown access patterns  |  99\.999999999%  |  99\.9%  |  >= 3  |  30 days  |  None  |  Monitoring and automation fees per object apply\. No retrieval fees\.  | 
 |  ONEZONE\_IA  |  Long\-lived, infrequently accessed, non\-critical data  |  99\.999999999%   |  99\.5%  |  1  |  30 days  |  128 KB  |  Per GB retrieval fees apply\. Not resilient to the loss of the Availability Zone\.  | 
-|  GLACIER  | Long\-term data archiving with retrieval times ranging from minutes to hours | 99\.999999999%  |  99\.99% \(after you restore objects\)  |  >= 3  |  90 days  |  40 KB  | Per GB retrieval fees apply\. You must first restore archived objects before you can access them\. For more information, see [Restoring Archived Objects](restoring-objects.md)\. | 
-|  DEEP ARCHIVE  | Archiving rarely accessed data with a default retrieval time of 12 hours | 99\.999999999%  |  99\.99% \(after you restore objects\)  |  >= 3  |  180 days  |  40 KB  | Per GB retrieval fees apply\. You must first restore archived objects before you can access them\. For more information, see [Restoring Archived Objects](restoring-objects.md)\. | 
+|  S3 Glacier  | Long\-term data archiving with retrieval times ranging from minutes to hours | 99\.999999999%  |  99\.99% \(after you restore objects\)  |  >= 3  |  90 days  |  40 KB  | Per GB retrieval fees apply\. You must first restore archived objects before you can access them\. For more information, see [Restoring Archived Objects](restoring-objects.md)\. | 
+|  S3 Glacier Deep Archive  | Archiving rarely accessed data with a default retrieval time of 12 hours | 99\.999999999%  |  99\.99% \(after you restore objects\)  |  >= 3  |  180 days  |  40 KB  | Per GB retrieval fees apply\. You must first restore archived objects before you can access them\. For more information, see [Restoring Archived Objects](restoring-objects.md)\. | 
 |  RRS \(Not recommended\)  |  Frequently accessed, non\-critical data  |  99\.99%   |  99\.99%  |  >= 3  |  None  |  None  |  None  | 
 
 All of the storage classes except for ONEZONE\_IA are designed to be resilient to simultaneous complete data loss in a single Availability Zone and partial loss in another Availability Zone\. 
@@ -108,7 +108,7 @@ Amazon S3 APIs support setting \(or updating\) the storage class of objects as f
 + When creating a new object, you can specify its storage class\. For example, when creating objects using the [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html), [POST Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html), and [Initiate Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html) APIs, you add the `x-amz-storage-class` request header to specify a storage class\. If you don't add this header, Amazon S3 uses STANDARD, the default storage class\.
 
    
-+ You can also change the storage class of an object that is already stored in Amazon S3 to any other storage class by making a copy of the object using the [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html) API\. However, you cannot use [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html) to copy objects that are stored in the GLACIER or DEEP ARCHIVE storage classes\.
++ You can also change the storage class of an object that is already stored in Amazon S3 to any other storage class by making a copy of the object using the [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html) API\. However, you cannot use [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html) to copy objects that are stored in the S3 Glacier or S3 Glacier Deep Archive storage classes\.
 
   You copy the object in the same bucket using the same key name and specify request headers as follows:
   + Set the `x-amz-metadata-directive` header to COPY\.
@@ -120,6 +120,6 @@ Amazon S3 APIs support setting \(or updating\) the storage class of objects as f
 + You can direct Amazon S3 to change the storage class of objects by adding a lifecycle configuration to a bucket\. For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
    
-+ When setting up a replication configuration, you can set the storage class for replicated objects to any other storage class\. However, you cannot replicate objects that are stored in the GLACIER or DEEP ARCHIVE storage classes\. For more information, see [Replication Configuration Overview](replication-add-config.md)\.
++ When setting up a replication configuration, you can set the storage class for replicated objects to any other storage class\. However, you cannot replicate objects that are stored in the S3 Glacier or S3 Glacier Deep Archive storage classes\. For more information, see [Replication Configuration Overview](replication-add-config.md)\.
 
 To create and update object storage classes, you can use the Amazon S3 console, AWS SDKs, or the AWS Command Line Interface \(AWS CLI\)\. Each uses the Amazon S3 APIs to send requests to Amazon S3\.

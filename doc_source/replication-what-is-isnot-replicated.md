@@ -53,7 +53,7 @@ By default Amazon S3 doesn't replicate the following:
    For more information about server\-side encryption, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. 
 
    
-+ Objects that are stored in GLACIER or DEEP ARCHIVE storage class\. To learn more about the Amazon S3 Glacier service, see the [Amazon S3 Glacier Developer Guide](https://docs.aws.amazon.com/amazonglacier/latest/dev/)\.
++ Objects that are stored in S3 Glacier or S3 Glacier Deep Archive storage class\. To learn more about the Amazon S3 Glacier service, see the [Amazon S3 Glacier Developer Guide](https://docs.aws.amazon.com/amazonglacier/latest/dev/)\.
 
    
 + Objects in the source bucket that the bucket owner doesn't have permissions for \(when the bucket owner is not the owner of the object\)\. For information about how an object owner can grant permissions to a bucket owner, see [Granting Cross\-Account Permissions to Upload Objects While Ensuring the Bucket Owner Has Full Control](example-bucket-policies.md#example-bucket-policies-use-case-8)\.

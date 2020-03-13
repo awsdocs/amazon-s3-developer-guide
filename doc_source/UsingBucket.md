@@ -22,7 +22,6 @@ Objects that belong to a bucket that you create in a specific AWS Region never l
 + [Examples of Creating a Bucket](create-bucket-get-location-example.md)
 + [Deleting or Emptying a Bucket](delete-or-empty-bucket.md)
 + [Amazon S3 Default Encryption for S3 Buckets](bucket-encryption.md)
-+ [Managing Bucket Website Configuration](ManagingBucketWebsiteConfig.md)
 + [Amazon S3 Transfer Acceleration](transfer-acceleration.md)
 + [Requester Pays Buckets](RequesterPaysBuckets.md)
 + [Buckets and Access Control](BucketAccess.md)

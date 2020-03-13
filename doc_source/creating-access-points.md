@@ -183,7 +183,7 @@ The following access point policy grants IAM user `Alice` in account `1234567890
 
 ```
 {
-    "Version":"2008-10-17",
+    "Version":"2012-10-17",
     "Statement": [
     {
         "Effect": "Allow",
@@ -219,7 +219,7 @@ The following access point policy grants IAM user `Bob` in account `123456789012
 
 ```
 {
-    "Version":"2008-10-17",
+    "Version":"2012-10-17",
     "Statement": [
     {
         "Effect":"Allow",

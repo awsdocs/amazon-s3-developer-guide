@@ -6,7 +6,7 @@ A delete marker has a key name \(or key\) and version ID like any other object\.
 + It does not have data associated with it\.
 + It is not associated with an access control list \(ACL\) value\.
 + It does not retrieve anything from a `GET` request because it has no data; you get a 404 error\.
-+ "The only operation you can make against a delete marker is an S3 API DELETE call, in order to do this you will need an IAM user/role with the appropriate access or the root account to issue such a request." \.
++ The only operation you can use on a delete marker is an Amazon S3 API `DELETE` call\. To do this you will need make the `DELETE` request using an AWS Identity and Access Management \(IAM\) user or role with the appropriate permissions\.
 
 Delete markers accrue a nominal charge for storage in Amazon S3\. The storage size of a delete marker is equal to the size of the key name of the delete marker\. A key name is a sequence of Unicode characters\. The UTF\-8 encoding adds from 1 to 4 bytes of storage to your bucket for each character in the name\. For more information about key names, see [Object Keys](UsingMetadata.md#object-keys)\. For information about deleting a delete marker, see [Removing Delete Markers](RemDelMarker.md)\.  
 

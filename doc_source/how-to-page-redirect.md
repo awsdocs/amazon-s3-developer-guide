@@ -8,7 +8,7 @@ A bucket configured for website hosting has both the website endpoint and the RE
 + **Region\-specific website endpoint – **Amazon S3 redirects the page request according to the value of the `x-amz-website-redirect-location` property\. 
 + **REST endpoint – **Amazon S3 doesn't redirect the page request\. It returns the requested object\.
 
-For more information about the endpoints, see [Key Differences Between the Amazon Website and the REST API Endpoint](WebsiteEndpoints.md#WebsiteRestEndpointDiff)\.
+For more information about the endpoints, see [Key Differences Between a Website Endpoint and a REST API Endpoint](WebsiteEndpoints.md#WebsiteRestEndpointDiff)\.
 
 **Topics**
 + [Page Redirect Support in the Amazon S3 Console](#page-redirect-using-console)

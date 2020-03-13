@@ -37,7 +37,7 @@ First, you create a CloudFront distribution\. This makes your website available 
 **Important**  
 Prior to performing this step, note the [requirements for using alternate domain names](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-requirements), in particular the need for a valid SSL/TLS certificate\. 
 
-   1. Set **Default Root Object** to `index.html`\. This is the default page that the CloudFront distribution returns if the URL used to access the distribution doesn't contain a file name\. This value should match the index document value that you set in [Configuring a Bucket for Website Hosting](HowDoIWebsiteConfiguration.md)\.
+   1. Set **Default Root Object** to `index.html`\. This is the default page that the CloudFront distribution returns if the URL used to access the distribution doesn't contain a file name\. This value should match the index document value that you set in [Configuring a Bucket As a Static Website Using the AWS Management Console](HowDoIWebsiteConfiguration.md)\.
 
    1. Set **Logging** to **On**\.
 

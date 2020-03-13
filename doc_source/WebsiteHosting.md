@@ -1,55 +1,19 @@
 # Hosting a Static Website on Amazon S3<a name="WebsiteHosting"></a>
 
-You can host a static website on Amazon S3\. On a static website, individual webpages include static content\. They might also contain client\-side scripts\. By contrast, a dynamic website relies on server\-side processing, including server\-side scripts such as PHP, JSP, or ASP\.NET\. Amazon S3 does not support server\-side scripting\. AWS also has resources for hosting dynamic websites\. To learn more about website hosting on AWS, see [Web Hosting](https://aws.amazon.com/websites/)\. 
+You can use Amazon S3 to host a static website\. On a *static* website, individual webpages include static content\. They might also contain client\-side scripts\.
+
+By contrast, a *dynamic* website relies on server\-side processing, including server\-side scripts such as PHP, JSP, or ASP\.NET\. Amazon S3 does not support server\-side scripting, but AWS has other resources for hosting dynamic websites\. To learn more about website hosting on AWS, see [Web Hosting](https://aws.amazon.com/websites/)\. 
+
+To host a static website on Amazon S3, you configure an Amazon S3 bucket for website hosting and then upload your website content to the bucket\. When you configure a bucket as a static website, you enable static website hosting, set permissions, and add an index document\. Depending on your website requirements, you can also configure other options, including redirects, web traffic logging, and custom error documents\. 
+
+After you configure your bucket as a static website, you can access the bucket through the AWS Region\-specific Amazon S3 website endpoints for your bucket\. Website endpoints are different from the endpoints where you send REST API requests\. For more information, see [Website Endpoints](WebsiteEndpoints.md)\.
+
+To configure your bucket for static website hosting, you can use the AWS Management Console without writing any code\. You can also create, update, and delete the website configuration *programmatically* by using the AWS SDKs\. The SDKs provide wrapper classes around the Amazon S3 REST API\. If your application requires it, you can send REST API requests directly from your application\.
+
+For more information, including instructions and step\-by\-step walkthroughs, see the following topics:
 
 **Topics**
 + [Website Endpoints](WebsiteEndpoints.md)
-+ [Configuring a Bucket for Website Hosting](HowDoIWebsiteConfiguration.md)
++ [Configuring a Bucket As a Static Website Using the AWS Management Console](HowDoIWebsiteConfiguration.md)
++ [Programmatically Configuring a Bucket as a Static Website](ManagingBucketWebsiteConfig.md)
 + [Example Walkthroughs \- Hosting Websites on Amazon S3](hosting-websites-on-s3-examples.md)
-
-To host a static website, you configure an Amazon S3 bucket for website hosting and then upload your website content to the bucket\. For more information, see [Configuring a Bucket for Website Hosting](HowDoIWebsiteConfiguration.md)\. This bucket must have public read access\. It is intentional that everyone in the world will have read access to this bucket\. To learn how to configure public read access for your bucket, see [Permissions Required for Website Access](WebsiteAccessPermissionsReqd.md)\. The website is then available at the AWS Region\-specific website endpoint of the bucket\. 
-
-Depending on your Region, Amazon S3 website endpoints follow one of these two formats:
-
-```
-http://bucket-name.s3-website.Region.amazonaws.com
-```
-
-```
-http://bucket-name.s3-website-Region.amazonaws.com
-```
-
-For a complete list of Amazon S3 website endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints)\.
-
-This URL will return the default index document that you configured for the website\.
-
-**Example Requesting an Object at the Root Level**  
-To request a specific object that is stored at the root level in the bucket, use the following URL structure:  
-
-```
-http://bucket-name.s3-website.Region.amazonaws.com/object-name
-```
-For example, this URL requests the `photo.jpg` object that is stored at the root level in the bucket:  
-
-```
-http://example-bucket.s3-website.us-west-2.amazonaws.com/photo.jpg
-```
-
-**Example Requesting an Object in a Prefix**  
-To request an object that is stored in a folder in your bucket, use this URL structure:  
-
-```
-http://bucket-name.s3-website.Region.amazonaws.com/folder-name/object-name
-```
-This URL requests the `docs/doc1.html` object in your bucket\.   
-
-```
-http://example-bucket.s3-website.us-west-2.amazonaws.com/docs/doc1.html
-```
-
-Using Your Own Domain Instead of accessing the website by using an Amazon S3 website endpoint, you can use your own domain, such as `example.com`, to serve your content\. Amazon S3, along with Amazon Route 53, supports hosting a website at the root domain\. For example, if you have the root domain `example.com` and you host your website on Amazon S3, your website visitors can access the site from their browser by typing either `http://www.example.com` or `http://example.com`\. For an example walkthrough, see [Example: Setting Up a Static Website Using a Custom Domain](website-hosting-custom-domain-walkthrough.md)\. 
-
-**Note**  
-The Amazon S3 website endpoints do not support HTTPS\. For information about using HTTPS with an Amazon S3 bucket, see the following:   
-[How do I use CloudFront to serve HTTPS requests for my Amazon S3 bucket?](https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-https-requests-s3)
-[Requiring HTTPS for Communication Between CloudFront and Your Amazon S3 Origin](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-s3-origin.html)

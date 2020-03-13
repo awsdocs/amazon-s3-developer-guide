@@ -20,7 +20,7 @@ Replication can help you do the following:
 + **Replicate objects while retaining metadata** — You can use replication to make copies of your objects that retain all metadata, such as the original object creation time and version IDs\. This capability is important if you need to ensure that your replica is identical to the source object
 
    
-+ **Replicate objects into different storage classes** — You can use replication to directly put objects into Glacier, DEEP ARCHIVE, or another storage class in the destination bucket\. You can also replicate your data to the same storage class and use lifecycle policies on the destination bucket to move your objects to a colder storage class as it ages\.
++ **Replicate objects into different storage classes** — You can use replication to directly put objects into Glacier, S3 Glacier Deep Archive, or another storage class in the destination bucket\. You can also replicate your data to the same storage class and use lifecycle policies on the destination bucket to move your objects to a colder storage class as it ages\.
 
    
 + **Maintain object copies under different ownership** — Regardless of who owns the source object, you can tell Amazon S3 to change replica ownership to the AWS account that owns the destination bucket\. This is referred to as the *owner override* option\. You can use this option to restrict access to object replicas\.
@@ -59,7 +59,7 @@ Replication requires the following:
 + If the owner of the source bucket doesn't own the object in the bucket, the object owner must grant the bucket owner `READ` and `READ_ACP` permissions with the object access control list \(ACL\)\. For more information, see [Managing Access with ACLs](S3_ACLs_UsingACLs.md)\. 
 + If the source bucket has Amazon S3 object lock enabled, the destination bucket must also have object lock enabled\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
 
-  To enable replication on a bucket that has object lock enabled, contact [AWS Support](https://console.aws.amazon.comsupport/home)\.
+  To enable replication on a bucket that has object lock enabled, contact [AWS Support](https://console.aws.amazon.com/support/home)\.
 
 For more information, see [Overview of Setting Up Replication](replication-how-setup.md)\. 
 

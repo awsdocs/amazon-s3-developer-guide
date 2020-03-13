@@ -1,4 +1,15 @@
-# \(Optional\) Custom Error Document Support<a name="CustomErrorDocSupport"></a>
+# \(Optional\) Configuring Custom Error Document Support<a name="CustomErrorDocSupport"></a>
+
+After you configure your bucket as a static website, when an error occurs, Amazon S3 returns an HTML error document\. You can optionally configure your bucket with a custom error document so that Amazon S3 returns that document when an error occurs\. 
+
+**Note**  
+Some browsers display their own error message when an error occurs, ignoring the error document that Amazon S3 returns\. For example, when an HTTP 404 Not Found error occurs, Google Chrome might ignore the error document that Amazon S3 returns and display its own error\.
+
+**Topics**
++ [Amazon S3 HTTP Response Codes](#s3-http-error-codes)
++ [Configuring a Custom Error Document](#custom-error-document)
+
+## Amazon S3 HTTP Response Codes<a name="s3-http-error-codes"></a>
 
 The following table lists the subset of HTTP response codes that Amazon S3 returns when an error occurs\. 
 
@@ -18,8 +29,24 @@ The following table lists the subset of HTTP response codes that Amazon S3 retur
 
 ![\[403 Forbidden error message example\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/WebsiteErrorExample403.png)
 
-**Custom Error Document**  
-You can optionally provide a custom error document that contains a user\-friendly error message and additional help\. You provide this custom error document as part of adding website configuration to your bucket\. Amazon S3 returns your custom error document for only the HTTP 4XX class of error codes\.
+## Configuring a Custom Error Document<a name="custom-error-document"></a>
 
-**Error Documents and Browser Behavior**  
-When an error occurs, Amazon S3 returns an HTML error document\. If you configured your website with a custom error document, Amazon S3 returns that error document\. However, some browsers display their own error message when an error occurs, ignoring the error document that Amazon S3 returns\. For example, when an HTTP 404 Not Found error occurs, Google Chrome might ignore the error document that Amazon S3 returns and display its own error\.
+When you configure your bucket as a static website, you can optionally provide a custom error document that contains a user\-friendly error message and additional help\. Amazon S3 returns your custom error document for only the HTTP 4XX class of error codes\. 
+
+**To configure a custom error document**
+
+1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
+
+1. In the **S3 buckets** list, choose your bucket name\.
+
+1. Choose **Properties**\.
+
+1. Choose **Static website hosting**\.
+
+   If your bucket is already configured as a static website, you can follow the next step to update or add error document information\. If you have not configured your bucket as a static website, you must first set up the required configuration\. For more information, see [Enabling Website Hosting](EnableWebsiteHosting.md)\.
+
+1. In the **Error document** box, enter your error document name\.
+
+1. Choose **Save**\.
+
+For more information about using the REST API to configure your bucket as a static website with a custom error document, see [PutBucketWebsite](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketWebsite.html) in the *Amazon Simple Storage Service API Reference*\.

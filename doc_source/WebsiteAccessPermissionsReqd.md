@@ -27,7 +27,7 @@ Before you turn off block public access, confirm that you want anyone on the int
 
 ## Add a Bucket Policy<a name="bucket-policy-static-site"></a>
 
-To make the objects in your bucket publicly readable, you must write a bucket policy that grants everyone `s3:GetObject` permission\. The following sample bucket policy grants everyone access to the objects in the specified folder\. Before you add a bucket policy that grants public read access to a bucket, confirm that you have disabled block public access for the bucket\. To use the following bucket policy, update the `Resource` to match your bucket\. For more information about bucket policies, see [Using Bucket Policies and User Policies](using-iam-policies.md)\.
+To make the objects in your bucket publicly readable, you must write a bucket policy that grants everyone `s3:GetObject` permission\. The following sample bucket policy grants everyone access to the objects in the specified folder\. Before you add a bucket policy that grants public read access to a bucket, confirm that you have disabled block public access for the bucket\. To use the following bucket policy, update the example bucket name \(*`example-bucket`*\) to match your bucket name\. For more information about bucket policies, see [Using Bucket Policies and User Policies](using-iam-policies.md)\.
 
 ```
  1. {

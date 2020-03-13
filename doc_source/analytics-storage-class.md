@@ -5,7 +5,7 @@ By using Amazon S3 analytics *storage class analysis* you can analyze storage ac
 After storage class analysis observes the infrequent access patterns of a filtered set of data over a period of time, you can use the analysis results to help you improve your lifecycle policies\. You can configure storage class analysis to analyze all the objects in a bucket\. Or, you can configure filters to group objects together for analysis by common prefix \(that is, objects that have names that begin with a common string\), by object tags, or by both prefix and tags\. You'll most likely find that filtering by object groups is the best way to benefit from storage class analysis\. 
 
 **Important**  
-Storage class analysis does not give recommendations for transitions to the ONEZONE\_IA or GLACIER storage classes\.
+Storage class analysis does not give recommendations for transitions to the ONEZONE\_IA or S3 Glacier storage classes\.
 
 You can have multiple storage class analysis filters per bucket, up to 1,000, and will receive a separate analysis for each filter\. Multiple filter configurations allow you analyze specific groups of objects to improve your lifecycle policies that transition objects to STANDARD\_IA\. 
 
@@ -87,7 +87,7 @@ The Amazon S3 console shows the access patterns grouped by the predefined object
 
 ![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/storage-class-analysis-infrequently-accesses.png)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
 
-The **Frequently accessed** or **Infrequently accessed** text shown at the bottom of each age group is based on the same logic as the lifecycle policy recommendation being prepared\. After a recommended age for a lifecycle policy is ready \(RecommendedObjectAge\), all of the age tiers younger than that recommended age are marked as infrequently accessed, regardless of the current cumulative access ratio\. This text is meant as a visual aid to help you in the lifecycle creation process\. 
+The **Frequently accessed** or **Infrequently accessed** text shown is meant as a visual aid to help you in the lifecycle creation process\.
 
 ## How Can I Export Storage Class Analysis Data?<a name="analytics-storage-class-export-to-file"></a>
 

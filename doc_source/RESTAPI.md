@@ -4,7 +4,7 @@ This section contains information on how to make requests to Amazon S3 endpoints
 
 **Topics**
 + [Constructing S3 Hostnames for REST API Requests](#constructing-hostname-rest-api-requests)
-+ [Virtual Hosted‐Style and Path‐Style Requets](#virtual-hosted-path-style-requests)
++ [Virtual Hosted‐Style and Path‐Style Requests](#virtual-hosted-path-style-requests)
 + [Making Requests to Dual\-Stack Endpoints by Using the REST API](#rest-api-dual-stack)
 + [Virtual Hosting of Buckets](VirtualHosting.md)
 + [Request Redirection and the REST API](RESTRedirect.md)
@@ -23,7 +23,7 @@ Amazon S3 Access Points endpoints and dual\-stack endpoints also follow the stan
 
 For a complete list of Amazon S3 Regions and endpoints, see [Amazon S3 Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html) in the *AWS General Reference*\.
 
-## Virtual Hosted‐Style and Path‐Style Requets<a name="virtual-hosted-path-style-requests"></a>
+## Virtual Hosted‐Style and Path‐Style Requests<a name="virtual-hosted-path-style-requests"></a>
 
 When making requests by using the REST API, you can use virtual hosted–style or path\-style URIs for the Amazon S3 endpoints\. For more information, see [Virtual Hosting of Buckets](VirtualHosting.md)\.
 

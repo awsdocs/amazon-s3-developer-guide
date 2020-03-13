@@ -2,7 +2,7 @@
 
 **Topics**
 + [Example: Setting up a Static Website](HostingWebsiteOnS3Setup.md)
-+ [Example: Setting Up a Static Website Using a Custom Domain](website-hosting-custom-domain-walkthrough.md)
++ [Example: Setting Up a Static Website Using a Custom Domain Name Registered with Route 53](website-hosting-custom-domain-walkthrough.md)
 + [Example: Speed Up Your Website with Amazon CloudFront](website-hosting-cloudfront-walkthrough.md)
 + [Clean Up Your Example Resources](getting-started-cleanup.md)
 

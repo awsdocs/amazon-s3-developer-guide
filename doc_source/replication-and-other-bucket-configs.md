@@ -21,8 +21,6 @@ This topic explains how bucket replication configuration affects the behavior of
 
 The time it takes for Amazon S3 to replicate an object depends on the size of the object\. For large objects, it can take several hours\. Although it might take a while before a replica is available in the destination bucket, it takes the same amount of time to create the replica as it took to create the corresponding object in the source bucket\. If a lifecycle policy is enabled on the destination bucket, the lifecycle rules honor the original creation time of the object, not when the replica became available in the destination bucket\. 
 
-If you have an object Expiration lifecycle policy in a non\-versioned bucket, and you want to maintain the same permanent delete behavior when you enable versioning, you must add a noncurrent expiration policy to manage the deletions of the noncurrent object versions in the version\-enabled bucket\.
-
 Replication configuration requires the bucket to be versioning\-enabled\. When you enable versioning on a bucket, keep the following in mind:
 + If you have an object Expiration lifecycle policy, after you enable versioning, add a `NonCurrentVersionExpiration` policy to maintain the same permanent delete behavior as before you enabled versioning\.
 + If you have a Transition lifecycle policy, after you enable versioning, consider adding a `NonCurrentVersionTransition` policy\.

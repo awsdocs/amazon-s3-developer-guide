@@ -51,4 +51,4 @@ For added security, you can require multifactor authentication \(MFA\) when acce
 
 ## Request Endpoints<a name="RequestEndpoints"></a>
 
-You send REST requests to the service's predefined endpoint\. For a list of all AWS services and their corresponding endpoints, go to [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) in the *AWS General Reference*\.
+You send REST requests to the service's predefined endpoint\. For a list of all AWS services and their corresponding endpoints, go to [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html) in the *AWS General Reference*\.

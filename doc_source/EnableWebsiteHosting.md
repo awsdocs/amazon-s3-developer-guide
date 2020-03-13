@@ -1,6 +1,6 @@
 # Enabling Website Hosting<a name="EnableWebsiteHosting"></a>
 
-Follow the steps below to enable website hosting for your Amazon S3 bucket using the [Amazon S3 console](https://console.aws.amazon.com/s3/home)\. For example walkthroughs that show you how to set up your website with optional configurations such as a custom domain, see [Example Walkthroughs \- Hosting Websites on Amazon S3](hosting-websites-on-s3-examples.md)\.
+Follow these steps to enable website hosting for your Amazon S3 bucket using the [Amazon S3 console](https://console.aws.amazon.com/s3/home)\. For example walkthroughs that show you how to set up your website with optional configurations such as a custom domain, see [Example Walkthroughs \- Hosting Websites on Amazon S3](hosting-websites-on-s3-examples.md)\.
 
 **To enable website hosting for an S3 bucket**
 
@@ -18,9 +18,9 @@ Follow the steps below to enable website hosting for your Amazon S3 bucket using
 
    The index document name is typically `index.html`\. For information, see [Configuring Index Document Support](IndexDocumentSupport.md)\.
 
-1. \(Optional\) If you want to add a custom error document, in the **Error document** field, type the error document name, for example, `error.html`\. 
+1. \(Optional\) If you want to add a custom error document, in the **Error document** field, enter the error document name \(for example, **error\.html**\)\. 
 
-   For more information, see [\(Optional\) Custom Error Document Support](CustomErrorDocSupport.md)\.
+   For more information, see [\(Optional\) Configuring Custom Error Document Support](CustomErrorDocSupport.md)\.
 
 1. \(Optional\) If you want to specify advanced redirection rules, in **Edit redirection rules**, use XML to describe the rules\.
 
