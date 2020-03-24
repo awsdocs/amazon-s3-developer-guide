@@ -36,7 +36,7 @@ The following sections provide additional information\.
 
 ### <a name="replication-config-min-rule-config"></a>
 
-Each rule must include the rule's status and priority, and indicate whether to replicate delete makers\. 
+Each rule must include the rule's status and priority, and indicate whether to replicate delete markers\. 
 + `Status` indicates whether the rule is enabled or disabled\. If a rule is disabled, Amazon S3 doesn't perform the actions specified in the rule\. 
 + `Priority` indicates which rule has priority when multiple rules apply to an object\. 
 + Currently, delete markers aren't replicated, so you must set `DeleteMarkerReplication` to `Disabled`\.
