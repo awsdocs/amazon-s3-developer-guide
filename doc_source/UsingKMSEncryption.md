@@ -46,7 +46,7 @@ To require server\-side encryption of all objects in a particular Amazon S3 buck
 ```
  1. {
  2.    "Version":"2012-10-17",
- 3.    "Id":"PutObjPolicy"
+ 3.    "Id":"PutObjPolicy",
  4.    "Statement":[{
  5.          "Sid":"DenyUnEncryptedObjectUploads",
  6.          "Effect":"Deny",
