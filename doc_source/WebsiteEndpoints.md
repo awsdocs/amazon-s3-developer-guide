@@ -2,19 +2,13 @@
 
 When you configure your bucket as a static website, the website is available at the AWS Region\-specific website endpoint of the bucket\. Website endpoints are different from the endpoints where you send REST API requests\. For more information about the differences between the endpoints, see [Key Differences Between a Website Endpoint and a REST API Endpoint](#WebsiteRestEndpointDiff)\.
 
-Depending on your Region, Amazon S3 website endpoints follow one of these two formats\. The URL returns the default index document that you configure for the website:
+Depending on your Region, your Amazon S3 website endpoints follows one of these two formats\.
++ **s3\-website dash \(\-\) Region** ‐ `http://bucket-name.s3-website.Region.amazonaws.com`
++ **s3\-website dot \(\.\) Region** ‐ `http://bucket-name.s3-website-Region.amazonaws.com`
 
-```
-http://bucket-name.s3-website.Region.amazonaws.com
-```
+These URLs return the default index document that you configure for the website\. For a complete list of Amazon S3 website endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints)\.
 
-```
-http://bucket-name.s3-website-Region.amazonaws.com
-```
-
-For a complete list of Amazon S3 website endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints) in the *AWS General Reference*\.
-
-For your customers to access content at the website endpoint, you must make all your content publicly readable\. To do so, you can edit the S3 Block Public Access settings for the bucket\. For more information, see [Using Amazon S3 Block Public Access](access-control-block-public-access.md)\. Then, use a bucket policy or an access control list \(ACL\) on an object to grant the necessary permissions\. For more information, see [Permissions Required for Website Access](WebsiteAccessPermissionsReqd.md)\.
+For your customers to access content at the website endpoint, you must make all your content publicly readable\. To do so, you can edit the S3 Block Public Access settings for the bucket\. For more information, see [Using Amazon S3 Block Public Access](access-control-block-public-access.md)\. Then, use a bucket policy or an access control list \(ACL\) on an object to grant the necessary permissions\. For more information, see [Setting Permissions for Website Access](WebsiteAccessPermissionsReqd.md)\.
 
 **Important**  
 Amazon S3 website endpoints do not support HTTPS\. For information about using HTTPS with an Amazon S3 bucket, see the following:  
@@ -66,7 +60,7 @@ For more information, see [Customizing Amazon S3 URLs with CNAMEs](VirtualHostin
 
 Instead of accessing the website using an Amazon S3 website endpoint, you can use your own domain registered with Amazon Route 53 to serve your content—for example, `example.com`\. You can use Amazon S3 with Route 53 to host a website at the root domain\. For example, if you have the root domain `example.com` and you host your website on Amazon S3, your website visitors can access the site from their browser by entering either `http://www.example.com` or `http://example.com`\. 
 
-For an example walkthrough, see [Example: Setting Up a Static Website Using a Custom Domain Name Registered with Route 53](website-hosting-custom-domain-walkthrough.md)\. 
+For an example walkthrough, see [Configuring a Static Website Using a Custom Domain Registered with Route 53](website-hosting-custom-domain-walkthrough.md)\. 
 
 ## Key Differences Between a Website Endpoint and a REST API Endpoint<a name="WebsiteRestEndpointDiff"></a>
 

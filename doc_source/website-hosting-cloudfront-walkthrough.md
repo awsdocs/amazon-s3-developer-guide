@@ -1,17 +1,15 @@
-# Example: Speed Up Your Website with Amazon CloudFront<a name="website-hosting-cloudfront-walkthrough"></a>
+# Speeding Up Your Website with Amazon CloudFront<a name="website-hosting-cloudfront-walkthrough"></a>
 
-You can use [Amazon CloudFront](http://aws.amazon.com/cloudfront) to improve the performance of your website\. CloudFront makes your website's files \(such as HTML, images, and video\) available from data centers around the world \(called *edge locations*\)\. When a visitor requests a file from your website, CloudFront automatically redirects the request to a copy of the file at the nearest edge location\. This results in faster download times than if the visitor had requested the content from a data center that is located farther away\.
+You can use [Amazon CloudFront](http://aws.amazon.com/cloudfront) to improve the performance of your website\. CloudFront makes your website files \(such as HTML, images, and video\) available from data centers around the world \(called *edge locations*\)\. When a visitor requests a file from your website, CloudFront automatically redirects the request to a copy of the file at the nearest edge location\. This results in faster download times than if the visitor had requested the content from a data center that is located farther away\.
 
-CloudFront caches content at edge locations for a period of time that you specify\. If a visitor requests content that has been cached for longer than the expiration date, CloudFront checks the origin server to see if a newer version of the content is available\. If a newer version is available, CloudFront copies the new version to the edge location\. Changes that you make to the original content are replicated to edge locations as visitors request the content\.
-
-To speed up your website, use CloudFront to complete the following tasks\.
+CloudFront caches content at edge locations for a period of time that you specify\. If a visitor requests content that has been cached for longer than the expiration date, CloudFront checks the origin server to see if a newer version of the content is available\. If a newer version is available, CloudFront copies the new version to the edge location\. Changes that you make to the original content are replicated to edge locations as visitors request the content\. 
 
 **Topics**
-+ [Create a CloudFront Distribution](#create-distribution)
-+ [Update the Record Sets for Your Domain and Subdomain](#update-record-sets)
-+ [\(Optional\) Check the Log Files](#check-log-files)
++ [Step 1: Create a CloudFront Distribution](#create-distribution)
++ [Step 2: Update the Record Sets for Your Domain and Subdomain](#update-record-sets)
++ [\(Optional\) Step 3: Check the Log Files](#check-log-files)
 
-## Create a CloudFront Distribution<a name="create-distribution"></a>
+## Step 1: Create a CloudFront Distribution<a name="create-distribution"></a>
 
 First, you create a CloudFront distribution\. This makes your website available from data centers around the world\.
 
@@ -21,53 +19,63 @@ First, you create a CloudFront distribution\. This makes your website available 
 
 1. Choose **Create Distribution**\.
 
-1. On the **Select a delivery method for your content** page, for **Web**, choose **Get Started**\.
+1. On the **Select a delivery method for your content** page, under **Web**, choose **Get Started**\.
 
-1. On the **Create Distribution** page, in the **Origin Settings** section, for **Origin Domain Name**, type the Amazon S3 static website hosting endpoint for your bucket\. For example, `example.com.s3-website.us-west-1.amazonaws.com`\.
+1. On the **Create Distribution** page, in the **Origin Settings** section, for **Origin Domain Name**, enter the Amazon S3 website endpoint for your bucket, for example, `example.com.s3-website.us-west-1.amazonaws.com`\.
 
    CloudFront fills in the **Origin ID** for you\.
 
-1. For **Default Cache Behavior Settings**, leave the values set to the defaults\. For more information about these configuration options, see [Values that You Specify When You Create or Update a Web Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/WorkingWithDownloadDistributions.html#DownloadDistValuesYouSpecify) in the *Amazon CloudFront Developer Guide*\.
+1. For **Default Cache Behavior Settings**, keep the values set to the defaults\. 
+
+   For more information about these configuration options, see [Values that You Specify When You Create or Update a Web Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/WorkingWithDownloadDistributions.html#DownloadDistValuesYouSpecify) in the *Amazon CloudFront Developer Guide*\.
 
 1. For **Distribution Settings**, do the following:
 
    1. Leave **Price Class** set to **Use All Edge Locations \(Best Performance\)**\.
 
-   1. Set **Alternate Domain Names \(CNAMEs\)** to the root domain and `www` subdomain; in this tutorial, these are `example.com` and `www.example.com`\. These values must be set before you create aliases for the A records that connect the specified domain names to the CloudFront distribution\.
-**Important**  
-Prior to performing this step, note the [requirements for using alternate domain names](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-requirements), in particular the need for a valid SSL/TLS certificate\. 
+   1. Keep **Alternate Domain Names \(CNAMEs\)** blank\.
 
-   1. Set **Default Root Object** to `index.html`\. This is the default page that the CloudFront distribution returns if the URL used to access the distribution doesn't contain a file name\. This value should match the index document value that you set in [Configuring a Bucket As a Static Website Using the AWS Management Console](HowDoIWebsiteConfiguration.md)\.
+   1. In **Default Root Object**, enter the name of your index document, for example, `index.html`\. 
+
+      If the URL used to access the distribution doesn't contain a file name, the CloudFront distribution returns the index document\. The **Default Root Object** should exactly match the name of the index document for your static website\. For more information, see [Configuring an Index Document](IndexDocumentSupport.md)\.
 
    1. Set **Logging** to **On**\.
 
    1. For **Bucket for Logs**, choose the logging bucket that you created\.
 
-   1. To store the logs generated by traffic to the CloudFront distribution in a folder, named `cdn`, in the log bucket, type `cdn/` for **Log Prefix**\.
+      For more information about configuring a logging bucket, see [\(Optional\) Configuring Web Traffic Logging](LoggingWebsiteTraffic.md)\.
 
-   1. Leave the other settings at their default values\.
+   1. If you want to store the logs that are generated by traffic to the CloudFront distribution in a folder, in **Log Prefix**, enter the folder name\.
+
+   1. Keep all other settings at their default values\.
 
 1. Choose **Create Distribution**\.
 
-To see the status of the distribution, find the distribution in the console and check the **Status** column\. A status of `InProgress` indicates that the distribution is not yet fully deployed\.
+1. To see the status of the distribution, find the distribution in the console and check the **Status** column\. 
 
-After your distribution is deployed, you can reference your content with the new CloudFront domain name\. Record the value of **Domain Name** shown in the CloudFront console\. You'll need it in the next step\. In this example, the value is `dj4p1rv6mvubz.cloudfront.net`\. 
+   A status of `InProgress` indicates that the distribution is not yet fully deployed\.
 
-To verify that your CloudFront distribution is working, type the domain name of the distribution in a web browser\. If it is working, your website is visible\. 
+   After your distribution is deployed, you can reference your content with the new CloudFront domain name\.
 
-## Update the Record Sets for Your Domain and Subdomain<a name="update-record-sets"></a>
+1. Record the value of **Domain Name** shown in the CloudFront console, for example, `dj4p1rv6mvubz.cloudfront.net`\. 
 
-Now that you have successfully created a CloudFront distribution, update the A records in Route 53 to point to the new CloudFront distribution\.
+1. To verify that your CloudFront distribution is working, enter the domain name of the distribution in a web browser\.
 
-**To update A records to point to a CloudFront distribution**
+   If your website is visible, the CloudFront distribution works\. If your website has a custom domain registered with Amazon Route 53, you will need the CloudFront domain name to update the record set in the next step\.
+
+## Step 2: Update the Record Sets for Your Domain and Subdomain<a name="update-record-sets"></a>
+
+Now that you have successfully created a CloudFront distribution, update the alias record in Route 53 to point to the new CloudFront distribution\.
+
+**To update the alias record to point to a CloudFront distribution**
 
 1. Open the Route 53 console at [https://console\.aws\.amazon\.com/route53/](https://console.aws.amazon.com/route53/)\.
 
-1. On the **Hosted Zones** page, choose the hosted zone that you created for your domain\.
+1. On the **Hosted Zones** page, choose the hosted zone that you created for your subdomain\.
 
 1. Choose **Go to Record Sets**\.
 
-1. Choose the A record that you created for the `www` subdomain\.
+1. Choose the A record that you created for your subdomain, for example, `www.example.com`\.
 
 1. For **Alias Target**, choose the CloudFront distribution\.
 
@@ -75,22 +83,19 @@ Now that you have successfully created a CloudFront distribution, update the A r
 
 1. To redirect the A record for the root domain to the CloudFront distribution, repeat this procedure\.
 
-The update to the record sets takes effect within 2 to 48 hours\. To see if the new A records have taken effect, in a web browser, type `http://www.example.com`\. If the browser no longer redirects you to `http://example.com`, the new A records are in place\. 
+   The update to the record sets takes effect within 2–48 hours\. 
 
-This change in behavior occurs because traffic routed by the *old* A record to the `www` subdomain S3 bucket is redirected by the settings in Amazon S3 to the root domain\. When the new A record has taken effect, traffic routed by the new A record to the CloudFront distribution is not redirected to the root domain\. 
+1. To see whether the new A records have taken effect, in a web browser, enter your subdomain URL, for example, `http://www.example.com`\. 
 
+   If the browser no longer redirects you to the root domain \(for example, `http://example.com`\), the new A records are in place\. When the new A record has taken effect, traffic routed by the new A record to the CloudFront distribution is not redirected to the root domain\. Any visitors who reference the site by using `http://example.com` or `http://www.example.com` are redirected to the nearest CloudFront edge location, where they benefit from faster download times\.
 **Tip**  
 Browsers can cache redirect settings\. If you think the new A record settings should have taken effect, but your browser still redirects `http://www.example.com` to `http://example.com`, try clearing your browser history and cache, closing and reopening your browser application, or using a different web browser\. 
 
-When the new A records are in effect, any visitors who reference the site by using `http://example.com` or `http://www.example.com` are redirected to the nearest CloudFront edge location, where they benefit from faster download times\.
-
-If you created your site as a learning exercise only, you can delete the resources that you allocated so that you no longer accrue charges\. To do so, continue on to [Clean Up Your Example Resources](getting-started-cleanup.md)\. After you delete your AWS resources, your website is no longer available\.
-
-## \(Optional\) Check the Log Files<a name="check-log-files"></a>
+## \(Optional\) Step 3: Check the Log Files<a name="check-log-files"></a>
 
 The access logs tell you how many people are visiting the website\. They also contain valuable business data that you can analyze with other services, such as [Amazon EMR](https://docs.aws.amazon.com/emr/latest/DeveloperGuide/)\. 
 
-In your bucket, older Amazon S3 log files are located in the `root` folder\. All new log files, which should be CloudFront logs, are located in the `cdn` folder\. Amazon S3 writes website access logs to your log bucket every two hours\. CloudFront writes logs to your log bucket within 24 hours from when the corresponding requests are made\.
+CloudFront logs are stored in the bucket and folder that you choose when you create a CloudFront distribution and enable logging\. CloudFront writes logs to your log bucket within 24 hours from when the corresponding requests are made\.
 
 **To see the log files for your website**
 
@@ -98,6 +103,8 @@ In your bucket, older Amazon S3 log files are located in the `root` folder\. All
 
 1. Choose the logging bucket for your website\.
 
-1. To see the log files that are stored in the `cdn` or `root` folder, choose `cdn` or `root`\.
+1. Choose the CloudFront logs folder\.
 
-1. Open Amazon S3 log files, which are text files, in a browser\. Download the \.gzip files written by CloudFront before opening them\.
+1. Download the `.gzip` files written by CloudFront before opening them\.
+
+   If you created your website only as a learning exercise, you can delete the resources that you allocated so that you no longer accrue charges\. To do so, see [Cleaning Up Your Example Resources](getting-started-cleanup.md)\. After you delete your AWS resources, your website is no longer available\.

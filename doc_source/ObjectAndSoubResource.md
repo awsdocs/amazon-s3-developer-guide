@@ -1,6 +1,6 @@
 # Object Subresources<a name="ObjectAndSoubResource"></a>
 
-Amazon S3 defines a set of subresources associated with buckets and objects\. Subresources are subordinates to objects; that is, subresources do not exist on their own, they are always associated with some other entity, such as an object or a bucket\. 
+Amazon S3 defines a set of subresources associated with buckets and objects\. Subresources are subordinates to objects\. This means that subresources don't exist on their own\. They are always associated with some other entity, such as an object or a bucket\. 
 
  The following table lists the subresources associated with Amazon S3 objects\.
 

@@ -18,7 +18,7 @@ You can use the select type of restore with the AWS SDKs, the S3 Glacier REST AP
 The following are requirements for using select:
 + Archive objects that are queried by select must be formatted as uncompressed comma\-separated values \(CSV\)\. 
 + An S3 bucket for output\. The AWS account that you use to initiate a S3 Glacier select job must have write permissions for the S3 bucket\. The Amazon S3 bucket must be in the same AWS Region as the bucket that contains the archived object that is being queried\.
-+ The requesting AWS account must have permissions to perform the `s3:RestoreObject` and `s3:GetObject` actions\. For more information about these permissions, see [Permissions Related to Bucket Subresource Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-bucket-subresources)\. 
++ The requesting AWS account must have permissions to perform the `s3:RestoreObject` and `s3:GetObject` actions\. For more information about these permissions, see [Example — Bucket Subresource Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-bucket-subresources)\. 
 + The archive must not be encrypted with SSE\-C or client\-side encryption\. 
 
 The following limits apply when using select:

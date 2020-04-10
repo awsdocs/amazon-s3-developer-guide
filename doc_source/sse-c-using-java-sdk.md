@@ -9,7 +9,7 @@ The following example shows how to request server\-side encryption with customer
 **Note**  
 This example shows how to upload an object in a single operation\. When using the Multipart Upload API to upload large objects, you provide encryption information in the same way shown in this example\. For examples of multipart uploads that use the AWS SDK for Java, see [Using the AWS Java SDK for Multipart Upload \(High\-Level API\)](usingHLmpuJava.md) and [Using the AWS Java SDK for a Multipart Upload \(Low\-Level API\)](mpListPartsJavaAPI.md)\.
 
-To add the required encryption information, you include an `SSECustomerKey` in your request\. For more information about the `SSECustomerKey` class, see [Using SSE\-C](ServerSideEncryptionCustomerKeys.md#sse-c-how-to-programmatically-intro)\.
+To add the required encryption information, you include an `SSECustomerKey` in your request\. For more information about the `SSECustomerKey` class, see [Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the REST API](ServerSideEncryptionCustomerKeysSSEUsingRESTAPI.md)\.
 
 For information about SSE\-C, see [Protecting Data Using Server\-Side Encryption with Customer\-Provided Encryption Keys \(SSE\-C\)](ServerSideEncryptionCustomerKeys.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 

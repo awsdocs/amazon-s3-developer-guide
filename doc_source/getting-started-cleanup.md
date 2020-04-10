@@ -1,13 +1,13 @@
-# Clean Up Your Example Resources<a name="getting-started-cleanup"></a>
+# Cleaning Up Your Example Resources<a name="getting-started-cleanup"></a>
 
-If you created your static website as a learning exercise only, be sure to delete the AWS resources that you allocated so that you no longer accrue charges\. After you delete your AWS resources, your website is no longer available\.
+If you created your static website as a learning exercise, you should delete the AWS resources that you allocated so that you no longer accrue charges\. After you delete your AWS resources, your website is no longer available\.
 
 **Topics**
-+ [Delete the Amazon CloudFront Distribution](#getting-started-cleanup-cloudfront)
-+ [Delete the Route 53 Hosted Zone](#getting-started-cleanup-route53)
-+ [Delete the S3 Bucket](#getting-started-cleanup-s3)
++ [Step 1: Delete the Amazon CloudFront Distribution](#getting-started-cleanup-cloudfront)
++ [Step 2: Delete the Route 53 Hosted Zone](#getting-started-cleanup-route53)
++ [Step 3: Disable Logging and Delete Your S3 Bucket](#getting-started-cleanup-s3)
 
-## Delete the Amazon CloudFront Distribution<a name="getting-started-cleanup-cloudfront"></a>
+## Step 1: Delete the Amazon CloudFront Distribution<a name="getting-started-cleanup-cloudfront"></a>
 
 Before you delete an Amazon CloudFront distribution, you must disable it\. A disabled distribution is no longer functional and does not accrue charges\. You can enable a disabled distribution at any time\. After you delete a disabled distribution, it is no longer available\.
 
@@ -23,7 +23,7 @@ Before you delete an Amazon CloudFront distribution, you must disable it\. A dis
 
 1. When prompted for confirmation, choose **Yes, Delete**\.
 
-## Delete the Route 53 Hosted Zone<a name="getting-started-cleanup-route53"></a>
+## Step 2: Delete the Route 53 Hosted Zone<a name="getting-started-cleanup-route53"></a>
 
 Before you delete the hosted zone, you must delete the record sets that you created\. You don't need to delete the NS and SOA records; these are automatically deleted when you delete the hosted zone\.
 
@@ -33,13 +33,15 @@ Before you delete the hosted zone, you must delete the record sets that you crea
 
 1.  In the list of domain names, select your domain name, and then choose **Go to Record Sets**\. 
 
-1. In the list of record sets, select the A records that you created\. The type of each record set is listed in the **Type** column\. 
+1. In the list of record sets, select the A records that you created\. 
 
-1.  Choose **Delete Record Set**\. 
+   The type of each record set is listed in the **Type** column\. 
 
-1.  When prompted for confirmation, choose **Confirm**\. 
+1. Choose **Delete Record Set**\. 
 
-**To delete an Route 53 hosted zone**
+1. When prompted for confirmation, choose **Confirm**\. 
+
+**To delete a Route 53 hosted zone**
 
 1.  Continuing from the previous procedure, choose **Back to Hosted Zones**\. 
 
@@ -47,7 +49,7 @@ Before you delete the hosted zone, you must delete the record sets that you crea
 
 1.  When prompted for confirmation, choose **Confirm**\. 
 
-## Delete the S3 Bucket<a name="getting-started-cleanup-s3"></a>
+## Step 3: Disable Logging and Delete Your S3 Bucket<a name="getting-started-cleanup-s3"></a>
 
 Before you delete your S3 bucket, make sure that logging is disabled for the bucket\. Otherwise, AWS continues to write logs to your bucket as you delete it\.
 
@@ -55,7 +57,7 @@ Before you delete your S3 bucket, make sure that logging is disabled for the buc
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. Select your bucket, and then choose **Properties**\.
+1. Under **Buckets**, choose your bucket name, and then choose **Properties**\.
 
 1. From **Properties**, choose **Logging**\.
 

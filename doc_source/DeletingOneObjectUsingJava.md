@@ -1,10 +1,10 @@
 # Deleting an Object Using the AWS SDK for Java<a name="DeletingOneObjectUsingJava"></a>
 
-You can delete an object from a bucket\. If you have versioning enabled on the bucket, you have the following options:
+You can delete an object from a bucket\. If you have S3 Versioning enabled on the bucket, you have the following options:
 + Delete a specific object version by specifying a version ID\.
 + Delete an object without specifying a version ID, in which case S3 adds a delete marker to the object\.
 
-For more information about versioning, see [Object Versioning](ObjectVersioning.md)\. 
+For more information about S3 Versioning, see [Object Versioning](ObjectVersioning.md)\. 
 
 **Example Example 1: Deleting an Object \(Non\-Versioned Bucket\)**  
 The following example deletes an object from a bucket\. The example assumes that the bucket is not versioning\-enabled and the object doesn't have any version IDs\. In the delete request, you specify only the object key and not a version ID\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  

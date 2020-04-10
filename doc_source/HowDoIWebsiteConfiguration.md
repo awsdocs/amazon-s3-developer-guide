@@ -4,10 +4,10 @@ Using the AWS Management Console, you can configure your Amazon S3 bucket as a s
 
 **Required configurations:**
 + [Enabling Website Hosting](EnableWebsiteHosting.md)
-+ [Configuring Index Document Support](IndexDocumentSupport.md)
-+ [Permissions Required for Website Access](WebsiteAccessPermissionsReqd.md)
++ [Configuring an Index Document](IndexDocumentSupport.md)
++ [Setting Permissions for Website Access](WebsiteAccessPermissionsReqd.md)
 
 **Optional configurations:**
 + [\(Optional\) Configuring Web Traffic Logging](LoggingWebsiteTraffic.md)
-+ [\(Optional\) Configuring Custom Error Document Support](CustomErrorDocSupport.md)
++ [\(Optional\) Configuring a Custom Error Document](CustomErrorDocSupport.md)
 + [\(Optional\) Configuring a Webpage Redirect](how-to-page-redirect.md)

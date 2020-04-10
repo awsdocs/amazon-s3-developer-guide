@@ -1,17 +1,17 @@
 # Manage an Object's Lifecycle Using the AWS SDK for \.NET<a name="manage-lifecycle-using-dot-net"></a>
 
-You can use the AWS SDK for \.NET to manage the lifecycle configuration on a bucket\. For more information about managing lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\. 
+You can use the AWS SDK for \.NET to manage the S3 Lifecycle configuration on a bucket\. For more information about managing Lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\. 
 
 **Note**  
-When you add a lifecycle configuration, Amazon S3 replaces the existing lifecycle configuration on the specified bucket\. To update a configuration, you must first retrieve the lifecycle configuration, make the changes, and then add the revised lifecycle configuration to the bucket\.
+When you add a Lifecycle configuration, Amazon S3 replaces the existing configuration on the specified bucket\. To update a configuration, you must first retrieve the Lifecycle configuration, make the changes, and then add the revised Lifecycle configuration to the bucket\.
 
 **Example \.NET Code Example**  
-The following example shows how to use the AWS SDK for \.NET to add, update, and delete a bucket's lifecycle configuration\. The code example does the following:  
-+ Adds a lifecycle configuration to a bucket\. 
-+ Retrieves the lifecycle configuration and updates it by adding another rule\. 
-+ Adds the modified lifecycle configuration to the bucket\. Amazon S3 replaces the existing lifecycle configuration\.
+The following example shows how to use the AWS SDK for \.NET to add, update, and delete a bucket's Lifecycle configuration\. The code example does the following:  
++ Adds a Lifecycle configuration to a bucket\. 
++ Retrieves the Lifecycle configuration and updates it by adding another rule\. 
++ Adds the modified Lifecycle configuration to the bucket\. Amazon S3 replaces the existing Lifecycle configuration\.
 + Retrieves the configuration again and verifies it by printing the number of rules in the configuration\.
-+ Deletes the lifecycle configuration\.and verifies the deletion
++ Deletes the Lifecycle configuration\.and verifies the deletion\.
 For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```

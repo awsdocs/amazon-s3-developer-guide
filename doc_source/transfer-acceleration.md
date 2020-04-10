@@ -21,12 +21,12 @@ For more information about when to use Transfer Acceleration, see [Amazon S3 FAQ
 
 ### Using the Amazon S3 Transfer Acceleration Speed Comparison Tool<a name="transfer-acceleration-speed-comparison"></a>
 
-You can use the [Amazon S3 Transfer Acceleration Speed Comparison tool](http://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html) to compare accelerated and non\-accelerated upload speeds across Amazon S3 regions\. The Speed Comparison tool uses multipart uploads to transfer a file from your browser to various Amazon S3 regions with and without using Transfer Acceleration\.
+You can use the [Amazon S3 Transfer Acceleration Speed Comparison tool](https://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html) to compare accelerated and non\-accelerated upload speeds across Amazon S3 regions\. The Speed Comparison tool uses multipart uploads to transfer a file from your browser to various Amazon S3 regions with and without using Transfer Acceleration\.
 
 You can access the Speed Comparison tool using either of the following methods:
 + Copy the following URL into your browser window, replacing *region* with the region that you are using \(for example, us\-west\-2\) and *yourBucketName* with the name of the bucket that you want to evaluate: 
 
-  `http://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html?region=region&origBucketName=yourBucketName` 
+  `https://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html?region=region&origBucketName=yourBucketName` 
 
    
 
@@ -67,7 +67,7 @@ The following are the requirements for using Transfer Acceleration on an S3 buck
 + The name of the bucket used for Transfer Acceleration must be DNS\-compliant and must not contain periods \("\."\)\.
 + Transfer Acceleration must be enabled on the bucket\. After enabling Transfer Acceleration on a bucket it might take up to 20 minutes before the data transfer speed to the bucket increases\.
 + To access the bucket that is enabled for Transfer Acceleration, you must use the endpoint `bucketname.s3-accelerate.amazonaws.com`\. or the dual\-stack endpoint `bucketname.s3-accelerate.dualstack.amazonaws.com` to connect to the enabled bucket over IPv6\. 
-+ You must be the bucket owner to set the transfer acceleration state\. The bucket owner can assign permissions to other users to allow them to set the acceleration state on a bucket\. The `s3:PutAccelerateConfiguration` permission permits users to enable or disable Transfer Acceleration on a bucket\. The `s3:GetAccelerateConfiguration` permission permits users to return the Transfer Acceleration state of a bucket, which is either `Enabled` or `Suspended.` For more information about these permissions, see [Permissions Related to Bucket Subresource Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-bucket-subresources) and [Identity and Access Management in Amazon S3](s3-access-control.md)\.
++ You must be the bucket owner to set the transfer acceleration state\. The bucket owner can assign permissions to other users to allow them to set the acceleration state on a bucket\. The `s3:PutAccelerateConfiguration` permission permits users to enable or disable Transfer Acceleration on a bucket\. The `s3:GetAccelerateConfiguration` permission permits users to return the Transfer Acceleration state of a bucket, which is either `Enabled` or `Suspended.` For more information about these permissions, see [Example — Bucket Subresource Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-bucket-subresources) and [Identity and Access Management in Amazon S3](s3-access-control.md)\.
 
 ### More Info<a name="transfer-acceleration-moreinfo"></a>
 + [GET Bucket accelerate](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETaccelerate.html)

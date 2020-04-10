@@ -100,6 +100,9 @@ If you access a bucket programmatically, note that Amazon S3 supports RESTful ar
 
 Amazon S3 supports both virtual\-hosted–style and path\-style URLs to access a bucket\. Because buckets can be accessed using path\-style and virtual\-hosted–style URLs, we recommend that you create buckets with DNS\-compliant bucket names\. For more information, see [Bucket Restrictions and Limitations](BucketRestrictions.md)\.
 
+**Note**  
+Virtual hosted style and path\-style requests use the S3 dot Region endpoint structure \(`s3.Region`\), for example, `https://my-bucket.s3.us-west-2.amazonaws.com`\. However, some older Amazon S3 Regions also support S3 dash Region endpoints `s3-Region`, for example, `https://my-bucket.s3-us-west-2.amazonaws.com`\. If your bucket is in one of these Regions, you might see `s3-Region` endpoints in your server access logs or CloudTrail logs\. We recommend that you do not use this endpoint structure in your requests\. 
+
 ### Virtual Hosted Style Access<a name="virtual-host-style-url-ex"></a>
 
 In a virtual\-hosted–style request, the bucket name is part of the domain name in the URL\.
@@ -148,11 +151,12 @@ In addition to accessing a bucket directly, you can access a bucket through an S
 S3 access points only support virtual\-host\-style addressing\. To address a bucket through an access point, use this format:
 
 ```
-https://access-point-name.s3-accesspoint.region.amazonaws.com.
+https://AccessPointName-AccountId.s3-accesspoint.region.amazonaws.com.
 ```
 
 **Note**  
-S3 access points only support secure access by HTTPS\. HTTP isn't supported\.
+If your access point name includes dash \(\-\) characters, include the dashes in the URL and insert another dash before the account ID\. For example, to use an access point named `finance-docs` owned by account `123456789012` in Region `us-west-2`, the appropriate URL would be `https://finance-docs-123456789012.s3-accesspoint.us-west-2.amazonaws.com`\.
+S3 access points don't support access by HTTP, only secure access by HTTPS\.
 
 ### Accessing a Bucket using S3://<a name="accessing-a-bucket-using-S3-format"></a>
 

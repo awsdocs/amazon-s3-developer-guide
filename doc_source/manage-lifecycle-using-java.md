@@ -1,17 +1,17 @@
 # Managing Object Lifecycles Using the AWS SDK for Java<a name="manage-lifecycle-using-java"></a>
 
-You can use the AWS SDK for Java to manage the lifecycle configuration of a bucket\. For more information about managing lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
+You can use the AWS SDK for Java to manage the S3 Lifecycle configuration of a bucket\. For more information about managing S3 Lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
 **Note**  
-When you add a lifecycle configuration to a bucket, Amazon S3 replaces the bucket's current lifecycle configuration, if there is one\. To update a configuration, you retrieve it, make the desired changes, and then add the revised lifecycle configuration to the bucket\.
+When you add S3 Lifecycle configuration to a bucket, Amazon S3 replaces the bucket's current Lifecycle configuration, if there is one\. To update a configuration, you retrieve it, make the desired changes, and then add the revised configuration to the bucket\.
 
 **Example**  
-The following example shows how to use the AWS SDK for Java to add, update, and delete the lifecycle configuration of a bucket\. The example does the following:  
-+ Adds a lifecycle configuration to a bucket\. 
-+ Retrieves the lifecycle configuration and updates it by adding another rule\. 
-+ Adds the modified lifecycle configuration to the bucket\. Amazon S3 replaces the existing configuration\. 
+The following example shows how to use the AWS SDK for Java to add, update, and delete the Lifecycle configuration of a bucket\. The example does the following:  
++ Adds a Lifecycle configuration to a bucket\. 
++ Retrieves the Lifecycle configuration and updates it by adding another rule\. 
++ Adds the modified Lifecycle configuration to the bucket\. Amazon S3 replaces the existing configuration\. 
 + Retrieves the configuration again and verifies that it has the right number of rules by the printing number of rules\.
-+ Deletes the lifecycle configuration and verifies that it has been deleted by attempting to retrieve it again\.
++ Deletes the Lifecycle configuration and verifies that it has been deleted by attempting to retrieve it again\.
  For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```

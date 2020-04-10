@@ -1,8 +1,8 @@
 # Using Versioning<a name="Versioning"></a>
 
-Versioning is a means of keeping multiple variants of an object in the same bucket\. You can use versioning to preserve, retrieve, and restore every version of every object stored in your Amazon S3 bucket\. With versioning, you can easily recover from both unintended user actions and application failures\. 
+Versioning is a means of keeping multiple variants of an object in the same bucket\. You can use versioning to preserve, retrieve, and restore every version of every object stored in your Amazon S3 bucket\. With versioning, you can easily recover from both unintended user actions and application failures\. When you enable versioning for a bucket, if Amazon S3 receives multiple write requests for the same object simultaneously, it stores all of the objects\.
 
-In one bucket, for example, you can have two objects with the same key, but different version IDs, such as `photo.gif` \(version 111111\) and `photo.gif `\(version 121212\)\. 
+If you enable versioning for a bucket, Amazon S3 automatically generates a unique version ID for the object being stored\. In one bucket, for example, you can have two objects with the same key, but different version IDs, such as `photo.gif` \(version 111111\) and `photo.gif `\(version 121212\)\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/versioning_Enabled.png)
 

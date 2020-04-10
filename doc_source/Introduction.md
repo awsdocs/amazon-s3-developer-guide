@@ -20,7 +20,7 @@ This guide describes how you send requests to create buckets, store and retrieve
 ## Advantages of Using Amazon S3<a name="features"></a>
 
 Amazon S3 is intentionally built with a minimal feature set that focuses on simplicity and robustness\. Following are some of the advantages of using Amazon S3:
-+ **Creating buckets** – Create and name a bucket that stores data\. Buckets are the fundamental container in Amazon S3 for data storage\.
++ **Creating buckets** – Create and name a bucket that stores data\. Buckets are the fundamental containers in Amazon S3 for data storage\.
 + **Storing data** – Store an infinite amount of data in a bucket\. Upload as many objects as you like into an Amazon S3 bucket\. Each object can contain up to 5 TB of data\. Each object is stored and retrieved using a unique developer\-assigned key\.
 + **Downloading data** – Download your data or enable others to do so\. Download your data anytime you like, or allow others to do the same\.
 + **Permissions** – Grant or deny access to others who want to upload or download data into your Amazon S3 bucket\. Grant upload and download permissions to three types of users\. Authentication mechanisms can help keep data secure from unauthorized access\.
@@ -41,7 +41,7 @@ This section describes key concepts and terminology you need to understand to us
 
 ### Buckets<a name="BasicsBucket"></a>
 
- A bucket is a container for objects stored in Amazon S3\. Every object is contained in a bucket\. For example, if the object named `photos/puppy.jpg` is stored in the `johnsmith` bucket in the US West \(Oregon\) Region, then it is addressable using the URL `https://johnsmith.s3.us-west-2.amazonaws.com/photos/puppy.jpg`\.
+ A bucket is a container for objects stored in Amazon S3\. Every object is contained in a bucket\. For example, if the object named `photos/puppy.jpg` is stored in the `awsexamplebucket` bucket in the US West \(Oregon\) Region, then it is addressable using the URL `https://awsexamplebucket.s3.us-west-2.amazonaws.com/photos/puppy.jpg`\.
 
  Buckets serve several purposes: 
 + They organize the Amazon S3 namespace at the highest level\.
@@ -61,7 +61,7 @@ An object is uniquely identified within a bucket by a key \(name\) and a version
 
 ### Keys<a name="BasicsKeys"></a>
 
-A key is the unique identifier for an object within a bucket\. Every object in a bucket has exactly one key\. The combination of a bucket, key, and version ID uniquely identify each object\. So you can think of Amazon S3 as a basic data map between "bucket \+ key \+ version" and the object itself\. Every object in Amazon S3 can be uniquely addressed through the combination of the web service endpoint, bucket name, key, and optionally, a version\. For example, in the URL `http://doc.s3.amazonaws.com/2006-03-01/AmazonS3.wsdl`, "`doc`" is the name of the bucket and "`2006-03-01/AmazonS3.wsdl`" is the key\.
+A key is the unique identifier for an object within a bucket\. Every object in a bucket has exactly one key\. The combination of a bucket, key, and version ID uniquely identify each object\. So you can think of Amazon S3 as a basic data map between "bucket \+ key \+ version" and the object itself\. Every object in Amazon S3 can be uniquely addressed through the combination of the web service endpoint, bucket name, key, and optionally, a version\. For example, in the URL `https://doc.s3.amazonaws.com/2006-03-01/AmazonS3.wsdl`, "`doc`" is the name of the bucket and "`2006-03-01/AmazonS3.wsdl`" is the key\.
 
  For more information about object keys, see [Object Keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)\. 
 
@@ -217,7 +217,7 @@ The REST API uses the standard HTTP headers and status codes, so that standard b
 **Note**  
  SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\. 
 
-The SOAP API provides a SOAP 1\.1 interface using document literal encoding\. The most common way to use SOAP is to download the WSDL \(see [http://doc\.s3\.amazonaws\.com/2006\-03\-01/AmazonS3\.wsdl](http://doc.s3.amazonaws.com/2006-03-01/AmazonS3.wsdl)\), use a SOAP toolkit such as Apache Axis or Microsoft \.NET to create bindings, and then write code that uses the bindings to call Amazon S3\.
+The SOAP API provides a SOAP 1\.1 interface using document literal encoding\. The most common way to use SOAP is to download the WSDL \(see [https://doc\.s3\.amazonaws\.com/2006\-03\-01/AmazonS3\.wsdl](https://doc.s3.amazonaws.com/2006-03-01/AmazonS3.wsdl)\), use a SOAP toolkit such as Apache Axis or Microsoft \.NET to create bindings, and then write code that uses the bindings to call Amazon S3\.
 
 ## Paying for Amazon S3<a name="PayingforStorage"></a>
 

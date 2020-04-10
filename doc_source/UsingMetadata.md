@@ -1,6 +1,6 @@
 # Object Key and Metadata<a name="UsingMetadata"></a>
 
-Each Amazon S3 object has data, a key, and metadata\. The object key \(or key name\) uniquely identifies the object in a bucket\. Object metadata is a set of name\-value pairs\. You can set object metadata at the time you upload it\. After you upload the object, you cannot modify object metadata\. The only way to modify object metadata is to make a copy of the object and set the metadata\. 
+Each Amazon S3 object has data, a key, and metadata\. The *object key* \(or key name\) uniquely identifies the object in a bucket\. *Object metadata* is a set of name\-value pairs\. You can set object metadata at the time you upload it\. After you upload the object, you cannot modify object metadata\. The only way to modify object metadata is to make a copy of the object and set the metadata\. 
 
 **Topics**
 + [Object Keys](#object-keys)
@@ -8,9 +8,11 @@ Each Amazon S3 object has data, a key, and metadata\. The object key \(or key na
 
 ## Object Keys<a name="object-keys"></a>
 
-When you create an object, you specify the key name, which uniquely identifies the object in the bucket\. For example, in the [Amazon S3 console](https://console.aws.amazon.com/s3/home), when you highlight a bucket, a list of objects in your bucket appears\. These names are the object keys\. The name for a key is a sequence of Unicode characters whose UTF\-8 encoding is at most 1024 bytes long\. 
+When you create an object, you specify the key name, which uniquely identifies the object in the bucket\. For example, on the [Amazon S3 console](https://console.aws.amazon.com/s3/home), when you highlight a bucket, a list of objects in your bucket appears\. These names are the *object keys*\. The name for a key is a sequence of Unicode characters whose UTF\-8 encoding is at most 1,024 bytes long\. 
 
-The Amazon S3 data model is a flat structure: you create a bucket, and the bucket stores objects\. There is no hierarchy of subbuckets or subfolders\. However, you can infer logical hierarchy using key name prefixes and delimiters as the Amazon S3 console does\. The Amazon S3 console supports a concept of folders\. Suppose that your bucket \(`admin-created`\) has four objects with the following object keys:
+The Amazon S3 data model is a flat structure: You create a bucket, and the bucket stores objects\. There is no hierarchy of subbuckets or subfolders\. However, you can infer logical hierarchy using key name prefixes and delimiters as the Amazon S3 console does\. The Amazon S3 console supports a concept of folders\. 
+
+Suppose that your bucket \(`admin-created`\) has four objects with the following object keys:
 
 `Development/Projects.xls`
 
@@ -29,15 +31,15 @@ The `s3-dg.pdf` key does not have a prefix, so its object appears directly at th
 ![\[Screenshot of Amazon S3 console with Projects.xlsx file selected in the Development folder.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/ui-file-in-folder.png)![\[Screenshot of Amazon S3 console with Projects.xlsx file selected in the Development folder.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screenshot of Amazon S3 console with Projects.xlsx file selected in the Development folder.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
 
 **Note**  
-Amazon S3 supports buckets and objects, and there is no hierarchy in Amazon S3\. However, the prefixes and delimiters in an object key name enable the Amazon S3 console and the AWS SDKs to infer hierarchy and introduce the concept of folders\.
+Amazon S3 supports buckets and objects, and there is no hierarchy\. However, by using prefixes and delimiters in an object key name, the Amazon S3 console and the AWS SDKs can infer hierarchy and introduce the concept of folders\.
 
 ### Object Key Naming Guidelines<a name="object-key-guidelines"></a>
 
-You can use any UTF\-8 character in an object key name\. However, using certain characters in key names may cause problems with some applications and protocols\. The following guidelines help you maximize compliance with DNS, web\-safe characters, XML parsers, and other APIs\. 
+You can use any UTF\-8 character in an object key name\. However, using certain characters in key names can cause problems with some applications and protocols\. The following guidelines help you maximize compliance with DNS, web\-safe characters, XML parsers, and other APIs\. 
 
 #### Safe Characters<a name="object-key-guidelines-safe-characters"></a>
 
-The following character sets are generally safe for use in key names:
+The following character sets are generally safe for use in key names\.
 
 
 |  |  | 
@@ -46,16 +48,16 @@ The following character sets are generally safe for use in key names:
 | Special characters |    \!   \-   \_   \.   \*   '   \(   \)    | 
 
 The following are examples of valid object key names:
-+  4my\-organization 
-+  my\.great\_photos\-2014/jan/myvacation\.jpg 
-+  videos/2014/birthday/video1\.wmv
++ `4my-organization`
++ `my.great_photos-2014/jan/myvacation.jpg`
++ `videos/2014/birthday/video1.wmv`
 
 **Important**  
-If an object key name consists of a single period \(\.\), or two periods \(\.\.\), you can’t download the object using the Amazon S3 console\. To download an object with a key name of “\.” or “\.\.”, you must use the AWS CLI, AWS SDKs, or REST API\.
+If an object key name ends with a single period \(\.\), or two periods \(\.\.\), you can’t download the object using the Amazon S3 console\. To download an object with a key name ending with “\.” or “\.\.”, you must use the AWS Command Line Interface \(AWS CLI\), AWS SDKs, or REST API\.
 
 #### Characters That Might Require Special Handling<a name="object-key-guidelines-special-handling"></a>
 
-The following characters in a key name might require additional code handling and likely need to be URL encoded or referenced as HEX\. Some of these are non\-printable characters and your browser might not handle them, which also requires special handling:
+The following characters in a key name might require additional code handling and likely need to be URL encoded or referenced as HEX\. Some of these are non\-printable characters that your browser might not handle, which also requires special handling:
 + Ampersand \("&"\) 
 + Dollar \("$"\) 
 + ASCII character ranges 00–1F hex \(0–31 decimal\) and 7F \(127 decimal\) 
@@ -64,7 +66,7 @@ The following characters in a key name might require additional code handling an
 + Semicolon \(";"\) 
 + Colon \(":"\) 
 + Plus \("\+"\) 
-+ Space – Significant sequences of spaces may be lost in some uses \(especially multiple spaces\) 
++ Space – Significant sequences of spaces might be lost in some uses \(especially multiple spaces\) 
 + Comma \(","\) 
 + Question mark \("?"\) 
 
@@ -89,7 +91,7 @@ Avoid the following characters in a key name because of significant special hand
 
 ## Object Metadata<a name="object-metadata"></a>
 
-There are two kinds of metadata: system metadata and user\-defined metadata\. 
+There are two kinds of metadata: *system metadata* and *user\-defined metadata*\. 
 
 ### System\-Defined Object Metadata<a name="SysMetadata"></a>
 
@@ -97,11 +99,13 @@ For each object stored in a bucket, Amazon S3 maintains a set of system metadata
 
 There are two categories of system metadata: 
 
-1. Metadata such as object creation date is system controlled where only Amazon S3 can modify the value\. 
+1. Metadata such as object creation date is system controlled, where only Amazon S3 can modify the value\. 
 
 1. Other system metadata, such as the storage class configured for the object and whether the object has server\-side encryption enabled, are examples of system metadata whose values you control\. If your bucket is configured as a website, sometimes you might want to redirect a page request to another page or an external URL\. In this case, a webpage is an object in your bucket\. Amazon S3 stores the page redirect value as system metadata whose value you control\. 
 
-   When you create objects, you can configure values of these system metadata items or update the values when you need to\. For more information about storage classes, see [Amazon S3 Storage Classes](storage-class-intro.md)\. For more information about server\-side encryption, see [Protecting Data Using Encryption](UsingEncryption.md)\. 
+   When you create objects, you can configure values of these system metadata items or update the values when you need to\. For more information about storage classes, see [Amazon S3 Storage Classes](storage-class-intro.md)\. 
+
+   For more information about server\-side encryption, see [Protecting Data Using Encryption](UsingEncryption.md)\. 
 
 The following table provides a list of system\-defined metadata and whether you can update it\.
 

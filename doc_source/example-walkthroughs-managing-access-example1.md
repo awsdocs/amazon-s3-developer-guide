@@ -84,7 +84,7 @@ Using the credentials of user AccountAadmin in Account A, and the special IAM us
       + The first statement grants Dave the bucket operation permissions `s3:GetBucketLocation` and `s3:ListBucket`\.
       + The second statement grants the `s3:GetObject` permission\. Because Account A also owns the object, the account administrator is able to grant the `s3:GetObject` permission\. 
 
-      In the `Principal` statement, Dave is identified by his user ARN\. For more information about policy elements, see [Access Policy Language Overview](access-policy-language-overview.md)\.
+      In the `Principal` statement, Dave is identified by his user ARN\. For more information about policy elements, see [Policies and Permissions in Amazon S3](access-policy-language-overview.md)\.
 
       ```
       {

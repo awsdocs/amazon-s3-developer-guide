@@ -1,6 +1,6 @@
 # Operations<a name="batch-ops-operations"></a>
 
-Amazon S3 batch operations support five different operations\. The topics in this section describe each of the operations\.
+Amazon S3 Batch Operations supports five different operations\. The topics in this section describe each of the operations and how they work with Batch Operations\.
 
 **Topics**
 + [PUT Object Copy](batch-ops-copy-object.md)

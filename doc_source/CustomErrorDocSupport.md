@@ -1,4 +1,4 @@
-# \(Optional\) Configuring Custom Error Document Support<a name="CustomErrorDocSupport"></a>
+# \(Optional\) Configuring a Custom Error Document<a name="CustomErrorDocSupport"></a>
 
 After you configure your bucket as a static website, when an error occurs, Amazon S3 returns an HTML error document\. You can optionally configure your bucket with a custom error document so that Amazon S3 returns that document when an error occurs\. 
 
@@ -21,7 +21,7 @@ The following table lists the subset of HTTP response codes that Amazon S3 retur
 | 304 Not Modified |  Amazon S3 users request headers `If-Modified-Since`, `If-Unmodified-Since`, `If-Match` and/or `If-None-Match` to determine whether the requested object is same as the cached copy held by the client\. If the object is the same, the website endpoint returns a **304 Not Modified** response\.  | 
 | 400 Malformed Request |  The website endpoint responds with a **400 Malformed Request** when a user attempts to access a bucket through the incorrect regional endpoint\.   | 
 | 403 Forbidden |  The website endpoint responds with a **403 Forbidden** when a user request translates to an object that is not publicly readable\. The object owner must make the object publicly readable using a bucket policy or an ACL\.   | 
-| 404 Not Found |  The website endpoint responds with **404 Not Found** for the following reasons: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/CustomErrorDocSupport.html) You can create a custom document that is returned for **404 Not Found**\. Make sure that the document is uploaded to the bucket configured as a website, and that the website hosting configuration is set to use the document\. For information on how Amazon S3 interprets the URL as a request for an object or an index document, see [Configuring Index Document Support](IndexDocumentSupport.md)\.   | 
+| 404 Not Found |  The website endpoint responds with **404 Not Found** for the following reasons: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/CustomErrorDocSupport.html) You can create a custom document that is returned for **404 Not Found**\. Make sure that the document is uploaded to the bucket configured as a website, and that the website hosting configuration is set to use the document\. For information on how Amazon S3 interprets the URL as a request for an object or an index document, see [Configuring an Index Document](IndexDocumentSupport.md)\.   | 
 | 500 Service Error |  The website endpoint responds with a **500 Service Error** when an internal server error occurs\.  | 
 | 503 Service Unavailable |  The website endpoint responds with a **503 Service Unavailable** when Amazon S3 determines that you need to reduce your request rate\.   | 
 
@@ -37,7 +37,7 @@ When you configure your bucket as a static website, you can optionally provide a
 
 1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. In the **S3 buckets** list, choose your bucket name\.
+1. In the **Buckets** list, choose your bucket name\.
 
 1. Choose **Properties**\.
 

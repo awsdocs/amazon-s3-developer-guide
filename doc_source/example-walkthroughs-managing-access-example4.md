@@ -21,7 +21,7 @@ In this scenario, the bucket owner can create an AWS Identity and Access Managem
 
  IAM roles enable several scenarios to delegate access to your resources, and cross\-account access is one of the key scenarios\. In this example, the bucket owner, Account A, uses an IAM role to temporarily delegate object access cross\-account to users in another AWS account, Account C\. Each IAM role you create has two policies attached to it:
 + A trust policy identifying another AWS account that can assume the role\.
-+ An access policy defining what permissions—for example, `s3:GetObject`—are allowed when someone assumes the role\. For a list of permissions you can specify in a policy, see [Specifying Permissions in a Policy](using-with-s3-actions.md)\.
++ An access policy defining what permissions—for example, `s3:GetObject`—are allowed when someone assumes the role\. For a list of permissions you can specify in a policy, see [Amazon S3 Actions](using-with-s3-actions.md)\.
 
 The AWS account identified in the trust policy then grants its user permission to assume the role\. The user can then do the following to access objects:
 + Assume the role and, in response, get temporary security credentials\. 

@@ -12,7 +12,7 @@ Following is a request that writes data to an object and makes the object readab
  `Sample Request`   
 
 ```
- 1. <PutObjectInline xmlns="http://doc.s3.amazonaws.com/2006-03-01">
+ 1. <PutObjectInline xmlns="https://doc.s3.amazonaws.com/2006-03-01">
  2.   <Bucket>quotes</Bucket>
  3.   <Key>Nelson</Key>
  4.   <Metadata>
@@ -44,7 +44,7 @@ Following is a request that writes data to an object and makes the object readab
  `Sample Response`   
 
 ```
-1. <PutObjectInlineResponse xmlns="http://s3.amazonaws.com/doc/2006-03-01">
+1. <PutObjectInlineResponse xmlns="https://s3.amazonaws.com/doc/2006-03-01">
 2.   <PutObjectInlineResponse>
 3.     <ETag>&quot828ef3fdfa96f00ad9f27c383fc9ac7f&quot</ETag>
 4.     <LastModified>2009-01-01T12:00:00.000Z</LastModified>

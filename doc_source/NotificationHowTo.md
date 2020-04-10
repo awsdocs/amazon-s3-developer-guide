@@ -429,7 +429,7 @@ The following is an example of an IAM policy that you attach to the destination 
    ],
    "Resource": "arn:aws:sns:REGION:ACCOUNT-ID:TOPICNAME",
    "Condition": {
-      "ArnLike": { "aws:SourceArn": "arn:aws:s3:::bucket-name" }
+      "ArnLike": { "aws:SourceArn": "arn:aws:s3:::bucket-name" },
       "StringEquals": { "aws:SourceAccount": "bucket-owner-account-id" }
    }
   }

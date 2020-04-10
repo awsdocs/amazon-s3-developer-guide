@@ -83,7 +83,7 @@ This section explains the trust policy and minimum required permissions policy\.
 Permissions for the `s3:ReplicateObject` action on the *destination* bucket also allow replication of object tags, so you don't need to explicitly grant permission for the `s3:ReplicateTags` action\.
   + `s3:GetObjectVersionTagging`—Permissions for this action on objects in the *source* bucket allow Amazon S3 to read object tags for replication \(see [Object Tagging](object-tagging.md)\)\. If Amazon S3 doesn't have these permissions, it replicates the objects, but not the object tags\.
 
-  For a list of Amazon S3 actions, see [Specifying Permissions in a Policy](using-with-s3-actions.md)\.
+  For a list of Amazon S3 actions, see [Amazon S3 Actions](using-with-s3-actions.md)\.
 **Important**  
 The AWS account that owns the IAM role must have permissions for the actions that it grants to the IAM role\.   
 For example, suppose that the source bucket contains objects owned by another AWS account\. The owner of the objects must explicitly grant the AWS account that owns the IAM role the required permissions through the object ACL\. Otherwise, Amazon S3 can't access the objects, and replication of the objects fails\. For information about ACL permissions, see [Access Control List \(ACL\) Overview](acl-overview.md)\.  

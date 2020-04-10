@@ -33,8 +33,8 @@ The first column in the following table lists usage types that appear in your bi
 | --- | --- | --- | --- | 
 |  *region1*\-*region2*\-AWS\-In\-Bytes  |  Bytes  |  Hourly  |  The amount of data transferred in to AWS Region1 from AWS Region2  | 
 |  *region1*\-*region2*\-AWS\-Out\-Bytes  |  Bytes  |  Hourly  |  The amount of data transferred from AWS Region1 to AWS Region2  | 
-|  *region*\-BatchOperations\-Jobs   |  Count   |  Hourly  |  The number of Amazon S3 batch operations jobs performed\.  | 
-|  *region*\-BatchOperations\-Objects   |  Count   |  Hourly  |  The number of object operations performed by Amazon S3 batch operations\.  | 
+|  *region*\-BatchOperations\-Jobs   |  Count   |  Hourly  |  The number of Amazon S3 Batch Operations jobs performed\.  | 
+|  *region*\-BatchOperations\-Objects   |  Count   |  Hourly  |  The number of object operations performed by Amazon S3 Batch Operations\.  | 
 |  *region*\-DataTransfer\-In\-Bytes  |  Bytes  |  Hourly  |  The amount of data transferred into Amazon S3 from the internet  | 
 |  *region*\-DataTransfer\-Out\-Bytes  |  Bytes  |  Hourly  |  The amount of data transferred from Amazon S3 to the internet1  | 
 |  *region*\-C3DataTransfer\-In\-Bytes  |  Bytes  |  Hourly  |  The amount of data transferred into Amazon S3 from Amazon EC2 within the same AWS Region  | 

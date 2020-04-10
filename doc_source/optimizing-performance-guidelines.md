@@ -43,7 +43,7 @@ For more information about data transfer costs, see [Amazon S3 Pricing](https://
 
 [Amazon S3 Transfer Acceleration](transfer-acceleration.md) manages fast, easy, and secure transfers of files over long geographic distances between the client and an S3 bucket\. Transfer Acceleration takes advantage of the globally distributed edge locations in [Amazon CloudFront](https://docs.aws.amazon.com/cloudfront/index.html)\. As the data arrives at an edge location, it is routed to Amazon S3 over an optimized network path\. Transfer Acceleration is ideal for transferring gigabytes to terabytes of data regularly across continents\. It's also useful for clients that upload to a centralized bucket from all over the world\.
 
-You can use the [Amazon S3 Transfer Acceleration Speed Comparison tool](http://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html) to compare accelerated and non\-accelerated upload speeds across Amazon S3 Regions\. The Speed Comparison tool uses multipart uploads to transfer a file from your browser to various Amazon S3 Regions with and without using Amazon S3 Transfer Acceleration\.
+You can use the [Amazon S3 Transfer Acceleration Speed Comparison tool](https://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html) to compare accelerated and non\-accelerated upload speeds across Amazon S3 Regions\. The Speed Comparison tool uses multipart uploads to transfer a file from your browser to various Amazon S3 Regions with and without using Amazon S3 Transfer Acceleration\.
 
 ## Use the Latest Version of the AWS SDKs<a name="optimizing-performance-guidelines-sdk"></a>
 

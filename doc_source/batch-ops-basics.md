@@ -1,6 +1,6 @@
 # The Basics: Amazon S3 Batch Operations Jobs<a name="batch-ops-basics"></a>
 
-You can use Amazon S3 batch operations to perform large\-scale batch operations on Amazon S3 objects\. Amazon S3 batch operations can execute a single operation or action on lists of Amazon S3 objects that you specify\. 
+You can use Amazon S3 Batch Operations to perform large\-scale batch operations on Amazon S3 objects\. Amazon S3 Batch Operations can execute a single operation or action on lists of Amazon S3 objects that you specify\. 
 
 **Topics**
 + [How an Amazon S3 Batch Operations Job Works](#batch-ops-basics-how-it-works)
@@ -8,9 +8,9 @@ You can use Amazon S3 batch operations to perform large\-scale batch operations 
 
 ## How an Amazon S3 Batch Operations Job Works<a name="batch-ops-basics-how-it-works"></a>
 
-A job is the basic unit of work for Amazon S3 batch operations\. A job contains all of the information necessary to execute the specified operation on a list of objects\.
+A job is the basic unit of work for Amazon S3 Batch Operations\. A job contains all of the information necessary to execute the specified operation on a list of objects\.
 
-To create a job, you give Amazon S3 batch operations a list of objects and specify the action to perform on those objects\. Amazon S3 batch operations support the following operations:
+To create a job, you give Amazon S3 Batch Operations a list of objects and specify the action to perform on those objects\. Amazon S3 Batch Operations support the following operations:
 + [PUT copy object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)
 + [PUT object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html)
 + [PUT object ACL](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html)
@@ -26,7 +26,7 @@ After you create a job, Amazon S3 processes the list of objects in the manifest 
  A manifest is an Amazon S3 object that lists object keys that you want Amazon S3 to act upon\. To create a manifest for a job, you specify the manifest object key, ETag, and optional version ID\. The contents of the manifest must be URL encoded\. Manifests that use server\-side encryption with customer\-provided keys \(SSE\-C\) and server\-side encryption with AWS Key Management Service \(SSE\-KMS\) customer master keys \(CMKs\) are not supported\. Your manifest must contain the bucket name, object key, and optionally, the object version for each object\. Any other fields in the manifest are not used by Amazon S3 batch operations\. 
 
 You can specify a manifest in a create job request using one of the following two formats\.
-+ Amazon S3 inventory report — Must be a CSV\-formatted Amazon S3 inventory report\. You must specify the `manifest.json` file that is associated with the inventory report\. For more information about inventory reports, see [ Amazon S3 Inventory](storage-inventory.md)\. If the inventory report includes version IDs, Amazon S3 batch operations operate on the specific object versions\.
++ Amazon S3 inventory report — Must be a CSV\-formatted Amazon S3 inventory report\. You must specify the `manifest.json` file that is associated with the inventory report\. For more information about inventory reports, see [ Amazon S3 Inventory](storage-inventory.md)\. If the inventory report includes version IDs, Amazon S3 Batch Operations operate on the specific object versions\.
 + CSV file — Each row in the file must include the bucket name, object key, and optionally, the object version\. Object keys must be URL\-encoded, as shown in the following examples\. The manifest must either include version IDs for all objects or omit version IDs for all objects\. For more information about the CSV manifest format, see [JobManifestSpec](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobManifestSpec.html) in the *Amazon Simple Storage Service API Reference*\.
 
   The following is an example manifest in CSV format without version IDs\.
@@ -52,5 +52,5 @@ You can specify a manifest in a create job request using one of the following tw
   ```
 
 **Important**  
-If the objects in your manifest are in a versioned bucket, you should specify the version IDs for the objects\. When you create a job, Amazon S3 batch operations parse the entire manifest before running the job\. However, it doesn't take a "snapshot" of the state of the bucket\.   
+If the objects in your manifest are in a versioned bucket, you should specify the version IDs for the objects\. When you create a job, Amazon S3 Batch Operations parse the entire manifest before running the job\. However, it doesn't take a "snapshot" of the state of the bucket\.   
 Because manifests can contain billions of objects, jobs might take a long time to run\. If you overwrite an object with a new version while a job is running, and you didn't specify a version ID for that object, Amazon S3 performs the operation on the latest version of the object, and not the version that existed when you created the job\. The only way to avoid this behavior is to specify version IDs for the objects that are listed in the manifest\. 

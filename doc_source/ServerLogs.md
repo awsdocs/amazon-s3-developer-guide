@@ -22,7 +22,7 @@ Server access logs do not log information regarding wrong\-region redirect error
 To track requests for access to your bucket, you can enable server access logging\. Each access log record provides details about a single access request, such as the requester, bucket name, request time, request action, response status, and an error code, if relevant\. 
 
 **Note**  
-There is no extra charge for enabling server access logging on an Amazon S3 bucket, and you are not charged when the logs are PUT to your bucket\. However, any log files that the system delivers to your bucket accrue the usual charges for storage\. You can delete these log files at any time\. Subsequent reads and other requests to these log files are charged normally, as for any other object, including data transfer charges
+There is no extra charge for enabling server access logging on an Amazon S3 bucket, and you are not charged when the logs are PUT to your bucket\. However, any log files that the system delivers to your bucket accrue the usual charges for storage\. You can delete these log files at any time\. Subsequent reads and other requests to these log files are charged normally, as for any other object, including data transfer charges\.
 
  By default, logging is disabled\. When logging is enabled, logs are saved to a bucket in the same AWS Region as the source bucket\. 
 

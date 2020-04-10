@@ -16,7 +16,7 @@ The following are some variations you might use:
   5.     ByteRange = new ByteRange(0, 10)
   6. };
   ```
-+ When retrieving an object, you can optionally override the response header values \(see [Getting Objects](GettingObjectsUsingAPIs.md)\) by using the `ResponseHeaderOverrides` object and setting the corresponding request property\. The following C\# code example shows how to do this\. For example, you can use this feature to indicate that the object should be downloaded into a file with a different filename that the object key name\.   
++ When retrieving an object, you can optionally override the response header values \(see [Getting Objects](GettingObjectsUsingAPIs.md)\) by using the `ResponseHeaderOverrides` object and setting the corresponding request property\. The following C\# code example shows how to do this\. For example, you can use this feature to indicate that the object should be downloaded into a file with a different file name than the object key name\.   
 **Example**  
 
   ```

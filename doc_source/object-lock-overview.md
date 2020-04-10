@@ -26,7 +26,7 @@ These retention modes apply different levels of protection to your objects\. You
 
 ### <a name="object-lock-governance-mode"></a>
 
-In *governance* mode, users can't overwrite or delete an object version or alter its lock settings unless they have special permissions\. With governance mode, you protect objects against being deleted by most users, but you can still grant some users permission to alter the retention settings or delete the object if necessary\. You can also use governance mode to test retention\-period settings before creating a compliance\-mode retention period\. To override or remove governance\-mode retention settings, a user must have the `s3:BypassGovernanceRetention` permission and must explicitly include `x-amz-bypass-governance-retention:true` as a request header with any request that requires overriding governance mode\.
+In *governance* mode, users can't overwrite or delete an object version or alter its lock settings unless they have special permissions\. With governance mode, you protect objects against being deleted by most users, but you can still grant some users permission to alter the retention settings or delete the object if necessary\. You can also use governance mode to test retention\-period settings before creating a compliance\-mode retention period\. To override or remove governance\-mode retention settings, a user must have the `s3:BypassGovernanceRetention` permission and must explicitly include `x-amz-bypass-governance-retention:true` as a request header with any request that requires overriding governance mode\. 
 
 **Note**  
 The Amazon S3 console by default includes the `x-amz-bypass-governance-retention:true` header\. If you try to delete objects protected by *governance* mode and have `s3:BypassGovernanceRetention` or `s3:GetBucketObjectLockConfiguration` permissions, the operation will succeed\. 
@@ -57,7 +57,7 @@ You can extend a retention period after you've applied a retention setting to an
 
 ## Legal Holds<a name="object-lock-legal-holds"></a>
 
-Amazon S3 object lock also enables you to place a *legal hold* on an object version\. Like a retention period, a legal hold prevents an object version from being overwritten or deleted\. However, a legal hold doesn't have an associated retention period and remains in effect until removed\. Legal holds can be freely placed and removed by any user who has the `s3:PutObjectLegalHold` permission\.
+Amazon S3 object lock also enables you to place a *legal hold* on an object version\. Like a retention period, a legal hold prevents an object version from being overwritten or deleted\. However, a legal hold doesn't have an associated retention period and remains in effect until removed\. Legal holds can be freely placed and removed by any user who has the `s3:PutObjectLegalHold` permission\. For a complete list of Amazon S3 permissions, see [Actions, Resources, and Condition Keys for Amazon S3](list_amazons3.md)\.
 
 Legal holds are independent from retention periods\. As long as the bucket that contains the object has Amazon S3 object lock enabled, you can place and remove legal holds regardless of whether the specified object version has a retention period set\. Placing a legal hold on an object version doesn't affect the retention mode or retention period for that object version\. For example, suppose that you place a legal hold on an object version while the object version is also protected by a retention period\. If the retention period expires, the object doesn't lose its WORM protection\. Rather, the legal hold continues to protect the object until an authorized user explicitly removes it\. Similarly, if you remove a legal hold while an object version has a retention period in effect, the object version remains protected until the retention period expires\.
 
@@ -65,7 +65,7 @@ Legal holds are independent from retention periods\. As long as the bucket that 
 
 To use Amazon S3 object lock, you must enable it for a bucket\. You can also optionally configure a default retention mode and period that applies to new objects that are placed in the bucket\.
 
-### Enabling object lock<a name="object-lock-bucket-config-enable"></a>
+### Enabling Object Lock<a name="object-lock-bucket-config-enable"></a>
 
 Before you can lock any objects, you have to configure a bucket to use Amazon S3 object lock\. To do this, you specify when you create the bucket that you want to enable Amazon S3 object lock\. After you configure a bucket for Amazon S3 object lock, you can lock objects in that bucket using retention periods, legal holds, or both\.
 
@@ -97,4 +97,4 @@ If you configure a default retention period on a bucket, requests to upload obje
 
 ## Required Permissions<a name="object-lock-permissions"></a>
 
- Amazon S3 object lock operations require specific permissions\. For more information, see [Permissions for Object Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-objects)\.
+ Amazon S3 object lock operations require specific permissions\. For more information about required permissions, see [Example — Object Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-objects)\. For information about using conditions with permissions, see [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)\.

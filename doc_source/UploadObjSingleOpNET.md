@@ -3,7 +3,7 @@
 **Example**  
 The following C\# code example creates two objects with two `PutObjectRequest` requests:  
 + The first `PutObjectRequest` request saves a text string as sample object data\. It also specifies the bucket and object key names\. 
-+ The second `PutObjectRequest` request uploads a file by specifing the file name\. This request also specifies the `ContentType` header and optional object metadata \(a title\)\. 
++ The second `PutObjectRequest` request uploads a file by specifying the file name\. This request also specifies the `ContentType` header and optional object metadata \(a title\)\. 
 For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```

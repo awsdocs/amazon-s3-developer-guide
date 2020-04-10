@@ -11,6 +11,8 @@ You can have multiple storage class analysis filters per bucket, up to 1,000, an
 
 Storage class analysis shows storage usage visualizations in the Amazon S3 console that are updated daily\. The storage usage data can also be exported daily to a file in an S3 bucket\. You can open the exported usage report file in a spreadsheet application or use it with the business intelligence tools of your choice such as Amazon QuickSight\.
 
+There are costs associated with the storage class analysis\. For pricing information, see *Management and replication* [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)\.
+
 **Topics**
 + [How Do I Set Up Storage Class Analysis?](#analytics-storage-class-how-to-set-up)
 + [How Do I Use Storage Class Analysis?](#analytics-storage-class-contents)

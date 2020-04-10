@@ -15,7 +15,7 @@ For example, in the following CreateBucket sample request, the signature element
 **Example**  
 
 ```
-1. <CreateBucket xmlns="http://doc.s3.amazonaws.com/2006-03-01">
+1. <CreateBucket xmlns="https://doc.s3.amazonaws.com/2006-03-01">
 2.   <Bucket>quotes</Bucket>
 3.   <Acl>private</Acl>
 4.   <AWSAccessKeyId>AKIAIOSFODNN7EXAMPLE</AWSAccessKeyId>

@@ -2,7 +2,7 @@
 
 Follow these steps to enable website hosting for your Amazon S3 bucket using the [Amazon S3 console](https://console.aws.amazon.com/s3/home)\. For example walkthroughs that show you how to set up your website with optional configurations such as a custom domain, see [Example Walkthroughs \- Hosting Websites on Amazon S3](hosting-websites-on-s3-examples.md)\.
 
-**To enable website hosting for an S3 bucket**
+**To enable static website hosting**
 
 1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
@@ -16,14 +16,18 @@ Follow these steps to enable website hosting for your Amazon S3 bucket using the
 
 1. Enter the name of your index document\. 
 
-   The index document name is typically `index.html`\. For information, see [Configuring Index Document Support](IndexDocumentSupport.md)\.
+   The index document name is typically `index.html`\. The index document name is case sensitive and must exactly match the file name of the HTML index document that you plan to upload to your S3 bucket\. For more information, see [Configuring an Index Document](IndexDocumentSupport.md)\.
 
-1. \(Optional\) If you want to add a custom error document, in the **Error document** field, enter the error document name \(for example, **error\.html**\)\. 
+1. \(Optional\) If you want to add a custom error document, in the **Error document** box, enter the key name for the error document \(for example, **error\.html**\)\. 
 
-   For more information, see [\(Optional\) Configuring Custom Error Document Support](CustomErrorDocSupport.md)\.
+   The error document name is case sensitive and must exactly match the file name of the HTML error document that you plan to upload to your S3 bucket\. For more information, see [\(Optional\) Configuring a Custom Error Document](CustomErrorDocSupport.md)\.
 
 1. \(Optional\) If you want to specify advanced redirection rules, in **Edit redirection rules**, use XML to describe the rules\.
 
-   For more information, see [Advanced Conditional Redirects](how-to-page-redirect.md#advanced-conditional-redirects)\.
+   For more information, see [Configuring Advanced Conditional Redirects](how-to-page-redirect.md#advanced-conditional-redirects)\.
+
+1. Under **Static website hosting**, note the **Endpoint**\.
+
+   The **Endpoint** is the Amazon S3 website endpoint for your bucket\. After you finish configuring your bucket as a static website, you can use this endpoint to test your website\.
 
 1. Choose **Save**\.

@@ -1,6 +1,6 @@
 # Operations on Objects<a name="ObjectOperations"></a>
 
-Amazon S3 enables you to store, retrieve, and delete objects\. You can retrieve an entire object or a portion of an object\. If you have enabled versioning on your bucket, you can retrieve a specific version of the object\. You can also retrieve a subresource associated with your object and update it where applicable\. You can make a copy of your existing object\. Depending on the object size, the following upload and copy related considerations apply: 
+Amazon S3 enables you to store, retrieve, and delete objects\. You can retrieve an entire object or a portion of an object\. If you enabled S3 Versioning on your bucket, you can retrieve a specific version of the object\. You can also retrieve a subresource associated with your object and update it where applicable\. You can make a copy of your existing object\. Depending on the object size, the following upload and copy related considerations apply: 
 + **Uploading objects—**You can upload objects of up to 5 GB in size in a single operation\. For objects greater than 5 GB you must use the multipart upload API\. 
 
   Using the multipart upload API you can upload objects up to 5 TB each\. For more information, see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\.

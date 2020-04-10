@@ -20,7 +20,7 @@ Replication can help you do the following:
 + **Replicate objects while retaining metadata** — You can use replication to make copies of your objects that retain all metadata, such as the original object creation time and version IDs\. This capability is important if you need to ensure that your replica is identical to the source object
 
    
-+ **Replicate objects into different storage classes** — You can use replication to directly put objects into Glacier, S3 Glacier Deep Archive, or another storage class in the destination bucket\. You can also replicate your data to the same storage class and use lifecycle policies on the destination bucket to move your objects to a colder storage class as it ages\.
++ **Replicate objects into different storage classes** — You can use replication to directly put objects into S3 Glacier, S3 Glacier Deep Archive, or another storage class in the destination bucket\. You can also replicate your data to the same storage class and use lifecycle policies on the destination bucket to move your objects to a colder storage class as it ages\.
 
    
 + **Maintain object copies under different ownership** — Regardless of who owns the source object, you can tell Amazon S3 to change replica ownership to the AWS account that owns the destination bucket\. This is referred to as the *owner override* option\. You can use this option to restrict access to object replicas\.
@@ -42,13 +42,13 @@ Cross\-Region replication can help you do the following:
 ## When to Use SRR<a name="srr-scenario"></a>
 
 Same\-Region replication can help you do the following:
-+ **Aggregate logs into a single bucket** — If you  store logs in multiple buckets or across multiple accounts, you can easily replicate logs  into a single, in\-Region bucket\. This allows for simpler processing of logs in a single  location\.
++ **Aggregate logs into a single bucket** — If you store logs in multiple buckets or across multiple accounts, you can easily replicate logs into a single, in\-Region bucket\. This allows for simpler processing of logs in a single location\.
 
    
-+ **Configure live replication between production and test  accounts** — If you or your customers have production and test accounts  that use the same data, you can replicate objects between those multiple accounts, while maintaining  object metadata, by implementing SRR rules\.
++ **Configure live replication between production and test accounts** — If you or your customers have production and test accounts that use the same data, you can replicate objects between those multiple accounts, while maintaining  object metadata, by implementing SRR rules\.
 
    
-+ **Abide by data sovereignty laws** — You might be required to store multiple copies of your data in separate AWS accounts within a certain Region\. Same\-Region replication can help you automatically replicate critical data when compliance regulations don't allow the data to leave your  country\.
++ **Abide by data sovereignty laws** — You might be required to store multiple copies of your data in separate AWS accounts within a certain Region\. Same\-Region replication can help you automatically replicate critical data when compliance regulations don't allow the data to leave your country\.
 
 ## Requirements for Replication<a name="replication-requirements"></a>
 

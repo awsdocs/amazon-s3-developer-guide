@@ -22,7 +22,7 @@ In Amazon Web Services \(AWS\), a resource is an entity that you can work with\.
 
 Object subresources include the following:
 + `acl` – Stores a list of access permissions on the object\. This topic discusses how to use this subresource to manage object permissions \(see [Managing Access with ACLs](S3_ACLs_UsingACLs.md)\)\.
-+ `restore` – Supports temporarily restoring an archived object \(see [POST Object restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html)\)\. An object in the Glacier storage class is an archived object\. To access the object, you must first initiate a restore request, which restores a copy of the archived object\. In the request, you specify the number of days that you want the restored copy to exist\. For more information about archiving objects, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
++ `restore` – Supports temporarily restoring an archived object \(see [POST Object restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html)\)\. An object in the S3 Glacier storage class is an archived object\. To access the object, you must first initiate a restore request, which restores a copy of the archived object\. In the request, you specify the number of days that you want the restored copy to exist\. For more information about archiving objects, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
 
 ## Amazon S3 Bucket and Object Ownership<a name="about-resource-owner"></a>
 

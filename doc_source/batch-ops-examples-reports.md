@@ -1,10 +1,10 @@
-# Amazon S3 Batch Operations Completion Report Examples<a name="batch-ops-examples-reports"></a>
+# Example: Requesting Amazon S3 Batch Operations Completion Reports<a name="batch-ops-examples-reports"></a>
 
-When you create an Amazon S3 batch operations job, you can request a completion report for all tasks or just for failed tasks\. As long as at least one task has been invoked successfully, Amazon S3 Batch Operations generates a report for jobs that have completed, failed, or have been cancelled\.
+When you create an Amazon S3 Batch Operations job, you can request a completion report for all tasks or just for failed tasks\. As long as at least one task has been invoked successfully, Amazon S3 Batch Operations generates a report for jobs that have completed, failed, or been canceled\.
 
-The completion report contains additional information for each task, including the object key name and version, status, error codes, and descriptions of any errors\. The description of errors for each failed task can be used to diagnose issues during job creation such as permissions\.
+The completion report contains additional information for each task, including the object key name and version, status, error codes, and descriptions of any errors\. The description of errors for each failed task can be used to diagnose issues that occur during job creation, such as permissions\.
 
-**Example Top\-Level Manifest Result File**  
+**Example — Top\-Level Manifest Result File**  
 The top\-level `manifest.json` file contains the locations of each succeeded report and \(if the job had any failures\) the location of failed reports, as shown in the following example\.  
 
 ```
@@ -29,8 +29,15 @@ The top\-level `manifest.json` file contains the locations of each succeeded rep
 }
 ```
 
-**Example Failed Tasks Reports**  
-Failed tasks reports contain the `Bucket`, `Key`, `VersionId`, `TaskStatus`, `ErrorCode`, `HTTPStatusCode`, and `ResultMessage` for all failed tasks\.  
+**Example — Failed Tasks Reports**  
+Failed tasks reports contain the following information for all *failed* tasks:  
++ `Bucket`
++ `Key`
++ `VersionId`
++ `TaskStatus`
++ `ErrorCode`
++ `HTTPStatusCode`
++ `ResultMessage`
 The following example report shows a case in which the AWS Lambda function timed out, causing failures to exceed the failure threshold\. It was then marked as a `PermanentFailure`\.  
 
 ```
@@ -42,9 +49,16 @@ awsexamplebucket,image_17644,,failed,200,PermanentFailure,"Lambda returned funct
 awsexamplebucket,image_17398,,failed,200,PermanentFailure,"Lambda returned function error: {""errorMessage"":""2019-04-05T17:35:44.661Z 1e306352-4c54-4eba-aee8-4d02f8c0235c Task timed out after 3.00 seconds""}"
 ```
 
-**Example Succeeded Tasks Report**  
-Succeeded tasks reports contain the `Bucket`, `Key`, `VersionId`, `TaskStatus`, `ErrorCode`, `HTTPStatusCode`, and `ResultMessage` for the completed tasks\.  
-In the following example, the Lambda function successfully copied the Amazon S3 object to another bucket\. The returned Amazon S3 response is passed back to Amazon S3 batch operations and is then written into the final completion report\.  
+**Example — Succeeded Tasks Report**  
+Succeeded tasks reports contain the following for the *completed* tasks:  
++ `Bucket`
++ `Key`
++ `VersionId`
++ `TaskStatus`
++ `ErrorCode`
++ `HTTPStatusCode`
++ `ResultMessage`
+In the following example, the Lambda function successfully copied the Amazon S3 object to another bucket\. The returned Amazon S3 response is passed back to Amazon S3 Batch Operations and is then written into the final completion report\.  
 
 ```
 awsexamplebucket,image_17775,,succeeded,200,,"{u'CopySourceVersionId': 'xVR78haVKlRnurYofbTfYr3ufYbktF8h', u'CopyObjectResult': {u'LastModified': datetime.datetime(2019, 4, 5, 17, 35, 39, tzinfo=tzlocal()), u'ETag': '""fe66f4390c50f29798f040d7aae72784""'}, 'ResponseMetadata': {'HTTPStatusCode': 200, 'RetryAttempts': 0, 'HostId': 'nXNaClIMxEJzWNmeMNQV2KpjbaCJLn0OGoXWZpuVOFS/iQYWxb3QtTvzX9SVfx2lA3oTKLwImKw=', 'RequestId': '3ED5852152014362', 'HTTPHeaders': {'content-length': '234', 'x-amz-id-2': 'nXNaClIMxEJzWNmeMNQV2KpjbaCJLn0OGoXWZpuVOFS/iQYWxb3QtTvzX9SVfx2lA3oTKLwImKw=', 'x-amz-copy-source-version-id': 'xVR78haVKlRnurYofbTfYr3ufYbktF8h', 'server': 'AmazonS3', 'x-amz-request-id': '3ED5852152014362', 'date': 'Fri, 05 Apr 2019 17:35:39 GMT', 'content-type': 'application/xml'}}}"

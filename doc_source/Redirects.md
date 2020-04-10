@@ -72,7 +72,7 @@ The following are examples of temporary request redirection responses\.
 
 ```
  1. HTTP/1.1 307 Temporary Redirect
- 2. Location: http://johnsmith.s3-gztb4pa9sq.amazonaws.com/photos/puppy.jpg?rk=e2c69a31
+ 2. Location: http://awsexamplebucket.s3-gztb4pa9sq.amazonaws.com/photos/puppy.jpg?rk=e2c69a31
  3. Content-Type: application/xml
  4. Transfer-Encoding: chunked
  5. Date: Fri, 12 Oct 2007 01:12:56 GMT
@@ -83,7 +83,7 @@ The following are examples of temporary request redirection responses\.
 10.   <Code>TemporaryRedirect</Code>
 11.   <Message>Please re-send this request to the specified temporary endpoint.
 12.   Continue to use the original request endpoint for future requests.</Message>
-13.   <Endpoint>johnsmith.s3-gztb4pa9sq.amazonaws.com</Endpoint>
+13.   <Endpoint>awsexamplebucket.s3-gztb4pa9sq.amazonaws.com</Endpoint>
 14. </Error>
 ```
 

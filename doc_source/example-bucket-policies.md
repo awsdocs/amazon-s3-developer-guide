@@ -1,6 +1,6 @@
 # Bucket Policy Examples<a name="example-bucket-policies"></a>
 
-This section presents a few examples of typical use cases for bucket policies\. The policies use *bucket* and *examplebucket* strings in the resource value\. To test these policies, replace these strings with your bucket name\. For information about access policy language, see [Access Policy Language Overview](access-policy-language-overview.md)\.
+This section presents a few examples of typical use cases for bucket policies\. The policies use *bucket* and *examplebucket* strings in the resource value\. To test these policies, replace these strings with your bucket name\. For information about access policy language, see [Policies and Permissions in Amazon S3](access-policy-language-overview.md)\.
 
 **Note**  
 Bucket policies are limited to 20 KB in size\.
@@ -23,7 +23,7 @@ When testing permissions using the Amazon S3 console, you will need to grant add
 
 ## Granting Permissions to Multiple Accounts with Added Conditions<a name="example-bucket-policies-use-case-1"></a>
 
-The following example policy grants the `s3:PutObject` and `s3:PutObjectAcl` permissions to multiple AWS accounts and requires that any request for these operations include the `public-read` canned access control list \(ACL\)\. For more information, see [Specifying Permissions in a Policy](using-with-s3-actions.md) and [Specifying Conditions in a Policy](amazon-s3-policy-keys.md)\.
+The following example policy grants the `s3:PutObject` and `s3:PutObjectAcl` permissions to multiple AWS accounts and requires that any request for these operations include the `public-read` canned access control list \(ACL\)\. For more information, see [Amazon S3 Actions](using-with-s3-actions.md) and [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)\.
 
 ```
  1. {
@@ -43,7 +43,7 @@ The following example policy grants the `s3:PutObject` and `s3:PutObjectAcl` per
 
 ## Granting Read\-Only Permission to an Anonymous User<a name="example-bucket-policies-use-case-2"></a>
 
-The following example policy grants the `s3:GetObject` permission to any public anonymous users\. \(For a list of permissions and the operations that they allow, see [Specifying Permissions in a Policy](using-with-s3-actions.md)\.\) This permission allows anyone to read the object data, which is useful for when you configure your bucket as a website and want everyone to be able to read objects in the bucket\. Before you use a bucket policy to grant read\-only permission to an anonymous user, you must disable block public access settings for your bucket\. For more information, see [Permissions Required for Website Access](WebsiteAccessPermissionsReqd.md)\.
+The following example policy grants the `s3:GetObject` permission to any public anonymous users\. \(For a list of permissions and the operations that they allow, see [Amazon S3 Actions](using-with-s3-actions.md)\.\) This permission allows anyone to read the object data, which is useful for when you configure your bucket as a website and want everyone to be able to read objects in the bucket\. Before you use a bucket policy to grant read\-only permission to an anonymous user, you must disable block public access settings for your bucket\. For more information, see [Setting Permissions for Website Access](WebsiteAccessPermissionsReqd.md)\.
 
 ```
  1. {
@@ -65,11 +65,14 @@ Use caution when granting anonymous access to your Amazon S3 bucket or disabling
 
 ## Restricting Access to Specific IP Addresses<a name="example-bucket-policies-use-case-3"></a>
 
-The following example denies permissions to any user to perform any Amazon S3 operations on objects in the specified S3 bucket\. However, the request must not originate from the range of IP addresses specified in the condition\. 
+The following example denies permissions to any user to perform any Amazon S3 operations on objects in the specified S3 bucket unless the request originates from the range of IP addresses specified in the condition\. 
 
-This statement identifies the 54\.240\.143\.\* as the range of disallowed Internet Protocol version 4 \(IPv4\) IP addresses\. 
+This statement identifies the 54\.240\.143\.0/24 as the range of allowed Internet Protocol version 4 \(IPv4\) IP addresses\. 
 
-The `Condition` block uses the `NotIpAddress` condition and the `aws:SourceIp` condition key, which is an AWS\-wide condition key\. For more information about these condition keys, see [Specifying Conditions in a Policy](amazon-s3-policy-keys.md)\. The `aws:SourceIp` IPv4 values use the standard CIDR notation\. For more information, see [IAM JSON Policy Elements Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_IPAddress) in the *IAM User Guide*\. 
+The `Condition` block uses the `NotIpAddress` condition and the `aws:SourceIp` condition key, which is an AWS\-wide condition key\. For more information about these condition keys, see [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)\. The `aws:SourceIp` IPv4 values use the standard CIDR notation\. For more information, see [IAM JSON Policy Elements Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Conditions_IPAddress) in the *IAM User Guide*\. 
+
+**Important**  
+Replace the IP address range in this example with an appropriate value for your use case before using this policy\. Otherwise, you will lose the ability to access your bucket\.
 
 ```
  1. {
@@ -100,6 +103,9 @@ When you start using IPv6 addresses, we recommend that you update all of your or
 The following example bucket policy shows how to mix IPv4 and IPv6 address ranges to cover all of your organization's valid IP addresses\. The example policy would allow access to the example IP addresses `54.240.143.1` and `2001:DB8:1234:5678::1` and would deny access to the addresses `54.240.143.129` and `2001:DB8:1234:5678:ABCD::1`\.
 
 The IPv6 values for `aws:SourceIp` must be in standard CIDR format\. For IPv6, we support using `::` to represent a range of 0s \(for example, `2032001:DB8:1234:5678::/64`\)\. For more information, see [ IP Address Condition Operators](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_IPAddress) in the *IAM User Guide*\.
+
+**Important**  
+Replace the IP address ranges in this example with appropriate values for your use case before using this policy\. Otherwise, you might lose the ability to access your bucket\.
 
 ```
  1. {
@@ -155,40 +161,6 @@ Suppose that you have a website with a domain name \(`www.example.com` or `examp
 ```
 
 Make sure the browsers you use include the HTTP `referer` header in the request\.
-
-You can further secure access to objects in the `examplebucket` bucket by adding explicit deny to the bucket policy as shown in the following example\. Explicit deny supersedes any permission you might grant to objects in the `examplebucket` bucket using other means such as ACLs or user policies\.
-
-**Important**  
-This example prevents all users \(including the root user\) from performing all Amazon S3 actions, including managing bucket policies\. Consider adding a third `Sid` that grants the root user `s3:*` actions\. 
-
-```
- 1. {
- 2.    "Version": "2012-10-17",
- 3.    "Id": "http referer policy example",
- 4.    "Statement": [
- 5.      {
- 6.        "Sid": "Allow get requests referred by www.example.com and example.com.",
- 7.        "Effect": "Allow",
- 8.        "Principal": "*",
- 9.        "Action": "s3:GetObject",
-10.        "Resource": "arn:aws:s3:::examplebucket/*",
-11.        "Condition": {
-12.          "StringLike": {"aws:Referer": ["http://www.example.com/*","http://example.com/*"]}
-13.        }
-14.      },
-15.       {
-16.         "Sid": "Explicit deny to ensure requests are allowed only from specific referer.",
-17.         "Effect": "Deny",
-18.         "Principal": "*",
-19.         "Action": "s3:*",
-20.         "Resource": "arn:aws:s3:::examplebucket/*",
-21.         "Condition": {
-22.           "StringNotLike": {"aws:Referer": ["http://www.example.com/*","http://example.com/*"]}
-23.         }
-24.       }
-25.    ]
-26. }
-```
 
 ## Granting Permission to an Amazon CloudFront OAI<a name="example-bucket-policies-cloudfront"></a>
 
@@ -306,7 +278,7 @@ You can optionally use a numeric condition to limit the duration for which the `
 
 ## Granting Cross\-Account Permissions to Upload Objects While Ensuring the Bucket Owner Has Full Control<a name="example-bucket-policies-use-case-8"></a>
 
-You can allow another AWS account to upload objects to your bucket\. However, you might decide that as a bucket owner you must have full control of the objects uploaded to your bucket\. The following policy enforces that a specific AWS account \(`111111111111`\) be denied the ability to upload objects unless that account grants full\-control access to the bucket owner identified by the email address \(`xyz@amazon.com`\)\. The `StringNotEquals` condition in the policy specifies the `s3:x-amz-grant-full-control` condition key to express the requirement \(see [Specifying Conditions in a Policy](amazon-s3-policy-keys.md)\)\. 
+You can allow another AWS account to upload objects to your bucket\. However, you might decide that as a bucket owner you must have full control of the objects uploaded to your bucket\. The following policy enforces that a specific AWS account \(`111111111111`\) be denied the ability to upload objects unless that account grants full\-control access to the bucket owner identified by the email address \(`xyz@amazon.com`\)\. The `StringNotEquals` condition in the policy specifies the `s3:x-amz-grant-full-control` condition key to express the requirement \(see [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)\)\. 
 
 ```
  1. {

@@ -23,6 +23,7 @@ As buckets can contain a virtually unlimited number of keys, the complete result
 The following Java and \.NET SDK examples show how to use pagination when listing keys in a bucket:
 + [Listing Keys Using the AWS SDK for Java](ListingObjectKeysUsingJava.md)
 + [Listing Keys Using the AWS SDK for \.NET](ListingObjectKeysUsingNetSDK.md)
++ [Listing Keys Using the AWS SDK for PHP](ListingObjectKeysUsingPHP.md)
 
 ### Related Resources<a name="RelatedResources016"></a>
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

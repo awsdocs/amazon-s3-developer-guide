@@ -64,25 +64,15 @@ Amazon S3 supports the following API operations that are specifically for object
 **Note**  
  If you send this request with an empty tag set, Amazon S3 deletes the existing tag set on the object\. If you use this method, you will be charged for a Tier 1 Request \(PUT\)\. For more information, see [Amazon S3 Pricing](https://d0.awsstatic.com/whitepapers/aws_pricing_overview.pdf)\.  
 The [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html) request is preferred because it achieves the same result without incurring charges\. 
-
-   
 +  [GET Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html) – Returns the tag set associated with an object\. Amazon S3 returns object tags in the response body\.
-
-   
 + [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html) – Deletes the tag set associated with an object\. 
 
 **Other API Operations That Support Tagging**
 +  [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) and [Initiate Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)– You can specify tags when you create objects\. You specify tags using the `x-amz-tagging` request header\. 
-
-   
 +  [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html) – Instead of returning the tag set, Amazon S3 returns the object tag count in the `x-amz-tag-count` header \(only if the requester has permissions to read tags\) because the header response size is limited to 8 K bytes\. If you want to view the tags, you make another request for the [GET Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html) API operation\.
-
-   
 + [POST Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html) – You can specify tags in your POST request\. 
 
   As long as the tags in your request don't exceed the 8 K byte HTTP request header size limit, you can use the `PUT Object `API to create objects with tags\. If the tags you specify exceed the header size limit, you can use this POST method in which you include the tags in the body\. 
-
-   
 
    [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html) – You can specify the `x-amz-tagging-directive` in your request to direct Amazon S3 to either copy \(default behavior\) the tags or replace tags by a new set of tags provided in the request\. 
 
@@ -116,23 +106,17 @@ If you configured Replication on your bucket, Amazon S3 replicates tags, provide
 ### Object Tagging and Access Control Policies<a name="tagging-and-policies"></a>
 
 You can also use permissions policies \(bucket and user policies\) to manage permissions related to object tagging\. For policy actions see the following topics: 
-+  [Permissions for Object Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-objects) 
-+  [Permissions Related to Bucket Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-buckets)
++  [Example — Object Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-objects) 
++  [Example — Bucket Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-buckets)
 
 Object tags enable fine\-grained access control for managing permissions\. You can grant conditional permissions based on object tags\. Amazon S3 supports the following condition keys that you can use to grant conditional permissions based on object tags:
 + `s3:ExistingObjectTag/<tag-key>` – Use this condition key to verify that an existing object tag has the specific tag key and value\. 
-
-   
 **Note**  
 When granting permissions for the `PUT Object` and `DELETE Object` operations, this condition key is not supported\. That is, you cannot create a policy to grant or deny a user permissions to delete or overwrite an object based on its existing tags\. 
-
-   
 + `s3:RequestObjectTagKeys` – Use this condition key to restrict the tag keys that you want to allow on objects\. This is useful when adding tags to objects using the PutObjectTagging and PutObject, and POST object requests\.
-
-   
 + `s3:RequestObjectTag/<tag-key>` – Use this condition key to restrict the tag keys and values that you want to allow on objects\. This is useful when adding tags to objects using the PutObjectTagging and PutObject, and POST Bucket requests\.
 
-For a complete list of Amazon S3 service\-specific condition keys, see [Available Condition Keys](amazon-s3-policy-keys.md#AvailableKeys-iamV2)\. The following permissions policies illustrate how object tagging enables fine grained access permissions management\.
+For a complete list of Amazon S3 service\-specific condition keys, see [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)\. The following permissions policies illustrate how object tagging enables fine grained access permissions management\.
 
 **Example 1: Allow a user to read only the Objects that have a specific tag**  
 The following permissions policy grants a user permission to read objects, but the condition limits the read permission to only objects that have the following specific tag key and value\.  
@@ -154,7 +138,7 @@ Note that the policy uses the Amazon S3 condition key, `s3:ExistingObjectTag/<ta
  9.       "Condition": {  "StringEquals": {"s3:ExistingObjectTag/security": "public" } }
 10.     }
 11.   ]
-12. }bb
+12. }
 ```
 
 **Example 2: Allow a user to add object tags with restrictions on the allowed tag keys**  
@@ -193,38 +177,39 @@ The policy ensures that the tag set, if specified in the request, has the specif
 
 ```
  1. {
- 2.   "Version": "2012-10-17",
- 3.   "Statement": [
- 4.     {
- 5.       "Effect": "Allow",
- 6.       "Action": [
- 7.         "s3:PutObjectTagging"
- 8.       ],
- 9.       "Resource": [
-10.         "arn:aws:s3:::examplebucket/*"
-11.       ],
-12.       "Principal":{
-13.         "AWS":[
-14.             "arn:aws:iam::account-number-without-hyphens:user/username"
-15.          ]
-16.        },
-17.       "Condition": {
-18.         "ForAllValues:StringLike": {
-19.           "s3:RequestObjectTagKeys": [
-20.             "Owner",
-21.             "CreationDate"
-22.           ]
-23.         },
-24.         "ForAnyValue:StringLike": {
-25.           "s3:RequestObjectTagKeys": [
-26.             "Owner",
-27.             "CreationDate"
-28.           ]
-29.         }
-30.       }
-31.     }
-32.   ]
-33. }
+ 2. 
+ 3.   "Version": "2012-10-17",
+ 4.   "Statement": [
+ 5.     {
+ 6.       "Effect": "Allow",
+ 7.       "Action": [
+ 8.         "s3:PutObjectTagging"
+ 9.       ],
+10.       "Resource": [
+11.         "arn:aws:s3:::examplebucket/*"
+12.       ],
+13.       "Principal":{
+14.         "AWS":[
+15.             "arn:aws:iam::account-number-without-hyphens:user/username"
+16.          ]
+17.        },
+18.       "Condition": {
+19.         "ForAllValues:StringLike": {
+20.           "s3:RequestObjectTagKeys": [
+21.             "Owner",
+22.             "CreationDate"
+23.           ]
+24.         },
+25.         "ForAnyValue:StringLike": {
+26.           "s3:RequestObjectTagKeys": [
+27.             "Owner",
+28.             "CreationDate"
+29.           ]
+30.         }
+31.       }
+32.     }
+33.   ]
+34. }
 ```
 For more information, see [Creating a Condition That Tests Multiple Key Values \(Set Operations\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_multi-value-conditions.html) in the *IAM User Guide*\.
 

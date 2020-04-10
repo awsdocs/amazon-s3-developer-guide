@@ -61,71 +61,71 @@ This section provides example URLs and requests\.
 
 **Example Path Style**  
 This example uses the following:  
-+ Bucket Name ‐ `johnsmith.net`
++ Bucket Name ‐ `awsexamplebucket.net`
 + Region ‐ US East \(N\. Virginia\) 
 + Key Name ‐ `homepage.html`
 The URL is as follows:  
 
 ```
-1. https://s3.us-east-1.amazonaws.com/johnsmith.net/homepage.html
+1. https://s3.us-east-1.amazonaws.com/awsexamplebucket.net/homepage.html
 ```
 The request is as follows:  
 
 ```
-1. GET /johnsmith.net/homepage.html HTTP/1.1
+1. GET /awsexamplebucket.net/homepage.html HTTP/1.1
 2. Host: s3.us-east-1.amazonaws.com
 ```
 The request with HTTP 1\.0 and omitting the `host` header is as follows:  
 
 ```
-1. GET /johnsmith.net/homepage.html HTTP/1.0
+1. GET /awsexamplebucket.net/homepage.html HTTP/1.0
 ```
 
 For information about DNS\-compatible names, see [Limitations](#VirtualHostingLimitations)\. For more information about keys, see [Keys](Introduction.md#BasicsKeys)\.
 
 **Example Virtual Hosted–Style**  
 This example uses the following:  
-+ Bucket Name ‐ `johnsmith.eu` 
++ Bucket Name ‐ `awsexamplebucket.eu` 
 + Region ‐ Europe \(Ireland\) 
 + Key Name ‐ `homepage.html`
 The URL is as follows:  
 
 ```
-1. https://johnsmith.eu.s3.eu-west-1.amazonaws.com/homepage.html
+1. https://awsexamplebucket.eu.s3.eu-west-1.amazonaws.com/homepage.html
 ```
 The request is as follows:  
 
 ```
 1. GET /homepage.html HTTP/1.1
-2. Host: johnsmith.eu.s3.eu-west-1.amazonaws.com
+2. Host: awsexamplebucket.eu.s3.eu-west-1.amazonaws.com
 ```
 
 **Example CNAME Method**  
 To use this method, you must configure your DNS name as a CNAME alias for `bucketname.s3.us-east-1.amazonaws.com`\. For more information, see [Customizing Amazon S3 URLs with CNAMEs](#VirtualHostingCustomURLs)\. This example uses the following:  
-+ Bucket Name ‐ `johnsmith.net` 
++ Bucket Name ‐ `awsexamplebucket.net` 
 + Key Name ‐ `homepage.html`
 The URL is as follows:  
 
 ```
-1. https://www.johnsmith.net/homepage.html
+1. https://www.awsexamplebucket.net/homepage.html
 ```
 The example is as follows:  
 
 ```
 1. GET /homepage.html HTTP/1.1
-2. Host: www.johnsmith.net
+2. Host: www.awsexamplebucket.net
 ```
 
 ## Customizing Amazon S3 URLs with CNAMEs<a name="VirtualHostingCustomURLs"></a>
 
-Depending on your needs, you might not want `s3.Region.amazonaws.com` to appear on your website or service\. For example, if you're hosting website images on Amazon S3, you might prefer `https://images.johnsmith.net/` instead of `https://johnsmith-images.s3.us-east-1.amazonaws.com/`\. Any bucket with a DNS\-compatible name can be referenced as follows: ` https://BucketName.s3.Region.amazonaws.com/[Filename]`, for example, `https://images.johnsmith.net.s3.us-east-1.amazonaws.com/mydog.jpg`\. By using CNAME, you can map `images.johnsmith.net` to an Amazon S3 hostname so that the previous URL could become `https://images.johnsmith.net/mydog.jpg`\. 
+Depending on your needs, you might not want `s3.Region.amazonaws.com` to appear on your website or service\. For example, if you're hosting website images on Amazon S3, you might prefer `https://images.awsexamplebucket.net/` instead of `https://awsexamplebucket-images.s3.us-east-1.amazonaws.com/`\. Any bucket with a DNS\-compatible name can be referenced as follows: ` https://BucketName.s3.Region.amazonaws.com/[Filename]`, for example, `https://images.awsexamplebucket.net.s3.us-east-1.amazonaws.com/mydog.jpg`\. By using CNAME, you can map `images.awsexamplebucket.net` to an Amazon S3 hostname so that the previous URL could become `https://images.awsexamplebucket.net/mydog.jpg`\. 
 
-Your bucket name must be the same as the CNAME\. For example, if you create a CNAME to map `images.johnsmith.net` to `images.johnsmith.net.s3.amazonaws.com`, both `https://images.johnsmith.net/filename` and `https://images.johnsmith.net.s3.us-east-1.amazonaws.com/filename` will be the same\.
+Your bucket name must be the same as the CNAME\. For example, if you create a CNAME to map `images.awsexamplebucket.net` to `images.awsexamplebucket.net.s3.amazonaws.com`, both `https://images.awsexamplebucket.net/filename` and `https://images.awsexamplebucket.net.s3.us-east-1.amazonaws.com/filename` will be the same\.
 
-The CNAME DNS record should alias your domain name to the appropriate virtual hosted–style hostname\. For example, if your bucket name and domain name are `images.johnsmith.net` and your bucket is in the US East \(N\. Virginia\) Region, the CNAME record should alias to `images.johnsmith.net.s3.us-east-1.amazonaws.com`\. 
+The CNAME DNS record should alias your domain name to the appropriate virtual hosted–style hostname\. For example, if your bucket name and domain name are `images.awsexamplebucket.net` and your bucket is in the US East \(N\. Virginia\) Region, the CNAME record should alias to `images.awsexamplebucket.net.s3.us-east-1.amazonaws.com`\. 
 
 ```
-1. images.johnsmith.net CNAME 			images.johnsmith.net.s3.us-east-1.amazonaws.com.
+1. images.awsexamplebucket.net CNAME 			images.awsexamplebucket.net.s3.us-east-1.amazonaws.com.
 ```
 
 Amazon S3 uses the hostname to determine the bucket name\. So the CNAME and the bucket name must be the same\. For example, suppose that you have configured `www.example.com` as a CNAME for `www.example.com.s3.us-east-1.amazonaws.com`\. When you access `https://www.example.com`, Amazon S3 receives a request similar to the following:
@@ -147,17 +147,17 @@ Any Amazon S3 endpoint can be used in a CNAME\. For example, `s3.ap-southeast-1.
 
 1. Select a hostname that belongs to a domain you control\. 
 
-   This example uses the `images` subdomain of the `johnsmith.net` domain\.
+   This example uses the `images` subdomain of the `awsexamplebucket.net` domain\.
 
 1. Create a bucket that matches the hostname\. 
 
-   In this example, the host and bucket names are `images.johnsmith.net`\. The bucket name must *exactly* match the hostname\. 
+   In this example, the host and bucket names are `images.awsexamplebucket.net`\. The bucket name must *exactly* match the hostname\. 
 
 1. Create a CNAME record that defines the hostname as an alias for the Amazon S3 bucket\. 
 
    For example:
 
-   `images.johnsmith.net CNAME images.johnsmith.net.s3.us-west-2.amazonaws.com`
+   `images.awsexamplebucket.net CNAME images.awsexamplebucket.net.s3.us-west-2.amazonaws.com`
 **Important**  
 For request routing reasons, the CNAME record must be defined exactly as shown in the preceding example\. Otherwise, it might appear to operate correctly but eventually result in unpredictable behavior\.
 

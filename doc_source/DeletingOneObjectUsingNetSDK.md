@@ -1,10 +1,10 @@
 # Deleting an Object Using the AWS SDK for \.NET<a name="DeletingOneObjectUsingNetSDK"></a>
 
-When you delete an object from a non\-versioned bucket, the object is removed\. If you have versioning enabled on the bucket, you have the following options:
+When you delete an object from a non\-versioned bucket, the object is removed\. If you have S3 Versioning enabled on the bucket, you have the following options:
 + Delete a specific version of an object by specifying a version ID\.
 + Delete an object without specifying a version ID\. Amazon S3 adds a delete marker\. For more information about delete markers, see [Object Versioning](ObjectVersioning.md)\.
 
-The following examples show how to delete an object from both versioned and non\-versioned buckets\. For more information about versioning, see [Object Versioning](ObjectVersioning.md)\. 
+The following examples show how to delete an object from both versioned and non\-versioned buckets\. For more information about S3 Versioning, see [Object Versioning](ObjectVersioning.md)\. 
 
 **Example Deleting an Object from a Non\-versioned Bucket**  
 The following C\# example deletes an object from a non\-versioned bucket\. The example assumes that the objects don't have version IDs, so you don't specify version IDs\. You specify only the object key\. For information about how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.   
@@ -60,7 +60,7 @@ namespace Amazon.DocSamples.S3
 The following C\# example deletes an object from a versioned bucket\. It deletes a specific version of the object by specifying the object key name and version ID\.   
 The code performs the following tasks:  
 
-1. Enables versioning on a bucket that you specify \(if versioning is already enabled, this has no effect\)\.
+1. Enables S3 Versioning on a bucket that you specify \(if Versioning is already enabled, this has no effect\)\.
 
 1. Adds a sample object to the bucket\. In response, Amazon S3 returns the version ID of the newly added object\. The example uses this version ID in the delete request\.
 

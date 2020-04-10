@@ -11,4 +11,4 @@ This section explains how to work with Amazon S3 access points\. For information
 **Topics**
 + [Creating Access Points](creating-access-points.md)
 + [Using Access Points](using-access-points.md)
-+ [Restrictions and Limitations](access-points-restrictions-limitations.md)
++ [Access Points Restrictions and Limitations](access-points-restrictions-limitations.md)

@@ -39,7 +39,6 @@ If you need server\-side encryption for all of the objects that are stored in a 
 
 **Note**  
 Server\-side encryption encrypts only the object data, not object metadata\. 
-You need the `kms:Decrypt` permission when you upload or download an Amazon S3 object encrypted with an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\), and that is in addition to `kms:ReEncrypt`, `kms:GenerateDataKey`, and `kms:DescribeKey` permissions\. For more information, see [Failure to upload a large file to Amazon S3 with encryption using an AWS KMS CMK\.](https://aws.amazon.com/premiumsupport/knowledge-center/s3-large-file-encryption-kms-key/)
 
 ## API Support for Server\-Side Encryption<a name="APISupportforServer-SideEncryption"></a>
 

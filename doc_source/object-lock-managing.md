@@ -16,7 +16,7 @@ You can view the object lock status of an Amazon S3 object version using the `GE
 
 To view an object version's retention mode and retention period, you must have the `s3:GetObjectRetention` permission\. To view an object version's legal hold status, you must have the `s3:GetObjectLegalHold` permission\. If you `GET` or `HEAD` an object version but don't have the necessary permissions to view its lock status, the request succeeds\. However, it doesn't return information that you don't have permission to view\.
 
-To view a bucket's default retention configuration \(if it has one\), request the bucket's object lock configuration\. To do this, you must have the `s3:GetBucketObjectLockConfiguration` permission\. If you make a request for an object lock configuration against a bucket that doesn't have Amazon S3 object lock enabled, Amazon S3 returns an error\.
+To view a bucket's default retention configuration \(if it has one\), request the bucket's object lock configuration\. To do this, you must have the `s3:GetBucketObjectLockConfiguration` permission\. If you make a request for an object lock configuration against a bucket that doesn't have Amazon S3 object lock enabled, Amazon S3 returns an error\. For more information about permissions, see [Example — Object Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-objects)\. 
 
 You can configure Amazon S3 inventory reports on your buckets to include the `Retain Until Date`, `object lock Mode`, and `Legal Hold Status` for all objects in a bucket\. For more information, see [ Amazon S3 Inventory](storage-inventory.md)\.
 
@@ -39,7 +39,7 @@ You can also use Amazon CloudWatch to generate alerts based on this data\. For i
 
 ## Setting Retention Limits<a name="object-lock-managing-retention-limits"></a>
 
-You can set minimum and maximum allowable retention periods for a bucket using a bucket policy\. You do this using the `s3:object-lock-remaining-retention-days` condition key\. The following example shows a bucket policy that sets a maximum retention period of 10 days\.
+You can set minimum and maximum allowable retention periods for a bucket using a bucket policy\. You do this using the `s3:object-lock-remaining-retention-days` condition key\. The following example shows a bucket policy that uses the `s3:object-lock-remaining-retention-days` condition key to set a maximum retention period of 10 days\.
 
 ```
 {
@@ -67,7 +67,10 @@ You can set minimum and maximum allowable retention periods for a bucket using a
 **Note**  
 If your bucket is the destination bucket for a replication policy and you want to set up minimum and maximum allowable retention periods for object replicas that are created using replication, you must include the `s3:ReplicateObject` action in your bucket policy\.
 
-For more information about using bucket policies, see [Using Bucket Policies and User Policies](using-iam-policies.md)\.
+For more information, see the following topics:
++ [Actions, Resources, and Condition Keys for Amazon S3](list_amazons3.md)
++ [Example — Object Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-objects)
++ [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)
 
 ## Managing Delete Markers and Object Lifecycles<a name="object-lock-managing-lifecycle"></a>
 
