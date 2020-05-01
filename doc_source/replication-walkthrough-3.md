@@ -67,12 +67,16 @@ The profiles you use for this exercise must have the necessary permissions\. For
               "AWS": "source-bucket-owner-account-id"
             },
             "Action": [
+              "s3:GetBucketVersioning",
+              "s3:PutBucketVersioning",
               "s3:ReplicateObject",
-              "s3:ReplicateDelete"
+              "s3:ReplicateDelete",
+              "s3:ObjectOwnerOverrideToBucketOwner"
             ],
             "Effect": "Allow",
             "Resource": [
-              "arn:aws:s3:::destination/*"
+              "arn:aws:s3:::destination/*",
+              "arn:aws:s3:::destination"
             ]
           }
         ]
