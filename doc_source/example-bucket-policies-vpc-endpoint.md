@@ -20,10 +20,11 @@ When applying the Amazon S3 bucket policies for VPC endpoints described in this 
 
 ## Restricting Access to a Specific VPC Endpoint<a name="example-bucket-policies-restrict-accesss-vpc-endpoint"></a>
 
-The following is an example of an Amazon S3 bucket policy that restricts access to a specific bucket, `examplebucket`, only from the VPC endpoint with the ID `vpce-1a2b3c4d`\. The policy denies all access to the bucket if the specified endpoint is not being used\. The `aws:sourceVpce` condition is used to specify the endpoint\. The `aws:sourceVpce` condition does not require an Amazon Resource Name \(ARN\) for the VPC endpoint resource, only the VPC endpoint ID\. For more information about using conditions in a policy, see [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)\.
+The following is an example of an Amazon S3 bucket policy that restricts access to a specific bucket, `awsexamplebucket1`, only from the VPC endpoint with the ID `vpce-1a2b3c4d`\. The policy denies all access to the bucket if the specified endpoint is not being used\. The `aws:sourceVpce` condition is used to specify the endpoint\. The `aws:sourceVpce` condition does not require an Amazon Resource Name \(ARN\) for the VPC endpoint resource, only the VPC endpoint ID\. For more information about using conditions in a policy, see [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)\.
 
 **Important**  
-Replace the VPC endpoint ID in this example with an appropriate value for your use case before using this policy\. Otherwise, you will lose the ability to access your bucket\.
+Before using the following example policy, replace the VPC endpoint ID with an appropriate value for your use case\. Otherwise, you won't be able to access your bucket\.
+This policy disables console access to the specified bucket, because console requests don't originate from the specified VPC endpoint\.
 
 ```
  1. {
@@ -35,8 +36,8 @@ Replace the VPC endpoint ID in this example with an appropriate value for your u
  7.        "Principal": "*",
  8.        "Action": "s3:*",
  9.        "Effect": "Deny",
-10.        "Resource": ["arn:aws:s3:::examplebucket",
-11.                     "arn:aws:s3:::examplebucket/*"],
+10.        "Resource": ["arn:aws:s3:::awsexamplebucket1",
+11.                     "arn:aws:s3:::awsexamplebucket1/*"],
 12.        "Condition": {
 13.          "StringNotEquals": {
 14.            "aws:sourceVpce": "vpce-1a2b3c4d"
@@ -49,10 +50,11 @@ Replace the VPC endpoint ID in this example with an appropriate value for your u
 
 ## Restricting Access to a Specific VPC<a name="example-bucket-policies-restrict-access-vpc"></a>
 
-You can create a bucket policy that restricts access to a specific VPC by using the `aws:sourceVpc` condition\. This is useful if you have multiple VPC endpoints configured in the same VPC, and you want to manage access to your Amazon S3 buckets for all of your endpoints\. The following is an example of a policy that allows VPC `vpc-111bbb22` to access `examplebucket` and its objects\. The policy denies all access to the bucket if the specified VPC is not being used\. The `vpc-111bbb22` condition key does not require an ARN for the VPC resource, only the VPC ID\.
+You can create a bucket policy that restricts access to a specific VPC by using the `aws:sourceVpc` condition\. This is useful if you have multiple VPC endpoints configured in the same VPC, and you want to manage access to your Amazon S3 buckets for all of your endpoints\. The following is an example of a policy that allows VPC `vpc-111bbb22` to access `awsexamplebucket1` and its objects\. The policy denies all access to the bucket if the specified VPC is not being used\. The `vpc-111bbb22` condition key does not require an ARN for the VPC resource, only the VPC ID\.
 
 **Important**  
-Replace the VPC ID in this example with an appropriate value for your use case before using this policy\. Otherwise, you will lose the ability to access your bucket\.
+Before using the following example policy, replace the VPC ID with an appropriate value for your use case\. Otherwise, you won't be able to access your bucket\.
+This policy disables console access to the specified bucket, because console requests don't originate from the specified VPC\.
 
 ```
  1. {
@@ -64,8 +66,8 @@ Replace the VPC ID in this example with an appropriate value for your use case b
  7.        "Principal": "*",
  8.        "Action": "s3:*",
  9.        "Effect": "Deny",
-10.        "Resource": ["arn:aws:s3:::examplebucket",
-11.                     "arn:aws:s3:::examplebucket/*"],
+10.        "Resource": ["arn:aws:s3:::awsexamplebucket1",
+11.                     "arn:aws:s3:::awsexamplebucket1/*"],
 12.        "Condition": {
 13.          "StringNotEquals": {
 14.            "aws:sourceVpc": "vpc-111bbb22"

@@ -18,7 +18,7 @@ Amazon S3 is a simple key\-value store designed to store as many objects as you 
   Because subresources are subordinates to objects, they are always associated with some other entity such as an object or a bucket\. For more information, see [Object Subresources](ObjectAndSoubResource.md)\.
 + ****Access Control Information** **– You can control access to the objects you store in Amazon S3\.
 
-  Amazon S3 supports both the resource\-based access control, such as an access control list \(ACL\) and bucket policies, and user\-based access control\. For more information, see [Identity and Access Management in Amazon S3](s3-access-control.md)\.
+  Amazon S3 supports both the resource\-based access control, such as an access control list \(ACL\) and bucket policies, and user\-based access control\. For more information, see [Identity and access management in Amazon S3](s3-access-control.md)\.
 
 For more information about working with objects, see the following sections\. Your Amazon S3 resources \(for example, buckets and objects\) are private by default\. You must explicitly grant permission for others to access these resources\. For example, you might want to share a video or a photo stored in your Amazon S3 bucket on your website\. That works only if you either make the object public or use a presigned URL on your website\. For more information about sharing objects, see [Share an Object with Others](ShareObjectPreSignedURL.md)\.
 
@@ -27,7 +27,7 @@ For more information about working with objects, see the following sections\. Yo
 + [Amazon S3 Storage Classes](storage-class-intro.md)
 + [Object Subresources](ObjectAndSoubResource.md)
 + [Object Versioning](ObjectVersioning.md)
-+ [Object Tagging](object-tagging.md)
-+ [Object Lifecycle Management](object-lifecycle-mgmt.md)
-+ [Cross\-Origin Resource Sharing \(CORS\)](cors.md)
++ [Object tagging](object-tagging.md)
++ [Object lifecycle management](object-lifecycle-mgmt.md)
++ [Cross\-origin resource sharing \(CORS\)](cors.md)
 + [Operations on Objects](ObjectOperations.md)

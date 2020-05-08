@@ -1,9 +1,9 @@
-# Handling REST and SOAP Errors<a name="HandlingErrors"></a>
+# Handling REST and SOAP errors<a name="HandlingErrors"></a>
 
 **Topics**
-+ [The REST Error Response](UsingRESTError.md)
-+ [The SOAP Error Response](UsingSOAPError.md)
-+ [Amazon S3 Error Best Practices](ErrorBestPractices.md)
++ [The REST error response](UsingRESTError.md)
++ [The SOAP error response](UsingSOAPError.md)
++ [Amazon S3 error best practices](ErrorBestPractices.md)
 
 This section describes REST and SOAP errors and how to handle them\.
 

@@ -1,13 +1,13 @@
-# Listing Objects in a Versioning\-Enabled Bucket<a name="list-obj-version-enabled-bucket"></a>
+# Listing objects in a versioning\-enabled bucket<a name="list-obj-version-enabled-bucket"></a>
 
 **Topics**
-+ [Using the Console](#list-obj-version-enabled-bucket-console)
++ [Using the console](#list-obj-version-enabled-bucket-console)
 + [Using the AWS SDKs](#list-obj-version-enabled-bucket-sdk-examples)
 + [Using the REST API](#ListingtheObjectsinaVersioningEnabledBucket)
 
 This section provides an example of listing object versions from a versioning\-enabled bucket\. Amazon S3 stores object version information in the *versions* subresource \(see [Bucket Configuration Options](UsingBucket.md#bucket-config-options-intro)\) that is associated with the bucket\. 
 
-## Using the Console<a name="list-obj-version-enabled-bucket-console"></a>
+## Using the console<a name="list-obj-version-enabled-bucket-console"></a>
 
 For information about listing object versions using the Amazon S3 console, see [ How Do I See the Versions of an S3 Object?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/view-object-versions.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
@@ -180,7 +180,7 @@ Amazon S3 returns object versions in the order in which they were stored, with t
   4. Authorization: AWS AKIAIOSFODNN7EXAMPLE:0RQf4/cRonhpaBX5sCYVf1bNRuU=
   ```
 
-### Retrieving a Subset of Objects in a Bucket<a name="RetBucObjSubset"></a>
+### Retrieving a subset of objects in a bucket<a name="RetBucObjSubset"></a>
 
 This section discusses the following two example scenarios:
 + You want to retrieve a subset of all object versions in a bucket, for example, retrieve all versions of a specific object\.
@@ -188,19 +188,19 @@ This section discusses the following two example scenarios:
 
  To retrieve a subset of object versions, you use the request parameters for GET Bucket\. For more information, see [GET Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html)\. 
 
-#### Example 1: Retrieving All Versions of Only a Specific Object<a name="ReturningAllVersionsofanObject"></a>
+#### Example 1: Retrieving all versions of only a specific object<a name="ReturningAllVersionsofanObject"></a>
 
 You can retrieve all versions of an object using the `versions` subresource and the `prefix` request parameter using the following process\. For more information about `prefix`, see [GET Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html)\.
 
 
-**Retrieving All Versions of a Key**  
+**Retrieving all versions of a key**  
 
 |  |  | 
 | --- |--- |
 | 1 | Set the prefix parameter to the key of the object you want to retrieve\. | 
 | 2 |  Send a `GET Bucket` request using the `versions` subresource and `prefix`\. `GET /?versions&prefix=objectName HTTP/1.1`  | 
 
-**Example Retrieving Objects Using a Prefix**  
+**Example Retrieving objects using a prefix**  
 The following example retrieves objects whose key is or begins with `myObject`\.  
 
 ```
@@ -212,14 +212,14 @@ The following example retrieves objects whose key is or begins with `myObject`\.
 
 You can use the other request parameters to retrieve a subset of all versions of the object\. For more information, see [GET Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html)\.
 
-#### Example 2: Retrieving a Listing of Additional Objects if the Response Is Truncated<a name="ReturningAdditionalObjectVersionsAfterExceedingMaxKeys"></a>
+#### Example 2: Retrieving a listing of additional objects if the response is truncated<a name="ReturningAdditionalObjectVersionsAfterExceedingMaxKeys"></a>
 
 If the number of objects that could be returned in a `GET` request exceeds the value of `max-keys`, the response contains `<isTruncated>true</isTruncated>`, and includes the first key \(in `NextKeyMarker`\) and the first version ID \(in `NextVersionIdMarker`\) that satisfy the request, but were not returned\. You use those returned values as the starting position in a subsequent request to retrieve the additional objects that satisfy the `GET` request\. 
 
 Use the following process to retrieve additional objects that satisfy the original `GET Bucket versions` request from a bucket\. For more information about `key-marker`, `version-id-marker`, `NextKeyMarker`, and `NextVersionIdMarker`, see [GET Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html)\.
 
 
-**Retrieving Additional Responses that Satisfy the Original GET Request**  
+**Retrieving additional responses that satisfy the original GET request**  
 
 |  |  | 
 | --- |--- |
@@ -227,7 +227,7 @@ Use the following process to retrieve additional objects that satisfy the origin
 | 2 | Set the value of version\-id\-marker to the version ID returned in NextVersionIdMarker in the previous response\. | 
 | 3 | Send a GET Bucket versions request using key\-marker and version\-id\-marker\. | 
 
-**Example Retrieving Objects Starting with a Specified Key and Version ID**  
+**Example Retrieving objects starting with a specified key and version ID**  
 
 ```
 1. GET /?versions&key-marker=myObject&version-id-marker=298459348571 HTTP/1.1

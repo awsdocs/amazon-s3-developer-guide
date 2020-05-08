@@ -1,9 +1,9 @@
-# Error Response<a name="ErrorResponse"></a>
+# Error response<a name="ErrorResponse"></a>
 
 **Topics**
-+ [Error Code](ErrorCode.md)
-+ [Error Message](ErrorMessage.md)
-+ [Further Details](ErrorDetails.md)
++ [Error code](ErrorCode.md)
++ [Error message](ErrorMessage.md)
++ [Further details](ErrorDetails.md)
 
 When an Amazon S3 request is in error, the client receives an error response\. The exact format of the error response is API specific: For example, the REST error response differs from the SOAP error response\. However, all error responses have common elements\.
 

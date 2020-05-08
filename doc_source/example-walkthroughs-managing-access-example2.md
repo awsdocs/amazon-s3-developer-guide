@@ -1,11 +1,11 @@
-# Example 2: Bucket Owner Granting Cross\-Account Bucket Permissions<a name="example-walkthroughs-managing-access-example2"></a>
+# Example 2: Bucket owner granting cross\-account bucket permissions<a name="example-walkthroughs-managing-access-example2"></a>
 
 **Topics**
-+ [Step 0: Preparing for the Walkthrough](#cross-acct-access-step0)
-+ [Step 1: Do the Account A Tasks](#access-policies-walkthrough-cross-account-permissions-acctA-tasks)
-+ [Step 2: Do the Account B Tasks](#access-policies-walkthrough-cross-account-permissions-acctB-tasks)
-+ [Step 3: Extra Credit: Try Explicit Deny](#access-policies-walkthrough-example2-explicit-deny)
-+ [Step 4: Clean Up](#access-policies-walkthrough-example2-cleanup-step)
++ [Step 0: Preparing for the walkthrough](#cross-acct-access-step0)
++ [Step 1: Do the account a tasks](#access-policies-walkthrough-cross-account-permissions-acctA-tasks)
++ [Step 2: Do the account b tasks](#access-policies-walkthrough-cross-account-permissions-acctB-tasks)
++ [Step 3: Extra credit: Try explicit deny](#access-policies-walkthrough-example2-explicit-deny)
++ [Step 4: Clean up](#access-policies-walkthrough-example2-cleanup-step)
 
 An AWS account—for example, Account A—can grant another AWS account, Account B, permission to access its resources such as buckets and objects\. Account B can then delegate those permissions to users in its account\. In this example scenario, a bucket owner grants cross\-account permission to another account to perform specific bucket operations\.
 
@@ -24,17 +24,17 @@ The following is a summary of the walkthrough steps:
 
 1. User in Account B then verifies permissions by accessing an object in the bucket owned by Account A\.
 
-For this example, you need two accounts\. The following table shows how we refer to these accounts and the administrator users in them\. Per IAM guidelines \(see [About Using an Administrator User to Create Resources and Grant Permissions](example-walkthroughs-managing-access.md#about-using-root-credentials)\) we do not use the account root credentials in this walkthrough\. Instead, you create an administrator user in each account and use those credentials in creating resources and granting them permissions\.
+For this example, you need two accounts\. The following table shows how we refer to these accounts and the administrator users in them\. Per IAM guidelines \(see [About using an administrator user to create resources and grant permissions](example-walkthroughs-managing-access.md#about-using-root-credentials)\) we do not use the account root credentials in this walkthrough\. Instead, you create an administrator user in each account and use those credentials in creating resources and granting them permissions\.
 
 
-| AWS Account ID | Account Referred To As | Administrator User in the Account  | 
+| AWS account ID | Account referred to as | Administrator user in the account  | 
 | --- | --- | --- | 
 |  *1111\-1111\-1111*  |  Account A  |  AccountAadmin  | 
 |  *2222\-2222\-2222*  |  Account B  |  AccountBadmin  | 
 
 All the tasks of creating users and granting permissions are done in the AWS Management Console\. To verify permissions, the walkthrough uses the command line tools, AWS Command Line Interface \(CLI\) and AWS Tools for Windows PowerShell, so you don't need to write any code\.
 
-## Step 0: Preparing for the Walkthrough<a name="cross-acct-access-step0"></a>
+## Step 0: Preparing for the walkthrough<a name="cross-acct-access-step0"></a>
 
 1. Make sure you have two AWS accounts and that each account has one administrator user as shown in the table in the preceding section\.
 
@@ -62,9 +62,9 @@ All the tasks of creating users and granting permissions are done in the AWS Man
    + If using the AWS CLI, create two profiles, AccountAadmin and AccountBadmin, in the config file\.
    + If using the AWS Tools for Windows PowerShell, make sure you store credentials for the session as AccountAadmin and AccountBadmin\.
 
-   For instructions, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
+   For instructions, see [Setting up the tools for the example walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
 
-1. Save the administrator user credentials, also referred to as profiles\. You can use the profile name instead of specifying credentials for each command you enter\. For more information, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
+1. Save the administrator user credentials, also referred to as profiles\. You can use the profile name instead of specifying credentials for each command you enter\. For more information, see [Setting up the tools for the example walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
 
    1. Add profiles in the AWS CLI credentials file for each of the administrator users in the two accounts\. 
 
@@ -87,13 +87,13 @@ All the tasks of creating users and granting permissions are done in the AWS Man
       set-awscredentials –AccessKey AcctB-access-key-ID –SecretKey AcctB-secret-access-key –storeas AccountBadmin
       ```
 
-## Step 1: Do the Account A Tasks<a name="access-policies-walkthrough-cross-account-permissions-acctA-tasks"></a>
+## Step 1: Do the account a tasks<a name="access-policies-walkthrough-cross-account-permissions-acctA-tasks"></a>
 
-### Step 1\.1: Sign In to the AWS Management Console<a name="access-policies-walkthrough-cross-account-permissions-acctA-tasks-sign-in"></a>
+### Step 1\.1: Sign in to the AWS Management Console<a name="access-policies-walkthrough-cross-account-permissions-acctA-tasks-sign-in"></a>
 
 Using the IAM user sign\-in URL for Account A first sign in to the AWS Management Console as AccountAadmin user\. This user will create a bucket and attach a policy to it\. 
 
-### Step 1\.2: Create a Bucket<a name="access-policies-walkthrough-example2a-create-bucket"></a>
+### Step 1\.2: Create a bucket<a name="access-policies-walkthrough-example2a-create-bucket"></a>
 
 1. In the Amazon S3 console, create a bucket\. This exercise assumes the bucket is created in the US East \(N\. Virginia\) region and is named `examplebucket`\.
 
@@ -103,7 +103,7 @@ Using the IAM user sign\-in URL for Account A first sign in to the AWS Managemen
 
    For instructions, go to [Add an Object to a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 
 
-### Step 1\.3: Attach a Bucket Policy to Grant Cross\-Account Permissions to Account B<a name="access-policies-walkthrough-example2a"></a>
+### Step 1\.3: Attach a bucket policy to grant cross\-account permissions to account b<a name="access-policies-walkthrough-example2a"></a>
 
 The bucket policy grants the `s3:GetBucketLocation` and `s3:ListBucket` permissions to Account B\. It is assumed you are still signed into the console using AccountAadmin user credentials\.
 
@@ -147,21 +147,21 @@ The bucket policy grants the `s3:GetBucketLocation` and `s3:ListBucket` permissi
      get-s3bucketlocation -BucketName example2bucket -StoredCredentials AccountBadmin
      ```
 
-## Step 2: Do the Account B Tasks<a name="access-policies-walkthrough-cross-account-permissions-acctB-tasks"></a>
+## Step 2: Do the account b tasks<a name="access-policies-walkthrough-cross-account-permissions-acctB-tasks"></a>
 
 Now the Account B administrator creates a user, Dave, and delegates the permissions received from Account A\. 
 
-### Step 2\.1: Sign In to the AWS Management Console<a name="access-policies-walkthrough-cross-account-permissions-acctB-tasks-sign-in"></a>
+### Step 2\.1: Sign in to the AWS Management Console<a name="access-policies-walkthrough-cross-account-permissions-acctB-tasks-sign-in"></a>
 
 Using the IAM user sign\-in URL for Account B, first sign in to the AWS Management Console as AccountBadmin user\. 
 
-### Step 2\.2: Create User Dave in Account B<a name="access-policies-walkthrough-example2b-create-user"></a>
+### Step 2\.2: Create user dave in account b<a name="access-policies-walkthrough-example2b-create-user"></a>
 
 In the IAM console, create a user, Dave\. 
 
 For instructions, see [Creating IAM Users \(AWS Management Console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console) in the *IAM User Guide*\. 
 
-### Step 2\.3: Delegate Permissions to User Dave<a name="access-policies-walkthrough-example2-delegate-perm-userdave"></a>
+### Step 2\.3: Delegate permissions to user dave<a name="access-policies-walkthrough-example2-delegate-perm-userdave"></a>
 
 Create an inline policy for the user Dave by using the following policy\. You will need to update the policy by providing your bucket name\.
 
@@ -187,13 +187,13 @@ It is assumed you are signed in to the console using AccountBadmin user credenti
 
 For instructions, see [Working with Inline Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_inline-using.html) in the *IAM User Guide*\.
 
-### Step 2\.4: Test Permissions<a name="access-policies-walkthrough-example2b-user-dave-access"></a>
+### Step 2\.4: Test permissions<a name="access-policies-walkthrough-example2b-user-dave-access"></a>
 
 Now Dave in Account B can list the contents of `examplebucket` owned by Account A\. You can verify the permissions using either of the following procedures\. 
 
-**Test Using the AWS CLI**
+**Test using the AWS CLI**
 
-1. Add the UserDave profile to the AWS CLI config file\. For more information about the config file, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
+1. Add the UserDave profile to the AWS CLI config file\. For more information about the config file, see [Setting up the tools for the example walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
 
    ```
    [profile UserDave]
@@ -214,7 +214,7 @@ Now Dave in Account B can list the contents of `examplebucket` owned by Account 
    aws s3api get-bucket-location --bucket examplebucket --profile UserDave
    ```
 
-**Test Using AWS Tools for Windows PowerShell**
+**Test using AWS Tools for Windows PowerShell**
 
 1. Store Dave's credentials as AccountBDave\.
 
@@ -234,7 +234,7 @@ Now Dave in Account B can list the contents of `examplebucket` owned by Account 
    get-s3bucketlocation -BucketName example2bucket -StoredCredentials AccountBDave
    ```
 
-## Step 3: Extra Credit: Try Explicit Deny<a name="access-policies-walkthrough-example2-explicit-deny"></a>
+## Step 3: Extra credit: Try explicit deny<a name="access-policies-walkthrough-example2-explicit-deny"></a>
 
 You can have permissions granted via an ACL, a bucket policy, and a user policy\. But if there is an explicit deny set via either a bucket policy or a user policy, the explicit deny takes precedence over any other permissions\. For testing, let's update the bucket policy and explicitly deny Account B the `s3:ListBucket` permission\. The policy also grants `s3:ListBucket` permission, but explicit deny takes precedence, and Account B or users in Account B will not be able to list objects in `examplebucket`\.
 
@@ -287,7 +287,7 @@ You can have permissions granted via an ACL, a bucket policy, and a user policy\
      get-s3object -BucketName example2bucket -StoredCredentials AccountBDave
      ```
 
-## Step 4: Clean Up<a name="access-policies-walkthrough-example2-cleanup-step"></a>
+## Step 4: Clean up<a name="access-policies-walkthrough-example2-cleanup-step"></a>
 
 1. After you are done testing, you can do the following to clean up\.
 

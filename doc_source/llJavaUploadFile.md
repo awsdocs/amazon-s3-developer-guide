@@ -1,4 +1,4 @@
-# Upload a File<a name="llJavaUploadFile"></a>
+# Upload a file<a name="llJavaUploadFile"></a>
 
 The following example shows how to use the low\-level Java classes to upload a file\. It performs the following steps:
 + Initiates a multipart upload using the `AmazonS3Client.initiateMultipartUpload()` method, and passes in an `InitiateMultipartUploadRequest` object\.

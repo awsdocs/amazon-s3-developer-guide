@@ -2,7 +2,7 @@
 
 Amazon S3 defines a set of permissions that you can specify in a policy\. These are keywords, each of which maps to a specific Amazon S3 operation\. For more information about Amazon S3 operations, see [Actions](https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations.html) in the *Amazon Simple Storage Service API Reference*\. 
 
-To see how to specify permissions in an Amazon S3 in a policy, review the following example policies\. For a complete list of Amazon S3 permissions, see [Actions, Resources, and Condition Keys for Amazon S3](list_amazons3.md)\.
+To see how to specify permissions in an Amazon S3 in a policy, review the following example policies\. For a list of Amazon S3 actions, resources, and condition keys for use in policies, see [Actions, resources, and condition keys for Amazon S3](list_amazons3.md)\. For a complete list of Amazon S3 actions, see [Actions](https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations.html)\.
 
 **Topics**
 + [Example — Object Operations](#using-with-s3-actions-related-to-objects)
@@ -90,7 +90,7 @@ The following user policy grants the `s3:GetBucketAcl` permission on the `exampl
 ```
 
 **DELETE Object Permissions**  
-You can delete objects either by explicitly calling the DELETE Object API or by configuring its lifecycle \(see [Object Lifecycle Management](object-lifecycle-mgmt.md)\) so that Amazon S3 can remove the objects when their lifetime expires\. To explicitly block users or accounts from deleting objects, you must explicitly deny them `s3:DeleteObject`, `s3:DeleteObjectVersion`, and `s3:PutLifecycleConfiguration` permissions\. 
+You can delete objects either by explicitly calling the DELETE Object API or by configuring its lifecycle \(see [Object lifecycle management](object-lifecycle-mgmt.md)\) so that Amazon S3 can remove the objects when their lifetime expires\. To explicitly block users or accounts from deleting objects, you must explicitly deny them `s3:DeleteObject`, `s3:DeleteObjectVersion`, and `s3:PutLifecycleConfiguration` permissions\. 
 
 **Explicit Deny**  
 By default, users have no permissions\. But as you create users, add users to groups, and grant them permissions, they might get certain permissions that you didn't intend to grant\. That is where you can use explicit deny, which supersedes all other permissions a user might have and denies the user permissions for specific actions\.

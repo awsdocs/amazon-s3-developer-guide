@@ -6,7 +6,7 @@ The topics in this section describe the key policy language elements, with empha
 
 **Important**  
 Bucket policies are limited to 20 KB in size\.  
-We recommend that you first review the introductory topics that explain the basic concepts and options available for you to manage access to your Amazon S3 resources\. For more information, see [Introduction to Managing Access to Amazon S3 Resources](s3-access-control.md#intro-managing-access-s3-resources)\. 
+We recommend that you first review the introductory topics that explain the basic concepts and options available for you to manage access to your Amazon S3 resources\. For more information, see [Introduction to managing access to Amazon S3 resources](s3-access-control.md#intro-managing-access-s3-resources)\. 
 
 **Topics**
 + [Policies and Permissions in Amazon S3](access-policy-language-overview.md)

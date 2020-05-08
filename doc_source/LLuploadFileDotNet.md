@@ -1,4 +1,4 @@
-# Upload a File to an S3 Bucket Using the AWS SDK for \.NET \(Low\-Level API\)<a name="LLuploadFileDotNet"></a>
+# Upload a file to an S3 Bucket using the AWS SDK for \.NET \(low\-level API\)<a name="LLuploadFileDotNet"></a>
 
 The following C\# example shows how to use the low\-level AWS SDK for \.NET multipart upload API to upload a file to an S3 bucket\. For information about Amazon S3 multipart uploads, see [Multipart Upload Overview](mpuoverview.md)\.
 
@@ -118,6 +118,6 @@ namespace Amazon.DocSamples.S3
 }
 ```
 
-## More Info<a name="LLuploadFileDotNet-more-info"></a>
+## More info<a name="LLuploadFileDotNet-more-info"></a>
 
 [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)

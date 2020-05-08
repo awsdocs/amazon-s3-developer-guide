@@ -1,6 +1,6 @@
-# Upload an Object Using a Presigned URL \(AWS SDK for \.NET\)<a name="UploadObjectPreSignedURLDotNetSDK"></a>
+# Upload an object using a presigned URL \(AWS SDK for \.NET\)<a name="UploadObjectPreSignedURLDotNetSDK"></a>
 
-The following C\# example shows how to use the AWS SDK for \.NET to upload an object to an S3 bucket using a presigned URL\. For more information about presigned URLs, see [Uploading Objects Using Presigned URLs](PresignedUrlUploadObject.md)\.
+The following C\# example shows how to use the AWS SDK for \.NET to upload an object to an S3 bucket using a presigned URL\. For more information about presigned URLs, see [Uploading objects using presigned URLs](PresignedUrlUploadObject.md)\.
 
 This example generates a presigned URL for a specific object and uses it to upload a file\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions about how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
@@ -65,6 +65,6 @@ namespace Amazon.DocSamples.S3
 }
 ```
 
-## More Info<a name="UploadObjectPreSignedURLDotNetSDK-more-info"></a>
+## More info<a name="UploadObjectPreSignedURLDotNetSDK-more-info"></a>
 
 [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)

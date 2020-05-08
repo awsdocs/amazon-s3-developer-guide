@@ -1,4 +1,4 @@
-# Retrieving Object Versions<a name="RetrievingObjectVersions"></a>
+# Retrieving object versions<a name="RetrievingObjectVersions"></a>
 
 A simple `GET` request retrieves the current version of an object\. The following figure shows how `GET` returns the current version of the object, `photo.gif`\.
 
@@ -8,7 +8,7 @@ To retrieve a specific version, you have to specify its version ID\. The followi
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/versioning_GET_Versioned.png)
 
-## Using the Console<a name="retrieve-obj-versioning-enabled-console"></a>
+## Using the console<a name="retrieve-obj-versioning-enabled-console"></a>
 
 For instructions see, [How Do I See the Versions of an S3 Object?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/view-object-versions.html) in the Amazon Simple Storage Service Console User Guide\.
 
@@ -26,7 +26,7 @@ For information about using other AWS SDKs, see [Sample Code and Libraries](http
 
 1. Send a `GET Object versionId `request\.
 
-**Example Retrieving a Versioned Object**  
+**Example Retrieving a versioned object**  
 The following request retrieves version L4kqtJlcpXroDTDmpUMLUo of `my-image.jpg`\.  
 
 ```
@@ -36,6 +36,6 @@ The following request retrieves version L4kqtJlcpXroDTDmpUMLUo of `my-image.jpg`
 4. Authorization: AWS AKIAIOSFODNN7EXAMPLE:0RQf4/cRonhpaBX5sCYVf1bNRuU=
 ```
 
-## Related Topics<a name="retrieve-obj-versioning-enabled-related-topics"></a>
+## Related topics<a name="retrieve-obj-versioning-enabled-related-topics"></a>
 
- [Retrieving the Metadata of an Object Version](RetMetaOfObjVersion.md) 
+ [Retrieving the metadata of an object version](RetMetaOfObjVersion.md) 

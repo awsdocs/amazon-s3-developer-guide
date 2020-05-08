@@ -1,4 +1,4 @@
-# Upload an Object Using a Presigned URL \(AWS SDK for Java\)<a name="PresignedUrlUploadObjectJavaSDK"></a>
+# Upload an object using a presigned URL \(AWS SDK for Java\)<a name="PresignedUrlUploadObjectJavaSDK"></a>
 
 You can use the AWS SDK for Java to generate a presigned URL that you, or anyone you give the URL, can use to upload an object to Amazon S3\. When you use the URL to upload an object, Amazon S3 creates the object in the specified bucket\. If an object with the same key that is specified in the presigned URL already exists in the bucket, Amazon S3 replaces the existing object with the uploaded object\. To successfully complete an upload, you must do the following:
 + Specify the HTTP PUT verb when creating the `GeneratePresignedUrlRequest` and `HttpURLConnection` objects\.

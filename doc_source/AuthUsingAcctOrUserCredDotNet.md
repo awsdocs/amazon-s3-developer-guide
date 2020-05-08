@@ -1,4 +1,4 @@
-# Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for \.NET<a name="AuthUsingAcctOrUserCredDotNet"></a>
+# Making requests using AWS account or IAM user credentials \- AWS SDK for \.NET<a name="AuthUsingAcctOrUserCredDotNet"></a>
 
 To send authenticated requests using your AWS account or IAM user credentials:
 + Create an instance of the `AmazonS3Client` class\. 
@@ -83,5 +83,5 @@ For working examples, see [Working with Amazon S3 Objects](UsingObjects.md) and 
 
 For example, to list all the object keys in your bucket, see [Listing Keys Using the AWS SDK for \.NET](ListingObjectKeysUsingNetSDK.md)\. 
 
-## Related Resources<a name="RelatedResources003"></a>
+## Related resources<a name="RelatedResources003"></a>
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

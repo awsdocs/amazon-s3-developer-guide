@@ -1,10 +1,10 @@
-# Deleting Object Versions<a name="DeletingObjectVersions"></a>
+# Deleting object versions<a name="DeletingObjectVersions"></a>
 
 You can delete object versions whenever you want\. In addition, you can also define lifecycle configuration rules for objects that have a well\-defined lifecycle to request Amazon S3 to expire current object versions or permanently remove noncurrent object versions\. When your bucket is version\-enabled or versioning is suspended, the lifecycle configuration actions work as follows:
 + The `Expiration` action applies to the current object version and instead of deleting the current object version, Amazon S3 retains the current version as a noncurrent version by adding a delete marker, which then becomes the current version\.
 + The `NoncurrentVersionExpiration` action applies to noncurrent object versions, and Amazon S3 permanently removes these object versions\. You cannot recover permanently removed objects\.
 
-For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
+For more information, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
 
 A `DELETE` request has the following use cases:
 + When versioning is enabled, a simple `DELETE` cannot permanently delete an object\. 
@@ -18,13 +18,13 @@ A `DELETE` request has the following use cases:
   The following figure shows that deleting a specified object version permanently removes that object\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/versioning_DELETE_versioningEnabled2.png)
 
-## Using the Console<a name="delete-obj-version-version-enabled-console"></a>
+## Using the console<a name="delete-obj-version-version-enabled-console"></a>
 
 For instructions see, [How Do I See the Versions of an S3 Object?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/view-object-versions.html) in the Amazon Simple Storage Service Console User Guide\. 
 
 ## Using the AWS SDKs<a name="delete-obj-version-version-enabled-bucket-sdks"></a>
 
-For examples of deleting objects using the AWS SDKs for Java, \.NET, and PHP, see [Deleting Objects](DeletingObjects.md)\. The examples for deleting objects in nonversioned and versioning\-enabled buckets are the same, although in the case of versioning\-enabled buckets, Amazon S3 assigns a version number\. Otherwise, the version number is null\. 
+For examples of deleting objects using the AWS SDKs for Java, \.NET, and PHP, see [Deleting objects](DeletingObjects.md)\. The examples for deleting objects in nonversioned and versioning\-enabled buckets are the same, although in the case of versioning\-enabled buckets, Amazon S3 assigns a version number\. Otherwise, the version number is null\. 
 
 For information about using other AWS SDKs, see [Sample Code and Libraries](https://aws.amazon.com/code/)\. 
 
@@ -33,7 +33,7 @@ For information about using other AWS SDKs, see [Sample Code and Libraries](http
 **To a delete a specific version of an object**
 + In a `DELETE`, specify a version ID\.
 
-**Example Deleting a Specific Version**  
+**Example Deleting a specific version**  
 The following example shows how to delete version UIORUnfnd89493jJFJ of `photo.gif`\.  
 
 ```
@@ -46,12 +46,12 @@ The following example shows how to delete version UIORUnfnd89493jJFJ of `photo.g
 7. Content-Length: 0
 ```
 
-## Related Topics<a name="delete-obj-version-enabled-related-topics"></a>
+## Related topics<a name="delete-obj-version-enabled-related-topics"></a>
 
- [Using MFA Delete](UsingMFADelete.md) 
+ [Using MFA delete](UsingMFADelete.md) 
 
- [Working with Delete Markers](DeleteMarker.md) 
+ [Working with delete markers](DeleteMarker.md) 
 
- [Removing Delete Markers](RemDelMarker.md) 
+ [Removing delete markers](RemDelMarker.md) 
 
- [Using Versioning](Versioning.md) 
+ [Using versioning](Versioning.md) 

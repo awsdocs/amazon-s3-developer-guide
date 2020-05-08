@@ -65,15 +65,15 @@ Amazon S3 supports a bucket lifecycle rule that you can use to direct Amazon S3 
 
 In the example, the rule does not specify a value for the `Prefix` element \([object key name prefix](https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#keyprefix)\)\. Therefore, it applies to all objects in the bucket for which you initiated multipart uploads\. Any multipart uploads that were initiated and did not complete within seven days become eligible for an abort operation\. The abort action has no effect on completed multipart uploads\.
 
-For more information about the bucket lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
+For more information about the bucket lifecycle configuration, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
 
 **Note**  
 If the multipart upload is completed within the number of days specified in the rule, the `AbortIncompleteMultipartUpload` lifecycle action does not apply \(that is, Amazon S3 will not take any action\)\. Also, this action does not apply to objects, no objects are deleted by this lifecycle action\.
 
-The following `put-bucket-lifecycle` CLI command adds the lifecycle configuration for the specified bucket\. 
+The following `put-bucket-lifecycle-configuration` CLI command adds the lifecycle configuration for the specified bucket\. 
 
 ```
-$ aws s3api put-bucket-lifecycle  \
+$ aws s3api put-bucket-lifecycle-configuration  \
         --bucket bucketname  \
         --lifecycle-configuration filename-containing-lifecycle-configuration
 ```
@@ -90,7 +90,9 @@ To test the CLI command, do the following:
            {
                "ID": "Test Rule",
                "Status": "Enabled",
-               "Prefix": "",
+               "Filter": {
+                   "Prefix": ""
+               },
                "AbortIncompleteMultipartUpload": {
                    "DaysAfterInitiation": 7
                }
@@ -102,7 +104,7 @@ To test the CLI command, do the following:
 1.  Run the following CLI command to set lifecycle configuration on your bucket\. 
 
    ```
-   aws s3api put-bucket-lifecycle   \
+   aws s3api put-bucket-lifecycle-configuration   \
    --bucket bucketname  \
    --lifecycle-configuration file://lifecycle.json
    ```

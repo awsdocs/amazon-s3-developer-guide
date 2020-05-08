@@ -8,7 +8,7 @@ Amazon S3 enables you to store, retrieve, and delete objects\. You can retrieve 
 
   You can create a copy of your object up to 5 GB in size in a single atomic operation\. However, for copying an object greater than 5 GB, you must use the multipart upload API\. For more information, see [Copying Objects](CopyingObjectsExamples.md)\.
 
-You can use the REST API \(see [Making Requests Using the REST API](RESTAPI.md)\) to work with objects or use one of the following AWS SDK libraries:
+You can use the REST API \(see [Making requests using the REST API](RESTAPI.md)\) to work with objects or use one of the following AWS SDK libraries:
 + [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/)
 + [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)
 + [AWS SDK for PHP](https://aws.amazon.com/sdk-for-php/)

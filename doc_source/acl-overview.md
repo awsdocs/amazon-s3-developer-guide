@@ -76,7 +76,7 @@ The canonical user ID is associated with your AWS account\. It is a long string,
 You can also look up the canonical user ID of an AWS account by reading the ACL of a bucket or an object to which the AWS account has access permissions\. When an individual AWS account is granted permissions by a grant request, a grant entry is added to the ACL with the AWS account's canonical user ID\. 
 
 **Note**  
-If you make your bucket public \(not recommended\) any unauthenticated user can upload objects to the bucket\. These anonymous users don't have an AWS account\. When an anonymous user uploads an object to your bucket Amazon S3 adds a special canonical user ID \(`65a011a29cdf8ec533ec3d1ccaae921c`\) as the object owner in the ACL\. For more information, see [Amazon S3 Bucket and Object Ownership](access-control-overview.md#about-resource-owner)\.
+If you make your bucket public \(not recommended\) any unauthenticated user can upload objects to the bucket\. These anonymous users don't have an AWS account\. When an anonymous user uploads an object to your bucket Amazon S3 adds a special canonical user ID \(`65a011a29cdf8ec533ec3d1ccaae921c`\) as the object owner in the ACL\. For more information, see [Amazon S3 bucket and object ownership](access-control-overview.md#about-resource-owner)\.
 
 ### Amazon S3 Predefined Groups<a name="specifying-grantee-predefined-groups"></a>
 
@@ -93,7 +93,7 @@ When you grant access to the **Authenticated Users group** any AWS authenticated
 We highly recommend that you never grant the **All Users group** `WRITE`, `WRITE_ACP`, or `FULL_CONTROL` permissions\. For example, `WRITE` permissions allow anyone to store objects in your bucket, for which you are billed\. It also allows others to delete objects that you might want to keep\. For more details about these permissions, see the following section [What Permissions Can I Grant?](#permissions)\.
 + ****Log Delivery group**** – Represented by `http://acs.amazonaws.com/groups/s3/LogDelivery`\.
 
-  WRITE permission on a bucket enables this group to write server access logs \(see [Amazon S3 Server Access Logging](ServerLogs.md)\) to the bucket\.
+  WRITE permission on a bucket enables this group to write server access logs \(see [Amazon S3 server access logging](ServerLogs.md)\) to the bucket\.
 
 **Note**  
 When using ACLs, a grantee can be an AWS account or one of the predefined Amazon S3 groups\. However, the grantee cannot be an IAM user\. For more information about AWS users and permissions within IAM, go to [Using AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
@@ -118,7 +118,7 @@ Use caution when granting access permissions to your S3 buckets and objects\. Fo
 
 As shown in the preceding table, an ACL allows only a finite set of permissions, compared to the number of permissions you can set in an access policy \(see [Amazon S3 Actions](using-with-s3-actions.md)\)\. Each of these permissions allows one or more Amazon S3 operations\.
 
-The following table shows how each ACL permission maps to the corresponding access policy permissions\. As you can see, access policy allows more permissions than an ACL does\. You use ACLs primarily to grant basic read/write permissions, similar to file system permissions\. For more information about when to use an ACL, see [Guidelines for Using the Available Access Policy Options](access-policy-alternatives-guidelines.md)\.
+The following table shows how each ACL permission maps to the corresponding access policy permissions\. As you can see, access policy allows more permissions than an ACL does\. You use ACLs primarily to grant basic read/write permissions, similar to file system permissions\. For more information about when to use an ACL, see [Guidelines for using the available access policy options](access-policy-alternatives-guidelines.md)\.
 
 
 | ACL permission | Corresponding access policy permissions when the ACL permission is granted on a bucket  | Corresponding access policy permissions when the ACL permission is granted on an object | 
@@ -139,7 +139,7 @@ When you grant access policy permissions, you can use condition keys to constrai
 + `s3:x-amz-grant-full-control` ‐ Require full control\.
 + `s3:x-amz-acl` ‐ Require a [Canned ACL](#canned-acl)\.
 
-For example policies that involves ACL\-specific headers, see [Example 1: Granting s3:PutObject Permission with a Condition Requiring the Bucket Owner to Get Full Control](amazon-s3-policy-keys.md#grant-putobject-conditionally-1)\. For a complete list of Amazon S3‐specific condition keys, see [Actions, Resources, and Condition Keys for Amazon S3](list_amazons3.md)\.
+For example policies that involves ACL\-specific headers, see [Example 1: Granting s3:PutObject Permission with a Condition Requiring the Bucket Owner to Get Full Control](amazon-s3-policy-keys.md#grant-putobject-conditionally-1)\. For a complete list of Amazon S3‐specific condition keys, see [Actions, resources, and condition keys for Amazon S3](list_amazons3.md)\.
 
 ## Sample ACL<a name="sample-acl"></a>
 
@@ -210,7 +210,7 @@ Amazon S3 supports a set of predefined grants, known as *canned ACLs*\. Each can
 | authenticated\-read | Bucket and object | Owner gets FULL\_CONTROL\. The AuthenticatedUsers group gets READ access\. | 
 | bucket\-owner\-read | Object | Object owner gets FULL\_CONTROL\. Bucket owner gets READ access\. If you specify this canned ACL when creating a bucket, Amazon S3 ignores it\. | 
 | bucket\-owner\-full\-control | Object  | Both the object owner and the bucket owner get FULL\_CONTROL over the object\. If you specify this canned ACL when creating a bucket, Amazon S3 ignores it\. | 
-| log\-delivery\-write | Bucket  | The LogDelivery group gets WRITE and READ\_ACP permissions on the bucket\. For more information about logs, see \([Amazon S3 Server Access Logging](ServerLogs.md)\)\. | 
+| log\-delivery\-write | Bucket  | The LogDelivery group gets WRITE and READ\_ACP permissions on the bucket\. For more information about logs, see \([Amazon S3 server access logging](ServerLogs.md)\)\. | 
 
 **Note**  
 You can specify only one of these canned ACLs in your request\.

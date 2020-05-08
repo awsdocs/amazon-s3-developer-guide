@@ -1,4 +1,4 @@
-# Using Amazon S3 Block Public Access<a name="access-control-block-public-access"></a>
+# Using Amazon S3 block public access<a name="access-control-block-public-access"></a>
 
 The Amazon S3 Block Public Access feature provides settings for access points, buckets, and accounts to help you manage public access to Amazon S3 resources\. By default, new buckets, access points, and objects don't allow public access\. However, users can modify bucket policies, access point policies, or object permissions to allow public access\. S3 Block Public Access settings override these policies and permissions so that you can limit public access to these resources\. 
 
@@ -13,27 +13,27 @@ When Amazon S3 evaluates whether an operation is prohibited by a block public ac
 
 |  | 
 | --- |
-|    Public access is granted to buckets and objects through access control lists \(ACLs\), access point policies, bucket policies, or all\. To help ensure that all of your Amazon S3 access points, buckets, and objects have their public access blocked, we recommend that you turn on all four settings for block public access for your account\. These settings block public access for all current and future buckets and access points\.  Before applying these settings, verify that your applications will work correctly without public access\. If you require some level of public access to your buckets or objects, for example to host a static website as described at [Hosting a Static Website on Amazon S3](WebsiteHosting.md), you can customize the individual settings to suit your storage use cases\.   | 
+|    Public access is granted to buckets and objects through access control lists \(ACLs\), access point policies, bucket policies, or all\. To help ensure that all of your Amazon S3 access points, buckets, and objects have their public access blocked, we recommend that you turn on all four settings for block public access for your account\. These settings block public access for all current and future buckets and access points\.  Before applying these settings, verify that your applications will work correctly without public access\. If you require some level of public access to your buckets or objects, for example to host a static website as described at [Hosting a static website on Amazon S3](WebsiteHosting.md), you can customize the individual settings to suit your storage use cases\.   | 
 
 **Note**  
 You can enable block public access settings only for access points, buckets, and AWS accounts\. Amazon S3 doesn't support block public access settings on a per\-object basis\.
 When you apply block public access settings to an account, the settings apply to all AWS Regions globally\. The settings might not take effect in all Regions immediately or simultaneously, but they eventually propagate to all Regions\.
 
 **Topics**
-+ [Enable Block Public Access on the Amazon S3 Console](#console-block-public-access-options)
-+ [Block Public Access Settings](#access-control-block-public-access-options)
-+ [The Meaning of "Public"](#access-control-block-public-access-policy-status)
-+ [Using Access Analyzer for S3 to Review Public Buckets](#access-analyzer-public-info)
++ [Enable block public access on the Amazon S3 console](#console-block-public-access-options)
++ [Block public access settings](#access-control-block-public-access-options)
++ [The meaning of "public"](#access-control-block-public-access-policy-status)
++ [Using Access Analyzer for S3 to review public buckets](#access-analyzer-public-info)
 + [Permissions](#access-control-block-public-access-permissions)
 + [Examples](#access-control-block-public-access-examples)
 
-## Enable Block Public Access on the Amazon S3 Console<a name="console-block-public-access-options"></a>
+## Enable block public access on the Amazon S3 console<a name="console-block-public-access-options"></a>
 
 Amazon S3 Block Public Access provides four settings\. You can apply these settings in any combination to individual access points, buckets, or entire AWS accounts\. The following image shows how to enable block public access on the Amazon S3 console for your account\. For more information, see [Setting Permissions: Block Public Access](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/block-public-access.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
 ![\[Console screenshot showing the block public access account settings.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/block-public-access-account-settings.png)
 
-## Block Public Access Settings<a name="access-control-block-public-access-options"></a>
+## Block public access settings<a name="access-control-block-public-access-options"></a>
 
 S3 Block Public Access provides four settings\. You can apply these settings in any combination to individual access points, buckets, or entire AWS accounts\. If you apply a setting to an account, it applies to all buckets and access points that are owned by that account\. Similarly, if you apply a setting to a bucket, it applies to all access points associated with that bucket\.
 
@@ -51,7 +51,7 @@ The following table contains the available settings\.
 Calls to GET Bucket acl and GET Object acl always return the effective permissions in place for the specified bucket or object\. For example, suppose that a bucket has an ACL that grants public access, but the bucket also has the `IgnorePublicAcls` setting enabled\. In this case, GET Bucket acl returns an ACL that reflects the access permissions that Amazon S3 is enforcing, rather than the actual ACL that is associated with the bucket\.
 Block public access settings don't alter existing policies or ACLs\. Therefore, removing a block public access setting causes a bucket or object with a public policy or ACL to again be publicly accessible\. 
 
-## The Meaning of "Public"<a name="access-control-block-public-access-policy-status"></a>
+## The meaning of "public"<a name="access-control-block-public-access-policy-status"></a>
 
 ### Buckets<a name="access-control-block-public-access-policy-status-buckets"></a>
 + **ACLs**
@@ -69,7 +69,7 @@ Block public access settings don't alter existing policies or ACLs\. Therefore, 
     + `aws:userid`, outside the pattern "`AROLEID:*`"
     + `s3:DataAccessPointArn`
 **Note**  
-When used in a bucket policy, this value can contain a wildcard for the access point name without rendering the policy public, as long as the account id is fixed\. For example, allowing access to `arn:aws:s3:us-west-2:123456789012:accesspoint/*` would permit access to any access point associated with account `123456789012` in Region `us-west-2`, without rendering the bucket policy public\. Note that this behavior is different for access point policies\. For more information, see [Access Points](#access-control-block-public-access-policy-status-access-points)\.
+When used in a bucket policy, this value can contain a wildcard for the access point name without rendering the policy public, as long as the account id is fixed\. For example, allowing access to `arn:aws:s3:us-west-2:123456789012:accesspoint/*` would permit access to any access point associated with account `123456789012` in Region `us-west-2`, without rendering the bucket policy public\. Note that this behavior is different for access point policies\. For more information, see [Access points](#access-control-block-public-access-policy-status-access-points)\.
     + `s3:DataAccessPointAccount`
   + Under these rules, the following example policies are considered public\.
 
@@ -130,15 +130,15 @@ As an example, suppose that a bucket owned by "Account\-1" has a policy that con
 
 This policy qualifies as public because of the third statement\. With this policy in place and `RestrictPublicBuckets` enabled, Amazon S3 allows access only by CloudTrail\. Even though statement 2 isn't public, Amazon S3 disables access by "Account\-2\." This is because statement 3 renders the entire policy public, so `RestrictPublicBuckets` applies\. As a result, Amazon S3 disables cross\-account access, even though the policy delegates access to a specific account, "Account\-2\." But if you remove statement 3 from the policy, then the policy doesn't qualify as public, and `RestrictPublicBuckets` no longer applies\. Thus, "Account\-2" regains access to the bucket, even if you leave `RestrictPublicBuckets` enabled\.
 
-### Access Points<a name="access-control-block-public-access-policy-status-access-points"></a>
+### Access points<a name="access-control-block-public-access-policy-status-access-points"></a>
 
 Amazon S3 evaluates block public access settings slightly differently for access points compared to buckets\. The rules that Amazon S3 applies to determine when an access point policy is public are generally the same for access points as for buckets, except in the following situations:
 + An access point that has a VPC network origin is always considered non\-public, regardless of the contents of its access point policy\.
 + An access point policy that grants access to a set of access points using `s3:DataAccessPointArn` is considered public\. Note that this behavior is different than for bucket policies\. For example, a bucket policy that grants access to values of `s3:DataAccessPointArn` that match `arn:aws:s3:us-west-2:123456789012:accesspoint/*` is not considered public\. However, the same statement in an access point policy would render the access point public\.
 
-## Using Access Analyzer for S3 to Review Public Buckets<a name="access-analyzer-public-info"></a>
+## Using Access Analyzer for S3 to review public buckets<a name="access-analyzer-public-info"></a>
 
-You can use Access Analyzer for S3 to review buckets with bucket ACLs or bucket policies that grant public access\. Access Analyzer for S3 alerts you to buckets that are configured to allow access to anyone on the internet or other AWS accounts, including AWS accounts outside of your organization\. For each public or shared bucket, you receive findings that report the source and level of public or shared access\. 
+You can use Access Analyzer for S3 to review buckets with bucket ACLs, bucket policies, or access point policies that grant public access\. Access Analyzer for S3 alerts you to buckets that are configured to allow access to anyone on the internet or other AWS accounts, including AWS accounts outside of your organization\. For each public or shared bucket, you receive findings that report the source and level of public or shared access\. 
 
 Armed with the knowledge presented in the findings, you can take immediate and precise corrective action\. In Access Analyzer for S3, you can block all public access to a bucket with a single click\. You can also drill down into bucket\-level permission settings to configure granular levels of access\. For specific and verified use cases that require public or shared access, you can acknowledge and record your intent for the bucket to remain public or shared by archiving the findings for the bucket\.
 
@@ -151,7 +151,7 @@ For more information about Access Analyzer for S3, see [Using Access Analyzer fo
 To use Amazon S3 Block Public Access features, you must have the following permissions\.
 
 
-| Operation | Required Permissions | 
+| Operation | Required permissions | 
 | --- | --- | 
 | GET bucket policy status | s3:GetBucketPolicyStatus | 
 | GET bucket Block Public Access settings | s3:GetBucketPublicAccessBlock | 
@@ -167,7 +167,7 @@ The DELETE operations require the same permissions as the PUT operations\. There
 
 ## Examples<a name="access-control-block-public-access-examples"></a>
 
-### Using Block Public Access with the AWS CLI<a name="access-control-block-public-access-examples-cli"></a>
+### Using block public access with the AWS CLI<a name="access-control-block-public-access-examples-cli"></a>
 
 You can use Amazon S3 Block Public Access through the AWS CLI\. The command you use depends on whether you want to perform a block public access call on an access point, bucket, or account\. For more information about setting up and using the AWS CLI, see [What is the AWS Command Line Interface?](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
 + **Access point**
@@ -184,7 +184,7 @@ You can use Amazon S3 Block Public Access through the AWS CLI\. The command you 
     + GET PublicAccessBlock \(for an account\)
     + DELETE PublicAccessBlock \(for an account\)
 
-### Using Block Public Access with the AWS SDK for Java<a name="access-control-block-public-access-examples-java"></a>
+### Using block public access with the AWS SDK for Java<a name="access-control-block-public-access-examples-java"></a>
 
 The following examples show how to use Amazon S3 Block Public Access with the AWS SDK for Java\. For instructions on how to create and test a working sample, see [Using the AWS SDK for Java](UsingTheMPJavaAPI.md)\.
 
@@ -231,11 +231,11 @@ client.putPublicAccessBlock(new PutPublicAccessBlockRequest()
 **Important**  
 This example pertains only to account\-level operations, which use the `AWSS3Control` client class\. For bucket\-level operations, see the preceding example\.
 
-### Using Block Public Access with Other AWS SDKs<a name="access-control-block-public-access-examples-other-sdk"></a>
+### Using block public access with other AWS SDKs<a name="access-control-block-public-access-examples-other-sdk"></a>
 
 For information about using the other AWS SDKs, see [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)\.
 
-### Using Block Public Access with the REST APIs<a name="access-control-block-public-access-examples-api"></a>
+### Using block public access with the REST APIs<a name="access-control-block-public-access-examples-api"></a>
 
 For information about using Amazon S3 Block Public Access through the REST APIs, see the following topics in the *Amazon Simple Storage Service API Reference*\.
 + Account\-level operations

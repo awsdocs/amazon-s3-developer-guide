@@ -19,7 +19,7 @@ The following topics list symptoms to help you troubleshoot some of the issues t
 
 If you notice a significant increase in the number of HTTP 503\-slow down responses received for Amazon S3 PUT or DELETE object requests to a bucket that has versioning enabled, you might have one or more objects in the bucket for which there are millions of versions\. When you have objects with millions of versions, Amazon S3 automatically throttles requests to the bucket to protect the customer from an excessive amount of request traffic, which could potentially impede other requests made to the same bucket\. 
 
-To determine which S3 objects have millions of versions, use the Amazon S3 inventory tool\. The inventory tool generates a report that provides a flat file list of the objects in a bucket\. For more information, see [ Amazon S3 Inventory](storage-inventory.md)\.
+To determine which S3 objects have millions of versions, use the Amazon S3 inventory tool\. The inventory tool generates a report that provides a flat file list of the objects in a bucket\. For more information, see [ Amazon S3 inventory](storage-inventory.md)\.
 
 The Amazon S3 team encourages customers to investigate applications that repeatedly overwrite the same S3 object, potentially creating millions of versions for that object, to determine whether the application is working as intended\. If you have a use case that requires millions of versions for one or more S3 objects, contact the AWS Support team at [AWS Support](https://console.aws.amazon.com/support/home) to discuss your use case and to help us assist you in determining the optimal solution for your use case scenario\.
 
@@ -29,7 +29,7 @@ To help prevent this issue, consider the following best practices:
 
 ### Unexpected Behavior When Accessing Buckets Set with CORS<a name="troubleshooting-by-symptom-increase"></a>
 
- If you encounter unexpected behavior when accessing buckets set with the cross\-origin resource sharing \(CORS\) configuration, see [Troubleshooting CORS Issues](cors-troubleshooting.md)\.
+ If you encounter unexpected behavior when accessing buckets set with the cross\-origin resource sharing \(CORS\) configuration, see [Troubleshooting CORS issues](cors-troubleshooting.md)\.
 
 ## Getting Amazon S3 Request IDs for AWS Support<a name="get-request-ids"></a>
 
@@ -140,8 +140,8 @@ You can get your request IDs in the AWS CLI by adding `--debug` to your command\
 ## Related Topics<a name="related-troubleshooting-topics"></a>
 
 For other troubleshooting and support topics, see the following:
-+ [Troubleshooting CORS Issues](cors-troubleshooting.md)
-+ [Handling REST and SOAP Errors](HandlingErrors.md)
++ [Troubleshooting CORS issues](cors-troubleshooting.md)
++ [Handling REST and SOAP errors](HandlingErrors.md)
 + [AWS Support Documentation](https://aws.amazon.com/documentation/aws-support/)
 
 For troubleshooting information regarding third\-party tools, see [Getting Amazon S3 request IDs](https://forums.aws.amazon.com/thread.jspa?threadID=182409) in the AWS Developer Forums\.

@@ -3,8 +3,41 @@
 Amazon S3 Select and S3 Glacier Select support the following conditional functions\.
 
 **Topics**
++ [CASE](#s3-glacier-select-sql-reference-case)
 + [COALESCE](#s3-glacier-select-sql-reference-coalesce)
 + [NULLIF](#s3-glacier-select-sql-reference-nullif)
+
+## CASE<a name="s3-glacier-select-sql-reference-case"></a>
+
+The CASE expression is a conditional expression, similar to if/then/else statements found in other languages\. CASE is used to specify a result when there are multiple conditions\.
+
+There are two types of CASE expressions: simple and searched\.
+
+In simple CASE expressions, an expression is compared with a value\. When a match is found, the specified action in the THEN clause is applied\. If no match is found, the action in the ELSE clause is applied\.
+
+In searched CASE expressions, each CASE is evaluated based on a Boolean expression, and the CASE statement returns the first matching CASE\. If no matching CASEs are found among the WHEN clauses, the action in the ELSE clause is returned\.
+
+### Syntax<a name="s3-glacier-select-sql-reference-case-syntax"></a>
+
+Simple CASE statement used to match conditions:
+
+```
+CASE expression
+WHEN value THEN result
+[WHEN...]
+[ELSE result]
+END
+```
+
+Searched CASE statement used to evaluate each condition:
+
+```
+CASE
+WHEN boolean condition THEN result
+[WHEN ...]
+[ELSE result]
+END
+```
 
 ## COALESCE<a name="s3-glacier-select-sql-reference-coalesce"></a>
 

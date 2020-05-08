@@ -1,12 +1,12 @@
-# Guidelines for Using the Available Access Policy Options<a name="access-policy-alternatives-guidelines"></a>
+# Guidelines for using the available access policy options<a name="access-policy-alternatives-guidelines"></a>
 
-Amazon S3 supports resource\-based policies and user policies to manage access to your Amazon S3 resources \(see [Managing Access to Resources](access-control-overview.md#access-control-resources-manage-permissions-basics)\)\. Resource\-based policies include bucket policies, bucket ACLs, and object ACLs\. This section describes specific scenarios for using resource\-based access policies to manage access to your Amazon S3 resources\. 
+Amazon S3 supports resource\-based policies and user policies to manage access to your Amazon S3 resources \(see [Managing access to resources](access-control-overview.md#access-control-resources-manage-permissions-basics)\)\. Resource\-based policies include bucket policies, bucket ACLs, and object ACLs\. This section describes specific scenarios for using resource\-based access policies to manage access to your Amazon S3 resources\. 
 
-## When to Use an ACL\-based Access Policy \(Bucket and Object ACLs\)<a name="when-to-use-acl"></a>
+## When to use an ACL\-based access policy \(bucket and object ACLs\)<a name="when-to-use-acl"></a>
 
 Both buckets and objects have associated ACLs that you can use to grant permissions\. The following sections describe scenarios for using object ACLs and bucket ACLs\.
 
-### When to Use an Object ACL<a name="when-to-use-object-acl"></a>
+### When to use an object ACL<a name="when-to-use-object-acl"></a>
 
 In addition to an object ACL, there are other ways an object owner can manage object permissions\. For example:
 + If the AWS account that owns the object also owns the bucket, then it can write a bucket policy to manage the object permissions\.
@@ -23,9 +23,9 @@ A bucket owner cannot grant permissions on objects it does not own\. For example
 
   An AWS account that owns a bucket can grant another AWS account permission to manage access policy\. It allows that account to change anything in the policy\. To better manage permissions, you may choose not to give such a broad permission, and instead grant only the READ\-ACP and WRITE\-ACP permissions on a subset of objects\. This limits the account to manage permissions only on specific objects by updating individual object ACLs\.
 
-### When to Use a Bucket ACL<a name="when-to-use-bucket-acl"></a>
+### When to use a bucket ACL<a name="when-to-use-bucket-acl"></a>
 
-The only recommended use case for the bucket ACL is to grant write permission to the Amazon S3 Log Delivery group to write access log objects to your bucket \(see [Amazon S3 Server Access Logging](ServerLogs.md)\)\. If you want Amazon S3 to deliver access logs to your bucket, you will need to grant write permission on the bucket to the Log Delivery group\. The only way you can grant necessary permissions to the Log Delivery group is via a bucket ACL, as shown in the following bucket ACL fragment\.
+The only recommended use case for the bucket ACL is to grant write permission to the Amazon S3 Log Delivery group to write access log objects to your bucket \(see [Amazon S3 server access logging](ServerLogs.md)\)\. If you want Amazon S3 to deliver access logs to your bucket, you will need to grant write permission on the bucket to the Log Delivery group\. The only way you can grant necessary permissions to the Log Delivery group is via a bucket ACL, as shown in the following bucket ACL fragment\.
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -47,14 +47,14 @@ The only recommended use case for the bucket ACL is to grant write permission to
 </AccessControlPolicy>
 ```
 
-## When to Use a Bucket Policy<a name="when-to-use-bucket-policy"></a>
+## When to use a bucket policy<a name="when-to-use-bucket-policy"></a>
 
 If an AWS account that owns a bucket wants to grant permission to users in its account, it can use either a bucket policy or a user policy\. But in the following scenarios, you will need to use a bucket policy\.
-+ **You want to manage cross\-account permissions for all Amazon S3 permissions** – You can use ACLs to grant cross\-account permissions to other accounts, but ACLs support only a finite set of permission \([What Permissions Can I Grant?](acl-overview.md#permissions)\), these don't include all Amazon S3 permissions\. For example, you cannot grant permissions on bucket subresources \(see [Identity and Access Management in Amazon S3](s3-access-control.md)\) using an ACL\. 
++ **You want to manage cross\-account permissions for all amazon S3 permissions** – You can use ACLs to grant cross\-account permissions to other accounts, but ACLs support only a finite set of permission \([What Permissions Can I Grant?](acl-overview.md#permissions)\), these don't include all Amazon S3 permissions\. For example, you cannot grant permissions on bucket subresources \(see [Identity and access management in Amazon S3](s3-access-control.md)\) using an ACL\. 
 
   Although both bucket and user policies support granting permission for all Amazon S3 operations \(see [Amazon S3 Actions](using-with-s3-actions.md)\), the user policies are for managing permissions for users in your account\. For cross\-account permissions to other AWS accounts or users in another account, you must use a bucket policy\.
 
-## When to Use a User Policy<a name="when-to-use-user-policy"></a>
+## When to use a user policy<a name="when-to-use-user-policy"></a>
 
 In general, you can use either a user policy or a bucket policy to manage permissions\. You may choose to manage permissions by creating users and managing permissions individually by attaching policies to users \(or user groups\), or you may find that resource\-based policies, such as a bucket policy, work better for your scenario\.
 
@@ -64,13 +64,13 @@ Note that AWS Identity and Access Management \(IAM\) enables you to create multi
 
 This is akin to a child who wants to play with a toy that belongs to someone else\. In this case, the child must get permission from a parent to play with the toy and permission from the toy owner\.
 
-### Permission Delegation<a name="permission-delegation"></a>
+### Permission delegation<a name="permission-delegation"></a>
 
 If an AWS account owns a resource, it can grant those permissions to another AWS account\. That account can then delegate those permissions, or a subset of them, to users in the account\. This is referred to as permission delegation\. But an account that receives permissions from another account cannot delegate permission cross\-account to another AWS account\. 
 
-## Related Topics<a name="access-control-guidelines-related-topics"></a>
+## Related topics<a name="access-control-guidelines-related-topics"></a>
 
-We recommend you first review all introductory topics that explain how you manage access to your Amazon S3 resources and related guidelines\. For more information, see [Introduction to Managing Access to Amazon S3 Resources](s3-access-control.md#intro-managing-access-s3-resources)\. You can then use the following topics for more information about specific access policy options\. 
+We recommend you first review all introductory topics that explain how you manage access to your Amazon S3 resources and related guidelines\. For more information, see [Introduction to managing access to Amazon S3 resources](s3-access-control.md#intro-managing-access-s3-resources)\. You can then use the following topics for more information about specific access policy options\. 
 + [Using Bucket Policies and User Policies](using-iam-policies.md)
 + [Access Control List \(ACL\) Overview](acl-overview.md)
 + [Managing Access with ACLs](S3_ACLs_UsingACLs.md)

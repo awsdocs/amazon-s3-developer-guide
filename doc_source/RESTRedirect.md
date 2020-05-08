@@ -1,13 +1,13 @@
-# Request Redirection and the REST API<a name="RESTRedirect"></a>
+# Request redirection and the REST API<a name="RESTRedirect"></a>
 
 **Topics**
-+ [Redirects and HTTP User\-Agents](#RESTRedirectHTTPUserAgents)
++ [Redirects and HTTP user\-agents](#RESTRedirectHTTPUserAgents)
 + [Redirects and 100\-Continue](#RESTRedirect100Continue)
-+ [Redirect Example](#RESTRedirectExample)
++ [Redirect example](#RESTRedirectExample)
 
-This section describes how to handle HTTP redirects by using the Amazon S3 REST API\. For general information about Amazon S3 redirects, see [Request Redirection and the REST API](Redirects.md) in the Amazon Simple Storage Service API Reference\. 
+This section describes how to handle HTTP redirects by using the Amazon S3 REST API\. For general information about Amazon S3 redirects, see [Request redirection and the REST API](Redirects.md) in the Amazon Simple Storage Service API Reference\. 
 
-## Redirects and HTTP User\-Agents<a name="RESTRedirectHTTPUserAgents"></a>
+## Redirects and HTTP user\-agents<a name="RESTRedirectHTTPUserAgents"></a>
 
 Programs that use the Amazon S3 REST API should handle redirects either at the application layer or the HTTP layer\. Many HTTP client libraries and user agents can be configured to correctly handle redirects automatically; however, many others have incorrect or incomplete redirect implementations\. 
 
@@ -26,7 +26,7 @@ To simplify redirect handling, improve efficiencies, and avoid the costs associa
 **Note**  
 According to RFC 2616, when using `Expect: Continue` with an unknown HTTP server, you should not wait an indefinite period before sending the request body\. This is because some HTTP servers do not recognize 100\-continue\. However, Amazon S3 does recognize if your request contains an `Expect: Continue` and will respond with a provisional 100\-continue status or a final status code\. Additionally, no redirect error will occur after receiving the provisional 100 continue go\-ahead\. This will help you avoid receiving a redirect response while you are still writing the request body\. 
 
-## Redirect Example<a name="RESTRedirectExample"></a>
+## Redirect example<a name="RESTRedirectExample"></a>
 
 This section provides an example of client\-server interaction using HTTP redirects and 100\-continue\. 
 

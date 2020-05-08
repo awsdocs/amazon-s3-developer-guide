@@ -1,4 +1,4 @@
-# Making Requests Using Federated User Temporary Credentials<a name="AuthUsingTempFederationToken"></a>
+# Making requests using federated user temporary credentials<a name="AuthUsingTempFederationToken"></a>
 
 You can request temporary security credentials and provide them to your federated users or applications who need to access your AWS resources\. This section provides examples of how you can use the AWS SDK to obtain temporary security credentials for your federated users or applications and send authenticated requests to Amazon S3 using those credentials\. For a list of available AWS SDKs, see [Sample Code and Libraries](https://aws.amazon.com/code/)\. 
 

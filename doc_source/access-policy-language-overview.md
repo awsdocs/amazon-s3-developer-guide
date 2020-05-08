@@ -2,7 +2,7 @@
 
 This page provides an overview of bucket and user policies in Amazon S3 and describes the basic elements of a policy\. Each listed element links to more details about that element and examples of how to use it\. 
 
-For a complete list of Amazon S3 actions, resources, and conditions, see [Actions, Resources, and Condition Keys for Amazon S3](list_amazons3.md)\.
+For a complete list of Amazon S3 actions, resources, and conditions, see [Actions, resources, and condition keys for Amazon S3](list_amazons3.md)\.
 
 ## Policy Language Overview<a name="policy-elements-overview"></a>
 

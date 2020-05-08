@@ -1,8 +1,8 @@
-# Versioned Object Permissions<a name="VersionedObjectPermissionsandACLs"></a>
+# Versioned object permissions<a name="VersionedObjectPermissionsandACLs"></a>
 
-Permissions are set at the version level\. Each version has its own object owner; an AWS account that creates the object version is the owner\. So, you can set different permissions for different versions of the same object\. To do so, you must specify the version ID of the object whose permissions you want to set in a `PUT Object versionId acl` request\. For a detailed description and instructions on using ACLs, see [Identity and Access Management in Amazon S3](s3-access-control.md)\.
+Permissions are set at the version level\. Each version has its own object owner; an AWS account that creates the object version is the owner\. So, you can set different permissions for different versions of the same object\. To do so, you must specify the version ID of the object whose permissions you want to set in a `PUT Object versionId acl` request\. For a detailed description and instructions on using ACLs, see [Identity and access management in Amazon S3](s3-access-control.md)\.
 
-**Example Setting Permissions for an Object Version**  
+**Example Setting permissions for an object version**  
 The following request sets the permission of the grantee, `BucketOwner@amazon.com`, to `FULL_CONTROL` on the key, `my-image.jpg`, version ID, 3HL4kqtJvjVBH40Nrjfkd\.  
 
 ```
@@ -31,7 +31,7 @@ The following request sets the permission of the grantee, `BucketOwner@amazon.co
 
 Likewise, to get the permissions of a specific object version, you must specify its version ID in a `GET Object versionId acl` request\. You need to include the version ID because, by default, `GET Object acl` returns the permissions of the current version of the object\. 
 
-**Example Retrieving the Permissions for a Specified Object Version**  
+**Example Retrieving the permissions for a specified object version**  
 In the following example, Amazon S3 returns the permissions for the key, `my-image.jpg`, version ID, DVBH40Nr8X8gUMLUo\.  
 
 ```

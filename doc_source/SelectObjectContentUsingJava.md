@@ -1,4 +1,4 @@
-# Selecting Content from Objects Using the SDK for Java<a name="SelectObjectContentUsingJava"></a>
+# Selecting content from objects using the SDK for Java<a name="SelectObjectContentUsingJava"></a>
 
 You use Amazon S3 Select to select contents of an object with Java using the `selectObjectContent` method, which on success returns the results of the SQL expression\. The specified bucket and object key must exist, or an error results\.
 

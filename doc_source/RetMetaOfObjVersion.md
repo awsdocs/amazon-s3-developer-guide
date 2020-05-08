@@ -1,4 +1,4 @@
-# Retrieving the Metadata of an Object Version<a name="RetMetaOfObjVersion"></a>
+# Retrieving the metadata of an object version<a name="RetMetaOfObjVersion"></a>
 
 If you only want to retrieve the metadata of an object \(and not its content\), you use the `HEAD` operation\. By default, you get the metadata of the most recent version\. To retrieve the metadata of a specific object version, you specify its version ID\.
 
@@ -8,7 +8,7 @@ If you only want to retrieve the metadata of an object \(and not its content\), 
 
 1. Send a `HEAD Object versionId` request\.
 
-**Example Retrieving the Metadata of a Versioned Object**  
+**Example Retrieving the metadata of a versioned object**  
 The following request retrieves the metadata of version 3HL4kqCxf3vjVBH40Nrjfkd of `my-image.jpg`\.  
 
 ```

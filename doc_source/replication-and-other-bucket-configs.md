@@ -1,11 +1,11 @@
 # Replication Additional Considerations<a name="replication-and-other-bucket-configs"></a>
 
 Amazon S3 also supports bucket configurations for the following:
-+ Versioning — For more information, see [Using Versioning](Versioning.md)\.
-+ Website hosting — For more information, see [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\.
++ Versioning — For more information, see [Using versioning](Versioning.md)\.
++ Website hosting — For more information, see [Hosting a static website on Amazon S3](WebsiteHosting.md)\.
 + Bucket access through a bucket policy or access control list \(ACL\) — For more information, see [Using Bucket Policies and User Policies](using-iam-policies.md) and see [Managing Access with ACLs](S3_ACLs_UsingACLs.md)\.
-+ Log storage — For more information, [Amazon S3 Server Access Logging](ServerLogs.md)\.
-+ Lifecycle management for objects in a bucket — For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
++ Log storage — For more information, [Amazon S3 server access logging](ServerLogs.md)\.
++ Lifecycle management for objects in a bucket — For more information, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
 
 This topic explains how bucket replication configuration affects the behavior of these bucket configurations\.
 
@@ -35,7 +35,7 @@ Both the source and destination buckets must be versioning\-enabled when you con
 
 If Amazon S3 delivers logs to a bucket that has replication enabled, it replicates the log objects\.
 
-If server access logs \([Amazon S3 Server Access Logging](ServerLogs.md)\) or AWS CloudTrail Logs \( [Logging Amazon S3 API Calls Using AWS CloudTrail](cloudtrail-logging.md)\) are enabled on your source or destination bucket, Amazon S3 includes replication\-related requests in the logs\. For example, Amazon S3 logs each object that it replicates\. 
+If server access logs \([Amazon S3 server access logging](ServerLogs.md)\) or AWS CloudTrail Logs \( [Logging Amazon S3 API calls using AWS CloudTrail](cloudtrail-logging.md)\) are enabled on your source or destination bucket, Amazon S3 includes replication\-related requests in the logs\. For example, Amazon S3 logs each object that it replicates\. 
 
 ## CRR and the Destination Region<a name="replication-and-dest-region"></a>
 

@@ -105,7 +105,7 @@ There are two categories of system metadata:
 
    When you create objects, you can configure values of these system metadata items or update the values when you need to\. For more information about storage classes, see [Amazon S3 Storage Classes](storage-class-intro.md)\. 
 
-   For more information about server\-side encryption, see [Protecting Data Using Encryption](UsingEncryption.md)\. 
+   For more information about server\-side encryption, see [Protecting data using encryption](UsingEncryption.md)\. 
 
 The following table provides a list of system\-defined metadata and whether you can update it\.
 
@@ -117,13 +117,13 @@ The following table provides a list of system\-defined metadata and whether you 
 | Content\-Type | Object type\. | Yes | 
 | Last\-Modified |  Object creation date or the last modified date, whichever is the latest\.  | No | 
 | Content\-MD5 | The base64\-encoded 128\-bit MD5 digest of the object\. | No | 
-| x\-amz\-server\-side\-encryption | Indicates whether server\-side encryption is enabled for the object, and whether that encryption is from the AWS Key Management Service \(AWS KMS\) or from Amazon S3 managed encryption \(SSE\-S3\)\. For more information, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.  | Yes | 
-| x\-amz\-version\-id | Object version\. When you enable versioning on a bucket, Amazon S3 assigns a version number to objects added to the bucket\. For more information, see [Using Versioning](Versioning.md)\. | No | 
+| x\-amz\-server\-side\-encryption | Indicates whether server\-side encryption is enabled for the object, and whether that encryption is from the AWS Key Management Service \(AWS KMS\) or from Amazon S3 managed encryption \(SSE\-S3\)\. For more information, see [Protecting data using server\-side encryption](serv-side-encryption.md)\.  | Yes | 
+| x\-amz\-version\-id | Object version\. When you enable versioning on a bucket, Amazon S3 assigns a version number to objects added to the bucket\. For more information, see [Using versioning](Versioning.md)\. | No | 
 | x\-amz\-delete\-marker | In a bucket that has versioning enabled, this Boolean marker indicates whether the object is a delete marker\.  | No | 
 | x\-amz\-storage\-class | Storage class used for storing the object\. For more information, see [Amazon S3 Storage Classes](storage-class-intro.md)\. | Yes | 
-| x\-amz\-website\-redirect\-location |  Redirects requests for the associated object to another object in the same bucket or an external URL\. For more information, see [\(Optional\) Configuring a Webpage Redirect](how-to-page-redirect.md)\. | Yes | 
+| x\-amz\-website\-redirect\-location |  Redirects requests for the associated object to another object in the same bucket or an external URL\. For more information, see [\(Optional\) configuring a webpage redirect](how-to-page-redirect.md)\. | Yes | 
 | x\-amz\-server\-side\-encryption\-aws\-kms\-key\-id | If x\-amz\-server\-side\-encryption is present and has the value of aws:kms, this indicates the ID of the AWS KMS symmetric customer master key \(CMK\) that was used for the object\. | Yes | 
-| x\-amz\-server\-side\-encryption\-customer\-algorithm | Indicates whether server\-side encryption with customer\-provided encryption keys \(SSE\-C\) is enabled\. For more information, see [Protecting Data Using Server\-Side Encryption with Customer\-Provided Encryption Keys \(SSE\-C\)](ServerSideEncryptionCustomerKeys.md)\.  | Yes | 
+| x\-amz\-server\-side\-encryption\-customer\-algorithm | Indicates whether server\-side encryption with customer\-provided encryption keys \(SSE\-C\) is enabled\. For more information, see [Protecting data using server\-side encryption with customer\-provided encryption keys \(SSE\-C\)](ServerSideEncryptionCustomerKeys.md)\.  | Yes | 
 
 ### User\-Defined Object Metadata<a name="UserMetadata"></a>
 
@@ -134,7 +134,33 @@ When uploading an object, you can also assign metadata to the object\. You provi
 
 When metadata is retrieved through the REST API, Amazon S3 combines headers that have the same name \(ignoring case\) into a comma\-delimited list\. If some metadata contains unprintable characters, it is not returned\. Instead, the `x-amz-missing-meta` header is returned with a value of the number of unprintable metadata entries\.
 
-User\-defined metadata is a set of key\-value pairs\. Amazon S3 stores user\-defined metadata keys in lowercase\. Each key\-value pair must conform to US\-ASCII when you are using REST and to UTF\-8 when you are using SOAP or browser\-based uploads via POST\.
+User\-defined metadata is a set of key\-value pairs\. Amazon S3 stores user\-defined metadata keys in lowercase\.
+
+Amazon S3 allows arbitrary Unicode characters in your metadata values\.
+
+To avoid issues around the presentation of these metadata values, you should conform to using US\-ASCII characters when using REST and UTF\-8 when using SOAP or browser\-based uploads via POST\.
+
+When using non US\-ASCII characters in your metadata values, the provided Unicode string is examined for non US\-ASCII characters\. If the string contains only US\-ASCII characters, it is presented as is\. If the string contains non US\-ASCII characters, it is first character\-encoded using UTF\-8 and then encoded into US\-ASCII\.
+
+Example:
+
+```
+PUT /Key HTTP/1.1
+Host: awsexamplebucket1.s3.amazonaws.com
+x-amz-meta-nonascii: ÄMÄZÕÑ S3
+
+HEAD /Key HTTP/1.1
+Host: awsexamplebucket1.s3.amazonaws.com
+x-amz-meta-nonascii: =?UTF-8?B?w4PChE3Dg8KEWsODwpXDg8KRIFMz?=
+
+PUT /Key HTTP/1.1
+Host: awsexamplebucket1.s3.amazonaws.com
+x-amz-meta-ascii: AMAZONS3
+
+HEAD /Key HTTP/1.1
+Host: awsexamplebucket1.s3.amazonaws.com
+x-amz-meta-ascii: AMAZONS3
+```
 
 **Note**  
 The PUT request header is limited to 8 KB in size\. Within the PUT request header, the user\-defined metadata is limited to 2 KB in size\. The size of user\-defined metadata is measured by taking the sum of the number of bytes in the UTF\-8 encoding of each key and value\. 

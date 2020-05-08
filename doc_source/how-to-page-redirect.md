@@ -1,14 +1,14 @@
-# \(Optional\) Configuring a Webpage Redirect<a name="how-to-page-redirect"></a>
+# \(Optional\) configuring a webpage redirect<a name="how-to-page-redirect"></a>
 
 If your Amazon S3 bucket is configured for website hosting, you can configure a webpage redirect\. You have the following options for configuring a redirect\.
 
 **Topics**
-+ [Setting a Page Redirect in the Amazon S3 Console](#page-redirect-using-console)
-+ [Setting a Page Redirect from the REST API](#page-redirect-using-rest-api)
-+ [Redirecting Requests for a Bucket's Website Endpoint to Another Host](#redirect-endpoint-host)
-+ [Configuring Advanced Conditional Redirects](#advanced-conditional-redirects)
++ [Setting a page redirect in the Amazon S3 console](#page-redirect-using-console)
++ [Setting a page redirect from the REST API](#page-redirect-using-rest-api)
++ [Redirecting requests for a bucket's website endpoint to another host](#redirect-endpoint-host)
++ [Configuring advanced conditional redirects](#advanced-conditional-redirects)
 
-## Setting a Page Redirect in the Amazon S3 Console<a name="page-redirect-using-console"></a>
+## Setting a page redirect in the Amazon S3 console<a name="page-redirect-using-console"></a>
 
 You can redirect requests for an object to another object or URL by setting the website redirect location in the metadata of the object\. You set the redirect by adding the `x-amz-website-redirect-location` property to the object metadata\. On the Amazon S3 console, you set the **Website Redirect Location** in the metadata of the object\. If you use the [Amazon S3 API](#page-redirect-using-rest-api), you set `x-amz-website-redirect-location`\. The website then interprets the object as a 301 redirect\. 
 
@@ -40,7 +40,7 @@ When you set a page redirect, you can either keep or delete the source object co
 
 1. Choose **Save**\.
 
-## Setting a Page Redirect from the REST API<a name="page-redirect-using-rest-api"></a>
+## Setting a page redirect from the REST API<a name="page-redirect-using-rest-api"></a>
 
 The following Amazon S3 API actions support the `x-amz-website-redirect-location` header in the request\. Amazon S3 stores the header value in the object metadata as `x-amz-website-redirect-location`\. 
 + [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)
@@ -52,7 +52,7 @@ A bucket configured for website hosting has both the website endpoint and the RE
 + **Region\-specific website endpoint – **Amazon S3 redirects the page request according to the value of the `x-amz-website-redirect-location` property\. 
 + **REST endpoint – **Amazon S3 doesn't redirect the page request\. It returns the requested object\.
 
-For more information about the endpoints, see [Key Differences Between a Website Endpoint and a REST API Endpoint](WebsiteEndpoints.md#WebsiteRestEndpointDiff)\.
+For more information about the endpoints, see [Key differences between a website endpoint and a REST API endpoint](WebsiteEndpoints.md#WebsiteRestEndpointDiff)\.
 
 When setting a page redirect, you can either keep or delete the object content\. For example, suppose that you have a `page1.html` object in your bucket\.
 + To keep the content of `page1.html` and only redirect page requests, you can submit a [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html) request to create a new `page1.html` object that uses the existing `page1.html` object as the source\. In your request, you set the `x-amz-website-redirect-location` header\. When the request is complete, you have the original page with its content unchanged, but Amazon S3 redirects any requests for the page to the redirect location that you specify\.
@@ -60,7 +60,7 @@ When setting a page redirect, you can either keep or delete the object content\.
 
 When you retrieve the object using the [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html) action, along with other object metadata, Amazon S3 returns the `x-amz-website-redirect-location` header in the response\.
 
-## Redirecting Requests for a Bucket's Website Endpoint to Another Host<a name="redirect-endpoint-host"></a>
+## Redirecting requests for a bucket's website endpoint to another host<a name="redirect-endpoint-host"></a>
 
 You can redirect all requests for a website endpoint for a bucket to another host\. If you redirect all requests, any request made to the website endpoint is redirected to the specified host name\. 
 
@@ -88,11 +88,11 @@ For example, if your root domain is `example.com`, and you want to serve request
 
 1. Choose **Save**\.
 
-## Configuring Advanced Conditional Redirects<a name="advanced-conditional-redirects"></a>
+## Configuring advanced conditional redirects<a name="advanced-conditional-redirects"></a>
 
 Using advanced redirection rules, you can route requests conditionally according to specific object key names, prefixes in the request, or response codes\. For example, suppose that you delete or rename an object in your bucket\. You can add a routing rule that redirects the request to another object\. If you want to make a folder unavailable, you can add a routing rule to redirect the request to another webpage\. You can also add a routing rule to handle error conditions by routing requests that return the error to another domain when the error is processed\.
 
-When configuring a bucket for website hosting, you have the option of specifying advanced redirection rules\. Amazon S3 has a limitation of 50 routing rules per website configuration\. If you require more than 50 routing rules, you can use object redirect\. For more information, see [\(Optional\) Configuring a Webpage Redirect](#how-to-page-redirect)\.
+When configuring a bucket for website hosting, you have the option of specifying advanced redirection rules\. Amazon S3 has a limitation of 50 routing rules per website configuration\. If you require more than 50 routing rules, you can use object redirect\. For more information, see [\(Optional\) configuring a webpage redirect](#how-to-page-redirect)\.
 
 **To configure redirection rules for a static website**
 
@@ -108,11 +108,11 @@ To add redirection rules for a bucket that already has static website hosting en
 
 1. In **Redirection rules**, enter your redirection rules\. 
 
-   You describe the rules using XML\. For general syntax and examples for specifying redirection rules, see [Syntax for Specifying Routing Rules](#configure-bucket-as-website-routing-rule-syntax)\. Amazon S3 has a limitation of 50 routing rules per website configuration\. If you require more than 50 routing rules, you can use object redirect\. For more information, see [Setting a Page Redirect in the Amazon S3 Console](#page-redirect-using-console)\.
+   You describe the rules using XML\. For general syntax and examples for specifying redirection rules, see [Syntax for specifying routing rules](#configure-bucket-as-website-routing-rule-syntax)\. Amazon S3 has a limitation of 50 routing rules per website configuration\. If you require more than 50 routing rules, you can use object redirect\. For more information, see [Setting a page redirect in the Amazon S3 console](#page-redirect-using-console)\.
 
 1. Choose **Save**\.
 
-### Syntax for Specifying Routing Rules<a name="configure-bucket-as-website-routing-rule-syntax"></a>
+### Syntax for specifying routing rules<a name="configure-bucket-as-website-routing-rule-syntax"></a>
 
 The following is general syntax for defining the routing rules in a website configuration\.
 

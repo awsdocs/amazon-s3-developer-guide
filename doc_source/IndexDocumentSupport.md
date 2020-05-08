@@ -1,6 +1,6 @@
-# Configuring an Index Document<a name="IndexDocumentSupport"></a>
+# Configuring an index document<a name="IndexDocumentSupport"></a>
 
-An *index document* is a webpage that Amazon S3 returns when a request is made to the root of a website or any subfolder\. For example, if a user enters `http://www.example.com` in the browser, the user is not requesting any specific page\. In that case, Amazon S3 serves up the index document, which is sometimes referred to as the *default page*\.
+When you enable website hosting, you must also configure and upload an index document\. An *index document* is a webpage that Amazon S3 returns when a request is made to the root of a website or any subfolder\. For example, if a user enters `http://www.example.com` in the browser, the user is not requesting any specific page\. In that case, Amazon S3 serves up the index document, which is sometimes referred to as the *default page*\.
 
 When you enable static website hosting for your bucket, you enter the name of the index document \(for example, `index.html`\)\. After you enable static website hosting for your bucket, you upload an HTML file with the index document name to your bucket\. 
 
@@ -11,9 +11,9 @@ The trailing slash at the root\-level URL is optional\. For example, if you conf
 2. http://example-bucket.s3-website.Region.amazonaws.com
 ```
 
-For more information about Amazon S3 website endpoints, see [Website Endpoints](WebsiteEndpoints.md)\.
+For more information about Amazon S3 website endpoints, see [Website endpoints](WebsiteEndpoints.md)\.
 
-## Index Document and Folders<a name="IndexDocumentsandFolders"></a>
+## Index document and folders<a name="IndexDocumentsandFolders"></a>
 
 In Amazon S3, a bucket is a flat container of objects\. It does not provide any hierarchical organization as the file system on your computer does\. However, you can create a logical hierarchy by using object key names that imply a folder structure\. 
 
@@ -32,7 +32,7 @@ If you create a folder structure in your bucket, you must have an index document
 
 However, if you exclude the trailing slash from the preceding URL, Amazon S3 first looks for an object `photos` in the bucket\. If the `photos` object is not found, it searches for an index document, `photos/index.html`\. If that document is found, Amazon S3 returns a `302 Found` message and points to the `photos/` key\. For subsequent requests to `photos/`, Amazon S3 returns `photos/index.html`\. If the index document is not found, Amazon S3 returns an error\.
 
-## Configuring an Index Document<a name="configuring-index-document"></a>
+## Configuring an index document<a name="configuring-index-document"></a>
 
 When you enable static website hosting for your bucket, you enter the name of the index document \(for example, **index\.html**\)\. After you enable static website hosting for the bucket, you upload an HTML file with this index document name to your bucket\.
 
@@ -62,7 +62,7 @@ When you enable static website hosting for your bucket, you enter the name of th
 
 1. In the **Buckets** list, choose the name of the bucket that you want to use to host a static website\.
 
-1. Enable static website hosting for your bucket, and enter the exact name of your index document \(for example, `index.html`\)\. For more information, see [Enabling Website Hosting](EnableWebsiteHosting.md)\.
+1. Enable static website hosting for your bucket, and enter the exact name of your index document \(for example, `index.html`\)\. For more information, see [Enabling website hosting](EnableWebsiteHosting.md)\.
 
    After enabling static website hosting, proceed to step 6\. 
 
@@ -73,3 +73,5 @@ When you enable static website hosting for your bucket, you enter the name of th
    For step\-by\-step instructions, see [How Do I Upload Files and Folders to an Amazon S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 1. \(Optional\) Upload other website content to your bucket\.
+
+Next, you must set permissions for website access\. For more information, see [Setting permissions for website access](WebsiteAccessPermissionsReqd.md)\. You can also optionally configure an [error document](CustomErrorDocSupport.md), [web traffic logging](LoggingWebsiteTraffic.md), or a [redirect](how-to-page-redirect.md)\.

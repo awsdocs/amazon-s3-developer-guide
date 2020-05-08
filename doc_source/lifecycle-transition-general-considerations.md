@@ -1,4 +1,4 @@
-# Transitioning Objects Using Amazon S3 Lifecycle<a name="lifecycle-transition-general-considerations"></a>
+# Transitioning objects using Amazon S3 lifecycle<a name="lifecycle-transition-general-considerations"></a>
 
 You can add rules in an S3 Lifecycle configuration to tell Amazon S3 to transition objects to another Amazon S3 [storage class](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html)\. For example:
 + When you know that objects are infrequently accessed, you might transition them to the S3 Standard\-IA storage class\.
@@ -6,7 +6,7 @@ You can add rules in an S3 Lifecycle configuration to tell Amazon S3 to transiti
 
  The following sections describe supported transitions, related constraints, and transitioning to the S3 Glacier storage class\.
 
-## Supported Transitions and Related Constraints<a name="lifecycle-general-considerations-transition-sc"></a>
+## Supported transitions and related constraints<a name="lifecycle-general-considerations-transition-sc"></a>
 
 In an S3 Lifecycle configuration, you can define rules to transition objects from one storage class to another to save on storage costs\. When you don't know the access patterns of your objects, or your access patterns are changing over time, you can transition the objects to the S3 Intelligent\-Tiering storage class for automatic cost savings\. For information about storage classes, see [Amazon S3 Storage Classes](storage-class-intro.md)\. 
 
@@ -14,7 +14,7 @@ Amazon S3 supports a waterfall model for transitioning between storage classes, 
 
 ![\[Amazon S3 storage class waterfall graphic.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/SupportedTransitionsWaterfallModel.png)
 
-### Supported Lifecycle Transitions<a name="supported-lifecycle-transitions"></a>
+### Supported lifecycle transitions<a name="supported-lifecycle-transitions"></a>
 
 Amazon S3 supports the following Lifecycle transitions between storage classes using an S3 Lifecycle configuration\. 
 
@@ -25,7 +25,7 @@ You *can transition* from the following:
 + The S3 Intelligent\-Tiering storage class to the S3 One Zone\-IA storage class\.
 + The S3 Glacier storage class to the S3 Glacier Deep Archive storage class\.
 
-### Unsupported Lifecycle Transitions<a name="unsupported-lifecycle-transitions"></a>
+### Unsupported lifecycle transitions<a name="unsupported-lifecycle-transitions"></a>
 
 Amazon S3 does not support any of the following Lifecycle transitions\. 
 
@@ -58,19 +58,19 @@ The S3 Intelligent\-Tiering, S3 Standard\-IA, and S3 One Zone\-IA storage classe
 
 The same 30\-day minimum applies when you specify a transition from S3 Standard\-IA storage to S3 One Zone\-IA or S3 Intelligent\-Tiering storage\. You can specify two rules to accomplish this, but you pay minimum storage charges\. For more information about cost considerations, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)\.
 
-### Manage an Object's Complete Lifecycle<a name="manage-complete-object-lifecycle"></a>
+### Manage an object's complete lifecycle<a name="manage-complete-object-lifecycle"></a>
 
 You can combine these S3 Lifecycle actions to manage an object's complete lifecycle\.  For example, suppose that the objects you create have a well\-defined lifecycle\. Initially, the objects are frequently accessed for a period of 30 days\. Then, objects are infrequently accessed for up to 90 days\. After that, the objects are no longer needed, so you might choose to archive or delete them\. 
 
 In this scenario, you can create an S3 Lifecycle rule in which you specify the initial transition action to S3 Intelligent\-Tiering, S3 Standard\-IA, or S3 One Zone\-IA storage, another transition action to S3 Glacier storage for archiving, and an expiration action\. As you move the objects from one storage class to another, you save on storage cost\. For more information about cost considerations, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)\.
 
-## Transitioning to the S3 Glacier and S3 Glacier Deep Archive Storage Classes \(Object Archival\)<a name="before-deciding-to-archive-objects"></a>
+## Transitioning to the S3 Glacier and S3 Glacier Deep Archive storage classes \(object archival\)<a name="before-deciding-to-archive-objects"></a>
 
 Using S3 Lifecycle configuration, you can transition objects to the S3 Glacier or S3 Glacier Deep Archive storage classes for archiving\. When you choose the S3 Glacier or S3 Glacier Deep Archive storage class, your objects remain in Amazon S3\. You cannot access them directly through the separate Amazon S3 Glacier service\. 
 
 Before you archive objects, review the following sections for relevant considerations\.
 
-### General Considerations<a name="transition-glacier-general-considerations"></a>
+### General considerations<a name="transition-glacier-general-considerations"></a>
 
 The following are the general considerations for you to consider before you archive objects:
 + Encrypted objects remain encrypted throughout the storage class transition process\.
@@ -89,7 +89,7 @@ The following are the general considerations for you to consider before you arch
 
   These are Amazon S3 objects, and you can access them only by using the Amazon S3 console or the Amazon S3 API\. You cannot access the archived objects through the separate Amazon S3 Glacier console or the Amazon S3 Glacier API\.
 
-### Cost Considerations<a name="glacier-pricing-considerations"></a>
+### Cost considerations<a name="glacier-pricing-considerations"></a>
 
 If you are planning to archive infrequently accessed data for a period of months or years, the S3 Glacier and S3 Glacier Deep Archive storage classes can reduce your storage costs\. However, to ensure that the S3 Glacier or S3 Glacier Deep Archive storage class is appropriate for you, consider the following:
 + **Storage overhead charges** – When you transition objects to the S3 Glacier or S3 Glacier Deep Archive storage class, a fixed amount of storage is added to each object to accommodate metadata for managing the object\.
@@ -109,7 +109,7 @@ The Amazon S3 product detail page provides pricing information and example calcu
 +  [ How much does it cost to retrieve data from Amazon S3 Glacier?](https://aws.amazon.com/s3/faqs/#How_am_I_charged_for_deleting_objects_from_Amazon_Glacier_that_are_less_than_3_months_old) 
 +  [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/) for storage costs for the different storage classes\. 
 
-### Restoring Archived Objects<a name="restore-glacier-objects-concepts"></a>
+### Restoring archived objects<a name="restore-glacier-objects-concepts"></a>
 
 Archived objects are not accessible in real time\. You must first initiate a restore request and then wait until a temporary copy of the object is available for the duration that you specify in the request\. After you receive a temporary copy of the restored object, the object's storage class remains S3 Glacier or S3 Glacier Deep Archive\. \(A [HEAD Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html) or [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html) API operation request will return S3 Glacier or S3 Glacier Deep Archive as the storage class\.\) 
 

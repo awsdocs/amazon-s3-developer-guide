@@ -1,4 +1,4 @@
-# Deleting Multiple Objects Using the AWS SDK for Java<a name="DeletingMultipleObjectsUsingJava"></a>
+# Deleting multiple objects using the AWS SDK for Java<a name="DeletingMultipleObjectsUsingJava"></a>
 
 The AWS SDK for Java provides the `AmazonS3Client.deleteObjects()` method for deleting multiple objects\. For each object that you want to delete, you specify the key name\. If the bucket is versioning\-enabled, you have the following options:
 + Specify only the object's key name\. Amazon S3 will add a delete marker to the object\.
@@ -6,7 +6,7 @@ The AWS SDK for Java provides the `AmazonS3Client.deleteObjects()` method for de
 
 **Example**  
 The following example uses the Multi\-Object Delete API to delete objects from a bucket that is not version\-enabled\. The example uploads sample objects to the bucket and then uses the `AmazonS3Client.deleteObjects()` method to delete the objects in a single request\. In the `DeleteObjectsRequest`, the example specifies only the object key names because the objects do not have version IDs\.   
-For more information about deleting objects, see [Deleting Objects](DeletingObjects.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
+For more information about deleting objects, see [Deleting objects](DeletingObjects.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```
  

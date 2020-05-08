@@ -1,6 +1,6 @@
-# Setting Up the Tools for the Example Walkthroughs<a name="policy-eval-walkthrough-download-awscli"></a>
+# Setting up the tools for the example walkthroughs<a name="policy-eval-walkthrough-download-awscli"></a>
 
-The introductory examples \(see [Example Walkthroughs: Managing Access to Your Amazon S3 Resources ](example-walkthroughs-managing-access.md)\) use the AWS Management Console to create resources and grant permissions\. And to test permissions, the examples use the command line tools, AWS Command Line Interface \(CLI\) and AWS Tools for Windows PowerShell, so you don't need to write any code\. To test permissions, you must set up one of these tools\. 
+The introductory examples \(see [Example walkthroughs: Managing access to your amazon S3 resources ](example-walkthroughs-managing-access.md)\) use the AWS Management Console to create resources and grant permissions\. And to test permissions, the examples use the command line tools, AWS Command Line Interface \(CLI\) and AWS Tools for Windows PowerShell, so you don't need to write any code\. To test permissions, you must set up one of these tools\. 
 
 **To set up the AWS CLI**
 

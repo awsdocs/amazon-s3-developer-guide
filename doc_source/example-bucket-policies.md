@@ -8,7 +8,7 @@ Bucket policies are limited to 20 KB in size\.
 You can use the [AWS Policy Generator](http://aws.amazon.com/blogs/aws/aws-policy-generator/) to create a bucket policy for your Amazon S3 bucket\. You can then use the generated document to set your bucket policy by using the [Amazon S3 console](https://console.aws.amazon.com/s3/home), through several third\-party tools, or via your application\. 
 
 **Important**  
-When testing permissions using the Amazon S3 console, you will need to grant additional permissions that the console requires—`s3:ListAllMyBuckets`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions\. For an example walkthrough that grants permissions to users and tests them using the console, see [Walkthrough: Controlling Access to a Bucket with User Policies](walkthrough1.md)\.
+When testing permissions using the Amazon S3 console, you will need to grant additional permissions that the console requires—`s3:ListAllMyBuckets`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions\. For an example walkthrough that grants permissions to users and tests them using the console, see [Walkthrough: Controlling access to a bucket with user policies](walkthrough1.md)\.
 
 **Topics**
 + [Granting Permissions to Multiple Accounts with Added Conditions](#example-bucket-policies-use-case-1)
@@ -43,7 +43,7 @@ The following example policy grants the `s3:PutObject` and `s3:PutObjectAcl` per
 
 ## Granting Read\-Only Permission to an Anonymous User<a name="example-bucket-policies-use-case-2"></a>
 
-The following example policy grants the `s3:GetObject` permission to any public anonymous users\. \(For a list of permissions and the operations that they allow, see [Amazon S3 Actions](using-with-s3-actions.md)\.\) This permission allows anyone to read the object data, which is useful for when you configure your bucket as a website and want everyone to be able to read objects in the bucket\. Before you use a bucket policy to grant read\-only permission to an anonymous user, you must disable block public access settings for your bucket\. For more information, see [Setting Permissions for Website Access](WebsiteAccessPermissionsReqd.md)\.
+The following example policy grants the `s3:GetObject` permission to any public anonymous users\. \(For a list of permissions and the operations that they allow, see [Amazon S3 Actions](using-with-s3-actions.md)\.\) This permission allows anyone to read the object data, which is useful for when you configure your bucket as a website and want everyone to be able to read objects in the bucket\. Before you use a bucket policy to grant read\-only permission to an anonymous user, you must disable block public access settings for your bucket\. For more information, see [Setting permissions for website access](WebsiteAccessPermissionsReqd.md)\.
 
 ```
  1. {
@@ -307,7 +307,7 @@ You can allow another AWS account to upload objects to your bucket\. However, yo
 
 ## Granting Permissions for Amazon S3 Inventory and Amazon S3 Analytics<a name="example-bucket-policies-use-case-9"></a>
 
-Amazon S3 inventory creates lists of the objects in an Amazon S3 bucket, and Amazon S3 analytics export creates output files of the data used in the analysis\. The bucket that the inventory lists the objects for is called the *source bucket*\. The bucket where the inventory file is written and the bucket where the analytics export file is written is called a *destination bucket*\. You must create a bucket policy for the destination bucket when setting up inventory for an Amazon S3 bucket and when setting up the analytics export\. For more information, see [ Amazon S3 Inventory](storage-inventory.md) and [Amazon S3 Analytics – Storage Class Analysis](analytics-storage-class.md)\.
+Amazon S3 inventory creates lists of the objects in an Amazon S3 bucket, and Amazon S3 analytics export creates output files of the data used in the analysis\. The bucket that the inventory lists the objects for is called the *source bucket*\. The bucket where the inventory file is written and the bucket where the analytics export file is written is called a *destination bucket*\. You must create a bucket policy for the destination bucket when setting up inventory for an Amazon S3 bucket and when setting up the analytics export\. For more information, see [ Amazon S3 inventory](storage-inventory.md) and [Amazon S3 analytics – Storage class analysis](analytics-storage-class.md)\.
 
 The following example bucket policy grants Amazon S3 permission to write objects \(PUTs\) from the account for the source bucket to the destination bucket\. You use a bucket policy like this on the destination bucket when setting up Amazon S3 inventory and Amazon S3 analytics export\.
 

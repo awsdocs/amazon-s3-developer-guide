@@ -1,4 +1,4 @@
-# Amazon S3 Analytics – Storage Class Analysis<a name="analytics-storage-class"></a>
+# Amazon S3 analytics – Storage class analysis<a name="analytics-storage-class"></a>
 
 By using Amazon S3 analytics *storage class analysis* you can analyze storage access patterns to help you decide when to transition the right data to the right storage class\. This new Amazon S3 analytics feature observes data access patterns to help you determine when to transition less frequently accessed STANDARD storage to the STANDARD\_IA \(IA, for infrequent access\) storage class\. For more information about storage classes, see [Amazon S3 Storage Classes](storage-class-intro.md)\. 
 
@@ -14,12 +14,12 @@ Storage class analysis shows storage usage visualizations in the Amazon S3 conso
 There are costs associated with the storage class analysis\. For pricing information, see *Management and replication* [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)\.
 
 **Topics**
-+ [How Do I Set Up Storage Class Analysis?](#analytics-storage-class-how-to-set-up)
-+ [How Do I Use Storage Class Analysis?](#analytics-storage-class-contents)
-+ [How Can I Export Storage Class Analysis Data?](#analytics-storage-class-export-to-file)
-+ [Amazon S3 Analytics REST APIs](#analytics-storage-class-related-resources)
++ [How do I set up storage class analysis?](#analytics-storage-class-how-to-set-up)
++ [How do I use storage class analysis?](#analytics-storage-class-contents)
++ [How can I export storage class analysis data?](#analytics-storage-class-export-to-file)
++ [Amazon S3 analytics REST APIs](#analytics-storage-class-related-resources)
 
-## How Do I Set Up Storage Class Analysis?<a name="analytics-storage-class-how-to-set-up"></a>
+## How do I set up storage class analysis?<a name="analytics-storage-class-how-to-set-up"></a>
 
 You set up storage class analysis by configuring what object data you want to analyze\. You can configure storage class analysis to do the following:
 + **Analyze the entire contents of a bucket\.**
@@ -36,7 +36,7 @@ You can use the Amazon S3 console, the REST API, or the AWS CLI or AWS SDKs to c
 + For information about how to configure storage class analysis in the Amazon S3 console, see [ How Do I Configure Storage Class Analysis?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-analytics-storage-class.html)\.
 + To use the Amazon S3 API, use the [PutBucketAnalyticsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTAnalyticsConfig.html) REST API, or the equivalent, from the AWS CLI or AWS SDKs\. 
 
-## How Do I Use Storage Class Analysis?<a name="analytics-storage-class-contents"></a>
+## How do I use storage class analysis?<a name="analytics-storage-class-contents"></a>
 
 You use storage class analysis to observe your data access patterns over time to gather information to help you improve the lifecycle management of your STANDARD\_IA storage\. After you configure a filter, you'll start seeing data analysis based on the filter in the Amazon S3 console in 24 to 48 hours\. However, storage class analysis observes the access patterns of a filtered data set for 30 days or longer to gather information for analysis before giving a result\. The analysis continues to run after the initial result and updates the result as the access patterns change
 
@@ -91,7 +91,7 @@ The Amazon S3 console shows the access patterns grouped by the predefined object
 
 The **Frequently accessed** or **Infrequently accessed** text shown is meant as a visual aid to help you in the lifecycle creation process\.
 
-## How Can I Export Storage Class Analysis Data?<a name="analytics-storage-class-export-to-file"></a>
+## How can I export storage class analysis data?<a name="analytics-storage-class-export-to-file"></a>
 
 You can choose to have storage class analysis export analysis reports to a comma\-separated values \(CSV\) flat file\. Reports are updated daily and are based on the object age group filters you configure\. When using the Amazon S3 console you can choose the export report option when you create a filter\. When selecting data export you specify a destination bucket and optional destination prefix where the file is written\. You can export the data to a destination bucket in a different account\. The destination bucket must be in the same region as the bucket that you configure to be analyzed\.
 
@@ -113,16 +113,16 @@ At the end of the report the object age group is given as ALL\. The ALL rows con
 
 The next section describes the columns used in the report\.
 
-### Exported File Layout<a name="analytics-storage-class-export-file-layout"></a>
+### Exported file layout<a name="analytics-storage-class-export-file-layout"></a>
 
 The following table describe the layout of the exported file\.
 
-If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, you can open the table in a new window\. To close the window, choose the close button \(**X**\) in the lower\-right corner\.
+Use the scroll bars to see the rest of the table\.
 
 
-**Amazon S3 Storage Class Analysis Export File Layout**  
+**Amazon S3 storage class analysis export file layout**  
 
-| Column Name | Dimension/Metric | DataType | Description | 
+| Column name | Dimension/Metric | DataType | Description | 
 | --- | --- | --- | --- | 
 | Date  | Dimension | String  | Date when the record was processed\. Format is MM\-DD\-YYYY\. | 
 | ConfigId  | Dimension | String  | Value entered as the filter name when adding the filter configuration\.  | 
@@ -138,7 +138,7 @@ If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, 
 | ObjectAgeForSIATransition | Metric | Integer In Days  | This value exists only where the `AgeGroup=’ALL’` and storage class = STANDARD\. It represents the observed age for transition to STANDARD\_IA\. | 
 | RecommendedObjectAgeForSIATransition  | Metric | Integer In Days  | This value exists only where the `AgeGroup=’ALL’` and storage class = STANDARD\. It represents the object age in days to consider for transition to STANDARD\_IA after the `ObjectAgeForSIATransition` stabilizes\. | 
 
-## Amazon S3 Analytics REST APIs<a name="analytics-storage-class-related-resources"></a>
+## Amazon S3 analytics REST APIs<a name="analytics-storage-class-related-resources"></a>
 
 The following are the REST operations used for storage inventory\.
 +  [ DELETE Bucket analytics configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEAnalyticsConfiguration.html) 

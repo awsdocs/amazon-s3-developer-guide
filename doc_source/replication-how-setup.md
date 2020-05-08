@@ -23,7 +23,7 @@ Amazon S3 also provides APIs to support setting up replication rules\. For more 
 +  [GET Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETreplication.html) 
 +  [DELETE Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEreplication.html) 
 
-Instead of making these API calls directly from your code, you can add a replication configuration to a bucket with the AWS SDK, AWS CLI, or the Amazon S3 console\. It's easiest to use the console\. For examples with step\-by\-step instructions, see [Replication Walkthroughs](replication-example-walkthroughs.md)\. 
+Instead of making these API calls directly from your code, you can add a replication configuration to a bucket with the AWS SDK, AWS CLI, or the Amazon S3 console\. It's easiest to use the console\. For examples with step\-by\-step instructions, see [Replication walkthroughs](replication-example-walkthroughs.md)\. 
 
 If you are new to replication configurations, we recommend that you read the following sections before exploring the examples and optional configurations\. For examples that provide step\-by\-step instructions for setting up basic replication configurations, see [Replication Configuration Overview](replication-add-config.md)\. 
 

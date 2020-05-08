@@ -1,19 +1,19 @@
-# Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys Stored in AWS KMS<a name="replication-config-for-kms-objects"></a>
+# Replicating objects created with server\-side encryption \(SSE\) using encryption keys stored in AWS KMS<a name="replication-config-for-kms-objects"></a>
 
 By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with customer master keys \(CMKs\) stored in AWS KMS\. This section explains additional configuration that you add to direct Amazon S3 to replicate these objects\. 
 
 **Important**  
 Replication of encrypted data is a server\-side process that occurs entirely within Amazon S3\. Replication does not support client\-side encryption\. 
 
-For an example with step\-by\-step instructions, see [Example 4: Replicating Encrypted Objects](replication-walkthrough-4.md)\. For information about creating a replication configuration, see [Replication](replication.md)\. 
+For an example with step\-by\-step instructions, see [Example 4: Replicating encrypted objects](replication-walkthrough-4.md)\. For information about creating a replication configuration, see [Replication](replication.md)\. 
 
 **Topics**
-+ [Specifying Additional Information in the Replication Configuration](#replication-kms-extra-config)
-+ [Granting Additional Permissions for the IAM Role](#replication-kms-extra-permissions)
-+ [Granting Additional Permissions for Cross\-Account Scenarios](#replication-kms-cross-acct-scenario)
-+ [AWS KMS Transaction Limit Considerations](#replication-kms-considerations)
++ [Specifying additional information in the replication configuration](#replication-kms-extra-config)
++ [Granting additional permissions for the IAM role](#replication-kms-extra-permissions)
++ [Granting additional permissions for cross\-account scenarios](#replication-kms-cross-acct-scenario)
++ [AWS KMS transaction limit considerations](#replication-kms-considerations)
 
-## Specifying Additional Information in the Replication Configuration<a name="replication-kms-extra-config"></a>
+## Specifying additional information in the replication configuration<a name="replication-kms-extra-config"></a>
 
 In the replication configuration, you do the following:
 + In the `Destination` configuration, add the symmetric customer managed AWS KMS CMK that you want Amazon S3 to use to encrypt object replicas\. 
@@ -77,7 +77,7 @@ The following example shows a replication configuration, which includes optional
 
 This replication configuration has one rule\. The rule applies to objects with the `Tax` key prefix\. Amazon S3 uses the AWS KMS key ID to encrypt these object replicas\.
 
-## Granting Additional Permissions for the IAM Role<a name="replication-kms-extra-permissions"></a>
+## Granting additional permissions for the IAM role<a name="replication-kms-extra-permissions"></a>
 
 To replicate objects that are encrypted at rest under AWS Key Management Service \(AWS KMS\), grant the following additional permissions to the IAM role you specify in the replication configuration\. You grant these permissions by updating the permission policy associated with the IAM role\. Objects created with server\-side encryption using customer\-provided \(SSE\-C\) encryption keys are not replicated\.
 + Permission for the `s3:GetObjectVersionForReplication` action for source objects\. Permission for this action allows Amazon S3 to replicate both unencrypted objects and objects created with server\-side encryption using Amazon S3 managed encryption \(SSE\-S3\) keys or or CMKs stored in AWS KMS \(SSE\-KMS\)\.
@@ -198,7 +198,7 @@ Objects created with server\-side encryption using customer\-provided \(SSE\-C\)
 }
 ```
 
-## Granting Additional Permissions for Cross\-Account Scenarios<a name="replication-kms-cross-acct-scenario"></a>
+## Granting additional permissions for cross\-account scenarios<a name="replication-kms-cross-acct-scenario"></a>
 
 In a cross\-account scenario, where *source* and *destination* buckets are owned by different AWS accounts, you can use a customer managed CMK to encrypt object replicas\. However, the CMK owner must grant the source bucket owner permission to use the CMK\. <a name="cross-acct-kms-key-permission"></a>
 
@@ -225,7 +225,7 @@ In a cross\-account scenario, where *source* and *destination* buckets are owned
 **To grant the source bucket owner permission to use the AWS KMS CMK \(AWS CLI\)**
 + For information, see [put\-key\-policy](http://docs.aws.amazon.com/cli/latest/reference/kms/put-key-policy.html) in the* AWS CLI Command Reference*\. For information about the underlying API, see [PutKeyPolicy](http://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html) in the *[AWS Key Management Service API Reference](https://docs.aws.amazon.com/kms/latest/APIReference/)\.*
 
-## AWS KMS Transaction Limit Considerations<a name="replication-kms-considerations"></a>
+## AWS KMS transaction limit considerations<a name="replication-kms-considerations"></a>
 
 When you add many new objects with AWS KMS encryption after enabling cross\-region replication \(CRR\), you might experience throttling \(HTTP 503 Slow Down errors\)\. Throttling occurs when the number of AWS KMS transactions per second exceeds the current limit\. For more information, see [Limits]( http://docs.aws.amazon.com/kms/latest/developerguide/limits.html) in the *AWS Key Management Service Developer Guide*\.
 

@@ -1,4 +1,4 @@
-# Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the REST API<a name="ServerSideEncryptionCustomerKeysSSEUsingRESTAPI"></a>
+# Specifying server\-side encryption with customer\-provided encryption keys using the REST API<a name="ServerSideEncryptionCustomerKeysSSEUsingRESTAPI"></a>
 
 At the time of object creation with the REST API, you can specify server\-side encryption with customer\-provided encryption keys \(SSE\-C\)\. When you use SSE\-C, you must provide encryption key information using the following request headers\. 
 
@@ -14,7 +14,7 @@ You can use AWS SDK wrapper libraries to add these headers to your request\. If 
 **Note**  
 You cannot use the Amazon S3 console to upload an object and request SSE\-C\. You also cannot use the console to update \(for example, change the storage class or add metadata\) an existing object stored using SSE\-C\.
 
-## Amazon S3 Rest APIs that Support SSE\-C<a name="sse-c-supported-apis"></a>
+## Amazon S3 rest APIs that support SSE\-C<a name="sse-c-supported-apis"></a>
 
 The following Amazon S3 APIs support server\-side encryption with customer\-provided encryption keys \(SSE\-C\)\.
 + **GET operation** — When retrieving objects using the GET API \(see [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html)\), you can specify the request headers\. Torrents are not supported for objects encrypted using SSE\-C\.
@@ -41,6 +41,6 @@ You can generate a presigned URL that can be used for operations such as upload 
 For non\-SSE\-C objects, you can generate a presigned URL and directly paste that into a browser, for example to access the data\.   
 However, this is not true for SSE\-C objects because in addition to the presigned URL, you also need to include HTTP headers that are specific to SSE\-C objects\. Therefore, you can use the presigned URL for SSE\-C objects only programmatically\.
 
-## More Info<a name="sse-c-more-info"></a>
-+ [Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the AWS SDK for \.NET](sse-c-using-dot-net-sdk.md)
-+ [Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the AWS SDK for Java](sse-c-using-java-sdk.md)
+## More info<a name="sse-c-more-info"></a>
++ [Specifying server\-side encryption with customer\-provided encryption keys using the AWS SDK for \.NET](sse-c-using-dot-net-sdk.md)
++ [Specifying server\-side encryption with customer\-provided encryption keys using the AWS SDK for Java](sse-c-using-java-sdk.md)

@@ -1,4 +1,4 @@
-# List Multipart Uploads to an S3 Bucket Using the AWS SDK for \.NET \(Low\-level\)<a name="LLlistMPuploadsDotNet"></a>
+# List multipart uploads to an S3 Bucket using the AWS SDK for \.NET \(low\-level\)<a name="LLlistMPuploadsDotNet"></a>
 
 To list all of the in\-progress multipart uploads on a specific bucket, use the AWS SDK for \.NET low\-level multipart upload API's `ListMultipartUploadsRequest` class\. The `AmazonS3Client.ListMultipartUploads` method returns an instance of the `ListMultipartUploadsResponse` class that provides information about the in\-progress multipart uploads\. 
 
@@ -15,6 +15,6 @@ ListMultipartUploadsRequest request = new ListMultipartUploadsRequest
 ListMultipartUploadsResponse response = await AmazonS3Client.ListMultipartUploadsAsync(request);
 ```
 
-## More Info<a name="LLlistMPuploadsDotNet-more-info"></a>
+## More info<a name="LLlistMPuploadsDotNet-more-info"></a>
 
 [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)

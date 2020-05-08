@@ -2,7 +2,7 @@
 
 This section shows several IAM user policies for controlling user access to Amazon S3\. For information about access policy language, see [Policies and Permissions in Amazon S3](access-policy-language-overview.md)\.
 
-The following example policies will work if you test them programmatically\. However, to use them with the Amazon S3 console, you must grant additional permissions that are required by the console\. For information about using policies such as these with the Amazon S3 console, see [Walkthrough: Controlling Access to a Bucket with User Policies](walkthrough1.md)\. 
+The following example policies will work if you test them programmatically\. However, to use them with the Amazon S3 console, you must grant additional permissions that are required by the console\. For information about using policies such as these with the Amazon S3 console, see [Walkthrough: Controlling access to a bucket with user policies](walkthrough1.md)\. 
 
 **Topics**
 + [Allowing an IAM User Access to One of Your Buckets](#iam-policy-ex0)
@@ -10,13 +10,13 @@ The following example policies will work if you test them programmatically\. How
 + [Allowing a Group to Have a Shared Folder in Amazon S3](#iam-policy-ex2)
 + [Allowing All Your Users to Read Objects in a Portion of the Corporate Bucket](#iam-policy-ex3)
 + [Allowing a Partner to Drop Files into a Specific Portion of the Corporate Bucket](#iam-policy-ex4)
-+ [Walkthrough: Controlling Access to a Bucket with User Policies](walkthrough1.md)
++ [Walkthrough: Controlling access to a bucket with user policies](walkthrough1.md)
 
 ## Allowing an IAM User Access to One of Your Buckets<a name="iam-policy-ex0"></a>
 
 In this example, you want to grant an IAM user in your AWS account access to one of your buckets, `examplebucket`, and allow the user to add, update, and delete objects\. 
 
-In addition to granting the `s3:PutObject`, `s3:GetObject`, and `s3:DeleteObject` permissions to the user, the policy also grants the `s3:ListAllMyBuckets`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions\. These are the additional permissions required by the console\. Also, the `s3:PutObjectAcl` and the `s3:GetObjectAcl` actions are required to be able to copy, cut, and paste objects in the console\. For an example walkthrough that grants permissions to users and tests them using the console, see [Walkthrough: Controlling Access to a Bucket with User Policies](walkthrough1.md)\. 
+In addition to granting the `s3:PutObject`, `s3:GetObject`, and `s3:DeleteObject` permissions to the user, the policy also grants the `s3:ListAllMyBuckets`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions\. These are the additional permissions required by the console\. Also, the `s3:PutObjectAcl` and the `s3:GetObjectAcl` actions are required to be able to copy, cut, and paste objects in the console\. For an example walkthrough that grants permissions to users and tests them using the console, see [Walkthrough: Controlling access to a bucket with user policies](walkthrough1.md)\. 
 
 ```
 {
@@ -109,7 +109,7 @@ Instead of attaching policies to individual users, you can write a single policy
 **Note**  
 When using policy variables, you must explicitly specify version `2012-10-17` in the policy\. The default version of the access policy language, 2008\-10\-17, does not support policy variables\. 
 
- If you want to test the preceding policy on the Amazon S3 console, the console requires permission for additional Amazon S3 permissions, as shown in the following policy\. For information about how the console uses these permissions, see [Walkthrough: Controlling Access to a Bucket with User Policies](walkthrough1.md)\. 
+ If you want to test the preceding policy on the Amazon S3 console, the console requires permission for additional Amazon S3 permissions, as shown in the following policy\. For information about how the console uses these permissions, see [Walkthrough: Controlling access to a bucket with user policies](walkthrough1.md)\. 
 
 ```
 {

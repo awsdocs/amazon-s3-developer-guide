@@ -1,4 +1,4 @@
-# Protecting Data Using Server\-Side Encryption with Customer\-Provided Encryption Keys \(SSE\-C\)<a name="ServerSideEncryptionCustomerKeys"></a>
+# Protecting data using server\-side encryption with customer\-provided encryption keys \(SSE\-C\)<a name="ServerSideEncryptionCustomerKeys"></a>
 
 Server\-side encryption is about protecting data at rest\. Server\-side encryption encrypts only the object data, not object metadata\. Using server\-side encryption with customer\-provided encryption keys \(SSE\-C\) allows you to set your own encryption keys\. With the encryption key you provide as part of your request, Amazon S3 manages the encryption as it writes to disks and decryption when you access your objects\. Therefore, you don't need to maintain any code to perform data encryption and decryption\. The only thing you do is manage the encryption keys you provide\. 
 
@@ -7,7 +7,7 @@ When you upload an object, Amazon S3 uses the encryption key you provide to appl
 **Important**  
 Amazon S3 does not store the encryption key you provide\. Instead, it stores a randomly salted HMAC value of the encryption key to validate future requests\. The salted HMAC value cannot be used to derive the value of the encryption key or to decrypt the contents of the encrypted object\. That means if you lose the encryption key, you lose the object\. 
 
-## SSE\-C Overview<a name="sse-c-highlights"></a>
+## SSE\-C overview<a name="sse-c-highlights"></a>
 
 This section provides an overview of SSE\-C:
 +  You must use HTTPS\. 
@@ -23,6 +23,6 @@ If you lose the encryption key, any GET request for an object without its encryp
 ## Topics<a name="sse-c-topic-list"></a>
 
 For more information, see the following topics:
-+ [Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the AWS SDK for Java](sse-c-using-java-sdk.md)
-+ [Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the AWS SDK for \.NET](sse-c-using-dot-net-sdk.md)
-+ [Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the REST API](ServerSideEncryptionCustomerKeysSSEUsingRESTAPI.md)
++ [Specifying server\-side encryption with customer\-provided encryption keys using the AWS SDK for Java](sse-c-using-java-sdk.md)
++ [Specifying server\-side encryption with customer\-provided encryption keys using the AWS SDK for \.NET](sse-c-using-dot-net-sdk.md)
++ [Specifying server\-side encryption with customer\-provided encryption keys using the REST API](ServerSideEncryptionCustomerKeysSSEUsingRESTAPI.md)

@@ -11,16 +11,16 @@ By default Amazon S3 replicates the following:
 + Unencrypted objects\. 
 
    
-+ Objects encrypted at rest under Amazon S3 managed keys \(SSE\-S3\) or customer master keys \(CMKs\) stored in AWS Key Management Service \(SSE\-KMS\)\. To replicate objects encrypted with CMKs stored in AWS KMS, you must explicitly enable the option\. The replicated copy of the object is encrypted using the same type of server\-side encryption that was used for the source object\. For more information about server\-side encryption, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.
++ Objects encrypted at rest under Amazon S3 managed keys \(SSE\-S3\) or customer master keys \(CMKs\) stored in AWS Key Management Service \(SSE\-KMS\)\. To replicate objects encrypted with CMKs stored in AWS KMS, you must explicitly enable the option\. The replicated copy of the object is encrypted using the same type of server\-side encryption that was used for the source object\. For more information about server\-side encryption, see [Protecting data using server\-side encryption](serv-side-encryption.md)\.
 
    
 + Object metadata\.
 
    
-+ Only objects in the source bucket for which the bucket owner has permissions to read objects and access control lists \(ACLs\)\. For more information about resource ownership, see [Amazon S3 Bucket and Object Ownership](access-control-overview.md#about-resource-owner)\.
++ Only objects in the source bucket for which the bucket owner has permissions to read objects and access control lists \(ACLs\)\. For more information about resource ownership, see [Amazon S3 bucket and object ownership](access-control-overview.md#about-resource-owner)\.
 
    
-+ Object ACL updates, unless you direct Amazon S3 to change the replica ownership when source and destination buckets aren't owned by the same accounts\. For more information, see [Changing the Replica Owner](replication-change-owner.md)\. 
++ Object ACL updates, unless you direct Amazon S3 to change the replica ownership when source and destination buckets aren't owned by the same accounts\. For more information, see [Changing the replica owner](replication-change-owner.md)\. 
 
    
 
@@ -30,7 +30,7 @@ By default Amazon S3 replicates the following:
 +  Object tags, if there are any\.
 
    
-+ Amazon S3 object lock retention information, if there is any\. When Amazon S3 replicates objects that have retention information applied, it applies those same retention controls to your replicas, overriding the default retention period configured on your destination bucket\. If you don't have retention controls applied to the objects in your source bucket, and you replicate into a destination bucket that has a default retention period set, the destination bucket's default retention period is applied to your object replicas\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
++ S3 Object Lock retention information, if there is any\. When Amazon S3 replicates objects that have retention information applied, it applies those same retention controls to your replicas, overriding the default retention period configured on your destination bucket\. If you don't have retention controls applied to the objects in your source bucket, and you replicate into a destination bucket that has a default retention period set, the destination bucket's default retention period is applied to your object replicas\. For more information, see [Locking objects using S3 Object Lock](object-lock.md)\.
 
 ### How Delete Operations Affect Replication<a name="replication-delete-op"></a>
 
@@ -50,7 +50,7 @@ By default Amazon S3 doesn't replicate the following:
   + Objects created with server\-side encryption using customer\-provided \(SSE\-C\) encryption keys\.
   + Objects created with server\-side encryption using CMKs stored in AWS KMS\. By default, Amazon S3 does not replicate objects encrypted using KMS CMKs\. However, you can explicitly enable replication of these objects in the replication configuration, and provide relevant information so that Amazon S3 can replicate these objects\.
 
-   For more information about server\-side encryption, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. 
+   For more information about server\-side encryption, see [Protecting data using server\-side encryption](serv-side-encryption.md)\. 
 
    
 + Objects that are stored in S3 Glacier or S3 Glacier Deep Archive storage class\. To learn more about the Amazon S3 Glacier service, see the [Amazon S3 Glacier Developer Guide](https://docs.aws.amazon.com/amazonglacier/latest/dev/)\.
@@ -66,7 +66,7 @@ By default Amazon S3 doesn't replicate the following:
 
   For example, if lifecycle configuration is enabled only on your source bucket, Amazon S3 creates delete markers for expired objects but doesn't replicate those markers\. If you want the same lifecycle configuration applied to both source and destination buckets, enable the same lifecycle configuration on both\.
 
-  For more information about lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
+  For more information about lifecycle configuration, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
 **Note**  
 If using the latest version of the replication configuration \(the XML specifies `Filter` as the child of `Rule`\), delete markers created either by a user action or by Amazon S3 as part of the lifecycle action are not replicated\. However, if you are using an earlier version of the replication configuration \(the XML specifies `Prefix` as the child of `Rule`\), delete markers resulting from user actions are replicated\. For more information, see [Backward Compatibility](replication-add-config.md#replication-backward-compat-considerations)\.
 + Objects in the source bucket that are replicas that were created by another replication rule\.

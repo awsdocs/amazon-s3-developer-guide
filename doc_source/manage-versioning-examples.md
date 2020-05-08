@@ -1,14 +1,14 @@
-# Examples of Enabling Bucket Versioning<a name="manage-versioning-examples"></a>
+# Examples of enabling bucket versioning<a name="manage-versioning-examples"></a>
 
 **Topics**
-+ [Using the Amazon S3 Console](#manage-versioning-examples-console)
++ [Using the Amazon S3 console](#manage-versioning-examples-console)
 + [Using the AWS SDK for Java](#manage-versioning-examples-java)
 + [Using the AWS SDK for \.NET](#manage-versioning-examples-dotnet)
-+ [Using Other AWS SDKs](#manage-versioning-examples-sdks)
++ [Using other AWS SDKs](#manage-versioning-examples-sdks)
 
- This section provides examples of enabling versioning on a bucket\. The examples first enable versioning on a bucket and then retrieve versioning status\. For an introduction, see [Using Versioning](Versioning.md)\.
+ This section provides examples of enabling versioning on a bucket\. The examples first enable versioning on a bucket and then retrieve versioning status\. For an introduction, see [Using versioning](Versioning.md)\.
 
-## Using the Amazon S3 Console<a name="manage-versioning-examples-console"></a>
+## Using the Amazon S3 console<a name="manage-versioning-examples-console"></a>
 
 For more information about enabling versioning on a bucket using the Amazon S3 console, see [ How Do I Enable or Suspend Versioning for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-versioning.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
@@ -139,6 +139,6 @@ namespace s3.amazon.com.docsamples
 }
 ```
 
-## Using Other AWS SDKs<a name="manage-versioning-examples-sdks"></a>
+## Using other AWS SDKs<a name="manage-versioning-examples-sdks"></a>
 
 For information about using other AWS SDKs, see [Sample Code and Libraries](https://aws.amazon.com/code/)\. 

@@ -1,4 +1,4 @@
-# Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for Java<a name="AuthUsingAcctOrUserCredJava"></a>
+# Making requests using AWS account or IAM user credentials \- AWS SDK for Java<a name="AuthUsingAcctOrUserCredJava"></a>
 
 To send authenticated requests to Amazon S3 using your AWS account or IAM user credentials, do the following: 
 + Use the `AmazonS3ClientBuilder` class to create an `AmazonS3Client` instance\.
@@ -62,5 +62,5 @@ public class MakingRequests {
 }
 ```
 
-## Related Resources<a name="RelatedResources002"></a>
+## Related resources<a name="RelatedResources002"></a>
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

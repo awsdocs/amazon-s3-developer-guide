@@ -1,4 +1,4 @@
-# Access Points Restrictions and Limitations<a name="access-points-restrictions-limitations"></a>
+# Access points restrictions and limitations<a name="access-points-restrictions-limitations"></a>
 
 Amazon S3 access points have the following restrictions and limitations: 
 + You can only create access points for buckets that you own\.

@@ -1,9 +1,9 @@
-# Using the AWS Java SDK for Multipart Upload \(High\-Level API\)<a name="usingHLmpuJava"></a>
+# Using the AWS Java SDK for multipart upload \(high\-level API\)<a name="usingHLmpuJava"></a>
 
 **Topics**
-+ [Upload a File](HLuploadFileJava.md)
-+ [Abort Multipart Uploads](HLAbortMPUploadsJava.md)
-+ [Track Multipart Upload Progress](HLTrackProgressMPUJava.md)
++ [Upload a file](HLuploadFileJava.md)
++ [Abort multipart uploads](HLAbortMPUploadsJava.md)
++ [Track multipart upload progress](HLTrackProgressMPUJava.md)
 
 The AWS SDK for Java exposes a high\-level API, called `TransferManager`, that simplifies multipart uploads \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\)\. You can upload data from a file or a stream\. You can also set advanced options, such as the part size you want to use for the multipart upload, or the number of concurrent threads you want to use when uploading the parts\. You can also set optional object properties, the storage class, or the ACL\. You use the `PutObjectRequest` and the `TransferManagerConfiguration` classes to set these advanced options\. 
 

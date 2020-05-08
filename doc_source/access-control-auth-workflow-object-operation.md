@@ -12,7 +12,7 @@ If the parent AWS account owns the resource \(bucket or object\), it can grant r
 
 1. **Object context** – The requester must have permissions from the object owner to perform a specific object operation\. In this step, Amazon S3 evaluates the object ACL\. 
 **Note**  
-If bucket and object owners are the same, access to the object can be granted in the bucket policy, which is evaluated at the bucket context\. If the owners are different, the object owners must use an object ACL to grant permissions\. If the AWS account that owns the object is also the parent account to which the IAM principal belongs, it can configure object permissions in a user policy, which is evaluated at the user context\. For more information about using these access policy alternatives, see [Guidelines for Using the Available Access Policy Options](access-policy-alternatives-guidelines.md)\.
+If bucket and object owners are the same, access to the object can be granted in the bucket policy, which is evaluated at the bucket context\. If the owners are different, the object owners must use an object ACL to grant permissions\. If the AWS account that owns the object is also the parent account to which the IAM principal belongs, it can configure object permissions in a user policy, which is evaluated at the user context\. For more information about using these access policy alternatives, see [Guidelines for using the available access policy options](access-policy-alternatives-guidelines.md)\.
 
  The following is an illustration of the context\-based evaluation for an object operation\.
 

@@ -1,6 +1,6 @@
-# Enabling Cross\-Origin Resource Sharing \(CORS\) Using the AWS SDK for Java<a name="ManageCorsUsingJava"></a>
+# Enabling cross\-origin resource sharing \(CORS\) using the AWS SDK for Java<a name="ManageCorsUsingJava"></a>
 
-You can use the AWS SDK for Java to manage cross\-origin resource sharing \(CORS\) for a bucket\. For more information about CORS, see [Cross\-Origin Resource Sharing \(CORS\)](cors.md)\.
+You can use the AWS SDK for Java to manage cross\-origin resource sharing \(CORS\) for a bucket\. For more information about CORS, see [Cross\-origin resource sharing \(CORS\)](cors.md)\.
 
 **Example**  
  The following example:   

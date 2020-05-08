@@ -1,15 +1,15 @@
-# Setting Permissions for Website Access<a name="WebsiteAccessPermissionsReqd"></a>
+# Setting permissions for website access<a name="WebsiteAccessPermissionsReqd"></a>
 
-When you configure a bucket as a website, you must grant public read access to the bucket so that people can access the website\. To make your bucket publicly readable, you must disable block public access settings for the bucket and write a bucket policy\. If your bucket contains objects that are not owned by the bucket owner, you might also need to add an object access control list \(ACL\) that grants everyone read access\.
+When you configure a bucket as a static website, if you want your website to be public, you can grant public read access\. To make your bucket publicly readable, you must disable block public access settings for the bucket and write a bucket policy that grants public read access\. If your bucket contains objects that are not owned by the bucket owner, you might also need to add an object access control list \(ACL\) that grants everyone read access\.
 
 **Note**  
 On the website endpoint, if a user requests an object that doesn't exist, Amazon S3 returns HTTP response code `404 (Not Found)`\. If the object exists but you haven't granted read permission on it, the website endpoint returns HTTP response code `403 (Access Denied)`\. The user can use the response code to infer whether a specific object exists\. If you don't want this behavior, you should not enable website support for your bucket\. 
 
-## Step 1: Edit Block Public Access Settings<a name="block-public-access-static-site"></a>
+## Step 1: Edit block public access settings<a name="block-public-access-static-site"></a>
 
 If you want to configure an existing bucket as a static website that has public access, you must edit block public access settings for that bucket\. You may also have to edit your account\-level block public access settings\. Amazon S3 applies the most restrictive combination of the bucket\-level and account\-level block public access settings\.
 
-For example, if you allow public access for a bucket but block all public access at the account level, Amazon S3 will continue to block public access to the bucket\. In this scenario, you would have to edit your bucket\-level and account\-level block public access settings\. For more information, see [Using Amazon S3 Block Public Access](access-control-block-public-access.md)\.
+For example, if you allow public access for a bucket but block all public access at the account level, Amazon S3 will continue to block public access to the bucket\. In this scenario, you would have to edit your bucket\-level and account\-level block public access settings\. For more information, see [Using Amazon S3 block public access](access-control-block-public-access.md)\.
 
 By default, Amazon S3 blocks public access to your account and buckets\. If you want to use a bucket to host a static website, you can use these steps to edit your block public access settings\. 
 
@@ -34,7 +34,7 @@ Before you complete this step, review [Using Amazon S3 Block Public Access](http
 
    Under **S3 buckets**, the **Access** for your bucket updates to **Objects can be public**\. You can now add a bucket policy to make the objects in the bucket publicly readable\. If the **Access** still displays as **Bucket and objects not public**, you might have to [edit the block public access settings](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/block-public-access-account.html) for your account before adding a bucket policy\.
 
-## Step 2: Add a Bucket Policy<a name="bucket-policy-static-site"></a>
+## Step 2: Add a bucket policy<a name="bucket-policy-static-site"></a>
 
 To make the objects in your bucket publicly readable, you must write a bucket policy that grants everyone `s3:GetObject` permission\. 
 
@@ -80,9 +80,9 @@ The following policy is an example only and allows full access to the contents o
 
    If you see an error that says `Policy has invalid resource`, confirm that the bucket name in the bucket policy matches your bucket name\. For information about adding a bucket policy, see [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html)
 
-   If you get an **Error \- Access denied** warning and the **Bucket policy editor** does not allow you to save the bucket policy, check your account\-level and bucket\-level block public access settings to confirm that you allow public access to the bucket\. For more information about website permissions, see [Permissions Required for Website Access](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteAccessPermissionsReqd.html)\.
+   If you get an **Error \- Access denied** warning and the **Bucket policy editor** does not allow you to save the bucket policy, check your account\-level and bucket\-level block public access settings to confirm that you allow public access to the bucket\.
 
-### Object Access Control Lists<a name="object-acl"></a>
+### Object access control lists<a name="object-acl"></a>
 
 You can use a bucket policy to grant public read permission to your objects\. However, the bucket policy applies only to objects that are owned by the bucket owner\. If your bucket contains objects that aren't owned by the bucket owner, the bucket owner should use the object access control list \(ACL\) to grant public READ permission on those objects\.
 

@@ -1,13 +1,13 @@
-# Cleaning Up Your Example Resources<a name="getting-started-cleanup"></a>
+# Cleaning up your example resources<a name="getting-started-cleanup"></a>
 
 If you created your static website as a learning exercise, you should delete the AWS resources that you allocated so that you no longer accrue charges\. After you delete your AWS resources, your website is no longer available\.
 
 **Topics**
-+ [Step 1: Delete the Amazon CloudFront Distribution](#getting-started-cleanup-cloudfront)
-+ [Step 2: Delete the Route 53 Hosted Zone](#getting-started-cleanup-route53)
-+ [Step 3: Disable Logging and Delete Your S3 Bucket](#getting-started-cleanup-s3)
++ [Step 1: Delete the Amazon CloudFront distribution](#getting-started-cleanup-cloudfront)
++ [Step 2: Delete the Route 53 hosted zone](#getting-started-cleanup-route53)
++ [Step 3: Disable logging and delete your S3 bucket](#getting-started-cleanup-s3)
 
-## Step 1: Delete the Amazon CloudFront Distribution<a name="getting-started-cleanup-cloudfront"></a>
+## Step 1: Delete the Amazon CloudFront distribution<a name="getting-started-cleanup-cloudfront"></a>
 
 Before you delete an Amazon CloudFront distribution, you must disable it\. A disabled distribution is no longer functional and does not accrue charges\. You can enable a disabled distribution at any time\. After you delete a disabled distribution, it is no longer available\.
 
@@ -23,7 +23,7 @@ Before you delete an Amazon CloudFront distribution, you must disable it\. A dis
 
 1. When prompted for confirmation, choose **Yes, Delete**\.
 
-## Step 2: Delete the Route 53 Hosted Zone<a name="getting-started-cleanup-route53"></a>
+## Step 2: Delete the Route 53 hosted zone<a name="getting-started-cleanup-route53"></a>
 
 Before you delete the hosted zone, you must delete the record sets that you created\. You don't need to delete the NS and SOA records; these are automatically deleted when you delete the hosted zone\.
 
@@ -49,7 +49,7 @@ Before you delete the hosted zone, you must delete the record sets that you crea
 
 1.  When prompted for confirmation, choose **Confirm**\. 
 
-## Step 3: Disable Logging and Delete Your S3 Bucket<a name="getting-started-cleanup-s3"></a>
+## Step 3: Disable logging and delete your S3 bucket<a name="getting-started-cleanup-s3"></a>
 
 Before you delete your S3 bucket, make sure that logging is disabled for the bucket\. Otherwise, AWS continues to write logs to your bucket as you delete it\.
 

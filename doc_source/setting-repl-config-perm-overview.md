@@ -12,7 +12,7 @@ When setting up replication, you must acquire necessary permissions as follows:
 
 By default, all Amazon S3 resources—buckets, objects, and related subresources—are private: Only the resource owner can access the resource\. To read objects from the source bucket and replicate them to the destination bucket, Amazon S3 needs permissions to perform these tasks\. You grant these permissions by creating an IAM role and specifying the role in your replication configuration\. 
 
-This section explains the trust policy and minimum required permissions policy\. The example walkthroughs provide step\-by\-step instructions to create an IAM role\. For more information, see [Replication Walkthroughs](replication-example-walkthroughs.md)\.
+This section explains the trust policy and minimum required permissions policy\. The example walkthroughs provide step\-by\-step instructions to create an IAM role\. For more information, see [Replication walkthroughs](replication-example-walkthroughs.md)\.
 + The following shows a *trust policy*, where you identify Amazon S3 as the service principal who can assume the role\.
 
   ```
@@ -81,7 +81,7 @@ This section explains the trust policy and minimum required permissions policy\.
   + `s3:ReplicateObject` and `s3:ReplicateDelete`—Permissions for these actions on objects in the *destination* bucket allow Amazon S3 to replicate objects or delete markers to the destination bucket\. For information about delete markers, see [How Delete Operations Affect Replication](replication-what-is-isnot-replicated.md#replication-delete-op)\. 
 **Note**  
 Permissions for the `s3:ReplicateObject` action on the *destination* bucket also allow replication of object tags, so you don't need to explicitly grant permission for the `s3:ReplicateTags` action\.
-  + `s3:GetObjectVersionTagging`—Permissions for this action on objects in the *source* bucket allow Amazon S3 to read object tags for replication \(see [Object Tagging](object-tagging.md)\)\. If Amazon S3 doesn't have these permissions, it replicates the objects, but not the object tags\.
+  + `s3:GetObjectVersionTagging`—Permissions for this action on objects in the *source* bucket allow Amazon S3 to read object tags for replication \(see [Object tagging](object-tagging.md)\)\. If Amazon S3 doesn't have these permissions, it replicates the objects, but not the object tags\.
 
   For a list of Amazon S3 actions, see [Amazon S3 Actions](using-with-s3-actions.md)\.
 **Important**  
@@ -127,7 +127,7 @@ When source and destination buckets aren't owned by the same accounts, the owner
 }
 ```
 
-For an example, see [Example 2: Configuring Replication When the Source and Destination Buckets Are Owned by Different Accounts](replication-walkthrough-2.md)\.
+For an example, see [Example 2: Configuring replication when the source and destination buckets are owned by different accounts](replication-walkthrough-2.md)\.
 
 If objects in the source bucket are tagged, note the following:
 + If the source bucket owner grants Amazon S3 permission for the `s3:GetObjectVersionTagging` and `s3:ReplicateTags` actions to replicate object tags \(through the IAM role\), Amazon S3 replicates the tags along with the objects\. For information about the IAM role, see [Creating an IAM Role](#setting-repl-config-same-acctowner)\. 
@@ -150,4 +150,4 @@ If objects in the source bucket are tagged, note the following:
 
 ### Changing Replica Ownership<a name="change-replica-ownership"></a>
 
-When different AWS accounts own the source and destination buckets, you can tell Amazon S3 to change the ownership of the replica to the AWS account that owns the destination bucket\. This is called the *owner override* option\. For more information, see [Changing the Replica Owner](replication-change-owner.md)\.
+When different AWS accounts own the source and destination buckets, you can tell Amazon S3 to change the ownership of the replica to the AWS account that owns the destination bucket\. This is called the *owner override* option\. For more information, see [Changing the replica owner](replication-change-owner.md)\.

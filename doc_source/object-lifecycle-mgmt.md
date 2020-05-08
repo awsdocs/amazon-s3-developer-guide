@@ -1,4 +1,4 @@
-# Object Lifecycle Management<a name="object-lifecycle-mgmt"></a>
+# Object lifecycle management<a name="object-lifecycle-mgmt"></a>
 
 To manage your objects so that they are stored cost effectively throughout their lifecycle, configure their *Amazon S3 Lifecycle*\.  An *S3 Lifecycle configuration* is a set of rules that define actions that Amazon S3 applies to a group of objects\. There are two types of actions:
 + **Transition actions**—Define when objects transition to another [storage class](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html)\. For example, you might choose to transition objects to the S3 Standard\-IA storage class 30 days after you created them, or archive objects to the S3 Glacier storage class one year after creating them\. 
@@ -8,11 +8,11 @@ To manage your objects so that they are stored cost effectively throughout their
    
 + **Expiration actions**—Define when objects expire\. Amazon S3 deletes expired objects on your behalf\. 
 
-  The lifecycle expiration costs depend on when you choose to expire objects\. For more information, see [Understanding Object Expiration](lifecycle-expire-general-considerations.md)\.
+  The lifecycle expiration costs depend on when you choose to expire objects\. For more information, see [Understanding object expiration](lifecycle-expire-general-considerations.md)\.
 
-For more information about S3 Lifecycle rules, see [Lifecycle Configuration Elements](intro-lifecycle-rules.md)\. 
+For more information about S3 Lifecycle rules, see [Lifecycle configuration elements](intro-lifecycle-rules.md)\. 
 
-## When Should I Use Lifecycle Configuration?<a name="lifecycle-config-overview-what"></a>
+## When should I use lifecycle configuration?<a name="lifecycle-config-overview-what"></a>
 
 Define S3 Lifecycle configuration rules for objects that have a well\-defined lifecycle\. For example: 
 + If you upload periodic logs to a bucket, your application might need them for a week or a month\. After that, you might want to delete them\.
@@ -21,7 +21,7 @@ Define S3 Lifecycle configuration rules for objects that have a well\-defined li
 
 With S3 Lifecycle configuration rules, you can tell Amazon S3 to transition objects to less expensive storage classes, or archive or delete them\.
 
-## How Do I Configure a Lifecycle?<a name="lifecycle-config-overview-how"></a>
+## How do I configure a lifecycle?<a name="lifecycle-config-overview-how"></a>
 
 An S3 Lifecycle configuration \(an XML file\), consists of a set of rules with predefined actions that you want Amazon S3 to perform on objects during their lifetime\. 
 
@@ -33,10 +33,10 @@ Amazon S3 provides a set of API operations for managing lifecycle configuration 
 
 [DELETE Bucket lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html)
 
-You can also configure the lifecycle by using the Amazon S3 console or programmatically by using the AWS SDK wrapper libraries\. If you need to, you can also make the REST API calls directly\. For more information, see [Setting Lifecycle Configuration on a Bucket](how-to-set-lifecycle-configuration-intro.md)\.
+You can also configure the lifecycle by using the Amazon S3 console or programmatically by using the AWS SDK wrapper libraries\. If you need to, you can also make the REST API calls directly\. For more information, see [Setting lifecycle configuration on a bucket](how-to-set-lifecycle-configuration-intro.md)\.
 
 For more information, see the following topics:
-+ [Additional Considerations for Lifecycle Configuration](lifecycle-additional-considerations.md)
-+ [Lifecycle Configuration Elements](intro-lifecycle-rules.md)
-+ [Examples of Lifecycle Configuration](lifecycle-configuration-examples.md)
-+ [Setting Lifecycle Configuration on a Bucket](how-to-set-lifecycle-configuration-intro.md)
++ [Additional considerations for lifecycle configuration](lifecycle-additional-considerations.md)
++ [Lifecycle configuration elements](intro-lifecycle-rules.md)
++ [Examples of lifecycle configuration](lifecycle-configuration-examples.md)
++ [Setting lifecycle configuration on a bucket](how-to-set-lifecycle-configuration-intro.md)

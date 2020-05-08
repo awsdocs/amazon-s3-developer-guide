@@ -1,4 +1,4 @@
-# Example 2: Configuring Replication When the Source and Destination Buckets Are Owned by Different Accounts<a name="replication-walkthrough-2"></a>
+# Example 2: Configuring replication when the source and destination buckets are owned by different accounts<a name="replication-walkthrough-2"></a>
 
 Setting up replication when *source* and *destination* buckets are owned by different AWS accounts is similar to setting replication when both buckets are owned by the same account\. The only difference is that the *destination* bucket owner must grant the *source* bucket owner permission to replicate objects by adding a bucket policy\. 
 
@@ -6,7 +6,7 @@ Setting up replication when *source* and *destination* buckets are owned by diff
 
 1. In this example, you create *source* and *destination* buckets in two different AWS accounts\. You need to have two credential profiles set for the AWS CLI \(in this example, we use `acctA` and `acctB` for profile names\)\. For more information about setting credential profiles, see [Named Profiles](https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html) in the *AWS Command Line Interface User Guide*\. 
 
-1. Follow the step\-by\-step instructions in [Example 1: Configuring for Buckets in the Same Account](replication-walkthrough1.md) with the following changes:
+1. Follow the step\-by\-step instructions in [Example 1: Configuring for buckets in the same account](replication-walkthrough1.md) with the following changes:
    + For all AWS CLI commands related to *source* bucket activities \(for creating the *source* bucket, enabling versioning, and creating the IAM role\), use the `acctA` profile\. Use the `acctB` profile to create the *destination* bucket\. 
    + Make sure that the permissions policy specifies the *source* and *destination* buckets that you created for this example\.
 
@@ -21,7 +21,7 @@ Setting up replication when *source* and *destination* buckets are owned by diff
             "Sid":"1",
             "Effect":"Allow",
             "Principal":{
-               "AWS":"arn:aws:iam::source-bucket-owner-AWS-acct-ID:root"
+               "AWS":"arn:aws:iam::source-bucket-acct-ID:source-acct-IAM-role"
             },
             "Action":["s3:ReplicateObject", "s3:ReplicateDelete"],
             "Resource":"arn:aws:s3:::destination/*"
@@ -30,7 +30,7 @@ Setting up replication when *source* and *destination* buckets are owned by diff
             "Sid":"2",
             "Effect":"Allow",
             "Principal":{
-               "AWS":"arn:aws:iam::source-bucket-owner-AWS-acct-ID:root"
+               "AWS":"arn:aws:iam::source-bucket-acct-ID:source-acct-IAM-role"
             },
             "Action":["s3:GetBucketVersioning", "s3:PutBucketVersioning"],
             "Resource":"arn:aws:s3:::destination"

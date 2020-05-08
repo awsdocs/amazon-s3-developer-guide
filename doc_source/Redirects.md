@@ -1,4 +1,4 @@
-# Request Redirection and the REST API<a name="Redirects"></a>
+# Request redirection and the REST API<a name="Redirects"></a>
 
 Amazon S3 uses the Domain Name System \(DNS\) to route requests to facilities that can process them\. This system works effectively, but temporary routing errors can occur\. If a request arrives at the wrong Amazon S3 location, Amazon S3 responds with a temporary redirect that tells the requester to resend the request to a new endpoint\. If a request is incorrectly formed, Amazon S3 uses permanent redirects to provide direction on how to perform the request correctly\.
 
@@ -8,12 +8,12 @@ For all Regions that launched after March 20, 2019, if a request arrives at the 
 For more information about enabling or disabling an AWS Region, see [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) in the *AWS General Reference*\.
 
 **Topics**
-+ [DNS Routing](#DNSRouting)
-+ [Temporary Request Redirection](#TemporaryRedirection)
-+ [Permanent Request Redirection](#RedirectsPermanentRedirection)
-+ [Request Redirection Examples](#redirect-examples)
++ [DNS routing](#DNSRouting)
++ [Temporary request redirection](#TemporaryRedirection)
++ [Permanent request redirection](#RedirectsPermanentRedirection)
++ [Request redirection examples](#redirect-examples)
 
-## DNS Routing<a name="DNSRouting"></a>
+## DNS routing<a name="DNSRouting"></a>
 
 DNS routing routes requests to appropriate Amazon S3 facilities\. The following figure and procedure show an example of DNS routing\.
 
@@ -29,7 +29,7 @@ DNS routing routes requests to appropriate Amazon S3 facilities\. The following 
 
 1. Facility B returns a copy of the object to the client\.
 
-## Temporary Request Redirection<a name="TemporaryRedirection"></a>
+## Temporary request redirection<a name="TemporaryRedirection"></a>
 
 A temporary redirect is a type of error response that signals to the requester that they should resend the request to a different endpoint\. Due to the distributed nature of Amazon S3, requests can be temporarily routed to the wrong facility\. This is most likely to occur immediately after buckets are created or deleted\.
 
@@ -58,21 +58,21 @@ The following figure and procedure shows an example of a temporary redirect\.
 
 1. Facility C returns a copy of the object\.
 
-## Permanent Request Redirection<a name="RedirectsPermanentRedirection"></a>
+## Permanent request redirection<a name="RedirectsPermanentRedirection"></a>
 
 A permanent redirect indicates that your request addressed a resource inappropriately\. For example, permanent redirects occur if you use a path\-style request to access a bucket that was created using `<CreateBucketConfiguration>`\. For more information, see [Accessing a Bucket](UsingBucket.md#access-bucket-intro)\.
 
 To help you find these errors during development, this type of redirect does not contain a Location HTTP header that allows you to automatically follow the request to the correct location\. Consult the resulting XML error document for help using the correct Amazon S3 endpoint\.
 
-## Request Redirection Examples<a name="redirect-examples"></a>
+## Request redirection examples<a name="redirect-examples"></a>
 
 The following are examples of temporary request redirection responses\.
 
-### REST API Temporary Redirect Response<a name="RedirectsTemporaryRedirection-response-rest-ex1"></a>
+### REST API temporary redirect response<a name="RedirectsTemporaryRedirection-response-rest-ex1"></a>
 
 ```
  1. HTTP/1.1 307 Temporary Redirect
- 2. Location: http://awsexamplebucket.s3-gztb4pa9sq.amazonaws.com/photos/puppy.jpg?rk=e2c69a31
+ 2. Location: http://awsexamplebucket1.s3-gztb4pa9sq.amazonaws.com/photos/puppy.jpg?rk=e2c69a31
  3. Content-Type: application/xml
  4. Transfer-Encoding: chunked
  5. Date: Fri, 12 Oct 2007 01:12:56 GMT
@@ -83,11 +83,11 @@ The following are examples of temporary request redirection responses\.
 10.   <Code>TemporaryRedirect</Code>
 11.   <Message>Please re-send this request to the specified temporary endpoint.
 12.   Continue to use the original request endpoint for future requests.</Message>
-13.   <Endpoint>awsexamplebucket.s3-gztb4pa9sq.amazonaws.com</Endpoint>
+13.   <Endpoint>awsexamplebucket1.s3-gztb4pa9sq.amazonaws.com</Endpoint>
 14. </Error>
 ```
 
-### SOAP API Temporary Redirect Response<a name="RedirectsTemporaryRedirection-respose-soap-ex2"></a>
+### SOAP API temporary redirect response<a name="RedirectsTemporaryRedirection-respose-soap-ex2"></a>
 
 **Note**  
  SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\. 

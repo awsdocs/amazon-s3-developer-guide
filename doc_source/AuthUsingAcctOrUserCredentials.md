@@ -1,12 +1,12 @@
-# Making Requests Using AWS Account or IAM User Credentials<a name="AuthUsingAcctOrUserCredentials"></a>
+# Making requests using AWS account or IAM user credentials<a name="AuthUsingAcctOrUserCredentials"></a>
 
 You can use your AWS account or IAM user security credentials to send authenticated requests to Amazon S3\. This section provides examples of how you can send authenticated requests using the AWS SDK for Java, AWS SDK for \.NET, and AWS SDK for PHP\. For a list of available AWS SDKs, go to [Sample Code and Libraries](https://aws.amazon.com/code/)\. 
 
 **Topics**
-+ [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for Java](AuthUsingAcctOrUserCredJava.md)
-+ [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for \.NET](AuthUsingAcctOrUserCredDotNet.md)
-+ [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for PHP](AuthUsingAcctOrUserCredPHP3.md)
-+ [Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for Ruby](AuthUsingAcctOrUserCredRuby.md)
++ [Making requests using AWS account or IAM user credentials \- AWS SDK for Java](AuthUsingAcctOrUserCredJava.md)
++ [Making requests using AWS account or IAM user credentials \- AWS SDK for \.NET](AuthUsingAcctOrUserCredDotNet.md)
++ [Making requests using AWS account or IAM user credentials \- AWS SDK for PHP](AuthUsingAcctOrUserCredPHP3.md)
++ [Making requests using AWS account or IAM user credentials \- AWS SDK for Ruby](AuthUsingAcctOrUserCredRuby.md)
 
 Each of these AWS SDKs uses an SDK\-specific credentials provider chain to find and use credentials and perform actions on behalf of the credentials owner\. What all these credentials provider chains have in common is that they all look for your local AWS credentials file\. 
 

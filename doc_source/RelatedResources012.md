@@ -1,4 +1,4 @@
-# Amazon S3 Resources<a name="RelatedResources012"></a>
+# Amazon S3 resources<a name="RelatedResources012"></a>
 
 Following is a table that lists related resources that you'll find useful as you work with this service\.
 

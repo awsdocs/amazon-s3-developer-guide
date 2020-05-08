@@ -1,4 +1,4 @@
-# Upload a File in Multiple Parts Using the PHP SDK Low\-Level API<a name="LLuploadFilePHP"></a>
+# Upload a file in multiple parts using the PHP SDK low\-level API<a name="LLuploadFilePHP"></a>
 
 This topic guides shows how to use the low\-level `uploadPart` method from version 3 of the AWS SDK for PHP to upload a file in multiple parts\. It assumes that you are already following the instructions for [Using the AWS SDK for PHP and Running PHP Examples](UsingTheMPphpAPI.md) and have the AWS SDK for PHP properly installed\.
 
@@ -74,7 +74,7 @@ $url = $result['Location'];
 echo "Uploaded {$filename} to {$url}." . PHP_EOL;
 ```
 
-## Related Resources<a name="RelatedResources-LLuploadFilePHP"></a>
+## Related resources<a name="RelatedResources-LLuploadFilePHP"></a>
 + [ AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client Class](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html) 
 + [ Amazon S3 Multipart Uploads](https://docs.aws.amazon.com/aws-sdk-php/v3/guide/service/s3-multipart-upload.html) 
 + [AWS SDK for PHP Documentation](http://aws.amazon.com/documentation/sdk-for-php/)

@@ -1,4 +1,4 @@
-# Copy an Object Using the AWS SDK for Java Multipart Upload API<a name="CopyingObjctsUsingLLJavaMPUapi"></a>
+# Copy an object using the AWS SDK for Java multipart upload API<a name="CopyingObjctsUsingLLJavaMPUapi"></a>
 
 To copy an Amazon S3 object that is larger than 5 GB with the AWS SDK for Java, use the low\-level Java API \. For objects smaller than 5 GB, use the single\-operation copy described in [Copy an Object Using the AWS SDK for Java](CopyingObjectUsingJava.md)\. 
 

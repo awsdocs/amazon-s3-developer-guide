@@ -1,6 +1,6 @@
-# Enabling Cross\-Origin Resource Sharing \(CORS\) Using the AWS SDK for \.NET<a name="ManageCorsUsingDotNet"></a>
+# Enabling cross\-origin resource sharing \(CORS\) using the AWS SDK for \.NET<a name="ManageCorsUsingDotNet"></a>
 
-To manage cross\-origin resource sharing \(CORS\) for a bucket, you can use the AWS SDK for \.NET\. For more information about CORS, see [Cross\-Origin Resource Sharing \(CORS\)](cors.md)\.
+To manage cross\-origin resource sharing \(CORS\) for a bucket, you can use the AWS SDK for \.NET\. For more information about CORS, see [Cross\-origin resource sharing \(CORS\)](cors.md)\.
 
 **Example**  
 The following C\# code:  

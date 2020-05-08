@@ -6,16 +6,16 @@ Amazon S3 has a simple web services interface that you can use to store and retr
 
 This guide explains the core concepts of Amazon S3, such as buckets, access points, and objects, and how to work with these resources using the Amazon S3 application programming interface \(API\)\.
 
-## How Do I\.\.\.?<a name="HowThisGuideIsOrganized"></a>
+## How do I\.\.\.?<a name="HowThisGuideIsOrganized"></a>
 
 
-|  Information  |  Relevant Sections  | 
+|  Information  |  Relevant sections  | 
 | --- | --- | 
 |  General product overview and pricing  |  [Amazon S3](https://aws.amazon.com/s3/)  | 
 |  Get a quick hands\-on introduction to Amazon S3  |  [Amazon Simple Storage Service Getting Started Guide](https://docs.aws.amazon.com/AmazonS3/latest/gsg/)  | 
 |  Learn about Amazon S3 key terminology and concepts  |  [Introduction to Amazon S3](Introduction.md)  | 
 |  How do I work with buckets?  |  [Working with Amazon S3 Buckets](UsingBucket.md)  | 
-| How do I work with access points? | [Managing Data Access with Amazon S3 Access Points ](access-points.md) | 
+| How do I work with access points? | [Managing data access with Amazon S3 access points ](access-points.md) | 
 |  How do I work with objects?  |  [Working with Amazon S3 Objects](UsingObjects.md)  | 
-|  How do I make requests?  |  [Making Requests](MakingRequests.md)  | 
-|  How do I manage access to my resources?  |  [Identity and Access Management in Amazon S3](s3-access-control.md)  | 
+|  How do I make requests?  |  [Making requests](MakingRequests.md)  | 
+|  How do I manage access to my resources?  |  [Identity and access management in Amazon S3](s3-access-control.md)  | 

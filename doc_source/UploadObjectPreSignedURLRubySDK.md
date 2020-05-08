@@ -1,9 +1,9 @@
-# Upload an Object Using a Presigned URL \(AWS SDK for Ruby\)<a name="UploadObjectPreSignedURLRubySDK"></a>
+# Upload an object using a presigned URL \(AWS SDK for Ruby\)<a name="UploadObjectPreSignedURLRubySDK"></a>
 
 The following tasks guide you through using a Ruby script to upload an object using a presigned URL for SDK for Ruby \- Version 3\.
 
 
-**Uploading Objects \- SDK for Ruby \- Version 3**  
+**Uploading objects \- SDK for Ruby \- version 3**  
 
 |  |  | 
 | --- |--- |

@@ -1,4 +1,4 @@
-# Copy an Amazon S3 Object Using the AWS SDK for \.NET Multipart Upload API<a name="CopyingObjctsUsingLLNetMPUapi"></a>
+# Copy an Amazon S3 object using the AWS SDK for \.NET multipart upload API<a name="CopyingObjctsUsingLLNetMPUapi"></a>
 
 The following C\# example shows how to use the AWS SDK for \.NET to copy an Amazon S3 object that is larger than 5 GB from one source location to another, such as from one bucket to another\. To copy objects that are smaller than 5 GB, use the single\-operation copy procedure described in [Copy an Amazon S3 Object in a Single Operation Using the AWS SDK for \.NET](CopyingObjectUsingNetSDK.md)\. For more information about Amazon S3 multipart uploads, see [Multipart Upload Overview](mpuoverview.md)\.
 
@@ -113,6 +113,6 @@ namespace Amazon.DocSamples.S3
 }
 ```
 
-## More Info<a name="CopyingObjctsUsingLLNetMPUapi-more-info"></a>
+## More info<a name="CopyingObjctsUsingLLNetMPUapi-more-info"></a>
 
 [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)

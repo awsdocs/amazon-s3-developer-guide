@@ -1,15 +1,15 @@
-# Example 3: Bucket Owner Granting Its Users Permissions to Objects It Does Not Own<a name="example-walkthroughs-managing-access-example3"></a>
+# Example 3: Bucket owner granting its users permissions to objects it does not own<a name="example-walkthroughs-managing-access-example3"></a>
 
 **Topics**
-+ [Step 0: Preparing for the Walkthrough](#access-policies-walkthrough-cross-account-acl-step0)
-+ [Step 1: Do the Account A Tasks](#access-policies-walkthrough-cross-account-acl-acctA-tasks)
-+ [Step 2: Do the Account B Tasks](#access-policies-walkthrough-cross-account-acl-acctB-tasks)
-+ [Step 3: Test Permissions](#access-policies-walkthrough-cross-account-acl-verify)
-+ [Step 4: Clean Up](#access-policies-walkthrough-cross-account-acl-cleanup)
++ [Step 0: Preparing for the walkthrough](#access-policies-walkthrough-cross-account-acl-step0)
++ [Step 1: Do the account a tasks](#access-policies-walkthrough-cross-account-acl-acctA-tasks)
++ [Step 2: Do the account b tasks](#access-policies-walkthrough-cross-account-acl-acctB-tasks)
++ [Step 3: Test permissions](#access-policies-walkthrough-cross-account-acl-verify)
++ [Step 4: Clean up](#access-policies-walkthrough-cross-account-acl-cleanup)
 
 The scenario for this example is that a bucket owner wants to grant permission to access objects, but not all objects in the bucket are owned by the bucket owner\. How can a bucket owner grant permission on objects it does not own? For this example, the bucket owner is trying to grant permission to users in its own account\.
 
-A bucket owner can enable other AWS accounts to upload objects\. These objects are owned by the accounts that created them\. The bucket owner does not own objects that were not created by the bucket owner\. Therefore, for the bucket owner to grant access to these objects, the object owner must first grant permission to the bucket owner using an object ACL\. For more information, see [Amazon S3 Bucket and Object Ownership](access-control-overview.md#about-resource-owner)\.
+A bucket owner can enable other AWS accounts to upload objects\. These objects are owned by the accounts that created them\. The bucket owner does not own objects that were not created by the bucket owner\. Therefore, for the bucket owner to grant access to these objects, the object owner must first grant permission to the bucket owner using an object ACL\. For more information, see [Amazon S3 bucket and object ownership](access-control-overview.md#about-resource-owner)\.
 
 In this example, the bucket owner delegates permission to users in its own account\. The following is a summary of the walkthrough steps:
 
@@ -25,17 +25,17 @@ In this example, the bucket owner delegates permission to users in its own accou
 
 1. User in Account A verifies by accessing objects in the bucket, regardless of who owns them\.
 
-For this example, you need two accounts\. The following table shows how we refer to these accounts and the administrator users in these accounts\. Per IAM guidelines \(see [About Using an Administrator User to Create Resources and Grant Permissions](example-walkthroughs-managing-access.md#about-using-root-credentials)\) we do not use the account root credentials in this walkthrough\. Instead, you create an administrator user in each account and use those credentials in creating resources and granting them permissions\.
+For this example, you need two accounts\. The following table shows how we refer to these accounts and the administrator users in these accounts\. Per IAM guidelines \(see [About using an administrator user to create resources and grant permissions](example-walkthroughs-managing-access.md#about-using-root-credentials)\) we do not use the account root credentials in this walkthrough\. Instead, you create an administrator user in each account and use those credentials in creating resources and granting them permissions\.
 
 
-| AWS Account ID | Account Referred To As | Administrator User in the Account  | 
+| AWS account ID | Account referred to as | Administrator user in the account  | 
 | --- | --- | --- | 
 |  *1111\-1111\-1111*  |  Account A  |  AccountAadmin  | 
 |  *2222\-2222\-2222*  |  Account B  |  AccountBadmin  | 
 
 All the tasks of creating users and granting permissions are done in the AWS Management Console\. To verify permissions, the walkthrough uses the command line tools, AWS Command Line Interface \(CLI\) and AWS Tools for Windows PowerShell, so you don't need to write any code\. 
 
-## Step 0: Preparing for the Walkthrough<a name="access-policies-walkthrough-cross-account-acl-step0"></a>
+## Step 0: Preparing for the walkthrough<a name="access-policies-walkthrough-cross-account-acl-step0"></a>
 
 1. Make sure you have two AWS accounts and each account has one administrator user as shown in the table in the preceding section\.
 
@@ -56,15 +56,15 @@ All the tasks of creating users and granting permissions are done in the AWS Man
    + If using the AWS CLI, create two profiles, AccountAadmin and AccountBadmin, in the config file\.
    + If using the AWS Tools for Windows PowerShell, make sure you store credentials for the session as AccountAadmin and AccountBadmin\.
 
-   For instructions, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
+   For instructions, see [Setting up the tools for the example walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
 
-## Step 1: Do the Account A Tasks<a name="access-policies-walkthrough-cross-account-acl-acctA-tasks"></a>
+## Step 1: Do the account a tasks<a name="access-policies-walkthrough-cross-account-acl-acctA-tasks"></a>
 
-### Step 1\.1: Sign In to the AWS Management Console<a name="access-policies-walkthrough-cross-account-permissions-acctA-tasks-sign-in-example3"></a>
+### Step 1\.1: Sign in to the AWS Management Console<a name="access-policies-walkthrough-cross-account-permissions-acctA-tasks-sign-in-example3"></a>
 
 Using the IAM user sign\-in URL for Account A first sign in to the AWS Management Console as AccountAadmin user\. This user will create a bucket and attach a policy to it\. 
 
-### Step 1\.2: Create a Bucket, a User, and Add a Bucket Policy Granting User Permissions<a name="access-policies-walkthrough-cross-account-acl-create-bucket"></a>
+### Step 1\.2: Create a bucket, a user, and add a bucket policy granting user permissions<a name="access-policies-walkthrough-cross-account-acl-create-bucket"></a>
 
 1. In the Amazon S3 console, create a bucket\. This exercise assumes the bucket is created in the US East \(N\. Virginia\) region and the name is `examplebucket`\.
 
@@ -116,7 +116,7 @@ Using the IAM user sign\-in URL for Account A first sign in to the AWS Managemen
    }
    ```
 
-## Step 2: Do the Account B Tasks<a name="access-policies-walkthrough-cross-account-acl-acctB-tasks"></a>
+## Step 2: Do the account b tasks<a name="access-policies-walkthrough-cross-account-acl-acctB-tasks"></a>
 
 Now that Account B has permissions to perform operations on Account A's bucket, the Account B administrator will do the following;
 + Upload an object to Account A's bucket\. 
@@ -150,13 +150,13 @@ Now that Account B has permissions to perform operations on Account A's bucket, 
    Set-S3ACL -BucketName examplebucket -Key HappyFace.jpg -CannedACLName "bucket-owner-full-control" -StoredCreden
    ```
 
-## Step 3: Test Permissions<a name="access-policies-walkthrough-cross-account-acl-verify"></a>
+## Step 3: Test permissions<a name="access-policies-walkthrough-cross-account-acl-verify"></a>
 
 Now verify user Dave in Account A can access the object owned by Account B\.
 
 **Using the AWS CLI**
 
-1. Add user Dave credentials to the AWS CLI config file and create a new profile, `UserDaveAccountA`\. For more information, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
+1. Add user Dave credentials to the AWS CLI config file and create a new profile, `UserDaveAccountA`\. For more information, see [Setting up the tools for the example walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
 
    ```
    [profile UserDaveAccountA]
@@ -185,7 +185,7 @@ Now verify user Dave in Account A can access the object owned by Account B\.
    Read-S3Object -BucketName examplebucket -Key HappyFace.jpg -file HappyFace.jpg  -StoredCredentials UserDaveAccountA
    ```
 
-## Step 4: Clean Up<a name="access-policies-walkthrough-cross-account-acl-cleanup"></a>
+## Step 4: Clean up<a name="access-policies-walkthrough-cross-account-acl-cleanup"></a>
 
 1. After you are done testing, you can do the following to clean up\.
 

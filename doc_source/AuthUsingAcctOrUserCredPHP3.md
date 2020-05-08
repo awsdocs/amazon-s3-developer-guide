@@ -1,4 +1,4 @@
-# Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for PHP<a name="AuthUsingAcctOrUserCredPHP3"></a>
+# Making requests using AWS account or IAM user credentials \- AWS SDK for PHP<a name="AuthUsingAcctOrUserCredPHP3"></a>
 
 This section explains how to use a class from version 3 of the AWS SDK for PHP to send authenticated requests using your AWS account or IAM user credentials\. It assumes that you are already following the instructions for [Using the AWS SDK for PHP and Running PHP Examples](UsingTheMPphpAPI.md) and have the AWS SDK for PHP properly installed\. 
 
@@ -48,6 +48,6 @@ For working examples, see [Operations on Objects](ObjectOperations.md)\. You can
 
 For an example of listing object keys in a bucket, see [Listing Keys Using the AWS SDK for PHP](ListingObjectKeysUsingPHP.md)\. 
 
-## Related Resources<a name="RelatedResources-AuthUsingAcctOrUserCredPHP3-related-resources"></a>
+## Related resources<a name="RelatedResources-AuthUsingAcctOrUserCredPHP3-related-resources"></a>
 + [ AWS SDK for PHP for Amazon S3 Aws\\S3\\S3Client Class](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.S3.S3Client.html) 
 + [AWS SDK for PHP Documentation](http://aws.amazon.com/documentation/sdk-for-php/)

@@ -1,11 +1,11 @@
-# HTML Forms \(AWS Signature Version 2\)<a name="HTTPPOSTForms"></a>
+# HTML forms \(AWS signature version 2\)<a name="HTTPPOSTForms"></a>
 
 **Topics**
-+ [HTML Form Encoding](#HTTPPOSTFormEncoding)
-+ [HTML Form Declaration](#HTTPPOSTFormDeclaration)
-+ [HTML Form Fields](#HTTPPOSTFormFields)
-+ [Policy Construction](#HTTPPOSTConstructPolicy)
-+ [Constructing a Signature](#HTTPPOSTConstructingPolicySignature)
++ [HTML form encoding](#HTTPPOSTFormEncoding)
++ [HTML form declaration](#HTTPPOSTFormDeclaration)
++ [HTML form fields](#HTTPPOSTFormFields)
++ [Policy construction](#HTTPPOSTConstructPolicy)
++ [Constructing a signature](#HTTPPOSTConstructingPolicySignature)
 + [Redirection](#HTTPPOSTConstructingPolicyRedirection)
 
 When you communicate with Amazon S3, you normally use the REST or SOAP API to perform put, get, delete, and other operations\. With POST, users upload data directly to Amazon S3 through their browsers, which cannot process the SOAP API or create a REST `PUT` request\.
@@ -20,7 +20,7 @@ The form data and boundaries \(excluding the contents of the file\) cannot excee
 
 This section explains how to use HTML forms\.
 
-## HTML Form Encoding<a name="HTTPPOSTFormEncoding"></a>
+## HTML form encoding<a name="HTTPPOSTFormEncoding"></a>
 
 The form and policy must be UTF\-8 encoded\. You can apply UTF\-8 encoding to the form by specifying it in the HTML heading or as a request header\.
 
@@ -45,11 +45,11 @@ The following is an example of UTF\-8 encoding in a request header:
 1. Content-Type: text/html; charset=UTF-8
 ```
 
-## HTML Form Declaration<a name="HTTPPOSTFormDeclaration"></a>
+## HTML form declaration<a name="HTTPPOSTFormDeclaration"></a>
 
 The form declaration has three components: the action, the method, and the enclosure type\. If any of these values is improperly set, the request fails\.
 
-The action specifies the URL that processes the request, which must be set to the URL of the bucket\. For example, if the name of your bucket is `awsexamplebucket` and the Region is US West \(N\. California\), the URL is `https://awsexamplebucket.s3.us-west-1.amazonaws.com/`\.
+The action specifies the URL that processes the request, which must be set to the URL of the bucket\. For example, if the name of your bucket is `awsexamplebucket1` and the Region is US West \(N\. California\), the URL is `https://awsexamplebucket1.s3.us-west-1.amazonaws.com/`\.
 
 **Note**  
 The key name is specified in a form field\.
@@ -59,15 +59,15 @@ The method must be POST\.
 The enclosure type \(enctype\) must be specified and must be set to multipart/form\-data for both file uploads and text area uploads\. For more information, go to [RFC 1867](http://www.ietf.org/rfc/rfc1867.txt)\.
 
 **Example**  
-The following example is a form declaration for the bucket "awsexamplebucket"\.  
+The following example is a form declaration for the bucket "awsexamplebucket1"\.  
 
 ```
-1. <form action="https://awsexamplebucket.s3.us-west-1.amazonaws.com/" method="post"
+1. <form action="https://awsexamplebucket1.s3.us-west-1.amazonaws.com/" method="post"
 2. 
 3. enctype="multipart/form-data">
 ```
 
-## HTML Form Fields<a name="HTTPPOSTFormFields"></a>
+## HTML form fields<a name="HTTPPOSTFormFields"></a>
 
 The following table describes fields that can be used within an HTML form\.
 
@@ -75,10 +75,10 @@ The following table describes fields that can be used within an HTML form\.
 The variable `${filename}` is automatically replaced with the name of the file provided by the user and is recognized by all form fields\. If the browser or client provides a full or partial path to the file, only the text following the last slash \(/\) or backslash \(\\\) will be used\. For example, "C:\\Program Files\\directory1\\file\.txt" will be interpreted as "file\.txt"\. If no file or file name is provided, the variable is replaced with an empty string\.
 
 
-| Field Name | Description | Required | 
+| Field name | Description | Required | 
 | --- | --- | --- | 
 | AWSAccessKeyId |  The AWS Access Key ID of the owner of the bucket who grants an anonymous user access for a request that satisfies the set of constraints in the policy\. This field is required if the request includes a policy document\.  |  Conditional  | 
-| acl |  An Amazon S3 access control list \(ACL\)\. If an invalid access control list is specified, an error is generated\. For more information on ACLs, see [Access Control Lists](Introduction.md#S3_ACLs)\. Type: String Default: private  Valid Values: `private \| public-read \| public-read-write \| aws-exec-read \| authenticated-read \| bucket-owner-read \| bucket-owner-full-control `   |  No  | 
+| acl |  An Amazon S3 access control list \(ACL\)\. If an invalid access control list is specified, an error is generated\. For more information on ACLs, see [Access control lists](Introduction.md#S3_ACLs)\. Type: String Default: private  Valid Values: `private \| public-read \| public-read-write \| aws-exec-read \| authenticated-read \| bucket-owner-read \| bucket-owner-full-control `   |  No  | 
 | Cache\-Control, Content\-Type, Content\-Disposition, Content\-Encoding, Expires |  REST\-specific headers\. For more information, see [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\.  |  No  | 
 | key |  The name of the uploaded key\. To use the filename provided by the user, use the $\{filename\} variable\. For example, if user Betty uploads the file lolcatz\.jpg and you specify /user/betty/$\{filename\}, the file is stored as /user/betty/lolcatz\.jpg\. For more information, see [Object Key and Metadata](UsingMetadata.md)\.  |  Yes  | 
 | policy |  Security policy describing what is permitted in the request\. Requests without a security policy are considered anonymous and will succeed only on publicly writable buckets\.   |  No  | 
@@ -89,13 +89,13 @@ The variable `${filename}` is automatically replaced with the name of the file p
 | Other field names prefixed with x\-amz\-meta\- |  User\-specified metadata\.  Amazon S3 does not validate or use this data\. For more information, see [ PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)\.  |  No  | 
 | file |  File or text content\.  The file or content must be the last field in the form\. Any fields below it are ignored\. You cannot upload more than one file at a time\.  |  Yes  | 
 
-## Policy Construction<a name="HTTPPOSTConstructPolicy"></a>
+## Policy construction<a name="HTTPPOSTConstructPolicy"></a>
 
 **Topics**
 + [Expiration](#HTTPPOSTExpiration)
 + [Conditions](#PolicyConditions)
-+ [Condition Matching](#ConditionMatching)
-+ [Character Escaping](#HTTPPOSTEscaping)
++ [Condition matching](#ConditionMatching)
++ [Character escaping](#HTTPPOSTEscaping)
 
 The policy is a UTF\-8 and Base64\-encoded JSON document that specifies conditions that the request must meet and is used to authenticate the content\. Depending on how you design your policy documents, you can use them per upload, per user, for all uploads, or according to other designs that meet your needs\.
 
@@ -111,7 +111,7 @@ The following is an example of a policy document:
  4. 
  5.     {"acl": "public-read" },
  6. 
- 7.     {"bucket": "awsexamplebucket" },
+ 7.     {"bucket": "awsexamplebucket1" },
  8. 
  9.     ["starts-with", "$key", "user/eric/"],
 10. 
@@ -132,12 +132,12 @@ The conditions in the policy document validate the contents of the uploaded obje
 
 **Note**  
 If you have multiple fields with the same name, the values must be separated by commas\. For example, if you have two fields named "x\-amz\-meta\-tag" and the first one has a value of "Ninja" and second has a value of "Stallman", you would set the policy document to `Ninja,Stallman`\.  
- All variables within the form are expanded before the policy is validated\. Therefore, all condition matching should be performed against the expanded fields\. For example, if you set the key field to `user/betty/${filename}`, your policy might be `[ "starts-with", "$key", "user/betty/" ]`\. Do not enter `[ "starts-with", "$key", "user/betty/${filename}" ]`\. For more information, see [Condition Matching](#ConditionMatching)\. 
+ All variables within the form are expanded before the policy is validated\. Therefore, all condition matching should be performed against the expanded fields\. For example, if you set the key field to `user/betty/${filename}`, your policy might be `[ "starts-with", "$key", "user/betty/" ]`\. Do not enter `[ "starts-with", "$key", "user/betty/${filename}" ]`\. For more information, see [Condition matching](#ConditionMatching)\. 
 
 The following table describes policy document conditions\.
 
 
-| Element Name | Description | 
+| Element name | Description | 
 | --- | --- | 
 | acl |  Specifies conditions that the ACL must meet\.  Supports exact matching and `starts-with`\.   | 
 | content\-length\-range |  Specifies the minimum and maximum allowable size for the uploaded content\.  Supports range matching\.  | 
@@ -151,7 +151,7 @@ The following table describes policy document conditions\.
 **Note**  
  If your toolkit adds additional fields \(e\.g\., Flash adds filename\), you must add them to the policy document\. If you can control this functionality, prefix `x-ignore-` to the field so Amazon S3 ignores the feature and it won't affect future versions of this feature\. 
 
-### Condition Matching<a name="ConditionMatching"></a>
+### Condition matching<a name="ConditionMatching"></a>
 
 The following table describes condition matching types\. Although you must specify one condition for each form field that you specify in the form, you can create more complex matching criteria by specifying multiple conditions for a form field\.
 
@@ -163,12 +163,12 @@ The following table describes condition matching types\. Although you must speci
 |  Matching Any Content  |  To configure the policy to allow any content within a field, use starts\-with with an empty value\. This example allows any success\_action\_redirect: <pre>["starts-with", "$success_action_redirect", ""]</pre>  | 
 |  Specifying Ranges  |  For fields that accept ranges, separate the upper and lower ranges with a comma\. This example allows a file size from 1 to 10 megabytes: <pre>["content-length-range", 1048579, 10485760]</pre>  | 
 
-### Character Escaping<a name="HTTPPOSTEscaping"></a>
+### Character escaping<a name="HTTPPOSTEscaping"></a>
 
 The following table describes characters that must be escaped within a policy document\.
 
 
-|  Escape Sequence  |  Description  | 
+|  Escape sequence  |  Description  | 
 | --- | --- | 
 |  \\\\  |  Backslash  | 
 |  \\$  |  Dollar sign  | 
@@ -180,7 +180,7 @@ The following table describes characters that must be escaped within a policy do
 |  \\v  |  Vertical tab  | 
 |  \\u*xxxx*  |  All Unicode characters  | 
 
-## Constructing a Signature<a name="HTTPPOSTConstructingPolicySignature"></a>
+## Constructing a signature<a name="HTTPPOSTConstructingPolicySignature"></a>
 
 
 | Step | Description | 
@@ -196,7 +196,7 @@ For general information about authentication, see [Using Auth Access](https://do
 
 This section describes how to handle redirects\.
 
-### General Redirection<a name="HTTPPOSTGeneralRedirection"></a>
+### General redirection<a name="HTTPPOSTGeneralRedirection"></a>
 
 On completion of the POST request, the user is redirected to the location that you specified in the `success_action_redirect` field\. If Amazon S3 cannot interpret the URL, it ignores the `success_action_redirect` field\.
 
@@ -204,6 +204,6 @@ If `success_action_redirect` is not specified, Amazon S3 returns the empty docum
 
 If the POST request fails, Amazon S3 displays an error and does not provide a redirect\.
 
-### Pre\-Upload Redirection<a name="HTTPPOSTPreUpload"></a>
+### Pre\-upload redirection<a name="HTTPPOSTPreUpload"></a>
 
 If your bucket was created using <CreateBucketConfiguration>, your end users might require a redirect\. If this occurs, some browsers might handle the redirect incorrectly\. This is relatively rare but is most likely to occur right after a bucket is created\.

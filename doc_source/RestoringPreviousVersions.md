@@ -1,4 +1,4 @@
-# Restoring Previous Versions<a name="RestoringPreviousVersions"></a>
+# Restoring previous versions<a name="RestoringPreviousVersions"></a>
 
 One of the value propositions of versioning is the ability to retrieve previous versions of an object\. There are two approaches to doing so:
 + Copy a previous version of the object into the same bucket

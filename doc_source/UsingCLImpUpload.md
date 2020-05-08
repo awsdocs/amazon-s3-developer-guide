@@ -1,4 +1,4 @@
-# Using the AWS Command Line Interface for Multipart Upload<a name="UsingCLImpUpload"></a>
+# Using the AWS Command Line Interface for multipart upload<a name="UsingCLImpUpload"></a>
 
 The following sections in the AWS Command Line Interface describe the operations for multipart upload\. 
 + [Initiate Multipart Upload](https://docs.aws.amazon.com/cli/latest/reference/s3api/create-multipart-upload.html)
@@ -9,4 +9,4 @@ The following sections in the AWS Command Line Interface describe the operations
 + [List Parts](https://docs.aws.amazon.com/cli/latest/reference/s3api/list-parts.html)
 + [List Multipart Uploads](https://docs.aws.amazon.com/cli/latest/reference/s3api/list-multipart-uploads.html)
 
-You can also use the REST API to make your own REST requests, or you can use one the SDKs we provide\. For more information about the REST API, see [Using the REST API for Multipart Upload](UsingRESTAPImpUpload.md)\. For more information about the SDKs, see [API Support for Multipart Upload](sdksupportformpu.md)\.
+You can also use the REST API to make your own REST requests, or you can use one the SDKs we provide\. For more information about the REST API, see [Using the REST API for multipart upload](UsingRESTAPImpUpload.md)\. For more information about the SDKs, see [API Support for Multipart Upload](sdksupportformpu.md)\.

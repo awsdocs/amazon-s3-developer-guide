@@ -1,8 +1,8 @@
-# The REST Error Response<a name="UsingRESTError"></a>
+# The REST error response<a name="UsingRESTError"></a>
 
 **Topics**
-+ [Response Headers](#UsingRESTErrorResponseHeaders)
-+ [Error Response](ErrorResponse.md)
++ [Response headers](#UsingRESTErrorResponseHeaders)
++ [Error response](ErrorResponse.md)
 
 If a REST request results in an error, the HTTP reply has: 
 + An XML error document as the response body 
@@ -23,7 +23,7 @@ Following is an example of a REST Error Response\.
 
 For more information about Amazon S3 errors, go to [ErrorCodeList](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)\.
 
-## Response Headers<a name="UsingRESTErrorResponseHeaders"></a>
+## Response headers<a name="UsingRESTErrorResponseHeaders"></a>
 
 Following are response headers returned by all operations:
 + `x-amz-request-id:` A unique ID assigned to each request by the system\. In the unlikely event that you have problems with Amazon S3, Amazon can use this to help troubleshoot the problem\.

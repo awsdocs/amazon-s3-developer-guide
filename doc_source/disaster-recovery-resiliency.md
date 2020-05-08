@@ -9,13 +9,13 @@ For more information about AWS Regions and Availability Zones, see [AWS Global I
 In addition to the AWS global infrastructure, Amazon S3 offers several features to help support your data resiliency and backup needs\.
 
 **Lifecycle configuration**  
-A lifecycle configuration is a set of rules that define actions that Amazon S3 applies to a group of objects\. With lifecycle configuration rules, you can tell Amazon S3 to transition objects to less expensive storage classes, archive them, or delete them\. For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
+A lifecycle configuration is a set of rules that define actions that Amazon S3 applies to a group of objects\. With lifecycle configuration rules, you can tell Amazon S3 to transition objects to less expensive storage classes, archive them, or delete them\. For more information, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
 
 **Versioning**  
-Versioning is a means of keeping multiple variants of an object in the same bucket\. You can use versioning to preserve, retrieve, and restore every version of every object stored in your Amazon S3 bucket\. With versioning, you can easily recover from both unintended user actions and application failures\. For more information, see [Using Versioning](Versioning.md)\.
+Versioning is a means of keeping multiple variants of an object in the same bucket\. You can use versioning to preserve, retrieve, and restore every version of every object stored in your Amazon S3 bucket\. With versioning, you can easily recover from both unintended user actions and application failures\. For more information, see [Using versioning](Versioning.md)\.
 
-**Amazon S3 object lock**  
-You can use Amazon S3 object lock to store objects using a *write once, read many* \(WORM\) model\. Using Amazon S3 object lock, you can prevent an object from being deleted or overwritten for a fixed amount of time or indefinitely\. Amazon S3 object lock enables you to meet regulatory requirements that require WORM storage or simply to add an additional layer of protection against object changes and deletion\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
+**S3 Object Lock**  
+You can use S3 Object Lock to store objects using a *write once, read many* \(WORM\) model\. Using S3 Object Lock, you can prevent an object from being deleted or overwritten for a fixed amount of time or indefinitely\. S3 Object Lock enables you to meet regulatory requirements that require WORM storage or simply to add an additional layer of protection against object changes and deletion\. For more information, see [Locking objects using S3 Object Lock](object-lock.md)\.
 
 **Storage classes**  
 Amazon S3 offers a range of storage classes for the objects that you store\. Two of these storage classes \(STANDARD\_IA and ONEZONE\_IA\) are designed for long\-lived and infrequently accessed data, such as backups\. You can also use the S3 Glacier storage class to archive objects that you don't need to access in real time\. For more information, see [Amazon S3 Storage Classes](storage-class-intro.md)\.
@@ -25,6 +25,6 @@ The following security best practices also address resilience:
 + [Consider Amazon S3 cross-region replication](security-best-practices.md#cross-region)
 + [Identify and audit all your Amazon S3 buckets](security-best-practices.md#audit)
 
-## Encryption of Amazon S3 Backups<a name="backup-encryption"></a>
+## Encryption of Amazon S3 backups<a name="backup-encryption"></a>
 
 If you are storing backups using Amazon S3, the encryption of your backups depends on the configuration of those buckets\. Amazon S3 provides a way to set the default encryption behavior for an S3 bucket\. You can set default encryption on a bucket so that all objects are encrypted when they are stored in the bucket\. The default encyrption supports keys stored in AWS KMS \(SSE\-KMS\)\. For more information, see [ Amazon S3 Default Encryption for S3 Buckets](bucket-encryption.md)\.

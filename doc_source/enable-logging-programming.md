@@ -1,14 +1,14 @@
-# Enabling Logging Programmatically<a name="enable-logging-programming"></a>
+# Enabling logging programmatically<a name="enable-logging-programming"></a>
 
 You can enable or disable logging programmatically by using either the Amazon S3 API or the AWS SDKs\. To do so, you both enable logging on the bucket and grant the Log Delivery group permission to write logs to the target bucket\.
 
 **Topics**
-+ [Enabling Logging](#enabling-logging-general)
-+ [Granting the Log Delivery Group WRITE and READ\_ACP Permissions](#grant-log-delivery-permissions-general)
++ [Enabling logging](#enabling-logging-general)
++ [Granting the log delivery group WRITE and READ\_ACP permissions](#grant-log-delivery-permissions-general)
 + [Example: AWS SDK for \.NET](#enable-logging-dotnetsdk-exmaple)
-+ [Related Resources](#enable-logging-programming-more-info)
++ [Related resources](#enable-logging-programming-more-info)
 
-## Enabling Logging<a name="enabling-logging-general"></a>
+## Enabling logging<a name="enabling-logging-general"></a>
 
 To enable logging, you submit a [PUT Bucket logging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html) request to add the logging configuration on the source bucket\. The request specifies the target bucket and, optionally, the prefix to be used with all log object keys\. The following example identifies `logbucket` as the target bucket and `logs/` as the prefix\. 
 
@@ -32,7 +32,7 @@ Amazon S3 also provides the [GET Bucket logging](https://docs.aws.amazon.com/Ama
 
 You can use either the Amazon S3 API or the AWS SDK wrapper libraries to enable logging on a bucket\.
 
-## Granting the Log Delivery Group WRITE and READ\_ACP Permissions<a name="grant-log-delivery-permissions-general"></a>
+## Granting the log delivery group WRITE and READ\_ACP permissions<a name="grant-log-delivery-permissions-general"></a>
 
 Amazon S3 writes the log files to the target bucket as a member of the predefined Amazon S3 group Log Delivery\. These writes are subject to the usual access control restrictions\. You must grant `s3:GetObjectAcl` and `s3:PutObject` permissions to this group by adding grants to the access control list \(ACL\) of the target bucket\. The Log Delivery group is represented by the following URL\. 
 
@@ -61,7 +61,7 @@ For examples of adding ACL grants programmatically using the AWS SDKs, see [Mana
 
 ## Example: AWS SDK for \.NET<a name="enable-logging-dotnetsdk-exmaple"></a>
 
-The following C\# example enables logging on a bucket\. You need to create two buckets, a source bucket and a target bucket\. The example first grants the Log Delivery group the necessary permission to write logs to the target bucket and then enables logging on the source bucket\. For more information, see [Enabling Logging Programmatically](#enable-logging-programming)\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
+The following C\# example enables logging on a bucket\. You need to create two buckets, a source bucket and a target bucket\. The example first grants the Log Delivery group the necessary permission to write logs to the target bucket and then enables logging on the source bucket\. For more information, see [Enabling logging programmatically](#enable-logging-programming)\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 **Example**  
 
@@ -142,6 +142,6 @@ The following C\# example enables logging on a bucket\. You need to create two b
 74. }
 ```
 
-## Related Resources<a name="enable-logging-programming-more-info"></a>
-+ [Amazon S3 Server Access Logging](ServerLogs.md)
+## Related resources<a name="enable-logging-programming-more-info"></a>
++ [Amazon S3 server access logging](ServerLogs.md)
 + [AWS::S3::Bucket](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html) in the *AWS CloudFormation User Guide*

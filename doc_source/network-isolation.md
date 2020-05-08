@@ -1,4 +1,4 @@
-# Infrastructure Security in Amazon S3<a name="network-isolation"></a>
+# Infrastructure security in Amazon S3<a name="network-isolation"></a>
 
 As a managed service, Amazon S3 is protected by the AWS global network security procedures that are described in the [Amazon Web Services: Overview of Security Processes](https://d0.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf) whitepaper\.
 

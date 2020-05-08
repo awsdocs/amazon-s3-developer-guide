@@ -1,11 +1,11 @@
-# Manage an Object's Lifecycle Using the AWS SDK for \.NET<a name="manage-lifecycle-using-dot-net"></a>
+# Manage an object's lifecycle using the AWS SDK for \.NET<a name="manage-lifecycle-using-dot-net"></a>
 
-You can use the AWS SDK for \.NET to manage the S3 Lifecycle configuration on a bucket\. For more information about managing Lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\. 
+You can use the AWS SDK for \.NET to manage the S3 Lifecycle configuration on a bucket\. For more information about managing Lifecycle configuration, see [Object lifecycle management](object-lifecycle-mgmt.md)\. 
 
 **Note**  
 When you add a Lifecycle configuration, Amazon S3 replaces the existing configuration on the specified bucket\. To update a configuration, you must first retrieve the Lifecycle configuration, make the changes, and then add the revised Lifecycle configuration to the bucket\.
 
-**Example \.NET Code Example**  
+**Example \.NET code example**  
 The following example shows how to use the AWS SDK for \.NET to add, update, and delete a bucket's Lifecycle configuration\. The code example does the following:  
 + Adds a Lifecycle configuration to a bucket\. 
 + Retrieves the Lifecycle configuration and updates it by adding another rule\. 

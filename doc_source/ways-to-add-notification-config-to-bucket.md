@@ -1,19 +1,19 @@
-# Example Walkthrough: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)<a name="ways-to-add-notification-config-to-bucket"></a>
+# Walkthrough: Configure a bucket for notifications \(SNS topic and SQS queue\)<a name="ways-to-add-notification-config-to-bucket"></a>
 
 **Topics**
-+ [Walkthrough Summary](#notification-walkthrough-summary)
-+ [Step 1: Create an Amazon SNS Topic](#step1-create-sns-topic-for-notification)
-+ [Step 2: Create an Amazon SQS Queue](#step1-create-sqs-queue-for-notification)
-+ [Step 3: Add a Notification Configuration to Your Bucket](#step2-enable-notification)
-+ [Step 4: Test the Setup](#notification-walkthrough-1-test)
++ [Walkthrough summary](#notification-walkthrough-summary)
++ [Step 1: Create an Amazon SNS topic](#step1-create-sns-topic-for-notification)
++ [Step 2: Create an Amazon SQS queue](#step1-create-sqs-queue-for-notification)
++ [Step 3: Add a notification configuration to your bucket](#step2-enable-notification)
++ [Step 4: Test the setup](#notification-walkthrough-1-test)
 
-## Walkthrough Summary<a name="notification-walkthrough-summary"></a>
+## Walkthrough summary<a name="notification-walkthrough-summary"></a>
 
 In this example, you add a notification configuration on a bucket requesting Amazon S3 to do the following:
 + Publish events of the `s3:ObjectCreated:*` type to an Amazon SQS queue\.
 + Publish events of the `s3:ReducedRedundancyLostObject` type to an Amazon SNS topic\.
 
-For information about notification configuration, see [ Configuring Amazon S3 Event Notifications](NotificationHowTo.md)\.
+For information about notification configuration, see [ Configuring Amazon S3 event notifications](NotificationHowTo.md)\.
 
 You can do all these steps using the console, without writing any code\. In addition, code examples using AWS SDKs for Java and \.NET are also provided to help you add notification configurations programmatically\.
 
@@ -33,7 +33,7 @@ You do the following in this walkthrough:
 
 1. Add notification configuration to a bucket\. 
 
-## Step 1: Create an Amazon SNS Topic<a name="step1-create-sns-topic-for-notification"></a>
+## Step 1: Create an Amazon SNS topic<a name="step1-create-sns-topic-for-notification"></a>
 
 Follow the steps to create and subscribe to an Amazon Simple Notification Service \(Amazon SNS\) topic\.
 
@@ -76,7 +76,7 @@ Follow the steps to create and subscribe to an Amazon Simple Notification Servic
    arn:aws:sns:aws-region:account-id:topic-name
    ```
 
-## Step 2: Create an Amazon SQS Queue<a name="step1-create-sqs-queue-for-notification"></a>
+## Step 2: Create an Amazon SQS queue<a name="step1-create-sqs-queue-for-notification"></a>
 
 Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Amazon SQS\) queue\.
 
@@ -144,11 +144,11 @@ Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Ama
    arn:aws:sqs:aws-region:account-id:queue-name
    ```
 
-## Step 3: Add a Notification Configuration to Your Bucket<a name="step2-enable-notification"></a>
+## Step 3: Add a notification configuration to your bucket<a name="step2-enable-notification"></a>
 
 You can enable bucket notifications either by using the Amazon S3 console or programmatically by using AWS SDKs\. Choose any one of the options to configure notifications on your bucket\. This section provides code examples using the AWS SDKs for Java and \.NET\.
 
-### Step 3 \(Option a\): Enable Notifications on a Bucket Using the Console<a name="step2-enable-notification-using-console"></a>
+### Step 3 \(option a\): Enable notifications on a bucket using the console<a name="step2-enable-notification-using-console"></a>
 
 Using the Amazon S3 console, add a notification configuration requesting Amazon S3 to:
 + Publish events of the `s3:ObjectCreated:*` type to your Amazon SQS queue\.
@@ -158,7 +158,7 @@ After you save the notification configuration, Amazon S3 posts a test message, w
 
 For instructions, see [How Do I Enable and Configure Event Notifications for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
-### Step 3 \(Option b\): Enable Notifications on a Bucket Using the AWS SDK for \.NET<a name="step2-enable-notification-using-awssdk-dotnet"></a>
+### Step 3 \(option b\): Enable notifications on a bucket using the AWS SDK for \.NET<a name="step2-enable-notification-using-awssdk-dotnet"></a>
 
 The following C\# code example provides a complete code listing that adds a notification configuration to a bucket\. You need to update the code and provide your bucket name and SNS topic ARN\. For information about how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\. 
 
@@ -226,7 +226,7 @@ namespace Amazon.DocSamples.S3
 }
 ```
 
-### Step 3 \(Option c\): Enable Notifications on a Bucket Using the AWS SDK for Java<a name="step2-enable-notification-using-java"></a>
+### Step 3 \(option c\): Enable notifications on a bucket using the AWS SDK for Java<a name="step2-enable-notification-using-java"></a>
 
 The following example shows how to add a notification configuration to a bucket\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.
 
@@ -284,6 +284,6 @@ public class EnableNotificationOnABucket {
 }
 ```
 
-## Step 4: Test the Setup<a name="notification-walkthrough-1-test"></a>
+## Step 4: Test the setup<a name="notification-walkthrough-1-test"></a>
 
 Now you can test the setup by uploading an object to your bucket and verifying the event notification in the Amazon SQS console\. For instructions, see [Receiving a Message](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-getting-started.htmlReceiveMessage.html) in the *Amazon Simple Queue Service Developer Guide "Getting Started" section*\. 

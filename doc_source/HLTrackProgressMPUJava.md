@@ -1,4 +1,4 @@
-# Track Multipart Upload Progress<a name="HLTrackProgressMPUJava"></a>
+# Track multipart upload progress<a name="HLTrackProgressMPUJava"></a>
 
 The high\-level Java multipart upload API provides a listen interface, `ProgressListener`, to track progress when uploading an object to Amazon S3\. Progress events periodically notify the listener that bytes have been transferred\.
 

@@ -9,9 +9,9 @@ Monitoring is an important part of maintaining the reliability, availability, an
 + Who should be notified when something goes wrong?
 
 **Topics**
-+ [Monitoring Tools](monitoring-automated-manual.md)
-+ [Monitoring Metrics with Amazon CloudWatch](cloudwatch-monitoring.md)
-+ [Metrics Configurations for Buckets](metrics-configurations.md)
++ [Monitoring tools](monitoring-automated-manual.md)
++ [Monitoring metrics with Amazon CloudWatch](cloudwatch-monitoring.md)
++ [Metrics configurations for buckets](metrics-configurations.md)
 + [Logging with Amazon S3](logging-with-S3.md)
-+ [Logging Amazon S3 API Calls Using AWS CloudTrail](cloudtrail-logging.md)
-+ [Using AWS CloudTrail to Identify Amazon S3 Requests](cloudtrail-request-identification.md)
++ [Logging Amazon S3 API calls using AWS CloudTrail](cloudtrail-logging.md)
++ [Using AWS CloudTrail to identify Amazon S3 requests](cloudtrail-request-identification.md)

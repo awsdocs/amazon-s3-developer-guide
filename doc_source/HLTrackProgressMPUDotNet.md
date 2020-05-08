@@ -1,4 +1,4 @@
-# Track the Progress of a Multipart Upload to an S3 Bucket Using the AWS SDK for \.NET \(High\-level API\)<a name="HLTrackProgressMPUDotNet"></a>
+# Track the progress of a multipart upload to an S3 Bucket using the AWS SDK for \.NET \(high\-level API\)<a name="HLTrackProgressMPUDotNet"></a>
 
 The following C\# example uploads a file to an S3 bucket using the `TransferUtility` class, and tracks the progress of the upload\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions for creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
@@ -68,6 +68,6 @@ namespace Amazon.DocSamples.S3
 }
 ```
 
-## More Info<a name="HLTrackProgressMPUDotNet-more-info"></a>
+## More info<a name="HLTrackProgressMPUDotNet-more-info"></a>
 
 [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)

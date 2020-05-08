@@ -1,4 +1,4 @@
-# Appendix A: Using the SOAP API<a name="SOAPAPI3"></a>
+# Appendix a: Using the SOAP API<a name="SOAPAPI3"></a>
 
 **Note**  
  SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\. 
