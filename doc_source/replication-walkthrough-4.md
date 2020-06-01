@@ -1,14 +1,14 @@
-# Example 4: Replicating Encrypted Objects<a name="replication-walkthrough-4"></a>
+# Example 4: Replicating encrypted objects<a name="replication-walkthrough-4"></a>
 
-By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with AWS Key Management Service \(AWS KMS\) customer master keys \(CMKs\)\. To replicate encrypted objects, you modify the bucket replication configuration to tell Amazon S3 to replicate these objects\. This example explains how to use the Amazon S3 console and the AWS Command Line Interface \(AWS CLI\) to change the bucket replication configuration to enable replicating encrypted objects\. For more information, see [Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys Stored in AWS KMS](replication-config-for-kms-objects.md)\. 
+By default, Amazon S3 doesn't replicate objects that are stored at rest using server\-side encryption with AWS Key Management Service \(AWS KMS\) customer master keys \(CMKs\)\. To replicate encrypted objects, you modify the bucket replication configuration to tell Amazon S3 to replicate these objects\. This example explains how to use the Amazon S3 console and the AWS Command Line Interface \(AWS CLI\) to change the bucket replication configuration to enable replicating encrypted objects\. For more information, see [Replicating objects created with server\-side encryption \(SSE\) using encryption keys stored in AWS KMS](replication-config-for-kms-objects.md)\. 
 
 **Topics**
 
-## Replicate Encrypted Objects \(Console\)<a name="replication-ex4-console"></a>
+## Replicate encrypted objects \(console\)<a name="replication-ex4-console"></a>
 
 For step\-by\-step instructions, see [How Do I Add a Replication Rule to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-replication.html) in the *Amazon Simple Storage Service Console User Guide*\. This topic provides instructions for setting replication configuration when buckets are owned by same and different AWS accounts\.
 
-## Replicate Encrypted Objects \(AWS CLI\)<a name="replication-ex4-cli"></a>
+## Replicate encrypted objects \(AWS CLI\)<a name="replication-ex4-cli"></a>
 
 To replicate encrypted objects with the AWS CLI, you create buckets, enable versioning on the buckets, create an IAM role that gives Amazon S3 permission to replicate objects, and add the replication configuration to the source bucket\. The replication configuration provides information related to replicating objects encrypted using KMS keys\. The IAM role permissions include necessary permissions to replicate the encrypted objects\. You also test the setup\.
 
@@ -261,8 +261,8 @@ In the replication configuration you specify the IAM role that Amazon S3 can ass
 
    1. Verify that the *destination* bucket contains the object replicas and that they are encrypted using the AWS KMS CMK that you specified in the configuration\.
 
-## Replicate Encrypted Objects \(AWS SDK\)<a name="replication-ex4-sdk"></a>
+## Replicate encrypted objects \(AWS SDK\)<a name="replication-ex4-sdk"></a>
 
- For a code example to add replication configuration, see [Configure Replication When Buckets Are Owned by the Same Account \(AWS SDK\)](replication-walkthrough1.md#replication-ex1-sdk)\. You need to modify the replication configuration appropriately\. 
+ For a code example to add replication configuration, see [Configure replication when buckets are owned by the same account \(AWS SDK\)](replication-walkthrough1.md#replication-ex1-sdk)\. You need to modify the replication configuration appropriately\. 
 
-For conceptual information, see [Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys Stored in AWS KMS](replication-config-for-kms-objects.md)\. 
+For conceptual information, see [Replicating objects created with server\-side encryption \(SSE\) using encryption keys stored in AWS KMS](replication-config-for-kms-objects.md)\. 

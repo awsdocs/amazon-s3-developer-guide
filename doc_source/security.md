@@ -9,11 +9,11 @@ Security is a shared responsibility between AWS and you\. The [shared responsibi
 This documentation will help you understand how to apply the shared responsibility model when using Amazon S3\. The following topics show you how to configure Amazon S3 to meet your security and compliance objectives\. You'll also learn how to use other AWS services that can help you monitor and secure your Amazon S3 resources\. 
 
 **Topics**
-+ [Data Protection in Amazon S3](DataDurability.md)
-+ [Identity and Access Management in Amazon S3](s3-access-control.md)
-+ [Logging and Monitoring in Amazon S3](s3-incident-response.md)
++ [Data protection in Amazon S3](DataDurability.md)
++ [Identity and access management in Amazon S3](s3-access-control.md)
++ [Logging and monitoring in Amazon S3](s3-incident-response.md)
 + [Compliance Validation for Amazon S3](s3-compliance.md)
 + [Resilience in Amazon S3](disaster-recovery-resiliency.md)
-+ [Infrastructure Security in Amazon S3](network-isolation.md)
-+ [Configuration and Vulnerability Analysis in Amazon S3](vulnerability-analysis-and-management.md)
++ [Infrastructure security in Amazon S3](network-isolation.md)
++ [Configuration and vulnerability analysis in Amazon S3](vulnerability-analysis-and-management.md)
 + [Security Best Practices for Amazon S3](security-best-practices.md)

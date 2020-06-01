@@ -1,4 +1,4 @@
-# Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the AWS SDK for Java<a name="sse-c-using-java-sdk"></a>
+# Specifying server\-side encryption with customer\-provided encryption keys using the AWS SDK for Java<a name="sse-c-using-java-sdk"></a>
 
 The following example shows how to request server\-side encryption with customer\-provided keys \(SSE\-C\) for objects\. The example performs the following operations\. Each operation shows how to specify SSE\-C\-related headers in the request:
 + **Put object**—Uploads an object and requests server\-side encryption using a customer\-provided encryption key\.
@@ -7,11 +7,11 @@ The following example shows how to request server\-side encryption with customer
 + **Copy object**—Makes a copy of the previously uploaded object\. Because the source object is stored using SSE\-C, you must provide its encryption information in your copy request\. By default, Amazon S3 encrypts the copy of the object only if you explicitly request it\. This example directs Amazon S3 to store an encrypted copy of the object using a new SSE\-C key\.
 
 **Note**  
-This example shows how to upload an object in a single operation\. When using the Multipart Upload API to upload large objects, you provide encryption information in the same way shown in this example\. For examples of multipart uploads that use the AWS SDK for Java, see [Using the AWS Java SDK for Multipart Upload \(High\-Level API\)](usingHLmpuJava.md) and [Using the AWS Java SDK for a Multipart Upload \(Low\-Level API\)](mpListPartsJavaAPI.md)\.
+This example shows how to upload an object in a single operation\. When using the Multipart Upload API to upload large objects, you provide encryption information in the same way shown in this example\. For examples of multipart uploads that use the AWS SDK for Java, see [Using the AWS Java SDK for multipart upload \(high\-level API\)](usingHLmpuJava.md) and [Using the AWS Java SDK for a multipart upload \(low\-level API\)](mpListPartsJavaAPI.md)\.
 
-To add the required encryption information, you include an `SSECustomerKey` in your request\. For more information about the `SSECustomerKey` class, see [Specifying Server\-Side Encryption with Customer\-Provided Encryption Keys Using the REST API](ServerSideEncryptionCustomerKeysSSEUsingRESTAPI.md)\.
+To add the required encryption information, you include an `SSECustomerKey` in your request\. For more information about the `SSECustomerKey` class, see [Specifying server\-side encryption with customer\-provided encryption keys using the REST API](ServerSideEncryptionCustomerKeysSSEUsingRESTAPI.md)\.
 
-For information about SSE\-C, see [Protecting Data Using Server\-Side Encryption with Customer\-Provided Encryption Keys \(SSE\-C\)](ServerSideEncryptionCustomerKeys.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
+For information about SSE\-C, see [Protecting data using server\-side encryption with customer\-provided encryption keys \(SSE\-C\)](ServerSideEncryptionCustomerKeys.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 **Example**  
 
@@ -124,13 +124,13 @@ public class ServerSideEncryptionUsingClientSideEncryptionKey {
 }
 ```
 
-## Other Amazon S3 Operations with SSE\-C Using the AWS SDK for Java<a name="sse-c-java-other-api"></a>
+## Other Amazon S3 operations with SSE\-C using the AWS SDK for Java<a name="sse-c-java-other-api"></a>
 
 The example in the preceding section shows how to request server\-side encryption with customer\-provided keys \(SSE\-C\) in the PUT, GET, Head, and Copy operations\. This section describes other APIs that support SSE\-C\.
 
 To upload large objects, you can use multipart upload API \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\)\. You can use either high\-level or low\-level APIs to upload large objects\. These APIs support encryption\-related headers in the request\.
-+ When using the high\-level `TransferManager` API, you provide the encryption\-specific headers in the `PutObjectRequest` \(see [Using the AWS Java SDK for Multipart Upload \(High\-Level API\)](usingHLmpuJava.md)\)\. 
-+ When using the low\-level API, you provide encryption\-related information in the `InitiateMultipartUploadRequest`, followed by identical encryption information in each `UploadPartRequest`\. You do not need to provide any encryption\-specific headers in your `CompleteMultipartUploadRequest`\. For examples, see [Using the AWS Java SDK for a Multipart Upload \(Low\-Level API\)](mpListPartsJavaAPI.md)\. 
++ When using the high\-level `TransferManager` API, you provide the encryption\-specific headers in the `PutObjectRequest` \(see [Using the AWS Java SDK for multipart upload \(high\-level API\)](usingHLmpuJava.md)\)\. 
++ When using the low\-level API, you provide encryption\-related information in the `InitiateMultipartUploadRequest`, followed by identical encryption information in each `UploadPartRequest`\. You do not need to provide any encryption\-specific headers in your `CompleteMultipartUploadRequest`\. For examples, see [Using the AWS Java SDK for a multipart upload \(low\-level API\)](mpListPartsJavaAPI.md)\. 
 
 The following example uses `TransferManager` to create objects and shows how to provide SSE\-C related information\. The example does the following:
 + Creates an object using the `TransferManager.upload()` method\. In the `PutObjectRequest` instance, you provide encryption key information to request\. Amazon S3 encrypts the object using the customer\-provided encryption key\.

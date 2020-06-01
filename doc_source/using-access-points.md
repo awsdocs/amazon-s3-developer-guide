@@ -1,4 +1,4 @@
-# Using Access Points<a name="using-access-points"></a>
+# Using access points<a name="using-access-points"></a>
 
 You can access the objects in an Amazon S3 bucket with an access point using the AWS Management Console, AWS CLI, AWS SDKs, or the S3 REST APIs\.
 
@@ -13,7 +13,7 @@ ARNs for objects accessed through an access point use the format `arn:aws:s3:reg
 + **arn:aws:s3:us\-west\-2:123456789012:accesspoint/test/object/\*** represents all objects for access point `test`, in account `123456789012` in Region `us-west-2`\.
 + **arn:aws:s3:us\-west\-2:123456789012:accesspoint/test/object/unit\-01/finance/\*** represents all objects under prefix `unit-01/finance/` for access point `test`, in account `123456789012` in Region `us-west-2`\.
 
-## Access Point Compatibility with S3 Operations and AWS Services<a name="access-points-service-api-support"></a>
+## Access point compatibility with S3 operations and AWS services<a name="access-points-service-api-support"></a>
 
 S3 access points are compatible with a subset of S3 operations and other AWS services\. The following sections list the compatible services and S3 operations\.
 
@@ -48,7 +48,7 @@ You can use access points to access a bucket using the following subset of Amazo
 + `[RestoreObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html)`
 + `[UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)`
 
-## Monitoring and Logging<a name="access-points-monitoring-logging"></a>
+## Monitoring and logging<a name="access-points-monitoring-logging"></a>
 
 Amazon S3 logs requests made through access points and requests made to the APIs that manage access points, such as `CreateAccessPoint` and `GetAccessPointPolicy`\.
 
@@ -59,7 +59,7 @@ Requests made to Amazon S3 through an access point appear in your S3 server acce
 
 A request made to retrieve `my-image.jpg` directly through the bucket appears in your logs with a hostname of `my-bucket.s3.us-west-2.amazonaws.com`\. If you make the request through the access point instead, Amazon S3 retrieves the same object but logs the request with a hostname of `my-bucket-ap-123456789012.s3-accesspoint.us-west-2.amazonaws.com`\.
 
-For more information about S3 Server Access Logs, see [Amazon S3 Server Access Logging](ServerLogs.md)\. For more information about AWS CloudTrail, see [What is AWS CloudTrail?](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html) in the *AWS CloudTrail User Guide*\.
+For more information about S3 Server Access Logs, see [Amazon S3 server access logging](ServerLogs.md)\. For more information about AWS CloudTrail, see [What is AWS CloudTrail?](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html) in the *AWS CloudTrail User Guide*\.
 
 **Note**  
 S3 access points aren't currently compatible with Amazon CloudWatch metrics\.

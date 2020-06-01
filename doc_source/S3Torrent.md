@@ -1,9 +1,9 @@
 # Using BitTorrent with Amazon S3<a name="S3Torrent"></a>
 
 **Topics**
-+ [How You are Charged for BitTorrent Delivery](S3TorrentCharge.md)
-+ [Using BitTorrent to Retrieve Objects Stored in Amazon S3](S3TorrentRetrieve.md)
-+ [Publishing Content Using Amazon S3 and BitTorrent](S3TorrentPublish.md)
++ [How you are charged for BitTorrent delivery](S3TorrentCharge.md)
++ [Using BitTorrent to retrieve objects stored in Amazon S3](S3TorrentRetrieve.md)
++ [Publishing content using Amazon S3 and BitTorrent](S3TorrentPublish.md)
 
 BitTorrent is an open, peer\-to\-peer protocol for distributing files\. You can use the BitTorrent protocol to retrieve any publicly\-accessible object in Amazon S3\. This section describes why you might want to use BitTorrent to distribute your data out of Amazon S3 and how to do so\.
 

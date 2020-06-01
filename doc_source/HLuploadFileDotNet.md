@@ -1,4 +1,4 @@
-# Upload a File to an S3 Bucket Using the AWS SDK for \.NET \(High\-Level API\)<a name="HLuploadFileDotNet"></a>
+# Upload a file to an S3 Bucket using the AWS SDK for \.NET \(high\-level API\)<a name="HLuploadFileDotNet"></a>
 
 To upload a file to an S3 bucket, use the `TransferUtility` class\. When uploading data from a file, you must provide the object's key name\. If you don't, the API uses the file name for the key name\. When uploading data from a stream, you must provide the object's key name\.
 
@@ -84,6 +84,6 @@ namespace Amazon.DocSamples.S3
 }
 ```
 
-## More Info<a name="HLuploadFileDotNet-more-info"></a>
+## More info<a name="HLuploadFileDotNet-more-info"></a>
 
 [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)

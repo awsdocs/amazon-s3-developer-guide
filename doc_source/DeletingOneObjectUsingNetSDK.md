@@ -1,4 +1,4 @@
-# Deleting an Object Using the AWS SDK for \.NET<a name="DeletingOneObjectUsingNetSDK"></a>
+# Deleting an object using the AWS SDK for \.NET<a name="DeletingOneObjectUsingNetSDK"></a>
 
 When you delete an object from a non\-versioned bucket, the object is removed\. If you have S3 Versioning enabled on the bucket, you have the following options:
 + Delete a specific version of an object by specifying a version ID\.
@@ -6,7 +6,7 @@ When you delete an object from a non\-versioned bucket, the object is removed\. 
 
 The following examples show how to delete an object from both versioned and non\-versioned buckets\. For more information about S3 Versioning, see [Object Versioning](ObjectVersioning.md)\. 
 
-**Example Deleting an Object from a Non\-versioned Bucket**  
+**Example Deleting an object from a non\-versioned bucket**  
 The following C\# example deletes an object from a non\-versioned bucket\. The example assumes that the objects don't have version IDs, so you don't specify version IDs\. You specify only the object key\. For information about how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.   
 
 ```
@@ -45,18 +45,18 @@ namespace Amazon.DocSamples.S3
             }
             catch (AmazonS3Exception e)
             {
-                Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
+                Console.WriteLine("Error encountered on server. Message:'{0}' when deleting an object", e.Message);
             }
             catch (Exception e)
             {
-                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when deleting an object", e.Message);
             }
         }
     }
 }
 ```
 
-**Example Deleting an Object from a Versioned Bucket**  
+**Example Deleting an object from a versioned bucket**  
 The following C\# example deletes an object from a versioned bucket\. It deletes a specific version of the object by specifying the object key name and version ID\.   
 The code performs the following tasks:  
 
@@ -114,11 +114,11 @@ namespace Amazon.DocSamples.S3
             }
             catch (AmazonS3Exception e)
             {
-                Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
+                Console.WriteLine("Error encountered on server. Message:'{0}' when deleting an object", e.Message);
             }
             catch (Exception e)
             {
-                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when deleting an object", e.Message);
             }
         }
 

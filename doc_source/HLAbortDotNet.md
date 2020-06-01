@@ -1,4 +1,4 @@
-# Abort Multipart Uploads to an S3 Bucket Using the AWS SDK for \.NET \(High\-Level API\)<a name="HLAbortDotNet"></a>
+# Abort multipart uploads to an S3 Bucket using the AWS SDK for \.NET \(high\-level API\)<a name="HLAbortDotNet"></a>
 
 To abort in\-progress  multipart uploads, use the `TransferUtility` class from the AWS SDK for \.NET\. You provide a `DateTime`value\. The API then aborts all of the multipart uploads that were initiated before the specified date and time and remove the uploaded parts\. An upload is considered to be in\-progress after you initiate it and it completes or you abort it\. 
 
@@ -51,8 +51,8 @@ namespace Amazon.DocSamples.S3
 ```
 
 **Note**  
-You can also abort a specific multipart upload\. For more information, see [List Multipart Uploads to an S3 Bucket Using the AWS SDK for \.NET \(Low\-level\)List Multipart Uploads ](LLlistMPuploadsDotNet.md)\. 
+You can also abort a specific multipart upload\. For more information, see [List multipart uploads to an S3 Bucket using the AWS SDK for \.NET \(low\-level\)List multipart uploads ](LLlistMPuploadsDotNet.md)\. 
 
-## More Info<a name="HLAbortDotNet-more-info"></a>
+## More info<a name="HLAbortDotNet-more-info"></a>
 
 [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)

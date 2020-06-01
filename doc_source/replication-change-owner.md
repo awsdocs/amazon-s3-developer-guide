@@ -1,4 +1,4 @@
-# Changing the Replica Owner<a name="replication-change-owner"></a>
+# Changing the replica owner<a name="replication-change-owner"></a>
 
 In replication, the owner of the source object also owns the replica by default\. When source and destination buckets are owned by different AWS accounts, you can add optional configuration settings to change replica ownership to the AWS account that owns the destination bucket\. You might do this, for example, to restrict access to object replicas\. This is referred to as the *owner override* option of the replication configuration\. This section explains only the relevant additional configuration settings\. For information about setting the replication configuration, see [Replication](replication.md)\. 
 
@@ -7,9 +7,9 @@ To configure the owner override, you do the following:
 + Grant Amazon S3 permissions to change replica ownership\. 
 + Add permission in the destination bucket policy to allow changing replica ownership\. This allows the owner of the destination bucket to accept the ownership of object replicas\.
 
-The following sections describe how to perform these tasks\. For a working example with step\-by\-step instructions, see [Example 3: Changing the Replica Owner When the Source and Destination Buckets Are Owned by Different Accounts](replication-walkthrough-3.md)\.
+The following sections describe how to perform these tasks\. For a working example with step\-by\-step instructions, see [Example 3: Changing the replica owner when the source and destination buckets are owned by different accounts](replication-walkthrough-3.md)\.
 
-## Adding the Owner Override Option to the Replication Configuration<a name="repl-ownership-owneroverride-option"></a>
+## Adding the owner override option to the replication configuration<a name="repl-ownership-owneroverride-option"></a>
 
 **Warning**  
 Add the owner override option only when the source and destination buckets are owned by different AWS accounts\. Amazon S3 doesn't check if the buckets are owned by same or different accounts\. If you add the owner override when both buckets are owned by same AWS account, Amazon S3 applies the owner override\. It grants full permissions to the owner of the destination bucket and doesn't replicate subsequent updates to the source object access control list \(ACL\)\. The replica owner can directly change the ACL associated with a replica with a `PUT ACL` request, but not through replication\.
@@ -60,7 +60,7 @@ The following example replication configuration tells Amazon S3 to replicate obj
 </ReplicationConfiguration>
 ```
 
-## Granting Amazon S3 Permission to Change Replica Ownership<a name="repl-ownership-add-role-permission"></a>
+## Granting Amazon S3 permission to change replica ownership<a name="repl-ownership-add-role-permission"></a>
 
 Grant Amazon S3 permissions to change replica ownership by adding permission for the `s3:ObjectOwnerOverrideToBucketOwner` action in the permissions policy associated with the IAM role\. This is the IAM role that you specified in the replication configuration that allows Amazon S3 to assume and replicate objects on your behalf\. 
 
@@ -76,7 +76,7 @@ Grant Amazon S3 permissions to change replica ownership by adding permission for
 ...
 ```
 
-## Adding Permission in the Destination Bucket Policy to Allow Changing Replica Ownership<a name="repl-ownership-accept-ownership-b-policy"></a>
+## Adding permission in the destination bucket policy to allow changing replica ownership<a name="repl-ownership-accept-ownership-b-policy"></a>
 
 The owner of the destination bucket must grant the owner of the source bucket permission to change replica ownership\. The owner of the destination bucket grants the owner of the source bucket permission for the `s3:ObjectOwnerOverrideToBucketOwner` action\. This allows the destination bucket owner to accept ownership of the object replicas\. The following example bucket policy statement shows how to do this\.
 
@@ -92,7 +92,7 @@ The owner of the destination bucket must grant the owner of the source bucket pe
 ...
 ```
 
-## Additional Considerations<a name="repl-ownership-considerations"></a>
+## Additional considerations<a name="repl-ownership-considerations"></a>
 
 When you configure the ownership override option, the following considerations apply:
 + By default, the owner of the source object also owns the replica\. Amazon S3 replicates the object version and the ACL associated with it\.

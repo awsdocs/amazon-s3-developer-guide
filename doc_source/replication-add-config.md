@@ -167,7 +167,7 @@ You can add the following options in the `<Destination>` element:
   ...
   ```
 
-  If you don't add this element to the replication configuration, the replicas are owned by the same AWS account that owns the source object\. For more information, see [Changing the Replica Owner](replication-change-owner.md)\.
+  If you don't add this element to the replication configuration, the replicas are owned by the same AWS account that owns the source object\. For more information, see [Changing the replica owner](replication-change-owner.md)\.
 + You can enable S3 Replication Time Control \(S3 RTC\) in your replication configuration\. S3 RTC replicates most objects in seconds and 99\.99 percent of objects within 15 minutes \(backed by a service level agreement\)\. 
 **Note**  
 Only a valid value of `<Minutes>15</Minutes>` is accepted for `EventThreshold` and `Time`\.
@@ -213,7 +213,7 @@ Only a valid value of `<Minutes>15</Minutes>` is accepted for `EventThreshold` a
   ...
   ```
 
-  For more information, see [Replicating Objects Created with Server\-Side Encryption \(SSE\) Using Encryption Keys Stored in AWS KMS](replication-config-for-kms-objects.md)\.
+  For more information, see [Replicating objects created with server\-side encryption \(SSE\) using encryption keys stored in AWS KMS](replication-config-for-kms-objects.md)\.
 
 ## Example Replication Configurations<a name="replication-config-example-configs"></a>
 
@@ -403,7 +403,7 @@ In this configuration, the two rules specify filters with overlapping key prefix
 ```
 
 **Example 4: Example Walkthroughs**  
-For example walkthroughs, see [Replication Walkthroughs](replication-example-walkthroughs.md)\.
+For example walkthroughs, see [Replication walkthroughs](replication-example-walkthroughs.md)\.
 
 For more information about the XML structure of replication configuration, see [PutBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) in the *Amazon Simple Storage Service API Reference*\. 
 

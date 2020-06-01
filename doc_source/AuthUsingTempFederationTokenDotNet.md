@@ -1,6 +1,6 @@
-# Making Requests Using Federated User Temporary Credentials \- AWS SDK for \.NET<a name="AuthUsingTempFederationTokenDotNet"></a>
+# Making requests using federated user temporary credentials \- AWS SDK for \.NET<a name="AuthUsingTempFederationTokenDotNet"></a>
 
-You can provide temporary security credentials for your federated users and applications so that they can send authenticated requests to access your AWS resources\. When requesting these temporary credentials, you must provide a user name and an IAM policy that describes the resource permissions that you want to grant\. By default, the duration of a session is one hour\. You can explicitly set a different duration value when requesting the temporary security credentials for federated users and applications\. For information about sending authenticated requests, see [Making Requests](MakingRequests.md)\.
+You can provide temporary security credentials for your federated users and applications so that they can send authenticated requests to access your AWS resources\. When requesting these temporary credentials, you must provide a user name and an IAM policy that describes the resource permissions that you want to grant\. By default, the duration of a session is one hour\. You can explicitly set a different duration value when requesting the temporary security credentials for federated users and applications\. For information about sending authenticated requests, see [Making requests](MakingRequests.md)\.
 
 **Note**  
 When requesting temporary security credentials for federated users and applications, for added security, we suggest that you use a dedicated IAM user with only the necessary access permissions\. The temporary user you create can never get more permissions than the IAM user who requested the temporary security credentials\. For more information, see [ AWS Identity and Access Management FAQs ](https://aws.amazon.com/iam/faqs/#What_are_the_best_practices_for_using_temporary_security_credentials)\.
@@ -144,5 +144,5 @@ The following C\# example lists the keys in the specified bucket\. In the exampl
   }
   ```
 
-## Related Resources<a name="RelatedResources006"></a>
+## Related resources<a name="RelatedResources006"></a>
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

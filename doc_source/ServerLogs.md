@@ -1,4 +1,4 @@
-# Amazon S3 Server Access Logging<a name="ServerLogs"></a>
+# Amazon S3 server access logging<a name="ServerLogs"></a>
 
 Server access logging provides detailed records for the requests that are made to a bucket\. Server access logs are useful for many applications\. For example, access log information can be useful in security and access audits\. It can also help you learn about your customer base and understand your Amazon S3 bill\.
 
@@ -6,18 +6,18 @@ Server access logging provides detailed records for the requests that are made t
 Server access logs do not log information regarding wrong\-region redirect errors for Regions that launched after March 20, 2019\. Wrong\-region redirect errors occur when a request for an object/bucket is made to an endpoint other than the endpoint of the Region in which the bucket exists\. 
 
 **Topics**
-+ [How to Enable Server Access Logging](#server-access-logging-overview)
-+ [Log Object Key Format](#server-log-keyname-format)
-+ [How Are Logs Delivered?](#how-logs-delivered)
-+ [Best Effort Server Log Delivery](#LogDeliveryBestEffort)
-+ [Bucket Logging Status Changes Take Effect Over Time](#BucketLoggingStatusChanges)
-+ [Enabling Logging Using the Console](enable-logging-console.md)
-+ [Enabling Logging Programmatically](enable-logging-programming.md)
++ [How to enable server access logging](#server-access-logging-overview)
++ [Log object key format](#server-log-keyname-format)
++ [How are logs delivered?](#how-logs-delivered)
++ [Best effort server log delivery](#LogDeliveryBestEffort)
++ [Bucket logging status changes take effect over time](#BucketLoggingStatusChanges)
++ [Enabling logging using the console](enable-logging-console.md)
++ [Enabling logging programmatically](enable-logging-programming.md)
 + [Amazon S3 Server Access Log Format](LogFormat.md)
-+ [Deleting Amazon S3 Log Files](deleting-log-files-lifecycle.md)
-+ [Using Amazon S3 Access Logs to Identify Requests](using-s3-access-logs-to-identify-requests.md)
++ [Deleting Amazon S3 log files](deleting-log-files-lifecycle.md)
++ [Using Amazon S3 access logs to identify requests](using-s3-access-logs-to-identify-requests.md)
 
-## How to Enable Server Access Logging<a name="server-access-logging-overview"></a>
+## How to enable server access logging<a name="server-access-logging-overview"></a>
 
 To track requests for access to your bucket, you can enable server access logging\. Each access log record provides details about a single access request, such as the requester, bucket name, request time, request action, response status, and an error code, if relevant\. 
 
@@ -34,7 +34,7 @@ To enable access logging, you must do the following:
  Amazon S3 only supports granting permission to deliver access logs via bucket ACL, not via bucket policy\.
  Adding *deny* conditions to a bucket policy may prevent Amazon S3 from delivering access logs\.
  [Default bucket encryption](bucket-encryption.html) on the destination bucket *may only be used* if **AES256 \(SSE\-S3\)** is selected\. SSE\-KMS encryption is not supported\. 
-Amazon S3 object lock cannot be enabled on the log destination bucket\.
+S3 Object Lock cannot be enabled on the log destination bucket\.
 
 To turn on log delivery, you provide the following logging configuration information:
 + The name of the target bucket where you want Amazon S3 to save the access logs as objects\. You can have logs delivered to any bucket that you own that is in the same Region as the source bucket, including the source bucket itself\. 
@@ -54,10 +54,10 @@ Both the source and target buckets must be owned by the same AWS account, and th
   logs/2013-11-01-21-32-16-E568B2907131C0C0
   ```
 
-   The key prefix can also help when you delete the logs\. For example, you can set a lifecycle configuration rule for Amazon S3 to delete objects with a specific key prefix\. For more information, see [Deleting Amazon S3 Log Files](deleting-log-files-lifecycle.md)\.
+   The key prefix can also help when you delete the logs\. For example, you can set a lifecycle configuration rule for Amazon S3 to delete objects with a specific key prefix\. For more information, see [Deleting Amazon S3 log files](deleting-log-files-lifecycle.md)\.
 +  \(Optional\) Permissions so that others can access the generated logs\. By default, the bucket owner always has full access to the log objects\. You can optionally grant access to other users\. 
 
-For more information about enabling server access logging, see [Enabling Logging Using the Console](enable-logging-console.md) and [Enabling Logging Programmatically](enable-logging-programming.md)\. 
+For more information about enabling server access logging, see [Enabling logging using the console](enable-logging-console.md) and [Enabling logging programmatically](enable-logging-programming.md)\. 
 
 ### Additional logging considerations<a name="additional-logging-considerations"></a>
 
@@ -67,7 +67,7 @@ Amazon S3 only supports granting permission to deliver access logs via bucket AC
 Adding deny conditions to a bucket policy may prevent Amazon S3 from delivering access logs\.
 Default bucket encryption on the destination bucket may only be used if AES256 \(SSE\-S3\) is selected\. SSE\-KMS encryption is not supported
 
-## Log Object Key Format<a name="server-log-keyname-format"></a>
+## Log object key format<a name="server-log-keyname-format"></a>
 
 Amazon S3 uses the following object key format for the log objects it uploads in the target bucket:
 
@@ -83,13 +83,13 @@ A log file delivered at a specific time can contain records written at any point
 
 The trailing slash */* is required to denote the end of the prefix\.
 
-## How Are Logs Delivered?<a name="how-logs-delivered"></a>
+## How are logs delivered?<a name="how-logs-delivered"></a>
 
 Amazon S3 periodically collects access log records, consolidates the records in log files, and then uploads log files to your target bucket as log objects\. If you enable logging on multiple source buckets that identify the same target bucket, the target bucket will have access logs for all those source buckets\. However, each log object reports access log records for a specific source bucket\. 
 
 Amazon S3 uses a special log delivery account, called the Log Delivery group, to write access logs\. These writes are subject to the usual access control restrictions\. You must grant the Log Delivery group write permission on the target bucket by adding a grant entry in the bucket's access control list \(ACL\)\. If you use the Amazon S3 console to enable logging on a bucket, the console both enables logging on the source bucket and updates the ACL on the target bucket to grant write permission to the Log Delivery group\.
 
-## Best Effort Server Log Delivery<a name="LogDeliveryBestEffort"></a>
+## Best effort server log delivery<a name="LogDeliveryBestEffort"></a>
 
 Server access log records are delivered on a best effort basis\. Most requests for a bucket that is properly configured for logging result in a delivered log record\. Most log records are delivered within a few hours of the time that they are recorded, but they can be delivered more frequently\. 
 
@@ -97,6 +97,6 @@ The completeness and timeliness of server logging is not guaranteed\. The log re
 
 It follows from the best\-effort nature of the server logging feature that the usage reports available at the AWS portal \(Billing and Cost Management reports on the [AWS Management Console](https://console.aws.amazon.com/)\) might include one or more access requests that do not appear in a delivered server log\. 
 
-## Bucket Logging Status Changes Take Effect Over Time<a name="BucketLoggingStatusChanges"></a>
+## Bucket logging status changes take effect over time<a name="BucketLoggingStatusChanges"></a>
 
  Changes to the logging status of a bucket take time to actually affect the delivery of log files\. For example, if you enable logging for a bucket, some requests made in the following hour might be logged, while others might not\. If you change the target bucket for logging from bucket A to bucket B, some logs for the next hour might continue to be delivered to bucket A, while others might be delivered to the new target bucket B\. In all cases, the new settings eventually take effect without any further action on your part\. 

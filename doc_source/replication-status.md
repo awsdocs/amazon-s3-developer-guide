@@ -1,6 +1,6 @@
 # Replication Status Information<a name="replication-status"></a>
 
-To get the replication status of the objects in a bucket, use the Amazon S3 inventory tool\. Amazon S3 sends a CSV file to the destination bucket that you specify in the inventory configuration\. You can also use Amazon Athena to query the replication status in the inventory report\. For more information about Amazon S3 inventory, see [ Amazon S3 Inventory](storage-inventory.md)\.
+To get the replication status of the objects in a bucket, use the Amazon S3 inventory tool\. Amazon S3 sends a CSV file to the destination bucket that you specify in the inventory configuration\. You can also use Amazon Athena to query the replication status in the inventory report\. For more information about Amazon S3 inventory, see [ Amazon S3 inventory](storage-inventory.md)\.
 
 In replication, you have a source bucket on which you configure replication and a destination bucket where Amazon S3 replicates objects\. When you request an object \(using `GET` object\) or object metadata \(using `HEAD` object\) from these buckets, Amazon S3 returns the `x-amz-replication-status` header in the response: 
 + When you request an object from the source bucket, Amazon S3 returns the `x-amz-replication-status` header if the object in your request is eligible for replication\. 

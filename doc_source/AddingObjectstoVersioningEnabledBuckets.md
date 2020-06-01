@@ -1,4 +1,4 @@
-# Adding Objects to Versioning\-Enabled Buckets<a name="AddingObjectstoVersioningEnabledBuckets"></a>
+# Adding objects to versioning\-enabled buckets<a name="AddingObjectstoVersioningEnabledBuckets"></a>
 
 Once you enable versioning on a bucket, Amazon S3 automatically adds a unique version ID to every object stored \(using `PUT`, `POST`, or `COPY`\) in the bucket\. 
 
@@ -7,11 +7,11 @@ The following figure shows that Amazon S3 adds a unique version ID to an object 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/versioning_PUT_versionEnabled.png)
 
 **Topics**
-+ [Using the Console](#add-obj-versioning-enabled-bucket-console)
++ [Using the console](#add-obj-versioning-enabled-bucket-console)
 + [Using the AWS SDKs](#add-obj-versioning-enabled-bucket-sdk)
 + [Using the REST API](#add-obj-versioning-enabled-bucket-rest)
 
-## Using the Console<a name="add-obj-versioning-enabled-bucket-console"></a>
+## Using the console<a name="add-obj-versioning-enabled-bucket-console"></a>
 
  For instructions, see [How Do I Upload an Object to an S3 Bucket? ](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
@@ -24,7 +24,7 @@ For information about using other AWS SDKs, see [Sample Code and Libraries](http
 ## Using the REST API<a name="add-obj-versioning-enabled-bucket-rest"></a>
 
 
-**Adding Objects to Versioning\-Enabled Buckets**  
+**Adding objects to versioning\-enabled buckets**  
 
 |  |  | 
 | --- |--- |

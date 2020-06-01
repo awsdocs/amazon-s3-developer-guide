@@ -27,7 +27,7 @@ When writing Amazon S3 applications using the AWS SDK for \.NET, you use the `AW
   It includes the `TransferUtility` class that enables you to specify a file, directory, or stream for uploading your data\. It also includes the `TransferUtilityUploadRequest` and `TransferUtilityUploadDirectoryRequest` classes to configure advanced settings, such as the number of concurrent threads, part size, object metadata, the storage class \(STANDARD, REDUCED\_REDUNDANCY\), and object access control list \(ACL\)\.
 + **Amazon\.S3—**Provides the implementation for the low\-level APIs\. 
 
-  It provides methods that correspond to the Amazon S3 REST multipart upload API \(see [Using the REST API for Multipart Upload](UsingRESTAPImpUpload.md)\)\.
+  It provides methods that correspond to the Amazon S3 REST multipart upload API \(see [Using the REST API for multipart upload](UsingRESTAPImpUpload.md)\)\.
 + **Amazon\.S3\.Model—**Provides the low\-level API classes to create requests and process responses\. For example, it provides the `InitiateMultipartUploadRequest` and `InitiateMultipartUploadResponse` classes you can use when initiating a multipart upload, and the `UploadPartRequest` and `UploadPartResponse` classes when uploading parts\. 
 + **Amazon\.S3\.Encryption—** Provides `AmazonS3EncryptionClient`\.
 + **Amazon\.S3\.Util—** Provides various utility classes such as `AmazonS3Util` and `BucketRegionDetector`\.

@@ -1,4 +1,4 @@
-# Uploading Objects Using Presigned URLs<a name="PresignedUrlUploadObject"></a>
+# Uploading objects using presigned URLs<a name="PresignedUrlUploadObject"></a>
 
 A presigned URL gives you access to the object identified in the URL, provided that the creator of the presigned URL has permissions to access that object\. That is, if you receive a presigned URL to upload an object, you can upload the object only if the creator of the presigned URL has the necessary permissions to upload that object\. 
 
@@ -12,7 +12,7 @@ You can generate a presigned URL programmatically using the [REST API](https://d
  If you are using Microsoft Visual Studio, you can also use AWS Explorer to generate a presigned object URL without writing any code\. Anyone who receives a valid presigned URL can then programmatically upload an object\. For more information, go to [Using Amazon S3 from AWS Explorer](https://docs.aws.amazon.com/AWSToolkitVS/latest/UserGuide/using-s3.html)\. For instructions about how to install AWS Explorer, see [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)\.
 
 **Topics**
-+ [Upload an Object Using a Presigned URL \(AWS SDK for Java\)](PresignedUrlUploadObjectJavaSDK.md)
-+ [Upload an Object Using a Presigned URL \(AWS SDK for \.NET\)](UploadObjectPreSignedURLDotNetSDK.md)
-+ [Upload an Object Using a Presigned URL \(AWS SDK for Ruby\)](UploadObjectPreSignedURLRubySDK.md)
++ [Upload an object using a presigned URL \(AWS SDK for Java\)](PresignedUrlUploadObjectJavaSDK.md)
++ [Upload an object using a presigned URL \(AWS SDK for \.NET\)](UploadObjectPreSignedURLDotNetSDK.md)
++ [Upload an object using a presigned URL \(AWS SDK for Ruby\)](UploadObjectPreSignedURLRubySDK.md)
 + [Upload an Object Using a Presigned URL \(AWS SDK for PHP\)](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/s3-presigned-url.html)

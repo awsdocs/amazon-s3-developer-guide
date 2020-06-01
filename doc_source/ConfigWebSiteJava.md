@@ -1,6 +1,6 @@
-# Managing Websites with the AWS SDK for Java<a name="ConfigWebSiteJava"></a>
+# Managing websites with the AWS SDK for Java<a name="ConfigWebSiteJava"></a>
 
-The following example shows how to use the AWS SDK for Java to manage website configuration for a bucket\. To add a website configuration to a bucket, you provide a bucket name and a website configuration\. The website configuration must include an index document and can include an optional error document\. These documents must already exist in the bucket\. For more information, see [PUT Bucket website](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html)\. For more information about the Amazon S3 website feature, see [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\. 
+The following example shows how to use the AWS SDK for Java to manage website configuration for a bucket\. To add a website configuration to a bucket, you provide a bucket name and a website configuration\. The website configuration must include an index document and can include an optional error document\. These documents must already exist in the bucket\. For more information, see [PUT Bucket website](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html)\. For more information about the Amazon S3 website feature, see [Hosting a static website on Amazon S3](WebsiteHosting.md)\. 
 
 **Example**  
 The following example uses the AWS SDK for Java to add a website configuration to a bucket, retrieve and print the configuration, and then delete the configuration and verify the deletion\. For instructions on how to create and test a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   

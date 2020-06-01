@@ -21,7 +21,7 @@ The ARN format for Amazon S3 resources reduces to the following:
 1. arn:aws:s3:::bucket_name/key_name
 ```
 
-For a complete list of Amazon S3 resources, see [Actions, Resources, and Condition Keys for Amazon S3](list_amazons3.md)\. 
+For a complete list of Amazon S3 resources, see [Actions, resources, and condition keys for Amazon S3](list_amazons3.md)\. 
 
 To find the ARN for an S3 bucket, you can look at the Amazon S3 console **Bucket Policy** or **CORS configuration** permissions pages\. For more information, see the following topics in the *Amazon Simple Storage Service Console User Guide*:
 + [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html)

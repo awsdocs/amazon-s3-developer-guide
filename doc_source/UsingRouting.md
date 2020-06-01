@@ -1,8 +1,8 @@
-# Request Routing<a name="UsingRouting"></a>
+# Request routing<a name="UsingRouting"></a>
 
 **Topics**
-+ [Request Redirection and the REST API](Redirects.md)
-+ [DNS Considerations](DNSConsiderations.md)
++ [Request redirection and the REST API](Redirects.md)
++ [DNS considerations](DNSConsiderations.md)
 
 Programs that make requests against buckets created using the <CreateBucketConfiguration> API must support redirects\. Additionally, some clients that do not respect DNS TTLs might encounter issues\.
 

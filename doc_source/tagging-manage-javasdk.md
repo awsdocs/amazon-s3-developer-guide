@@ -1,6 +1,6 @@
-# Managing Tags Using the AWS SDK for Java<a name="tagging-manage-javasdk"></a>
+# Managing tags using the AWS SDK for Java<a name="tagging-manage-javasdk"></a>
 
-The following example shows how to use the AWS SDK for Java to set tags for a new object and retrieve or replace tags for an existing object\. For more information about object tagging, see [Object Tagging](object-tagging.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
+The following example shows how to use the AWS SDK for Java to set tags for a new object and retrieve or replace tags for an existing object\. For more information about object tagging, see [Object tagging](object-tagging.md)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 
 ```
 import com.amazonaws.AmazonServiceException;

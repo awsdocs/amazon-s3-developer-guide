@@ -1,4 +1,4 @@
-# Upload a Directory<a name="HLuploadDirDotNet"></a>
+# Upload a directory<a name="HLuploadDirDotNet"></a>
 
 You can use the `TransferUtility` class to upload an entire directory\. By default, the API uploads only the files at the root of the specified directory\. You can, however, specify recursively uploading files in all of the subdirectories\. 
 

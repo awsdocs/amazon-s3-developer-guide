@@ -1,4 +1,4 @@
-# Set Lifecycle Configurations Using the AWS CLI<a name="set-lifecycle-cli"></a>
+# Set lifecycle configurations using the AWS CLI<a name="set-lifecycle-cli"></a>
 
 You can use the following AWS CLI commands to manage S3 Lifecycle configurations:
 + `put-bucket-lifecycle-configuration`
@@ -20,7 +20,7 @@ The Amazon S3 Lifecycle configuration is an XML file\. But when using the AWS CL
           <Status>Enabled</Status>
           <Transition>        
              <Days>365</Days>        
-             <StorageClass>S3 Glacier</StorageClass>
+             <StorageClass>GLACIER</StorageClass>
           </Transition>    
           <Expiration>
                <Days>3650</Days>
@@ -42,7 +42,7 @@ The Amazon S3 Lifecycle configuration is an XML file\. But when using the AWS CL
               "Transitions": [
                   {
                       "Days": 365,
-                      "StorageClass": "S3 Glacier"
+                      "StorageClass": "GLACIER"
                   }
               ],
               "Expiration": {

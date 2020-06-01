@@ -1,6 +1,6 @@
-# Managing Tags Using the AWS SDK for \.NET<a name="tagging-manage-dotnet"></a>
+# Managing tags using the AWS SDK for \.NET<a name="tagging-manage-dotnet"></a>
 
-The following example shows how to use the AWS SDK for \.NET to set the tags for a new object and retrieve or replace the tags for an existing object\. For more information about object tagging, see [Object Tagging](object-tagging.md)\. 
+The following example shows how to use the AWS SDK for \.NET to set the tags for a new object and retrieve or replace the tags for an existing object\. For more information about object tagging, see [Object tagging](object-tagging.md)\. 
 
 For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
@@ -54,7 +54,7 @@ namespace Amazon.DocSamples.S3
 
                 GetObjectTaggingResponse objectTags = await client.GetObjectTaggingAsync(getTagsRequest);
                 for (int i = 0; i < objectTags.Tagging.Count; i++)
-                    Console.WriteLine("Key: {0}, Value: {1}", objectTags.Tagging[i].Key, objectTags.Tagging[0].Value);
+                    Console.WriteLine("Key: {0}, Value: {1}", objectTags.Tagging[i].Key, objectTags.Tagging[i].Value);
 
 
                 // 3. Replace the tagset.
@@ -80,7 +80,7 @@ namespace Amazon.DocSamples.S3
                 getTagsRequest2.Key = keyName;
                 GetObjectTaggingResponse objectTags2 = await client.GetObjectTaggingAsync(getTagsRequest2);
                 for (int i = 0; i < objectTags2.Tagging.Count; i++)
-                    Console.WriteLine("Key: {0}, Value: {1}", objectTags2.Tagging[i].Key, objectTags2.Tagging[0].Value);
+                    Console.WriteLine("Key: {0}, Value: {1}", objectTags2.Tagging[i].Key, objectTags2.Tagging[i].Value);
 
             }
             catch (AmazonS3Exception e)

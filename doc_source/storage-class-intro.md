@@ -44,7 +44,7 @@ For example, you might choose the S3 Standard\-IA and S3 One Zone\-IA storage cl
 + For storing backups\. 
 + For older data that is accessed infrequently, but that still requires millisecond access\. For example, when you upload data, you might choose the S3 Standard storage class, and use lifecycle configuration to tell Amazon S3 to transition the objects to the S3 Standard\-IA or S3 One Zone\-IA class\. 
 
-  For more information about lifecycle management, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
+  For more information about lifecycle management, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
 
 **Note**  
 The S3 Standard\-IA and S3 One Zone\-IA storage classes are suitable for objects larger than 128 KB that you plan to store for at least 30 days\. If an object is less than 128 KB, Amazon S3 charges you for 128 KB\. If you delete an object before the end of the 30\-day minimum storage duration period, you are charged for 30 days\. For pricing information, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)\.
@@ -110,7 +110,7 @@ Amazon S3 APIs support setting \(or updating\) the storage class of objects as f
   + Set the `x-amz-storage-class` to the storage class that you want to use\. 
 
   In a versioning\-enabled bucket, you cannot change the storage class of a specific version of an object\. When you copy it, Amazon S3 gives it a new version ID\.
-+ You can direct Amazon S3 to change the storage class of objects by adding an S3 Lifecycle configuration to a bucket\. For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
++ You can direct Amazon S3 to change the storage class of objects by adding an S3 Lifecycle configuration to a bucket\. For more information, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
 + When setting up a replication configuration, you can set the storage class for replicated objects to any other storage class\. However, you cannot replicate objects that are stored in the S3 Glacier or S3 Glacier Deep Archive storage classes\. For more information, see [Replication Configuration Overview](replication-add-config.md)\.
 
 To create and update object storage classes, you can use the Amazon S3 console, AWS SDKs, or the AWS Command Line Interface \(AWS CLI\)\. Each uses the Amazon S3 APIs to send requests to Amazon S3\.
@@ -118,5 +118,5 @@ To create and update object storage classes, you can use the Amazon S3 console, 
 ### Restricting Access Policy Permissions to a Specific Storage Class<a name="restricting-storage-class"></a>
 
 When you grant access policy permissions for Amazon S3 operations, you can use the `s3:x-amz-storage-class` condition key to restrict which storage class to use when storing uploaded objects\. For example, when you grant `s3:PUTObject` permission, you can restrict object uploads to a specific storage class\. For an example policy, see [Example 5: Restricting Object Uploads to Objects with a Specific Storage Class](amazon-s3-policy-keys.md#example-storage-class-condition-key)\. For more information about using conditions in policies and a complete list of Amazon S3 condition keys, see the following:
-+ [Actions, Resources, and Condition Keys for Amazon S3](list_amazons3.md)
++ [Actions, resources, and condition keys for Amazon S3](list_amazons3.md)
 + [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)

@@ -1,4 +1,4 @@
-# Protecting Data Using Client\-Side Encryption<a name="UsingClientSideEncryption"></a>
+# Protecting data using client\-side encryption<a name="UsingClientSideEncryption"></a>
 
 *Client\-side encryption* is the act of encrypting data before sending it to Amazon S3\. To enable client\-side encryption, you have the following options:
 + Use a customer master key \(CMK\) stored in AWS Key Management Service \(AWS KMS\)\.
@@ -12,7 +12,7 @@ The following AWS SDKs support client\-side encryption:
 + [AWS SDK for Ruby](https://aws.amazon.com/sdk-for-ruby/)
 + [AWS SDK for C\+\+](https://aws.amazon.com/sdk-for-cpp/)
 
-## Option 1: Using a CMK Stored in AWS KMS<a name="client-side-encryption-kms-managed-master-key-intro"></a>
+## Option 1: Using a CMK stored in AWS KMS<a name="client-side-encryption-kms-managed-master-key-intro"></a>
 + **When uploading an object**—Using the customer master key \(CMK\) ID, the client first sends a request to AWS KMS for a CMK that it can use to encrypt your object data\. AWS KMS returns two versions of a randomly generated data key:
   + A plaintext version of the data key that the client uses to encrypt the object data
   + A cipher blob of the same data key that the client uploads to Amazon S3 as object metadata
@@ -111,7 +111,7 @@ public class UploadObjectKMSKey {
 }
 ```
 
-## Option 2: Using a Master Key Stored Within Your Application<a name="client-side-encryption-client-side-master-key-intro"></a>
+## Option 2: Using a master key stored within your application<a name="client-side-encryption-client-side-master-key-intro"></a>
 
 This section shows how to use a master key stored within your application for client\-side data encryption\. 
 

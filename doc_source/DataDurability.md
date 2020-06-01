@@ -1,4 +1,4 @@
-# Data Protection in Amazon S3<a name="DataDurability"></a>
+# Data protection in Amazon S3<a name="DataDurability"></a>
 
 Amazon S3 provides a highly durable storage infrastructure designed for mission\-critical and primary data storage\. Objects are redundantly stored on multiple devices across multiple facilities in an Amazon S3 Region\. To help better ensure data durability, Amazon S3 `PUT` and `PUT Object copy` operations synchronously store your data across multiple facilities\. After the objects are stored, Amazon S3 maintains their durability by quickly detecting and repairing any lost redundancy\. 
 

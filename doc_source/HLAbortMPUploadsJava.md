@@ -1,4 +1,4 @@
-# Abort Multipart Uploads<a name="HLAbortMPUploadsJava"></a>
+# Abort multipart uploads<a name="HLAbortMPUploadsJava"></a>
 
 **Example**  
 The following example uses the high\-level Java API \(the `TransferManager` class\) to abort all in\-progress multipart uploads that were initiated on a specific bucket over a week ago\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   

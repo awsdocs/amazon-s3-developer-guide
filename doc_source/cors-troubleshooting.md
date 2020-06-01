@@ -1,4 +1,4 @@
-# Troubleshooting CORS Issues<a name="cors-troubleshooting"></a>
+# Troubleshooting CORS issues<a name="cors-troubleshooting"></a>
 
 If you encounter unexpected behavior while accessing buckets set with the CORS configuration, try the following steps to troubleshoot:
 

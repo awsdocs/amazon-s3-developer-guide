@@ -1,4 +1,4 @@
-# Adding Objects to Versioning\-Suspended Buckets<a name="AddingObjectstoVersionSuspendedBuckets"></a>
+# Adding objects to versioning\-suspended buckets<a name="AddingObjectstoVersionSuspendedBuckets"></a>
 
 Once you suspend versioning on a bucket, Amazon S3 automatically adds a `null` version ID to every subsequent object stored thereafter \(using `PUT`, `POST`, or `COPY`\) in that bucket\.
 

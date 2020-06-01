@@ -1,6 +1,6 @@
-# Managing Object Lifecycles Using the AWS SDK for Java<a name="manage-lifecycle-using-java"></a>
+# Managing object lifecycles using the AWS SDK for Java<a name="manage-lifecycle-using-java"></a>
 
-You can use the AWS SDK for Java to manage the S3 Lifecycle configuration of a bucket\. For more information about managing S3 Lifecycle configuration, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
+You can use the AWS SDK for Java to manage the S3 Lifecycle configuration of a bucket\. For more information about managing S3 Lifecycle configuration, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
 
 **Note**  
 When you add S3 Lifecycle configuration to a bucket, Amazon S3 replaces the bucket's current Lifecycle configuration, if there is one\. To update a configuration, you retrieve it, make the desired changes, and then add the revised configuration to the bucket\.

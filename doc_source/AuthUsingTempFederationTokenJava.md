@@ -1,4 +1,4 @@
-# Making Requests Using Federated User Temporary Credentials \- AWS SDK for Java<a name="AuthUsingTempFederationTokenJava"></a>
+# Making requests using federated user temporary credentials \- AWS SDK for Java<a name="AuthUsingTempFederationTokenJava"></a>
 
 You can provide temporary security credentials for your federated users and applications so that they can send authenticated requests to access your AWS resources\. When requesting these temporary credentials, you must provide a user name and an IAM policy that describes the resource permissions that you want to grant\. By default, the session duration is one hour\. You can explicitly set a different duration value when requesting the temporary security credentials for federated users and applications\.
 
@@ -110,5 +110,5 @@ public class MakingRequestsWithFederatedTempCredentials {
 }
 ```
 
-## Related Resources<a name="RelatedResources005"></a>
+## Related resources<a name="RelatedResources005"></a>
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

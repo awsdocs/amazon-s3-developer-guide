@@ -1,4 +1,4 @@
-# Managing Websites with the REST API<a name="ConfigWebSiteREST"></a>
+# Managing websites with the REST API<a name="ConfigWebSiteREST"></a>
 
 **Topics**
 

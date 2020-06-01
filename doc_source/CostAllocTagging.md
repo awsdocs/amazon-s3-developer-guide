@@ -1,6 +1,6 @@
 # Using Cost Allocation S3 Bucket Tags<a name="CostAllocTagging"></a>
 
-To track the storage cost or other criteria for individual projects or groups of projects, label your Amazon S3 buckets using cost allocation tags\. A *cost allocation tag* is a key\-value pair that you associate with an S3 bucket\. After you activate cost allocation tags, AWS uses the tags to organize your resource costs on your cost allocation report\. Cost allocation tags can only be used to label buckets\. For information about tags used for labeling objects, see [Object Tagging](object-tagging.md)\.
+To track the storage cost or other criteria for individual projects or groups of projects, label your Amazon S3 buckets using cost allocation tags\. A *cost allocation tag* is a key\-value pair that you associate with an S3 bucket\. After you activate cost allocation tags, AWS uses the tags to organize your resource costs on your cost allocation report\. Cost allocation tags can only be used to label buckets\. For information about tags used for labeling objects, see [Object tagging](object-tagging.md)\.
 
 The *cost allocation report* lists the AWS usage for your account by product category and AWS Identity and Access Management \(IAM\) user\. The report contains the same line items as the detailed billing report \(see [Understanding Your AWS Billing and Usage Reports for Amazon S3](aws-usage-report-understand.md)\) and additional columns for your tag keys\.
 

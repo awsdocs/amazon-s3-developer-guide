@@ -1,4 +1,4 @@
-# Using BitTorrent to Retrieve Objects Stored in Amazon S3<a name="S3TorrentRetrieve"></a>
+# Using BitTorrent to retrieve objects stored in Amazon S3<a name="S3TorrentRetrieve"></a>
 
 Any object in Amazon S3 that can be read anonymously can also be downloaded via BitTorrent\. Doing so requires use of a BitTorrent client application\. Amazon does not distribute a BitTorrent client application, but there are many free clients available\. The Amazon S3BitTorrent implementation has been tested to work with the official BitTorrent client \(go to [http://www\.bittorrent\.com/](http://www.bittorrent.com/)\)\.
 

@@ -20,7 +20,7 @@ Amazon S3 doesn't support retrieving multiple ranges of data per GET request\.
 
 The AWS SDKs for Java, \.NET, and PHP also provide necessary objects you can use to specify values for these response headers in your GET request\. 
 
-When retrieving objects that are stored encrypted using server\-side encryption, you must provide appropriate request headers\. For more information, see [Protecting Data Using Encryption](UsingEncryption.md)\.
+When retrieving objects that are stored encrypted using server\-side encryption, you must provide appropriate request headers\. For more information, see [Protecting data using encryption](UsingEncryption.md)\.
 
 ## Related Resources<a name="RelatedResources013"></a>
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

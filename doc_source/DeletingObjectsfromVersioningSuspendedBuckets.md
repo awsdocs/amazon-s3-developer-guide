@@ -1,4 +1,4 @@
-# Deleting Objects from Versioning\-Suspended Buckets<a name="DeletingObjectsfromVersioningSuspendedBuckets"></a>
+# Deleting objects from versioning\-suspended buckets<a name="DeletingObjectsfromVersioningSuspendedBuckets"></a>
 
 If versioning is suspended, a `DELETE` request:
 + Can only remove an object whose version ID is `null`

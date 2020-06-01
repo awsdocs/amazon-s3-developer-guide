@@ -74,7 +74,7 @@ You can also use other AWS‐wide condition keys in Amazon S3 policies\. For exa
 
 ## Amazon S3‐Specific Condition Keys<a name="s3-specific-keys"></a>
 
-You can use Amazon S3 condition keys with specific Amazon S3 actions\. Each condition key maps to the same name request header allowed by the API on which the condition can be set\. Amazon S3‐specific condition keys dictate the behavior of the same name request headers\. For a complete list of Amazon S3‐specific condition keys, see [Actions, Resources, and Condition Keys for Amazon S3](list_amazons3.md)\.
+You can use Amazon S3 condition keys with specific Amazon S3 actions\. Each condition key maps to the same name request header allowed by the API on which the condition can be set\. Amazon S3‐specific condition keys dictate the behavior of the same name request headers\. For a complete list of Amazon S3‐specific condition keys, see [Actions, resources, and condition keys for Amazon S3](list_amazons3.md)\.
 
 For example, the condition key `s3:x-amz-acl` that you can use to grant condition permission for the `s3:PutObject` permission defines behavior of the `x-amz-acl` request header that the PUT Object API supports\. The condition key `s3:VersionId` that you can use to grant conditional permission for the `s3:GetObjectVersion` permission defines behavior of the `versionId` query parameter that you set in a GET Object request\.
 
@@ -107,7 +107,7 @@ Not all conditions make sense for all actions\. For example, it makes sense to i
 
 ## Examples — Amazon S3 Condition Keys for Object Operations<a name="object-keys-in-amazon-s3-policies"></a>
 
-This section provides examples that show you how you can use Amazon S3‐specific condition keys for object operations\. For a complete list of Amazon S3 actions, condition keys, and resources that you can specify in policies, see [Actions, Resources, and Condition Keys for Amazon S3](list_amazons3.md)\.
+This section provides examples that show you how you can use Amazon S3‐specific condition keys for object operations\. For a complete list of Amazon S3 actions, condition keys, and resources that you can specify in policies, see [Actions, resources, and condition keys for Amazon S3](list_amazons3.md)\.
 
 Several of the example policies show how you can use conditions keys with [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) operations\. PUT Object operations allow access control list \(ACL\)–specific headers that you can use to grant ACL\-based permissions\. Using these keys, the bucket owner can set a condition to require specific access permissions when the user uploads an object\. You can also grant ACL–based permissions with the PutObjectAcl operation\. For more information, see [PutObjectAcl](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectAcl.html) in the *Amazon S3 Amazon Simple Storage Service API Reference*\. For more information about ACLs, see [Access Control List \(ACL\) Overview](acl-overview.md)\.
 
@@ -186,7 +186,7 @@ The preceding bucket policy grants conditional permission to user Dave in Accoun
 ```
 
 **Test the Policy with the AWS CLI**  
-If you have two AWS accounts, you can test the policy using the AWS Command Line Interface \(AWS CLI\)\. You attach the policy and use Dave's credentials to test the permission using the following AWS CLI `put-object` command\. You provide Dave's credentials by adding the `--profile` parameter\. You grant full control permission to the bucket owner by adding the `--grant-full-control` parameter\. For more information about setting up and using the AWS CLI, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
+If you have two AWS accounts, you can test the policy using the AWS Command Line Interface \(AWS CLI\)\. You attach the policy and use Dave's credentials to test the permission using the following AWS CLI `put-object` command\. You provide Dave's credentials by adding the `--profile` parameter\. You grant full control permission to the bucket owner by adding the `--grant-full-control` parameter\. For more information about setting up and using the AWS CLI, see [Setting up the tools for the example walkthroughs](policy-eval-walkthrough-download-awscli.md)\. 
 
 ```
 aws s3api put-object --bucket examplebucket --key HappyFace.jpg --body c:\HappyFace.jpg --grant-full-control id="AccountA-CanonicalUserID" --profile AccountBUserProfile
@@ -267,7 +267,7 @@ The following bucket policy grants user \(Dave\) `s3:PutObject` permission\. It 
 ```
 
 **Test the Policy with the AWS CLI**  
-You can test the permission using the AWS CLI `copy-object` command\. You specify the source by adding the `--copy-source` parameter; the key name prefix must match the prefix allowed in the policy\. You need to provide the user Dave credentials using the `--profile` parameter\. For more information about setting up the AWS CLI, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
+You can test the permission using the AWS CLI `copy-object` command\. You specify the source by adding the `--copy-source` parameter; the key name prefix must match the prefix allowed in the policy\. You need to provide the user Dave credentials using the `--profile` parameter\. For more information about setting up the AWS CLI, see [Setting up the tools for the example walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
 
 ```
 aws s3api copy-object --bucket examplebucket --key HappyFace.jpg 
@@ -361,7 +361,7 @@ Suppose that Account A owns a bucket\. The account administrator wants to restri
 
 ### Example 6: Granting Permissions Based on Object Tags<a name="example-object-tagging-access-control"></a>
 
-For examples on how to use object tagging condition keys with Amazon S3 operations, see [Object Tagging and Access Control Policies](object-tagging.md#tagging-and-policies)\.
+For examples on how to use object tagging condition keys with Amazon S3 operations, see [Object tagging and access control policies](object-tagging.md#tagging-and-policies)\.
 
 ## Examples — Amazon S3 Condition Keys for Bucket Operations<a name="bucket-keys-in-amazon-s3-policies"></a>
 
@@ -443,7 +443,7 @@ The `Deny` statement uses the `StringNotLike` condition\. That is, a create buck
 ```
 
 **Test the Policy with the AWS CLI**  
-You can test the policy using the following `create-bucket` AWS CLI command\. This example uses the `bucketconfig.txt` file to specify the location constraint\. Note the Windows file path\. You need to update the bucket name and path as appropriate\. You must provide user credentials using the `--profile` parameter\. For more information about setting up and using the AWS CLI, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
+You can test the policy using the following `create-bucket` AWS CLI command\. This example uses the `bucketconfig.txt` file to specify the location constraint\. Note the Windows file path\. You need to update the bucket name and path as appropriate\. You must provide user credentials using the `--profile` parameter\. For more information about setting up and using the AWS CLI, see [Setting up the tools for the example walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
 
 ```
 aws s3api create-bucket --bucket examplebucket --profile AccountADave --create-bucket-configuration file://c:/Users/someUser/bucketconfig.txt
@@ -457,7 +457,7 @@ The `bucketconfig.txt` file specifies the configuration as follows\.
 
 ### Example 2: Getting a List of Objects in a Bucket with a Specific Prefix<a name="condition-key-bucket-ops-2"></a>
 
-You can use the `s3:prefix` condition key to limit the response of the [GET Bucket \(ListObjects\)](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html) API to key names with a specific prefix\. If you are the bucket owner, you can restrict a user to list the contents of a specific prefix in the bucket\. This condition key is useful if objects in the bucket are organized by key name prefixes\. The Amazon S3 console uses key name prefixes to show a folder concept\. Only the console supports the concept of folders; the Amazon S3 API supports only buckets and objects\. For more information about using prefixes and delimiters to filter access permissions, see [Walkthrough: Controlling Access to a Bucket with User Policies](walkthrough1.md)\.
+You can use the `s3:prefix` condition key to limit the response of the [GET Bucket \(ListObjects\)](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html) API to key names with a specific prefix\. If you are the bucket owner, you can restrict a user to list the contents of a specific prefix in the bucket\. This condition key is useful if objects in the bucket are organized by key name prefixes\. The Amazon S3 console uses key name prefixes to show a folder concept\. Only the console supports the concept of folders; the Amazon S3 API supports only buckets and objects\. For more information about using prefixes and delimiters to filter access permissions, see [Walkthrough: Controlling access to a bucket with user policies](walkthrough1.md)\.
 
 For example, if you have two objects with key names `public/object1.jpg` and `public/object2.jpg`, the console shows the objects under the `public` folder\. In the Amazon S3 API, these are objects with prefixes, not objects in folders\. However, in the Amazon S3 API, if you organize your object keys using such prefixes, you can grant `s3:ListBucket` permission with the `s3:prefix` condition that will allow the user to get a list of key names with those specific prefixes\. 
 
@@ -554,7 +554,7 @@ If you add the `Principal` element to the above user policy, identifying the use
 ```
 
 **Test the Policy with the AWS CLI**  
-You can test the policy using the following `list-object` AWS CLI command\. In the command, you provide user credentials using the `--profile` parameter\. For more information about setting up and using the AWS CLI, see [Setting Up the Tools for the Example Walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
+You can test the policy using the following `list-object` AWS CLI command\. In the command, you provide user credentials using the `--profile` parameter\. For more information about setting up and using the AWS CLI, see [Setting up the tools for the example walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
 
 ```
 aws s3api list-objects --bucket examplebucket --prefix examplefolder --profile AccountADave

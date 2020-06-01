@@ -1,4 +1,4 @@
-# Actions, Resources, and Condition Keys for Amazon S3<a name="list_amazons3"></a>
+# Actions, resources, and condition keys for Amazon S3<a name="list_amazons3"></a>
 
 Amazon S3 \(service prefix: `s3`\) provides the following service\-specific resources, actions, and condition context keys for use in IAM permission policies\.
 
@@ -11,11 +11,11 @@ References:
 We are in the process of updating this section\. For complete tables, check back later this month\.
 
 **Topics**
-+ [Actions Defined by Amazon S3](#amazons3-actions-as-permissions)
-+ [Resource Types Defined by Amazon S3](#amazons3-resources-for-iam-policies)
-+ [Condition Keys for Amazon S3](#amazons3-policy-keys)
++ [Actions defined by Amazon S3](#amazons3-actions-as-permissions)
++ [Resource types defined by amazon S3](#amazons3-resources-for-iam-policies)
++ [Condition keys for amazon S3](#amazons3-policy-keys)
 
-## Actions Defined by Amazon S3<a name="amazons3-actions-as-permissions"></a>
+## Actions defined by Amazon S3<a name="amazons3-actions-as-permissions"></a>
 
 You can specify the following actions in the `Action` element of an IAM policy statement\. Use policies to grant permissions to perform an operation in AWS\. When you use an action in a policy, you usually allow or deny access to the API operation or CLI command with the same name\. However, in some cases, a single action controls access to more than one operation\. Alternatively, some operations require several different actions\.
 
@@ -25,21 +25,21 @@ The **Resource Types** column indicates whether each action supports resource\-l
 ****  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html)
 
-## Resource Types Defined by Amazon S3<a name="amazons3-resources-for-iam-policies"></a>
+## Resource types defined by amazon S3<a name="amazons3-resources-for-iam-policies"></a>
 
 The following resource types are defined by this service and can be used in the `Resource` element of IAM permission policy statements\. Each action in the [Actions table](#amazons3-actions-as-permissions) identifies the resource types that can be specified with that action\. A resource type can also define which condition keys you can include in a policy\. These keys are displayed in the last column of the table\.
 
 
 ****  
 
-| Resource Types | ARN | Condition Keys | 
+| Resource types | ARN | Condition keys | 
 | --- | --- | --- | 
 |   [ accesspoint ](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html)  |  arn:$\{Partition\}:s3:$\{Region\}:$\{Account\}:accesspoint/$\{AccessPointName\}  |  | 
 |   [ bucket ](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html)  |  arn:$\{Partition\}:s3:::$\{BucketName\}  |  | 
 |   [ object ](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html)  |  arn:$\{Partition\}:s3:::$\{BucketName\}/$\{ObjectName\}  |  | 
 |   [ job ](https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html)  |  arn:$\{Partition\}:s3:$\{Region\}:$\{Account\}:job/$\{JobId\}  |  | 
 
-## Condition Keys for Amazon S3<a name="amazons3-policy-keys"></a>
+## Condition keys for amazon S3<a name="amazons3-policy-keys"></a>
 
 Amazon S3 defines the following condition keys that can be used in the `Condition` element of an IAM policy\. You can use these keys to further refine the conditions under which the policy statement applies\.
 
@@ -48,7 +48,7 @@ To view the global condition keys that are available to all services, see [Avail
 
 ****  
 
-| Condition Keys | Description | Type | 
+| Condition keys | Description | Type | 
 | --- | --- | --- | 
 |   [ s3:AccessPointNetworkOrigin ](https://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html#object-keys-in-amazon-s3-policies)  | The network type from which traffic may be received by the access point involved in the request | String | 
 |   [ s3:DataAccessPointAccount ](https://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html#object-keys-in-amazon-s3-policies)  | The AWS Account ID of the account that owns the data operations access point involved in the request | String | 

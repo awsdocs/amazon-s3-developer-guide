@@ -1,6 +1,6 @@
-# Making Requests Using AWS Account or IAM User Credentials \- AWS SDK for Ruby<a name="AuthUsingAcctOrUserCredRuby"></a>
+# Making requests using AWS account or IAM user credentials \- AWS SDK for Ruby<a name="AuthUsingAcctOrUserCredRuby"></a>
 
-Before you can use version 3 of the AWS SDK for Ruby to make calls to Amazon S3, you must set the AWS access credentials that the SDK uses to verify your access to your buckets and objects\. If you have shared credentials set up in the AWS credentials profile on your local system, version 3 of the SDK for Ruby can use those credentials without your having to declare them in your code\. For more information about setting up shared credentials, see [Making Requests Using AWS Account or IAM User Credentials](AuthUsingAcctOrUserCredentials.md)\.
+Before you can use version 3 of the AWS SDK for Ruby to make calls to Amazon S3, you must set the AWS access credentials that the SDK uses to verify your access to your buckets and objects\. If you have shared credentials set up in the AWS credentials profile on your local system, version 3 of the SDK for Ruby can use those credentials without your having to declare them in your code\. For more information about setting up shared credentials, see [Making requests using AWS account or IAM user credentials](AuthUsingAcctOrUserCredentials.md)\.
 
 The following Ruby code snippet uses the credentials in a shared AWS credentials file on a local computer to authenticate a request to get all of the object key names in a specific bucket\. It does the following:
 

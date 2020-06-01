@@ -1,32 +1,32 @@
-# Configuring Amazon S3 Event Notifications<a name="NotificationHowTo"></a>
+# Configuring Amazon S3 event notifications<a name="NotificationHowTo"></a>
 
 The Amazon S3 notification feature enables you to receive notifications when certain events happen in your bucket\. To enable notifications, you must first add a notification configuration that identifies the events you want Amazon S3 to publish and the destinations where you want Amazon S3 to send the notifications\. You store this configuration in the *notification* subresource that is associated with a bucket\. \(For more information, see [Bucket Configuration Options](UsingBucket.md#bucket-config-options-intro)\.\) Amazon S3 provides an API for you to manage this subresource\. 
 
 **Important**  
-Amazon S3 event notifications typically deliver events in seconds but can sometimes take a minute or longer\.  
+Amazon S3 event notifications are designed to be delivered at least once\. Typically, event notifications are delivered in seconds but can sometimes take a minute or longer\.  
 If two writes are made to a single non\-versioned object at the same time, it is possible that only a single event notification will be sent\. If you want to ensure that an event notification is sent for every successful write, you can enable versioning on your bucket\. With versioning, every successful write will create a new version of your object and will also send an event notification\.
 
 **Topics**
-+ [Overview of Notifications](#notification-how-to-overview)
-+ [How to Enable Event Notifications](#how-to-enable-disable-notification-intro)
-+ [Event Notification Types and Destinations](#notification-how-to-event-types-and-destinations)
-+ [Configuring Notifications with Object Key Name Filtering](#notification-how-to-filtering)
-+ [Granting Permissions to Publish Event Notification Messages to a Destination](#grant-destinations-permissions-to-s3)
-+ [Example Walkthrough: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)](ways-to-add-notification-config-to-bucket.md)
-+ [Event Message Structure](notification-content-structure.md)
++ [Overview of notifications](#notification-how-to-overview)
++ [How to enable event notifications](#how-to-enable-disable-notification-intro)
++ [Event notification types and destinations](#notification-how-to-event-types-and-destinations)
++ [Configuring notifications with object key name filtering](#notification-how-to-filtering)
++ [Granting permissions to publish event notification messages to a destination](#grant-destinations-permissions-to-s3)
++ [Walkthrough: Configure a bucket for notifications \(SNS topic and SQS queue\)](ways-to-add-notification-config-to-bucket.md)
++ [Event message structure](notification-content-structure.md)
 
-## Overview of Notifications<a name="notification-how-to-overview"></a>
+## Overview of notifications<a name="notification-how-to-overview"></a>
 
  Currently, Amazon S3 can publish notifications for the following events:
 + **New object created events** — Amazon S3 supports multiple APIs to create objects\. You can request notification when only a specific API is used \(for example, `s3:ObjectCreated:Put`\), or you can use a wildcard \(for example, `s3:ObjectCreated:*`\) to request notification when an object is created regardless of the API used\. 
-+ **Object removal events** — Amazon S3 supports deletes of versioned and unversioned objects\. For information about object versioning, see [Object Versioning](ObjectVersioning.md) and [Using Versioning](Versioning.md)\. 
++ **Object removal events** — Amazon S3 supports deletes of versioned and unversioned objects\. For information about object versioning, see [Object Versioning](ObjectVersioning.md) and [Using versioning](Versioning.md)\. 
 
-  You can request notification when an object is deleted or a versioned object is permanently deleted by using the `s3:ObjectRemoved:Delete` event type\. Or you can request notification when a delete marker is created for a versioned object by using `s3:ObjectRemoved:DeleteMarkerCreated`\. You can also use a wildcard `s3:ObjectRemoved:*` to request notification anytime an object is deleted\. For information about deleting versioned objects, see [Deleting Object Versions](DeletingObjectVersions.md)\. 
+  You can request notification when an object is deleted or a versioned object is permanently deleted by using the `s3:ObjectRemoved:Delete` event type\. Or you can request notification when a delete marker is created for a versioned object by using `s3:ObjectRemoved:DeleteMarkerCreated`\. You can also use a wildcard `s3:ObjectRemoved:*` to request notification anytime an object is deleted\. For information about deleting versioned objects, see [Deleting object versions](DeletingObjectVersions.md)\. 
 + **Restore object events **— Amazon S3 supports the restoration of objects archived to the S3 Glacier storage class\. You request to be notified of object restoration completion by using `s3:ObjectRestore:Completed`\. You use `s3:ObjectRestore:Post` to request notification of the initiation of a restore\. 
 + **Reduced Redundancy Storage \(RRS\) object lost events** — Amazon S3 sends a notification message when it detects that an object of the RRS storage class has been lost\. 
 + **Replication events** — Amazon S3 sends event notifications for replication configurations that have S3 Replication Time Control \(S3 RTC\) enabled\. It sends these notifications when an object fails replication, when an object exceeds the 15\-minute threshold, when an object is replicated after the 15\-minute threshold, and when an object is no longer tracked by replication metrics\. It publishes a second event when that object replicates to the destination Region\.
 
-For a list of supported event types, see [Supported Event Types](#supported-notification-event-types)\. 
+For a list of supported event types, see [Supported event types](#supported-notification-event-types)\. 
 
 Amazon S3 supports the following destinations where it can publish events:
 + **Amazon Simple Notification Service \(Amazon SNS\) topic**
@@ -49,7 +49,7 @@ Amazon S3 supports the following destinations where it can publish events:
 If your notification ends up writing to the bucket that triggers the notification, this could cause an execution loop\. For example, if the bucket triggers a Lambda function each time an object is uploaded, and the function uploads an object to the bucket, then the function indirectly triggers itself\. To avoid this, use two buckets, or configure the trigger to only apply to a prefix used for incoming objects\.  
 For more information and an example of using Amazon S3 notifications with AWS Lambda, see [Using AWS Lambda with Amazon S3](https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html) in the *AWS Lambda Developer Guide*\. 
 
-## How to Enable Event Notifications<a name="how-to-enable-disable-notification-intro"></a>
+## How to enable event notifications<a name="how-to-enable-disable-notification-intro"></a>
 
 Enabling notifications is a bucket\-level operation; that is, you store notification configuration information in the *notification* subresource associated with a bucket\. You can use any of the following methods to manage notification configuration:
 + **Using the Amazon S3 console**
@@ -59,7 +59,7 @@ Enabling notifications is a bucket\-level operation; that is, you store notifica
 **Note**  
 If you need to, you can also make the Amazon S3 REST API calls directly from your code\. However, this can be cumbersome because it requires you to write code to authenticate your requests\. 
 
-  Internally, both the console and the SDKs call the Amazon S3 REST API to manage *notification* subresources associated with the bucket\. For notification configuration using AWS SDK examples, see the walkthrough link provided in the preceding section\.
+  Internally, both the console and the SDKs call the Amazon S3 REST API to manage *notification* subresources associated with the bucket\. For notification configuration using AWS SDK examples, see [Walkthrough: Configure a bucket for notifications \(SNS topic and SQS queue\)](ways-to-add-notification-config-to-bucket.md)\.
 
   Regardless of the method that you use, Amazon S3 stores the notification configuration as XML in the *notification* subresource associated with a bucket\. For information about bucket subresources, see [Bucket Configuration Options](UsingBucket.md#bucket-config-options-intro)\. 
 
@@ -116,13 +116,13 @@ If you need to, you can also make the Amazon S3 REST API calls directly from you
 
   To remove all notifications configured on a bucket, you save an empty `<NotificationConfiguration/>` element in the *notification* subresource\. 
 
-  When Amazon S3 detects an event of the specific type, it publishes a message with the event information\. For more information, see [Event Message Structure](notification-content-structure.md)\. 
+  When Amazon S3 detects an event of the specific type, it publishes a message with the event information\. For more information, see [Event message structure](notification-content-structure.md)\. 
 
-## Event Notification Types and Destinations<a name="notification-how-to-event-types-and-destinations"></a>
+## Event notification types and destinations<a name="notification-how-to-event-types-and-destinations"></a>
 
 This section describes the event notification types that are supported by Amazon S3 and the type of destinations where the notifications can be published\.
 
-### Supported Event Types<a name="supported-notification-event-types"></a>
+### Supported event types<a name="supported-notification-event-types"></a>
 
 Amazon S3 can publish events of the following types\. You specify these event types in the notification configuration\.
 
@@ -130,7 +130,7 @@ Amazon S3 can publish events of the following types\. You specify these event ty
 |  Event types |  Description  | 
 | --- | --- | 
 |  *s3:ObjectCreated:\** *s3:ObjectCreated:Put* *s3:ObjectCreated:Post* *s3:ObjectCreated:Copy* *s3:ObjectCreated:CompleteMultipartUpload*  | Amazon S3 APIs such as PUT, POST, and COPY can create an object\. Using these event types, you can enable notification when an object is created using a specific API, or you can use the *s3:ObjectCreated:\** event type to request notification regardless of the API that was used to create an object\.  You do not receive event notifications from failed operations\.  | 
-|  *s3:ObjectRemoved:\** *s3:ObjectRemoved:Delete* *s3:ObjectRemoved:DeleteMarkerCreated*  | By using the *ObjectRemoved* event types, you can enable notification when an object or a batch of objects is removed from a bucket\.  You can request notification when an object is deleted or a versioned object is permanently deleted by using the *s3:ObjectRemoved:Delete* event type\. Or you can request notification when a delete marker is created for a versioned object by using *s3:ObjectRemoved:DeleteMarkerCreated*\. For information about deleting versioned objects, see [Deleting Object Versions](DeletingObjectVersions.md)\. You can also use a wildcard `s3:ObjectRemoved:*` to request notification anytime an object is deleted\.  You do not receive event notifications from automatic deletes from lifecycle policies or from failed operations\.  | 
+|  *s3:ObjectRemoved:\** *s3:ObjectRemoved:Delete* *s3:ObjectRemoved:DeleteMarkerCreated*  | By using the *ObjectRemoved* event types, you can enable notification when an object or a batch of objects is removed from a bucket\. You can request notification when an object is deleted or a versioned object is permanently deleted by using the *s3:ObjectRemoved:Delete* event type\. Or you can request notification when a delete marker is created for a versioned object by using *s3:ObjectRemoved:DeleteMarkerCreated*\. For information about deleting versioned objects, see [Deleting object versions](DeletingObjectVersions.md)\. You can also use a wildcard `s3:ObjectRemoved:*` to request notification anytime an object is deleted\.  You do not receive event notifications from automatic deletes from lifecycle policies or from failed operations\.  | 
 |  *s3:ObjectRestore:Post* *s3:ObjectRestore:Completed*  |  Using restore object event types you can receive notifications for initiation and completion when restoring objects from the S3 Glacier storage class\. You use `s3:ObjectRestore:Post` to request notification of object restoration initiation\. You use `s3:ObjectRestore:Completed` to request notification of restoration completion\.   | 
 | s3:ReducedRedundancyLostObject | You can use this event type to request Amazon S3 to send a notification message when Amazon S3 detects that an object of the RRS storage class is lost\. | 
 | s3:Replication:OperationFailedReplication | You receive this notification event when an object that was eligible for replication using Amazon S3 Replication Time Control failed to replicate\. | 
@@ -138,7 +138,7 @@ Amazon S3 can publish events of the following types\. You specify these event ty
 | s3:Replication:OperationReplicatedAfterThreshold | You receive this notification event for an object that was eligible for replication using the Amazon S3 Replication Time Control feature replicated after the 15\-minute threshold\. | 
 | s3:Replication:OperationNotTracked | You receive this notification event for an object that was eligible for replication using Amazon S3 Replication Time Control but is no longer tracked by replication metrics\. | 
 
-### Supported Destinations<a name="supported-notification-destinations"></a>
+### Supported destinations<a name="supported-notification-destinations"></a>
 
 Amazon S3 can send event notification messages to the following destinations\. You specify the ARN value of these destinations in the notification configuration\.
 + Publish event messages to an Amazon Simple Notification Service \(Amazon SNS\) topic
@@ -147,19 +147,19 @@ Amazon S3 can send event notification messages to the following destinations\. Y
 If the destination queue or topic is SSE enabled, Amazon S3 will need access to the associated AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) to enable message encryption\.
 + Publish event messages to AWS Lambda by invoking a Lambda function and providing the event message as an argument
 
-You must grant Amazon S3 permissions to post messages to an Amazon SNS topic or an Amazon SQS queue\. You must also grant Amazon S3 permission to invoke an AWS Lambda function on your behalf\. For information about granting these permissions, see [Granting Permissions to Publish Event Notification Messages to a Destination](#grant-destinations-permissions-to-s3)\. 
+You must grant Amazon S3 permissions to post messages to an Amazon SNS topic or an Amazon SQS queue\. You must also grant Amazon S3 permission to invoke an AWS Lambda function on your behalf\. For information about granting these permissions, see [Granting permissions to publish event notification messages to a destination](#grant-destinations-permissions-to-s3)\. 
 
-## Configuring Notifications with Object Key Name Filtering<a name="notification-how-to-filtering"></a>
+## Configuring notifications with object key name filtering<a name="notification-how-to-filtering"></a>
 
 You can configure notifications to be filtered by the prefix and suffix of the key name of objects\. For example, you can set up a configuration so that you are sent a notification only when image files with a "`.jpg`" file name extension are added to a bucket\. Or, you can have a configuration that delivers a notification to an Amazon SNS topic when an object with the prefix "`images/`" is added to the bucket, while having notifications for objects with a "`logs/`" prefix in the same bucket delivered to an AWS Lambda function\. 
 
 You can set up notification configurations that use object key name filtering in the Amazon S3 console and by using Amazon S3 APIs through the AWS SDKs or the REST APIs directly\. For information about using the console UI to set a notification configuration on a bucket, see [ How Do I Enable and Configure Event Notifications for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
-Amazon S3 stores the notification configuration as XML in the *notification* subresource associated with a bucket as described in [How to Enable Event Notifications ](#how-to-enable-disable-notification-intro)\. You use the `Filter` XML structure to define the rules for notifications to be filtered by the prefix and/or suffix of an object key name\. For information about the details of the `Filter` XML structure, see [PUT Bucket notification](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTnotification.html) in the *Amazon Simple Storage Service API Reference*\. 
+Amazon S3 stores the notification configuration as XML in the *notification* subresource associated with a bucket as described in [How to enable event notifications ](#how-to-enable-disable-notification-intro)\. You use the `Filter` XML structure to define the rules for notifications to be filtered by the prefix and/or suffix of an object key name\. For information about the details of the `Filter` XML structure, see [PUT Bucket notification](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTnotification.html) in the *Amazon Simple Storage Service API Reference*\. 
 
 Notification configurations that use `Filter` cannot define filtering rules with overlapping prefixes, overlapping suffixes, or prefix and suffix overlapping\. The following sections have examples of valid notification configurations with object key name filtering\. They also contain examples of notification configurations that are invalid because of prefix/suffix overlapping\. 
 
-### Examples of Valid Notification Configurations with Object Key Name Filtering<a name="notification-how-to-filtering-example-valid"></a>
+### Examples of valid notification configurations with object key name filtering<a name="notification-how-to-filtering-example-valid"></a>
 
 The following notification configuration contains a queue configuration identifying an Amazon SQS queue for Amazon S3 to publish events to of the `s3:ObjectCreated:Put` type\. The events will be published whenever an object that has a prefix of `images/` and a `jpg` suffix is PUT to a bucket\. 
 
@@ -292,9 +292,9 @@ Your notification configurations that use `Filter` cannot define filtering rules
 </NotificationConfiguration>
 ```
 
-### Examples of Notification Configurations with Invalid Prefix/Suffix Overlapping<a name="notification-how-to-filtering-examples-invalid"></a>
+### Examples of notification configurations with invalid Prefix/Suffix overlapping<a name="notification-how-to-filtering-examples-invalid"></a>
 
-For the most part, your notification configurations that use `Filter` cannot define filtering rules with overlapping prefixes, overlapping suffixes, or overlapping combinations of prefixes and suffixes for the same event types\. \(You can have overlapping prefixes as long as the suffixes do not overlap\. For an example, see [Configuring Notifications with Object Key Name Filtering](#notification-how-to-filtering)\.\)
+For the most part, your notification configurations that use `Filter` cannot define filtering rules with overlapping prefixes, overlapping suffixes, or overlapping combinations of prefixes and suffixes for the same event types\. \(You can have overlapping prefixes as long as the suffixes do not overlap\. For an example, see [Configuring notifications with object key name filtering](#notification-how-to-filtering)\.\)
 
 You can use overlapping object key name filters with different event types\. For example, you could create a notification configuration that uses the prefix `image/` for the `ObjectCreated:Put` event type and the prefix `image/` for the `ObjectDeleted:*` event type\. 
 
@@ -389,11 +389,11 @@ The following notification configuration is not valid because it has overlapping
 </NotificationConfiguration>
 ```
 
-## Granting Permissions to Publish Event Notification Messages to a Destination<a name="grant-destinations-permissions-to-s3"></a>
+## Granting permissions to publish event notification messages to a destination<a name="grant-destinations-permissions-to-s3"></a>
 
 Before Amazon S3 can publish messages to a destination, you must grant the Amazon S3 principal the necessary permissions to call the relevant API to publish messages to an SNS topic, an SQS queue, or a Lambda function\. 
 
-### Granting Permissions to Invoke an AWS Lambda Function<a name="grant-lambda-invoke-permission-to-s3"></a>
+### Granting permissions to invoke an AWS Lambda function<a name="grant-lambda-invoke-permission-to-s3"></a>
 
 Amazon S3 publishes event messages to AWS Lambda by invoking a Lambda function and providing the event message as an argument\.
 
@@ -401,15 +401,15 @@ When you use the Amazon S3 console to configure event notifications on an Amazon
 
 You can also grant Amazon S3 permissions from AWS Lambda to invoke your Lambda function\. For more information, see [Tutorial: Using AWS Lambda with Amazon S3](https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html) in the *AWS Lambda Developer Guide*\.
 
-### Granting Permissions to Publish Messages to an SNS Topic or an SQS Queue<a name="grant-sns-sqs-permission-for-s3"></a>
+### Granting permissions to publish messages to an SNS topic or an SQS queue<a name="grant-sns-sqs-permission-for-s3"></a>
 
 To grant Amazon S3 permissions to publish messages to the SNS topic or SQS queue, you attach an AWS Identity and Access Management \(IAM\) policy to the destination SNS topic or SQS queue\. 
 
-For an example of how to attach a policy to an SNS topic or an SQS queue, see [Example Walkthrough: Configure a Bucket for Notifications \(Message Destination: SNS Topic and SQS Queue\)](ways-to-add-notification-config-to-bucket.md)\. For more information about permissions, see the following topics:
+For an example of how to attach a policy to an SNS topic or an SQS queue, see [Walkthrough: Configure a bucket for notifications \(SNS topic and SQS queue\)](ways-to-add-notification-config-to-bucket.md)\. For more information about permissions, see the following topics:
 + [Example Cases for Amazon SNS Access Control](https://docs.aws.amazon.com/sns/latest/dg/AccessPolicyLanguage_UseCases_Sns.html) in the *Amazon Simple Notification Service Developer Guide*
 + [Access Control Using AWS Identity and Access Management \(IAM\)](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/UsingIAM.html) in the *Amazon Simple Queue Service Developer Guide*
 
-#### IAM Policy for a Destination SNS Topic<a name="sns-topic-policy"></a>
+#### IAM policy for a destination SNS topic<a name="sns-topic-policy"></a>
 
 The following is an example of an IAM policy that you attach to the destination SNS topic\.
 
@@ -437,7 +437,7 @@ The following is an example of an IAM policy that you attach to the destination 
 }
 ```
 
-#### IAM Policy for a Destination SQS Queue<a name="sqs-queue-policy"></a>
+#### IAM policy for a destination SQS queue<a name="sqs-queue-policy"></a>
 
 The following is an example of an IAM policy that you attach to the destination SQS queue\.
 
@@ -472,7 +472,7 @@ Note that for both the Amazon SNS and Amazon SQS IAM policies, you can specify t
   }
 ```
 
-#### AWS KMS Key Policy<a name="key-policy-sns-sqs"></a>
+#### AWS KMS key policy<a name="key-policy-sns-sqs"></a>
 
 If the SQS queue or SNS topics are encrypted with an AWS Key Management Service \(AWS KMS\) customer managed customer master key \(CMK\), you must grant the Amazon S3 service principal permission to work with the encrypted topics and or queue\. To grant the Amazon S3 service principal permission, add the following statement to the key policy for the customer managed CMK:
 

@@ -1,22 +1,22 @@
-# Walkthrough: Controlling Access to a Bucket with User Policies<a name="walkthrough1"></a>
+# Walkthrough: Controlling access to a bucket with user policies<a name="walkthrough1"></a>
 
 This walkthrough explains how user permissions work with Amazon S3\. In this example, you create a bucket with folders\. You then create AWS Identity and Access Management \(IAM\) users in your AWS account and grant those users incremental permissions on your Amazon S3 bucket and the folders in it\. 
 
 **Topics**
-+ [The Basics of Buckets and Folders](#walkthrough-background1)
-+ [Walkthrough Summary](#walkthrough-scenario)
-+ [Preparing for the Walkthrough](#walkthrough-what-you-need)
-+ [Step 1: Create a Bucket](#walkthrough1-create-bucket)
-+ [Step 2: Create IAM Users and a Group](#walkthrough1-add-users)
-+ [Step 3: Verify That IAM Users Have No Permissions](#walkthrough1-verify-no-user-permissions)
-+ [Step 4: Grant Group\-Level Permissions](#walkthrough-group-policy)
-+ [Step 5: Grant IAM User Alice Specific Permissions](#walkthrough-grant-user1-permissions)
-+ [Step 6: Grant IAM User Bob Specific Permissions](#walkthrough1-grant-permissions-step5)
-+ [Step 7: Secure the Private Folder](#walkthrough-secure-private-folder-explicit-deny)
-+ [Step 8: Clean Up](#walkthrough-cleanup)
-+ [Related Resources](#RelatedResources-walkthrough1)
++ [The basics of buckets and folders](#walkthrough-background1)
++ [Walkthrough summary](#walkthrough-scenario)
++ [Preparing for the walkthrough](#walkthrough-what-you-need)
++ [Step 1: Create a bucket](#walkthrough1-create-bucket)
++ [Step 2: Create IAM users and a group](#walkthrough1-add-users)
++ [Step 3: Verify that IAM users have no permissions](#walkthrough1-verify-no-user-permissions)
++ [Step 4: Grant group\-level permissions](#walkthrough-group-policy)
++ [Step 5: Grant IAM user alice specific permissions](#walkthrough-grant-user1-permissions)
++ [Step 6: Grant IAM user bob specific permissions](#walkthrough1-grant-permissions-step5)
++ [Step 7: Secure the private folder](#walkthrough-secure-private-folder-explicit-deny)
++ [Step 8: Clean up](#walkthrough-cleanup)
++ [Related resources](#RelatedResources-walkthrough1)
 
-## The Basics of Buckets and Folders<a name="walkthrough-background1"></a>
+## The basics of buckets and folders<a name="walkthrough-background1"></a>
 
 The Amazon S3 data model is a flat structure: You create a bucket, and the bucket stores objects\. There is no hierarchy of subbuckets or subfolders, but you can emulate a folder hierarchy\. Tools like the Amazon S3 console can present a view of these logical folders and subfolders in your bucket, as shown in the following image\.
 
@@ -50,7 +50,7 @@ These object keys create a logical hierarchy with `Private`, `Development`, and 
 
 ![\[Console screenshot of the objects tab with the s3-dg.pdf object in the list.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/walkthrough-10.png)
 
-## Walkthrough Summary<a name="walkthrough-scenario"></a>
+## Walkthrough summary<a name="walkthrough-scenario"></a>
 
 In this walkthrough, you create a bucket with three folders \(`Private`, `Development`, and `Finance`\) in it\. 
 
@@ -61,7 +61,7 @@ IAM also supports creating user groups and granting group\-level permissions tha
 **Note**  
 The walkthrough uses `companybucket` as the bucket name, Alice and Bob as the IAM users, and `Consultants` as the group name\. Because Amazon S3 requires that bucket names be globally unique, you must replace the bucket name with a name that you create\.
 
-## Preparing for the Walkthrough<a name="walkthrough-what-you-need"></a>
+## Preparing for the walkthrough<a name="walkthrough-what-you-need"></a>
 
  In this example, you use your AWS account credentials to create IAM users\. Initially, these users have no permissions\. You incrementally grant these users permissions to perform specific Amazon S3 actions\. To test these permissions, you sign in to the console with each user's credentials\. As you incrementally grant permissions as an AWS account owner and test permissions as an IAM user, you need to sign in and out, each time using different credentials\. You can do this testing with one browser, but the process will go faster if you can use two different browsers\. Use one browser to connect to the AWS Management Console with your AWS account credentials and another to connect with the IAM user credentials\. 
 
@@ -69,7 +69,7 @@ The walkthrough uses `companybucket` as the bucket name, Alice and Bob as the IA
 
 For more information about IAM, see [The AWS Management Console Sign\-in Page](https://docs.aws.amazon.com/IAM/latest/UserGuide/console.html) in the *IAM User Guide*\.
 
-### To Provide a Sign\-In Link for IAM Users<a name="walkthrough-sign-in-user-credentials"></a>
+### To provide a sign\-in link for IAM users<a name="walkthrough-sign-in-user-credentials"></a>
 
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
@@ -77,7 +77,7 @@ For more information about IAM, see [The AWS Management Console Sign\-in Page](h
 
 1. Note the URL under **IAM users sign in link:**\. You will give this link to IAM users to sign in to the console with their IAM user name and password\.
 
-## Step 1: Create a Bucket<a name="walkthrough1-create-bucket"></a>
+## Step 1: Create a bucket<a name="walkthrough1-create-bucket"></a>
 
 In this step, you sign in to the Amazon S3 console with your AWS account credentials, create a bucket, add folders \(`Development`, `Finance`, and `Private`\) to the bucket, and upload one or two sample documents in each folder\. 
 
@@ -108,7 +108,7 @@ In this step, you sign in to the Amazon S3 console with your AWS account credent
 
    For step\-by\-step instructions, see [How Do I Upload Files and Folders to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
-## Step 2: Create IAM Users and a Group<a name="walkthrough1-add-users"></a>
+## Step 2: Create IAM users and a group<a name="walkthrough1-add-users"></a>
 
 Now use the IAM console to add two IAM users, Alice and Bob, to your AWS account\. Also create an administrative group named `Consultants`, and then add both users to the group\. 
 
@@ -119,11 +119,11 @@ For step\-by\-step instructions for creating a new IAM user, see [Creating an IA
 
 For step\-by\-step instructions for creating an administrative group, see [Creating Your First IAM Admin User and Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\.
 
-## Step 3: Verify That IAM Users Have No Permissions<a name="walkthrough1-verify-no-user-permissions"></a>
+## Step 3: Verify that IAM users have no permissions<a name="walkthrough1-verify-no-user-permissions"></a>
 
 If you are using two browsers, you can now use the second browser to sign in to the console using one of the IAM user credentials\.
 
-1. Using the IAM user sign\-in link \(see [To Provide a Sign\-In Link for IAM Users](#walkthrough-sign-in-user-credentials)\), sign in to the AWS Management Console using either of the IAM user credentials\.
+1. Using the IAM user sign\-in link \(see [To provide a sign\-in link for IAM users](#walkthrough-sign-in-user-credentials)\), sign in to the AWS Management Console using either of the IAM user credentials\.
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
@@ -132,7 +132,7 @@ If you are using two browsers, you can now use the second browser to sign in to 
 
 Now, you can begin granting incremental permissions to the users\. First, you attach a group policy that grants permissions that both users must have\. 
 
-## Step 4: Grant Group\-Level Permissions<a name="walkthrough-group-policy"></a>
+## Step 4: Grant group\-level permissions<a name="walkthrough-group-policy"></a>
 
 You want the users to be able to do the following:
 + List all buckets owned by the parent account\. To do so, Bob and Alice must have permission for the `s3:ListAllMyBuckets` action\.
@@ -140,7 +140,7 @@ You want the users to be able to do the following:
 
 First, you create a policy that grants these permissions, and then you attach it to the `Consultants` group\. 
 
-### Step 4\.1: Grant Permission to List All Buckets<a name="walkthrough1-grant-permissions-step1"></a>
+### Step 4\.1: Grant permission to list all buckets<a name="walkthrough1-grant-permissions-step1"></a>
 
 In this step, you create a managed policy that grants the users minimum permissions to enable them to list all buckets owned by the parent account\. Then you attach the policy to the `Consultants` group\. When you attach the managed policy to a user or a group, you grant the user or group permission to obtain a list of buckets owned by the parent AWS account\.
 
@@ -184,14 +184,14 @@ The **Summary** entry displays a message stating that the policy does not grant 
 
 1. Test the permission\.
 
-   1. Using the IAM user sign\-in link \(see [To Provide a Sign\-In Link for IAM Users](#walkthrough-sign-in-user-credentials)\), sign in to the console using any one of IAM user credentials\.
+   1. Using the IAM user sign\-in link \(see [To provide a sign\-in link for IAM users](#walkthrough-sign-in-user-credentials)\), sign in to the console using any one of IAM user credentials\.
 
    1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
       The console should now list all the buckets but not the objects in any of the buckets\.  
 ![\[Console screenshot showing a list of buckets.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/walkthrough-30.png)
 
-### Step 4\.2: Enable Users to List Root\-Level Content of a Bucket<a name="walkthrough1-grant-permissions-step2"></a>
+### Step 4\.2: Enable users to list root\-level content of a bucket<a name="walkthrough1-grant-permissions-step2"></a>
 
 Next, you allow all users in the `Consultants` group to list the root\-level `companybucket` bucket items\. When a user chooses the company bucket on the Amazon S3 console, the user can see the root\-level items in the bucket\.
 
@@ -336,7 +336,7 @@ When you choose a bucket on the Amazon S3 console, the console first sends the [
 
 1. Test the updated permissions\.
 
-   1. Using the IAM user sign\-in link \(see [To Provide a Sign\-In Link for IAM Users](#walkthrough-sign-in-user-credentials)\), sign in to the AWS Management Console\. 
+   1. Using the IAM user sign\-in link \(see [To provide a sign\-in link for IAM users](#walkthrough-sign-in-user-credentials)\), sign in to the AWS Management Console\. 
 
       Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
@@ -345,7 +345,7 @@ When you choose a bucket on the Amazon S3 console, the console first sends the [
 
 This test succeeds when users use the Amazon S3 console\. When you choose a bucket on the console, the console implementation sends a request that includes the `prefix` parameter with an empty string as its value and the `delimiter` parameter with "`/`" as its value\.
 
-### Step 4\.3: Summary of the Group Policy<a name="walkthrough-group-policy-summary"></a>
+### Step 4\.3: Summary of the group policy<a name="walkthrough-group-policy-summary"></a>
 
 The net effect of the group policy that you added is to grant the IAM users Alice and Bob the following minimum permissions:
 + List all buckets owned by the parent account\.
@@ -357,11 +357,11 @@ However, the users still can't do much\. Next, you grant user\-specific permissi
 
 For user\-specific permissions, you attach a policy to the specific user, not to the group\. In the following section, you grant Alice permission to work in the `Development` folder\. You can repeat the steps to grant similar permission to Bob to work in the `Finance` folder\.
 
-## Step 5: Grant IAM User Alice Specific Permissions<a name="walkthrough-grant-user1-permissions"></a>
+## Step 5: Grant IAM user alice specific permissions<a name="walkthrough-grant-user1-permissions"></a>
 
 Now you grant additional permissions to Alice so that she can see the content of the `Development` folder and get and put objects in that folder\.
 
-### Step 5\.1: Grant IAM User Alice Permission to List the Development Folder Content<a name="walkthrough-grant-user1-permissions-listbucket"></a>
+### Step 5\.1: Grant IAM user alice permission to list the development folder content<a name="walkthrough-grant-user1-permissions-listbucket"></a>
 
 For Alice to list the `Development` folder content, you must apply a policy to the Alice user that grants permission for the `s3:ListBucket` action on the `companybucket` bucket, provided the request includes the prefix `Development/`\. You want this policy to be applied only to the user Alice, so you use an inline policy\. For more information about inline policies, see [Managed Policies and Inline Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html) in the *IAM User Guide*\.
 
@@ -401,7 +401,7 @@ For Alice to list the `Development` folder content, you must apply a policy to t
 
 1. Test the change to Alice's permissions:
 
-   1. Using the IAM user sign\-in link \(see [To Provide a Sign\-In Link for IAM Users](#walkthrough-sign-in-user-credentials)\), sign in to the AWS Management Console\. 
+   1. Using the IAM user sign\-in link \(see [To provide a sign\-in link for IAM users](#walkthrough-sign-in-user-credentials)\), sign in to the AWS Management Console\. 
 
    1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
@@ -410,7 +410,7 @@ For Alice to list the `Development` folder content, you must apply a policy to t
       When the user chooses the `/Development` folder to see the list of objects in it, the Amazon S3 console sends the `ListObjects` request to Amazon S3 with the prefix `/Development`\. Because the user is granted permission to see the object list with the prefix `Development` and delimiter `/`, Amazon S3 returns the list of objects with the key prefix `Development/`, and the console displays the list\.  
 ![\[Console screenshot showing the development folder containing two xls files.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/walkthrough-60.png)
 
-### Step 5\.2: Grant IAM User Alice Permissions to Get and Put Objects in the Development Folder<a name="walkthrough-grant-user1-permissions-get-put-object"></a>
+### Step 5\.2: Grant IAM user alice permissions to get and put objects in the development folder<a name="walkthrough-grant-user1-permissions-get-put-object"></a>
 
 For Alice to get and put objects in the `Development` folder, she needs permission to call the `s3:GetObject` and `s3:PutObject` actions\. The following policy statements grant these permissions, provided that the request includes the `prefix` parameter with a value of `Development/`\.
 
@@ -465,13 +465,13 @@ For Alice to get and put objects in the `Development` folder, she needs permissi
 
 1. Test the updated policy:
 
-   1. Using the IAM user sign\-in link \(see [To Provide a Sign\-In Link for IAM Users](#walkthrough-sign-in-user-credentials)\), sign into the AWS Management Console\. 
+   1. Using the IAM user sign\-in link \(see [To provide a sign\-in link for IAM users](#walkthrough-sign-in-user-credentials)\), sign into the AWS Management Console\. 
 
    1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
    1. On the Amazon S3 console, verify that Alice can now add an object and download an object in the `Development` folder\. 
 
-### Step 5\.3: Explicitly Deny IAM User Alice Permissions to Any Other Folders in the Bucket<a name="walkthrough-grant-user1-explicit-deny-other-access"></a>
+### Step 5\.3: Explicitly deny IAM user alice permissions to any other folders in the bucket<a name="walkthrough-grant-user1-explicit-deny-other-access"></a>
 
 User Alice can now list the root\-level content in the `companybucket` bucket\. She can also get and put objects in the `Development` folder\. If you really want to tighten the access permissions, you could explicitly deny Alice access to any other folders in the bucket\. If there is any other policy \(bucket policy or ACL\) that grants Alice access to any other folders in the bucket, this explicit deny overrides those permissions\. 
 
@@ -494,7 +494,7 @@ There are two conditional expressions in the `Condition` block\. The result of t
 
   The `prefix` parameter requires folder\-like access\. If you send a request without the `prefix` parameter, Amazon S3 returns all the object keys\. 
 
-  If the request includes the `prefix` parameter with a null value, the expression evaluates to true, and so the entire `Condition` evaluates to true\. You must allow an empty string as value of the `prefix` parameter\. From the preceding discussion, recall that allowing the null string allows Alice to retrieve root\-level bucket items as the console does in the preceding discussion\. For more information, see [Step 4\.2: Enable Users to List Root\-Level Content of a Bucket](#walkthrough1-grant-permissions-step2)\. 
+  If the request includes the `prefix` parameter with a null value, the expression evaluates to true, and so the entire `Condition` evaluates to true\. You must allow an empty string as value of the `prefix` parameter\. From the preceding discussion, recall that allowing the null string allows Alice to retrieve root\-level bucket items as the console does in the preceding discussion\. For more information, see [Step 4\.2: Enable users to list root\-level content of a bucket](#walkthrough1-grant-permissions-step2)\. 
 + The `StringNotLike` conditional expression ensures that if the value of the `prefix` parameter is specified and is not `Development/*`, the request fails\. 
 
 Follow the steps in the preceding section and again update the inline policy that you created for user Alice\.
@@ -534,11 +534,11 @@ Copy the following policy and paste it into the policy text field, replacing the
 }
 ```
 
-## Step 6: Grant IAM User Bob Specific Permissions<a name="walkthrough1-grant-permissions-step5"></a>
+## Step 6: Grant IAM user bob specific permissions<a name="walkthrough1-grant-permissions-step5"></a>
 
-Now you want to grant Bob permission to the `Finance` folder\. Follow the steps that you used earlier to grant permissions to Alice, but replace the `Development` folder with the `Finance` folder\. For step\-by\-step instructions, see [Step 5: Grant IAM User Alice Specific Permissions](#walkthrough-grant-user1-permissions)\. 
+Now you want to grant Bob permission to the `Finance` folder\. Follow the steps that you used earlier to grant permissions to Alice, but replace the `Development` folder with the `Finance` folder\. For step\-by\-step instructions, see [Step 5: Grant IAM user alice specific permissions](#walkthrough-grant-user1-permissions)\. 
 
-## Step 7: Secure the Private Folder<a name="walkthrough-secure-private-folder-explicit-deny"></a>
+## Step 7: Secure the private folder<a name="walkthrough-secure-private-folder-explicit-deny"></a>
 
 In this example, you have only two users\. You granted all the minimum required permissions at the group level and granted user\-level permissions only when you really need to permissions at the individual user level\. This approach helps minimize the effort of managing permissions\. As the number of users increases, managing permissions can become cumbersome\. For example, you don't want any of the users in this example to access the content of the `Private` folder\. How do you ensure that you don't accidentally grant a user permission to it? You add a policy that explicitly denies access to the folder\. An explicit deny overrides any other permissions\. 
 
@@ -624,11 +624,11 @@ Replace the `Consultants` group policy with an updated policy that includes the 
    }
    ```
 
-## Step 8: Clean Up<a name="walkthrough-cleanup"></a>
+## Step 8: Clean up<a name="walkthrough-cleanup"></a>
 
 To clean up, open the IAM console and remove the users Alice and Bob\. For step\-by\-step instructions, see [Deleting an IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_manage.html#id_users_deleting) in the *IAM User Guide*\.
 
 To ensure that you aren't charged further for storage, you should also delete the objects and the bucket that you created for this exercise\.
 
-## Related Resources<a name="RelatedResources-walkthrough1"></a>
+## Related resources<a name="RelatedResources-walkthrough1"></a>
 + [Managing IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) in the *IAM User Guide*\.

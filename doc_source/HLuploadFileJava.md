@@ -1,4 +1,4 @@
-# Upload a File<a name="HLuploadFileJava"></a>
+# Upload a file<a name="HLuploadFileJava"></a>
 
 **Example**  
 The following example shows how to upload an object using the high\-level multipart\-upload Java API \(the `TransferManager` class\)\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   

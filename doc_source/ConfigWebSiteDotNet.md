@@ -1,6 +1,6 @@
-# Managing Websites with the AWS SDK for \.NET<a name="ConfigWebSiteDotNet"></a>
+# Managing websites with the AWS SDK for \.NET<a name="ConfigWebSiteDotNet"></a>
 
-The following example shows how to use the AWS SDK for \.NET to manage website configuration for a bucket\. To add a website configuration to a bucket, you provide a bucket name and a website configuration\. The website configuration must include an index document and can contain an optional error document\. These documents must be stored in the bucket\. For more information, see [PUT Bucket website](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html)\. For more information about the Amazon S3 website feature, see [Hosting a Static Website on Amazon S3](WebsiteHosting.md)\. 
+The following example shows how to use the AWS SDK for \.NET to manage website configuration for a bucket\. To add a website configuration to a bucket, you provide a bucket name and a website configuration\. The website configuration must include an index document and can contain an optional error document\. These documents must be stored in the bucket\. For more information, see [PUT Bucket website](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html)\. For more information about the Amazon S3 website feature, see [Hosting a static website on Amazon S3](WebsiteHosting.md)\. 
 
 **Example**  
 The following C\# code example adds a website configuration to the specified bucket\. The configuration specifies both the index document and the error document names\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  

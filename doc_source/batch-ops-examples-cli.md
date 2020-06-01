@@ -1,16 +1,26 @@
-# Amazon S3 Batch Operations Examples Using the AWS CLI<a name="batch-ops-examples-cli"></a>
+# S3 Batch Operations examples using the AWS Command Line Interface<a name="batch-ops-examples-cli"></a>
 
-Amazon S3 batch operations track progress, send notifications, and store a detailed completion report of all actions, providing a fully managed, auditable, serverless experience\. You can use Amazon S3 batch operations through the AWS Management Console, AWS CLI, AWS SDKs, or REST API\. For more information, see [The Basics: Amazon S3 Batch Operations Jobs](batch-ops-basics.md)\.
+S3 Batch Operations track progress, send notifications, and store a detailed completion report of all actions, providing a fully managed, auditable, serverless experience\. You can use S3 Batch Operations through the AWS Management Console, AWS CLI, AWS SDKs, or REST API\. For more information, see [The basics: Amazon S3 batch operations jobs](batch-ops-basics.md)\.
 
-The following are examples show how you can use Amazon S3 Batch Operations with the AWS Command Line Interface \(AWS CLI\)\.
+The following are examples show how you can use S3 Batch Operations with the AWS Command Line Interface \(AWS CLI\)\.
 
 **Topics**
-+ [Creating an Amazon S3 Batch Operations Job](#batch-ops-example-cli-create)
-+ [Using Amazon S3 Batch Operations Job Tagging](#batch-ops-example-cli-job-tags)
++ [Creating and managing S3 Batch Operations jobs using the AWS CLI](#batch-ops-example-cli-create)
++ [Using S3 Batch Operations job tagging with the AWS CLI](#batch-ops-example-cli-job-tags)
++ [Using S3 Batch Operations with S3 Object Lock using the AWS CLI](#batchops-example-cli-object-lock)
 
-## Creating an Amazon S3 Batch Operations Job Using the AWS CLI<a name="batch-ops-example-cli-create"></a>
+## Creating and managing S3 Batch Operations jobs using the AWS CLI<a name="batch-ops-example-cli-create"></a>
 
-The following example creates an Amazon S3 Batch Operations `S3PutObjectTagging` job using the AWS CLI\. 
+**Topics**
++ [Creating a S3 Batch Operations job](#batch-ops-example-cli-job-create)
++ [Getting the description of a S3 Batch Operations job](#batch-ops-example-cli-job-description)
++ [Get a list of `Active` and `Complete` jobs](#batch-ops-example-cli-active-jobs)
++ [Update the job priority](#batch-ops-example-cli-update-job-priority)
++ [Update the job status](#batch-ops-example-cli-update-job-status)
+
+### Creating a S3 Batch Operations job<a name="batch-ops-example-cli-job-create"></a>
+
+The following example creates an S3 Batch Operations `S3PutObjectTagging` job using the AWS CLI\. 
 
 **To create a Batch Operations `S3PutObjectTagging` job**
 
@@ -37,7 +47,7 @@ The following example creates an Amazon S3 Batch Operations `S3PutObjectTagging`
 
       Record the role's Amazon Resource Name \(ARN\)\. You need the ARN when you create a job\.
 
-   1. Create an IAM policy with permissions, and attach it to the IAM role that you created in the previous step\. For more information about permissions, see [Granting Permissions for Amazon S3 Batch Operations](batch-ops-iam-role-policies.md)\.
+   1. Create an IAM policy with permissions, and attach it to the IAM role that you created in the previous step\. For more information about permissions, see [Granting permissions for Amazon S3 batch operations](batch-ops-iam-role-policies.md)\.
 
       ```
       aws iam put-role-policy \
@@ -99,69 +109,71 @@ The following example creates an Amazon S3 Batch Operations `S3PutObjectTagging`
 
    In response, Amazon S3 returns a job ID \(for example, `00e123a4-c0d8-41f4-a0eb-b46f9ba5b07c`\)\. You need the ID in the next commands\.
 
-1. Get the job description\.
+### Getting the description of a S3 Batch Operations job<a name="batch-ops-example-cli-job-description"></a>
 
-   ```
-   aws s3control describe-job \
-       --region us-west-2 \
-       --account-id acct-id \
-       --job-id 00e123a4-c0d8-41f4-a0eb-b46f9ba5b07c
-   ```
+```
+aws s3control describe-job \
+    --region us-west-2 \
+    --account-id acct-id \
+    --job-id 00e123a4-c0d8-41f4-a0eb-b46f9ba5b07c
+```
 
-1. Get a list of `Active` and `Complete` jobs\.
+### Get a list of `Active` and `Complete` jobs<a name="batch-ops-example-cli-active-jobs"></a>
 
-   ```
-   aws s3control list-jobs \
-       --region us-west-2 \
-       --account-id acct-id \
-       --job-statuses '["Active","Complete"]' \
-       --max-results 20
-   ```
+```
+aws s3control list-jobs \
+    --region us-west-2 \
+    --account-id acct-id \
+    --job-statuses '["Active","Complete"]' \
+    --max-results 20
+```
 
-1. Update the job priority \(a higher number indicates a higher execution priority\)\.
+### Update the job priority<a name="batch-ops-example-cli-update-job-priority"></a>
 
-   ```
-   aws s3control update-job-priority \
-       --region us-west-2 \
-       --account-id acct-id \
-       --priority 98 \
-       --job-id 00e123a4-c0d8-41f4-a0eb-b46f9ba5b07c
-   ```
+Update the job priority \(a higher number indicates a higher execution priority\)\.
 
-1. If you didn't specify the `--no-confirmation-required` parameter in the `create-job`, the job remains in a suspended state until you confirm the job by setting its status to `Ready`\. Amazon S3 then makes the job eligible for execution\.
+```
+aws s3control update-job-priority \
+    --region us-west-2 \
+    --account-id acct-id \
+    --priority 98 \
+    --job-id 00e123a4-c0d8-41f4-a0eb-b46f9ba5b07c
+```
 
-   ```
-   aws s3control update-job-status \
+### Update the job status<a name="batch-ops-example-cli-update-job-status"></a>
++ If you didn't specify the `--no-confirmation-required` parameter in the previous `create-job` example, the job remains in a suspended state until you confirm the job by setting its status to `Ready`\. Amazon S3 then makes the job eligible for execution\.
+
+  ```
+  aws s3control update-job-status \
+      --region us-west-2 \
+      --account-id 181572960644 \
+      --job-id 00e123a4-c0d8-41f4-a0eb-b46f9ba5b07c \
+      --requested-job-status 'Ready'
+  ```
++ Cancel the job by setting the job status to `Cancelled`\.
+
+  ```
+  aws s3control update-job-status \
        --region us-west-2 \
        --account-id 181572960644 \
        --job-id 00e123a4-c0d8-41f4-a0eb-b46f9ba5b07c \
-       --requested-job-status 'Ready'
-   ```
+       --status-update-reason "No longer needed" \
+       --requested-job-status Cancelled
+  ```
 
-1. Cancel the job by setting the job status to `Cancelled`\.
+## Using S3 Batch Operations job tagging with the AWS CLI<a name="batch-ops-example-cli-job-tags"></a>
 
-   ```
-   aws s3control update-job-status \
-        --region us-west-2 \
-        --account-id 181572960644 \
-        --job-id 00e123a4-c0d8-41f4-a0eb-b46f9ba5b07c \
-        --status-update-reason "No longer needed" \
-        --requested-job-status Cancelled
-   ```
-
-## Using Amazon S3 Batch Operations Job Tagging with the AWS CLI<a name="batch-ops-example-cli-job-tags"></a>
-
-You can label and control access to your Amazon S3 Batch Operations jobs by adding *tags*\. Tags can be used to identify who is responsible for a Batch Operations job\. You can create jobs with tags attached to them, and you can add tags to jobs after they are created\. For more information, see [Controlling Access and Labeling Jobs Using Tags](batch-ops-managing-jobs.md#batch-ops-job-tags)\.
+You can label and control access to your S3 Batch Operations jobs by adding *tags*\. Tags can be used to identify who is responsible for a Batch Operations job\. You can create jobs with tags attached to them, and you can add tags to jobs after they are created\. For more information, see [Controlling access and labeling jobs using tags](batch-ops-managing-jobs.md#batch-ops-job-tags)\.
 
 **Topics**
-+ [Create a Batch Operations Job with Tags](#batch-ops-example-cli-job-tags-create-job)
-+ [Delete the Tags of a Batch Operations Job](#batch-ops-example-cli-job-tags-delete-job-tagging)
-+ [Get the Tags of a Batch Operations Job](#batch-ops-example-cli-job-tags-get-job-tagging)
-+ [Put Tags in a Batch Operations Job](#batch-ops-example-cli-job-tags-put-job-tagging)
++ [Create a Batch Operations job with tags](#batch-ops-example-cli-job-tags-create-job)
++ [Delete the tags of a Batch Operations job](#batch-ops-example-cli-job-tags-delete-job-tagging)
++ [Get the tags of a Batch Operations job](#batch-ops-example-cli-job-tags-get-job-tagging)
++ [Put tags in a Batch Operations job](#batch-ops-example-cli-job-tags-put-job-tagging)
 
-### Create an Amazon S3 Batch Operations Job with Tags<a name="batch-ops-example-cli-job-tags-create-job"></a>
+### Create an S3 Batch Operations job with tags<a name="batch-ops-example-cli-job-tags-create-job"></a>
 
-The following example creates an Amazon S3 Batch Operations `S3PutObjectCopy` job using job tags as labels for the job using the AWS CLI\. 
+The following example creates an S3 Batch Operations `S3PutObjectCopy` job using job tags as labels for the job using the AWS CLI\. 
 
 1. Select the action or `OPERATION` that you want the Batch Operations job to perform, and choose your `TargetResource`\.
 
@@ -243,7 +255,7 @@ The following example creates an Amazon S3 Batch Operations `S3PutObjectCopy` jo
        --description "Copy with Replace Metadata";
    ```
 
-### Delete the Tags of an Amazon S3 Batch Operations Job<a name="batch-ops-example-cli-job-tags-delete-job-tagging"></a>
+### Delete the tags of an S3 Batch Operations job<a name="batch-ops-example-cli-job-tags-delete-job-tagging"></a>
 
 The following example deletes the tags from a Batch Operations job using the AWS CLI\.
 
@@ -255,7 +267,7 @@ aws \
     --region us-east-1;
 ```
 
-### Get the Job Tags of an Amazon S3 Batch Operations Job<a name="batch-ops-example-cli-job-tags-get-job-tagging"></a>
+### Get the job tags of an S3 Batch Operations job<a name="batch-ops-example-cli-job-tags-get-job-tagging"></a>
 
 The following example gets the tags of a Batch Operations job using the AWS CLI\.
 
@@ -267,9 +279,9 @@ aws \
     --region us-east-1;
 ```
 
-### Put Job Tags in an Existing Amazon S3 Batch Operations Job<a name="batch-ops-example-cli-job-tags-put-job-tagging"></a>
+### Put job tags in an existing S3 Batch Operations job<a name="batch-ops-example-cli-job-tags-put-job-tagging"></a>
 
-The following is an example of using `s3control put-job-tagging` to add job tags to your Amazon S3 Batch Operations job using the AWS CLI\.
+The following is an example of using `s3control put-job-tagging` to add job tags to your S3 Batch Operations job using the AWS CLI\.
 
 **Note**  
 If you send this request with an empty tag set, S3 Batch Operations deletes the existing tag set on the object\. Also, if you use this method, you are charged for a Tier 1 Request \(PUT\)\. For more information, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing)\.  
@@ -302,3 +314,468 @@ To delete existing tags for your Batch Operations job, the `DeleteJobTagging` ac
        --job-id Example-e25a-4ed2-8bee-7f8ed7fc2f1c \
        --region us-east-1;
    ```
+
+## Using S3 Batch Operations with S3 Object Lock using the AWS CLI<a name="batchops-example-cli-object-lock"></a>
+
+Using S3 Batch Operations with S3 Object Lock you can manage retention or enable a legal hold of many Amazon S3 objects at once\. You specify the list of target objects in your manifest and submit it to Batch Operations for completion\. For more information, see [Managing S3 Object Lock Retention Dates](batch-ops-retention-date.md) and [Managing S3 Object Lock Legal Hold](batch-ops-legal-hold.md)\. 
+
+The following examples show how to: create an IAM roles with S3 Batch Operations permissions, update the role permissions to create jobs that enable object lock using the AWS Command Line Interface\. In the code examples below, replace any variables values with those that suit your needs\. You must also have a **CSV** manifest identifying the objects for your S3 Batch Operations job\. For more information, see [Specifying a manifest](batch-ops-basics.md#specify-batchjob-manifest)
+
+**Topics**
++ [Example: Using S3 Batch Operations with S3 Object Lock retention](#batch-ops-cli-object-lock-retention-example)
++ [Example: Using S3 Batch Operations with S3 Object Lock legal hold](#batch-ops-cli-object-lock-legalhold-example)
+
+In this section, you will:
+
+1. 
+
+**Create an IAM role and assign S3 Batch Operations permissions to run\. This is required for all S3 Batch Operations\.**
+
+   ```
+   export AWS_PROFILE='aws-user'
+   
+   read -d '' bops_trust_policy <<EOF
+   {
+     "Version": "2012-10-17", 
+     "Statement": [ 
+       { 
+         "Effect": "Allow", 
+         "Principal": { 
+           "Service": [
+             "batchoperations.s3.amazonaws.com"
+           ]
+         }, 
+         "Action": "sts:AssumeRole" 
+       } 
+     ]
+   }
+   EOF
+   aws iam create-role --role-name bops-objectlock --assume-role-policy-document "${bops_trust_policy}"
+   ```
+
+1. 
+
+**Set up S3 Batch Operations with S3 Object Lock to run**
+
+   You will now allow the role to:
+
+   1. Run Object Lock on the S3 bucket that contains the target objects that you want Batch Operations to run on\.
+
+   1. Read the S3 bucket where the manifest CSV file and the objects are located\.
+
+   1. Write the results of the S3 Batch Operations job to the reporting bucket\.
+
+   ```
+   read -d '' bops_permissions <<EOF
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Effect": "Allow",
+               "Action": "s3:GetBucketObjectLockConfiguration",
+               "Resource": [
+                   "arn:aws:s3:::{{ManifestBucket}}"
+               ]
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "s3:GetObject",
+                   "s3:GetObjectVersion",
+                   "s3:GetBucketLocation"
+               ],
+               "Resource": [
+                   "arn:aws:s3:::{{ManifestBucket}}/*"
+               ]
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "s3:PutObject",
+                   "s3:GetBucketLocation"
+               ],
+               "Resource": [
+                   "arn:aws:s3:::{{ReportBucket}}/*"
+               ]
+           }
+       ]
+   }
+   EOF
+   
+   aws iam put-role-policy --role-name bops-objectlock --policy-name object-lock-permissions --policy-document "${bops_permissions}"
+   ```
+
+### Example: Using S3 Batch Operations with S3 Object Lock retention<a name="batch-ops-cli-object-lock-retention-example"></a>
+
+The following snippet will alow the rule to set S3 Object Lock retention for your objects in the manifest bucket\.
+
+ You will update the role to include `s3:PutObjectRetention` permissions so you can execute Object Lock retention on the objects in your bucket\.
+
+```
+export AWS_PROFILE='aws-user'
+
+read -d '' retention_permissions <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObjectRetention"
+            ],
+            "Resource": [
+                "arn:aws:s3:::{{ManifestBucket}}/*"
+            ]
+        }
+    ]
+}
+EOF
+
+aws iam put-role-policy --role-name bops-objectlock --policy-name retention-permissions --policy-document "${retention_permissions}"
+```
+
+**Topics**
++ [Using S3 Batch Operations with S3 Object Lock retention compliance mode](#batch-ops-cli-object-lock-compliance-example)
++ [Using S3 Batch Operations with S3 Object Lock retention governance mode](#batch-ops-cli-object-lock-governance-example)
+
+#### Using S3 Batch Operations with S3 Object Lock retention compliance mode<a name="batch-ops-cli-object-lock-compliance-example"></a>
+
+The following example build on the previos examples of creating a trust policy, setting S3 Batch Operations and S3 Object Lock configuration permissions to your objects\. This example will set the retention mode `COMPLIANCE` and the retain until date to Jan 1, 2020 and create a job that will target objects in manifest bucket and report the results in the reports bucket that you have identified\.
+
+```
+export AWS_PROFILE='aws-user'
+export AWS_DEFAULT_REGION='us-west-2'
+export ACCOUNT_ID=123456789012
+export ROLE_ARN='arn:aws:iam::123456789012:role/bops-objectlock'
+
+read -d '' OPERATION <<EOF
+{
+  "S3PutObjectRetention": {
+    "Retention": {
+      "RetainUntilDate":"Jan 1 00:00:00 PDT 2020",
+      "Mode":"COMPLIANCE"
+    }
+  }
+}
+EOF
+
+read -d '' MANIFEST <<EOF
+{
+  "Spec": {
+    "Format": "S3BatchOperations_CSV_20180820",
+    "Fields": [
+      "Bucket",
+      "Key"
+    ]
+  },
+  "Location": {
+    "ObjectArn": "arn:aws:s3:::ManifestBucket/complaince-objects-manifest.csv",
+    "ETag": "Your-manifest-ETag"
+  }
+}
+EOF
+
+read -d '' REPORT <<EOF
+{
+  "Bucket": "arn:aws:s3:::ReportBucket",
+  "Format": "Report_CSV_20180820",
+  "Enabled": true,
+  "Prefix": "reports/compliance-objects-bops",
+  "ReportScope": "AllTasks"
+}
+EOF
+
+aws \
+    s3control create-job \
+    --account-id "${ACCOUNT_ID}" \
+    --manifest "${MANIFEST//$'\n'}" \
+    --operation "${OPERATION//$'\n'/}" \
+    --report "${REPORT//$'\n'}" \
+    --priority 10 \
+    --role-arn "${ROLE_ARN}" \
+    --client-request-token "$(uuidgen)" \
+    --region "${AWS_DEFAULT_REGION}" \
+    --description "Set compliance retain-until to 1 Jul 2030";
+```
+
+The example below shows how you can extend the `COMPLIANCE` mode's retain until date to Jan 15, 2020\.
+
+```
+export AWS_PROFILE='aws-user'
+export AWS_DEFAULT_REGION='us-west-2'
+export ACCOUNT_ID=123456789012
+export ROLE_ARN='arn:aws:iam::123456789012:role/bops-objectlock'
+
+read -d '' OPERATION <<EOF
+{
+  "S3PutObjectRetention": {
+    "Retention": {
+      "RetainUntilDate":"Jan 15 00:00:00 PDT 2020",
+      "Mode":"COMPLIANCE"
+    }
+  }
+}
+EOF
+
+read -d '' MANIFEST <<EOF
+{
+  "Spec": {
+    "Format": "S3BatchOperations_CSV_20180820",
+    "Fields": [
+      "Bucket",
+      "Key"
+    ]
+  },
+  "Location": {
+    "ObjectArn": "arn:aws:s3:::ManifestBucket/complaince-objects-manifest.csv",
+    "ETag": "Your-manifest-ETag"
+  }
+}
+EOF
+
+read -d '' REPORT <<EOF
+{
+  "Bucket": "arn:aws:s3:::ReportBucket",
+  "Format": "Report_CSV_20180820",
+  "Enabled": true,
+  "Prefix": "reports/compliance-objects-bops",
+  "ReportScope": "AllTasks"
+}
+EOF
+
+aws \
+    s3control create-job \
+    --account-id "${ACCOUNT_ID}" \
+    --manifest "${MANIFEST//$'\n'}" \
+    --operation "${OPERATION//$'\n'/}" \
+    --report "${REPORT//$'\n'}" \
+    --priority 10 \
+    --role-arn "${ROLE_ARN}" \
+    --client-request-token "$(uuidgen)" \
+    --region "${AWS_DEFAULT_REGION}" \
+    --description "Extend compliance retention to 15 Jan 2020";
+```
+
+#### Using S3 Batch Operations with S3 Object Lock retention governance mode<a name="batch-ops-cli-object-lock-governance-example"></a>
+
+The following example builds on the previous example of creating a trust policy, setting S3 Batch Operations and S3 Object Lock configuration permissions and shows how to apply S3 Object Lock retention governance with the retain until date to Jan 30, 2020 across multiples objects and creates a Batch Operations job that will use the manifest bucket and reports the results in the reports bucket\.
+
+```
+export AWS_PROFILE='aws-user'
+export AWS_DEFAULT_REGION='us-west-2'
+export ACCOUNT_ID=123456789012
+export ROLE_ARN='arn:aws:iam::123456789012:role/bops-objectlock'
+
+read -d '' OPERATION <<EOF
+{
+  "S3PutObjectRetention": {
+    "Retention": {
+      "RetainUntilDate":"Jan 30 00:00:00 PDT 2020",
+      "Mode":"GOVERNANCE"
+    }
+  }
+}
+EOF
+
+read -d '' MANIFEST <<EOF
+{
+  "Spec": {
+    "Format": "S3BatchOperations_CSV_20180820",
+    "Fields": [
+      "Bucket",
+      "Key"
+    ]
+  },
+  "Location": {
+    "ObjectArn": "arn:aws:s3:::ManifestBucket/governance-objects-manifest.csv",
+    "ETag": "Your-manifest-ETag"
+  }
+}
+EOF
+
+read -d '' REPORT <<EOF
+{
+  "Bucket": "arn:aws:s3:::ReportBucketT",
+  "Format": "Report_CSV_20180820",
+  "Enabled": true,
+  "Prefix": "reports/governance-objects",
+  "ReportScope": "AllTasks"
+}
+EOF
+
+aws \
+    s3control create-job \
+    --account-id "${ACCOUNT_ID}" \
+    --manifest "${MANIFEST//$'\n'}" \
+    --operation "${OPERATION//$'\n'/}" \
+    --report "${REPORT//$'\n'}" \
+    --priority 10 \
+    --role-arn "${ROLE_ARN}" \
+    --client-request-token "$(uuidgen)" \
+    --region "${AWS_DEFAULT_REGION}" \
+    --description "Put governance retention";
+```
+
+The following example builds on the previous example of creating a trust policy, setting S3 Batch Operations and S3 Object Lock configuration permissions and shows how to bypass retention governance with across multiples objects and creates a Batch Operations job that will use the manifest bucket and reports the results in the reports bucket\.
+
+```
+export AWS_PROFILE='aws-user'
+
+read -d '' bypass_governance_permissions <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:BypassGovernanceRetention"
+            ],
+            "Resource": [
+                "arn:aws:s3:::ManifestBucket/*"
+            ]
+        }
+    ]
+}
+EOF
+
+aws iam put-role-policy --role-name bops-objectlock --policy-name bypass-governance-permissions --policy-document "${bypass_governance_permissions}"
+
+export AWS_PROFILE='aws-user'
+export AWS_DEFAULT_REGION='us-west-2'
+export ACCOUNT_ID=123456789012
+export ROLE_ARN='arn:aws:iam::123456789012:role/bops-objectlock'
+
+read -d '' OPERATION <<EOF
+{
+  "S3PutObjectRetention": {
+    "BypassGovernanceRetention": true,
+    "Retention": {
+    }
+  }
+}
+EOF
+
+read -d '' MANIFEST <<EOF
+{
+  "Spec": {
+    "Format": "S3BatchOperations_CSV_20180820",
+    "Fields": [
+      "Bucket",
+      "Key"
+    ]
+  },
+  "Location": {
+    "ObjectArn": "arn:aws:s3:::ManifestBucket/governance-objects-manifest.csv",
+    "ETag": "Your-manifest-ETag"
+  }
+}
+EOF
+
+read -d '' REPORT <<EOF
+{
+  "Bucket": "arn:aws:s3:::REPORT_BUCKET",
+  "Format": "Report_CSV_20180820",
+  "Enabled": true,
+  "Prefix": "reports/bops-governance",
+  "ReportScope": "AllTasks"
+}
+EOF
+
+aws \
+    s3control create-job \
+    --account-id "${ACCOUNT_ID}" \
+    --manifest "${MANIFEST//$'\n'}" \
+    --operation "${OPERATION//$'\n'/}" \
+    --report "${REPORT//$'\n'}" \
+    --priority 10 \
+    --role-arn "${ROLE_ARN}" \
+    --client-request-token "$(uuidgen)" \
+    --region "${AWS_DEFAULT_REGION}" \
+    --description "Remove governance retention";
+```
+
+### Example: Using S3 Batch Operations with S3 Object Lock legal hold<a name="batch-ops-cli-object-lock-legalhold-example"></a>
+
+The following example builds on the previous examples of creating a trust policy, setting S3 Batch Operations and S3 Object Lock configuration permissions and shows how to disable Object Lock legal hold on objects using Batch Operations\. 
+
+This example first updates the role allow `s3:PutObjectLegalHold` permissions and then creates a Batch Operations job that will turn off\(remove\) legal hold from the objects identified in the manifest and report on it\.
+
+```
+export AWS_PROFILE='aws-user'
+
+read -d '' legal_hold_permissions <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObjectLegalHold"
+            ],
+            "Resource": [
+                "arn:aws:s3:::ManifestBucket/*"
+            ]
+        }
+    ]
+
+EOF
+
+aws iam put-role-policy --role-name bops-objectlock --policy-name legal-hold-permissions --policy-document "${legal_hold_permissions}"
+```
+
+Use the example below if you want to turn off legal hold\.
+
+```
+export AWS_PROFILE='aws-user'
+export AWS_DEFAULT_REGION='us-west-2'
+export ACCOUNT_ID=123456789012
+export ROLE_ARN='arn:aws:iam::123456789012:role/bops-objectlock'
+
+read -d '' OPERATION <<EOF
+{
+  "S3PutObjectLegalHold": {
+    "LegalHold": {
+      "Status":"OFF"
+    }
+  }
+}
+EOF
+
+read -d '' MANIFEST <<EOF
+{
+  "Spec": {
+    "Format": "S3BatchOperations_CSV_20180820",
+    "Fields": [
+      "Bucket",
+      "Key"
+    ]
+  },
+  "Location": {
+    "ObjectArn": "arn:aws:s3:::ManifestBucket/legalhold-object-manifest.csv",
+    "ETag": "Your-manifest-ETag"
+  }
+}
+EOF
+
+read -d '' REPORT <<EOF
+{
+  "Bucket": "arn:aws:s3:::ReportBucket",
+  "Format": "Report_CSV_20180820",
+  "Enabled": true,
+  "Prefix": "reports/legalhold-objects-bops",
+  "ReportScope": "AllTasks"
+}
+EOF
+
+aws \
+    s3control create-job \
+    --account-id "${ACCOUNT_ID}" \
+    --manifest "${MANIFEST//$'\n'}" \
+    --operation "${OPERATION//$'\n'/}" \
+    --report "${REPORT//$'\n'}" \
+    --priority 10 \
+    --role-arn "${ROLE_ARN}" \
+    --client-request-token "$(uuidgen)" \
+    --region "${AWS_DEFAULT_REGION}" \
+    --description "Turn off legal hold";
+```

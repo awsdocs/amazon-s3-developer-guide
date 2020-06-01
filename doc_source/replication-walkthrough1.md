@@ -1,14 +1,14 @@
-# Example 1: Configuring Replication When the Source and Destination Buckets Are Owned by the Same Account<a name="replication-walkthrough1"></a>
+# Example 1: Configuring replication when the source and destination buckets are owned by the same account<a name="replication-walkthrough1"></a>
 
 In this example, you set up replication for source and destination buckets that are owned by the same AWS account\. Examples are provided for using the Amazon S3 console, the AWS Command Line Interface \(AWS CLI\), and the AWS SDK for Java and AWS SDK for \.NET\.
 
 **Topics**
 
-## Configure Replication When Buckets Are Owned by the Same Account \(Console\)<a name="replication-ex1-console"></a>
+## Configure replication when buckets are owned by the same account \(console\)<a name="replication-ex1-console"></a>
 
 For step\-by\-step instructions, see [How Do I Add a Replication Rule to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-replication.html) in the *Amazon Simple Storage Service Console User Guide*\. This topic provides instructions for setting replication configuration when buckets are owned by same and different AWS accounts\.
 
-## Configure Replication When Buckets Are Owned by the Same Account \(AWS CLI\)<a name="replication-ex1-cli"></a>
+## Configure replication when buckets are owned by the same account \(AWS CLI\)<a name="replication-ex1-cli"></a>
 
 To use the AWS CLI to set up replication when the source and destination buckets are owned by the same AWS account, you create source and destination buckets, enable versioning on the buckets, create an IAM role that gives Amazon S3 permission to replicate objects, and add the replication configuration to the source bucket\. To verify your setup, you test it\.
 
@@ -191,14 +191,14 @@ The amount of time it takes for Amazon S3 to replicate an object depends on the 
       In the *destination* bucket, verify the following:
       + That Amazon S3 replicated the objects\.
       + In object **properties**, that the **Replication Status** is set to `Replica` \(identifying this as a replica object\)\.
-      + In object **properties**, that the permission section shows no permissions\. This means that the replica is still owned by the *source* bucket owner, and the *destination* bucket owner has no permission on the object replica\. You can add optional configuration to tell Amazon S3 to change the replica ownership\. For an example, see [Example 3: Changing the Replica Owner When the Source and Destination Buckets Are Owned by Different Accounts](replication-walkthrough-3.md)\.   
+      + In object **properties**, that the permission section shows no permissions\. This means that the replica is still owned by the *source* bucket owner, and the *destination* bucket owner has no permission on the object replica\. You can add optional configuration to tell Amazon S3 to change the replica ownership\. For an example, see [Example 3: Changing the replica owner when the source and destination buckets are owned by different accounts](replication-walkthrough-3.md)\.   
 ![\[Screen shot of object properties showing the replication status and permissions.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/crr-wt2-10.png)
 
    1. Update an object's ACL in the *source* bucket and verify that changes appear in the *destination* bucket\.
 
       For instructions, see [How Do I Set Permissions on an Object?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/set-object-permissions.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
-## Configure Replication When Buckets Are Owned by the Same Account \(AWS SDK\)<a name="replication-ex1-sdk"></a>
+## Configure replication when buckets are owned by the same account \(AWS SDK\)<a name="replication-ex1-sdk"></a>
 
 Use the following code examples to add a replication configuration to a bucket with the AWS SDK for Java and AWS SDK for \.NET, respectively\.
 

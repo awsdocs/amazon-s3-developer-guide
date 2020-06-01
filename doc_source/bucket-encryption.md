@@ -2,7 +2,7 @@
 
 Amazon S3 default encryption provides a way to set the default encryption behavior for an S3 bucket\. You can set default encryption on a bucket so that all new objects are encrypted when they are stored in the bucket\. The objects are encrypted using server\-side encryption with either Amazon S3\-managed keys \(SSE\-S3\) or customer master keys \(CMKs\) stored in AWS Key Management Service \(AWS KMS\)\. 
 
-When you use server\-side encryption, Amazon S3 encrypts an object before saving it to disk and decrypts it when you download the objects\. For more information about protecting data using server\-side encryption and encryption key management, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\.
+When you use server\-side encryption, Amazon S3 encrypts an object before saving it to disk and decrypts it when you download the objects\. For more information about protecting data using server\-side encryption and encryption key management, see [Protecting data using server\-side encryption](serv-side-encryption.md)\.
 
 **Topics**
 + [How Do I Set Up Amazon S3 Default Encryption for an S3 Bucket?](#bucket-encryption-how-to-set-up)
@@ -27,10 +27,10 @@ After you enable default encryption for a bucket, the following encryption behav
   + If your `PUT` request headers include encryption information, Amazon S3 uses the encryption information from the `PUT` request to encrypt objects before storing them in Amazon S3\.
 + If you use the SSE\-KMS option for your default encryption configuration, you are subject to the RPS \(requests per second\) limits of AWS KMS\. For more information about AWS KMS limits and how to request a limit increase, see [AWS KMS limits](https://docs.aws.amazon.com/kms/latest/developerguide/limits.html)\. 
 
-To encrypt your existing Amazon S3 objects with a single request, you can use Amazon S3 batch operations\. You provide Amazon S3 batch operations with a list of objects to operate on, and Amazon S3 batch operations calls the respective API to perform the specified operation\. You can use the copy operation to copy the existing unencrypted objects and write the new encrypted objects to the same bucket\. A single Amazon S3 batch operations job can perform the specified operation on billions of objects containing exabytes of data\.
+To encrypt your existing Amazon S3 objects with a single request, you can use Amazon S3 batch operations\. You provide S3 Batch Operations with a list of objects to operate on, and Batch Operations calls the respective API to perform the specified operation\. You can use the copy operation to copy the existing unencrypted objects and write the new encrypted objects to the same bucket\. A single Batch Operations job can perform the specified operation on billions of objects containing exabytes of data\.
 
 **Note**  
-Amazon S3 buckets with default bucket encryption using SSE\-KMS cannot be used as destination buckets for [Amazon S3 Server Access Logging](ServerLogs.md)\. Only SSE\-S3 default encryption is supported for server access log destination buckets\.
+Amazon S3 buckets with default bucket encryption using SSE\-KMS cannot be used as destination buckets for [Amazon S3 server access logging](ServerLogs.md)\. Only SSE\-S3 default encryption is supported for server access log destination buckets\.
 
 ## Using Encryption for Cross\-account Operations<a name="bucket-encryption-update-bucket-policy"></a>
 
@@ -45,7 +45,7 @@ After you enable default encryption for a replication destination bucket, the fo
 + If objects in the source bucket are not encrypted, the replica objects in the destination bucket are encrypted using the default encryption settings of the destination bucket\. This results in the `ETag` of the source object being different from the `ETag` of the replica object\. You must update applications that use the `ETag` to accommodate for this difference\.
 + If objects in the source bucket are encrypted using SSE\-S3 or SSE\-KMS, the replica objects in the destination bucket use the same encryption as the source object encryption\. The default encryption settings of the destination bucket are not used\.
 
-For more information about using default encryption with SSE\-KMS, see [Replicating Encrypted Objects](replication-config-for-kms-objects.md)\.
+For more information about using default encryption with SSE\-KMS, see [Replicating encrypted objects](replication-config-for-kms-objects.md)\.
 
 ## Monitoring Default Encryption with CloudTrail and CloudWatch<a name="bucket-encryption-tracking"></a>
 

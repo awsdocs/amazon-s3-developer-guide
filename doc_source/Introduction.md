@@ -3,21 +3,21 @@
 This introduction to Amazon Simple Storage Service \(Amazon S3\) provides a detailed summary of this web service\. After reading this section, you should have a good idea of what it offers and how it can fit in with your business\.
 
 **Topics**
-+ [Overview of Amazon S3 and This Guide](#overview)
-+ [Advantages of Using Amazon S3](#features)
-+ [Amazon S3 Concepts](#CoreConcepts)
-+ [Amazon S3 Features](#S3Features)
-+ [Amazon S3 Application Programming Interfaces \(API\)](#API)
++ [Overview of Amazon S3 and this guide](#overview)
++ [Advantages of using Amazon S3](#features)
++ [Amazon S3 concepts](#CoreConcepts)
++ [Amazon S3 features](#S3Features)
++ [Amazon S3 application programming interfaces \(API\)](#API)
 + [Paying for Amazon S3](#PayingforStorage)
-+ [Related Services](#RelatedAmazonWebServices)
++ [Related services](#RelatedAmazonWebServices)
 
-## Overview of Amazon S3 and This Guide<a name="overview"></a>
+## Overview of Amazon S3 and this guide<a name="overview"></a>
 
 Amazon S3 has a simple web services interface that you can use to store and retrieve any amount of data, at any time, from anywhere on the web\.
 
 This guide describes how you send requests to create buckets, store and retrieve your objects, and manage permissions on your resources\. The guide also describes access control and the authentication process\. Access control defines who can access objects and buckets within Amazon S3, and the type of access \(for example, READ and WRITE\)\. The authentication process verifies the identity of a user who is trying to access Amazon Web Services \(AWS\)\.
 
-## Advantages of Using Amazon S3<a name="features"></a>
+## Advantages of using Amazon S3<a name="features"></a>
 
 Amazon S3 is intentionally built with a minimal feature set that focuses on simplicity and robustness\. Following are some of the advantages of using Amazon S3:
 + **Creating buckets** – Create and name a bucket that stores data\. Buckets are the fundamental containers in Amazon S3 for data storage\.
@@ -28,7 +28,7 @@ Amazon S3 is intentionally built with a minimal feature set that focuses on simp
 **Note**  
  SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\. 
 
-## Amazon S3 Concepts<a name="CoreConcepts"></a>
+## Amazon S3 concepts<a name="CoreConcepts"></a>
 
 This section describes key concepts and terminology you need to understand to use Amazon S3 effectively\. They are presented in the order that you will most likely encounter them\.
 
@@ -37,11 +37,11 @@ This section describes key concepts and terminology you need to understand to us
 + [Objects](#BasicsObjects)
 + [Keys](#BasicsKeys)
 + [Regions](#Regions)
-+ [Amazon S3 Data Consistency Model](#ConsistencyModel)
++ [Amazon S3 data consistency model](#ConsistencyModel)
 
 ### Buckets<a name="BasicsBucket"></a>
 
- A bucket is a container for objects stored in Amazon S3\. Every object is contained in a bucket\. For example, if the object named `photos/puppy.jpg` is stored in the `awsexamplebucket` bucket in the US West \(Oregon\) Region, then it is addressable using the URL `https://awsexamplebucket.s3.us-west-2.amazonaws.com/photos/puppy.jpg`\.
+ A bucket is a container for objects stored in Amazon S3\. Every object is contained in a bucket\. For example, if the object named `photos/puppy.jpg` is stored in the `awsexamplebucket1` bucket in the US West \(Oregon\) Region, then it is addressable using the URL `https://awsexamplebucket1.s3.us-west-2.amazonaws.com/photos/puppy.jpg`\.
 
  Buckets serve several purposes: 
 + They organize the Amazon S3 namespace at the highest level\.
@@ -74,7 +74,7 @@ You can only access Amazon S3 and its features in AWS Regions that are enabled f
 
  For a list of Amazon S3 Regions and endpoints, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\. 
 
-### Amazon S3 Data Consistency Model<a name="ConsistencyModel"></a>
+### Amazon S3 data consistency model<a name="ConsistencyModel"></a>
 
 Amazon S3 provides read\-after\-write consistency for PUTS of new objects in your S3 bucket in all Regions with one caveat\. The caveat is that if you make a HEAD or GET request to a key name before the object is created, then create the object shortly after that, a subsequent GET might not return the object due to eventual consistency\. 
 
@@ -92,18 +92,20 @@ Amazon S3 achieves high availability by replicating data across multiple servers
 Amazon S3 does not currently support object locking\. If two PUT requests are simultaneously made to the same key, the request with the latest timestamp wins\. If this is an issue, you will need to build an object\-locking mechanism into your application\.   
 Updates are key\-based\. There is no way to make atomic updates across keys\. For example, you cannot make the update of one key dependent on the update of another key unless you design this functionality into your application\.
 
-Buckets have a similar consistency model, with the same caveats\. For example, if you delete a bucket and immediately list all buckets, the bucket might still appear in the list\.
+
+Buckets have a similar consistency model, with the same caveats\. For example, if you delete a bucket and immediately list all buckets, the deleted bucket might still appear in the list\.
+
 
 The following table describes the characteristics of an eventually consistent read and a consistent read\.
 
 
-| Eventually Consistent Read | Consistent Read | 
+| Eventually consistent read | Consistent read | 
 | --- | --- | 
 | Stale reads possible | No stale reads | 
 | Lowest read latency | Potential higher read latency | 
 | Highest read throughput | Potential lower read throughput | 
 
-#### Concurrent Applications<a name="ApplicationConcurrency"></a>
+#### Concurrent applications<a name="ApplicationConcurrency"></a>
 
 This section provides examples of eventually consistent and consistent read requests when multiple clients are writing to the same items\.
 
@@ -121,25 +123,25 @@ In the last example, Client 2 performs W2 before Amazon S3 returns a success for
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/consistency3.png)
 
-## Amazon S3 Features<a name="S3Features"></a>
+## Amazon S3 features<a name="S3Features"></a>
 
 This section describes important Amazon S3 features\.
 
 **Topics**
-+ [Storage Classes](#RRS)
-+ [Bucket Policies](#BucketPolicies)
-+ [AWS Identity and Access Management](#AWSIdentityandAccessManagement)
-+ [Access Control Lists](#S3_ACLs)
++ [Storage classes](#RRS)
++ [Bucket policies](#BucketPolicies)
++ [AWS identity and access management](#AWSIdentityandAccessManagement)
++ [Access control lists](#S3_ACLs)
 + [Versioning](#Versions)
 + [Operations](#BasicsOperations)
 
-### Storage Classes<a name="RRS"></a>
+### Storage classes<a name="RRS"></a>
 
  Amazon S3 offers a range of storage classes designed for different use cases\. These include Amazon S3 STANDARD for general\-purpose storage of frequently accessed data, Amazon S3 STANDARD\_IA for long\-lived, but less frequently accessed data, and S3 Glacier for long\-term archive\.
 
 For more information, see [Amazon S3 Storage Classes](storage-class-intro.md)\.
 
-### Bucket Policies<a name="BucketPolicies"></a>
+### Bucket policies<a name="BucketPolicies"></a>
 
 Bucket policies provide centralized access control to buckets and objects based on a variety of conditions, including Amazon S3 operations, requesters, resources, and aspects of the request \(for example, IP address\)\. The policies are expressed in the *access policy language* and enable centralized management of permissions\. The permissions attached to a bucket apply to all of the objects in that bucket\. 
 
@@ -163,7 +165,7 @@ The conditions can be such things as IP addresses, IP address ranges in CIDR not
 
 For more information, see [Using Bucket Policies and User Policies](using-iam-policies.md)\.
 
-### AWS Identity and Access Management<a name="AWSIdentityandAccessManagement"></a>
+### AWS identity and access management<a name="AWSIdentityandAccessManagement"></a>
 
 You can use AWS Identity and Access Management \(IAM\) to manage access to your Amazon S3 resources\.
 
@@ -174,7 +176,7 @@ For more information about IAM, see the following:
 + [Getting Started](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started.html)
 + [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/)
 
-### Access Control Lists<a name="S3_ACLs"></a>
+### Access control lists<a name="S3_ACLs"></a>
 
 You can control access to each of your buckets and objects using an access control list \(ACL\)\. For more information, see [Managing Access with ACLs](S3_ACLs_UsingACLs.md)\.
 
@@ -186,7 +188,7 @@ You can use *versioning* to keep multiple versions of an object in the same buck
 
 Following are the most common operations that you'll execute through the API\.
 
-**Common Operations**
+**Common operations**
 + **Create a bucket** – Create and name your own bucket in which to store your objects\.
 + **Write an object** – Store data by creating or overwriting an object\. When you write an object, you specify a unique key in the namespace of your bucket\. This is also a good time to specify any access control you want on the object\.
 + **Read an object** – Read data back\. You can download the data via HTTP or BitTorrent\.
@@ -195,7 +197,7 @@ Following are the most common operations that you'll execute through the API\.
 
 These operations and all other functionality are described in detail throughout this guide\.
 
-## Amazon S3 Application Programming Interfaces \(API\)<a name="API"></a>
+## Amazon S3 application programming interfaces \(API\)<a name="API"></a>
 
 The Amazon S3 architecture is designed to be programming language\-neutral, using AWS supported interfaces to store and retrieve objects\. 
 
@@ -204,7 +206,7 @@ Amazon S3 provides a REST and a SOAP interface\. They are similar, but there are
 **Note**  
  SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\. 
 
-### The REST Interface<a name="UsingRESTAPI"></a>
+### The REST interface<a name="UsingRESTAPI"></a>
 
 The REST API is an HTTP interface to Amazon S3\. Using REST, you use standard HTTP requests to create, fetch, and delete buckets and objects\.
 
@@ -212,7 +214,7 @@ You can use any toolkit that supports HTTP to use the REST API\. You can even us
 
 The REST API uses the standard HTTP headers and status codes, so that standard browsers and toolkits work as expected\. In some areas, we have added functionality to HTTP \(for example, we added headers to support access control\)\. In these cases, we have done our best to add the new functionality in a way that matched the style of standard HTTP usage\.
 
-### The SOAP Interface<a name="UsingSOAPAPI"></a>
+### The SOAP interface<a name="UsingSOAPAPI"></a>
 
 **Note**  
  SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\. 
@@ -229,7 +231,7 @@ Before storing anything in Amazon S3, you must register with the service and pro
 
 For information about paying for Amazon S3 storage, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
 
-## Related Services<a name="RelatedAmazonWebServices"></a>
+## Related services<a name="RelatedAmazonWebServices"></a>
 
 After you load your data into Amazon S3, you can use it with other AWS services\. The following are the services you might use most frequently:
 + **Amazon Elastic Compute Cloud \(Amazon EC2\)** – This service provides virtual compute resources in the cloud\. For more information, see the [Amazon EC2 product details page](https://aws.amazon.com/ec2/)\.

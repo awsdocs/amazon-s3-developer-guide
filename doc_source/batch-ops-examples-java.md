@@ -1,21 +1,22 @@
-# Example: Creating and Managing Amazon S3 Batch Operations Jobs Using the AWS SDK for Java<a name="batch-ops-examples-java"></a>
+# S3 Batch Operations examples using the AWS SDK for Java<a name="batch-ops-examples-java"></a>
 
-This section provides examples of how to create and manage Amazon S3 Batch Operations jobs using the AWS SDK for Java\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.
+This section provides examples of how to create and manage S3 Batch Operations jobs using the AWS SDK for Java\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.
 
 **Topics**
-+ [Creating a Batch Operations Job](#batch-ops-examples-java-create-job)
-+ [Canceling a Batch Operations Job](#batch-ops-examples-java-cancel-job)
-+ [Updating the Status of a Batch Operations Job](#batch-ops-examples-java-update-job-status)
-+ [Updating the Priority of a Batch Operations Job](#batch-ops-examples-java-update-job-priority.)
-+ [Using Batch Operations with Tags](#batch-ops-examples-java-job-with-tags.)
++ [Creating a Batch Operations job](#batch-ops-examples-java-create-job)
++ [Canceling a Batch Operations job](#batch-ops-examples-java-cancel-job)
++ [Updating the status of a Batch Operations job](#batch-ops-examples-java-update-job-status)
++ [Updating the priority of a Batch Operations job](#batch-ops-examples-java-update-job-priority.)
++ [Using Batch Operations with tags](#batch-ops-examples-java-job-with-tags.)
++ [Using S3 Batch Operations with S3 Object Lock](#batchops-examples-java-object-lock)
 
-## Creating a Batch Operations Job<a name="batch-ops-examples-java-create-job"></a>
+## Creating a Batch Operations job<a name="batch-ops-examples-java-create-job"></a>
 
-The following example creates an Amazon S3 Batch Operations job using the AWS SDK for Java\.
+The following example creates an S3 Batch Operations job using the AWS SDK for Java\.
 
-For more information about creating a job, see [Creating an Amazon S3 Batch Operations Job](batch-ops-create-job.md)\.
+For more information about creating a job, see [Creating an S3 Batch Operations job](batch-ops-create-job.md)\.
 
-For information about setting up the permissions that you need to create a job, see [Granting Permissions for Amazon S3 Batch Operations](batch-ops-iam-role-policies.md)\. 
+For information about setting up the permissions that you need to create a job, see [Granting permissions for Amazon S3 batch operations](batch-ops-iam-role-policies.md)\. 
 
 **Example**  
 
@@ -99,9 +100,9 @@ public class CreateJob {
 }
 ```
 
-## Canceling a Batch Operations Job<a name="batch-ops-examples-java-cancel-job"></a>
+## Canceling a Batch Operations job<a name="batch-ops-examples-java-cancel-job"></a>
 
-The following example cancels an Amazon S3 Batch Operations job using the AWS SDK for Java\.
+The following example cancels an S3 Batch Operations job using the AWS SDK for Java\.
 
 **Example**  
 
@@ -148,11 +149,11 @@ public class CancelJob {
 }
 ```
 
-## Updating the Status of a Batch Operations Job<a name="batch-ops-examples-java-update-job-status"></a>
+## Updating the status of a Batch Operations job<a name="batch-ops-examples-java-update-job-status"></a>
 
-The following example updates the status of an Amazon S3 Batch Operations job using the AWS SDK for Java\.
+The following example updates the status of an S3 Batch Operations job using the AWS SDK for Java\.
 
-For more information about job status, see [Job Status](batch-ops-managing-jobs.md#batch-ops-job-status)\.
+For more information about job status, see [Job status](batch-ops-managing-jobs.md#batch-ops-job-status)\.
 
 **Example**  
 
@@ -198,11 +199,11 @@ public class UpdateJobStatus {
 }
 ```
 
-## Updating the Priority of a Batch Operations Job<a name="batch-ops-examples-java-update-job-priority."></a>
+## Updating the priority of a Batch Operations job<a name="batch-ops-examples-java-update-job-priority."></a>
 
-The following example updates the priority of an Amazon S3 Batch Operations job using the AWS SDK for Java\.
+The following example updates the priority of an S3 Batch Operations job using the AWS SDK for Java\.
 
-For more information about job priority, see [Assigning Job Priority](batch-ops-managing-jobs.md#batch-ops-job-priority)\.
+For more information about job priority, see [Assigning job priority](batch-ops-managing-jobs.md#batch-ops-job-priority)\.
 
 **Example**  
 
@@ -249,20 +250,20 @@ public class UpdateJobPriority {
 }
 ```
 
-## Using Batch Operations with Tags<a name="batch-ops-examples-java-job-with-tags."></a>
+## Using Batch Operations with tags<a name="batch-ops-examples-java-job-with-tags."></a>
 
-You can label and control access to your Amazon S3 Batch Operations jobs by adding *tags*\. Tags can be used to identify who is responsible for a Batch Operations job\. You can create jobs with tags attached to them, and you can add tags to jobs after they are created\. For more information, see [Controlling Access and Labeling Jobs Using Tags](batch-ops-managing-jobs.md#batch-ops-job-tags)\.
+You can label and control access to your S3 Batch Operations jobs by adding *tags*\. Tags can be used to identify who is responsible for a Batch Operations job\. You can create jobs with tags attached to them, and you can add tags to jobs after they are created\. For more information, see [Controlling access and labeling jobs using tags](batch-ops-managing-jobs.md#batch-ops-job-tags)\.
 
 **Topics**
-+ [Create a Batch Operations Job with Job Tags Used for Labeling](#batch-ops-examples-java-job-with-tags-create)
-+ [Delete the Job Tags of a Batch Operations Job](#batch-ops-examples-java-job-with-tags-delete)
-+ [Get the Job Tags of a Batch Operations Job](#batch-ops-examples-java-job-with-tags-get)
-+ [Put Job Tags in a Batch Operations Job](#batch-ops-examples-java-job-with-tags-put)
++ [Create a Batch Operations job with job tags used for labeling](#batch-ops-examples-java-job-with-tags-create)
++ [Delete the job tags of a Batch Operations job](#batch-ops-examples-java-job-with-tags-delete)
++ [Get the job tags of a Batch Operations job](#batch-ops-examples-java-job-with-tags-get)
++ [Put job tags in a Batch Operations job](#batch-ops-examples-java-job-with-tags-put)
 
-### Create a Batch Operations Job with Job Tags Used for Labeling<a name="batch-ops-examples-java-job-with-tags-create"></a>
+### Create a Batch Operations job with job tags used for labeling<a name="batch-ops-examples-java-job-with-tags-create"></a>
 
 **Example**  
-The following example creates an Amazon S3 Batch Operations job with tags using the AWS SDK for Java\.  
+The following example creates an S3 Batch Operations job with tags using the AWS SDK for Java\.  
 
 ```
 public String createJob(final AWSS3ControlClient awss3ControlClient) {
@@ -319,10 +320,10 @@ public String createJob(final AWSS3ControlClient awss3ControlClient) {
 }
 ```
 
-### Delete the Job Tags of a Batch Operations Job<a name="batch-ops-examples-java-job-with-tags-delete"></a>
+### Delete the job tags of a Batch Operations job<a name="batch-ops-examples-java-job-with-tags-delete"></a>
 
 **Example**  
-The following example deletes the tags of an Amazon S3 Batch Operations job using the AWS SDK for Java\.  
+The following example deletes the tags of an S3 Batch Operations job using the AWS SDK for Java\.  
 
 ```
 public void deleteJobTagging(final AWSS3ControlClient awss3ControlClient,
@@ -335,10 +336,10 @@ public void deleteJobTagging(final AWSS3ControlClient awss3ControlClient,
 }
 ```
 
-### Get the Job Tags of a Batch Operations Job<a name="batch-ops-examples-java-job-with-tags-get"></a>
+### Get the job tags of a Batch Operations job<a name="batch-ops-examples-java-job-with-tags-get"></a>
 
 **Example**  
-The following example gets the tags of an Amazon S3 Batch Operations job using the AWS SDK for Java\.  
+The following example gets the tags of an S3 Batch Operations job using the AWS SDK for Java\.  
 
 ```
 public List<S3Tag> getJobTagging(final AWSS3ControlClient awss3ControlClient,
@@ -355,10 +356,10 @@ public List<S3Tag> getJobTagging(final AWSS3ControlClient awss3ControlClient,
 }
 ```
 
-### Put Job Tags in a Batch Operations Job<a name="batch-ops-examples-java-job-with-tags-put"></a>
+### Put job tags in a Batch Operations job<a name="batch-ops-examples-java-job-with-tags-put"></a>
 
 **Example**  
-The following example puts the tags of an Amazon S3 Batch Operations job using the AWS SDK for Java\.  
+The following example puts the tags of an S3 Batch Operations job using the AWS SDK for Java\.  
 
 ```
 public void putJobTagging(final AWSS3ControlClient awss3ControlClient,
@@ -371,5 +372,494 @@ public void putJobTagging(final AWSS3ControlClient awss3ControlClient,
             .withTags(departmentTag, fiscalYearTag);
 
     final PutJobTaggingResult putJobTaggingResult = awss3ControlClient.putJobTagging(putJobTaggingRequest);
+}
+```
+
+## Using S3 Batch Operations with S3 Object Lock<a name="batchops-examples-java-object-lock"></a>
+
+Using S3 Batch Operations with S3 Object Lock you can manage retention or enable a legal hold of many Amazon S3 objects at once\. You specify the list of target objects in your manifest and submit it to Batch Operations for completion\. For more information, see [Managing S3 Object Lock Retention Dates](batch-ops-retention-date.md) and [Managing S3 Object Lock Legal Hold](batch-ops-legal-hold.md)\. 
+
+The following examples show how to: create an IAM roles with S3 Batch Operations permissions, update the role permissions to create jobs that enable object lock using the AWS Command Line Interface\. In the code examples below, replace any variables values with those that suit your needs\. You must also have a **CSV** manifest identifying the objects for your S3 Batch Operations job\. For more information, see [Specifying a manifest](batch-ops-basics.md#specify-batchjob-manifest)
+
+**Topics**
++ [Using S3 Batch Operations with S3 Object Lock retention](#batch-ops-examples-java-object-lock-retention)
++ [Example: Using S3 Batch Operations with S3 Object Lock legal hold](#batch-ops-examples-java-object-lock-legalhold)
+
+First, you will:
++ Create an IAM role and assign S3 Batch Operations permissions to run\. This is required for all S3 Batch Operations jobs\.
++ Set up S3 Batch Operations with S3 Object Lock to run
+
+  You will now allow the role to:
+
+  1. Run Object Lock on the S3 bucket that contains the target objects that you want Batch Operations to run on\.
+
+  1. Read the S3 bucket where the manifest CSV file and the objects are located\.
+
+  1. Write the results of the S3 Batch Operations job to the reporting bucket\.
+
+```
+public void createObjectLockRole() {
+    final String roleName = "bops-object-lock";
+
+    final String trustPolicy = "{" +
+            "  \"Version\": \"2012-10-17\", " +
+            "  \"Statement\": [ " +
+            "    { " +
+            "      \"Effect\": \"Allow\", " +
+            "      \"Principal\": { " +
+            "        \"Service\": [" +
+            "          \"batchoperations.s3.amazonaws.com\"" +
+            "        ]" +
+            "      }, " +
+            "      \"Action\": \"sts:AssumeRole\" " +
+            "    } " +
+            "  ]" +
+            "}";
+
+    final String bopsPermissions = "{" +
+            "    \"Version\": \"2012-10-17\"," +
+            "    \"Statement\": [" +
+            "        {" +
+            "            \"Effect\": \"Allow\"," +
+            "            \"Action\": \"s3:GetBucketObjectLockConfiguration\"," +
+            "            \"Resource\": [" +
+            "                \"arn:aws:s3:::ManifestBucket\"" +
+            "            ]" +
+            "        }," +
+            "        {" +
+            "            \"Effect\": \"Allow\"," +
+            "            \"Action\": [" +
+            "                \"s3:GetObject\"," +
+            "                \"s3:GetObjectVersion\"," +
+            "                \"s3:GetBucketLocation\"" +
+            "            ]," +
+            "            \"Resource\": [" +
+            "                \"arn:aws:s3:::ManifestBucket/*\"" +
+            "            ]" +
+            "        }," +
+            "        {" +
+            "            \"Effect\": \"Allow\"," +
+            "            \"Action\": [" +
+            "                \"s3:PutObject\"," +
+            "                \"s3:GetBucketLocation\"" +
+            "            ]," +
+            "            \"Resource\": [" +
+            "                \"arn:aws:s3:::ReportBucket/*\"" +
+            "            ]" +
+            "        }" +
+            "    ]" +
+            "}";
+
+    final AmazonIdentityManagement iam =
+            AmazonIdentityManagementClientBuilder.defaultClient();
+
+    final CreateRoleRequest createRoleRequest = new CreateRoleRequest()
+            .withAssumeRolePolicyDocument(bopsPermissions)
+            .withRoleName(roleName);
+
+    final CreateRoleResult createRoleResult = iam.createRole(createRoleRequest);
+
+    final PutRolePolicyRequest putRolePolicyRequest = new PutRolePolicyRequest()
+            .withPolicyDocument(bopsPermissions)
+            .withPolicyName("bops-permissions")
+            .withRoleName(roleName);
+
+    final PutRolePolicyResult putRolePolicyResult = iam.putRolePolicy(putRolePolicyRequest);
+}
+```
+
+### Using S3 Batch Operations with S3 Object Lock retention<a name="batch-ops-examples-java-object-lock-retention"></a>
+
+The following snippet will alow the rule to set S3 Object Lock retention for your objects in the manifest bucket\.
+
+ You will update the role to include `s3:PutObjectRetention` permissions so you can execute Object Lock retention on the objects in your bucket\.
+
+```
+public void allowPutObjectRetention() {
+    final String roleName = "bops-object-lock";
+
+    final String retentionPermissions = "{" +
+            "    \"Version\": \"2012-10-17\"," +
+            "    \"Statement\": [" +
+            "        {" +
+            "            \"Effect\": \"Allow\"," +
+            "            \"Action\": [" +
+            "                \"s3:PutObjectRetention\"" +
+            "            ]," +
+            "            \"Resource\": [" +
+            "                \"arn:aws:s3:::ManifestBucket*\"" +
+            "            ]" +
+            "        }" +
+            "    ]" +
+            "}";
+            
+    final AmazonIdentityManagement iam =
+            AmazonIdentityManagementClientBuilder.defaultClient();
+
+    final PutRolePolicyRequest putRolePolicyRequest = new PutRolePolicyRequest()
+            .withPolicyDocument(retentionPermissions)
+            .withPolicyName("retention-permissions")
+            .withRoleName(roleName);
+
+    final PutRolePolicyResult putRolePolicyResult = iam.putRolePolicy(putRolePolicyRequest);
+}
+```
+
+**Topics**
++ [Using S3 Batch Operations with S3 Object Lock retention compliance mode](#batch-ops-examples-java-object-lock-compliance)
++ [Using S3 Batch Operations with S3 Object Lock retention governance mode](#batch-ops-examples-java-object-lock-governance)
+
+#### Using S3 Batch Operations with S3 Object Lock retention compliance mode<a name="batch-ops-examples-java-object-lock-compliance"></a>
+
+The following example build on the previos examples of creating a trust policy, setting S3 Batch Operations and S3 Object Lock configuration permissions to your objects\. This example will set the retention mode `COMPLIANCE` and the retain until date to Jan 1, 2020 and create a job that will target objects in manifest bucket and report the results in the reports bucket that you have identified\.
+
+```
+public String createComplianceRetentionJob(final AWSS3ControlClient awss3ControlClient) throws ParseException {
+    final String manifestObjectArn = "arn:aws:s3:::ManifestBucket/complaince-objects-manifest.csv";
+    final String manifestObjectVersionId = "your-object-version-Id";
+
+    final JobManifestLocation manifestLocation = new JobManifestLocation()
+            .withObjectArn(manifestObjectArn)
+            .withETag(manifestObjectVersionId);
+
+    final JobManifestSpec manifestSpec =
+            new JobManifestSpec()
+                    .withFormat(JobManifestFormat.S3BatchOperations_CSV_20180820)
+                    .withFields("Bucket", "Key");
+
+    final JobManifest manifestToPublicApi = new JobManifest()
+            .withLocation(manifestLocation)
+            .withSpec(manifestSpec);
+
+    final String jobReportBucketArn = "arn:aws:s3:::ReportBucket";
+    final String jobReportPrefix = "reports/compliance-objects-bops";
+
+    final JobReport jobReport = new JobReport()
+            .withEnabled(true)
+            .withReportScope(JobReportScope.AllTasks)
+            .withBucket(jobReportBucketArn)
+            .withPrefix(jobReportPrefix)
+            .withFormat(JobReportFormat.Report_CSV_20180820);
+
+    final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    final Date janFirst = format.parse("01/01/2020");
+
+    final JobOperation jobOperation = new JobOperation()
+            .withS3PutObjectRetention(new S3SetObjectRetentionOperation()
+                    .withRetention(new S3Retention()
+                            .withMode(S3ObjectLockRetentionMode.COMPLIANCE)
+                            .withRetainUntilDate(janFirst)));
+
+    final String roleArn = "arn:aws:iam::123456789012:role/bops-object-lock";
+    final Boolean requiresConfirmation = true;
+    final int priority = 10;
+
+    final CreateJobRequest request = new CreateJobRequest()
+            .withAccountId("123456789012")
+            .withDescription("Set compliance retain-until to 1 Jan 2020")
+            .withManifest(manifestToPublicApi)
+            .withOperation(jobOperation)
+            .withPriority(priority)
+            .withRoleArn(roleArn)
+            .withReport(jobReport)
+            .withConfirmationRequired(requiresConfirmation);
+
+    final CreateJobResult result = awss3ControlClient.createJob(request);
+
+    return result.getJobId();
+}
+```
+
+The example below shows how you can extend the `COMPLIANCE` mode's retain until date to Jan 15, 2020\.
+
+```
+public String createExtendComplianceRetentionJob(final AWSS3ControlClient awss3ControlClient) throws ParseException {
+    final String manifestObjectArn = "arn:aws:s3:::ManifestBucket/complaince-objects-manifest.csv";
+    final String manifestObjectVersionId = "15ad5ba069e6bbc465c77bf83d541385";
+
+    final JobManifestLocation manifestLocation = new JobManifestLocation()
+            .withObjectArn(manifestObjectArn)
+            .withETag(manifestObjectVersionId);
+
+    final JobManifestSpec manifestSpec =
+            new JobManifestSpec()
+                    .withFormat(JobManifestFormat.S3BatchOperations_CSV_20180820)
+                    .withFields("Bucket", "Key");
+
+    final JobManifest manifestToPublicApi = new JobManifest()
+            .withLocation(manifestLocation)
+            .withSpec(manifestSpec);
+
+    final String jobReportBucketArn = "arn:aws:s3:::ReportBucket";
+    final String jobReportPrefix = "reports/compliance-objects-bops";
+
+    final JobReport jobReport = new JobReport()
+            .withEnabled(true)
+            .withReportScope(JobReportScope.AllTasks)
+            .withBucket(jobReportBucketArn)
+            .withPrefix(jobReportPrefix)
+            .withFormat(JobReportFormat.Report_CSV_20180820);
+
+    final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    final Date jan15th = format.parse("15/01/2020");
+
+    final JobOperation jobOperation = new JobOperation()
+            .withS3PutObjectRetention(new S3SetObjectRetentionOperation()
+                    .withRetention(new S3Retention()
+                            .withMode(S3ObjectLockRetentionMode.COMPLIANCE)
+                            .withRetainUntilDate(jan15th)));
+
+    final String roleArn = "arn:aws:iam::123456789012:role/bops-object-lock";
+    final Boolean requiresConfirmation = true;
+    final int priority = 10;
+
+    final CreateJobRequest request = new CreateJobRequest()
+            .withAccountId("123456789012")
+            .withDescription("Extend compliance retention to 15 Jan 2020")
+            .withManifest(manifestToPublicApi)
+            .withOperation(jobOperation)
+            .withPriority(priority)
+            .withRoleArn(roleArn)
+            .withReport(jobReport)
+            .withConfirmationRequired(requiresConfirmation);
+
+    final CreateJobResult result = awss3ControlClient.createJob(request);
+
+    return result.getJobId();
+}
+```
+
+#### Using S3 Batch Operations with S3 Object Lock retention governance mode<a name="batch-ops-examples-java-object-lock-governance"></a>
+
+The following example builds on the previous example of creating a trust policy, setting S3 Batch Operations and S3 Object Lock configuration permissions and shows how to apply S3 Object Lock retention governance with the retain until date to Jan 30, 2020 across multiples objects and creates a Batch Operations job that will use the manifest bucket and reports the results in the reports bucket\.
+
+```
+public String createGovernanceRetentionJob(final AWSS3ControlClient awss3ControlClient) throws ParseException {
+    final String manifestObjectArn = "arn:aws:s3:::ManifestBucket/governance-objects-manifest.csv";
+    final String manifestObjectVersionId = "15ad5ba069e6bbc465c77bf83d541385";
+
+    final JobManifestLocation manifestLocation = new JobManifestLocation()
+            .withObjectArn(manifestObjectArn)
+            .withETag(manifestObjectVersionId);
+
+    final JobManifestSpec manifestSpec =
+            new JobManifestSpec()
+                    .withFormat(JobManifestFormat.S3BatchOperations_CSV_20180820)
+                    .withFields("Bucket", "Key");
+
+    final JobManifest manifestToPublicApi = new JobManifest()
+            .withLocation(manifestLocation)
+            .withSpec(manifestSpec);
+
+    final String jobReportBucketArn = "arn:aws:s3:::ReportBucket";
+    final String jobReportPrefix = "reports/governance-objects";
+
+    final JobReport jobReport = new JobReport()
+            .withEnabled(true)
+            .withReportScope(JobReportScope.AllTasks)
+            .withBucket(jobReportBucketArn)
+            .withPrefix(jobReportPrefix)
+            .withFormat(JobReportFormat.Report_CSV_20180820);
+
+    final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    final Date jan30th = format.parse("30/01/2020");
+
+    final JobOperation jobOperation = new JobOperation()
+            .withS3PutObjectRetention(new S3SetObjectRetentionOperation()
+                    .withRetention(new S3Retention()
+                            .withMode(S3ObjectLockRetentionMode.GOVERNANCE)
+                            .withRetainUntilDate(jan30th)));
+
+    final String roleArn = "arn:aws:iam::123456789012:role/bops-object-lock";
+    final Boolean requiresConfirmation = true;
+    final int priority = 10;
+
+    final CreateJobRequest request = new CreateJobRequest()
+            .withAccountId("123456789012")
+            .withDescription("Put governance retention")
+            .withManifest(manifestToPublicApi)
+            .withOperation(jobOperation)
+            .withPriority(priority)
+            .withRoleArn(roleArn)
+            .withReport(jobReport)
+            .withConfirmationRequired(requiresConfirmation);
+
+    final CreateJobResult result = awss3ControlClient.createJob(request);
+
+    return result.getJobId();
+}
+```
+
+The following example builds on the previous example of creating a trust policy, setting S3 Batch Operations and S3 Object Lock configuration permissions and shows how to bypass retention governance with across multiples objects and creates a Batch Operations job that will use the manifest bucket and reports the results in the reports bucket\.
+
+```
+public void allowBypassGovernance() {
+    final String roleName = "bops-object-lock";
+
+    final String bypassGovernancePermissions = "{" +
+            "    \"Version\": \"2012-10-17\"," +
+            "    \"Statement\": [" +
+            "        {" +
+            "            \"Effect\": \"Allow\"," +
+            "            \"Action\": [" +
+            "                \"s3:BypassGovernanceRetention\"" +
+            "            ]," +
+            "            \"Resource\": [" +
+            "                \"arn:aws:s3:::ManifestBucket/*\"" +
+            "            ]" +
+            "        }" +
+            "    ]" +
+            "}";
+
+    final AmazonIdentityManagement iam =
+            AmazonIdentityManagementClientBuilder.defaultClient();
+
+    final PutRolePolicyRequest putRolePolicyRequest = new PutRolePolicyRequest()
+            .withPolicyDocument(bypassGovernancePermissions)
+            .withPolicyName("bypass-governance-permissions")
+            .withRoleName(roleName);
+
+    final PutRolePolicyResult putRolePolicyResult = iam.putRolePolicy(putRolePolicyRequest);
+} 
+public String createRemoveGovernanceRetentionJob(final AWSS3ControlClient awss3ControlClient) {
+    final String manifestObjectArn = "arn:aws:s3:::ManifestBucket/governance-objects-manifest.csv";
+    final String manifestObjectVersionId = "15ad5ba069e6bbc465c77bf83d541385";
+
+    final JobManifestLocation manifestLocation = new JobManifestLocation()
+            .withObjectArn(manifestObjectArn)
+            .withETag(manifestObjectVersionId);
+
+    final JobManifestSpec manifestSpec =
+            new JobManifestSpec()
+                    .withFormat(JobManifestFormat.S3BatchOperations_CSV_20180820)
+                    .withFields("Bucket", "Key");
+
+    final JobManifest manifestToPublicApi = new JobManifest()
+            .withLocation(manifestLocation)
+            .withSpec(manifestSpec);
+
+    final String jobReportBucketArn = "arn:aws:s3:::ReportBucket";
+    final String jobReportPrefix = "reports/bops-governance";
+
+    final JobReport jobReport = new JobReport()
+            .withEnabled(true)
+            .withReportScope(JobReportScope.AllTasks)
+            .withBucket(jobReportBucketArn)
+            .withPrefix(jobReportPrefix)
+            .withFormat(JobReportFormat.Report_CSV_20180820);
+
+    final JobOperation jobOperation = new JobOperation()
+            .withS3PutObjectRetention(new S3SetObjectRetentionOperation()
+                    .withRetention(new S3Retention()));
+
+    final String roleArn = "arn:aws:iam::123456789012:role/bops-object-lock";
+    final Boolean requiresConfirmation = true;
+    final int priority = 10;
+
+    final CreateJobRequest request = new CreateJobRequest()
+            .withAccountId("123456789012")
+            .withDescription("Remove governance retention")
+            .withManifest(manifestToPublicApi)
+            .withOperation(jobOperation)
+            .withPriority(priority)
+            .withRoleArn(roleArn)
+            .withReport(jobReport)
+            .withConfirmationRequired(requiresConfirmation);
+
+    final CreateJobResult result = awss3ControlClient.createJob(request);
+
+    return result.getJobId();
+}
+```
+
+### Example: Using S3 Batch Operations with S3 Object Lock legal hold<a name="batch-ops-examples-java-object-lock-legalhold"></a>
+
+The following example builds on the previous examples of creating a trust policy, setting S3 Batch Operations and S3 Object Lock configuration permissions and shows how to disable Object Lock legal hold on objects using Batch Operations\. 
+
+This example first updates the role allow `s3:PutObjectLegalHold` permissions and then creates a Batch Operations job that will turn off\(remove\) legal hold from the objects identified in the manifest and report on it\.
+
+```
+public void allowPutObjectLegalHold() {
+    final String roleName = "bops-object-lock";
+
+    final String legalHoldPermissions = "{" +
+            "    \"Version\": \"2012-10-17\"," +
+            "    \"Statement\": [" +
+            "        {" +
+            "            \"Effect\": \"Allow\"," +
+            "            \"Action\": [" +
+            "                \"s3:PutObjectLegalHold\"" +
+            "            ]," +
+            "            \"Resource\": [" +
+            "                \"arn:aws:s3:::ManifestBucket/*\"" +
+            "            ]" +
+            "        }" +
+            "    ]" +
+            "}";
+
+    final AmazonIdentityManagement iam =
+            AmazonIdentityManagementClientBuilder.defaultClient();
+
+    final PutRolePolicyRequest putRolePolicyRequest = new PutRolePolicyRequest()
+            .withPolicyDocument(legalHoldPermissions)
+            .withPolicyName("legal-hold-permissions")
+            .withRoleName(roleName);
+
+    final PutRolePolicyResult putRolePolicyResult = iam.putRolePolicy(putRolePolicyRequest);
+}
+```
+
+Use the example below if you want to turn off legal hold\.
+
+```
+public String createLegalHoldOffJob(final AWSS3ControlClient awss3ControlClient) {
+    final String manifestObjectArn = "arn:aws:s3:::ManifestBucket/legalhold-object-manifest.csv";
+    final String manifestObjectVersionId = "15ad5ba069e6bbc465c77bf83d541385";
+
+    final JobManifestLocation manifestLocation = new JobManifestLocation()
+            .withObjectArn(manifestObjectArn)
+            .withETag(manifestObjectVersionId);
+
+    final JobManifestSpec manifestSpec =
+            new JobManifestSpec()
+                    .withFormat(JobManifestFormat.S3BatchOperations_CSV_20180820)
+                    .withFields("Bucket", "Key");
+
+    final JobManifest manifestToPublicApi = new JobManifest()
+            .withLocation(manifestLocation)
+            .withSpec(manifestSpec);
+
+    final String jobReportBucketArn = "arn:aws:s3:::ReportBucket";
+    final String jobReportPrefix = "reports/legalhold-objects-bops";
+
+    final JobReport jobReport = new JobReport()
+            .withEnabled(true)
+            .withReportScope(JobReportScope.AllTasks)
+            .withBucket(jobReportBucketArn)
+            .withPrefix(jobReportPrefix)
+            .withFormat(JobReportFormat.Report_CSV_20180820);
+
+    final JobOperation jobOperation = new JobOperation()
+            .withS3PutObjectLegalHold(new S3SetObjectLegalHoldOperation()
+                    .withLegalHold(new S3ObjectLockLegalHold()
+                            .withStatus(S3ObjectLockLegalHoldStatus.OFF)));
+
+    final String roleArn = "arn:aws:iam::123456789012:role/bops-object-lock";
+    final Boolean requiresConfirmation = true;
+    final int priority = 10;
+
+    final CreateJobRequest request = new CreateJobRequest()
+            .withAccountId("123456789012")
+            .withDescription("Turn off legal hold")
+            .withManifest(manifestToPublicApi)
+            .withOperation(jobOperation)
+            .withPriority(priority)
+            .withRoleArn(roleArn)
+            .withReport(jobReport)
+            .withConfirmationRequired(requiresConfirmation);
+
+    final CreateJobResult result = awss3ControlClient.createJob(request);
+
+    return result.getJobId();
 }
 ```

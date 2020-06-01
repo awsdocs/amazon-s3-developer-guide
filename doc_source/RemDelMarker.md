@@ -1,4 +1,4 @@
-# Removing Delete Markers<a name="RemDelMarker"></a>
+# Removing delete markers<a name="RemDelMarker"></a>
 
 To delete a delete marker, you must specify its version ID in a `DELETE Object versionId` request\. If you use a `DELETE` request to delete a delete marker \(without specifying the version ID of the delete marker\), Amazon S3 does not delete the delete marker, but instead, inserts another delete marker\.
 
@@ -20,7 +20,7 @@ The effect of removing the delete marker is that a simple `GET` request will now
 
 1. Send a `DELETE Object versionId` request\.
 
-**Example Removing a Delete Marker**  
+**Example Removing a delete marker**  
 The following example removes the delete marker for `photo.gif` version 4857693\.  
 
 ```

@@ -1,6 +1,6 @@
 # Copy an Amazon S3 Object in a Single Operation Using the AWS SDK for \.NET<a name="CopyingObjectUsingNetSDK"></a>
 
-The following C\# example shows how to use the high\-level AWS SDK for \.NET to copy objects that are as big as 5 GB in a single operation\. For objects that are bigger than 5 GB, use the multipart upload copy example described in [Copy an Amazon S3 Object Using the AWS SDK for \.NET Multipart Upload API](CopyingObjctsUsingLLNetMPUapi.md)\.
+The following C\# example shows how to use the high\-level AWS SDK for \.NET to copy objects that are as big as 5 GB in a single operation\. For objects that are bigger than 5 GB, use the multipart upload copy example described in [Copy an Amazon S3 object using the AWS SDK for \.NET multipart upload API](CopyingObjctsUsingLLNetMPUapi.md)\.
 
 This example makes a copy of an object that is a maximum of 5 GB\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 

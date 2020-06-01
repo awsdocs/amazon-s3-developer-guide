@@ -1,4 +1,4 @@
-# Amazon S3 Inventory<a name="storage-inventory"></a>
+# Amazon S3 inventory<a name="storage-inventory"></a>
 
 Amazon S3 inventory is one of the tools Amazon S3 provides to help manage your storage\. You can use it to audit and report on the replication and encryption status of your objects for business, compliance, and regulatory needs\. You can also simplify and speed up business workflows and big data jobs using Amazon S3 inventory, which provides a scheduled alternative to the Amazon S3 synchronous `List` API operation\. 
 
@@ -9,18 +9,18 @@ You can configure multiple inventory lists for a bucket\. You can configure what
 You can query Amazon S3 inventory using standard SQL by using [Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug/what-is.html), Amazon Redshift Spectrum, and other tools such as [Presto](https://prestodb.io/), [Apache Hive](https://hive.apache.org/), and [Apache Spark](https://databricks.com/spark/about/)\. It's easy to use Athena to run queries on your inventory files\. You can use Athena for Amazon S3 inventory queries in all Regions where Athena is available\. 
 
 **Topics**
-+ [How Do I Set Up Amazon S3 Inventory?](#storage-inventory-how-to-set-up)
-+ [What's Included in an Amazon S3 Inventory?](#storage-inventory-contents)
-+ [Where Are Inventory Lists Located?](#storage-inventory-location)
-+ [How Do I Know When an Inventory Is Complete?](#storage-inventory-notification)
-+ [Querying Inventory with Amazon Athena](#storage-inventory-athena-query)
-+ [Amazon S3 Inventory REST APIs](#storage-inventory-related-resources)
++ [How do I set up Amazon S3 inventory?](#storage-inventory-how-to-set-up)
++ [What's included in an Amazon S3 inventory?](#storage-inventory-contents)
++ [Where are inventory lists located?](#storage-inventory-location)
++ [How do I know when an inventory is complete?](#storage-inventory-notification)
++ [Querying inventory with Amazon Athena](#storage-inventory-athena-query)
++ [Amazon S3 inventory REST APIs](#storage-inventory-related-resources)
 
-## How Do I Set Up Amazon S3 Inventory?<a name="storage-inventory-how-to-set-up"></a>
+## How do I set up Amazon S3 inventory?<a name="storage-inventory-how-to-set-up"></a>
 
 This section describes how to set up an inventory, including details about the inventory source and destination buckets\.
 
-### Amazon S3 Inventory Source and Destination Buckets<a name="storage-inventory-buckets"></a>
+### Amazon S3 inventory source and destination buckets<a name="storage-inventory-buckets"></a>
 
 The bucket that the inventory lists the objects for is called the *source bucket*\. The bucket where the inventory list file is stored is called the *destination bucket*\. 
 
@@ -38,13 +38,13 @@ Amazon S3 inventory list files are written to the destination bucket\. To group 
 
 The destination bucket:
 + Contains the inventory file lists\. 
-+ Contains the manifest files that list all the file inventory lists that are stored in the destination bucket\. For more information, see [What Is an Inventory Manifest?](#storage-inventory-location-manifest)
++ Contains the manifest files that list all the file inventory lists that are stored in the destination bucket\. For more information, see [What is an inventory manifest?](#storage-inventory-location-manifest)
 + Must have a bucket policy to give Amazon S3 permission to verify ownership of the bucket and permission to write files to the bucket\. 
 + Must be in the same AWS Region as the source bucket\.
 + Can be the same as the source bucket\.
 + Can be owned by a different AWS account than the account that owns the source bucket\.
 
-### Setting Up Amazon S3 Inventory<a name="storage-inventory-setting-up"></a>
+### Setting up Amazon S3 inventory<a name="storage-inventory-setting-up"></a>
 
 Amazon S3 inventory helps you manage your storage by creating lists of the objects in an S3 bucket on a defined schedule\. You can configure multiple inventory lists for a bucket\. The inventory lists are published to CSV, ORC, or Parquet files in a destination bucket\. 
 
@@ -60,15 +60,15 @@ The easiest way to set up an inventory is by using the AWS Management Console, b
 
    When you configure an inventory list for a source bucket, you specify the destination bucket where you want the list to be stored, and whether you want to generate the list daily or weekly\. You can also configure what object metadata to include and whether to list all object versions or only current versions\. 
 
-   You can specify that the inventory list file be encrypted by using an Amazon S3 managed key \(SSE\-S3\) or an AWS Key Management Service \(AWS KMS\) customer managed customer master key \(CMK\)\. For more information about SSE\-S3 and SSE\-KMS, see [Protecting Data Using Server\-Side Encryption](serv-side-encryption.md)\. If you plan to use SSE\-KMS encryption, see Step 3\.
+   You can specify that the inventory list file be encrypted by using an Amazon S3 managed key \(SSE\-S3\) or an AWS Key Management Service \(AWS KMS\) customer managed customer master key \(CMK\)\. For more information about SSE\-S3 and SSE\-KMS, see [Protecting data using server\-side encryption](serv-side-encryption.md)\. If you plan to use SSE\-KMS encryption, see Step 3\.
    + For information about how to use the console to configure an inventory list, see [How Do I Configure Amazon S3 Inventory?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-inventory.html) in the *Amazon Simple Storage Service Console User Guide*\.
    + To use the Amazon S3 API to configure an inventory list, use the [PUT Bucket inventory configuration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTInventoryConfig.html) REST API or the equivalent from the AWS CLI or AWS SDKs\. 
 
 1. **To encrypt the inventory list file with SSE\-KMS, grant Amazon S3 permission to use the CMK stored in AWS KMS\.**
 
-   You can configure encryption for the inventory list file by using the AWS Management Console, REST API, AWS CLI, or AWS SDKs\. Whichever way you choose, you must grant Amazon S3 permission to use the AWS KMS customer managed CMK to encrypt the inventory file\. You grant Amazon S3 permission by modifying the key policy for the customer managed CMK that you want to use to encrypt the inventory file\. For more information, see the next section, [Granting Amazon S3 Permission to Use Your AWS KMS CMK for Encryption](#storage-inventory-kms-key-policy)\.
+   You can configure encryption for the inventory list file by using the AWS Management Console, REST API, AWS CLI, or AWS SDKs\. Whichever way you choose, you must grant Amazon S3 permission to use the AWS KMS customer managed CMK to encrypt the inventory file\. You grant Amazon S3 permission by modifying the key policy for the customer managed CMK that you want to use to encrypt the inventory file\. For more information, see the next section, [Granting Amazon S3 permission to use your AWS KMS CMK for encryption](#storage-inventory-kms-key-policy)\.
 
-#### Granting Amazon S3 Permission to Use Your AWS KMS CMK for Encryption<a name="storage-inventory-kms-key-policy"></a>
+#### Granting Amazon S3 permission to use your AWS KMS CMK for encryption<a name="storage-inventory-kms-key-policy"></a>
 
 To grant Amazon S3 permission to encrypt using a customer managed AWS Key Management Service \(AWS KMS\) customer master key \(CMK\), you must use a key policy\. To update your key policy so that you can use an AWS KMS customer managed CMK to encrypt the inventory file, follow these steps\.
 
@@ -112,7 +112,7 @@ To grant Amazon S3 permission to encrypt using a customer managed AWS Key Manage
 
    You can also use the AWS KMS PUT key policy API [PutKeyPolicy](https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html) to copy the key policy to the customer managed CMK that you want to use to encrypt the inventory file\. 
 
-## What's Included in an Amazon S3 Inventory?<a name="storage-inventory-contents"></a>
+## What's included in an Amazon S3 inventory?<a name="storage-inventory-contents"></a>
 
 An inventory list file contains a list of the objects in the source bucket and metadata for each object\. The inventory lists are stored in the destination bucket as a CSV file compressed with GZIP, as an Apache optimized row columnar \(ORC\) file compressed with ZLIB, or as an Apache Parquet \(Parquet\) file compressed with Snappy\. 
 
@@ -129,20 +129,20 @@ The inventory list contains a list of the objects in an S3 bucket and the follow
 + **Multipart upload flag** – Set to `True` if the object was uploaded as a multipart upload\. For more information, see [Multipart Upload Overview](mpuoverview.md)\.
 + **Delete marker** – Set to `True`, if the object is a delete marker\. For more information, see [Object Versioning](ObjectVersioning.md)\. \(This field is automatically added to your report if you've configured the report to include all versions of your objects\)\.
 + **Replication status** – Set to `PENDING`, `COMPLETED`, `FAILED`, or `REPLICA.` For more information, see [Replication Status Information](replication-status.md)\.
-+ **Encryption status** – Set to `SSE-S3`, `SSE-C`, `SSE-KMS`, or `NOT-SSE`\. The server\-side encryption status for SSE\-S3, SSE\-KMS, and SSE with customer\-provided keys \(SSE\-C\)\. A status of `NOT-SSE` means that the object is not encrypted with server\-side encryption\. For more information, see [Protecting Data Using Encryption](UsingEncryption.md)\.
-+ **Object lock Retain until date** – The date until which the locked object cannot be deleted\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
-+ **Object lock Mode** – Set to `Governance` or `Compliance` for objects that are locked\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
-+ **Object lock Legal hold status ** – Set to `On` if a legal hold has been applied to an object; otherwise it is set to `Off`\. For more information, see [Locking Objects Using Amazon S3 Object Lock](object-lock.md)\.
++ **Encryption status** – Set to `SSE-S3`, `SSE-C`, `SSE-KMS`, or `NOT-SSE`\. The server\-side encryption status for SSE\-S3, SSE\-KMS, and SSE with customer\-provided keys \(SSE\-C\)\. A status of `NOT-SSE` means that the object is not encrypted with server\-side encryption\. For more information, see [Protecting data using encryption](UsingEncryption.md)\.
++ **S3 Object Lock Retain until date** – The date until which the locked object cannot be deleted\. For more information, see [Locking objects using S3 Object Lock](object-lock.md)\.
++ **S3 Object Lock Mode** – Set to `Governance` or `Compliance` for objects that are locked\. For more information, see [Locking objects using S3 Object Lock](object-lock.md)\.
++ **S3 Object Lock Legal hold status ** – Set to `On` if a legal hold has been applied to an object; otherwise it is set to `Off`\. For more information, see [Locking objects using S3 Object Lock](object-lock.md)\.
 
-We recommend that you create a lifecycle policy that deletes old inventory lists\. For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\.
+We recommend that you create a lifecycle policy that deletes old inventory lists\. For more information, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
 
-### Inventory Consistency<a name="storage-inventory-contents-consistency"></a>
+### Inventory consistency<a name="storage-inventory-contents-consistency"></a>
 
 All of your objects might not appear in each inventory list\. The inventory list provides eventual consistency for PUTs of both new objects and overwrites, and DELETEs\. Inventory lists are a rolling snapshot of bucket items, which are eventually consistent \(that is, the list might not include recently added or deleted objects\)\. 
 
 To validate the state of the object before you take action on the object, we recommend that you perform a `HEAD Object` REST API request to retrieve metadata for the object, or check the object's properties in the Amazon S3 console\. You can also check object metadata with the AWS CLI or the AWS SDKS\. For more information, see [HEAD Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html) in the *Amazon Simple Storage Service API Reference*\.
 
-## Where Are Inventory Lists Located?<a name="storage-inventory-location"></a>
+## Where are inventory lists located?<a name="storage-inventory-location"></a>
 
 When an inventory list is published, the manifest files are published to the following location in the destination bucket\.
 
@@ -170,7 +170,7 @@ The inventory lists are published daily or weekly to the following location in t
 + *source\-bucket* is the source bucket that the inventory list is for\. It is added to prevent collisions when multiple inventory reports from different source buckets are sent to the same destination bucket\.
 + *example\-file\-name*`.csv.gz` is one of the CSV inventory files\. ORC inventory names end with the file name extension `.orc`, and Parquet inventory names end with the file name extension `.parquet`\.
 
-### What Is an Inventory Manifest?<a name="storage-inventory-location-manifest"></a>
+### What is an inventory manifest?<a name="storage-inventory-location-manifest"></a>
 
 The manifest files `manifest.json` and `symlink.txt` describe where the inventory files are located\. Whenever a new inventory list is delivered, it is accompanied by a new set of manifest files\.
 
@@ -250,11 +250,11 @@ The `symlink.txt` file is an Apache Hive\-compatible manifest file that allows H
 The `symlink.txt` Apache Hive\-compatible manifest file does not currently work with AWS Glue\.  
 Reading `symlink.txt` with [Apache Hive](https://hive.apache.org/) and [Apache Spark](https://databricks.com/spark/about/) is not supported for ORC and Parquet\-formatted inventory files\. 
 
-## How Do I Know When an Inventory Is Complete?<a name="storage-inventory-notification"></a>
+## How do I know when an inventory is complete?<a name="storage-inventory-notification"></a>
 
 You can set up an Amazon S3 event notification to receive notice when the manifest checksum file is created, which indicates that an inventory list has been added to the destination bucket\. The manifest is an up\-to\-date list of all the inventory lists at the destination location\.
 
-Amazon S3 can publish events to an Amazon Simple Notification Service \(Amazon SNS\) topic, an Amazon Simple Queue Service \(Amazon SQS\) queue, or an AWS Lambda function\. For more information, see [ Configuring Amazon S3 Event Notifications](NotificationHowTo.md)\.
+Amazon S3 can publish events to an Amazon Simple Notification Service \(Amazon SNS\) topic, an Amazon Simple Queue Service \(Amazon SQS\) queue, or an AWS Lambda function\. For more information, see [ Configuring Amazon S3 event notifications](NotificationHowTo.md)\.
 
 The following notification configuration defines that all `manifest.checksum` files newly added to the destination bucket are processed by the AWS Lambda `cloud-function-list-write`\.
 
@@ -282,7 +282,7 @@ The following notification configuration defines that all `manifest.checksum` fi
 
 For more information, see [Using AWS Lambda with Amazon S3](https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html) in the *AWS Lambda Developer Guide*\.
 
-## Querying Inventory with Amazon Athena<a name="storage-inventory-athena-query"></a>
+## Querying inventory with Amazon Athena<a name="storage-inventory-athena-query"></a>
 
 You can query Amazon S3 inventory using standard SQL by using Amazon Athena in all Regions where Athena is available\. To check for AWS Region availability, see the [AWS Region Table](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/)\. 
 
@@ -325,6 +325,12 @@ Athena can query Amazon S3 inventory files in ORC, Parquet, or CSV format\. When
    ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe'
    ```
 
+    When using Athena to query a CSV\-formatted inventory report, use the following Parquet SerDe in place of the ORC SerDe in the `ROW FORMAT SERDE` statement\.
+
+   ```
+   ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+   ```
+
 1. To add new inventory lists to your table, use the following `MSCK REPAIR TABLE` command\.
 
    ```
@@ -347,7 +353,7 @@ Athena can query Amazon S3 inventory files in ORC, Parquet, or CSV format\. When
 
 For more information about using Athena, see [Amazon Athena User Guide](https://docs.aws.amazon.com/athena/latest/ug/)\.
 
-## Amazon S3 Inventory REST APIs<a name="storage-inventory-related-resources"></a>
+## Amazon S3 inventory REST APIs<a name="storage-inventory-related-resources"></a>
 
 The following are the REST operations used for Amazon S3 inventory\.
 +  [ DELETE Bucket Inventory ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEInventoryConfiguration.html) 

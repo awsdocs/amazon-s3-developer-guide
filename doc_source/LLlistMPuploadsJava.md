@@ -1,4 +1,4 @@
-# List Multipart Uploads<a name="LLlistMPuploadsJava"></a>
+# List multipart uploads<a name="LLlistMPuploadsJava"></a>
 
 **Example**  
 The following example shows how to retrieve a list of in\-progress multipart uploads using the low\-level Java API:  

@@ -39,6 +39,6 @@ In order to determine whether the requester has permission to perform the specif
 
 ## Related Topics<a name="access-control-how-s3-evaluates-related-topics"></a>
 
-We recommend you first review the introductory topics that explain the options for managing access to your Amazon S3 resources\. For more information, see [Introduction to Managing Access to Amazon S3 Resources](s3-access-control.md#intro-managing-access-s3-resources)\. You can then use the following topics for more information about specific access policy options\. 
+We recommend you first review the introductory topics that explain the options for managing access to your Amazon S3 resources\. For more information, see [Introduction to managing access to Amazon S3 resources](s3-access-control.md#intro-managing-access-s3-resources)\. You can then use the following topics for more information about specific access policy options\. 
 +  [Using Bucket Policies and User Policies](using-iam-policies.md) 
 +  [Managing Access with ACLs](S3_ACLs_UsingACLs.md) 

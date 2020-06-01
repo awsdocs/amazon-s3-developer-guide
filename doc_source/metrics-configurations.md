@@ -1,10 +1,10 @@
-# Metrics Configurations for Buckets<a name="metrics-configurations"></a>
+# Metrics configurations for buckets<a name="metrics-configurations"></a>
 
 With Amazon CloudWatch request metrics for Amazon S3, you can receive 1\-minute CloudWatch metrics, set CloudWatch alarms, and access CloudWatch dashboards to view near\-real\-time operations and performance of your Amazon S3 storage\. For applications that depend on cloud storage, these metrics let you quickly identify and act on operational issues\. When enabled, these 1\-minute metrics are available at the Amazon S3 bucket\-level, by default\.
 
 If you want to get the CloudWatch request metrics for the objects in a bucket, you must create a metrics configuration for the bucket\. You can also define a filter for the metrics collected using a shared prefix or object tags\. This allows you to align metrics filters to specific business applications, workflows, or internal organizations\.
 
-For more information about the CloudWatch metrics that are available and the differences between storage and request metrics, see [Monitoring Metrics with Amazon CloudWatch](cloudwatch-monitoring.md)\.
+For more information about the CloudWatch metrics that are available and the differences between storage and request metrics, see [Monitoring metrics with Amazon CloudWatch](cloudwatch-monitoring.md)\.
 
 Keep the following in mind when using metrics configurations:
 + You can have a maximum of 1,000 metrics configurations per bucket\.
@@ -14,7 +14,7 @@ Keep the following in mind when using metrics configurations:
 + Request metrics are reported for object\-level operations\. They are also reported for operations that list bucket contents, like [GET Bucket \(List Objects\)](https://docs.aws.amazon.com/AmazonS3/latest/API/v2-RESTBucketGET.html), [GET Bucket Object Versions](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETVersion.html), and [List Multipart Uploads](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadListMPUpload.html), but they are not reported for other operations on buckets\.
 + Request metrics support filtering by prefixes, but storage metrics do not\.
 
-## Best\-Effort CloudWatch Metrics Delivery<a name="metrics-configurations-delivery"></a>
+## Best\-effort CloudWatch metrics delivery<a name="metrics-configurations-delivery"></a>
 
  CloudWatch metrics are delivered on a best\-effort basis\. Most requests for an Amazon S3 object that have request metrics result in a data point being sent to CloudWatch\.
 
@@ -22,7 +22,7 @@ The completeness and timeliness of metrics is not guaranteed\. The data point fo
 
 It follows from the best\-effort nature of this feature that the reports available at the [Billing & Cost Management Dashboard](https://console.aws.amazon.com/billing/home?#/) might include one or more access requests that do not appear in the bucket metrics\.
 
-## Filtering Metrics Configurations<a name="metrics-configurations-filter"></a>
+## Filtering metrics configurations<a name="metrics-configurations-filter"></a>
 
 When working with CloudWatch metric configurations, you have the option of filtering the configuration into groups of related objects within a single bucket\. You can filter objects in a bucket for inclusion in a metrics configuration based on one or more of the following elements:
 + **Object key name prefix** – Although the Amazon S3 data model is a flat structure, you can infer hierarchy by using a prefix\. The Amazon S3 console supports these prefixes with the concept of folders\. If you filter by prefix, objects that have the same prefix are included in the metrics configuration\.
@@ -32,7 +32,7 @@ If you specify a filter, only requests that operate on single objects can match 
 
 To request more complex filtering, choose two or more elements\. Only objects that have all of those elements are included in the metrics configuration\. If you don't set filters, all of the objects in the bucket are included in the metrics configuration\.
 
-## How to Add Metrics Configurations<a name="add-metrics-configurations"></a>
+## How to add metrics configurations<a name="add-metrics-configurations"></a>
 
 You can add metrics configurations to a bucket through the Amazon S3 console, with the AWS CLI, or with the Amazon S3 REST API\. For information about how to do this in the AWS Management Console, see the [How Do I Configure Request Metrics for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/configure-metrics.html) in the *Amazon Simple Storage Service Console User Guide*\.
 

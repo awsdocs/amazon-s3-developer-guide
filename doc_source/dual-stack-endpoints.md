@@ -1,16 +1,16 @@
-# Using Amazon S3 Dual\-Stack Endpoints<a name="dual-stack-endpoints"></a>
+# Using Amazon S3 dual\-stack endpoints<a name="dual-stack-endpoints"></a>
 
 Amazon S3 dual\-stack endpoints support requests to S3 buckets over IPv6 and IPv4\. This section describes how to use dual\-stack endpoints\.
 
 **Topics**
-+ [Amazon S3 Dual\-Stack Endpoints](#dual-stack-endpoints-description)
-+ [Using Dual\-Stack Endpoints from the AWS CLI](#dual-stack-endpoints-cli)
-+ [Using Dual\-Stack Endpoints from the AWS SDKs](#dual-stack-endpoints-sdks)
-+ [Using Dual\-Stack Endpoints from the REST API](#dual-stack-endpoints-examples-rest-api)
++ [Amazon S3 dual\-stack endpoints](#dual-stack-endpoints-description)
++ [Using dual\-stack endpoints from the AWS CLI](#dual-stack-endpoints-cli)
++ [Using dual\-stack endpoints from the AWS SDKs](#dual-stack-endpoints-sdks)
++ [Using dual\-stack endpoints from the REST API](#dual-stack-endpoints-examples-rest-api)
 
-## Amazon S3 Dual\-Stack Endpoints<a name="dual-stack-endpoints-description"></a>
+## Amazon S3 dual\-stack endpoints<a name="dual-stack-endpoints-description"></a>
 
-When you make a request to a dual\-stack endpoint, the bucket URL resolves to an IPv6 or an IPv4 address\. For more information about accessing a bucket over IPv6, see [Making Requests to Amazon S3 over IPv6](ipv6-access.md)\.
+When you make a request to a dual\-stack endpoint, the bucket URL resolves to an IPv6 or an IPv4 address\. For more information about accessing a bucket over IPv6, see [Making requests to Amazon S3 over IPv6](ipv6-access.md)\.
 
 When using the REST API, you directly access an Amazon S3 endpoint by using the endpoint name \(URI\)\. You can access an S3 bucket through a dual\-stack endpoint by using a virtual hosted\-style or a path\-style endpoint name\. Amazon S3 supports only regional dual\-stack endpoint names, which means that you must specify the region as part of the name\. 
 
@@ -31,7 +31,7 @@ You can use transfer acceleration with dual\-stack endpoints\. For more informat
 
 When using the AWS Command Line Interface \(AWS CLI\) and AWS SDKs, you can use a parameter or flag to change to a dual\-stack endpoint\. You can also specify the dual\-stack endpoint directly as an override of the Amazon S3 endpoint in the config file\. The following sections describe how to use dual\-stack endpoints from the AWS CLI and the AWS SDKs\.
 
-## Using Dual\-Stack Endpoints from the AWS CLI<a name="dual-stack-endpoints-cli"></a>
+## Using dual\-stack endpoints from the AWS CLI<a name="dual-stack-endpoints-cli"></a>
 
 This section provides examples of AWS CLI commands used to make requests to a dual\-stack endpoint\. For instructions on setting up the AWS CLI, see [Setting Up the AWS CLI](setup-aws-cli.md)\.
 
@@ -57,11 +57,11 @@ If you want to use a dual\-stack endpoint for specified AWS CLI commands only \(
 **Note**  
 When using the AWS CLI you currently cannot use transfer acceleration with dual\-stack endpoints\. However, support for the AWS CLI is coming soon\. For more information, see [Using Transfer Acceleration from the AWS Command Line Interface \(AWS CLI\) ](transfer-acceleration-examples.md#transfer-acceleration-examples-aws-cli)\. 
 
-## Using Dual\-Stack Endpoints from the AWS SDKs<a name="dual-stack-endpoints-sdks"></a>
+## Using dual\-stack endpoints from the AWS SDKs<a name="dual-stack-endpoints-sdks"></a>
 
 This section provides examples of how to access a dual\-stack endpoint by using the AWS SDKs\. 
 
-### AWS SDK for Java Dual\-Stack Endpoint Example<a name="dual-stack-endpoints-examples-java"></a>
+### AWS SDK for Java dual\-stack endpoint example<a name="dual-stack-endpoints-examples-java"></a>
 
 The following example shows how to enable dual\-stack endpoints when creating an Amazon S3 client using the AWS SDK for Java\.
 
@@ -109,7 +109,7 @@ If you are using the AWS SDK for Java on Windows, you might have to set the foll
 java.net.preferIPv6Addresses=true
 ```
 
-### AWS \.NET SDK Dual\-Stack Endpoint Example<a name="dual-stack-endpoints-examples-dotnet"></a>
+### AWS \.NET SDK dual\-stack endpoint example<a name="dual-stack-endpoints-examples-dotnet"></a>
 
 When using the AWS SDK for \.NET you use the `AmazonS3Config` class to enable the use of a dual\-stack endpoint as shown in the following example\. 
 
@@ -181,6 +181,6 @@ For a full \.NET sample for listing objects, see [Listing Keys Using the AWS SDK
 
 For information about how to create and test a working \.NET sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\. 
 
-## Using Dual\-Stack Endpoints from the REST API<a name="dual-stack-endpoints-examples-rest-api"></a>
+## Using dual\-stack endpoints from the REST API<a name="dual-stack-endpoints-examples-rest-api"></a>
 
-For information about making requests to dual\-stack endpoints by using the REST API, see [Making Requests to Dual\-Stack Endpoints by Using the REST API](RESTAPI.md#rest-api-dual-stack)\.
+For information about making requests to dual\-stack endpoints by using the REST API, see [Making requests to dual\-stack endpoints by using the REST API](RESTAPI.md#rest-api-dual-stack)\.

@@ -1,4 +1,4 @@
-# Amazon S3 Error Best Practices<a name="ErrorBestPractices"></a>
+# Amazon S3 error best practices<a name="ErrorBestPractices"></a>
 
 When designing an application for use with Amazon S3, it is important to handle Amazon S3 errors appropriately\. This section describes issues to consider when designing your application\.
 
@@ -10,11 +10,11 @@ Requests that receive an InternalError response might not have processed\. For e
 
 If Amazon S3 returns an InternalError response, retry the request\.
 
-## Tune Application for Repeated SlowDown errors<a name="UsingErrorsSlowDown"></a>
+## Tune application for repeated SlowDown errors<a name="UsingErrorsSlowDown"></a>
 
 As with any distributed system, S3 has protection mechanisms which detect intentional or unintentional resource over\-consumption and react accordingly\. SlowDown errors can occur when a high request rate triggers one of these mechanisms\. Reducing your request rate will decrease or eliminate errors of this type\. Generally speaking, most users will not experience these errors regularly; however, if you would like more information or are experiencing high or unexpected SlowDown errors, please post to our Amazon S3 developer forum  [https://forums\.aws\.amazon\.com/](https://forums.aws.amazon.com/) or sign up for AWS Premium Support [https://aws\.amazon\.com/premiumsupport/](https://aws.amazon.com/premiumsupport/)\.
 
-## Isolate Errors<a name="UsingErrorsIsolate"></a>
+## Isolate errors<a name="UsingErrorsIsolate"></a>
 
 **Note**  
  SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\. 

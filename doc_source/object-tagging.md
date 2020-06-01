@@ -1,4 +1,4 @@
-# Object Tagging<a name="object-tagging"></a>
+# Object tagging<a name="object-tagging"></a>
 
 Use object tagging to categorize storage\. Each tag is a key\-value pair\. Consider the following tagging examples:
 + Suppose that an object contains protected health information \(PHI\) data\. You might tag the object using the following key\-value pair\.
@@ -49,11 +49,11 @@ With tagging, you now have another dimension\. If you want photo1 in project x c
 **Important**  
 It is acceptable to use tags to label objects containing confidential data, such as personally identifiable information \(PII\) or protected health information \(PHI\)\. However, the tags themselves shouldn't contain any confidential information\. 
 
-To add object tag sets to more than one Amazon S3 object with a single request, you can use Amazon S3 batch operations\. You provide Amazon S3 batch operations with a list of objects to operate on\. Amazon S3 batch operations call the respective API to perform the specified operation\. A single Amazon S3 batch operations job can perform the specified operation on billions of objects containing exabytes of data\. 
+To add object tag sets to more than one Amazon S3 object with a single request, you can use S3 Batch Operations\. You provide S3 Batch Operations with a list of objects to operate on\. S3 Batch Operations call the respective API to perform the specified operation\. A single S3 Batch Operations job can perform the specified operation on billions of objects containing exabytes of data\. 
 
-Amazon S3 batch operations track progress, send notifications, and store a detailed completion report of all actions, providing a fully managed, auditable, serverless experience\. You can use Amazon S3 batch operations through the AWS Management Console, AWS CLI, AWS SDKs, or REST API\. For more information, see [The Basics: Amazon S3 Batch Operations Jobs](batch-ops-basics.md)\.
+S3 Batch Operations track progress, send notifications, and store a detailed completion report of all actions, providing a fully managed, auditable, serverless experience\. You can use S3 Batch Operations through the AWS Management Console, AWS CLI, AWS SDKs, or REST API\. For more information, see [The basics: Amazon S3 batch operations jobs](batch-ops-basics.md)\.
 
-## API Operations Related to Object Tagging<a name="tagging-apis"></a>
+## API operations related to object tagging<a name="tagging-apis"></a>
 
 Amazon S3 supports the following API operations that are specifically for object tagging:
 
@@ -79,11 +79,11 @@ The [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/REST
 Note the following:
 + Tagging follows the eventual consistency model\. That is, soon after adding tags to an object, if you try to retrieve the tags, you might get old tags, if any, on the objects\. However, a subsequent call will likely provide the updated tags\.
 
-## Object Tagging and Additional Information<a name="tagging-other-configs"></a>
+## Object tagging and additional information<a name="tagging-other-configs"></a>
 
 This section explains how object tagging relates to other configurations\.
 
-### Object Tagging and Lifecycle Management<a name="tagging-and-lifecycle"></a>
+### Object tagging and lifecycle management<a name="tagging-and-lifecycle"></a>
 
 In bucket lifecycle configuration, you can specify a filter to select a subset of objects to which the rule applies\. You can specify a filter based on the key name prefixes, object tags, or both\. 
 
@@ -97,13 +97,13 @@ phototype=finished
 
 You might consider archiving the raw photos to S3 Glacier sometime after they are created\. You can configure a lifecycle rule with a filter that identifies the subset of objects with the key name prefix \(`photos/`\) that have a specific tag \(`phototype=raw`\)\. 
 
-For more information, see [Object Lifecycle Management](object-lifecycle-mgmt.md)\. 
+For more information, see [Object lifecycle management](object-lifecycle-mgmt.md)\. 
 
-### Object Tagging and Replication<a name="tagging-and-replication"></a>
+### Object tagging and replication<a name="tagging-and-replication"></a>
 
 If you configured Replication on your bucket, Amazon S3 replicates tags, provided you grant Amazon S3 permission to read the tags\. For more information, see [Overview of Setting Up Replication](replication-how-setup.md)\.
 
-### Object Tagging and Access Control Policies<a name="tagging-and-policies"></a>
+### Object tagging and access control policies<a name="tagging-and-policies"></a>
 
 You can also use permissions policies \(bucket and user policies\) to manage permissions related to object tagging\. For policy actions see the following topics: 
 +  [Example — Object Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-objects) 
@@ -118,7 +118,7 @@ When granting permissions for the `PUT Object` and `DELETE Object` operations, t
 
 For a complete list of Amazon S3 service\-specific condition keys, see [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)\. The following permissions policies illustrate how object tagging enables fine grained access permissions management\.
 
-**Example 1: Allow a user to read only the Objects that have a specific tag**  
+**Example 1: Allow a user to read only the objects that have a specific tag**  
 The following permissions policy grants a user permission to read objects, but the condition limits the read permission to only objects that have the following specific tag key and value\.  
 
 ```
@@ -244,4 +244,4 @@ The following user policy grants a user permissions to perform the `s3:PutObject
 ```
 
 **Related Topics**  
-[Managing Object Tags](tagging-managing.md)
+[Managing object tags](tagging-managing.md)

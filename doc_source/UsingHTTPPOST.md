@@ -1,4 +1,4 @@
-# Browser\-Based Uploads Using POST \(AWS Signature Version 2\)<a name="UsingHTTPPOST"></a>
+# Browser\-based uploads using POST \(AWS signature version 2\)<a name="UsingHTTPPOST"></a>
 
 Amazon S3 supports POST, which allows your users to upload content directly to Amazon S3\. POST is designed to simplify uploads, reduce upload latency, and save you money on applications where users upload data to store in Amazon S3\.
 
@@ -11,7 +11,7 @@ The following figure shows an upload using Amazon S3 POST\.
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/s3_post.png)
 
 
-**Uploading Using POST**  
+**Uploading using POST**  
 
 |  |  | 
 | --- |--- |

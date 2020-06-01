@@ -1,4 +1,4 @@
-# Manage an Object's Lifecycle Using the Amazon S3 Console<a name="manage-lifecycle-using-console"></a>
+# Manage an object's lifecycle using the Amazon S3 console<a name="manage-lifecycle-using-console"></a>
 
 You can specify S3 Lifecycle rules on a bucket using the Amazon S3 console\. 
 

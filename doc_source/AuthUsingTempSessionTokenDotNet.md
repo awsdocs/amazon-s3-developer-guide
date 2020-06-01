@@ -1,4 +1,4 @@
-# Making Requests Using IAM User Temporary Credentials \- AWS SDK for \.NET<a name="AuthUsingTempSessionTokenDotNet"></a>
+# Making requests using IAM user temporary credentials \- AWS SDK for \.NET<a name="AuthUsingTempSessionTokenDotNet"></a>
 
 An IAM user or an AWS account can request temporary security credentials using the AWS SDK for \.NET and use them to access Amazon S3\. These credentials expire after the session duration\. To get temporary security credentials and access Amazon S3, do the following:
 
@@ -17,7 +17,7 @@ If you obtain temporary security credentials using your AWS account security cre
 
 The following C\# example lists object keys in the specified bucket\. For illustration, the example obtains temporary security credentials for a default one\-hour session and uses them to send authenticated request to Amazon S3\. 
 
-If you want to test the sample using IAM user credentials, you need to create an IAM user under your AWS account\. For more information about how to create an IAM user, see [Creating Your First IAM User and Administrators Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\. For more information about making requests, see [Making Requests](MakingRequests.md)\.
+If you want to test the sample using IAM user credentials, you need to create an IAM user under your AWS account\. For more information about how to create an IAM user, see [Creating Your First IAM User and Administrators Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\. For more information about making requests, see [Making requests](MakingRequests.md)\.
 
  For instructions on creating and testing a working example, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\. 
 
@@ -101,5 +101,5 @@ namespace Amazon.DocSamples.S3
 }
 ```
 
-## Related Resources<a name="RelatedResources009"></a>
+## Related resources<a name="RelatedResources009"></a>
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

@@ -1,28 +1,28 @@
-# Upload Examples \(AWS Signature Version 2\)****<a name="HTTPPOSTExamples"></a>
+# Upload examples \(AWS signature version 2\)****<a name="HTTPPOSTExamples"></a>
 
 **Topics**
-+ [File Upload](#HTTPPOSTExamplesFileUpload)
-+ [Text Area Upload](#HTTPPOSTExamplesTextArea)
++ [File upload](#HTTPPOSTExamplesFileUpload)
++ [Text area upload](#HTTPPOSTExamplesTextArea)
 
 **Note**  
 The request authentication discussed in this section is based on AWS Signature Version 2, a protocol for authenticating inbound API requests to AWS services\.   
 Amazon S3 now supports Signature Version 4, a protocol for authenticating inbound API requests to AWS services, in all AWS regions\. At this time, AWS regions created before January 30, 2014 will continue to support the previous protocol, Signature Version 2\. Any new regions after January 30, 2014 will support only Signature Version 4 and therefore all requests to those regions must be made with Signature Version 4\. For more information, see [Examples: Browser\-Based Upload using HTTP POST \(Using AWS Signature Version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html) in the *Amazon Simple Storage Service API Reference*\. 
 
-## File Upload<a name="HTTPPOSTExamplesFileUpload"></a>
+## File upload<a name="HTTPPOSTExamplesFileUpload"></a>
 
 This example shows the complete process for constructing a policy and form that can be used to upload a file attachment\.
 
-### Policy and Form Construction<a name="HTTPPOSTExamplesFileUploadPolicy"></a>
+### Policy and form construction<a name="HTTPPOSTExamplesFileUploadPolicy"></a>
 
-The following policy supports uploads to Amazon S3 for the awsexamplebucket bucket\.
+The following policy supports uploads to Amazon S3 for the awsexamplebucket1 bucket\.
 
 ```
  1. { "expiration": "2007-12-01T12:00:00.000Z",
  2.   "conditions": [
- 3.     {"bucket": "awsexamplebucket"},
+ 3.     {"bucket": "awsexamplebucket1"},
  4.     ["starts-with", "$key", "user/eric/"],
  5.     {"acl": "public-read"},
- 6.     {"success_action_redirect": "https://awsexamplebucket.s3.us-west-1.amazonaws.com/successful_upload.html"},
+ 6.     {"success_action_redirect": "https://awsexamplebucket1.s3.us-west-1.amazonaws.com/successful_upload.html"},
  7.     ["starts-with", "$Content-Type", "image/"],
  8.     {"x-amz-meta-uuid": "14365123651274"},
  9.     ["starts-with", "$x-amz-meta-tag", ""]
@@ -32,10 +32,10 @@ The following policy supports uploads to Amazon S3 for the awsexamplebucket buck
 
 This policy requires the following:
 + The upload must occur before 12:00 UTC on December 1, 2007\.
-+ The content must be uploaded to the awsexamplebucket bucket\.
++ The content must be uploaded to the awsexamplebucket1 bucket\.
 + The key must start with "user/eric/"\.
 + The ACL is set to public\-read\.
-+ The success\_action\_redirect is set to https://awsexamplebucket\.s3\.us\-west\-1\.amazonaws\.com/successful\_upload\.html\.
++ The success\_action\_redirect is set to https://awsexamplebucket1\.s3\.us\-west\-1\.amazonaws\.com/successful\_upload\.html\.
 + The object is an image file\.
 + The x\-amz\-meta\-uuid tag must be set to 14365123651274\. 
 + The x\-amz\-meta\-tag can contain any value\.
@@ -48,7 +48,7 @@ The following is a Base64\-encoded version of this policy\.
 
 Using your credentials create a signature, for example `0RavWzkygo6QX9caELEqKi9kDbU=` is the signature for the preceding policy document\.
 
-The following form supports a POST request to the awsexamplebucket\.net bucket that uses this policy\.
+The following form supports a POST request to the awsexamplebucket1\.net bucket that uses this policy\.
 
 ```
  1. <html>
@@ -59,10 +59,10 @@ The following form supports a POST request to the awsexamplebucket\.net bucket t
  6.   </head>
  7.   <body>
  8.   ...
- 9.   <form action="https://awsexamplebucket.s3.us-west-1.amazonaws.com/" method="post" enctype="multipart/form-data">
+ 9.   <form action="https://awsexamplebucket1.s3.us-west-1.amazonaws.com/" method="post" enctype="multipart/form-data">
 10.     Key to upload: <input type="input" name="key" value="user/eric/" /><br />
 11.     <input type="hidden" name="acl" value="public-read" />
-12.     <input type="hidden" name="success_action_redirect" value="https://awsexamplebucket.s3.us-west-1.amazonaws.com/successful_upload.html" />
+12.     <input type="hidden" name="success_action_redirect" value="https://awsexamplebucket1.s3.us-west-1.amazonaws.com/successful_upload.html" />
 13.     Content-Type: <input type="input" name="Content-Type" value="image/jpeg" /><br />
 14.     <input type="hidden" name="x-amz-meta-uuid" value="14365123651274" />
 15.     Tags for File: <input type="input" name="x-amz-meta-tag" value="" /><br />
@@ -77,13 +77,13 @@ The following form supports a POST request to the awsexamplebucket\.net bucket t
 24. </html>
 ```
 
-### Sample Request<a name="HTTPPOSTExamplesFileUploadRequest"></a>
+### Sample request<a name="HTTPPOSTExamplesFileUploadRequest"></a>
 
 This request assumes that the image uploaded is 117,108 bytes; the image data is not included\.
 
 ```
  1. POST / HTTP/1.1
- 2. Host: awsexamplebucket.s3.us-west-1.amazonaws.com
+ 2. Host: awsexamplebucket1.s3.us-west-1.amazonaws.com
  3. User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.10) Gecko/20071115 Firefox/2.0.0.10
  4. Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
  5. Accept-Language: en-us,en;q=0.5
@@ -105,7 +105,7 @@ This request assumes that the image uploaded is 117,108 bytes; the image data is
 21. --9431149156168
 22. Content-Disposition: form-data; name="success_action_redirect"
 23. 
-24. https://awsexamplebucket.s3.us-west-1.amazonaws.com/successful_upload.html
+24. https://awsexamplebucket1.s3.us-west-1.amazonaws.com/successful_upload.html
 25. --9431149156168
 26. Content-Disposition: form-data; name="Content-Type"
 27. 
@@ -142,7 +142,7 @@ This request assumes that the image uploaded is 117,108 bytes; the image data is
 58. --9431149156168--
 ```
 
-### Sample Response<a name="HTTPPOSTExamplesFileUploadResponse"></a>
+### Sample response<a name="HTTPPOSTExamplesFileUploadResponse"></a>
 
 ```
 1. HTTP/1.1 303 Redirect
@@ -151,30 +151,30 @@ This request assumes that the image uploaded is 117,108 bytes; the image data is
 4. Content-Type: application/xml
 5. Date: Wed, 14 Nov 2007 21:21:33 GMT
 6. Connection: close
-7. Location: https://awsexamplebucket.s3.us-west-1.amazonaws.com/successful_upload.html?bucket=awsexamplebucket&key=user/eric/MyPicture.jpg&etag=&quot;39d459dfbc0faabbb5e179358dfb94c3&quot;
+7. Location: https://awsexamplebucket1.s3.us-west-1.amazonaws.com/successful_upload.html?bucket=awsexamplebucket1&key=user/eric/MyPicture.jpg&etag=&quot;39d459dfbc0faabbb5e179358dfb94c3&quot;
 8. Server: AmazonS3
 ```
 
-## Text Area Upload<a name="HTTPPOSTExamplesTextArea"></a>
+## Text area upload<a name="HTTPPOSTExamplesTextArea"></a>
 
 **Topics**
-+ [Policy and Form Construction](#HTTPPOSTExamplesTextAreaPolicy)
-+ [Sample Request](#HTTPPOSTExamplesTextAreaRequest)
-+ [Sample Response](#HTTPPOSTExamplesTextAreaResponse)
++ [Policy and form construction](#HTTPPOSTExamplesTextAreaPolicy)
++ [Sample request](#HTTPPOSTExamplesTextAreaRequest)
++ [Sample response](#HTTPPOSTExamplesTextAreaResponse)
 
 The following example shows the complete process for constructing a policy and form to upload a text area\. Uploading a text area is useful for submitting user\-created content, such as blog postings\.
 
-### Policy and Form Construction<a name="HTTPPOSTExamplesTextAreaPolicy"></a>
+### Policy and form construction<a name="HTTPPOSTExamplesTextAreaPolicy"></a>
 
-The following policy supports text area uploads to Amazon S3 for the awsexamplebucket bucket\.
+The following policy supports text area uploads to Amazon S3 for the awsexamplebucket1 bucket\.
 
 ```
  1. { "expiration": "2007-12-01T12:00:00.000Z",
  2.   "conditions": [
- 3.     {"bucket": "awsexamplebucket"},
+ 3.     {"bucket": "awsexamplebucket1"},
  4.     ["starts-with", "$key", "user/eric/"],
  5.     {"acl": "public-read"},
- 6.     {"success_action_redirect": "https://awsexamplebucket.s3.us-west-1.amazonaws.com/new_post.html"},
+ 6.     {"success_action_redirect": "https://awsexamplebucket1.s3.us-west-1.amazonaws.com/new_post.html"},
  7.     ["eq", "$Content-Type", "text/html"],
  8.     {"x-amz-meta-uuid": "14365123651274"},
  9.     ["starts-with", "$x-amz-meta-tag", ""]
@@ -184,10 +184,10 @@ The following policy supports text area uploads to Amazon S3 for the awsexampleb
 
 This policy requires the following:
 + The upload must occur before 12:00 GMT on 2007\-12\-01\.
-+ The content must be uploaded to the awsexamplebucket bucket\.
++ The content must be uploaded to the awsexamplebucket1 bucket\.
 + The key must start with "user/eric/"\.
 + The ACL is set to public\-read\.
-+ The success\_action\_redirect is set to https://awsexamplebucket\.s3\.us\-west\-1\.amazonaws\.com/new\_post\.html\.
++ The success\_action\_redirect is set to https://awsexamplebucket1\.s3\.us\-west\-1\.amazonaws\.com/new\_post\.html\.
 + The object is HTML text\.
 + The x\-amz\-meta\-uuid tag must be set to 14365123651274\. 
 + The x\-amz\-meta\-tag can contain any value\.
@@ -205,7 +205,7 @@ Following is a Base64\-encoded version of this policy\.
 
 Using your credentials, create a signature\. For example, `qA7FWXKq6VvU68lI9KdveT1cWgF=` is the signature for the preceding policy document\.
 
-The following form supports a POST request to the awsexamplebucket\.net bucket that uses this policy\.
+The following form supports a POST request to the awsexamplebucket1\.net bucket that uses this policy\.
 
 ```
  1. <html>
@@ -216,10 +216,10 @@ The following form supports a POST request to the awsexamplebucket\.net bucket t
  6.   </head>
  7.   <body>
  8.   ...
- 9.   <form action="https://awsexamplebucket.s3.us-west-1.amazonaws.com/" method="post" enctype="multipart/form-data">
+ 9.   <form action="https://awsexamplebucket1.s3.us-west-1.amazonaws.com/" method="post" enctype="multipart/form-data">
 10.     Key to upload: <input type="input" name="key" value="user/eric/" /><br />
 11.     <input type="hidden" name="acl" value="public-read" />
-12.     <input type="hidden" name="success_action_redirect" value="https://awsexamplebucket.s3.us-west-1.amazonaws.com/new_post.html" />
+12.     <input type="hidden" name="success_action_redirect" value="https://awsexamplebucket1.s3.us-west-1.amazonaws.com/new_post.html" />
 13.     <input type="hidden" name="Content-Type" value="text/html" />
 14.     <input type="hidden" name="x-amz-meta-uuid" value="14365123651274" />
 15.     Tags for File: <input type="input" name="x-amz-meta-tag" value="" /><br />
@@ -238,13 +238,13 @@ The following form supports a POST request to the awsexamplebucket\.net bucket t
 28. </html>
 ```
 
-### Sample Request<a name="HTTPPOSTExamplesTextAreaRequest"></a>
+### Sample request<a name="HTTPPOSTExamplesTextAreaRequest"></a>
 
 This request assumes that the image uploaded is 117,108 bytes; the image data is not included\.
 
 ```
  1. POST / HTTP/1.1
- 2. Host: awsexamplebucket.s3.us-west-1.amazonaws.com
+ 2. Host: awsexamplebucket1.s3.us-west-1.amazonaws.com
  3. User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.10) Gecko/20071115 Firefox/2.0.0.10
  4. Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
  5. Accept-Language: en-us,en;q=0.5
@@ -266,7 +266,7 @@ This request assumes that the image uploaded is 117,108 bytes; the image data is
 21. --178521717625888
 22. Content-Disposition: form-data; name="success_action_redirect"
 23. 
-24. https://awsexamplebucket.s3.us-west-1.amazonaws.com/new_post.html
+24. https://awsexamplebucket1.s3.us-west-1.amazonaws.com/new_post.html
 25. --178521717625888
 26. Content-Disposition: form-data; name="Content-Type"
 27. 
@@ -302,7 +302,7 @@ This request assumes that the image uploaded is 117,108 bytes; the image data is
 57. --178521717625888--
 ```
 
-### Sample Response<a name="HTTPPOSTExamplesTextAreaResponse"></a>
+### Sample response<a name="HTTPPOSTExamplesTextAreaResponse"></a>
 
 ```
 1. HTTP/1.1 303 Redirect
@@ -311,6 +311,6 @@ This request assumes that the image uploaded is 117,108 bytes; the image data is
 4. Content-Type: application/xml
 5. Date: Wed, 14 Nov 2007 21:21:33 GMT
 6. Connection: close
-7. Location: https://awsexamplebucket.s3.us-west-1.amazonaws.com/new_post.html?bucket=awsexamplebucket&key=user/eric/NewEntry.html&etag=40c3271af26b7f1672e41b8a274d28d4
+7. Location: https://awsexamplebucket1.s3.us-west-1.amazonaws.com/new_post.html?bucket=awsexamplebucket1&key=user/eric/NewEntry.html&etag=40c3271af26b7f1672e41b8a274d28d4
 8. Server: AmazonS3
 ```

@@ -1,4 +1,4 @@
-# Using the REST API for Multipart Upload<a name="UsingRESTAPImpUpload"></a>
+# Using the REST API for multipart upload<a name="UsingRESTAPImpUpload"></a>
 
 The following sections in the Amazon Simple Storage Service API Reference describe the REST API for multipart upload\. 
 + [Initiate Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)
@@ -8,4 +8,4 @@ The following sections in the Amazon Simple Storage Service API Reference descri
 + [List Parts](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadListParts.html)
 + [List Multipart Uploads](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadListMPUpload.html)
 
-You can use these APIs to make your own REST requests, or you can use the AWS Command Line Interface, or you can use one the SDKs we provide\. For more information about using Multipard Upload with the AWS CLI, see [Using the AWS Command Line Interface for Multipart Upload](UsingCLImpUpload.md)\. For more information about the SDKs, see [API Support for Multipart Upload](sdksupportformpu.md)\.
+You can use these APIs to make your own REST requests, or you can use the AWS Command Line Interface, or you can use one the SDKs we provide\. For more information about using Multipard Upload with the AWS CLI, see [Using the AWS Command Line Interface for multipart upload](UsingCLImpUpload.md)\. For more information about the SDKs, see [API Support for Multipart Upload](sdksupportformpu.md)\.

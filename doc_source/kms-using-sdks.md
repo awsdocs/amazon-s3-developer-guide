@@ -30,8 +30,8 @@ For more information about creating customer managed CMKs, see [Programming the 
 For working code examples of uploading an object, see the following topics\. You will need to update those code examples and provide encryption information as shown in the preceding code fragment\.
 + For uploading an object in a single operation, see [Upload an Object Using the AWS SDK for Java](UploadObjSingleOpJava.md)\.
 + For a multipart upload, see the following topics:
-  + Using high\-level multipart upload API, see [Upload a File](HLuploadFileJava.md)\. 
-  + If you are using the low\-level multipart upload API, see [Upload a File](llJavaUploadFile.md)\.
+  + Using high\-level multipart upload API, see [Upload a file](HLuploadFileJava.md)\. 
+  + If you are using the low\-level multipart upload API, see [Upload a file](llJavaUploadFile.md)\.
 
 ### Copy Operation<a name="kms-using-sdks-java-copy"></a>
 
@@ -87,8 +87,8 @@ For more information about creating customer managed CMKs, see [Programming the 
 For working code examples of uploading an object, see the following topics\. You will need to update these code examples and provide encryption information as shown in the preceding code fragment\.
 + For uploading an object in a single operation, see [Upload an Object Using the AWS SDK for \.NET](UploadObjSingleOpNET.md)\.
 + For multipart upload see the following topics:
-  + Using high\-level multipart upload API, see [Upload a File to an S3 Bucket Using the AWS SDK for \.NET \(High\-Level API\)](HLuploadFileDotNet.md)\. 
-  + Using low\-level multipart upload API, see [Upload a File to an S3 Bucket Using the AWS SDK for \.NET \(Low\-Level API\)](LLuploadFileDotNet.md)\.
+  + Using high\-level multipart upload API, see [Upload a file to an S3 Bucket using the AWS SDK for \.NET \(high\-level API\)](HLuploadFileDotNet.md)\. 
+  + Using low\-level multipart upload API, see [Upload a file to an S3 Bucket using the AWS SDK for \.NET \(low\-level API\)](LLuploadFileDotNet.md)\.
 
 ### Copy Operation<a name="kms-using-sdks-dotnet-copy"></a>
 
