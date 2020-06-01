@@ -92,7 +92,9 @@ Amazon S3 achieves high availability by replicating data across multiple servers
 Amazon S3 does not currently support object locking\. If two PUT requests are simultaneously made to the same key, the request with the latest timestamp wins\. If this is an issue, you will need to build an object\-locking mechanism into your application\.   
 Updates are key\-based\. There is no way to make atomic updates across keys\. For example, you cannot make the update of one key dependent on the update of another key unless you design this functionality into your application\.
 
+
 Buckets have a similar consistency model, with the same caveats\. For example, if you delete a bucket and immediately list all buckets, the deleted bucket might still appear in the list\.
+
 
 The following table describes the characteristics of an eventually consistent read and a consistent read\.
 
