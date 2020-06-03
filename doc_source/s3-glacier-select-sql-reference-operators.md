@@ -33,6 +33,7 @@ Addition, subtraction, multiplication, division, and modulo are supported\.
 + \+
 + \-
 + \*
++ /
 + %
 
 ## Operator Precedence<a name="s3-glacier-select-sql-reference-op-Precedence"></a>
