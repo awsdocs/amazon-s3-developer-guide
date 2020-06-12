@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class GetObject {
+public class GetObject2 {
 
     public static void main(String[] args) throws IOException {
         Regions clientRegion = Regions.DEFAULT_REGION;

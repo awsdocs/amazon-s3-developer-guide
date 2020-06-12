@@ -3,7 +3,7 @@
  Depending on the size of the data you are uploading, Amazon S3 offers the following options: 
 + **Upload objects in a single operation—**With a single PUT operation, you can upload objects up to 5 GB in size\. 
 
-  For more information, see [Uploading Objects in a Single Operation](UploadInSingleOp.md)\.
+  For more information, see [Uploading an object in a single operation](UploadInSingleOp.md)\.
 + **Upload objects in parts—**Using the multipart upload API, you can upload large objects, up to 5 TB\. 
 
   The multipart upload API is designed to improve the upload experience for larger objects\. You can upload objects in parts\. These object parts can be uploaded independently, in any order, and in parallel\. You can use a multipart upload for objects from 5 MB to 5 TB in size\. For more information, see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\.
@@ -15,7 +15,7 @@ We recommend that you use multipart uploading in the following ways:
 For more information about multipart uploads, see [Multipart Upload Overview](mpuoverview.md)\.
 
 **Topics**
-+ [Uploading Objects in a Single Operation](UploadInSingleOp.md)
++ [Uploading an object in a single operation](UploadInSingleOp.md)
 + [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)
 + [Uploading objects using presigned URLs](PresignedUrlUploadObject.md)
 

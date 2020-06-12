@@ -78,7 +78,7 @@ DATE_DIFF(year, `2010-01-01T`, `2011-01-01T`)            -- 1
 DATE_DIFF(year, `2010T`, `2010-05T`)                     -- 4 (2010T is equivalent to 2010-01-01T00:00:00.000Z)
 DATE_DIFF(month, `2010T`, `2011T`)                       -- 12
 DATE_DIFF(month, `2011T`, `2010T`)                       -- -12
-DATE_DIFF(day, `2010-01-01T23:00T`, `2010-01-02T01:00T`) -- 0 (need to be at least 24h apart to be 1 day apart)
+DATE_DIFF(day, `2010-01-01T23:00`, `2010-01-02T01:00`) -- 0 (need to be at least 24h apart to be 1 day apart)
 ```
 
 ## EXTRACT<a name="s3-glacier-select-sql-reference-extract"></a>

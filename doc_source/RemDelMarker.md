@@ -1,6 +1,6 @@
 # Removing delete markers<a name="RemDelMarker"></a>
 
-To delete a delete marker, you must specify its version ID in a `DELETE Object versionId` request\. If you use a `DELETE` request to delete a delete marker \(without specifying the version ID of the delete marker\), Amazon S3 does not delete the delete marker, but instead, inserts another delete marker\.
+To delete a delete marker, it must have a version ID and you must specify that ID in a `DELETE Object versionId` request\. If you use a `DELETE` request to delete a delete marker \(without specifying the version ID of the delete marker\), Amazon S3 does not delete the delete marker, but instead, inserts another delete marker\.
 
 The following figure shows how a simple `DELETE` on a delete marker removes nothing, but adds a new delete marker to a bucket\.
 

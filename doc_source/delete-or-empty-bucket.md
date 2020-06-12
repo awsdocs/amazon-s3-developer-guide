@@ -53,7 +53,7 @@ import com.amazonaws.services.s3.model.*;
 
 import java.util.Iterator;
 
-public class DeleteBucket {
+public class DeleteBucket2 {
 
     public static void main(String[] args) {
         Regions clientRegion = Regions.DEFAULT_REGION;

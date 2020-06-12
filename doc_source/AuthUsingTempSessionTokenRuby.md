@@ -1,6 +1,8 @@
 # Making requests using IAM user temporary credentials \- AWS SDK for Ruby<a name="AuthUsingTempSessionTokenRuby"></a>
 
-An IAM user or an AWS account can request temporary security credentials using AWS SDK for Ruby and use them to access Amazon S3\. These credentials expire after the session duration\. By default, the session duration is one hour\. If you use IAM user credentials, you can specify the duration \(from 1 to 36 hours\) when requesting the temporary security credentials\. For information about requesting temporary security credentials, see [Making requests](MakingRequests.md)\.
+An IAM user or an AWS account can request temporary security credentials using AWS SDK for Ruby and use them to access Amazon S3\. These credentials expire after the session duration\. 
+
+By default, the session duration is one hour\. If you use IAM user credentials, you can specify the duration when requesting the temporary security credentials from 15 minutes to the maximum session duration for the role\. For more information about temporary security credentials, see [Temporary Security Credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) in the *IAM User Guide*\. For more information about making requests, see [Making requests](MakingRequests.md)\.
 
 **Note**  
 If you obtain temporary security credentials using your AWS account security credentials, the temporary security credentials are valid for only one hour\. You can specify session duration only if you use IAM user credentials to request a session\.

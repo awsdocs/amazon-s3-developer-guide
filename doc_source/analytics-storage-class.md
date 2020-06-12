@@ -9,7 +9,7 @@ Storage class analysis does not give recommendations for transitions to the ONEZ
 
 You can have multiple storage class analysis filters per bucket, up to 1,000, and will receive a separate analysis for each filter\. Multiple filter configurations allow you analyze specific groups of objects to improve your lifecycle policies that transition objects to STANDARD\_IA\. 
 
-Storage class analysis shows storage usage visualizations in the Amazon S3 console that are updated daily\. The storage usage data can also be exported daily to a file in an S3 bucket\. You can open the exported usage report file in a spreadsheet application or use it with the business intelligence tools of your choice such as Amazon QuickSight\.
+Storage class analysis provides storage usage visualizations in the Amazon S3 console that are updated daily\. You can also export this daily usage data to an S3 bucket and view them in a spreadsheet application, or with business intelligence tools, like Amazon QuickSight\.
 
 There are costs associated with the storage class analysis\. For pricing information, see *Management and replication* [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)\.
 

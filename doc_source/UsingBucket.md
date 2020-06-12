@@ -47,17 +47,10 @@ Creating a bucket using the REST API can be cumbersome because it requires you t
 
 When you use the AWS SDKs to create a bucket, you first create a client and then use the client to send a request to create a bucket\. If you don't specify a Region when you create a client or a bucket, Amazon S3 uses US East \(N\. Virginia\), the default Region\. You can also specify a specific Region\. For a list of available AWS Regions, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html) in the *AWS General Reference*\. For more information about enabling or disabling an AWS Region, see [Managing AWS Regions](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html) in the *AWS General Reference*\. 
 
-**Legacy Global Endpoint**  
-As a best practice, you should create your client and bucket in the same Region\. However, if you create your client in the US East \(N\. Virginia\) Region, either by default or intention, Amazon S3 can use the legacy global endpoint to communicate with the client:
-
-```
-s3.amazonaws.com
-```
-
-Therefore, you can use a client in US East \(N\. Virginia\) to create a bucket in any Region that launched *before March 20, 2019*\. However, if the Region that you want to create your bucket in was launched *after March 20, 2019*, you your client and bucket must be in the same Region\. For more information, see [Legacy Endpoints](VirtualHosting.md#s3-legacy-endpoints)\.
+As a best practice, you should create your client and bucket in the same Region\. If your Region launched *after March 20, 2019*, your client and bucket must be in the same Region\. However, you can use a client in the US East \(N\. Virginia\) Region to create a bucket in any Region that launched *before March 20, 2019*\. For more information, see [Legacy Endpoints](VirtualHosting.md#s3-legacy-endpoints)\.
 
 **Creating a Client**  
-When you create the client, you can specify an AWS Region to create the client in\. If you don’t specify a Region, Amazon S3 creates the bucket in US East \(N\. Virginia\), the default Region\. To create a client to access a dual\-stack endpoint, you must specify an AWS Region\. For more information, see [Dual\-stack endpoints](dual-stack-endpoints.md#dual-stack-endpoints-description)\.
+When you create the client, you should specify an AWS Region, to create the client in\. If you don’t specify a Region, Amazon S3 creates the client in US East \(N\. Virginia\) by default Region\. To create a client to access a dual\-stack endpoint, you must specify an AWS Region,\. For more information, see [Dual\-stack endpoints](dual-stack-endpoints.md#dual-stack-endpoints-description)\.
 
 When you create a client, the Region maps to the Region\-specific endpoint\. The client uses this endpoint to communicate with Amazon S3:
 
@@ -72,7 +65,7 @@ s3.eu-west-1.amazonaws.com
 ```
 
 **Creating a Bucket**  
-If you don't specify a Region when you create a bucket, Amazon S3 creates the bucket in the US East \(N\. Virginia\) Region\. Therefore, if you need to create a bucket in a specific Region, you must specify the Region when you create the bucket\.
+If you don't specify a Region when you create a bucket, Amazon S3 creates the bucket in the US East \(N\. Virginia\) Region\. Therefore, if you want to create a bucket in a specific Region, you must specify the Region when you create the bucket\.
 
 Buckets created after September 30, 2020, will support only virtual hosted\-style requests\. Path\-style requests will continue to be supported for buckets created on or before this date\. For more information, see [ Amazon S3 Path Deprecation Plan – The Rest of the Story](https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)\.
 

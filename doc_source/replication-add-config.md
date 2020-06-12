@@ -38,7 +38,7 @@ The following sections provide additional information\.
 
 Each rule must include the rule's status and priority, and indicate whether to replicate delete markers\. 
 + `Status` indicates whether the rule is enabled or disabled\. If a rule is disabled, Amazon S3 doesn't perform the actions specified in the rule\. 
-+ `Priority` indicates which rule has priority when multiple rules apply to an object\. 
++ `Priority` indicates which rule has priority when multiple rules apply to an object\. The higher the number, the higher the priority\.
 + Currently, delete markers aren't replicated, so you must set `DeleteMarkerReplication` to `Disabled`\.
 
 In the destination configuration, you must provide the name of the bucket where you want Amazon S3 to replicate objects\. 
@@ -174,23 +174,21 @@ Only a valid value of `<Minutes>15</Minutes>` is accepted for `EventThreshold` a
 
   ```
   ...
-  •	<Destination>
-  •	...
-  •	       <Bucket>arn:aws:s3:::destinationbucket</Bucket>
-  •	            <Metrics>
-  •	                <Status>Enabled</Status>
-  •	                <EventThreshold>
-  •	                    <Minutes>15</Minutes> 
-  •	                </EventThreshold>
-  •	            </Metrics>
-  •	            <ReplicationTime>
-  •	                <Status>Enabled</Status>
-  •	                <Time>
-  •	                    <Minutes>15</Minutes>
-  •	                </Time>
-  •	            <ReplicationTime>...
-  •	</Destination>
-  
+  <Destination>
+    <Bucket>arn:aws:s3:::destinationbucket</Bucket>
+    <Metrics>
+      <Status>Enabled</Status>
+      <EventThreshold>
+        <Minutes>15</Minutes> 
+      </EventThreshold>
+    </Metrics>
+    <ReplicationTime>
+      <Status>Enabled</Status>
+      <Time>
+        <Minutes>15</Minutes>
+      </Time>
+    <ReplicationTime>
+  </Destination>
   ...
   ```
 
@@ -366,7 +364,7 @@ In the following replication configuration:
 ```
 
 **Example 3: Replication Configuration with Two Rules with Overlapping Prefixes**  <a name="overlap-rule-example"></a>
-In this configuration, the two rules specify filters with overlapping key prefixes, `star/` and `starship`\. Both rules apply to objects with the key name `starship-x`\. In this case, Amazon S3 uses the rule priority to determine which rule to apply\.   
+In this configuration, the two rules specify filters with overlapping key prefixes, `star/` and `starship`\. Both rules apply to objects with the key name `starship-x`\. In this case, Amazon S3 uses the rule priority to determine which rule to apply\. The higher the number, the higher the priority\.  
 
 ```
 <ReplicationConfiguration>
@@ -388,7 +386,7 @@ In this configuration, the two rules specify filters with overlapping key prefix
   </Rule>
   <Rule>
     <Status>Enabled</Status>
-    <Priority>1</Priority>
+    <Priority>2</Priority>
     <DeleteMarkerReplication>
        <Status>string</Status>
     </DeleteMarkerReplication>

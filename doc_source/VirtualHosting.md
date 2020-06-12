@@ -219,7 +219,7 @@ https://my-bucket.amazonaws.com
 ```
 
 **Virtual Hosted\-Style Requests for US East \(N\. Virginia\)**  
-Requests made with the legacy global endpoint go to US East \(N\. Virginia\) by default\. Therefore, the legacy global endpoint is sometimes used as in place of the Regional endpoint for US East \(N\. Virginia\)\. If you create a bucket in US East \(N\. Virginia\) and use the global endpoint, Amazon S3 routes your request to this Region by default\. 
+Requests made with the legacy global endpoint go to US East \(N\. Virginia\) by default\. Therefore, the legacy global endpoint is sometimes used in place of the Regional endpoint for US East \(N\. Virginia\)\. If you create a bucket in US East \(N\. Virginia\) and use the global endpoint, Amazon S3 routes your request to this Region by default\. 
 
 **Virtual Hosted\-Style Requests for Other Regions**  
 The legacy global endpoint is also used for virtual hosted\-style requests in other supported Regions\. If you create a bucket in a Region that was launched before March 20, 2019 and use the legacy global endpoint, Amazon S3 updates the DNS to reroute the request to the correct location, which might take time\. In the meantime, the default rule applies, and your virtual hosted–style request goes to the US East \(N\. Virginia\) Region\. Amazon S3 then redirects it with an HTTP 307 redirect to the correct Region\. For S3 buckets in Regions launched after March 20, 2019, the DNS doesn't route your request directly to the AWS Region where your bucket resides\. It returns an HTTP 400 Bad Request error instead\. For more information, see [Request redirection and the REST API](Redirects.md)\.

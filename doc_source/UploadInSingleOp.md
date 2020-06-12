@@ -1,4 +1,4 @@
-# Uploading Objects in a Single Operation<a name="UploadInSingleOp"></a>
+# Uploading an object in a single operation<a name="UploadInSingleOp"></a>
 
 **Topics**
 + [Upload an Object Using the AWS SDK for Java](UploadObjSingleOpJava.md)

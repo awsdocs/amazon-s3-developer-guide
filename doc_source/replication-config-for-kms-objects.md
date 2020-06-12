@@ -80,7 +80,7 @@ This replication configuration has one rule\. The rule applies to objects with t
 ## Granting additional permissions for the IAM role<a name="replication-kms-extra-permissions"></a>
 
 To replicate objects that are encrypted at rest under AWS Key Management Service \(AWS KMS\), grant the following additional permissions to the IAM role you specify in the replication configuration\. You grant these permissions by updating the permission policy associated with the IAM role\. Objects created with server\-side encryption using customer\-provided \(SSE\-C\) encryption keys are not replicated\.
-+ Permission for the `s3:GetObjectVersionForReplication` action for source objects\. Permission for this action allows Amazon S3 to replicate both unencrypted objects and objects created with server\-side encryption using Amazon S3 managed encryption \(SSE\-S3\) keys or or CMKs stored in AWS KMS \(SSE\-KMS\)\.
++ Permission for the `s3:GetObjectVersionForReplication` action for source objects\. Permission for this action allows Amazon S3 to replicate both unencrypted objects and objects created with server\-side encryption using Amazon S3 managed encryption \(SSE\-S3\) keys or CMKs stored in AWS KMS \(SSE\-KMS\)\.
 **Note**  
 We recommend that you use the `s3:GetObjectVersionForReplication` action instead of the `s3:GetObjectVersion` action because it provides Amazon S3 with only the minimum permissions necessary for replication\. In addition, permission for the `s3:GetObjectVersion` action allows replication of unencrypted and SSE\-S3\-encrypted objects, but not of objects created using a CMK stored in AWS KMS\. 
 + Permissions for the following AWS KMS actions:

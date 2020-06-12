@@ -1,20 +1,22 @@
 # Example: Copying objects across AWS accounts using S3 Batch Operations<a name="batch-ops-examples-xcopy"></a>
 
-You can use S3 Batch Operations to create a PUT copy job to copy objects to a different AWS account \(the *destination account*\)\. When doing this, you can use Amazon S3 Inventory to deliver the inventory report to the destination account for use during job creation\. Or, you can use a comma\-separated values \(CSV\) manifest in the source or destination account\. 
+You can use S3 Batch Operations to create a PUT copy job to copy objects to a different AWS account \(the *destination account*\)\. The following sections explain how to store and use a manifest that is in a different AWS account\. In the first section, you can use Amazon S3 Inventory to deliver the inventory report to the destination account for use during job creation or, you can use a comma\-separated values \(CSV\) manifest in the source or destination account as shown in the second section\. 
 
-The following sections explain how to store and use a manifest that is in a different AWS account\.
+ \.
 
 **Topics**
-+ [Using an inventory report delivered to the destination account](#specify-batchjob-manifest-xaccount-inventory)
-+ [Using a CSV manifest stored in the source account](#specify-batchjob-manifest-xaccount-csv)
++ [Using an inventory report delivered to the destination account to copy objects across AWS accounts](#specify-batchjob-manifest-xaccount-inventory)
++ [Using a CSV manifest stored in the source account to copy objects across AWS accounts](#specify-batchjob-manifest-xaccount-csv)
 
-## Using an inventory report delivered to the destination account<a name="specify-batchjob-manifest-xaccount-inventory"></a>
+## Using an inventory report delivered to the destination account to copy objects across AWS accounts<a name="specify-batchjob-manifest-xaccount-inventory"></a>
+
+You can use Amazon S3 Inventory to deliver the inventory report to the destination account for use during job creation\. For using a CSV manifest in the source or destination account, see [Using a CSV manifest stored in the source account to copy objects across AWS accounts](#specify-batchjob-manifest-xaccount-csv)\.
 
 Amazon S3 Inventory generates inventories of the objects in a bucket\. The resulting list is published to an output file\. The bucket that is inventoried is called the *source bucket*, and the bucket where the inventory report file is stored is called the *destination bucket*\. 
 
 The Amazon S3 inventory report can be configured to be delivered to another AWS account\. This allows S3 Batch Operations to read the inventory report when the job is created in the destination AWS account\. 
 
-For more information about Amazon S3 Inventory source and destination buckets, see [How do I set up Amazon S3 inventory?](storage-inventory.md#storage-inventory-how-to-set-up) 
+For more information about Amazon S3 Inventory source and destination buckets, see [How do I set up Amazon S3 inventory?](storage-inventory.md#storage-inventory-how-to-set-up)\. 
 
 The easiest way to set up an inventory is by using the AWS Management Console, but you can also use the REST API, AWS Command Line Interface \(AWS CLI\), or AWS SDKs\.
 
@@ -122,9 +124,9 @@ The following console procedure contains the high\-level steps for setting up pe
 
    For information about creating a job using the console, see [ Creating an S3 Batch Operations Job](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/batch-ops-create-job.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
-## Using a CSV manifest stored in the source account<a name="specify-batchjob-manifest-xaccount-csv"></a>
+## Using a CSV manifest stored in the source account to copy objects across AWS accounts<a name="specify-batchjob-manifest-xaccount-csv"></a>
 
-You can use a CSV file that is stored in a different AWS account as a manifest for an S3 Batch Operations job\. 
+You can use a CSV file that is stored in a different AWS account as a manifest for an S3 Batch Operations job\. For using an S3 Inventory Report, see [Using an inventory report delivered to the destination account to copy objects across AWS accounts](#specify-batchjob-manifest-xaccount-inventory)\.
 
 The following procedure shows how to set up permissions when using an S3 Batch Operations job to copy objects from a source account to a destination account with the CSV manifest file stored in the source account\.
 

@@ -54,9 +54,9 @@ When you enable static website hosting for your bucket, you enter the name of th
    </html>
    ```
 
-1. Save the index file locally, and note the file name \(for example, `index.html`\)\.
+1. Save the index file locally with the *exact* index document name that you entered when you enabled static website hosting for your bucket \(for example, `index.html`\)\.
 
-   When you enable static website hosting and enter your index document name, you enter this exact file name \(for example, `index.html`\)\.
+   The index document file name must exactly match the index document name that you enter in the **Static website hosting** dialog box\. The index document name is case sensitive\. For example, if you enter `index.html` for the **Index document** name in the **Static website hosting** dialog box, your index document file name must also be `index.html` and not `Index.html`\.
 
 1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 

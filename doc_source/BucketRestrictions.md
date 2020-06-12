@@ -25,6 +25,7 @@ The following rules apply for naming S3 buckets:
 + Bucket names can consist only of lowercase letters, numbers, dots \(\.\), and hyphens \(\-\)\.
 + Bucket names must begin and end with a letter or number\.
 + Bucket names must not be formatted as an IP address \(for example, 192\.168\.5\.4\)\.
++ Bucket names can't begin with `xn--` \(for buckets created after February 2020\)\.
 + Bucket names must be unique within a partition\. A partition is a grouping of Regions\. AWS currently has three partitions: `aws` \(Standard Regions\), `aws-cn` \(China Regions\), and `aws-us-gov` \(AWS GovCloud \[US\] Regions\)\.
 + Buckets used with Amazon S3 Transfer Acceleration can't have dots \(\.\) in their names\. For more information about transfer acceleration, see [Amazon S3 Transfer Acceleration](transfer-acceleration.md)\.
 

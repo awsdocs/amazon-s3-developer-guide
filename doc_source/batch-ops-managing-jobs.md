@@ -33,7 +33,7 @@ Job tags should not contain any confidential information or personal data\.
 
 Consider the following tagging example: Suppose that you want your Finance department to create a Batch Operations job\. You could write an AWS Identity and Access Management \(IAM\) policy that allows a user to invoke `CreateJob`, provided that the job is created with the `Department` tag assigned the value `Finance`\. Furthermore, you could attach that policy to all users who are members of the Finance department\.
 
-Continuing with this example, you could write a policy that allows a user to update the priority of any job that has the desired tags, or cancel any job that has those tags\. For more information, see [Example: Using Job Tags to Control Permissions for S3 Batch Operations](batch-ops-job-tags-examples.md)\.
+Continuing with this example, you could write a policy that allows a user to update the priority of any job that has the desired tags, or cancel any job that has those tags\. For more information, see [Example: Using job tags to control permissions for S3 Batch Operations](batch-ops-job-tags-examples.md)\.
 
 You can add tags to new S3 Batch Operations jobs when you create them, or you can add them to existing jobs\. 
 
@@ -106,4 +106,6 @@ For more information about Amazon S3 events, see [ Configuring Amazon S3 event n
 
 When you create a job, you can request a completion report\. As long as S3 Batch Operations successfully invoke at least one task, Amazon S3 generates a completion report after it finishes running tasks, fails, or is canceled\. You can configure the completion report to include all tasks or only failed tasks\. 
 
-The completion report includes the job configuration and status and information for each task, including the object key and version, status, error codes, and descriptions of any errors\. If you don't configure a completion report, you can still monitor and audit your job and its tasks using CloudTrail and Amazon CloudWatch\. However, completion reports provide an easy way to view the results of your tasks in a consolidated format with no additional setup required\. For an example of a completion report, see [Example: Requesting S3 Batch Operations completion reports](batch-ops-examples-reports.md)\. 
+The completion report includes the job configuration and status and information for each task, including the object key and version, status, error codes, and descriptions of any errors\. Completion reports provide an easy way to view the results of your tasks in a consolidated format with no additional setup required\. For an example of a completion report, see [Example: Requesting S3 Batch Operations completion reports](batch-ops-examples-reports.md)\. 
+
+If you don't configure a completion report, you can still monitor and audit your job and its tasks using CloudTrail and Amazon CloudWatch For more information, see [Example: Tracking an S3 Batch Operations job in Amazon EventBridge through AWS CloudTrail](batch-ops-examples-event-bridge-cloud-trail.md)\.

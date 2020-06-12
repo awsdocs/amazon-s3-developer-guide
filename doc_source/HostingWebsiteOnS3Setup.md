@@ -160,9 +160,9 @@ When you enable static website hosting for your bucket, you enter the name of th
    </html>
    ```
 
-1. Save the index file locally, and note the file name \(for example, `index.html`\)\.
+1. Save the index file locally with the *exact* index document name that you entered when you enabled static website hosting for your bucket \(for example, `index.html`\)\.
 
-   When you enable static website hosting and enter your index document name, you enter this exact file name \(for example, `index.html`\)\.
+   The index document file name must exactly match the index document name that you enter in the **Static website hosting** dialog box\. The index document name is case sensitive\. For example, if you enter `index.html` for the **Index document** name in the **Static website hosting** dialog box, your index document file name must also be `index.html` and not `Index.html`\.
 
 1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
@@ -206,7 +206,7 @@ If you need to get your website endpoint before testing, follow these steps:
 
    If your browser displays your `index.html` page, the website was successfully deployed\.
 
-You now have a website hosted on Amazon S3\. This website is available at the Amazon S3 website endpoint\. However, you might have a domain, such as `example.com`, that you want to use to serve the content from the website you created\. You might also want to use Amazon S3 root domain support to serve requests for both `http://www.example.com` and `http://example.com`\. This requires additional steps\. For an example, see [Configuring a static website using a custom Domain registered with Route 53](website-hosting-custom-domain-walkthrough.md)\. 
+You now have a website hosted on Amazon S3\. This website is available at the Amazon S3 website endpoint\. However, you might have a domain, such as `example.com`, that you want to use to serve the content from the website you created\. You might also want to use Amazon S3 root domain support to serve requests for both `http://www.example.com` and `http://example.com`\. This requires additional steps\. For an example, see [Configuring a static website using a custom domain registered with Route 53](website-hosting-custom-domain-walkthrough.md)\. 
 
 ## Step 7: Clean up<a name="getting-started-cleanup-s3-website-overview"></a>
 

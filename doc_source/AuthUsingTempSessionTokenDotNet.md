@@ -1,6 +1,10 @@
 # Making requests using IAM user temporary credentials \- AWS SDK for \.NET<a name="AuthUsingTempSessionTokenDotNet"></a>
 
-An IAM user or an AWS account can request temporary security credentials using the AWS SDK for \.NET and use them to access Amazon S3\. These credentials expire after the session duration\. To get temporary security credentials and access Amazon S3, do the following:
+An IAM user or an AWS account can request temporary security credentials using the AWS SDK for \.NET and use them to access Amazon S3\. These credentials expire after the session duration\. 
+
+By default, the session duration is one hour\. If you use IAM user credentials, you can specify the duration when requesting the temporary security credentials from 15 minutes to the maximum session duration for the role\. For more information about temporary security credentials, see [Temporary Security Credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) in the *IAM User Guide*\. For more information about making requests, see [Making requests](MakingRequests.md)\.
+
+**To get temporary security credentials and access Amazon S3**
 
 1. Create an instance of the AWS Security Token Service client, `AmazonSecurityTokenServiceClient`\. For information about providing credentials, see [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)\.
 

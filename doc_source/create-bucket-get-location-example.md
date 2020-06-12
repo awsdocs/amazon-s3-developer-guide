@@ -38,7 +38,7 @@ import com.amazonaws.services.s3.model.GetBucketLocationRequest;
 
 import java.io.IOException;
 
-public class CreateBucket {
+public class CreateBucket2 {
 
     public static void main(String[] args) throws IOException {
         Regions clientRegion = Regions.DEFAULT_REGION;

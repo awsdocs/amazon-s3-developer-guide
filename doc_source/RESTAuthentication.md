@@ -28,10 +28,11 @@ This topic explains authenticating requests using Signature Version 2\. Amazon S
 
 ```
 1. GET /photos/puppy.jpg HTTP/1.1
-2. Host: awsexamplebucket1.s3.us-west-1.amazonaws.com
-3. Date: Mon, 26 Mar 2007 19:37:58 +0000
+2. Host: awsexamplebucket1.us-west-1.s3.amazonaws.com
+3. Date: Tue, 27 Mar 2007 19:36:42 +0000
 4. 
-5. Authorization: AWS AKIAIOSFODNN7EXAMPLE:frJIUN8DYpKDtOLCwo//yllqDzg=
+5. Authorization: AWS AKIAIOSFODNN7EXAMPLE:
+6. qgk2+6Sv9/oM7G3qLEjTH1a1l1g=
 ```
 
 ## Using temporary security credentials<a name="UsingTemporarySecurityCredentials"></a>
@@ -57,7 +58,7 @@ Following is pseudogrammar that illustrates the construction of the `Authorizati
 ```
  1. Authorization = "AWS" + " " + AWSAccessKeyId + ":" + Signature;
  2. 
- 3. Signature = Base64( HMAC-SHA1( YourSecretAccessKey, UTF-8-Encoding-Of( StringToSign ) ) );
+ 3. Signature = Base64( HMAC-SHA1( UTF-8-Encoding-Of(YourSecretAccessKey), UTF-8-Encoding-Of( StringToSign ) ) );
  4. 
  5. StringToSign = HTTP-Verb + "\n" +
  6. 	Content-MD5 + "\n" +
@@ -147,9 +148,31 @@ This example gets an object from the awsexamplebucket1 bucket\.
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>GET /photos/puppy.jpg HTTP/1.1<br />Host: awsexamplebucket1.us-west-1.s3.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:36:42 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />bWq2s1WEIj+Ydj0vQ697zp+IXMU=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:36:42 +0000\n<br />/awsexamplebucket1/photos/puppy.jpg</pre>  | 
+|  <pre>GET /photos/puppy.jpg HTTP/1.1<br />Host: awsexamplebucket1.us-west-1.s3.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:36:42 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />qgk2+6Sv9/oM7G3qLEjTH1a1l1g=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:36:42 +0000\n<br />/awsexamplebucket1/photos/puppy.jpg</pre>  | 
 
  Note that the CanonicalizedResource includes the bucket name, but the HTTP Request\-URI does not\. \(The bucket is specified by the Host header\.\) 
+
+**Note**  
+The following Python script calculates the preceeding signature, using the provided parameters\. You can use this script to construct your own signatures, replacing the keys and StringToSign as appropriate\.  
+
+```
+ 1. import base64
+ 2. import hmac
+ 3. from hashlib import sha1
+ 4. 
+ 5. access_key = 'AKIAIOSFODNN7EXAMPLE'.encode("UTF-8")
+ 6. secret_key = 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'.encode("UTF-8")
+ 7. 
+ 8. string_to_sign = 'GET\n\n\nTue, 27 Mar 2007 19:36:42 +0000\n/awsexamplebucket1/photos/puppy.jpg'.encode("UTF-8")
+ 9. signature = base64.encodestring(
+10.                                 hmac.new(
+11.                                          secret_key, string_to_sign, sha1
+12.                                          ).digest()
+13.                                 ).strip()
+14. 
+15. 
+16. print(f"AWS {access_key.decode()}:{signature.decode()}")
+```
 
 ### Object PUT<a name="RESTAuthenticationExamples-2"></a>
 
@@ -158,7 +181,7 @@ This example puts an object into the awsexamplebucket1 bucket\.
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>PUT /photos/puppy.jpg HTTP/1.1<br />Content-Type: image/jpeg<br />Content-Length: 94328<br />Host: awsexamplebucket1.s3.us-west-1.amazonaws.com<br />Date: Tue, 27 Mar 2007 21:15:45 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />MyyxeRY7whkBe+bq8fHCL/2kKUg=<br /></pre>  |  <pre>PUT\n<br />\n<br />image/jpeg\n<br />Tue, 27 Mar 2007 21:15:45 +0000\n<br />/awsexamplebucket1/photos/puppy.jpg</pre>  | 
+|  <pre>PUT /photos/puppy.jpg HTTP/1.1<br />Content-Type: image/jpeg<br />Content-Length: 94328<br />Host: awsexamplebucket1.s3.us-west-1.amazonaws.com<br />Date: Tue, 27 Mar 2007 21:15:45 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />iqRzw+ileNPu1fhspnRs8nOjjIA=<br /></pre>  |  <pre>PUT\n<br />\n<br />image/jpeg\n<br />Tue, 27 Mar 2007 21:15:45 +0000\n<br />/awsexamplebucket1/photos/puppy.jpg</pre>  | 
 
  Note the Content\-Type header in the request and in the StringToSign\. Also note that the Content\-MD5 is left blank in the StringToSign, because it is not present in the request\. 
 
@@ -169,7 +192,7 @@ This example lists the content of the awsexamplebucket1 bucket\.
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>GET /?prefix=photos&max-keys=50&marker=puppy HTTP/1.1<br />User-Agent: Mozilla/5.0<br />Host: awsexamplebucket1.s3.us-west-1.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:42:41 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />htDYFYduRNen8P9ZfE/s9SuKy0U=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:42:41 +0000\n<br />/awsexamplebucket1/</pre>  | 
+|  <pre>GET /?prefix=photos&max-keys=50&marker=puppy HTTP/1.1<br />User-Agent: Mozilla/5.0<br />Host: awsexamplebucket1.s3.us-west-1.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:42:41 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />m0WP8eCtspQl5Ahe6L1SozdX9YA=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:42:41 +0000\n<br />/awsexamplebucket1/</pre>  | 
 
  Note the trailing slash on the CanonicalizedResource and the absence of query string parameters\. 
 
@@ -180,7 +203,7 @@ This example fetches the access control policy subresource for the 'awsexamplebu
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>GET /?acl HTTP/1.1<br />Host: awsexamplebucket1.s3.us-west-1.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:44:46 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />c2WLPFtWHVgbEmeEG93a4cG37dM=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:44:46 +0000\n<br />/awsexamplebucket1/?acl</pre>  | 
+|  <pre>GET /?acl HTTP/1.1<br />Host: awsexamplebucket1.s3.us-west-1.amazonaws.com<br />Date: Tue, 27 Mar 2007 19:44:46 +0000<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />82ZHiFIjc+WbcwFKGUVEQspPn+0=</pre>  |  <pre>GET\n<br />\n<br />\n<br />Tue, 27 Mar 2007 19:44:46 +0000\n<br />/awsexamplebucket1/?acl</pre>  | 
 
  Notice how the subresource query string parameter is included in the CanonicalizedResource\. 
 
@@ -191,7 +214,7 @@ This example deletes an object from the 'awsexamplebucket1' bucket using the pat
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>DELETE /awsexamplebucket1/photos/puppy.jpg HTTP/1.1<br />User-Agent: dotnet<br />Host: s3.us-west-1.amazonaws.com<br />Date: Tue, 27 Mar 2007 21:20:27 +0000<br /><br />x-amz-date: Tue, 27 Mar 2007 21:20:26 +0000<br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:lx3byBScXR6KzyMaifNkardMwNk=</pre>  |  <pre>DELETE\n<br />\n<br />\n<br />Tue, 27 Mar 2007 21:20:26 +0000\n<br />/awsexamplebucket1/photos/puppy.jpg</pre>  | 
+|  <pre>DELETE /awsexamplebucket1/photos/puppy.jpg HTTP/1.1<br />User-Agent: dotnet<br />Host: s3.us-west-1.amazonaws.com<br />Date: Tue, 27 Mar 2007 21:20:27 +0000<br /><br />x-amz-date: Tue, 27 Mar 2007 21:20:26 +0000<br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:XbyTlbQdu9Xw5o8P4iMwPktxQd8=</pre>  |  <pre>DELETE\n<br />\n<br />\n<br />Tue, 27 Mar 2007 21:20:26 +0000\n<br />/awsexamplebucket1/photos/puppy.jpg</pre>  | 
 
  Note how we used the alternate 'x\-amz\-date' method of specifying the date \(because our client library prevented us from setting the date, say\)\. In this case, the `x-amz-date` takes precedence over the `Date` header\. Therefore, date entry in the signature must contain the value of the `x-amz-date` header\. 
 
@@ -202,7 +225,7 @@ This example uploads an object to a CNAME style virtual hosted bucket with metad
 
 | Request | StringToSign | 
 | --- | --- | 
-|  <pre>PUT /db-backup.dat.gz HTTP/1.1<br />User-Agent: curl/7.15.5<br />Host: static.awsexamplebucket1.net:8080<br />Date: Tue, 27 Mar 2007 21:06:08 +0000<br /><br />x-amz-acl: public-read<br />content-type: application/x-download<br />Content-MD5: 4gJE4saaMU4BqNR0kLY+lw==<br />X-Amz-Meta-ReviewedBy: joe@awsexamplebucket1.net<br />X-Amz-Meta-ReviewedBy: jane@awsexamplebucket1.net<br />X-Amz-Meta-FileChecksum: 0x02661779<br />X-Amz-Meta-ChecksumAlgorithm: crc32<br />Content-Disposition: attachment; filename=database.dat<br />Content-Encoding: gzip<br />Content-Length: 5913339<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />ilyl83RwaSoYIEdixDQcA4OnAnc=</pre>  |  <pre>PUT\n<br />4gJE4saaMU4BqNR0kLY+lw==\n<br />application/x-download\n<br />Tue, 27 Mar 2007 21:06:08 +0000\n<br /><br />x-amz-acl:public-read\n<br />x-amz-meta-checksumalgorithm:crc32\n<br />x-amz-meta-filechecksum:0x02661779\n<br />x-amz-meta-reviewedby:<br />joe@awsexamplebucket1.net,jane@awsexamplebucket1.net\n<br />/static.awsexamplebucket1.net/db-backup.dat.gz</pre>  | 
+|  <pre>PUT /db-backup.dat.gz HTTP/1.1<br />User-Agent: curl/7.15.5<br />Host: static.awsexamplebucket1.net:8080<br />Date: Tue, 27 Mar 2007 21:06:08 +0000<br /><br />x-amz-acl: public-read<br />content-type: application/x-download<br />Content-MD5: 4gJE4saaMU4BqNR0kLY+lw==<br />X-Amz-Meta-ReviewedBy: joe@awsexamplebucket1.net<br />X-Amz-Meta-ReviewedBy: jane@awsexamplebucket1.net<br />X-Amz-Meta-FileChecksum: 0x02661779<br />X-Amz-Meta-ChecksumAlgorithm: crc32<br />Content-Disposition: attachment; filename=database.dat<br />Content-Encoding: gzip<br />Content-Length: 5913339<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />dKZcB+bz2EPXgSdXZp9ozGeOM4I=</pre>  |  <pre>PUT\n<br />4gJE4saaMU4BqNR0kLY+lw==\n<br />application/x-download\n<br />Tue, 27 Mar 2007 21:06:08 +0000\n<br /><br />x-amz-acl:public-read\n<br />x-amz-meta-checksumalgorithm:crc32\n<br />x-amz-meta-filechecksum:0x02661779\n<br />x-amz-meta-reviewedby:<br />joe@awsexamplebucket1.net,jane@awsexamplebucket1.net\n<br />/static.awsexamplebucket1.net/db-backup.dat.gz</pre>  | 
 
  Notice how the 'x\-amz\-' headers are sorted, trimmed of whitespace, and converted to lowercase\. Note also that multiple headers with the same name have been joined using commas to separate values\. 
 

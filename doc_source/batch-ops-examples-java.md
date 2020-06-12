@@ -16,7 +16,7 @@ The following example creates an S3 Batch Operations job using the AWS SDK for J
 
 For more information about creating a job, see [Creating an S3 Batch Operations job](batch-ops-create-job.md)\.
 
-For information about setting up the permissions that you need to create a job, see [Granting permissions for Amazon S3 batch operations](batch-ops-iam-role-policies.md)\. 
+For information about setting up the permissions that you need to create a job, see [Granting permissions for Amazon S3 Batch Operations](batch-ops-iam-role-policies.md)\. 
 
 **Example**  
 
@@ -377,25 +377,23 @@ public void putJobTagging(final AWSS3ControlClient awss3ControlClient,
 
 ## Using S3 Batch Operations with S3 Object Lock<a name="batchops-examples-java-object-lock"></a>
 
-Using S3 Batch Operations with S3 Object Lock you can manage retention or enable a legal hold of many Amazon S3 objects at once\. You specify the list of target objects in your manifest and submit it to Batch Operations for completion\. For more information, see [Managing S3 Object Lock Retention Dates](batch-ops-retention-date.md) and [Managing S3 Object Lock Legal Hold](batch-ops-legal-hold.md)\. 
+You can use S3 Batch Operations with S3 Object Lock to manage retention or to enable a legal hold for many Amazon S3 objects at once\. You specify the list of target objects in your manifest and submit it to Batch Operations for completion\. For more information, see [Managing S3 Object Lock retention dates](batch-ops-retention-date.md) and [Managing S3 Object Lock legal hold](batch-ops-legal-hold.md)\. 
 
-The following examples show how to: create an IAM roles with S3 Batch Operations permissions, update the role permissions to create jobs that enable object lock using the AWS Command Line Interface\. In the code examples below, replace any variables values with those that suit your needs\. You must also have a **CSV** manifest identifying the objects for your S3 Batch Operations job\. For more information, see [Specifying a manifest](batch-ops-basics.md#specify-batchjob-manifest)
+The following examples show how to create an IAM role with S3 Batch Operations permissions, and update the role permissions to create jobs that enable object lock using the AWS SDK for Java\. In the code, replace any variable values with those that suit your needs\. You must also have a `CSV` manifest identifying the objects for your S3 Batch Operations job\. For more information, see [Specifying a manifest](batch-ops-basics.md#specify-batchjob-manifest)\.
 
-**Topics**
-+ [Using S3 Batch Operations with S3 Object Lock retention](#batch-ops-examples-java-object-lock-retention)
-+ [Example: Using S3 Batch Operations with S3 Object Lock legal hold](#batch-ops-examples-java-object-lock-legalhold)
+You perform the following steps:
 
-First, you will:
-+ Create an IAM role and assign S3 Batch Operations permissions to run\. This is required for all S3 Batch Operations jobs\.
-+ Set up S3 Batch Operations with S3 Object Lock to run
+1. Create an IAM role and assign S3 Batch Operations permissions to run\. This step is required for all S3 Batch Operations jobs\.
 
-  You will now allow the role to:
+1. Set up S3 Batch Operations with S3 Object Lock to run\.
 
-  1. Run Object Lock on the S3 bucket that contains the target objects that you want Batch Operations to run on\.
+   You allow the role to do the following:
 
-  1. Read the S3 bucket where the manifest CSV file and the objects are located\.
+   1. Run Object Lock on the S3 bucket that contains the target objects that you want Batch Operations to run on\.
 
-  1. Write the results of the S3 Batch Operations job to the reporting bucket\.
+   1. Read the S3 bucket where the manifest CSV file and the objects are located\.
+
+   1. Write the results of the S3 Batch Operations job to the reporting bucket\.
 
 ```
 public void createObjectLockRole() {
@@ -468,11 +466,15 @@ public void createObjectLockRole() {
 }
 ```
 
-### Using S3 Batch Operations with S3 Object Lock retention<a name="batch-ops-examples-java-object-lock-retention"></a>
+**Topics**
++ [Use S3 Batch Operations with S3 Object Lock retention](#batch-ops-examples-java-object-lock-retention)
++ [Use S3 Batch Operations with S3 Object Lock legal hold](#batch-ops-examples-java-object-lock-legalhold)
 
-The following snippet will alow the rule to set S3 Object Lock retention for your objects in the manifest bucket\.
+### Use S3 Batch Operations with S3 Object Lock retention<a name="batch-ops-examples-java-object-lock-retention"></a>
 
- You will update the role to include `s3:PutObjectRetention` permissions so you can execute Object Lock retention on the objects in your bucket\.
+The following example allows the rule to set S3 Object Lock retention for your objects in the manifest bucket\.
+
+ You update the role to include `s3:PutObjectRetention` permissions so you can execute Object Lock retention on the objects in your bucket\.
 
 ```
 public void allowPutObjectRetention() {
@@ -505,13 +507,9 @@ public void allowPutObjectRetention() {
 }
 ```
 
-**Topics**
-+ [Using S3 Batch Operations with S3 Object Lock retention compliance mode](#batch-ops-examples-java-object-lock-compliance)
-+ [Using S3 Batch Operations with S3 Object Lock retention governance mode](#batch-ops-examples-java-object-lock-governance)
+#### Use S3 Batch Operations with S3 Object Lock retention compliance mode<a name="batch-ops-examples-java-object-lock-compliance"></a>
 
-#### Using S3 Batch Operations with S3 Object Lock retention compliance mode<a name="batch-ops-examples-java-object-lock-compliance"></a>
-
-The following example build on the previos examples of creating a trust policy, setting S3 Batch Operations and S3 Object Lock configuration permissions to your objects\. This example will set the retention mode `COMPLIANCE` and the retain until date to Jan 1, 2020 and create a job that will target objects in manifest bucket and report the results in the reports bucket that you have identified\.
+The following example builds on the previous examples of creating a trust policy, and setting S3 Batch Operations and S3 Object Lock configuration permissions on your objects\. This example sets the retention mode to `COMPLIANCE` and the `retain until date` to January 1, 2020, and creates a job to target objects in the manifest bucket and report the results in the reports bucket that you identified\.
 
 ```
 public String createComplianceRetentionJob(final AWSS3ControlClient awss3ControlClient) throws ParseException {
@@ -570,7 +568,7 @@ public String createComplianceRetentionJob(final AWSS3ControlClient awss3Control
 }
 ```
 
-The example below shows how you can extend the `COMPLIANCE` mode's retain until date to Jan 15, 2020\.
+The following example extends the `COMPLIANCE` mode's `retain until date` to January 15, 2020\.
 
 ```
 public String createExtendComplianceRetentionJob(final AWSS3ControlClient awss3ControlClient) throws ParseException {
@@ -629,9 +627,9 @@ public String createExtendComplianceRetentionJob(final AWSS3ControlClient awss3C
 }
 ```
 
-#### Using S3 Batch Operations with S3 Object Lock retention governance mode<a name="batch-ops-examples-java-object-lock-governance"></a>
+#### Use S3 Batch Operations with S3 Object Lock retention governance mode<a name="batch-ops-examples-java-object-lock-governance"></a>
 
-The following example builds on the previous example of creating a trust policy, setting S3 Batch Operations and S3 Object Lock configuration permissions and shows how to apply S3 Object Lock retention governance with the retain until date to Jan 30, 2020 across multiples objects and creates a Batch Operations job that will use the manifest bucket and reports the results in the reports bucket\.
+The following example builds on the previous example of creating a trust policy, and setting S3 Batch Operations and S3 Object Lock configuration permissions\. It shows how to apply S3 Object Lock retention governance with the `retain until date` set to January 30, 2020 across multiple objects\. It creates a Batch Operations job that uses the manifest bucket and reports the results in the reports bucket\.
 
 ```
 public String createGovernanceRetentionJob(final AWSS3ControlClient awss3ControlClient) throws ParseException {
@@ -690,7 +688,7 @@ public String createGovernanceRetentionJob(final AWSS3ControlClient awss3Control
 }
 ```
 
-The following example builds on the previous example of creating a trust policy, setting S3 Batch Operations and S3 Object Lock configuration permissions and shows how to bypass retention governance with across multiples objects and creates a Batch Operations job that will use the manifest bucket and reports the results in the reports bucket\.
+The following example builds on the previous example of creating a trust policy, and setting S3 Batch Operations and S3 Object Lock configuration permissions\. It shows how to bypass retention governance across multiple objects and creates a Batch Operations job that uses the manifest bucket and reports the results in the reports bucket\.
 
 ```
 public void allowBypassGovernance() {
@@ -772,11 +770,11 @@ public String createRemoveGovernanceRetentionJob(final AWSS3ControlClient awss3C
 }
 ```
 
-### Example: Using S3 Batch Operations with S3 Object Lock legal hold<a name="batch-ops-examples-java-object-lock-legalhold"></a>
+### Use S3 Batch Operations with S3 Object Lock legal hold<a name="batch-ops-examples-java-object-lock-legalhold"></a>
 
-The following example builds on the previous examples of creating a trust policy, setting S3 Batch Operations and S3 Object Lock configuration permissions and shows how to disable Object Lock legal hold on objects using Batch Operations\. 
+The following example builds on the previous examples of creating a trust policy, and setting S3 Batch Operations and S3 Object Lock configuration permissions\. It shows how to disable Object Lock legal hold on objects using Batch Operations\. 
 
-This example first updates the role allow `s3:PutObjectLegalHold` permissions and then creates a Batch Operations job that will turn off\(remove\) legal hold from the objects identified in the manifest and report on it\.
+This example first updates the role allow `s3:PutObjectLegalHold` permissions and then creates a Batch Operations job that turns off \(removes\) legal hold from the objects identified in the manifest and reports on it\.
 
 ```
 public void allowPutObjectLegalHold() {

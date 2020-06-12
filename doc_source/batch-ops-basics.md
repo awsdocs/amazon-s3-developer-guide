@@ -1,4 +1,4 @@
-# The basics: Amazon S3 batch operations jobs<a name="batch-ops-basics"></a>
+# The basics: S3 Batch Operations<a name="batch-ops-basics"></a>
 
 You can use S3 Batch Operations to perform large\-scale batch operations on Amazon S3 objects\. S3 Batch Operations can execute a single operation or action on lists of Amazon S3 objects that you specify\. 
 

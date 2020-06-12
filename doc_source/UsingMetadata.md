@@ -116,7 +116,7 @@ The following table provides a list of system\-defined metadata and whether you 
 | Content\-Length | Object size in bytes\. | No | 
 | Content\-Type | Object type\. | Yes | 
 | Last\-Modified |  Object creation date or the last modified date, whichever is the latest\.  | No | 
-| Content\-MD5 | The base64\-encoded 128\-bit MD5 digest of the object\. | No | 
+| Content\-MD5 | The base64\-encoded 128\-bit MD5 digest of the object\. | Yes | 
 | x\-amz\-server\-side\-encryption | Indicates whether server\-side encryption is enabled for the object, and whether that encryption is from the AWS Key Management Service \(AWS KMS\) or from Amazon S3 managed encryption \(SSE\-S3\)\. For more information, see [Protecting data using server\-side encryption](serv-side-encryption.md)\.  | Yes | 
 | x\-amz\-version\-id | Object version\. When you enable versioning on a bucket, Amazon S3 assigns a version number to objects added to the bucket\. For more information, see [Using versioning](Versioning.md)\. | No | 
 | x\-amz\-delete\-marker | In a bucket that has versioning enabled, this Boolean marker indicates whether the object is a delete marker\.  | No | 

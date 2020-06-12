@@ -43,11 +43,11 @@ Follow the steps to create and subscribe to an Amazon Simple Notification Servic
 
    You will get email requesting you to confirm your subscription to the topic\. Confirm the subscription\. 
 
-1. Replace the access policy attached to the topic with the following policy\. You must update the policy by providing your SNS topic Amazon Resource Name \(ARN\) and bucket name\.
+1. Replace the access policy attached to the topic with the following policy\. You must update the policy by providing your SNS topic Amazon Resource Name \(ARN\), bucket name, and bucket owner's account ID\.
 
    ```
    {
-    "Version": "2008-10-17",
+    "Version": "2012-10-17",
     "Id": "example-ID",
     "Statement": [
      {
@@ -61,7 +61,8 @@ Follow the steps to create and subscribe to an Amazon Simple Notification Servic
       ],
       "Resource": "SNS-topic-ARN",
       "Condition": {
-         "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
+         "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" },
+         "StringEquals": { "aws:SourceAccount": "bucket-owner-account-id" }
       }
      }
     ]
@@ -100,7 +101,8 @@ Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Ama
       ],
       "Resource": "SQS-queue-ARN",
       "Condition": {
-         "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
+         "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" },
+         "StringEquals": { "aws:SourceAccount": "bucket-owner-account-id" }
       }
      }
     ]

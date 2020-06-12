@@ -8,5 +8,5 @@ S3 Batch Operations supports several different operations\. The topics in this s
 + [Invoking a Lambda function from Amazon S3 batch operations](batch-ops-invoke-lambda.md)
 + [Put object ACL](batch-ops-put-object-acl.md)
 + [Put object tagging](batch-ops-put-object-tagging.md)
-+ [Managing S3 Object Lock Retention Dates](batch-ops-retention-date.md)
-+ [Managing S3 Object Lock Legal Hold](batch-ops-legal-hold.md)
++ [Managing S3 Object Lock retention dates](batch-ops-retention-date.md)
++ [Managing S3 Object Lock legal hold](batch-ops-legal-hold.md)

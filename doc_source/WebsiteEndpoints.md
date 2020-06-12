@@ -2,7 +2,7 @@
 
 When you configure your bucket as a static website, the website is available at the AWS Region\-specific website endpoint of the bucket\. Website endpoints are different from the endpoints where you send REST API requests\. For more information about the differences between the endpoints, see [Key differences between a website endpoint and a REST API endpoint](#WebsiteRestEndpointDiff)\.
 
-Depending on your Region, your Amazon S3 website endpoints follows one of these two formats\.
+Depending on your Region, your Amazon S3 website endpoint follows one of these two formats\.
 + **s3\-website dash \(\-\) Region** ‐ `http://bucket-name.s3-website-Region.amazonaws.com`
 + **s3\-website dot \(\.\) Region** ‐ `http://bucket-name.s3-website.Region.amazonaws.com`
 
@@ -60,7 +60,7 @@ For more information, see [Customizing Amazon S3 URLs with CNAMEs](VirtualHostin
 
 Instead of accessing the website using an Amazon S3 website endpoint, you can use your own domain registered with Amazon Route 53 to serve your content—for example, `example.com`\. You can use Amazon S3 with Route 53 to host a website at the root domain\. For example, if you have the root domain `example.com` and you host your website on Amazon S3, your website visitors can access the site from their browser by entering either `http://www.example.com` or `http://example.com`\. 
 
-For an example walkthrough, see [Configuring a static website using a custom Domain registered with Route 53](website-hosting-custom-domain-walkthrough.md)\. 
+For an example walkthrough, see [Configuring a static website using a custom domain registered with Route 53](website-hosting-custom-domain-walkthrough.md)\. 
 
 ## Key differences between a website endpoint and a REST API endpoint<a name="WebsiteRestEndpointDiff"></a>
 

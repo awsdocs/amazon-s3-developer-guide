@@ -1,6 +1,10 @@
 # Making requests using IAM user temporary credentials \- AWS SDK for Java<a name="AuthUsingTempSessionTokenJava"></a>
 
-An IAM user or an AWS Account can request temporary security credentials \(see [Making requests](MakingRequests.md)\) using the AWS SDK for Java and use them to access Amazon S3\. These credentials expire after the specified session duration\. To use IAM temporary security credentials, do the following:
+An IAM user or an AWS Account can request temporary security credentials \(see [Making requests](MakingRequests.md)\) using the AWS SDK for Java and use them to access Amazon S3\. These credentials expire after the specified session duration\. 
+
+By default, the session duration is one hour\. If you use IAM user credentials, you can specify the duration when requesting the temporary security credentials from 15 minutes to the maximum session duration for the role\. For more information about temporary security credentials, see [Temporary Security Credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) in the *IAM User Guide*\. For more information about making requests, see [Making requests](MakingRequests.md)\.
+
+**To get temporary security credentials and access Amazon S3**
 
 1. Create an instance of the `AWSSecurityTokenService` class\. For information about providing credentials, see [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)\.
 

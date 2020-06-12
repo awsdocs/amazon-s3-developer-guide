@@ -22,7 +22,7 @@ If two writes are made to a single non\-versioned object at the same time, it is
 + **Object removal events** — Amazon S3 supports deletes of versioned and unversioned objects\. For information about object versioning, see [Object Versioning](ObjectVersioning.md) and [Using versioning](Versioning.md)\. 
 
   You can request notification when an object is deleted or a versioned object is permanently deleted by using the `s3:ObjectRemoved:Delete` event type\. Or you can request notification when a delete marker is created for a versioned object by using `s3:ObjectRemoved:DeleteMarkerCreated`\. You can also use a wildcard `s3:ObjectRemoved:*` to request notification anytime an object is deleted\. For information about deleting versioned objects, see [Deleting object versions](DeletingObjectVersions.md)\. 
-+ **Restore object events **— Amazon S3 supports the restoration of objects archived to the S3 Glacier storage class\. You request to be notified of object restoration completion by using `s3:ObjectRestore:Completed`\. You use `s3:ObjectRestore:Post` to request notification of the initiation of a restore\. 
++ **Restore object events **— Amazon S3 supports the restoration of objects archived to the S3 Glacier storage classes\. You request to be notified of object restoration completion by using `s3:ObjectRestore:Completed`\. You use `s3:ObjectRestore:Post` to request notification of the initiation of a restore\.
 + **Reduced Redundancy Storage \(RRS\) object lost events** — Amazon S3 sends a notification message when it detects that an object of the RRS storage class has been lost\. 
 + **Replication events** — Amazon S3 sends event notifications for replication configurations that have S3 Replication Time Control \(S3 RTC\) enabled\. It sends these notifications when an object fails replication, when an object exceeds the 15\-minute threshold, when an object is replicated after the 15\-minute threshold, and when an object is no longer tracked by replication metrics\. It publishes a second event when that object replicates to the destination Region\.
 
@@ -415,7 +415,7 @@ The following is an example of an IAM policy that you attach to the destination 
 
 ```
 {
- "Version": "2008-10-17",
+ "Version": "2012-10-17",
  "Id": "example-ID",
  "Statement": [
   {
@@ -427,7 +427,7 @@ The following is an example of an IAM policy that you attach to the destination 
    "Action": [
     "SNS:Publish"
    ],
-   "Resource": "arn:aws:sns:REGION:ACCOUNT-ID:TOPICNAME",
+   "Resource": "arn:aws:sns:Region:account-id:topic-name",
    "Condition": {
       "ArnLike": { "aws:SourceArn": "arn:aws:s3:::bucket-name" },
       "StringEquals": { "aws:SourceAccount": "bucket-owner-account-id" }
@@ -443,7 +443,7 @@ The following is an example of an IAM policy that you attach to the destination 
 
 ```
 {
- "Version": "2008-10-17",
+ "Version": "2012-10-17",
  "Id": "example-ID",
  "Statement": [
   {
@@ -455,9 +455,10 @@ The following is an example of an IAM policy that you attach to the destination 
    "Action": [
     "SQS:SendMessage"
    ],
-   "Resource": "arn:aws:sqs:REGION:ACCOUNT-ID:QUEUENAMEHERE",
+   "Resource": "arn:aws:sqs:Region:account-id:queue-name",
    "Condition": {
-      "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" }
+      "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" },
+      "StringEquals": { "aws:SourceAccount": "bucket-owner-account-id" }
    }
   }
  ]

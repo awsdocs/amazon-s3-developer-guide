@@ -4,4 +4,4 @@ This section provides two examples\. In the first example, you configure a bucke
 
 **Topics**
 + [Configuring a static website](HostingWebsiteOnS3Setup.md)
-+ [Configuring a static website using a custom Domain registered with Route 53](website-hosting-custom-domain-walkthrough.md)
++ [Configuring a static website using a custom domain registered with Route 53](website-hosting-custom-domain-walkthrough.md)
