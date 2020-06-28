@@ -33,7 +33,8 @@ First, you create a CloudFront distribution\. This makes your website available 
 
    1. Leave **Price Class** set to **Use All Edge Locations \(Best Performance\)**\.
 
-   1. Keep **Alternate Domain Names \(CNAMEs\)** blank\.
+   1. Enter the domain names you want to use (names of your buckets) into the field for **Alternate Domain Names \(CNAMEs\)**\.
+      You will also need to set a custom SSL certificate that covers these CNAMEs.
 
    1. In **Default Root Object**, enter the name of your index document, for example, `index.html`\. 
 
