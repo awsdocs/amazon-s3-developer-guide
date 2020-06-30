@@ -156,13 +156,13 @@ S3 access points don't support access by HTTP, only secure access by HTTPS\.
 Some AWS services require specifying an Amazon S3 bucket using `S3://bucket`\. The correct format is shown below\. Be aware that when using this format, the bucket name does not include the region\.
 
 ```
-S3://bucket-name/key-name
+s3://bucket-name/key-name
 ```
 
 For example, using the sample bucket described in the earlier path\-style section:
 
 ```
-S3://mybucket/puppy.jpg
+s3://mybucket/puppy.jpg
 ```
 
 ## Bucket Configuration Options<a name="bucket-config-options-intro"></a>
