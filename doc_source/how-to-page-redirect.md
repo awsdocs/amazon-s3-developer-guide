@@ -12,7 +12,7 @@ If your Amazon S3 bucket is configured for website hosting, you can configure a 
 
 You can redirect requests for an object to another object or URL by setting the website redirect location in the metadata of the object\. You set the redirect by adding the `x-amz-website-redirect-location` property to the object metadata\. On the Amazon S3 console, you set the **Website Redirect Location** in the metadata of the object\. If you use the [Amazon S3 API](#page-redirect-using-rest-api), you set `x-amz-website-redirect-location`\. The website then interprets the object as a 301 redirect\. 
 
-To redirect a request to another object, you set the redirect location to the key of the target object\. To redirect a request to an external URL, you set the redirect location to the URL that you want\. For more information about object metadata, see [System\-Defined Object Metadata](UsingMetadata.md#SysMetadata)\.
+To redirect a request to another object, you set the redirect location to the key of the target object\. To redirect a request to an external URL, you set the redirect location to the URL that you want\. For more information about object metadata, see [System\-defined object metadata](UsingMetadata.md#SysMetadata)\.
 
 When you set a page redirect, you can either keep or delete the source object content\. For example, if you have a `page1.html` object in your bucket, you can redirect any requests for this page to another object, `page2.html`\. You have two options:
 + Keep the content of the `page1.html` object and redirect page requests\.

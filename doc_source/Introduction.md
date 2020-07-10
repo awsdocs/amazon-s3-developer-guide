@@ -90,7 +90,7 @@ Amazon S3 achieves high availability by replicating data across multiple servers
 
 **Note**  
 Amazon S3 does not currently support object locking for concurrent updates\. If two PUT requests are simultaneously made to the same key, the request with the latest timestamp wins\. If this is an issue, you will need to build an object\-locking mechanism into your application\.   
-Object locking is different from the S3 Object Lock feature\. With S3 Object Lock, you can store objects using a write\-once\-read\-many \(WORM\) model and prevent an object from being deleted or overwritten for a fixed amount of time or indefinitely\. For more information, see [Locking objects using S3 Object Lock](object-lock.md) 
+Object locking is different from the S3 Object Lock feature\. With S3 Object Lock, you can store objects using a write\-once\-read\-many \(WORM\) model and prevent an object from being deleted or overwritten for a fixed amount of time or indefinitely\. For more information, see [Locking objects using S3 Object Lock](object-lock.md)\. 
 Updates are key\-based\. There is no way to make atomic updates across keys\. For example, you cannot make the update of one key dependent on the update of another key unless you design this functionality into your application\.
 
 Buckets have a similar consistency model, with the same caveats\. For example, if you delete a bucket and immediately list all buckets, the deleted bucket might still appear in the list\.
@@ -138,7 +138,7 @@ This section describes important Amazon S3 features\.
 
  Amazon S3 offers a range of storage classes designed for different use cases\. These include Amazon S3 STANDARD for general\-purpose storage of frequently accessed data, Amazon S3 STANDARD\_IA for long\-lived, but less frequently accessed data, and S3 Glacier for long\-term archive\.
 
-For more information, see [Amazon S3 Storage Classes](storage-class-intro.md)\.
+For more information, see [Amazon S3 storage classes](storage-class-intro.md)\.
 
 ### Bucket policies<a name="BucketPolicies"></a>
 

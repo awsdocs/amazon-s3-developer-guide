@@ -1,4 +1,4 @@
-# Understanding Your AWS Billing and Usage Reports for Amazon S3<a name="aws-usage-report-understand"></a>
+# Understanding your AWS billing and usage reports for Amazon S3<a name="aws-usage-report-understand"></a>
 
 Amazon S3 billing and usage reports use codes and abbreviations\. For example, for usage type, which is defined in the following table, *region* is replaced with one of the following abbreviations:
 + **APE1:** Asia Pacific \(Hong Kong\)
@@ -121,7 +121,7 @@ Operations describe the action taken on your AWS object or bucket by the specifi
 
 ## Converting Usage Byte\-Hours to Billed GB\-Months<a name="aws-usage-report-understand-converting-byte-hours"></a>
 
-The volume of storage that we bill you for each month is based on the average amount of storage you used throughout the month\. You are billed for all of the object data and metadata stored in buckets that you created under your AWS account\. For more information about metadata, see [Object Key and Metadata](UsingMetadata.md)\. 
+The volume of storage that we bill you for each month is based on the average amount of storage you used throughout the month\. You are billed for all of the object data and metadata stored in buckets that you created under your AWS account\. For more information about metadata, see [Object key and metadata](UsingMetadata.md)\. 
 
 We measure your storage usage in TimedStorage\-ByteHrs, which are totaled up at the end of the month to generate your monthly charges\. The usage report reports your storage usage in byte\-hours and the billing reports report storage usage in GB\-months\. To correlate your usage report to your billing reports, you need to convert byte\-hours into GB\-months\.
 
@@ -144,8 +144,8 @@ Then convert the byte\-hours to GB\-Months:
 ```
 
 ## More Info<a name="aws-usage-report-understand-more-info"></a>
-+ [AWS Usage Report for Amazon S3](aws-usage-report.md)
-+ [AWS Billing Reports for Amazon S3](aws-billing-reports.md)
++ [AWS usage report for Amazon S3](aws-usage-report.md)
++ [AWS Billing reports for Amazon S3](aws-billing-reports.md)
 + [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)
 + [Amazon S3 FAQ](https://aws.amazon.com/s3/faqs/#billing)
 + [S3 Glacier Pricing](https://aws.amazon.com/glacier/pricing/)

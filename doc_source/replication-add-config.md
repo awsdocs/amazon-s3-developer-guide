@@ -407,7 +407,7 @@ For more information about the XML structure of replication configuration, see [
 
 ## Backward Compatibility<a name="replication-backward-compat-considerations"></a>
 
-The latest version of the replication configuration XML is V2\. For backward compatibility, Amazon S3 continues to support the V1 configuration\. If you have used replication configuration XML V1, consider the following issues that affect backward compatibility:
+The latest version of the replication configuration XML is V2\. XML V2 replication configurations are those containing the `Filter` element for rules, and rules specifying S3 Replication Time Control \(S3 RTC\)\. In V2 replication configurations, Amazon S3 doesn't replicate delete markers\. Therefore, you must set the `DeleteMarkerReplication` element to `Disabled`\. For backward compatibility, Amazon S3 continues to support the XML V1 replication configuration\. If you have used XML V1 replication configuration, consider the following issues that affect backward compatibility:
 + Replication configuration XML V2 includes the `Filter` element for rules\. With the `Filter` element, you can specify object filters based on the object key prefix, tags, or both to scope the objects that the rule applies to\. Replication configuration XML V1 supported filtering based only on the key prefix\. In that case, you add the `Prefix` directly as a child element of the `Rule` element, as in the following example\.
 
   ```

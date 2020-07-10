@@ -1,4 +1,4 @@
-# Amazon S3 Storage Classes<a name="storage-class-intro"></a>
+# Amazon S3 storage classes<a name="storage-class-intro"></a>
 
 Each object in Amazon S3 has a storage class associated with it\. For example, if you list the objects in an S3 bucket, the console shows the storage class for all the objects in the list\.
 
@@ -7,14 +7,14 @@ Each object in Amazon S3 has a storage class associated with it\. For example, i
 Amazon S3 offers a range of storage classes for the objects that you store\. You choose a class depending on your use case scenario and performance access requirements\. All of these storage classes offer high durability\. 
 
 **Topics**
-+ [Storage Classes for Frequently Accessed Objects](#sc-freq-data-access)
-+ [Storage Class for Automatically Optimizing Frequently and Infrequently Accessed Objects](#sc-dynamic-data-access)
-+ [Storage Classes for Infrequently Accessed Objects](#sc-infreq-data-access)
-+ [Storage Classes for Archiving Objects](#sc-glacier)
-+ [Comparing the Amazon S3 Storage Classes](#sc-compare)
-+ [Setting the Storage Class of an Object](#sc-howtoset)
++ [Storage classes for frequently accessed objects](#sc-freq-data-access)
++ [Storage class for automatically optimizing frequently and infrequently accessed objects](#sc-dynamic-data-access)
++ [Storage classes for infrequently accessed objects](#sc-infreq-data-access)
++ [Storage classes for archiving objects](#sc-glacier)
++ [Comparing the Amazon S3 storage classes](#sc-compare)
++ [Setting the storage class of an object](#sc-howtoset)
 
-## Storage Classes for Frequently Accessed Objects<a name="sc-freq-data-access"></a>
+## Storage classes for frequently accessed objects<a name="sc-freq-data-access"></a>
 
 For performance\-sensitive use cases \(those that require millisecond access time\) and frequently accessed data, Amazon S3 provides the following storage classes:
 + **S3 Standard**—The default storage class\. If you don't specify the storage class when you upload an object, Amazon S3 assigns the S3 Standard storage class\.
@@ -24,7 +24,7 @@ We recommend that you not use this storage class\. The S3 Standard storage class
 
   For durability, RRS objects have an average annual expected loss of 0\.01 percent of objects\. If an RRS object is lost, when requests are made to that object, Amazon S3 returns a 405 error\.
 
-## Storage Class for Automatically Optimizing Frequently and Infrequently Accessed Objects<a name="sc-dynamic-data-access"></a>
+## Storage class for automatically optimizing frequently and infrequently accessed objects<a name="sc-dynamic-data-access"></a>
 
 The **S3 Intelligent\-Tiering** storage class is designed to optimize storage costs by automatically moving data to the most cost\-effective storage access tier, without performance impact or operational overhead\. S3 Intelligent\-Tiering delivers automatic cost savings by moving data on a granular object level between two access tiers, a frequent access tier and a lower\-cost infrequent access tier, when access patterns change\. The Intelligent\-Tiering storage class is ideal if you want to optimize storage costs automatically for long\-lived data when access patterns are unknown or unpredictable\.
 
@@ -36,7 +36,7 @@ There are no retrieval fees when using the S3 Intelligent\-Tiering storage class
 The S3 Intelligent\-Tiering storage class is suitable for objects larger than 128 KB that you plan to store for at least 30 days\. If the size of an object is less than 128 KB, it is not eligible for auto\-tiering\. Smaller objects can be stored, but they are always charged at the frequent access tier rates in the S3 Intelligent\-Tiering storage class\.   
 If you delete an object before the end of the 30\-day minimum storage duration period, you are charged for 30 days\. For pricing information, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)\.
 
-## Storage Classes for Infrequently Accessed Objects<a name="sc-infreq-data-access"></a>
+## Storage classes for infrequently accessed objects<a name="sc-infreq-data-access"></a>
 
 The **S3 Standard\-IA** and **S3 One Zone\-IA** storage classes are designed for long\-lived and infrequently accessed data\. \(IA stands for *infrequent access*\.\) S3 Standard\-IA and S3 One Zone\-IA objects are available for millisecond access \(same as the S3 Standard storage class\)\. Amazon S3 charges a retrieval fee for these objects, so they are most suitable for infrequently accessed data\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 
 
@@ -57,26 +57,26 @@ We recommend the following:
 + S3 Standard\-IA—Use for your primary or only copy of data that can't be re\-created\. 
 + S3 One Zone\-IA—Use if you can re\-create the data if the Availability Zone fails, and for object replicas when setting S3 Cross\-Region Replication \(CRR\)\. 
 
-## Storage Classes for Archiving Objects<a name="sc-glacier"></a>
+## Storage classes for archiving objects<a name="sc-glacier"></a>
 
 The **S3 Glacier** and **S3 Glacier Deep Archive** storage classes are designed for low\-cost data archiving\. These storage classes offer the same durability and resiliency as the S3 Standard storage class\. For a comparison of storage class durability and availability, see the table at the end of this section\.
 
 These storage classes differ as follows:
-+ S3 Glacier—Use for archives where portions of the data might need to be retrieved in minutes\. Data stored in the S3 Glacier storage class has a minimum storage duration period of 90 days and can be accessed in as little as 1\-5 minutes using expedited retrieval\. If you have deleted, overwritten, or transitioned to a different storage class an object before the 90\-day minimum, you are charged for 90 days\. For pricing information, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)\. 
++ **S3 Glacier**—Use for archives where portions of the data might need to be retrieved in minutes\. Data stored in the S3 Glacier storage class has a minimum storage duration period of 90 days and can be accessed in as little as 1\-5 minutes using expedited retrieval\. If you have deleted, overwritten, or transitioned to a different storage class an object before the 90\-day minimum, you are charged for 90 days\. For pricing information, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)\. 
 + **S3 Glacier Deep Archive**—Use for archiving data that rarely needs to be accessed\. Data stored in the S3 Glacier Deep Archive storage class has a minimum storage duration period of 180 days and a default retrieval time of 12 hours\. If you have deleted, overwritten, or transitioned to a different storage class an object before the 180\-day minimum, you are charged for 180 days\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 
 
   S3 Glacier Deep Archive is the lowest cost storage option in AWS\. Storage costs for S3 Glacier Deep Archive are less expensive than using the S3 Glacier storage class\. You can reduce S3 Glacier Deep Archive retrieval costs by using bulk retrieval, which returns data within 48 hours\. 
 
-### Retrieving Archived Objects<a name="sc-glacier-restore"></a>
+### Retrieving archived objects<a name="sc-glacier-restore"></a>
 
-You can set the storage class of an object to S3 Glacier or S3 Glacier Deep Archive in the same ways that you do for the other storage classes as described in the section [Setting the Storage Class of an Object](#sc-howtoset)\. However, the S3 Glacier and S3 Glacier Deep Archive objects are not available for real\-time access\. You must first restore the S3 Glacier and S3 Glacier Deep Archive objects before you can access them\. \(S3 Standard, RRS, S3 Standard\-IA, S3 One Zone\-IA, and S3 Intelligent\-Tiering objects are available for anytime access\.\) For more information about retrieving archived objects, see [Restoring Archived Objects](restoring-objects.md)\.
+You can set the storage class of an object to S3 Glacier or S3 Glacier Deep Archive in the same ways that you do for the other storage classes as described in the section [Setting the storage class of an object](#sc-howtoset)\. However, the S3 Glacier and S3 Glacier Deep Archive objects are not available for real\-time access\. You must first restore the S3 Glacier and S3 Glacier Deep Archive objects before you can access them\. \(S3 Standard, RRS, S3 Standard\-IA, S3 One Zone\-IA, and S3 Intelligent\-Tiering objects are available for anytime access\.\) For more information about retrieving archived objects, see [Restoring Archived Objects](restoring-objects.md)\.
 
 **Important**  
 When you choose the S3 Glacier or S3 Glacier Deep Archive storage class, your objects remain in Amazon S3\. You cannot access them directly through the separate Amazon S3 Glacier service\. 
 
 To learn more about the Amazon S3 Glacier service, see the [Amazon S3 Glacier Developer Guide](https://docs.aws.amazon.com/amazonglacier/latest/dev/)\.
 
-## Comparing the Amazon S3 Storage Classes<a name="sc-compare"></a>
+## Comparing the Amazon S3 storage classes<a name="sc-compare"></a>
 
 The following table compares the storage classes\. 
 
@@ -99,7 +99,7 @@ All of the storage classes except for S3 One Zone\-IA are designed to be resilie
 
 In addition to the performance requirements of your application scenario, consider price\. For storage class pricing, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
 
-## Setting the Storage Class of an Object<a name="sc-howtoset"></a>
+## Setting the storage class of an object<a name="sc-howtoset"></a>
 
 Amazon S3 APIs support setting \(or updating\) the storage class of objects as follows:
 + When creating a new object, you can specify its storage class\. For example, when creating objects using the [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html), [POST Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html), and [Initiate Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html) APIs, you add the `x-amz-storage-class` request header to specify a storage class\. If you don't add this header, Amazon S3 uses Standard, the default storage class\.

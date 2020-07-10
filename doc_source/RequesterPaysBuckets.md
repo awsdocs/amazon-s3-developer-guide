@@ -1,7 +1,7 @@
-# Requester Pays Buckets<a name="RequesterPaysBuckets"></a>
+# Requester Pays buckets<a name="RequesterPaysBuckets"></a>
 
 **Topics**
-+ [Configure Requester Pays by Using the Amazon S3 Console](configure-requester-pays-console.md)
++ [Configure Requester Pays by using the Amazon S3 console](configure-requester-pays-console.md)
 + [Configure Requester Pays with the REST API](configure-requester-pays-rest.md)
 + [Charge Details](#ChargeDetails)
 
@@ -31,3 +31,5 @@ The charge for successful Requester Pays requests is straightforward: the reques
 + Request authentication fails \(HTTP code 403\)\.
 + The request is anonymous \(HTTP code 403\)\.
 + The request is a SOAP request\.
+
+For information about pricing, see [Amazon S3 pricing\.](http://aws.amazon.com/s3/pricing/)

@@ -19,7 +19,7 @@ obj = s3.bucket(bucketName).object(key)
 obj.upload_file(filePath, :server_side_encryption => encryptionType)
 ```
 
-For an example that shows how to upload an object without SSE, see [Upload an Object Using the AWS SDK for Ruby](UploadObjSingleOpRuby.md)\.
+For an example that shows how to upload an object without SSE, see [Upload an object using the AWS SDK for Ruby](UploadObjSingleOpRuby.md)\.
 
 ## Determining the Encryption Algorithm Used<a name="DeterminingEncryptionAlgorithmUsed03"></a>
 

@@ -6,7 +6,7 @@ The following table lists the key properties of AWS CloudTrail logs and Amazon S
 
 
 | Log properties | AWS CloudTrail | Amazon S3 server logs | 
-| --- | --- | --- | 
+| --- |--- |--- |
 |  Can be forwarded to other systems \(CloudWatch Logs, CloudWatch Events\)  |  Yes  |  | 
 |  Deliver logs to more than one destination \(for example, send the same logs to two different buckets\)  |  Yes  |  | 
 |  Turn on logs for a subset of objects \(prefix\)  |  Yes  |  | 
@@ -23,6 +23,7 @@ The following table lists the key properties of AWS CloudTrail logs and Amazon S
 |  Authentication failures1  |  |  Yes  | 
 |  Accounts where logs get delivered  |  Bucket owner2, and requester  |  Bucket owner only  | 
 | Performance and Cost | AWS CloudTrail | Amazon S3 Server Logs | 
+| --- |--- |--- |
 |  Price  |  Management events \(first delivery\) are free; data events incur a fee, in addition to storage of logs  |  No additional cost in addition to storage of logs  | 
 |  Speed of log delivery  |  Data events every 5 mins; management events every 15 mins  |  Within a few hours  | 
 |  Log format  |  JSON  |  Log file with space\-separated, newline\-delimited records  | 

@@ -13,7 +13,7 @@ When testing permissions using the Amazon S3 console, you will need to grant add
 **Topics**
 + [Granting Permissions to Multiple Accounts with Added Conditions](#example-bucket-policies-use-case-1)
 + [Granting Read\-Only Permission to an Anonymous User](#example-bucket-policies-use-case-2)
-+ [Restricting Access to Specific IP Addresses](#example-bucket-policies-use-case-3)
++ [Limiting Access to Specific IP Addresses](#example-bucket-policies-use-case-3)
 + [Restricting Access to a Specific HTTP Referer](#example-bucket-policies-use-case-4)
 + [Granting Permission to an Amazon CloudFront OAI](#example-bucket-policies-cloudfront)
 + [Adding a Bucket Policy to Require MFA](#example-bucket-policies-use-case-7)
@@ -63,7 +63,7 @@ The following example policy grants the `s3:GetObject` permission to any public 
 **Warning**  
 Use caution when granting anonymous access to your Amazon S3 bucket or disabling block public access settings\. When you grant anonymous access, anyone in the world can access your bucket\. We recommend that you never grant anonymous access to your Amazon S3 bucket unless you specifically need to, such as with [static website hosting](WebsiteHosting.md)\.
 
-## Restricting Access to Specific IP Addresses<a name="example-bucket-policies-use-case-3"></a>
+## Limiting Access to Specific IP Addresses<a name="example-bucket-policies-use-case-3"></a>
 
 The following example denies permissions to any user to perform any Amazon S3 operations on objects in the specified S3 bucket unless the request originates from the range of IP addresses specified in the condition\. 
 
@@ -86,14 +86,17 @@ Replace the IP address range in this example with an appropriate value for your 
  9.       "Effect": "Deny",
 10.       "Principal": "*",
 11.       "Action": "s3:*",
-12.       "Resource": "arn:aws:s3:::examplebucket/*",
-13.       "Condition": {
-14.          "NotIpAddress": {"aws:SourceIp": "54.240.143.0/24"}
-15. 
-16.       }
-17.     }
-18.   ]
-19. }
+12.       "Resource": [
+13. 	 "arn:aws:s3:::examplebucket",
+14.          "arn:aws:s3:::examplebucket/*"
+15.       ],
+16.       "Condition": {
+17.          "NotIpAddress": {"aws:SourceIp": "54.240.143.0/24"}
+18. 
+19.       }
+20.     }
+21.   ]
+22. }
 ```
 
 ### Allowing IPv4 and IPv6 Addresses<a name="example-bucket-policies-use-case-ipv6"></a>
@@ -307,7 +310,7 @@ You can allow another AWS account to upload objects to your bucket\. However, yo
 
 ## Granting Permissions for Amazon S3 Inventory and Amazon S3 Analytics<a name="example-bucket-policies-use-case-9"></a>
 
-Amazon S3 inventory creates lists of the objects in an Amazon S3 bucket, and Amazon S3 analytics export creates output files of the data used in the analysis\. The bucket that the inventory lists the objects for is called the *source bucket*\. The bucket where the inventory file is written and the bucket where the analytics export file is written is called a *destination bucket*\. You must create a bucket policy for the destination bucket when setting up inventory for an Amazon S3 bucket and when setting up the analytics export\. For more information, see [ Amazon S3 inventory](storage-inventory.md) and [Amazon S3 analytics – Storage class analysis](analytics-storage-class.md)\.
+Amazon S3 inventory creates lists of the objects in an Amazon S3 bucket, and Amazon S3 analytics export creates output files of the data used in the analysis\. The bucket that the inventory lists the objects for is called the *source bucket*\. The bucket where the inventory file is written and the bucket where the analytics export file is written is called a *destination bucket*\. You must create a bucket policy for the destination bucket when setting up inventory for an Amazon S3 bucket and when setting up the analytics export\. For more information, see [ Amazon S3 inventory](storage-inventory.md) and [Amazon S3 analytics – Storage Class Analysis](analytics-storage-class.md)\.
 
 The following example bucket policy grants Amazon S3 permission to write objects \(PUTs\) from the account for the source bucket to the destination bucket\. You use a bucket policy like this on the destination bucket when setting up Amazon S3 inventory and Amazon S3 analytics export\.
 

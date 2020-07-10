@@ -17,7 +17,7 @@ The following figure shows that Amazon S3 adds a unique version ID to an object 
 
 ## Using the AWS SDKs<a name="add-obj-versioning-enabled-bucket-sdk"></a>
 
-For examples of uploading objects using the AWS SDKs for Java, \.NET, and PHP, see [Uploading Objects](UploadingObjects.md)\. The examples for uploading objects in nonversioned and versioning\-enabled buckets are the same, although in the case of versioning\-enabled buckets, Amazon S3 assigns a version number\. Otherwise, the version number is null\. 
+For examples of uploading objects using the AWS SDKs for Java, \.NET, and PHP, see [Uploading objects](UploadingObjects.md)\. The examples for uploading objects in nonversioned and versioning\-enabled buckets are the same, although in the case of versioning\-enabled buckets, Amazon S3 assigns a version number\. Otherwise, the version number is null\. 
 
 For information about using other AWS SDKs, see [Sample Code and Libraries](https://aws.amazon.com/code/)\. 
 

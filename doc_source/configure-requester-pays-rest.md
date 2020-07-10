@@ -3,4 +3,4 @@
 **Topics**
 + [Setting the requestPayment Bucket Configuration](RequesterPaysBucketConfiguration.md)
 + [Retrieving the requestPayment Configuration](BucketPayerValues.md)
-+ [Downloading Objects in Requester Pays Buckets](ObjectsinRequesterPaysBuckets.md)
++ [Downloading objects in Requester Pays buckets](ObjectsinRequesterPaysBuckets.md)

@@ -6,7 +6,7 @@ This section contains information on how to make requests to Amazon S3 endpoints
 + [Constructing S3 hostnames for REST API requests](#constructing-hostname-rest-api-requests)
 + [Virtual hosted‐style and path‐style requests](#virtual-hosted-path-style-requests)
 + [Making requests to dual\-stack endpoints by using the REST API](#rest-api-dual-stack)
-+ [Virtual Hosting of Buckets](VirtualHosting.md)
++ [Virtual hosting of buckets](VirtualHosting.md)
 + [Request redirection and the REST API](RESTRedirect.md)
 
 ## Constructing S3 hostnames for REST API requests<a name="constructing-hostname-rest-api-requests"></a>
@@ -25,7 +25,7 @@ For a complete list of Amazon S3 Regions and endpoints, see [Amazon S3 Regions a
 
 ## Virtual hosted‐style and path‐style requests<a name="virtual-hosted-path-style-requests"></a>
 
-When making requests by using the REST API, you can use virtual hosted–style or path\-style URIs for the Amazon S3 endpoints\. For more information, see [Virtual Hosting of Buckets](VirtualHosting.md)\.
+When making requests by using the REST API, you can use virtual hosted–style or path\-style URIs for the Amazon S3 endpoints\. For more information, see [Virtual hosting of buckets](VirtualHosting.md)\.
 
 **Example Virtual hosted–Style request**  
 Following is an example of a virtual hosted–style request to delete the `puppy.jpg` file from the bucket named `examplebucket` in the US West \(Oregon\) Region\. For more information about virtual hosted\-style requests, see [Virtual Hosted\-Style Requests](VirtualHosting.md#virtual-hosted-style-access)\.  

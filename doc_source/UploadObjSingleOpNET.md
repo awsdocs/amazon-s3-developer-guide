@@ -1,4 +1,4 @@
-# Upload an Object Using the AWS SDK for \.NET<a name="UploadObjSingleOpNET"></a>
+# Upload an object using the AWS SDK for \.NET<a name="UploadObjSingleOpNET"></a>
 
 **Example**  
 The following C\# code example creates two objects with two `PutObjectRequest` requests:  
@@ -7,6 +7,7 @@ The following C\# code example creates two objects with two `PutObjectRequest` r
 For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;
@@ -54,7 +55,9 @@ namespace Amazon.DocSamples.S3
                     FilePath = filePath,
                     ContentType = "text/plain"
                 };
+                
                 putRequest2.Metadata.Add("x-amz-meta-title", "someTitle");
+                PutObjectResponse response2 = await client.PutObjectAsync(putRequest2);
             }
             catch (AmazonS3Exception e)
             {

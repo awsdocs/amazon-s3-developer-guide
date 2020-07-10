@@ -14,6 +14,7 @@ For information about SSE\-C, see [Protecting data using server\-side encryption
 **Example**  
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;
@@ -153,7 +154,7 @@ namespace Amazon.DocSamples.S3
 
 The example in the preceding section shows how to request server\-side encryption with customer\-provided key \(SSE\-C\) in the PUT, GET, Head, and Copy operations\. This section describes other Amazon S3 APIs that support SSE\-C\.
 
-To upload large objects, you can use multipart upload API \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\)\. AWS SDK for \.NET provides both high\-level or low\-level APIs to upload large objects\. These APIs support encryption\-related headers in the request\.
+To upload large objects, you can use multipart upload API \(see [Uploading objects using multipart upload API](uploadobjusingmpu.md)\)\. AWS SDK for \.NET provides both high\-level or low\-level APIs to upload large objects\. These APIs support encryption\-related headers in the request\.
 + When using high\-level `Transfer-Utility `API, you provide the encryption\-specific headers in the `TransferUtilityUploadRequest` as shown\. For code examples, see [Using the AWS SDK for \.NET for multipart upload \(high\-level API\)](usingHLmpuDotNet.md)\.
 
   ```
@@ -177,6 +178,7 @@ To upload large objects, you can use multipart upload API \(see [Uploading Objec
 **Example**  
 
   ```
+  using Amazon;
   using Amazon.S3;
   using Amazon.S3.Model;
   using System;

@@ -6,6 +6,7 @@ The following example shows how to use the AWS SDK for \.NET to manage website c
 The following C\# code example adds a website configuration to the specified bucket\. The configuration specifies both the index document and the error document names\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;

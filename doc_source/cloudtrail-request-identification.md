@@ -267,14 +267,14 @@ SELECT
   eventSource, 
   sourceIpAddress, 
   userAgent, 
-  requestParameters.bucketName as bucketName, 
-  requestParameters.key as object,
+  json_extract_scalar(requestParameters, '$.bucketName') as bucketName, 
+  json_extract_scalar(requestParameters, '$.key') as object,
   userIdentity.arn as userArn
 FROM
-  s3_cloudtrail_events_db.cloudtrail_myawsexamplebucket1_table
+  s3_cloudtrail_events_db.cloudtrail_myawsexamplebucket_table
 WHERE
-  eventName = ‘PutObject'
-  AND eventTime BETWEEN "2019-07-05T00:00:00Z" and "2019-07-06T00:00:00Z"
+  eventName = 'PutObject'
+  AND eventTime BETWEEN '2019-07-05T00:00:00Z' and '2019-07-06T00:00:00Z'
 ```
 
 **Example — select all events that have GET object access requests, and print only EventTime, EventSource, SourceIP, UserAgent, BucketName, object, and UserARN**  
@@ -286,14 +286,14 @@ SELECT
   eventSource, 
   sourceIpAddress, 
   userAgent, 
-  requestParameters.bucketName as bucketName, 
-  requestParameters.key as object,
+  json_extract_scalar(requestParameters, '$.bucketName') as bucketName, 
+  json_extract_scalar(requestParameters, '$.key') as object,
   userIdentity.arn as userArn
 FROM
-  s3_cloudtrail_events_db.cloudtrail_myawsexamplebucket1_table
+  s3_cloudtrail_events_db.cloudtrail_myawsexamplebucket_table
 WHERE
-  eventName = ‘GetObject'
-  AND eventTime BETWEEN "2019-07-05T00:00:00Z" and "2019-07-06T00:00:00Z"
+  eventName = 'GetObject'
+  AND eventTime BETWEEN '2019-07-05T00:00:00Z' and '2019-07-06T00:00:00Z'
 ```
 
 **Example — select all anonymous requester events to a bucket in a certain period and print only EventTime, EventSource, SourceIP, UserAgent, BucketName, UserIdentity, and UserARN**  
@@ -305,14 +305,14 @@ SELECT
   eventSource, 
   sourceIpAddress, 
   userAgent, 
-  requestParameters.bucketName as bucketName, 
+  json_extract_scalar(requestParameters, '$.bucketName') as bucketName, 
   userIdentity.arn as userArn,
   userIdentity.principalId 
 FROM
-  s3_cloudtrail_events_db.cloudtrail_myawsexamplebucket1_table
+  s3_cloudtrail_events_db.cloudtrail_myawsexamplebucket_table
 WHERE
   userIdentity.principalId='ANONYMOUS_PRINCIPAL'
-  AND eventTime BETWEEN "2019-07-05T00:00:00Z" and "2019-07-06T00:00:00Z"
+  AND eventTime BETWEEN '2019-07-05T00:00:00Z' and '2019-07-06T00:00:00Z'
 ```
 
 **Note**  

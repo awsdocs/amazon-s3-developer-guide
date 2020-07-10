@@ -10,10 +10,9 @@ Amazon S3 Block Public Access provides four settings\. These settings are indepe
 
 When Amazon S3 evaluates whether an operation is prohibited by a block public access setting, it rejects any request that violates an access point, bucket, or account setting\.
 
-
-|  | 
-| --- |
-|    Public access is granted to buckets and objects through access control lists \(ACLs\), access point policies, bucket policies, or all\. To help ensure that all of your Amazon S3 access points, buckets, and objects have their public access blocked, we recommend that you turn on all four settings for block public access for your account\. These settings block public access for all current and future buckets and access points\.  Before applying these settings, verify that your applications will work correctly without public access\. If you require some level of public access to your buckets or objects, for example to host a static website as described at [Hosting a static website on Amazon S3](WebsiteHosting.md), you can customize the individual settings to suit your storage use cases\.   | 
+**Warning**  
+Public access is granted to buckets and objects through access control lists \(ACLs\), access point policies, bucket policies, or all\. To help ensure that all of your Amazon S3 access points, buckets, and objects have their public access blocked, we recommend that you turn on all four settings for block public access for your account\. These settings block public access for all current and future buckets and access points\.   
+Before applying these settings, verify that your applications will work correctly without public access\. If you require some level of public access to your buckets or objects, for example to host a static website as described at [Hosting a static website on Amazon S3](WebsiteHosting.md), you can customize the individual settings to suit your storage use cases\.
 
 **Note**  
 You can enable block public access settings only for access points, buckets, and AWS accounts\. Amazon S3 doesn't support block public access settings on a per\-object basis\.

@@ -2,7 +2,7 @@
 
 You can abort an in\-progress multipart upload by calling the `AmazonS3Client.AbortMultipartUploadAsync` method\. In addition to aborting the upload, this method deletes all parts that were uploaded to Amazon S3\. 
 
-To abort a multipart upload, you provide the upload ID, and the bucket and key names that are used in the upload\. After you have aborted a multipart upload, you can't use the upload ID to upload additional parts\. For more information about Amazon S3 multipart uploads, see [Multipart Upload Overview](mpuoverview.md)\.
+To abort a multipart upload, you provide the upload ID, and the bucket and key names that are used in the upload\. After you have aborted a multipart upload, you can't use the upload ID to upload additional parts\. For more information about Amazon S3 multipart uploads, see [Multipart upload overview](mpuoverview.md)\.
 
 The following C\# example shows how to abort an multipart upload\. For a complete C\# sample that includes the following code, see [Upload a file to an S3 Bucket using the AWS SDK for \.NET \(low\-level API\)](LLuploadFileDotNet.md)\.
 

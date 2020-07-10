@@ -167,6 +167,7 @@ The following C\# code example provides a complete code listing that adds a noti
 **Example**  
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;

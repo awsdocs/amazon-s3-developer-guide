@@ -95,7 +95,7 @@ You can enable logging for specific requests or responses, allowing you to catch
 ```
 PutObjectRequest req = new PutObjectRequest(bucketName, key, createSampleFile());
 s3.putObject(req);
-S3ResponseMetadata md = s3.getCachedResponseMetadata(req);
+s3ResponseMetadata md = s3.getCachedResponseMetadata(req);
 System.out.println("Host ID: " + md.getHostId() + " RequestID: " + md.getRequestId());
 ```
 

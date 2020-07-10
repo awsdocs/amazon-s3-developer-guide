@@ -1,4 +1,4 @@
-# Examples of Creating a Bucket<a name="create-bucket-get-location-example"></a>
+# Examples of creating a bucket<a name="create-bucket-get-location-example"></a>
 
 **Topics**
 + [Using the Amazon S3 Console](#create-bucket-get-location-console)
@@ -12,7 +12,7 @@ The following code examples create a bucket programmatically using the AWS SDKs 
   + Create a client by explicitly specifying an AWS Region \(the example uses the `s3.eu-west-1` Region\)\. Accordingly, the client communicates with Amazon S3 using the `s3.eu-west-1.amazonaws.com` endpoint\. You can specify any other AWS Region\. For a list of AWS Regions, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html) in the *AWS General Reference*\. 
   + Send a create bucket request by specifying only a bucket name\. The create bucket request doesn't specify another AWS Region\. The client sends a request to Amazon S3 to create the bucket in the Region you specified when creating the client\. Once you have created a bucket, you can't change its Region\.
 **Note**  
-If you explicitly specify an AWS Region in your create bucket request that is different from the Region you specified when you created the client, you might get an error\. For more information, see [Creating a Bucket](UsingBucket.md#create-bucket-intro)\.
+If you explicitly specify an AWS Region in your create bucket request that is different from the Region you specified when you created the client, you might get an error\. For more information, see [Creating a bucket](UsingBucket.md#create-bucket-intro)\.
 
     The SDK libraries send the PUT bucket request to Amazon S3 to create the bucket\. For more information, see [PUT Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html)\.
 + Retrieve information about the location of the bucket—Amazon S3 stores bucket location information in the *location* subresource that is associated with the bucket\. The SDK libraries send the GET Bucket location request \(see [GET Bucket location](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html)\) to retrieve this information\.
@@ -79,6 +79,7 @@ For information about how to create and test a working sample, see [Running the 
 **Example**  
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Util;

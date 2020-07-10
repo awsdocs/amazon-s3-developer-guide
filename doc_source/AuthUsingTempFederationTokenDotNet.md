@@ -49,6 +49,7 @@ The following C\# example lists the keys in the specified bucket\. In the exampl
   Update the following sample and provide the bucket name that you specified in the preceding federated user access policy\. For instructions on how to create and test a working example, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
   ```
+  using Amazon;
   using Amazon.Runtime;
   using Amazon.S3;
   using Amazon.S3.Model;

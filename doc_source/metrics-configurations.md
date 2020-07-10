@@ -25,7 +25,7 @@ It follows from the best\-effort nature of this feature that the reports availab
 ## Filtering metrics configurations<a name="metrics-configurations-filter"></a>
 
 When working with CloudWatch metric configurations, you have the option of filtering the configuration into groups of related objects within a single bucket\. You can filter objects in a bucket for inclusion in a metrics configuration based on one or more of the following elements:
-+ **Object key name prefix** – Although the Amazon S3 data model is a flat structure, you can infer hierarchy by using a prefix\. The Amazon S3 console supports these prefixes with the concept of folders\. If you filter by prefix, objects that have the same prefix are included in the metrics configuration\.
++ **Object key name prefix** – Although the Amazon S3 data model is a flat structure, you can infer hierarchy by using a [prefix](ListingKeysHierarchy.md)\. The Amazon S3 console supports these prefixes with the concept of folders\. If you filter by prefix, objects that have the same prefix are included in the metrics configuration\.
 + **Tag** – You can add tags, which are key\-value name pairs, to objects\. Tags help you find and organize objects easily\. You can also use tags as a filter for metrics configurations\.
 
 If you specify a filter, only requests that operate on single objects can match the filter and be included in the reported metrics\. Requests like [Delete Multiple Objects](https://docs.aws.amazon.com/AmazonS3/latest/API/multiobjectdeleteapi.html) and `List` requests don't return any metrics for configurations with filters\.

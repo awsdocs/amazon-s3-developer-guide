@@ -128,7 +128,7 @@ public class ServerSideEncryptionUsingClientSideEncryptionKey {
 
 The example in the preceding section shows how to request server\-side encryption with customer\-provided keys \(SSE\-C\) in the PUT, GET, Head, and Copy operations\. This section describes other APIs that support SSE\-C\.
 
-To upload large objects, you can use multipart upload API \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\)\. You can use either high\-level or low\-level APIs to upload large objects\. These APIs support encryption\-related headers in the request\.
+To upload large objects, you can use multipart upload API \(see [Uploading objects using multipart upload API](uploadobjusingmpu.md)\)\. You can use either high\-level or low\-level APIs to upload large objects\. These APIs support encryption\-related headers in the request\.
 + When using the high\-level `TransferManager` API, you provide the encryption\-specific headers in the `PutObjectRequest` \(see [Using the AWS Java SDK for multipart upload \(high\-level API\)](usingHLmpuJava.md)\)\. 
 + When using the low\-level API, you provide encryption\-related information in the `InitiateMultipartUploadRequest`, followed by identical encryption information in each `UploadPartRequest`\. You do not need to provide any encryption\-specific headers in your `CompleteMultipartUploadRequest`\. For examples, see [Using the AWS Java SDK for a multipart upload \(low\-level API\)](mpListPartsJavaAPI.md)\. 
 

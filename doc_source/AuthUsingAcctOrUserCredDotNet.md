@@ -9,6 +9,7 @@ The following C\# example shows how to perform the preceding tasks\. For informa
 **Example**  
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;

@@ -1,6 +1,6 @@
 # Using Amazon S3 access logs to identify requests<a name="using-s3-access-logs-to-identify-requests"></a>
 
- You can identify Amazon S3 requests using Amazon S3 access logs\. 
+You can identify Amazon S3 requests with Amazon S3 access logs\. 
 
 **Note**  
 We recommend that you use AWS CloudTrail data events instead of Amazon S3 access logs\. CloudTrail data events are easier to set up and contain more information\. For more information, see [ Using AWS CloudTrail to identify Amazon S3 requests](cloudtrail-request-identification.md)\.
@@ -8,7 +8,7 @@ Depending on how many access requests you get, it may require more resources and
 
 **Topics**
 + [Enabling Amazon S3 access logs for requests](#enabling-s3-access-logs-for-requests)
-+ [Querying Amazon S3 access logs for requests](#querying-s3-access-logs-for-requests)
++ [Querying Amazon S3 access logs for requests using Amazon Athena](#querying-s3-access-logs-for-requests)
 + [Using Amazon S3 access logs to identify signature version 2 requests](#using-s3-access-logs-to-identify-sigv2-requests)
 + [Using Amazon S3 access logs to identify object access requests](#using-s3-access-logs-to-identify-objects-access)
 + [Related resources](#s3-access-logs-requests-more-info)
@@ -17,7 +17,7 @@ Depending on how many access requests you get, it may require more resources and
 
 We recommend that you create a dedicated logging bucket in each AWS Region that you have S3 buckets in\. Then have the Amazon S3 access log delivered to that S3 bucket\.
 
-**Example — enable access logs with five buckets across two regions**  
+**Example — enable access logs with five buckets across two Regions**  
 In this example, you have the following five buckets:  
 + `1-awsexamplebucket1-us-east-1`
 + `2-awsexamplebucket1-us-east-1`
@@ -109,7 +109,9 @@ The `put-bucket-acl` command is required to grant the Amazon S3 log delivery sys
 **Note**  
 This only works if all your buckets are in the same Region\. If you have buckets in multiple Regions, you must adjust the script\. 
 
-## Querying Amazon S3 access logs for requests<a name="querying-s3-access-logs-for-requests"></a>
+## Querying Amazon S3 access logs for requests using Amazon Athena<a name="querying-s3-access-logs-for-requests"></a>
+
+You can identify Amazon S3 requests with Amazon S3 access logs using Amazon Athena\. 
 
 Amazon S3 stores server access logs as objects in an S3 bucket\. It is often easier to use a tool that can analyze the logs in Amazon S3\. Athena supports analysis of S3 objects and can be used to query Amazon S3 access logs\.
 
@@ -130,41 +132,41 @@ It's a best practice to create the database in the same AWS Region as your S3 bu
 1. In the Query Editor, run a command similar to the following to create a table schema in the database that you created in step 2\. The `STRING` and `BIGINT` data type values are the access log properties\. You can query these properties in Athena\. For `LOCATION`, enter the S3 bucket and prefix path as noted earlier\.
 
    ```
-      CREATE EXTERNAL TABLE IF NOT EXISTS s3_access_logs_db.mybucket_logs(
-         BucketOwner STRING,
-         Bucket STRING,
-         RequestDateTime STRING,
-         RemoteIP STRING,
-         Requester STRING,
-         RequestID STRING,
-         Operation STRING,
-         Key STRING,
-         RequestURI_operation STRING,
-         RequestURI_key STRING,
-         RequestURI_httpProtoversion STRING,
-         HTTPstatus STRING,
-         ErrorCode STRING,
-         BytesSent BIGINT,
-         ObjectSize BIGINT,
-         TotalTime STRING,
-         TurnAroundTime STRING,
-         Referrer STRING,
-         UserAgent STRING,
-         VersionId STRING,
-         HostId STRING,
-         SigV STRING,
-         CipherSuite STRING,
-         AuthType STRING,
-         EndPoint STRING,
-         TLSVersion STRING
-     ) 
-     ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.RegexSerDe'
-     WITH SERDEPROPERTIES (
-                  'serialization.format' = '1', 'input.regex' = '([^ ]*) ([^ ]*) 
-                  \\[(.*?)\\] ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) \\\"([^ ]*) ([^ ]*) (- |[^ ]*)
-                  \\\" (-|[0-9]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) (\"[^\"]*\") ([^ ]*)
-                  (?: ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*))?.*$' )
-         LOCATION 's3://awsexamplebucket1-logs/prefix'
+   CREATE EXTERNAL TABLE `s3_access_logs_db.mybucket_logs`(
+     `bucketowner` STRING, 
+     `bucket_name` STRING, 
+     `requestdatetime` STRING, 
+     `remoteip` STRING, 
+     `requester` STRING, 
+     `requestid` STRING, 
+     `operation` STRING, 
+     `key` STRING, 
+     `request_uri` STRING, 
+     `httpstatus` STRING, 
+     `errorcode` STRING, 
+     `bytessent` BIGINT, 
+     `objectsize` BIGINT, 
+     `totaltime` STRING, 
+     `turnaroundtime` STRING, 
+     `referrer` STRING, 
+     `useragent` STRING, 
+     `versionid` STRING, 
+     `hostid` STRING, 
+     `sigv` STRING, 
+     `ciphersuite` STRING, 
+     `authtype` STRING, 
+     `endpoint` STRING, 
+     `tlsversion` STRING)
+   ROW FORMAT SERDE 
+     'org.apache.hadoop.hive.serde2.RegexSerDe' 
+   WITH SERDEPROPERTIES ( 
+     'input.regex'='([^ ]*) ([^ ]*) \\[(.*?)\\] ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) (\"[^\"]*\"|-) (-|[0-9]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) (\"[^\"]*\"|-) ([^ ]*)(?: ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*))?.*$') 
+   STORED AS INPUTFORMAT 
+     'org.apache.hadoop.mapred.TextInputFormat' 
+   OUTPUTFORMAT 
+     'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+   LOCATION
+     's3://awsexamplebucket1-logs/prefix/'
    ```
 
 1. In the navigation pane, under **Database**, choose your database\.
@@ -263,7 +265,7 @@ AND
 parse_datetime('2019-07-02:00:42:42','yyyy-MM-dd:HH:mm:ss')
 ```
 
-The following Amazon Athena query example shows how to get all annonymous requests to your S3 buckets from the server access log\. 
+The following Amazon Athena query example shows how to get all anonymous requests to your S3 buckets from the server access log\. 
 
 **Example — show all anonymous requesters that are making requests to a bucket in a certain period**  
 
@@ -280,7 +282,7 @@ parse_datetime('2019-07-02:00:42:42','yyyy-MM-dd:HH:mm:ss')
 **Note**  
 You can modify the date range as needed to suit your needs\.
 These query examples may also be useful for security monitoring\. You can review the results for `PutObject` or `GetObject` calls from unexpected or unauthorized IP addresses/requesters and for identifying any anonymous requests to your buckets\.
- This query only retrieves information from the time at which logging was enabled\. 
+This query only retrieves information from the time at which logging was enabled\. 
 If you are using Amazon S3 AWS CloudTrail logs, see [Using AWS CloudTrail to identify access to Amazon S3 objects](cloudtrail-request-identification.md#cloudtrail-identification-object-access)\. 
 
 ## Related resources<a name="s3-access-logs-requests-more-info"></a>

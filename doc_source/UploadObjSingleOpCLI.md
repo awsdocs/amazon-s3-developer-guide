@@ -1,3 +1,3 @@
-# Upload an Object Using the CLI<a name="UploadObjSingleOpCLI"></a>
+# Upload an object using the CLI<a name="UploadObjSingleOpCLI"></a>
 
 You can use AWS SDK to upload an object\. However, if your application requires it, you can send AWS Command Line Interface requests directly\. You can send a PUT request to upload data in a single operation\. For more information, see [PUT Object](https://docs.aws.amazon.com/cli/latest/reference/s3api/put-object.html) in the AWS CLI Command Reference guide\.

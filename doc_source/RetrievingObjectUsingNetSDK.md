@@ -1,4 +1,4 @@
-# Get an Object Using the AWS SDK for \.NET<a name="RetrievingObjectUsingNetSDK"></a>
+# Get an object Using the AWS SDK for \.NET<a name="RetrievingObjectUsingNetSDK"></a>
 
 When you download an object, you get all of the object's metadata and a stream from which to read the contents\. You should read the content of the stream as quickly as possible because the data is streamed directly from Amazon S3 and your network connection will remain open until you read all the data or close the input stream\. You do the following to get an object:
 + Execute the `getObject` method by providing bucket name and object key in the request\.
@@ -16,7 +16,7 @@ The following are some variations you might use:
   5.     ByteRange = new ByteRange(0, 10)
   6. };
   ```
-+ When retrieving an object, you can optionally override the response header values \(see [Getting Objects](GettingObjectsUsingAPIs.md)\) by using the `ResponseHeaderOverrides` object and setting the corresponding request property\. The following C\# code example shows how to do this\. For example, you can use this feature to indicate that the object should be downloaded into a file with a different file name than the object key name\.   
++ When retrieving an object, you can optionally override the response header values \(see [Getting objects](GettingObjectsUsingAPIs.md)\) by using the `ResponseHeaderOverrides` object and setting the corresponding request property\. The following C\# code example shows how to do this\. For example, you can use this feature to indicate that the object should be downloaded into a file with a different file name than the object key name\.   
 **Example**  
 
   ```
@@ -38,6 +38,7 @@ The following C\# code example retrieves an object from an Amazon S3 bucket\. Fr
 For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;
@@ -84,11 +85,12 @@ namespace Amazon.DocSamples.S3
             }
             catch (AmazonS3Exception e)
             {
-                Console.WriteLine("Error encountered ***. Message:'{0}' when writing an object", e.Message);
+                // If bucket or object does not exist
+                Console.WriteLine("Error encountered ***. Message:'{0}' when reading object", e.Message);
             }
             catch (Exception e)
             {
-                Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
+                Console.WriteLine("Unknown encountered on server. Message:'{0}' when reading object", e.Message);
             }
         }
     }

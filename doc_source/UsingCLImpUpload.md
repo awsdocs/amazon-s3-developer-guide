@@ -9,4 +9,4 @@ The following sections in the AWS Command Line Interface describe the operations
 + [List Parts](https://docs.aws.amazon.com/cli/latest/reference/s3api/list-parts.html)
 + [List Multipart Uploads](https://docs.aws.amazon.com/cli/latest/reference/s3api/list-multipart-uploads.html)
 
-You can also use the REST API to make your own REST requests, or you can use one the SDKs we provide\. For more information about the REST API, see [Using the REST API for multipart upload](UsingRESTAPImpUpload.md)\. For more information about the SDKs, see [API Support for Multipart Upload](sdksupportformpu.md)\.
+You can also use the REST API to make your own REST requests, or you can use one the SDKs we provide\. For more information about the REST API, see [Using the REST API for multipart upload](UsingRESTAPImpUpload.md)\. For more information about the SDKs, see [API support for multipart upload](sdksupportformpu.md)\.

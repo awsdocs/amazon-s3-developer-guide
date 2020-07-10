@@ -30,6 +30,7 @@ When you upload this directory, Amazon S3 uses the following key names:
 The following C\# example uploads a directory to an Amazon S3 bucket\. It shows how to use various `TransferUtility.UploadDirectory` overloads to upload the directory\. Each successive call to upload replaces the previous upload\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Transfer;
 using System;

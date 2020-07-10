@@ -1,8 +1,11 @@
-# Virtual Hosting of Buckets<a name="VirtualHosting"></a>
+# Virtual hosting of buckets<a name="VirtualHosting"></a>
 
 Virtual hosting is the practice of serving multiple websites from a single web server\. One way to differentiate sites is by using the apparent hostname of the request instead of just the path name part of the URI\. An ordinary Amazon S3 REST request specifies a bucket by using the first slash\-delimited component of the Request\-URI path\. Or, you can use Amazon S3 virtual hosting to address a bucket in a REST API call by using the HTTP `Host` header\. In practice, Amazon S3 interprets `Host` as meaning that most buckets are automatically accessible for limited types of requests at `https://bucketname.s3.Region.amazonaws.com`\. For a complete list of Amazon S3 Regions and endpoints, see [Amazon S3 Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html) in the *AWS General Reference*\.
 
 Virtual hosting also has other benefits\. By naming your bucket after your registered domain name and by making that name a DNS alias for Amazon S3, you can completely customize the URL of your Amazon S3 resources, for example, `https://my.bucketname.com/`\. You can also publish to the "root directory" of your bucket's virtual server\. This ability can be important because many existing applications search for files in this standard location\. For example, `favicon.ico`, `robots.txt`, `crossdomain.xml` are all expected to be found at the root\. 
+
+**Important**  
+When using virtual hosted–style buckets with SSL, the SSL wild\-card certificate only matches buckets that do not contain dots \("\."\)\. To work around this, use HTTP or write your own certificate verification logic\. For more information, see [Amazon S3 Path Deprecation Plan](http://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)\.
 
 **Topics**
 + [Path\-Style Requests](#path-style-access)
@@ -166,7 +169,7 @@ For request routing reasons, the CNAME record must be defined exactly as shown i
 ## Limitations<a name="VirtualHostingLimitations"></a>
 
 **SSL**  
- Virtual hosted URLs are supported for non\-SSL \(HTTP\) requests only\. When using virtual hosted–style buckets with SSL, the SSL wild\-card certificate only matches buckets that do not contain periods\. To work around this, use HTTP or write your own certificate verification logic\. 
+ Virtual hosted URLs are supported for non\-SSL \(HTTP\) requests only\.
 
 **SOAP**  
  SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\. 

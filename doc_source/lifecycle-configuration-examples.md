@@ -466,7 +466,7 @@ When specifying the `ExpiredObjectDeleteMarker` Lifecycle action, the rule canno
 
 ## Example 8: Lifecycle configuration to abort multipart uploads<a name="lc-expire-mpu"></a>
 
-You can use the multipart upload API to upload large objects in parts\. For more information about multipart uploads, see [Multipart Upload Overview](mpuoverview.md)\. 
+You can use the multipart upload API to upload large objects in parts\. For more information about multipart uploads, see [Multipart upload overview](mpuoverview.md)\. 
 
 Using S3 Lifecycle configuration, you can direct Amazon S3 to abort incomplete multipart uploads \(identified by the key name prefix specified in the rule\) if they don't complete within a specified number of days after initiation\. When Amazon S3 aborts a multipart upload, it deletes all parts associated with the multipart upload\. This ensures that you don't have incomplete multipart uploads with parts that are stored in Amazon S3 and, therefore, you don't have to pay any storage costs for these parts\. 
 

@@ -5,6 +5,7 @@ The following C\# example shows how to use the high\-level AWS SDK for \.NET to 
 This example makes a copy of an object that is a maximum of 5 GB\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;

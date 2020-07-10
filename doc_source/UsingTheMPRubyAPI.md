@@ -36,4 +36,4 @@ The easiest way to get started with the Ruby script examples is to install the l
 
 The following links contain samples to help get you started with the SDK for Ruby \- Version 3:
 + [Using the AWS SDK for Ruby Version 3](create-bucket-get-location-example.md#create-bucket-get-location-ruby)
-+ [Upload an Object Using the AWS SDK for Ruby](UploadObjSingleOpRuby.md)
++ [Upload an object using the AWS SDK for Ruby](UploadObjSingleOpRuby.md)

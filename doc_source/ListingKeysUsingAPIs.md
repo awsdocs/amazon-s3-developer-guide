@@ -1,4 +1,4 @@
-# Listing Object Keys<a name="ListingKeysUsingAPIs"></a>
+# Listing object keys<a name="ListingKeysUsingAPIs"></a>
 
  Keys can be listed by prefix\. By choosing a common prefix for the names of related keys and marking these keys with a special character that delimits hierarchy, you can use the list operation to select and browse keys hierarchically\. This is similar to how files are stored in directories within a file system\. 
 

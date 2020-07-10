@@ -1,4 +1,4 @@
-# Transitioning objects using Amazon S3 lifecycle<a name="lifecycle-transition-general-considerations"></a>
+# Transitioning objects using Amazon S3 Lifecycle<a name="lifecycle-transition-general-considerations"></a>
 
 You can add rules in an S3 Lifecycle configuration to tell Amazon S3 to transition objects to another Amazon S3 [storage class](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html)\. For example:
 + When you know that objects are infrequently accessed, you might transition them to the S3 Standard\-IA storage class\.
@@ -8,15 +8,15 @@ You can add rules in an S3 Lifecycle configuration to tell Amazon S3 to transiti
 
 ## Supported transitions and related constraints<a name="lifecycle-general-considerations-transition-sc"></a>
 
-In an S3 Lifecycle configuration, you can define rules to transition objects from one storage class to another to save on storage costs\. When you don't know the access patterns of your objects, or your access patterns are changing over time, you can transition the objects to the S3 Intelligent\-Tiering storage class for automatic cost savings\. For information about storage classes, see [Amazon S3 Storage Classes](storage-class-intro.md)\. 
+In an S3 Lifecycle configuration, you can define rules to transition objects from one storage class to another to save on storage costs\. When you don't know the access patterns of your objects, or your access patterns are changing over time, you can transition the objects to the S3 Intelligent\-Tiering storage class for automatic cost savings\. For information about storage classes, see [Amazon S3 storage classes](storage-class-intro.md)\. 
 
 Amazon S3 supports a waterfall model for transitioning between storage classes, as shown in the following diagram\. 
 
-![\[Amazon S3 storage class waterfall graphic.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/SupportedTransitionsWaterfallModel.png)
+![\[Amazon S3 storage class waterfall graphic.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/lifecycle-transitions-v2.png)
 
 ### Supported lifecycle transitions<a name="supported-lifecycle-transitions"></a>
 
-Amazon S3 supports the following Lifecycle transitions between storage classes using an S3 Lifecycle configuration\. 
+Amazon S3 supports the following lifecycle transitions between storage classes using an S3 Lifecycle configuration\. 
 
 You *can transition* from the following:
 + The S3 Standard storage class to any other storage class\.
@@ -27,7 +27,7 @@ You *can transition* from the following:
 
 ### Unsupported lifecycle transitions<a name="unsupported-lifecycle-transitions"></a>
 
-Amazon S3 does not support any of the following Lifecycle transitions\. 
+Amazon S3 does not support any of the following lifecycle transitions\. 
 
 You *can't transition* from the following:
 + Any storage class to the S3 Standard storage class\.
@@ -39,7 +39,7 @@ You *can't transition* from the following:
 
 Lifecycle storage class transitions have the following constraints:
 
-**Object Size and Transitions from S3 Standard or S3 Standard\-IA to S3 Intelligent\-Tiering, S3 Standard\-IA, or S3 One Zone\-IA**  
+**Object size and transitions from S3 Standard or S3 Standard\-IA to S3 Intelligent\-Tiering, S3 Standard\-IA, or S3 One Zone\-IA**  
 When you transition objects from the S3 Standard or S3 Standard\-IA storage classes to S3 Intelligent\-Tiering, S3 Standard\-IA, or S3 One Zone\-IA, the following object size constraints apply:
 + **Larger objects** ‐ For the following transitions, there is a cost benefit to transitioning larger objects:
   + From the S3 Standard or S3 Standard\-IA storage classes to S3 Intelligent\-Tiering\.
@@ -48,12 +48,12 @@ When you transition objects from the S3 Standard or S3 Standard\-IA storage clas
   + From the S3 Standard or S3 Standard\-IA storage classes to S3 Intelligent\-Tiering\.
   + From the S3 Standard storage class to S3 Standard\-IA or S3 One Zone\-IA\.
 
-**Minimum Days for Transition from S3 Standard or S3 Standard\-IA to S3 Standard\-IA or S3 One Zone\-IA**  
+**Minimum days for transition from S3 Standard or S3 Standard\-IA to S3 Standard\-IA or S3 One Zone\-IA**  
 Before you transition objects from the S3 Standard or S3 Standard\-IA storages classes to S3 Standard\-IA or S3 One Zone\-IA, you must store them at least 30 days in the S3 Standard storage class\. For example, you cannot create a Lifecycle rule to transition objects to the S3 Standard\-IA storage class one day after you create them\. Amazon S3 doesn't transition objects within the first 30 days because newer objects are often accessed more frequently or deleted sooner than is suitable for S3 Standard\-IA or S3 One Zone\-IA storage\.
 
 Similarly, if you are transitioning noncurrent objects \(in versioned buckets\), you can transition only objects that are at least 30 days noncurrent to S3 Standard\-IA or S3 One Zone\-IA storage\. 
 
-**Minimum 30\-Day Storage Charge for S3 Intelligent\-Tiering, S3 Standard\-IA, and S3 One Zone\-IA**  
+**Minimum 30\-Day storage charge for S3 Intelligent\-Tiering, S3 Standard\-IA, and S3 One Zone\-IA**  
 The S3 Intelligent\-Tiering, S3 Standard\-IA, and S3 One Zone\-IA storage classes have a minimum 30\-day storage charge\. Therefore, you can't specify a single Lifecycle rule for both an S3 Intelligent\-Tiering, S3 Standard\-IA, or S3 One Zone\-IA transition and a S3 Glacier or S3 Glacier Deep Archive transition when the S3 Glacier or S3 Glacier Deep Archive transition occurs less than 30 days after the S3 Intelligent\-Tiering, S3 Standard\-IA, or S3 One Zone\-IA transition\.
 
 The same 30\-day minimum applies when you specify a transition from S3 Standard\-IA storage to S3 One Zone\-IA or S3 Intelligent\-Tiering storage\. You can specify two rules to accomplish this, but you pay minimum storage charges\. For more information about cost considerations, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)\.

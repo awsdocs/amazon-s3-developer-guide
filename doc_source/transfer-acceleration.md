@@ -7,7 +7,7 @@ When using Transfer Acceleration, additional data transfer charges may apply\. F
 **Topics**
 + [Why Use Amazon S3 Transfer Acceleration?](#transfer-acceleration-why-use)
 + [Getting Started with Amazon S3 Transfer Acceleration](#transfer-acceleration-getting-started)
-+ [Requirements for Using Amazon S3 Transfer Acceleration](#transfer-acceleration-requirements)
++ [Requirements for using Amazon S3 Transfer Acceleration](#transfer-acceleration-requirements)
 + [Amazon S3 Transfer Acceleration Examples](transfer-acceleration-examples.md)
 
 ## Why Use Amazon S3 Transfer Acceleration?<a name="transfer-acceleration-why-use"></a>
@@ -58,9 +58,9 @@ You can continue to use the regular endpoint in addition to the accelerate endpo
 
    You can use the accelerate endpoint in the AWS CLI, AWS SDKs, and other tools that transfer data to and from Amazon S3\. If you are using the AWS SDKs, some of the supported languages use an accelerate endpoint client configuration flag so you don't need to explicitly set the endpoint for Transfer Acceleration to *bucketname*\.s3\-accelerate\.amazonaws\.com\. For examples of how to use an accelerate endpoint client configuration flag, see [Amazon S3 Transfer Acceleration Examples](transfer-acceleration-examples.md)\.
 
-You can use all of the Amazon S3 operations through the transfer acceleration endpoints, except for the following the operations: [GET Service \(list buckets\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html), [PUT Bucket \(create bucket\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html), and [DELETE Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETE.html)\. Also, Amazon S3 Transfer Acceleration does not support cross region copies using [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\. 
+You can use all of the Amazon S3 operations through the transfer acceleration endpoints, except for the following operations: [GET Service \(list buckets\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html), [PUT Bucket \(create bucket\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html), and [DELETE Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETE.html)\. Also, Amazon S3 Transfer Acceleration does not support cross region copies using [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\. 
 
-## Requirements for Using Amazon S3 Transfer Acceleration<a name="transfer-acceleration-requirements"></a>
+## Requirements for using Amazon S3 Transfer Acceleration<a name="transfer-acceleration-requirements"></a>
 
 The following are the requirements for using Transfer Acceleration on an S3 bucket:
 + Transfer Acceleration is only supported on virtual\-hosted style requests\. For more information about virtual\-hosted style requests, see [Making requests using the REST API](RESTAPI.md)\. 

@@ -1,6 +1,6 @@
 # Upload a file to an S3 Bucket using the AWS SDK for \.NET \(low\-level API\)<a name="LLuploadFileDotNet"></a>
 
-The following C\# example shows how to use the low\-level AWS SDK for \.NET multipart upload API to upload a file to an S3 bucket\. For information about Amazon S3 multipart uploads, see [Multipart Upload Overview](mpuoverview.md)\.
+The following C\# example shows how to use the low\-level AWS SDK for \.NET multipart upload API to upload a file to an S3 bucket\. For information about Amazon S3 multipart uploads, see [Multipart upload overview](mpuoverview.md)\.
 
 **Note**  
 When you use the AWS SDK for \.NET API to upload large objects, a timeout might occur while data is being written to the request stream\. You can set an explicit timeout using the `UploadPartRequest`\. 
@@ -8,6 +8,7 @@ When you use the AWS SDK for \.NET API to upload large objects, a timeout might 
 The following C\# example uploads a file to an S3 bucket using the low\-level multipart upload API\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions for creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
+using Amazon;
 using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.S3.Model;

@@ -4,7 +4,7 @@ You can upload large files to Amazon S3 in multiple parts\. You must use a multi
 
 The `upload` method of the `MultipartUploader` class is best used for a simple multipart upload\. If you need to pause and resume multipart uploads, vary part sizes during the upload, or do not know the size of the data in advance, use the low\-level PHP API\. For more information, see [Using the AWS PHP SDK for multipart upload \(low\-level API\)](usingLLmpuPHP.md)\. 
 
-For more information about multipart uploads, see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\. For information on uploading files that are less than 5GB in size, see [Upload an Object Using the AWS SDK for PHP](UploadObjSingleOpPHP.md)\. 
+For more information about multipart uploads, see [Uploading objects using multipart upload API](uploadobjusingmpu.md)\. For information on uploading files that are less than 5GB in size, see [Upload an object using the AWS SDK for PHP](UploadObjSingleOpPHP.md)\. 
 
 ## Upload a file using the high\-level multipart upload<a name="HLuploadFilePHP"></a>
 

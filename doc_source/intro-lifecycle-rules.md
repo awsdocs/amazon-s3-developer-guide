@@ -76,7 +76,7 @@ You can filter objects by key prefix, object tags, or a combination of both \(in
   </LifecycleConfiguration>
   ```
 
-  For more information about object keys, see [Object Keys](UsingMetadata.md#object-keys)\. 
+  For more information about object keys, see [Object keys](UsingMetadata.md#object-keys)\. 
 + **Specifying a filter based on object tags** – In the following example, the Lifecycle rule specifies a filter based on a tag \(*key*\) and value \(*value*\)\. The rule then applies only to a subset of objects with the specific tag\.
 
   ```
@@ -167,7 +167,7 @@ You can direct Amazon S3 to perform specific actions in an object's lifetime by 
 + **Transition** action element – You specify the `Transition` action to transition objects from one storage class to another\. For more information about transitioning objects, see [Supported transitions and related constraints](lifecycle-transition-general-considerations.md#lifecycle-general-considerations-transition-sc)\. When a specified date or time period in the object's lifetime is reached, Amazon S3 performs the transition\. 
 
   For a versioned bucket \(versioning\-enabled or versioning\-suspended bucket\), the `Transition` action applies to the current object version\. To manage noncurrent versions, Amazon S3 defines the `NoncurrentVersionTransition` action \(described below\)\.
-+ **Expiration action element** – The `Expiration` action expires objects identified in the rule and applies to eligible objects in any of the Amazon S3 storage classes\. For more information about storage classes, see [Amazon S3 Storage Classes](storage-class-intro.md)\. Amazon S3 makes all expired objects unavailable\. Whether the objects are permanently removed depends on the versioning state of the bucket\. 
++ **Expiration action element** – The `Expiration` action expires objects identified in the rule and applies to eligible objects in any of the Amazon S3 storage classes\. For more information about storage classes, see [Amazon S3 storage classes](storage-class-intro.md)\. Amazon S3 makes all expired objects unavailable\. Whether the objects are permanently removed depends on the versioning state of the bucket\. 
 **Important**  
 Object expiration Lifecycle policies do not remove incomplete multipart uploads\. To remove incomplete multipart uploads, you must use the **AbortIncompleteMultipartUpload** Lifecycle configuration action that is described later in this section\. 
   + **Non\-versioned bucket** – The `Expiration` action results in Amazon S3 permanently removing the object\. 
@@ -193,7 +193,7 @@ In addition, Amazon S3 provides the following actions that you can use to manage
 Object expiration Lifecycle policies do not remove incomplete multipart uploads\. To remove incomplete multipart uploads, you must use the **AbortIncompleteMultipartUpload** Lifecycle configuration action that is described later in this section\. 
 
 In addition to the transition and expiration actions, you can use the following Lifecycle configuration action to direct Amazon S3 to abort incomplete multipart uploads\. 
-+ **AbortIncompleteMultipartUpload** action element – Use this element to set a maximum time \(in days\) that you want to allow multipart uploads to remain in progress\. If the applicable multipart uploads \(determined by the key name `prefix` specified in the Lifecycle rule\) are not successfully completed within the predefined time period, Amazon S3 aborts the incomplete multipart uploads\. For more information, see [Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Policy](mpuoverview.md#mpu-abort-incomplete-mpu-lifecycle-config)\. 
++ **AbortIncompleteMultipartUpload** action element – Use this element to set a maximum time \(in days\) that you want to allow multipart uploads to remain in progress\. If the applicable multipart uploads \(determined by the key name `prefix` specified in the Lifecycle rule\) are not successfully completed within the predefined time period, Amazon S3 aborts the incomplete multipart uploads\. For more information, see [Aborting incomplete multipart uploads using a bucket lifecycle policy](mpuoverview.md#mpu-abort-incomplete-mpu-lifecycle-config)\. 
 **Note**  
 You cannot specify this Lifecycle action in a rule that specifies a filter based on object tags\. 
 + **ExpiredObjectDeleteMarker** action element – In a versioning\-enabled bucket, a delete marker with zero noncurrent versions is referred to as the expired object delete marker\. You can use this Lifecycle action to direct S3 to remove the expired object delete markers\. For an example, see [Example 7: Removing expired object delete markers](lifecycle-configuration-examples.md#lifecycle-config-conceptual-ex7)\.

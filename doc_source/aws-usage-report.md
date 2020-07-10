@@ -1,4 +1,4 @@
-# AWS Usage Report for Amazon S3<a name="aws-usage-report"></a>
+# AWS usage report for Amazon S3<a name="aws-usage-report"></a>
 
 For more detail about your Amazon S3 storage usage, download dynamically generated AWS usage reports\. You can choose which usage type, operation, and time period to include\. You can also choose how the data is aggregated\. 
 
@@ -15,7 +15,7 @@ The Amazon S3 usage report includes the following information:
   + A code that identifies early deletions from INTELLIGENT\_TIERING, STANDARD\_IA, ONEZONE\_IA, S3 Glacier, or S3 Glacier Deep Archive storage
   + `StorageObjectCount` – The count of objects stored within a given bucket
 
-  For a detailed explanation of Amazon S3 usage types, see [Understanding Your AWS Billing and Usage Reports for Amazon S3](aws-usage-report-understand.md)\.
+  For a detailed explanation of Amazon S3 usage types, see [Understanding your AWS billing and usage reports for Amazon S3](aws-usage-report-understand.md)\.
 + **Resource** – The name of the bucket associated with the listed usage\.
 + **StartTime** – Start time of the day that the usage applies to, in Coordinated Universal Time \(UTC\)\.
 + **EndTime ** – End time of the day that the usage applies to, in Coordinated Universal Time \(UTC\)\. 
@@ -32,7 +32,7 @@ You can download a usage report as an XML or a comma\-separated values \(CSV\) f
 
 ![\[Screenshot of a CSV usage report in a spreadsheet application.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/s3-usage-report.png)
 
-For information on understanding the usage report, see [Understanding Your AWS Billing and Usage Reports for Amazon S3](aws-usage-report-understand.md)\.
+For information on understanding the usage report, see [Understanding your AWS billing and usage reports for Amazon S3](aws-usage-report-understand.md)\.
 
 ## Downloading the AWS Usage Report<a name="aws-usage-report-download"></a>
 
@@ -51,7 +51,7 @@ You can download a usage report as an \.xml or a \.csv file\.
 1. For **Services:**, choose **Amazon Simple Storage Service**\.
 
 1. For **Download Usage Report**, choose the following settings:
-   + ****Usage Types **** – For a detailed explanation of Amazon S3 usage types, see [Understanding Your AWS Billing and Usage Reports for Amazon S3](aws-usage-report-understand.md)\.
+   + ****Usage Types **** – For a detailed explanation of Amazon S3 usage types, see [Understanding your AWS billing and usage reports for Amazon S3](aws-usage-report-understand.md)\.
    + ****Operation **** – For a detailed explanation of Amazon S3 operations, see [Tracking Operations in Your Usage Reports](aws-usage-report-understand.md#aws-usage-report-understand-operations)\.
    + ****Time Period **** – The time period that you want the report to cover\. 
    + ****Report Granularity**** – Whether you want the report to include subtotals by the hour, by the day, or by the month\.
@@ -59,5 +59,5 @@ You can download a usage report as an \.xml or a \.csv file\.
 1. To choose the format for the report, choose the **Download** for that format, and then follow the prompts to see or save the report\.
 
 ## More Info<a name="aws-usage-report-more-info"></a>
-+ [Understanding Your AWS Billing and Usage Reports for Amazon S3](aws-usage-report-understand.md)
-+ [AWS Billing Reports for Amazon S3](aws-billing-reports.md)
++ [Understanding your AWS billing and usage reports for Amazon S3](aws-usage-report-understand.md)
++ [AWS Billing reports for Amazon S3](aws-billing-reports.md)

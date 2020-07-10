@@ -24,7 +24,7 @@ Use the following naming conventions for the dual\-stack virtual hosted\-style a
 
   s3\.dualstack\.*aws\-region*\.amazonaws\.com/*bucketname*
 
-For more information, about endpoint name style, see [Accessing a Bucket](UsingBucket.md#access-bucket-intro)\. For a list of Amazon S3 endpoints, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html) in the *AWS General Reference*\. 
+For more information, about endpoint name style, see [Accessing a bucket](UsingBucket.md#access-bucket-intro)\. For a list of Amazon S3 endpoints, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html) in the *AWS General Reference*\. 
 
 **Important**  
 You can use transfer acceleration with dual\-stack endpoints\. For more information, see [Getting Started with Amazon S3 Transfer Acceleration](transfer-acceleration.md#transfer-acceleration-getting-started)\.
@@ -114,6 +114,7 @@ java.net.preferIPv6Addresses=true
 When using the AWS SDK for \.NET you use the `AmazonS3Config` class to enable the use of a dual\-stack endpoint as shown in the following example\. 
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;

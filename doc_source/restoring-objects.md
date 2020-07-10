@@ -1,6 +1,6 @@
 # Restoring Archived Objects<a name="restoring-objects"></a>
 
-Objects that you archive to the S3 Glacier or S3 Glacier Deep Archive storage classes are not accessible in real time\. You must first initiate a restore request, and then wait until a temporary copy of the object is available for the duration \(number of days\) that you specify in the request\. For more information about how the S3 Glacier, S3 Glacier Deep Archive, and other Amazon S3 storage classes compare, see [Amazon S3 Storage Classes](storage-class-intro.md)\. 
+Objects that you archive to the S3 Glacier or S3 Glacier Deep Archive storage classes are not accessible in real time\. You must first initiate a restore request, and then wait until a temporary copy of the object is available for the duration \(number of days\) that you specify in the request\. For more information about how the S3 Glacier, S3 Glacier Deep Archive, and other Amazon S3 storage classes compare, see [Amazon S3 storage classes](storage-class-intro.md)\. 
 
 Amazon S3 restores a temporary copy of the object only for the specified duration\. After that, it deletes the restored object copy\. You can modify the expiration period of a restored copy by reissuing a restore\. In this case, Amazon S3 updates the expiration period relative to the current time\. 
 

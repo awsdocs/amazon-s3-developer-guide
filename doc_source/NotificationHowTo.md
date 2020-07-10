@@ -1,6 +1,6 @@
 # Configuring Amazon S3 event notifications<a name="NotificationHowTo"></a>
 
-The Amazon S3 notification feature enables you to receive notifications when certain events happen in your bucket\. To enable notifications, you must first add a notification configuration that identifies the events you want Amazon S3 to publish and the destinations where you want Amazon S3 to send the notifications\. You store this configuration in the *notification* subresource that is associated with a bucket\. \(For more information, see [Bucket Configuration Options](UsingBucket.md#bucket-config-options-intro)\.\) Amazon S3 provides an API for you to manage this subresource\. 
+The Amazon S3 notification feature enables you to receive notifications when certain events happen in your bucket\. To enable notifications, you must first add a notification configuration that identifies the events you want Amazon S3 to publish and the destinations where you want Amazon S3 to send the notifications\. You store this configuration in the *notification* subresource that is associated with a bucket\. \(For more information, see [Bucket configuration options](UsingBucket.md#bucket-config-options-intro)\.\) Amazon S3 provides an API for you to manage this subresource\. 
 
 **Important**  
 Amazon S3 event notifications are designed to be delivered at least once\. Typically, event notifications are delivered in seconds but can sometimes take a minute or longer\.  
@@ -61,7 +61,7 @@ If you need to, you can also make the Amazon S3 REST API calls directly from you
 
   Internally, both the console and the SDKs call the Amazon S3 REST API to manage *notification* subresources associated with the bucket\. For notification configuration using AWS SDK examples, see [Walkthrough: Configure a bucket for notifications \(SNS topic and SQS queue\)](ways-to-add-notification-config-to-bucket.md)\.
 
-  Regardless of the method that you use, Amazon S3 stores the notification configuration as XML in the *notification* subresource associated with a bucket\. For information about bucket subresources, see [Bucket Configuration Options](UsingBucket.md#bucket-config-options-intro)\. 
+  Regardless of the method that you use, Amazon S3 stores the notification configuration as XML in the *notification* subresource associated with a bucket\. For information about bucket subresources, see [Bucket configuration options](UsingBucket.md#bucket-config-options-intro)\. 
 
   By default, notifications are not enabled for any type of event\. Therefore, initially the *notification* subresource stores an empty configuration\.
 
@@ -296,7 +296,7 @@ Your notification configurations that use `Filter` cannot define filtering rules
 
 For the most part, your notification configurations that use `Filter` cannot define filtering rules with overlapping prefixes, overlapping suffixes, or overlapping combinations of prefixes and suffixes for the same event types\. \(You can have overlapping prefixes as long as the suffixes do not overlap\. For an example, see [Configuring notifications with object key name filtering](#notification-how-to-filtering)\.\)
 
-You can use overlapping object key name filters with different event types\. For example, you could create a notification configuration that uses the prefix `image/` for the `ObjectCreated:Put` event type and the prefix `image/` for the `ObjectDeleted:*` event type\. 
+You can use overlapping object key name filters with different event types\. For example, you could create a notification configuration that uses the prefix `image/` for the `ObjectCreated:Put` event type and the prefix `image/` for the `ObjectRemoved:*` event type\. 
 
 You get an error if you try to save a notification configuration that has invalid overlapping name filters for the same event types when using the Amazon S3 console or API\. This section shows examples of notification configurations that are not valid because of overlapping name filters\. 
 

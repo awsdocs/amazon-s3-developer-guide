@@ -1,4 +1,4 @@
-# Uploading Objects Using Multipart Upload API<a name="uploadobjusingmpu"></a>
+# Uploading objects using multipart upload API<a name="uploadobjusingmpu"></a>
 
 Multipart upload allows you to upload a single object as a set of parts\. Each part is a contiguous portion of the object's data\. You can upload these object parts independently and in any order\. If transmission of any part fails, you can retransmit that part without affecting other parts\. After all parts of your object are uploaded, Amazon S3 assembles these parts and creates the object\. In general, when your object size reaches 100 MB, you should consider using multipart uploads instead of uploading the object in a single operation\.
 
@@ -9,7 +9,7 @@ Using multipart upload provides the following advantages:
 + Begin an upload before you know the final object size \- You can upload an object as you are creating it\. 
 
 **Topics**
-+ [Multipart Upload Overview](mpuoverview.md)
++ [Multipart upload overview](mpuoverview.md)
 + [Using the AWS Java SDK for multipart upload \(high\-level API\)](usingHLmpuJava.md)
 + [Using the AWS Java SDK for a multipart upload \(low\-level API\)](mpListPartsJavaAPI.md)
 + [Using the AWS SDK for \.NET for multipart upload \(high\-level API\)](usingHLmpuDotNet.md)

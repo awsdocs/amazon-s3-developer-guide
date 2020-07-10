@@ -14,7 +14,7 @@ For your customers to access content at the website endpoint, you must make all 
 Amazon S3 website endpoints do not support HTTPS\. For information about using HTTPS with an Amazon S3 bucket, see the following:  
 [How do I use CloudFront to serve HTTPS requests for my Amazon S3 bucket?](https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-https-requests-s3)
 [Requiring HTTPS for Communication Between CloudFront and Your Amazon S3 Origin](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-s3-origin.html)
-Requester Pays buckets  do not allow access through the website endpoint\. Any request to such a bucket receives a 403 Access Denied response\. For more information, see [Requester Pays Buckets](RequesterPaysBuckets.md)\.
+Requester Pays buckets  do not allow access through the website endpoint\. Any request to such a bucket receives a 403 Access Denied response\. For more information, see [Requester Pays buckets](RequesterPaysBuckets.md)\.
 
 **Topics**
 + [Website endpoint examples](#website-endpoint-examples)

@@ -1,6 +1,6 @@
 # Using the AWS SDK for \.NET<a name="UsingTheMPDotNetAPI"></a>
 
-The AWS SDK for \.NET provides the API for the Amazon S3 bucket and object operations\. For object operations, in addition to providing the API to upload objects in a single operation, the SDK provides the API to upload large objects in parts \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\)\. 
+The AWS SDK for \.NET provides the API for the Amazon S3 bucket and object operations\. For object operations, in addition to providing the API to upload objects in a single operation, the SDK provides the API to upload large objects in parts \(see [Uploading objects using multipart upload API](uploadobjusingmpu.md)\)\. 
 
 **Topics**
 + [The \.NET API Organization](#DotNetAPIOrg)
@@ -9,7 +9,7 @@ The AWS SDK for \.NET provides the API for the Amazon S3 bucket and object opera
 The AWS SDK for \.NET gives you the option of using a high\-level or low\-level API\. 
 
 **Low\-Level API**  
-The low\-level APIs correspond to the underlying Amazon S3 REST operations, including the create, update, and delete operations that apply to buckets and objects\. When you upload large objects using the low\-level multipart upload API \(see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\), it provides greater control\. For example, it lets you pause and resume multipart uploads, vary part sizes during the upload, or begin uploads when you don't know the size of the data in advance\. If you do not have these requirements, use the high\-level API for uploading objects\.
+The low\-level APIs correspond to the underlying Amazon S3 REST operations, including the create, update, and delete operations that apply to buckets and objects\. When you upload large objects using the low\-level multipart upload API \(see [Uploading objects using multipart upload API](uploadobjusingmpu.md)\), it provides greater control\. For example, it lets you pause and resume multipart uploads, vary part sizes during the upload, or begin uploads when you don't know the size of the data in advance\. If you do not have these requirements, use the high\-level API for uploading objects\.
 
 **High\-Level API**  
 For uploading objects, the SDK provides a higher level of abstraction by providing the `TransferUtility` class\. The high\-level API is a simpler API, where in just a few lines of code, you can upload files and streams to Amazon S3\. You should use this API to upload data unless you need to control the upload as described in the preceding Low\-Level API section\.

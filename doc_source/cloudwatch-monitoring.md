@@ -7,7 +7,7 @@ Amazon CloudWatch metrics for Amazon S3 can help you understand and improve the 
   When enabled, request metrics are reported for all object operations\. By default, these 1\-minute metrics are available at the Amazon S3 bucket level\. You can also define a filter for the metrics collected using a shared prefix or object tag\. This allows you to align metrics filters to specific business applications, workflows, or internal organizations\.
 + **Replication metrics** ‐ Monitor the total number of S3 API operations that are pending replication, the total size of objects pending replication, and the maximum replication time to the destination Region\. Only replication rules that have S3 Replication Time Control \(S3 RTC\) enabled will publish replication metrics\. 
 
-  Unlike CloudWatch storage and request metrics, you can't filter replication metrics by prefixes and tags\. However, you can set up a replication rule based on prefixes and tags\. Your replication metrics will then monitor replication for the prefixes and tags that you specified\. For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
+  Unlike request metrics, you can't filter replication metrics by prefixes and tags\. However, you can set up a replication rule based on prefixes and tags\. Your replication metrics will then monitor replication for the prefixes and tags that you specified\. For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
 
 All CloudWatch statistics are retained for a period of 15 months so that you can access historical information and gain a better perspective on how your web application or service is performing\. For more information, see [What Is Amazon CloudWatch?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
 
@@ -53,7 +53,7 @@ The `AWS/S3` namespace includes the following request metrics\.
 
 Monitor the total number of S3 API operations that are pending replication, the total size of objects pending replication, and the maximum replication time to the destination Region\. Only replication rules that have S3 Replication Time Control \(S3 RTC\) enabled can publish replication metrics\.
 
-Unlike CloudWatch storage and request metrics, you can't filter replication metrics by prefixes or tags\. However, you can set up a replication rule based on prefixes and tags\. Your replication metrics then monitor replication for the prefixes and tags that you specified\. For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
+Unlike CloudWatch request metrics, you can't filter replication metrics by prefixes or tags\. However, you can set up a replication rule based on prefixes and tags\. Your replication metrics then monitor replication for the prefixes and tags that you specified\. For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
 
 **Note**  
 You can enable alarms for your replication metrics on Amazon CloudWatch\. When you set up alarms for your replication metrics, set the **Missing data treatment** field to **Treat missing data as ignore \(maintain the alarm state\)**\.

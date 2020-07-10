@@ -32,7 +32,7 @@ You can configure bucket versioning using any of the following methods:
 **Note**  
 If you need to, you can also make the Amazon S3 REST API calls directly from your code\. However, this can be cumbersome because it requires you to write code to authenticate your requests\. 
 
-  Each bucket you create has a *versioning* subresource \(see [Bucket Configuration Options](UsingBucket.md#bucket-config-options-intro)\) associated with it\. By default, your bucket is unversioned, and accordingly the versioning subresource stores empty versioning configuration\.
+  Each bucket you create has a *versioning* subresource \(see [Bucket configuration options](UsingBucket.md#bucket-config-options-intro)\) associated with it\. By default, your bucket is unversioned, and accordingly the versioning subresource stores empty versioning configuration\.
 
   ```
   <VersioningConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"> 

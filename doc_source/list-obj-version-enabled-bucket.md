@@ -5,7 +5,7 @@
 + [Using the AWS SDKs](#list-obj-version-enabled-bucket-sdk-examples)
 + [Using the REST API](#ListingtheObjectsinaVersioningEnabledBucket)
 
-This section provides an example of listing object versions from a versioning\-enabled bucket\. Amazon S3 stores object version information in the *versions* subresource \(see [Bucket Configuration Options](UsingBucket.md#bucket-config-options-intro)\) that is associated with the bucket\. 
+This section provides an example of listing object versions from a versioning\-enabled bucket\. Amazon S3 stores object version information in the *versions* subresource \(see [Bucket configuration options](UsingBucket.md#bucket-config-options-intro)\) that is associated with the bucket\. 
 
 ## Using the console<a name="list-obj-version-enabled-bucket-console"></a>
 
@@ -95,6 +95,7 @@ For information about how to create and test a working sample, see [Running the 
 **Example**  
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;

@@ -1,4 +1,4 @@
-# Upload a file to an S3 Bucket using the AWS SDK for \.NET \(high\-level API\)<a name="HLuploadFileDotNet"></a>
+# Upload a file to an S3 bucket using the AWS SDK for \.NET \(high\-level API\)<a name="HLuploadFileDotNet"></a>
 
 To upload a file to an S3 bucket, use the `TransferUtility` class\. When uploading data from a file, you must provide the object's key name\. If you don't, the API uses the file name for the key name\. When uploading data from a stream, you must provide the object's key name\.
 
@@ -7,6 +7,7 @@ To set advanced upload options—such as the part size, the number of threads wh
 The following C\# example uploads a file to an Amazon S3 bucket in multiple parts\. It shows how to use various `TransferUtility.Upload` overloads to upload a file\. Each successive call to upload replaces the previous upload\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions for creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Transfer;
 using System;

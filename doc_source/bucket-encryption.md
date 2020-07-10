@@ -1,17 +1,17 @@
-# Amazon S3 Default Encryption for S3 Buckets<a name="bucket-encryption"></a>
+# Amazon S3 default encryption for S3 buckets<a name="bucket-encryption"></a>
 
 Amazon S3 default encryption provides a way to set the default encryption behavior for an S3 bucket\. You can set default encryption on a bucket so that all new objects are encrypted when they are stored in the bucket\. The objects are encrypted using server\-side encryption with either Amazon S3\-managed keys \(SSE\-S3\) or customer master keys \(CMKs\) stored in AWS Key Management Service \(AWS KMS\)\. 
 
 When you use server\-side encryption, Amazon S3 encrypts an object before saving it to disk and decrypts it when you download the objects\. For more information about protecting data using server\-side encryption and encryption key management, see [Protecting data using server\-side encryption](serv-side-encryption.md)\.
 
 **Topics**
-+ [How Do I Set Up Amazon S3 Default Encryption for an S3 Bucket?](#bucket-encryption-how-to-set-up)
-+ [Using Encryption for Cross\-account Operations](#bucket-encryption-update-bucket-policy)
-+ [Using Default Encryption with Replication](#bucket-encryption-update-bucket-policy)
-+ [Monitoring Default Encryption with CloudTrail and CloudWatch](#bucket-encryption-tracking)
++ [How do I set up Amazon S3 default encryption for an S3 bucket?](#bucket-encryption-how-to-set-up)
++ [Using encryption for cross\-account operations](#bucket-encryption-update-bucket-policy)
++ [Using default encryption with replication](#bucket-encryption-update-bucket-policy)
++ [Monitoring default encryption with CloudTrail and CloudWatch](#bucket-encryption-tracking)
 + [More Info](#bucket-encryption-related-resources)
 
-## How Do I Set Up Amazon S3 Default Encryption for an S3 Bucket?<a name="bucket-encryption-how-to-set-up"></a>
+## How do I set up Amazon S3 default encryption for an S3 bucket?<a name="bucket-encryption-how-to-set-up"></a>
 
 This section describes how to set up Amazon S3 default encryption\. You can use the AWS SDKs, the Amazon S3 REST API, the AWS Command Line Interface \(AWS CLI\), or the Amazon S3 console to enable the default encryption\. The easiest way to set up default encryption for an S3 bucket is by using the AWS Management Console\.
 
@@ -32,14 +32,14 @@ To encrypt your existing Amazon S3 objects with a single request, you can use Am
 **Note**  
 Amazon S3 buckets with default bucket encryption using SSE\-KMS cannot be used as destination buckets for [Amazon S3 server access logging](ServerLogs.md)\. Only SSE\-S3 default encryption is supported for server access log destination buckets\.
 
-## Using Encryption for Cross\-account Operations<a name="bucket-encryption-update-bucket-policy"></a>
+## Using encryption for cross\-account operations<a name="bucket-encryption-update-bucket-policy"></a>
 
 Be aware of the following when using encryption for cross\-account operations:
 + The aws/s3 AWS managed CMK is used when a CMK ARN or alias is not provided at request\-time, nor via the bucket's default encryption configuration\.
 + If specifying your own CMK, you should use a fully qualified CMK key ARN\. When using a CMK alias, be aware that KMS will resolve the key within the requester’s account\. This may result in data encrypted with a CMK that belongs to the requester, and not the bucket administrator\.
 + You must specify a key that you \(the requester\) has been granted `Encrypt` permission to\. For more information, see [Allows Key Users to Use a CMK for Cryptographic Operations](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-users-crypto)\.
 
-## Using Default Encryption with Replication<a name="bucket-encryption-update-bucket-policy"></a>
+## Using default encryption with replication<a name="bucket-encryption-update-bucket-policy"></a>
 
 After you enable default encryption for a replication destination bucket, the following encryption behavior applies: 
 + If objects in the source bucket are not encrypted, the replica objects in the destination bucket are encrypted using the default encryption settings of the destination bucket\. This results in the `ETag` of the source object being different from the `ETag` of the replica object\. You must update applications that use the `ETag` to accommodate for this difference\.
@@ -47,7 +47,7 @@ After you enable default encryption for a replication destination bucket, the fo
 
 For more information about using default encryption with SSE\-KMS, see [Replicating encrypted objects](replication-config-for-kms-objects.md)\.
 
-## Monitoring Default Encryption with CloudTrail and CloudWatch<a name="bucket-encryption-tracking"></a>
+## Monitoring default encryption with CloudTrail and CloudWatch<a name="bucket-encryption-tracking"></a>
 
 You can track default encryption configuration requests through AWS CloudTrail events\. The API event names used in CloudTrail logs are `PutBucketEncryption`, `GetBucketEncryption`, and `DeleteBucketEncryption`\. You can also create Amazon CloudWatch Events with S3 bucket\-level operations as the event type\. For more information about CloudTrail events, see [How Do I Enable Object\-Level Logging for an S3 Bucket with CloudTrail Data Events?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-cloudtrail-events.html)
 

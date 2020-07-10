@@ -33,7 +33,9 @@ First, you create a CloudFront distribution\. This makes your website available 
 
    1. Leave **Price Class** set to **Use All Edge Locations \(Best Performance\)**\.
 
-   1. Keep **Alternate Domain Names \(CNAMEs\)** blank\.
+   1. Set **Alternate Domain Names \(CNAMEs\)** to the root domain and `www` subdomain; in this tutorial, these are `example.com` and `www.example.com`\.  
+**Important**  
+Prior to performing this step, note the [requirements for using alternate domain names](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-requirements), in particular the need for a valid SSL/TLS certificate\. 
 
    1. In **Default Root Object**, enter the name of your index document, for example, `index.html`\. 
 

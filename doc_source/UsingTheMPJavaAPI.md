@@ -1,6 +1,6 @@
 # Using the AWS SDK for Java<a name="UsingTheMPJavaAPI"></a>
 
-The AWS SDK for Java provides an API for the Amazon S3 bucket and object operations\. For object operations, in addition to providing the API to upload objects in a single operation, the SDK provides an API to upload large objects in parts\. For more information, see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\. 
+The AWS SDK for Java provides an API for the Amazon S3 bucket and object operations\. For object operations, in addition to providing the API to upload objects in a single operation, the SDK provides an API to upload large objects in parts\. For more information, see [Uploading objects using multipart upload API](uploadobjusingmpu.md)\. 
 
 **Topics**
 + [The Java API Organization](#JavaAPIOrganization)

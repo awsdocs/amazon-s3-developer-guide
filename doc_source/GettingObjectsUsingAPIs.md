@@ -1,12 +1,12 @@
-# Getting Objects<a name="GettingObjectsUsingAPIs"></a>
+# Getting objects<a name="GettingObjectsUsingAPIs"></a>
 
 **Topics**
-+ [Related Resources](#RelatedResources013)
-+ [Get an Object Using the AWS SDK for Java](RetrievingObjectUsingJava.md)
-+ [Get an Object Using the AWS SDK for \.NET](RetrievingObjectUsingNetSDK.md)
-+ [Get an Object Using the AWS SDK for PHP](RetrieveObjSingleOpPHP.md)
-+ [Get an Object Using the REST API](RetrieveObjSingleOpREST.md)
-+ [Share an Object with Others](ShareObjectPreSignedURL.md)
++ [Related resources](#RelatedResources013)
++ [Get an object Using the AWS SDK for Java](RetrievingObjectUsingJava.md)
++ [Get an object Using the AWS SDK for \.NET](RetrievingObjectUsingNetSDK.md)
++ [Get an object Using the AWS SDK for PHP](RetrieveObjSingleOpPHP.md)
++ [Get an object Using the REST API](RetrieveObjSingleOpREST.md)
++ [Share an object with others](ShareObjectPreSignedURL.md)
 
  You can retrieve objects directly from Amazon S3\. You have the following options when retrieving an object: 
 + **Retrieve an entire object—**A single GET operation can return you the entire object stored in Amazon S3\. 
@@ -22,5 +22,5 @@ The AWS SDKs for Java, \.NET, and PHP also provide necessary objects you can use
 
 When retrieving objects that are stored encrypted using server\-side encryption, you must provide appropriate request headers\. For more information, see [Protecting data using encryption](UsingEncryption.md)\.
 
-## Related Resources<a name="RelatedResources013"></a>
+## Related resources<a name="RelatedResources013"></a>
 + [Using the AWS SDKs, CLI, and Explorers](UsingAWSSDK.md)

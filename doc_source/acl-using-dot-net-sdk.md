@@ -9,6 +9,7 @@ This C\# example creates a bucket\. In the request, the code also specifies a ca
  For instructions on creating and testing a working example, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\. 
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;
@@ -73,6 +74,7 @@ This C\# example updates the ACL on an existing object\. The example performs th
  For instructions on creating and testing a working example, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\. 
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;

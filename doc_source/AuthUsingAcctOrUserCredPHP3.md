@@ -44,7 +44,7 @@ try {
 **Note**  
 You can create the `S3Client` client without providing your security credentials\. Requests sent using this client are anonymous requests, without a signature\. Amazon S3 returns an error if you send anonymous requests for a resource that is not publicly available\. 
 
-For working examples, see [Operations on Objects](ObjectOperations.md)\. You can test these examples using your AWS account or IAM user credentials\. 
+For working examples, see [Operations on objects](ObjectOperations.md)\. You can test these examples using your AWS account or IAM user credentials\. 
 
 For an example of listing object keys in a bucket, see [Listing Keys Using the AWS SDK for PHP](ListingObjectKeysUsingPHP.md)\. 
 

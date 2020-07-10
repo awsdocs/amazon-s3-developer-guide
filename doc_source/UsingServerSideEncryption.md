@@ -55,4 +55,4 @@ When using a POST operation to upload an object, instead of providing the reques
 The AWS SDKs also provide wrapper APIs that you can use to request server\-side encryption\. You can also use the AWS Management Console to upload objects and request server\-side encryption\.
 
 ## More Info<a name="encryption-server-side-more-info"></a>
-+  [ Amazon S3 Default Encryption for S3 Buckets](bucket-encryption.md) 
++  [ Amazon S3 default encryption for S3 buckets](bucket-encryption.md) 

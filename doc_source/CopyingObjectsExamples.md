@@ -1,4 +1,4 @@
-# Copying Objects<a name="CopyingObjectsExamples"></a>
+# Copying objects<a name="CopyingObjectsExamples"></a>
 
 The copy operation creates a copy of an object that is already stored in Amazon S3\. You can create a copy of your object up to 5 GB in a single atomic operation\. However, for copying an object that is greater than 5 GB, you must use the multipart upload API\. Using the `copy` operation, you can:
 + Create additional copies of objects 
@@ -12,7 +12,7 @@ Each object has metadata\. Some of it is system metadata and other user\-defined
 
 When copying an object, you might decide to update some of the metadata values\. For example, if your source object is configured to use standard storage, you might choose to use reduced redundancy storage for the object copy\. You might also decide to alter some of the user\-defined metadata values present on the source object\. Note that if you choose to update any of the object's user\-configurable metadata \(system or user\-defined\) during the copy, then you must explicitly specify all of the user\-configurable metadata present on the source object in your request, even if you are only changing only one of the metadata values\.
 
-For more information about the object metadata, see [Object Key and Metadata](UsingMetadata.md)\.
+For more information about the object metadata, see [Object key and metadata](UsingMetadata.md)\.
 
 **Note**  
 Copying objects across locations incurs bandwidth charges\. 

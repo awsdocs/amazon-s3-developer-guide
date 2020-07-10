@@ -1,4 +1,4 @@
-# Configure Requester Pays by Using the Amazon S3 Console<a name="configure-requester-pays-console"></a>
+# Configure Requester Pays by using the Amazon S3 console<a name="configure-requester-pays-console"></a>
 
  You can configure a bucket for Requester Pays by using the Amazon S3 console\.
 

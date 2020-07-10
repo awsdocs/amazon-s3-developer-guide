@@ -1,6 +1,6 @@
-# Upload an Object Using the AWS SDK for PHP<a name="UploadObjSingleOpPHP"></a>
+# Upload an object using the AWS SDK for PHP<a name="UploadObjSingleOpPHP"></a>
 
- This topic guides you through using classes from the AWS SDK for PHP to upload an object of up to 5 GB in size\. For larger files you must use multipart upload API\. For more information, see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\.
+ This topic guides you through using classes from the AWS SDK for PHP to upload an object of up to 5 GB in size\. For larger files you must use multipart upload API\. For more information, see [Uploading objects using multipart upload API](uploadobjusingmpu.md)\.
 
  This topic assumes that you are already following the instructions for [Using the AWS SDK for PHP and Running PHP Examples](UsingTheMPphpAPI.md) and have the AWS SDK for PHP properly installed\.
 

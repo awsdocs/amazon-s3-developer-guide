@@ -40,7 +40,7 @@ Amazon S3 writes the log files to the target bucket as a member of the predefine
 1. http://acs.amazonaws.com/groups/s3/LogDelivery
 ```
 
- To grant `WRITE` and `READ_ACP` permissions, add the following grants\. For information about ACLs, see [Managing Access with ACLs](S3_ACLs_UsingACLs.md)\.
+To grant `WRITE` and `READ_ACP` permissions, add the following grants\. For information about ACLs, see [Managing Access with ACLs](S3_ACLs_UsingACLs.md)\.
 
 ```
  1. <Grant>
@@ -66,80 +66,81 @@ The following C\# example enables logging on a bucket\. You need to create two b
 **Example**  
 
 ```
- 1. using Amazon.S3;
- 2. using Amazon.S3.Model;
- 3. using System;
- 4. using System.Threading.Tasks;
- 5. 
- 6. namespace Amazon.DocSamples.S3
- 7. {
- 8.     class ServerAccesLoggingTest
- 9.     {
-10.         private const string bucketName = "*** bucket name for which to enable logging ***"; 
-11.         private const string targetBucketName = "*** bucket name where you want access logs stored ***"; 
-12.         private const string logObjectKeyPrefix = "Logs";
-13.         // Specify your bucket region (an example region is shown).
-14.         private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
-15.         private static IAmazonS3 client;
-16. 
-17.         public static void Main()
-18.         {
-19.             client = new AmazonS3Client(bucketRegion);
-20.             EnableLoggingAsync().Wait();
-21.         }
-22. 
-23.         private static async Task EnableLoggingAsync()
-24.         {
-25.             try
-26.             {
-27.                 // Step 1 - Grant Log Delivery group permission to write log to the target bucket.
-28.                 await GrantPermissionsToWriteLogsAsync();
-29.                 // Step 2 - Enable logging on the source bucket.
-30.                 await EnableDisableLoggingAsync();
-31.             }
-32.             catch (AmazonS3Exception e)
-33.             {
-34.                 Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
-35.             }
-36.             catch (Exception e)
-37.             {
-38.                 Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
-39.             }
-40.         }
-41. 
-42.         private static async Task GrantPermissionsToWriteLogsAsync()
-43.         {
-44.             var bucketACL = new S3AccessControlList();
-45.             var aclResponse = client.GetACL(new GetACLRequest { BucketName = targetBucketName });
-46.             bucketACL = aclResponse.AccessControlList;
-47.             bucketACL.AddGrant(new S3Grantee { URI = "http://acs.amazonaws.com/groups/s3/LogDelivery" }, S3Permission.WRITE);
-48.             bucketACL.AddGrant(new S3Grantee { URI = "http://acs.amazonaws.com/groups/s3/LogDelivery" }, S3Permission.READ_ACP);
-49.             var setACLRequest = new PutACLRequest
-50.             {
-51.                 AccessControlList = bucketACL,
-52.                 BucketName = targetBucketName
-53.             };
-54.             await client.PutACLAsync(setACLRequest);
-55.         }
-56. 
-57.         private static async Task EnableDisableLoggingAsync()
-58.         {
-59.             var loggingConfig = new S3BucketLoggingConfig
-60.             {
-61.                 TargetBucketName = targetBucketName,
-62.                 TargetPrefix = logObjectKeyPrefix
-63.             };
-64. 
-65.             // Send request.
-66.             var putBucketLoggingRequest = new PutBucketLoggingRequest
-67.             {
-68.                 BucketName = bucketName,
-69.                 LoggingConfig = loggingConfig
-70.             };
-71.             await client.PutBucketLoggingAsync(putBucketLoggingRequest);
-72.         }
-73.     }
-74. }
+ 1. using Amazon;
+ 2. using Amazon.S3;
+ 3. using Amazon.S3.Model;
+ 4. using System;
+ 5. using System.Threading.Tasks;
+ 6. 
+ 7. namespace Amazon.DocSamples.S3
+ 8. {
+ 9.     class ServerAccesLoggingTest
+10.     {
+11.         private const string bucketName = "*** bucket name for which to enable logging ***"; 
+12.         private const string targetBucketName = "*** bucket name where you want access logs stored ***"; 
+13.         private const string logObjectKeyPrefix = "Logs";
+14.         // Specify your bucket region (an example region is shown).
+15.         private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
+16.         private static IAmazonS3 client;
+17. 
+18.         public static void Main()
+19.         {
+20.             client = new AmazonS3Client(bucketRegion);
+21.             EnableLoggingAsync().Wait();
+22.         }
+23. 
+24.         private static async Task EnableLoggingAsync()
+25.         {
+26.             try
+27.             {
+28.                 // Step 1 - Grant Log Delivery group permission to write log to the target bucket.
+29.                 await GrantPermissionsToWriteLogsAsync();
+30.                 // Step 2 - Enable logging on the source bucket.
+31.                 await EnableDisableLoggingAsync();
+32.             }
+33.             catch (AmazonS3Exception e)
+34.             {
+35.                 Console.WriteLine("Error encountered on server. Message:'{0}' when writing an object", e.Message);
+36.             }
+37.             catch (Exception e)
+38.             {
+39.                 Console.WriteLine("Unknown encountered on server. Message:'{0}' when writing an object", e.Message);
+40.             }
+41.         }
+42. 
+43.         private static async Task GrantPermissionsToWriteLogsAsync()
+44.         {
+45.             var bucketACL = new S3AccessControlList();
+46.             var aclResponse = client.GetACL(new GetACLRequest { BucketName = targetBucketName });
+47.             bucketACL = aclResponse.AccessControlList;
+48.             bucketACL.AddGrant(new S3Grantee { URI = "http://acs.amazonaws.com/groups/s3/LogDelivery" }, S3Permission.WRITE);
+49.             bucketACL.AddGrant(new S3Grantee { URI = "http://acs.amazonaws.com/groups/s3/LogDelivery" }, S3Permission.READ_ACP);
+50.             var setACLRequest = new PutACLRequest
+51.             {
+52.                 AccessControlList = bucketACL,
+53.                 BucketName = targetBucketName
+54.             };
+55.             await client.PutACLAsync(setACLRequest);
+56.         }
+57. 
+58.         private static async Task EnableDisableLoggingAsync()
+59.         {
+60.             var loggingConfig = new S3BucketLoggingConfig
+61.             {
+62.                 TargetBucketName = targetBucketName,
+63.                 TargetPrefix = logObjectKeyPrefix
+64.             };
+65. 
+66.             // Send request.
+67.             var putBucketLoggingRequest = new PutBucketLoggingRequest
+68.             {
+69.                 BucketName = bucketName,
+70.                 LoggingConfig = loggingConfig
+71.             };
+72.             await client.PutBucketLoggingAsync(putBucketLoggingRequest);
+73.         }
+74.     }
+75. }
 ```
 
 ## Related resources<a name="enable-logging-programming-more-info"></a>

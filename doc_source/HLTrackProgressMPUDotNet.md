@@ -3,6 +3,7 @@
 The following C\# example uploads a file to an S3 bucket using the `TransferUtility` class, and tracks the progress of the upload\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions for creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Transfer;
 using System;

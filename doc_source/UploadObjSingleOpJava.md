@@ -1,4 +1,4 @@
-# Upload an Object Using the AWS SDK for Java<a name="UploadObjSingleOpJava"></a>
+# Upload an object Using the AWS SDK for Java<a name="UploadObjSingleOpJava"></a>
 
 **Example**  
 The following example creates two objects\. The first object has a text string as data, and the second object is a file\. The example creates the first object by specifying the bucket name, object key, and text data directly in a call to `AmazonS3Client.putObject()`\. The example creates the second object by using a `PutObjectRequest` that specifies the bucket name, object key, and file path\. The `PutObjectRequest` also specifies the `ContentType` header and title metadata\.  

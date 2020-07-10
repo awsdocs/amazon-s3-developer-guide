@@ -1,4 +1,4 @@
-# Get an Object Using the AWS SDK for PHP<a name="RetrieveObjSingleOpPHP"></a>
+# Get an object Using the AWS SDK for PHP<a name="RetrieveObjSingleOpPHP"></a>
 
 This topic explains how to use a class from the AWS SDK for PHP to retrieve an Amazon S3 object\. You can retrieve an entire object or a byte range from the object\. We assume that you are already following the instructions for [Using the AWS SDK for PHP and Running PHP Examples](UsingTheMPphpAPI.md) and have the AWS SDK for PHP properly installed\. 
 
@@ -18,7 +18,7 @@ When retrieving an object, you can optionally override the response header value
 9. ]);
 ```
 
-For more information about retrieving objects, see [Getting Objects](GettingObjectsUsingAPIs.md)\. 
+For more information about retrieving objects, see [Getting objects](GettingObjectsUsingAPIs.md)\. 
 
 The following PHP example retrieves an object and displays the content of the object in the browser\. The example shows how to use the `getObject()` method\. For information about running the PHP examples in this guide, see [Running PHP Examples](UsingTheMPphpAPI.md#running-php-samples)\. 
 

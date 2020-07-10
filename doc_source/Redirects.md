@@ -3,7 +3,7 @@
 Amazon S3 uses the Domain Name System \(DNS\) to route requests to facilities that can process them\. This system works effectively, but temporary routing errors can occur\. If a request arrives at the wrong Amazon S3 location, Amazon S3 responds with a temporary redirect that tells the requester to resend the request to a new endpoint\. If a request is incorrectly formed, Amazon S3 uses permanent redirects to provide direction on how to perform the request correctly\.
 
 **Important**  
-To use this feature, you must have an application that can handle Amazon S3 redirect responses\. The only exception is for applications that work exclusively with buckets that were created without `<CreateBucketConfiguration>`\. For more information about location constraints, see [Accessing a Bucket](UsingBucket.md#access-bucket-intro)\.  
+To use this feature, you must have an application that can handle Amazon S3 redirect responses\. The only exception is for applications that work exclusively with buckets that were created without `<CreateBucketConfiguration>`\. For more information about location constraints, see [Accessing a bucket](UsingBucket.md#access-bucket-intro)\.  
 For all Regions that launched after March 20, 2019, if a request arrives at the wrong Amazon S3 location, Amazon S3 returns an HTTP 400 Bad Request error\.  
 For more information about enabling or disabling an AWS Region, see [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) in the *AWS General Reference*\.
 
@@ -60,7 +60,7 @@ The following figure and procedure shows an example of a temporary redirect\.
 
 ## Permanent request redirection<a name="RedirectsPermanentRedirection"></a>
 
-A permanent redirect indicates that your request addressed a resource inappropriately\. For example, permanent redirects occur if you use a path\-style request to access a bucket that was created using `<CreateBucketConfiguration>`\. For more information, see [Accessing a Bucket](UsingBucket.md#access-bucket-intro)\.
+A permanent redirect indicates that your request addressed a resource inappropriately\. For example, permanent redirects occur if you use a path\-style request to access a bucket that was created using `<CreateBucketConfiguration>`\. For more information, see [Accessing a bucket](UsingBucket.md#access-bucket-intro)\.
 
 To help you find these errors during development, this type of redirect does not contain a Location HTTP header that allows you to automatically follow the request to the correct location\. Consult the resulting XML error document for help using the correct Amazon S3 endpoint\.
 

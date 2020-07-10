@@ -26,6 +26,7 @@ If you want to test the sample using IAM user credentials, you need to create an
  For instructions on creating and testing a working example, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\. 
 
 ```
+using Amazon;
 using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.S3.Model;

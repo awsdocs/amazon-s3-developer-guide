@@ -1,4 +1,4 @@
-# Multipart Upload API and Permissions<a name="mpuAndPermissions"></a>
+# Multipart upload API and permissions<a name="mpuAndPermissions"></a>
 
 An individual must have the necessary permissions to use the multipart upload operations\. You can use access control lists \(ACLs\), the bucket policy, or the user policy to grant individuals permissions to perform these operations\. The following table lists the required permissions for various multipart upload operations when using ACLs, a bucket policy, or a user policy\. 
 

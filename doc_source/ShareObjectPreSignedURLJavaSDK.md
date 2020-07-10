@@ -1,7 +1,7 @@
-# Generate a presigned Object URL Using the AWS SDK for Java<a name="ShareObjectPreSignedURLJavaSDK"></a>
+# Generate a presigned object URL using the AWS SDK for Java<a name="ShareObjectPreSignedURLJavaSDK"></a>
 
 **Example**  
-The following example generates a presigned URL that you can give to others so that they can retrieve an object from an S3 bucket\. For more information, see [Share an Object with Others](ShareObjectPreSignedURL.md)\.   
+The following example generates a presigned URL that you can give to others so that they can retrieve an object from an S3 bucket\. For more information, see [Share an object with others](ShareObjectPreSignedURL.md)\.   
  For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.   
 
 ```

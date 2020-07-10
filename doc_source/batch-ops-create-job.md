@@ -45,3 +45,5 @@ If the `Create Job` request succeeds, Amazon S3 returns a job ID\. The job ID is
 When you create a job through the AWS CLI, AWS SDKs, or REST API, you can set S3 Batch Operations to begin processing the job automatically\. The job runs as soon as it's ready and not waiting behind higher\-priority jobs\. 
 
 When you create a job through the AWS Management Console, you must review the job details and confirm that you want to run it before Batch Operations can begin to process it\. After you confirm that you want to run the job, it progresses as though you had created it through one of the other methods\. If a job remains in the suspended state for over 30 days, it will fail\.
+
+For examples, see [S3 Batch Operations examples using the AWS CLI](batch-ops-examples-cli.md)\.

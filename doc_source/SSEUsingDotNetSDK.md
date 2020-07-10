@@ -13,6 +13,7 @@ For a working sample of how to copy an object, see [Copy an Amazon S3 Object in 
 The following example uploads an object\. In the request, the example directs Amazon S3 to encrypt the object\. The example then retrieves object metadata and verifies the encryption method that was used\. For information about creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;

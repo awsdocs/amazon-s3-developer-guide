@@ -14,7 +14,7 @@ For instructions see, [How Do I See the Versions of an S3 Object?](https://docs.
 
 ## Using the AWS SDKs<a name="retrieve-obj-version-sdks"></a>
 
-For examples of uploading objects using AWS SDKs for Java, \.NET, and PHP, see [Getting Objects](GettingObjectsUsingAPIs.md)\. The examples for uploading objects in a nonversioned and versioning\-enabled buckets are the same, although in the case of versioning\-enabled buckets, Amazon S3 assigns a version number\. Otherwise, the version number is null\. 
+For examples of uploading objects using AWS SDKs for Java, \.NET, and PHP, see [Getting objects](GettingObjectsUsingAPIs.md)\. The examples for uploading objects in a nonversioned and versioning\-enabled buckets are the same, although in the case of versioning\-enabled buckets, Amazon S3 assigns a version number\. Otherwise, the version number is null\. 
 
 For information about using other AWS SDKs, see [Sample Code and Libraries](https://aws.amazon.com/code/)\. 
 

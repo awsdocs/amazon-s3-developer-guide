@@ -2,11 +2,12 @@
 
 To abort in\-progress  multipart uploads, use the `TransferUtility` class from the AWS SDK for \.NET\. You provide a `DateTime`value\. The API then aborts all of the multipart uploads that were initiated before the specified date and time and remove the uploaded parts\. An upload is considered to be in\-progress after you initiate it and it completes or you abort it\. 
 
-Because you are billed for all storage associated with uploaded parts, it's important that you either complete the multipart upload to finish creating the object or abort it to remove uploaded parts\. For more information about Amazon S3 multipart uploads, see [Multipart Upload Overview](mpuoverview.md)\. For information about pricing, see [Multipart Upload and Pricing](mpuoverview.md#mpuploadpricing)\.
+Because you are billed for all storage associated with uploaded parts, it's important that you either complete the multipart upload to finish creating the object or abort it to remove uploaded parts\. For more information about Amazon S3 multipart uploads, see [Multipart upload overview](mpuoverview.md)\. For information about pricing, see [Multipart upload and pricing](mpuoverview.md#mpuploadpricing)\.
 
 The following C\# example aborts all in\-progress multipart uploads that were initiated on a specific bucket over a week ago\. For information about the example's compatibility with a specific version of the AWS SDK for \.NET and instructions on creating and testing a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Transfer;
 using System;

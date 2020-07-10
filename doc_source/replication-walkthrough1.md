@@ -373,6 +373,7 @@ public class CrossRegionReplication {
 The following AWS SDK for \.NET code example adds a replication configuration to a bucket and then retrieves it\. To use this code, provide the names for your buckets and the Amazon Resource Name \(ARN\) for your IAM role\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;

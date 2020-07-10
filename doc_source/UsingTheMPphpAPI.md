@@ -17,7 +17,7 @@ The AWS SDK for PHP gives you the option of using a high\-level or low\-level AP
 
 ### Low\-Level API<a name="Lowlevel-php-api"></a>
 
-The low\-level APIs correspond to the underlying Amazon S3 REST operations, including the create, update, and delete operations on buckets and objects\. The low\-level APIs provide greater control over these operations\. For example, you can batch your requests and execute them in parallel\. Or, when using the multipart upload API, you can manage the object parts individually\. Note that these low\-level API calls return a result that includes all of the Amazon S3 response details\. For more information about the multipart upload API, see [Uploading Objects Using Multipart Upload API](uploadobjusingmpu.md)\.
+The low\-level APIs correspond to the underlying Amazon S3 REST operations, including the create, update, and delete operations on buckets and objects\. The low\-level APIs provide greater control over these operations\. For example, you can batch your requests and execute them in parallel\. Or, when using the multipart upload API, you can manage the object parts individually\. Note that these low\-level API calls return a result that includes all of the Amazon S3 response details\. For more information about the multipart upload API, see [Uploading objects using multipart upload API](uploadobjusingmpu.md)\.
 
 ### High\-Level Abstractions<a name="Highlevel-php-api"></a>
 

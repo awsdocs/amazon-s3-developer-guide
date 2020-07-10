@@ -17,4 +17,4 @@ You can generate a presigned URL programmatically using the [REST API](https://d
 + [Upload an object using a presigned URL \(AWS SDK for Java\)](PresignedUrlUploadObjectJavaSDK.md)
 + [Upload an object using a presigned URL \(AWS SDK for \.NET\)](UploadObjectPreSignedURLDotNetSDK.md)
 + [Upload an object using a presigned URL \(AWS SDK for Ruby\)](UploadObjectPreSignedURLRubySDK.md)
-+ [Upload an Object Using a Presigned URL \(AWS SDK for PHP\)](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/s3-presigned-url.html)
++ [Upload an object using a presigned URL \(AWS SDK for PHP\)](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/s3-presigned-url.html)

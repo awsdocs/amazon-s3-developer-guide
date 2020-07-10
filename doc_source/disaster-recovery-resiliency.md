@@ -18,7 +18,7 @@ Versioning is a means of keeping multiple variants of an object in the same buck
 You can use S3 Object Lock to store objects using a *write once, read many* \(WORM\) model\. Using S3 Object Lock, you can prevent an object from being deleted or overwritten for a fixed amount of time or indefinitely\. S3 Object Lock enables you to meet regulatory requirements that require WORM storage or simply to add an additional layer of protection against object changes and deletion\. For more information, see [Locking objects using S3 Object Lock](object-lock.md)\.
 
 **Storage classes**  
-Amazon S3 offers a range of storage classes for the objects that you store\. Two of these storage classes \(STANDARD\_IA and ONEZONE\_IA\) are designed for long\-lived and infrequently accessed data, such as backups\. You can also use the S3 Glacier storage class to archive objects that you don't need to access in real time\. For more information, see [Amazon S3 Storage Classes](storage-class-intro.md)\.
+Amazon S3 offers a range of storage classes for the objects that you store\. Two of these storage classes \(STANDARD\_IA and ONEZONE\_IA\) are designed for long\-lived and infrequently accessed data, such as backups\. You can also use the S3 Glacier storage class to archive objects that you don't need to access in real time\. For more information, see [Amazon S3 storage classes](storage-class-intro.md)\.
 
 The following security best practices also address resilience:
 + [Enable versioning](security-best-practices.md#versioning)
@@ -27,4 +27,4 @@ The following security best practices also address resilience:
 
 ## Encryption of Amazon S3 backups<a name="backup-encryption"></a>
 
-If you are storing backups using Amazon S3, the encryption of your backups depends on the configuration of those buckets\. Amazon S3 provides a way to set the default encryption behavior for an S3 bucket\. You can set default encryption on a bucket so that all objects are encrypted when they are stored in the bucket\. The default encryption supports keys stored in AWS KMS \(SSE\-KMS\)\. For more information, see [ Amazon S3 Default Encryption for S3 Buckets](bucket-encryption.md)\.
+If you are storing backups using Amazon S3, the encryption of your backups depends on the configuration of those buckets\. Amazon S3 provides a way to set the default encryption behavior for an S3 bucket\. You can set default encryption on a bucket so that all objects are encrypted when they are stored in the bucket\. The default encryption supports keys stored in AWS KMS \(SSE\-KMS\)\. For more information, see [ Amazon S3 default encryption for S3 buckets](bucket-encryption.md)\.

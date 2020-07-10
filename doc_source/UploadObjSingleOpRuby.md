@@ -1,4 +1,4 @@
-# Upload an Object Using the AWS SDK for Ruby<a name="UploadObjSingleOpRuby"></a>
+# Upload an object using the AWS SDK for Ruby<a name="UploadObjSingleOpRuby"></a>
 
 The AWS SDK for Ruby \- Version 3 has two ways of uploading an object to Amazon S3\. The first uses a managed file uploader, which makes it easy to upload files of any size from disk\. To use the managed file uploader method:
 

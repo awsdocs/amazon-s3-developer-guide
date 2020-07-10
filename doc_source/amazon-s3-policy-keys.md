@@ -70,7 +70,7 @@ The `IPAddress` and `NotIpAddress` key values specified in the condition uses CI
 }
 ```
 
-You can also use other AWS‐wide condition keys in Amazon S3 policies\. For example, you can specify the `aws:sourceVpce` and `aws:sourceVpc` condition keys in bucket policies for VPC endpoints\. For examples, see [Example Bucket Policies for VPC Endpoints for Amazon S3](example-bucket-policies-vpc-endpoint.md)\.
+You can also use other AWS‐wide condition keys in Amazon S3 policies\. For example, you can specify the `aws:SourceVpce` and `aws:SourceVpc` condition keys in bucket policies for VPC endpoints\. For examples, see [Example Bucket Policies for VPC Endpoints for Amazon S3](example-bucket-policies-vpc-endpoint.md)\.
 
 ## Amazon S3‐Specific Condition Keys<a name="s3-specific-keys"></a>
 

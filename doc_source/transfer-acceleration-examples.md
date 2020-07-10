@@ -139,6 +139,7 @@ The following example shows how to use the AWS SDK for \.NET to enable Transfer 
 **Example**  
 
 ```
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;
@@ -207,7 +208,7 @@ For an example of enabling Transfer Acceleration by using the AWS SDK for JavaSc
 
 ## Using Transfer Acceleration from the AWS SDK for Python \(Boto\)<a name="transfer-acceleration-examples-python"></a>
 
-For an example of enabling Transfer Acceleration by using the SDK for Python, see [ put\_bucket\_accelerate\_configuration](http://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.put_bucket_accelerate_configuration) in the *AWS SDK for Python \(Boto 3\) API Reference*\.
+For an example of enabling Transfer Acceleration by using the SDK for Python, see [ put\_bucket\_accelerate\_configuration](http://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#S3.Client.put_bucket_accelerate_configuration) in the *AWS SDK for Python \(Boto3\) API Reference*\.
 
 ## Using Other AWS SDKs<a name="transfer-acceleration-examples-sdks"></a>
 

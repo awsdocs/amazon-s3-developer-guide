@@ -82,7 +82,7 @@ To grant Amazon S3 permission to encrypt using a customer managed AWS Key Manage
 
 1. In the left navigation pane, choose **Customer managed keys**\.
 
-1. Under **Customer managed keys**, choose the customer managed CMK that you want to use to encrypt the inventory file\.
+1. Under **Customer managed keys**, choose the key that you want to use to encrypt the inventory file\. CMKs are Region specific and must be in the same Region as the source bucket\.
 
 1. Under **Key policy**, choose **Switch to policy view**\.
 
@@ -124,9 +124,9 @@ The inventory list contains a list of the objects in an S3 bucket and the follow
 + **Size** – Object size in bytes\.
 + **Last modified date** – Object creation date or the last modified date, whichever is the latest\.
 + **ETag** – The entity tag is a hash of the object\. The ETag reflects changes only to the contents of an object, not its metadata\. The ETag may or may not be an MD5 digest of the object data\. Whether it is depends on how the object was created and how it is encrypted\.
-+ **Storage class** – Storage class used for storing the object\. For more information, see [Amazon S3 Storage Classes](storage-class-intro.md)\.
++ **Storage class** – Storage class used for storing the object\. For more information, see [Amazon S3 storage classes](storage-class-intro.md)\.
 + **Intelligent\-Tiering access tier** – Access tier \(frequent or infrequent\) of the object if stored in Intelligent\-Tiering\. For more information, see [Amazon S3 Intelligent\-Tiering](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access)\.
-+ **Multipart upload flag** – Set to `True` if the object was uploaded as a multipart upload\. For more information, see [Multipart Upload Overview](mpuoverview.md)\.
++ **Multipart upload flag** – Set to `True` if the object was uploaded as a multipart upload\. For more information, see [Multipart upload overview](mpuoverview.md)\.
 + **Delete marker** – Set to `True`, if the object is a delete marker\. For more information, see [Object Versioning](ObjectVersioning.md)\. \(This field is automatically added to your report if you've configured the report to include all versions of your objects\)\.
 + **Replication status** – Set to `PENDING`, `COMPLETED`, `FAILED`, or `REPLICA.` For more information, see [Replication Status Information](replication-status.md)\.
 + **Encryption status** – Set to `SSE-S3`, `SSE-C`, `SSE-KMS`, or `NOT-SSE`\. The server\-side encryption status for SSE\-S3, SSE\-KMS, and SSE with customer\-provided keys \(SSE\-C\)\. A status of `NOT-SSE` means that the object is not encrypted with server\-side encryption\. For more information, see [Protecting data using encryption](UsingEncryption.md)\.
