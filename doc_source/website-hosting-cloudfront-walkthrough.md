@@ -4,6 +4,9 @@ You can use [Amazon CloudFront](http://aws.amazon.com/cloudfront) to improve the
 
 CloudFront caches content at edge locations for a period of time that you specify\. If a visitor requests content that has been cached for longer than the expiration date, CloudFront checks the origin server to see if a newer version of the content is available\. If a newer version is available, CloudFront copies the new version to the edge location\. Changes that you make to the original content are replicated to edge locations as visitors request the content\. 
 
+**Automating set up with an AWS CloudFormation template**  
+For more information about using an AWS CloudFormation template to configure a secure static website that creates a CloudFront distribution to serve your website, see [Getting started with a secure static website](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/getting-started-secure-static-website-cloudformation-template.html) in the *Amazon CloudFront Developer Guide*\.
+
 **Topics**
 + [Step 1: Create a CloudFront distribution](#create-distribution)
 + [Step 2: Update the record sets for your Domain and subdomain](#update-record-sets)

@@ -1,15 +1,15 @@
-# Walkthrough: Configure a bucket for notifications \(SNS topic and SQS queue\)<a name="ways-to-add-notification-config-to-bucket"></a>
+# Walkthrough: Configure a bucket for notifications \(SNS topic or SQS queue\)<a name="ways-to-add-notification-config-to-bucket"></a>
+
+You can receive Amazon S3 notifications using Amazon Simple Notification Service; or Amazon Simple Queue Service\. In the following walkthrough, you will add a notification configuration to your bucket using an Amazon SNS topic and Amazon SQS queue\.
 
 **Topics**
 + [Walkthrough summary](#notification-walkthrough-summary)
-+ [Step 1: Create an Amazon SNS topic](#step1-create-sns-topic-for-notification)
-+ [Step 2: Create an Amazon SQS queue](#step1-create-sqs-queue-for-notification)
++ [Step 1: Create an Amazon SQS queue](#step1-create-sqs-queue-for-notification)
++ [Step 2: Create an Amazon SNS topic](#step1-create-sns-topic-for-notification)
 + [Step 3: Add a notification configuration to your bucket](#step2-enable-notification)
 + [Step 4: Test the setup](#notification-walkthrough-1-test)
 
 ## Walkthrough summary<a name="notification-walkthrough-summary"></a>
-
-In this example, you add a notification configuration on a bucket requesting Amazon S3 to do the following:
 + Publish events of the `s3:ObjectCreated:*` type to an Amazon SQS queue\.
 + Publish events of the `s3:ReducedRedundancyLostObject` type to an Amazon SNS topic\.
 
@@ -17,13 +17,7 @@ For information about notification configuration, see [ Configuring Amazon S3 ev
 
 You can do all these steps using the console, without writing any code\. In addition, code examples using AWS SDKs for Java and \.NET are also provided to help you add notification configurations programmatically\.
 
-You do the following in this walkthrough:
-
-1. Create an Amazon SNS topic\.
-
-   Using the Amazon SNS console, you create an SNS topic and subscribe to the topic so that any events posted to it are delivered to you\. You specify email as the communications protocol\. After you create a topic, Amazon SNS sends an email\. You must click a link in the email to confirm the topic subscription\. 
-
-   You attach an access policy to the topic to grant Amazon S3 permission to post messages\. 
+You can do the following with this walkthrough:
 
 1. Create an Amazon SQS queue\.
 
@@ -31,53 +25,15 @@ You do the following in this walkthrough:
 
    You attach an access policy to the topic to grant Amazon S3 permission to post messages\.
 
+1. Create an Amazon SNS topic\.
+
+   Using the Amazon SNS console, you create an SNS topic and subscribe to the topic so that any events posted to it are delivered to you\. You specify email as the communications protocol\. After you create a topic, Amazon SNS sends an email\. You must click a link in the email to confirm the topic subscription\. 
+
+   You attach an access policy to the topic to grant Amazon S3 permission to post messages\. 
+
 1. Add notification configuration to a bucket\. 
 
-## Step 1: Create an Amazon SNS topic<a name="step1-create-sns-topic-for-notification"></a>
-
-Follow the steps to create and subscribe to an Amazon Simple Notification Service \(Amazon SNS\) topic\.
-
-1. Using Amazon SNS console create a topic\. For instructions, see [Create a Topic](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in the *Amazon Simple Notification Service Developer Guide*\. 
-
-1. Subscribe to the topic\. For this exercise, use email as the communications protocol\. For instructions, see [Subscribe to a Topic](https://docs.aws.amazon.com/sns/latest/dg/SubscribeTopic.html) in the *Amazon Simple Notification Service Developer Guide*\. 
-
-   You will get email requesting you to confirm your subscription to the topic\. Confirm the subscription\. 
-
-1. Replace the access policy attached to the topic with the following policy\. You must update the policy by providing your SNS topic Amazon Resource Name \(ARN\), bucket name, and bucket owner's account ID\.
-
-   ```
-   {
-    "Version": "2012-10-17",
-    "Id": "example-ID",
-    "Statement": [
-     {
-      "Sid": "example-statement-ID",
-      "Effect": "Allow",
-      "Principal": {
-       "AWS":"*"  
-      },
-      "Action": [
-       "SNS:Publish"
-      ],
-      "Resource": "SNS-topic-ARN",
-      "Condition": {
-         "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" },
-         "StringEquals": { "aws:SourceAccount": "bucket-owner-account-id" }
-      }
-     }
-    ]
-   }
-   ```
-
-1. Note the topic ARN\.
-
-   The SNS topic you created is another resource in your AWS account, and it has a unique Amazon Resource Name \(ARN\)\. You will need this ARN in the next step\. The ARN will be of the following format:
-
-   ```
-   arn:aws:sns:aws-region:account-id:topic-name
-   ```
-
-## Step 2: Create an Amazon SQS queue<a name="step1-create-sqs-queue-for-notification"></a>
+## Step 1: Create an Amazon SQS queue<a name="step1-create-sqs-queue-for-notification"></a>
 
 Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Amazon SQS\) queue\.
 
@@ -146,6 +102,50 @@ Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Ama
    arn:aws:sqs:aws-region:account-id:queue-name
    ```
 
+## Step 2: Create an Amazon SNS topic<a name="step1-create-sns-topic-for-notification"></a>
+
+Follow the steps to create and subscribe to an Amazon Simple Notification Service \(Amazon SNS\) topic\.
+
+1. Using Amazon SNS console create a topic\. For instructions, see [Create a Topic](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in the *Amazon Simple Notification Service Developer Guide*\. 
+
+1. Subscribe to the topic\. For this exercise, use email as the communications protocol\. For instructions, see [Subscribe to a Topic](https://docs.aws.amazon.com/sns/latest/dg/SubscribeTopic.html) in the *Amazon Simple Notification Service Developer Guide*\. 
+
+   You will get email requesting you to confirm your subscription to the topic\. Confirm the subscription\. 
+
+1. Replace the access policy attached to the topic with the following policy\. You must update the policy by providing your SNS topic Amazon Resource Name \(ARN\), bucket name, and bucket owner's account ID\.
+
+   ```
+   {
+    "Version": "2012-10-17",
+    "Id": "example-ID",
+    "Statement": [
+     {
+      "Sid": "example-statement-ID",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS":"*"  
+      },
+      "Action": [
+       "SNS:Publish"
+      ],
+      "Resource": "SNS-topic-ARN",
+      "Condition": {
+         "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" },
+         "StringEquals": { "aws:SourceAccount": "bucket-owner-account-id" }
+      }
+     }
+    ]
+   }
+   ```
+
+1. Note the topic ARN\.
+
+   The SNS topic you created is another resource in your AWS account, and it has a unique Amazon Resource Name \(ARN\)\. You will need this ARN in the next step\. The ARN will be of the following format:
+
+   ```
+   arn:aws:sns:aws-region:account-id:topic-name
+   ```
+
 ## Step 3: Add a notification configuration to your bucket<a name="step2-enable-notification"></a>
 
 You can enable bucket notifications either by using the Amazon S3 console or programmatically by using AWS SDKs\. Choose any one of the options to configure notifications on your bucket\. This section provides code examples using the AWS SDKs for Java and \.NET\.
@@ -153,8 +153,8 @@ You can enable bucket notifications either by using the Amazon S3 console or pro
 ### Step 3 \(option a\): Enable notifications on a bucket using the console<a name="step2-enable-notification-using-console"></a>
 
 Using the Amazon S3 console, add a notification configuration requesting Amazon S3 to:
-+ Publish events of the `s3:ObjectCreated:*` type to your Amazon SQS queue\.
-+ Publish events of the `s3:ReducedRedundancyLostObject` type to your Amazon SNS topic\.
++ Publish events of the **All object create events** type to your Amazon SQS queue\.
++ Publish events of the **Object in RRS lost** type to your Amazon SNS topic\.
 
 After you save the notification configuration, Amazon S3 posts a test message, which you get via email\. 
 

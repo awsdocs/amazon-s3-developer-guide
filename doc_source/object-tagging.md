@@ -101,7 +101,7 @@ For more information, see [Object lifecycle management](object-lifecycle-mgmt.md
 
 ### Object tagging and replication<a name="tagging-and-replication"></a>
 
-If you configured Replication on your bucket, Amazon S3 replicates tags, provided you grant Amazon S3 permission to read the tags\. For more information, see [Overview of Setting Up Replication](replication-how-setup.md)\.
+If you configured Replication on your bucket, Amazon S3 replicates tags, provided you grant Amazon S3 permission to read the tags\. For more information, see [Overview of setting up replication](replication-how-setup.md)\.
 
 ### Object tagging and access control policies<a name="tagging-and-policies"></a>
 

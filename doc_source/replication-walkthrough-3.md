@@ -170,7 +170,7 @@ The profiles you use for this exercise must have the necessary permissions\. For
          --profile acctA
          ```
 
-1. Add a replication configuration to your source bucket\. 
+1. Add a replication configuration to your source bucket\.
 
    1. The AWS CLI requires specifying the replication configuration as JSON\. Save the following JSON in a file named `replication.json` in the current directory on your local computer\. In the configuration, the addition of `AccessControlTranslation` to indicate change in replica ownership\.
 
@@ -180,12 +180,11 @@ The profiles you use for this exercise must have the necessary permissions\. For
          "Rules":[
             {
                "Status":"Enabled",
-               "Priority":"1",
+               "Priority":1,
                "DeleteMarkerReplication":{
                   "Status":"Disabled"
                },
                "Filter":{
-                  "Prefix":"Tax"
                },
                "Status":"Enabled",
                "Destination":{
@@ -206,7 +205,7 @@ The profiles you use for this exercise must have the necessary permissions\. For
 
       ```
       $ aws s3api put-bucket-replication \
-      --replication-configuration file://replication-changeowner.json \
+      --replication-configuration file://replication.json \
       --bucket source \
       --profile acctA
       ```
@@ -215,9 +214,7 @@ The profiles you use for this exercise must have the necessary permissions\. For
 
    1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\. 
 
-   1. In the *source* bucket, create a folder named `Tax`\. 
-
-   1. Add objects to the folder in the *source* bucket\. Verify that the *destination* bucket contains the object replicas and that the ownership of the replicas has changed to the AWS account that owns the *destination* bucket\.
+   1. Add objects to the *source* bucket\. Verify that the *destination* bucket contains the object replicas and that the ownership of the replicas has changed to the AWS account that owns the *destination* bucket\.
 
 ## Change the replica owner when buckets are owned by different accounts \(AWS SDK\)<a name="replication-ex3-sdk"></a>
 

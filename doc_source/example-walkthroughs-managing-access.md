@@ -1,4 +1,4 @@
-# Example walkthroughs: Managing access to your amazon S3 resources<a name="example-walkthroughs-managing-access"></a>
+# Example walkthroughs: Managing access to your Amazon S3 resources<a name="example-walkthroughs-managing-access"></a>
 
 This topic provides the following introductory walkthrough examples for granting access to Amazon S3 resources\. These examples use the AWS Management Console to create resources \(buckets, objects, users\) and grant them permissions\. The examples then show you how to verify permissions using the command line tools, so you don't have to write any code\. We provide commands using both the AWS Command Line Interface \(CLI\) and the AWS Tools for Windows PowerShell\.
 + [Example 1: Bucket owner granting its users bucket permissions ](example-walkthroughs-managing-access-example1.md)

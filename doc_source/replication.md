@@ -6,15 +6,15 @@ To enable object replication, you add a replication configuration to your source
 + The destination bucket where you want Amazon S3 to replicate objects 
 + An AWS Identity and Access Management \(IAM\)  role that Amazon S3 can assume to replicate objects on your behalf 
 
-Additional configuration options are available\. For more information, see [Additional Replication Configurations](replication-additional-configs.md)\.
+Additional configuration options are available\. For more information, see [Additional replication configurations](replication-additional-configs.md)\.
 
-## Types of Object Replication<a name="replication-types"></a>
+## Types of object replication<a name="replication-types"></a>
 
 You can replicate objects between different AWS Regions or within the same AWS Region\.
 + **Cross\-Region replication** \(CRR\) is used to copy objects across Amazon S3 buckets in different AWS Regions\.
 + **Same\-Region replication** \(SRR\) is used to copy objects across Amazon S3 buckets in the same AWS Region\.
 
-## Why Use Replication<a name="replication-scenario"></a>
+## Why use replication<a name="replication-scenario"></a>
 
 Replication can help you do the following:
 + **Replicate objects while retaining metadata** — You can use replication to make copies of your objects that retain all metadata, such as the original object creation time and version IDs\. This capability is important if you need to ensure that your replica is identical to the source object
@@ -28,7 +28,7 @@ Replication can help you do the following:
    
 + **Replicate objects within 15 minutes** — You can use S3 Replication Time Control \(S3 RTC\) to replicate your data in the same AWS Region or across different Regions in a predictable time frame\. S3 RTC replicates 99\.99 percent of new objects stored in Amazon S3 within 15 minutes \(backed by a service level agreement\)\. For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
 
-## When to Use CRR<a name="crr-scenario"></a>
+## When to use CRR<a name="crr-scenario"></a>
 
 Cross\-Region replication can help you do the following:
 + **Meet compliance requirements** — Although Amazon S3 stores your data across multiple geographically distant Availability Zones by default, compliance requirements might dictate that you store data at even greater distances\. Cross\-Region replication allows you to replicate data between distant AWS Regions to satisfy these requirements\.
@@ -39,7 +39,7 @@ Cross\-Region replication can help you do the following:
    
 + **Increase operational efficiency** — If you have compute clusters in two different AWS Regions that analyze the same set of objects, you might choose to maintain object copies in those Regions\.
 
-## When to Use SRR<a name="srr-scenario"></a>
+## When to use SRR<a name="srr-scenario"></a>
 
 Same\-Region replication can help you do the following:
 + **Aggregate logs into a single bucket** — If you store logs in multiple buckets or across multiple accounts, you can easily replicate logs into a single, in\-Region bucket\. This allows for simpler processing of logs in a single location\.
@@ -50,7 +50,7 @@ Same\-Region replication can help you do the following:
    
 + **Abide by data sovereignty laws** — You might be required to store multiple copies of your data in separate AWS accounts within a certain Region\. Same\-Region replication can help you automatically replicate critical data when compliance regulations don't allow the data to leave your country\.
 
-## Requirements for Replication<a name="replication-requirements"></a>
+## Requirements for replication<a name="replication-requirements"></a>
 
 Replication requires the following:
 + The source bucket owner must have the source and destination AWS Regions enabled for their account\. The destination bucket owner must have the destination Region\-enabled for their account\. For more information about enabling or disabling an AWS Region, see [AWS Service Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) in the *AWS General Reference*\.
@@ -61,9 +61,9 @@ Replication requires the following:
 
   To enable replication on a bucket that has Object Lock enabled, contact [AWS Support](https://console.aws.amazon.com/support/home)\.
 
-For more information, see [Overview of Setting Up Replication](replication-how-setup.md)\. 
+For more information, see [Overview of setting up replication](replication-how-setup.md)\. 
 
 If you are setting the replication configuration in a *cross\-account scenario*, where source and destination buckets are owned by different AWS accounts, the following additional requirement applies:
-+ The owner of the destination bucket must grant the owner of the source bucket permissions to replicate objects with a bucket policy\. For more information, see [Granting Permissions When Source and Destination Buckets Are Owned by Different AWS Accounts](setting-repl-config-perm-overview.md#setting-repl-config-crossacct)\.
++ The owner of the destination bucket must grant the owner of the source bucket permissions to replicate objects with a bucket policy\. For more information, see [Granting permissions when source and destination buckets are owned by different AWS accounts](setting-repl-config-perm-overview.md#setting-repl-config-crossacct)\.
 
    

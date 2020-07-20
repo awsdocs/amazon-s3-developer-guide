@@ -103,6 +103,6 @@ To complete step 2 in the preceding options, you must contact [AWS Support](http
 
 Before you contact AWS Support, review the following requirements for setting up Object Lock with replication:
 + The Amazon S3 destination bucket must have Object Lock enabled on it\.
-+ You must grant two new permissions on the source S3 bucket in the AWS Identity and Access Management \(IAM\) role that you use to set up replication\. The two new permissions are `s3:GetObjectRetention` and `s3:GetObjectLegalHold`\. If the role has an `s3:Get*` permission, it satisfies the requirement\. For more information, see [Setting Up Permissions for Replication](setting-repl-config-perm-overview.md)\.
++ You must grant two new permissions on the source S3 bucket in the AWS Identity and Access Management \(IAM\) role that you use to set up replication\. The two new permissions are `s3:GetObjectRetention` and `s3:GetObjectLegalHold`\. If the role has an `s3:Get*` permission, it satisfies the requirement\. For more information, see [Setting up permissions for replication](setting-repl-config-perm-overview.md)\.
 
 For more information about S3 Object Lock, see [Locking objects using S3 Object Lock](object-lock.md)\.

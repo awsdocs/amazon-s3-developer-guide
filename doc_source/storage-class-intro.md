@@ -111,7 +111,7 @@ Amazon S3 APIs support setting \(or updating\) the storage class of objects as f
 
   In a versioning\-enabled bucket, you cannot change the storage class of a specific version of an object\. When you copy it, Amazon S3 gives it a new version ID\.
 + You can direct Amazon S3 to change the storage class of objects by adding an S3 Lifecycle configuration to a bucket\. For more information, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
-+ When setting up a replication configuration, you can set the storage class for replicated objects to any other storage class\. However, you cannot replicate objects that are stored in the S3 Glacier or S3 Glacier Deep Archive storage classes\. For more information, see [Replication Configuration Overview](replication-add-config.md)\.
++ When setting up a replication configuration, you can set the storage class for replicated objects to any other storage class\. However, you cannot replicate objects that are stored in the S3 Glacier or S3 Glacier Deep Archive storage classes\. For more information, see [Replication configuration overview](replication-add-config.md)\.
 
 To create and update object storage classes, you can use the Amazon S3 console, AWS SDKs, or the AWS Command Line Interface \(AWS CLI\)\. Each uses the Amazon S3 APIs to send requests to Amazon S3\.
 

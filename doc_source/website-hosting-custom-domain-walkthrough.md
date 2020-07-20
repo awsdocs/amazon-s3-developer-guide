@@ -6,7 +6,17 @@ Once you complete this walkthrough, you can optionally use Amazon CloudFront to 
 
 **Note**  
 Amazon S3 does not support HTTPS access to the website\. If you want to use HTTPS, you can use Amazon CloudFront to serve a static website hosted on Amazon S3\.  
-For more information, see [How do I use CloudFront to serve a static website hosted on Amazon S3?](http://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/) and [Requiring HTTPS for Communication Between CloudFront and Your Amazon S3 Origin](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-s3-origin.html)\.
+For more information, see [How do I use CloudFront to serve a static website hosted on Amazon S3?](http://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/) and [Requiring HTTPS for communication between viewers and AWS CloudFormation](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html)\.
+
+**Automating static website set up with an AWS CloudFormation template**  
+You can use an AWS CloudFormation template to automate your static website setup\. The AWS CloudFormation template sets up the components that you need to host a secure static website so that you can focus more on your website’s content and less on configuring components\.
+
+The AWS CloudFormation template includes the following components:
++ Amazon S3‐Creates an Amazon S3 bucket to host your static website\.
++ CloudFront‐ Creates a CloudFront distribution to speed up your static website\.
++ Lambda@Edge‐Uses [Lambda@Edge](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-at-the-edge.html) to add security headers to every server response\. Security headers are a group of headers in the web server response that tell web browsers to take extra security precautions\. For more information, refer to this blog post: [Adding HTTP security headers using Lambda@Edge and Amazon CloudFront](http://aws.amazon.com/blogs/networking-and-content-delivery/adding-http-security-headers-using-lambdaedge-and-amazon-cloudfront/)\.
+
+This AWS CloudFormation template is available for you to download and use\. For information and instructions, see [Getting started with a secure static website](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/getting-started-secure-static-website-cloudformation-template.html) in the *Amazon CloudFront Developer Guide*\.
 
 **Topics**
 + [Before you begin](#root-domain-walkthrough-before-you-begin)
@@ -291,7 +301,7 @@ After you configure your domain bucket to host a public website, you can test yo
 
 **Note**  
 Amazon S3 does not support HTTPS access to the website\. If you want to use HTTPS, you can use Amazon CloudFront to serve a static website hosted on Amazon S3\.  
-For more information, see [How do I use CloudFront to serve a static website hosted on Amazon S3?](http://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/) and [Requiring HTTPS for Communication Between CloudFront and Your Amazon S3 Origin](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-s3-origin.html)\.
+For more information, see [How do I use CloudFront to serve a static website hosted on Amazon S3?](http://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/) and [Requiring HTTPS for communication between viewers and AWS CloudFormation](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html)\.
 
 **To test your website endpoint**
 
@@ -380,6 +390,8 @@ Verify that the website and the redirect work correctly\. In your browser, enter
 + **Domain** \(`http://example.com`\) – Displays the index document in the `example.com` bucket\.
 + **Subdomain **\(`http://www.example.com`\) – Redirects your request to `http://example.com`\. You see the index document in the `example.com` bucket\.
 
-In some cases, you might need to clear the cache of your web browser to see the expected behavior\.
+If your website or redirect links don't work, you can try the following:
++ **Clear cache**–Clear the cache of your web browser\.
++ **Check name servers**–If your web page and redirect links don't work after you've cleared your cache, you can compare the name servers for your domain and the name servers for your hosted zone\. If the name servers don't match, you might need to update your domain name servers to match those listed under your hosted zone\. For more information, see [Adding or changing name servers and glue records for a domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-name-servers-glue-records.html)\.
 
-You can set up an [Amazon CloudFront](http://aws.amazon.com/cloudfront) distribution to improve the performance of your website and provide logs that you can use to review website traffic\. For more information, see [Speeding up your website with Amazon CloudFront](website-hosting-cloudfront-walkthrough.md)\.
+Once you've successfully tested your root domain and subdomain, you can set up an [Amazon CloudFront](http://aws.amazon.com/cloudfront) distribution to improve the performance of your website and provide logs that you can use to review website traffic\. For more information, see [Speeding up your website with Amazon CloudFront](website-hosting-cloudfront-walkthrough.md)\.

@@ -4,6 +4,8 @@ You can use the AWS SDK for Java to generate a presigned URL that you, or anyone
 + Specify the HTTP PUT verb when creating the `GeneratePresignedUrlRequest` and `HttpURLConnection` objects\.
 + Interact with the `HttpURLConnection` object in some way after finishing the upload\. The following example accomplishes this by using the `HttpURLConnection` object to check the HTTP response code\.
 
+For more information about presigned URLs, see [Uploading objects using presigned URLs](PresignedUrlUploadObject.md)\.
+
 **Example**  
 This example generates a presigned URL and uses it to upload sample data as an object\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 

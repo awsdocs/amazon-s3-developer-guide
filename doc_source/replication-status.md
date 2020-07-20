@@ -1,4 +1,4 @@
-# Replication Status Information<a name="replication-status"></a>
+# Replication status information<a name="replication-status"></a>
 
 To get the replication status of the objects in a bucket, use the Amazon S3 inventory tool\. Amazon S3 sends a CSV file to the destination bucket that you specify in the inventory configuration\. You can also use Amazon Athena to query the replication status in the inventory report\. For more information about Amazon S3 inventory, see [ Amazon S3 inventory](storage-inventory.md)\.
 
@@ -7,7 +7,7 @@ In replication, you have a source bucket on which you configure replication and 
 
   For example, suppose that you specify the object prefix `TaxDocs` in your replication configuration to tell Amazon S3 to replicate only objects with the key name prefix `TaxDocs`\. Any objects that you upload that have this key name prefix—for example, `TaxDocs/document1.pdf`—will be replicated\. For object requests with this key name prefix, Amazon S3 returns the `x-amz-replication-status` header with one of the following values for the object's replication status: `PENDING`, `COMPLETED`, or `FAILED`\.
 **Note**  
-If object replication fails after you upload an object, you can't retry replication\. You must upload the object again\. Objects transition to a `FAILED` state for issues such as missing S3 Replication role permissions, AWS KMS permissions, or bucket permissions\. For temporary failures, such as if a bucket or region is unavailable, replication status will not transition to `FAILED`, but will remain `PENDING`\. After the resource is back online, S3 Replication will resume replicating those objects\.
+If object replication fails after you upload an object, you can't retry replication\. You must upload the object again\. Objects transition to a `FAILED` state for issues such as missing S3 Replication role permissions, AWS KMS permissions, or bucket permissions\. For temporary failures, such as if a bucket or Region is unavailable, replication status will not transition to `FAILED`, but will remain `PENDING`\. After the resource is back online, S3 Replication will resume replicating those objects\.
 + When you request an object from the destination bucket, if the object in your request is a replica that Amazon S3 created, Amazon S3 returns the `x-amz-replication-status` header with the value `REPLICA`\.
 
 You can find the object replication status using the console, the AWS Command Line Interface \(AWS CLI\), or the AWS SDK\. 
@@ -60,6 +60,6 @@ You can find the object replication status using the console, the AWS Command Li
 Before deleting an object from a source bucket that has replication enabled, check the object's replication status to ensure that the object has been replicated\.   
 If lifecycle configuration is enabled on the source bucket, Amazon S3 puts suspends lifecycle actions until it marks the objects status as either `COMPLETED` or `FAILED`\.
 
-## Related Topics<a name="replication-status-related-topics"></a>
+## Related topics<a name="replication-status-related-topics"></a>
 
 [Replication](replication.md)

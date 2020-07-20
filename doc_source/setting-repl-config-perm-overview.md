@@ -1,14 +1,14 @@
-# Setting Up Permissions for Replication<a name="setting-repl-config-perm-overview"></a>
+# Setting up permissions for replication<a name="setting-repl-config-perm-overview"></a>
 
 When setting up replication, you must acquire necessary permissions as follows:
 + Create an IAM role—Amazon S3 needs permissions to replicate objects on your behalf\. You grant these permissions by creating an IAM role and specify the role in your replication configuration\.
 + When source and destination buckets aren't owned by the same accounts, the owner of the destination bucket must grant the source bucket owner permissions to store the replicas\.
 
 **Topics**
-+ [Creating an IAM Role](#setting-repl-config-same-acctowner)
-+ [Granting Permissions When Source and Destination Buckets Are Owned by Different AWS Accounts](#setting-repl-config-crossacct)
++ [Creating an IAM role](#setting-repl-config-same-acctowner)
++ [Granting permissions when source and destination buckets are owned by different AWS accounts](#setting-repl-config-crossacct)
 
-## Creating an IAM Role<a name="setting-repl-config-same-acctowner"></a>
+## Creating an IAM role<a name="setting-repl-config-same-acctowner"></a>
 
 By default, all Amazon S3 resources—buckets, objects, and related subresources—are private: Only the resource owner can access the resource\. To read objects from the source bucket and replicate them to the destination bucket, Amazon S3 needs permissions to perform these tasks\. You grant these permissions by creating an IAM role and specifying the role in your replication configuration\. 
 
@@ -78,7 +78,7 @@ This section explains the trust policy and minimum required permissions policy\.
   The access policy grants permissions for the following actions:
   +  `s3:GetReplicationConfiguration` and `s3:ListBucket`—Permissions for these actions on the *source* bucket allow Amazon S3 to retrieve the replication configuration and list bucket content \(the current permissions model requires the `s3:ListBucket` permission for accessing delete markers\)\.
   + `s3:GetObjectVersion` and `s3:GetObjectVersionAcl`— Permissions for these actions granted on all objects allow Amazon S3 to get a specific object version and access control list \(ACL\) associated with objects\. 
-  + `s3:ReplicateObject` and `s3:ReplicateDelete`—Permissions for these actions on objects in the *destination* bucket allow Amazon S3 to replicate objects or delete markers to the destination bucket\. For information about delete markers, see [How Delete Operations Affect Replication](replication-what-is-isnot-replicated.md#replication-delete-op)\. 
+  + `s3:ReplicateObject` and `s3:ReplicateDelete`—Permissions for these actions on objects in the *destination* bucket allow Amazon S3 to replicate objects or delete markers to the destination bucket\. For information about delete markers, see [How delete operations affect replication](replication-what-is-isnot-replicated.md#replication-delete-op)\. 
 **Note**  
 Permissions for the `s3:ReplicateObject` action on the *destination* bucket also allow replication of object tags, so you don't need to explicitly grant permission for the `s3:ReplicateTags` action\.
   + `s3:GetObjectVersionTagging`—Permissions for this action on objects in the *source* bucket allow Amazon S3 to read object tags for replication \(see [Object tagging](object-tagging.md)\)\. If Amazon S3 doesn't have these permissions, it replicates the objects, but not the object tags\.
@@ -87,9 +87,9 @@ Permissions for the `s3:ReplicateObject` action on the *destination* bucket also
 **Important**  
 The AWS account that owns the IAM role must have permissions for the actions that it grants to the IAM role\.   
 For example, suppose that the source bucket contains objects owned by another AWS account\. The owner of the objects must explicitly grant the AWS account that owns the IAM role the required permissions through the object ACL\. Otherwise, Amazon S3 can't access the objects, and replication of the objects fails\. For information about ACL permissions, see [Access Control List \(ACL\) Overview](acl-overview.md)\.  
-The permissions described here are related to minimum replication configuration\. If you choose to add optional replication configurations, you must grant additional permissions to Amazon S3\. For more information, see [Additional Replication Configurations](replication-additional-configs.md)\. 
+The permissions described here are related to minimum replication configuration\. If you choose to add optional replication configurations, you must grant additional permissions to Amazon S3\. For more information, see [Additional replication configurations](replication-additional-configs.md)\. 
 
-## Granting Permissions When Source and Destination Buckets Are Owned by Different AWS Accounts<a name="setting-repl-config-crossacct"></a>
+## Granting permissions when source and destination buckets are owned by different AWS accounts<a name="setting-repl-config-crossacct"></a>
 
 When source and destination buckets aren't owned by the same accounts, the owner of the destination bucket must also add a bucket policy to grant the owner of the source bucket permissions to perform replication actions, as follows\. 
 
@@ -130,7 +130,7 @@ When source and destination buckets aren't owned by the same accounts, the owner
 For an example, see [Example 2: Configuring replication when the source and destination buckets are owned by different accounts](replication-walkthrough-2.md)\.
 
 If objects in the source bucket are tagged, note the following:
-+ If the source bucket owner grants Amazon S3 permission for the `s3:GetObjectVersionTagging` and `s3:ReplicateTags` actions to replicate object tags \(through the IAM role\), Amazon S3 replicates the tags along with the objects\. For information about the IAM role, see [Creating an IAM Role](#setting-repl-config-same-acctowner)\. 
++ If the source bucket owner grants Amazon S3 permission for the `s3:GetObjectVersionTagging` and `s3:ReplicateTags` actions to replicate object tags \(through the IAM role\), Amazon S3 replicates the tags along with the objects\. For information about the IAM role, see [Creating an IAM role](#setting-repl-config-same-acctowner)\. 
 + If the owner of the destination bucket doesn't want to replicate the tags, they can add the following statement to the destination bucket policy to explicitly deny permission for the `s3:ReplicateTags` action\.
 
   ```
@@ -148,6 +148,6 @@ If objects in the source bucket are tagged, note the following:
   ...
   ```
 
-### Changing Replica Ownership<a name="change-replica-ownership"></a>
+### Changing replica ownership<a name="change-replica-ownership"></a>
 
 When different AWS accounts own the source and destination buckets, you can tell Amazon S3 to change the ownership of the replica to the AWS account that owns the destination bucket\. This is called the *owner override* option\. For more information, see [Changing the replica owner](replication-change-owner.md)\.

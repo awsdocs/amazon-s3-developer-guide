@@ -186,7 +186,7 @@ To set up replication configuration when both source and destination buckets are
 
    1. Add sample objects to the `Tax` folder in the *source* bucket\. 
 **Note**  
-The amount of time it takes for Amazon S3 to replicate an object depends on the size of the object\. For information about how to see the status of replication, see [Replication Status Information](replication-status.md)\.
+The amount of time it takes for Amazon S3 to replicate an object depends on the size of the object\. For information about how to see the status of replication, see [Replication status information](replication-status.md)\.
 
       In the *destination* bucket, verify the following:
       + That Amazon S3 replicated the objects\.

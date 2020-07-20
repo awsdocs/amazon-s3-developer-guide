@@ -12,7 +12,7 @@ If two writes are made to a single non\-versioned object at the same time, it is
 + [Event notification types and destinations](#notification-how-to-event-types-and-destinations)
 + [Configuring notifications with object key name filtering](#notification-how-to-filtering)
 + [Granting permissions to publish event notification messages to a destination](#grant-destinations-permissions-to-s3)
-+ [Walkthrough: Configure a bucket for notifications \(SNS topic and SQS queue\)](ways-to-add-notification-config-to-bucket.md)
++ [Walkthrough: Configure a bucket for notifications \(SNS topic or SQS queue\)](ways-to-add-notification-config-to-bucket.md)
 + [Event message structure](notification-content-structure.md)
 
 ## Overview of notifications<a name="notification-how-to-overview"></a>
@@ -59,7 +59,7 @@ Enabling notifications is a bucket\-level operation; that is, you store notifica
 **Note**  
 If you need to, you can also make the Amazon S3 REST API calls directly from your code\. However, this can be cumbersome because it requires you to write code to authenticate your requests\. 
 
-  Internally, both the console and the SDKs call the Amazon S3 REST API to manage *notification* subresources associated with the bucket\. For notification configuration using AWS SDK examples, see [Walkthrough: Configure a bucket for notifications \(SNS topic and SQS queue\)](ways-to-add-notification-config-to-bucket.md)\.
+  Internally, both the console and the SDKs call the Amazon S3 REST API to manage *notification* subresources associated with the bucket\. For notification configuration using AWS SDK examples, see [Walkthrough: Configure a bucket for notifications \(SNS topic or SQS queue\)](ways-to-add-notification-config-to-bucket.md)\.
 
   Regardless of the method that you use, Amazon S3 stores the notification configuration as XML in the *notification* subresource associated with a bucket\. For information about bucket subresources, see [Bucket configuration options](UsingBucket.md#bucket-config-options-intro)\. 
 
@@ -405,7 +405,7 @@ You can also grant Amazon S3 permissions from AWS Lambda to invoke your Lambda f
 
 To grant Amazon S3 permissions to publish messages to the SNS topic or SQS queue, you attach an AWS Identity and Access Management \(IAM\) policy to the destination SNS topic or SQS queue\. 
 
-For an example of how to attach a policy to an SNS topic or an SQS queue, see [Walkthrough: Configure a bucket for notifications \(SNS topic and SQS queue\)](ways-to-add-notification-config-to-bucket.md)\. For more information about permissions, see the following topics:
+For an example of how to attach a policy to an SNS topic or an SQS queue, see [Walkthrough: Configure a bucket for notifications \(SNS topic or SQS queue\)](ways-to-add-notification-config-to-bucket.md)\. For more information about permissions, see the following topics:
 + [Example Cases for Amazon SNS Access Control](https://docs.aws.amazon.com/sns/latest/dg/AccessPolicyLanguage_UseCases_Sns.html) in the *Amazon Simple Notification Service Developer Guide*
 + [Access Control Using AWS Identity and Access Management \(IAM\)](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/UsingIAM.html) in the *Amazon Simple Queue Service Developer Guide*
 

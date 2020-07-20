@@ -301,7 +301,7 @@ When you choose a bucket on the Amazon S3 console, the console first sends the [
 
 **To enable users to list root\-level bucket content**
 
-1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
+1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
    Use your AWS account credentials, not the credentials of an IAM user, to sign in to the console\.
 

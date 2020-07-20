@@ -10,7 +10,7 @@ We recommend you first review the introductory topics that explain the options f
 + [Overview of managing access](access-control-overview.md)
 + [How Amazon S3 Authorizes a Request](how-s3-evaluates-access-control.md)
 + [Guidelines for using the available access policy options](access-policy-alternatives-guidelines.md)
-+ [Example walkthroughs: Managing access to your amazon S3 resources ](example-walkthroughs-managing-access.md)
++ [Example walkthroughs: Managing access to your Amazon S3 resources ](example-walkthroughs-managing-access.md)
 
 Several security best practices also address access control, including:
 + [Ensure Amazon S3 buckets are not publicly accessible](security-best-practices.md#public)

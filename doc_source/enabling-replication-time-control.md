@@ -7,4 +7,4 @@ You can start using S3 Replication Time Control \(S3 RTC\) with a new or existin
 
 You can configure Replication Time Control using the [Amazon S3 console](https://console.aws.amazon.com/s3/), the [Amazon S3 API](https://docs.aws.amazon.com/AmazonS3/latest/API/), the [AWS SDKs](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html), and the [AWS Command Line Interface \(AWS CLI\)](https://docs.aws.amazon.com/cli/latest/reference/)\.
 
-For more information, see [Replication Configuration Overview](replication-add-config.md)\.
+For more information, see [Replication configuration overview](replication-add-config.md)\.

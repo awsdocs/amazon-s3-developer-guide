@@ -93,9 +93,9 @@ Amazon S3 does not currently support object locking for concurrent updates\. If 
 Object locking is different from the S3 Object Lock feature\. With S3 Object Lock, you can store objects using a write\-once\-read\-many \(WORM\) model and prevent an object from being deleted or overwritten for a fixed amount of time or indefinitely\. For more information, see [Locking objects using S3 Object Lock](object-lock.md)\. 
 Updates are key\-based\. There is no way to make atomic updates across keys\. For example, you cannot make the update of one key dependent on the update of another key unless you design this functionality into your application\.
 
-Buckets have a similar consistency model, with the same caveats\. For example, if you delete a bucket and immediately list all buckets, the deleted bucket might still appear in the list\.
+Bucket configurations have a similar eventual consistency model, with the same caveats\. For example, if you delete a bucket and immediately list all buckets, the deleted bucket might still appear in the list\.
 
-The following table describes the characteristics of an eventually consistent read and a consistent read\.
+The following table describes the characteristics of an *eventually consistent read* and a *consistent read*\.
 
 
 | Eventually consistent read | Consistent read | 

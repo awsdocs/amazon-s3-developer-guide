@@ -167,7 +167,7 @@ For more information about Access Analyzer for S3, see [Using Access Analyzer fo
  The following sections explain these access control alternatives, how Amazon S3 evaluates access control mechanisms, and when to use which access control method\. They also provide example walkthroughs\.
 +  [How Amazon S3 Authorizes a Request](how-s3-evaluates-access-control.md) 
 +  [Guidelines for using the available access policy options](access-policy-alternatives-guidelines.md) 
-+  [Example walkthroughs: Managing access to your amazon S3 resources ](example-walkthroughs-managing-access.md) 
++  [Example walkthroughs: Managing access to your Amazon S3 resources ](example-walkthroughs-managing-access.md) 
 
 ## More info<a name="access-control-overview-related-topics"></a>
 
