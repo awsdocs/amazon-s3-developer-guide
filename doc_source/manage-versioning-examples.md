@@ -2,6 +2,7 @@
 
 **Topics**
 + [Using the Amazon S3 console](#manage-versioning-examples-console)
++ [Using the AWS CLI](#manage-versioning-examples-cli)
 + [Using the AWS SDK for Java](#manage-versioning-examples-java)
 + [Using the AWS SDK for \.NET](#manage-versioning-examples-dotnet)
 + [Using other AWS SDKs](#manage-versioning-examples-sdks)
@@ -11,6 +12,14 @@
 ## Using the Amazon S3 console<a name="manage-versioning-examples-console"></a>
 
 For more information about enabling versioning on a bucket using the Amazon S3 console, see [ How Do I Enable or Suspend Versioning for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-versioning.html) in the *Amazon Simple Storage Service Console User Guide*\.
+
+## Using the AWS CLI<a name="manage-versioning-examples-cli"></a>
+
+For more information about enabling versioning on a bucket using the AWS CLI, see [put-bucket-versioning](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-versioning.html) in the *AWS CLI Command Reference*\. 
+
+```
+aws s3api put-bucket-versioning --bucket my-bucket --versioning-cofiguration MFADelete=Enabled,Status=Enabled --mfa "SERIAL 123456"
+```
 
 ## Using the AWS SDK for Java<a name="manage-versioning-examples-java"></a>
 
