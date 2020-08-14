@@ -301,7 +301,7 @@ After you configure your domain bucket to host a public website, you can test yo
 
 **Note**  
 Amazon S3 does not support HTTPS access to the website\. If you want to use HTTPS, you can use Amazon CloudFront to serve a static website hosted on Amazon S3\.  
-For more information, see [How do I use CloudFront to serve a static website hosted on Amazon S3?](http://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/) and [Requiring HTTPS for communication between viewers and AWS CloudFormation](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html)\.
+For more information, see [How do I use CloudFront to serve a static website hosted on Amazon S3?](http://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/) and [Requiring HTTPS for communication between viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html)\.
 
 **To test your website endpoint**
 
@@ -327,7 +327,71 @@ In the next step, you use Amazon Route 53 to enable customers to use both of yo
 
 In this step, you create the alias records that you add to the hosted zone for your domain maps `example.com` and `www.example.com`\. Instead of using IP addresses, the alias records use the Amazon S3 website endpoints\. Amazon Route 53 maintains a mapping between the alias records and the IP addresses where the Amazon S3 buckets reside\. You create two alias records, one for your root domain and one for your subdomain\.
 
+### Add an alias record for your root domain and subdomain<a name="add-alis-record"></a>
+
 **To add an alias record for your root domain \(`example.com`\)**
+
+1. Open the Route 53 console at [https://console\.aws\.amazon\.com/route53/](https://console.aws.amazon.com/route53/)\.
+**Note**  
+If you don't already use Route 53, see [Step 1: Register a Domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started.html#getting-started-find-domain-name) in the *Amazon Route 53 Developer Guide*\. After completing your setup, you can resume the instructions\.
+
+1. Choose **Hosted zones**\.
+
+1. In the list of hosted zones, choose the name of the hosted zone that matches your domain name\.
+
+1. Choose **Create record**\.
+
+1. Choose **Simple routing**, and choose **Next**\.
+
+1. Choose **Define simple record**\.
+
+1. In **Record name** accept the default value, which is the name of your hosted zone and your domain\.
+
+1. In **Value/Route traffic to**, choose **Alias to S3 website endpoint**\.
+
+1. Choose the Region\.
+
+1. Choose the S3 bucket\.
+
+   The bucket name should match the name that appears in the **Name** box\. In the **Alias Target** listing, the bucket name is followed by the Amazon S3 website endpoint for the Region where the bucket was created, for example `example.com (s3-website-us-west-2)`\. **Alias Target** lists a bucket if:
+   + You configured the bucket as a static website\.
+   + The bucket name is the same as the name of the record that you're creating\.
+   + The current AWS account created the bucket\.
+
+   If your bucket does not appear in the **Alias Target** listing, enter the Amazon S3 website endpoint for the Region where the bucket was created, for example, `s3-website-us-west-2`\. For a complete list of Amazon S3 website endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints)\. For more information about the alias target, see [Alias Target](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values-alias.html#rrsets-values-alias-alias-target) in the *Amazon Route 53 Developer Guide*\.
+
+1. In **Record type**, choose **A ‐ Routes traffic to an IPv4 address and some AWS resources**\.
+
+1. For **Evaluate target health**, choose **No**\.
+
+1. Choose **Define simple record**\.
+
+**To add an alias record for your subdomain \(`www.example.com`\)**
+
+1. In the hosted zone for your root domain \(`example.com`\), choose **Create Record Set**\.
+
+1. In **Record name** for your subdomain, type `www`\.
+
+1. In **Value/Route traffic to**, choose **Alias to S3 website endpoint**\.
+
+1. Choose the Region\.
+
+1. Choose the S3 bucket, for example `example.com (s3-website-us-west-2)`\.
+
+1. In **Record type**, choose **A ‐ Routes traffic to an IPv4 address and some AWS resources**\.
+
+1. For **Evaluate target health**, choose **No**\.
+
+1. Choose **Define simple record**\.
+
+**Note**  
+Changes generally propagate to all Route 53 servers within 60 seconds\. When propagation is done, you can route traffic to your Amazon S3 bucket by using the names of the alias records that you created in this procedure\.
+
+### Add an alias record for your root domain and subdomain \(old Route 53 console\)<a name="add-alis-record-old"></a>
+
+**To add an alias record for your root domain \(`example.com`\)**
+
+The Route 53 console has been redesigned\. In the Route 53 console you can temporarily use the old console\. If you choose to work with the old Route 53 console, use the procedure below\.
 
 1. Open the Route 53 console at [https://console\.aws\.amazon\.com/route53/](https://console.aws.amazon.com/route53/)\.
 **Note**  

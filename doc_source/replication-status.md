@@ -11,7 +11,7 @@ If object replication fails after you upload an object, you can't retry replicat
 + When you request an object from the destination bucket, if the object in your request is a replica that Amazon S3 created, Amazon S3 returns the `x-amz-replication-status` header with the value `REPLICA`\.
 
 You can find the object replication status using the console, the AWS Command Line Interface \(AWS CLI\), or the AWS SDK\. 
-+ **Console:** Choose the object, and then choose **Properties** to view object properties, including replication status\. 
++ **Console:** Select the object and look under the **Overview** header to view object properties, including replication status\. 
 + **AWS CLI**: Use the `head-object` AWS CLI command to retrieve object metadata\.
 
   ```

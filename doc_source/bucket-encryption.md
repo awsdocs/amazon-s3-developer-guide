@@ -35,9 +35,13 @@ Amazon S3 buckets with default bucket encryption using SSE\-KMS cannot be used a
 ## Using encryption for cross\-account operations<a name="bucket-encryption-update-bucket-policy"></a>
 
 Be aware of the following when using encryption for cross\-account operations:
-+ The aws/s3 AWS managed CMK is used when a CMK ARN or alias is not provided at request\-time, nor via the bucket's default encryption configuration\.
++ The AWS managed CMK \(aws/s3\) is used when a CMK ARN or alias is not provided at request\-time, nor via the bucket's default encryption configuration\.
++ If you're uploading or accessing S3 objects using AWS Identity and Access Management \(IAM\) principals that are in the same AWS account as your CMK, you can use the AWS managed CMK \(aws/s3\)\. 
++ Use a customer managed CMK if you want to grant cross\-account access to your S3 objects\. You can configure the policy of a customer managed CMK to allow access from another account\.
 + If specifying your own CMK, you should use a fully qualified CMK key ARN\. When using a CMK alias, be aware that KMS will resolve the key within the requester’s account\. This may result in data encrypted with a CMK that belongs to the requester, and not the bucket administrator\.
 + You must specify a key that you \(the requester\) has been granted `Encrypt` permission to\. For more information, see [Allows Key Users to Use a CMK for Cryptographic Operations](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-users-crypto)\.
+
+For more information about when to use customer managed CMKs and the AWS managed CMK, see [Should I use an AWS AWS KMS\-managed key or a custom AWS AWS KMS key to encrypt my objects on Amazon S3](http://aws.amazon.com/premiumsupport/knowledge-center/s3-object-encrpytion-keys/)\.
 
 ## Using default encryption with replication<a name="bucket-encryption-update-bucket-policy"></a>
 

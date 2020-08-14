@@ -102,7 +102,7 @@ We recommend that you use the `s3:GetObjectVersionForReplication` action instead
           }
       },
       "Resource": [
-          "List of AWS KMS key IDs used to encrypt source objects.", 
+          "List of AWS KMS key ARNs used to encrypt source objects.", 
       ]
   },
   {
@@ -117,7 +117,7 @@ We recommend that you use the `s3:GetObjectVersionForReplication` action instead
           }
       },
       "Resource": [
-           "AWS KMS key IDs (for the AWS region of the destination bucket). S3 uses it to encrypt object replicas", 
+           "AWS KMS key ARNs (for the AWS Region of the destination bucket). S3 uses it to encrypt object replicas", 
       ]
   }
   ```
@@ -174,7 +174,7 @@ Objects created with server\-side encryption using customer\-provided \(SSE\-C\)
             }
          },
          "Resource":[
-           "List of AWS KMS key IDs used to encrypt source objects."
+           "List of AWS KMS key ARNs used to encrypt source objects."
          ]
       },
       {
@@ -191,12 +191,14 @@ Objects created with server\-side encryption using customer\-provided \(SSE\-C\)
             }
          },
          "Resource":[
-            "AWS KMS key IDs (for the AWS region of the destination bucket) to use for encrypting object replicas"
+            "AWS KMS key ARNs (for the AWS Region of the destination bucket) to use for encrypting object replicas"
          ]
       }
    ]
 }
 ```
+
+For more information, see [Using IAM policies with AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html)\.
 
 ## Granting additional permissions for cross\-account scenarios<a name="replication-kms-cross-acct-scenario"></a>
 

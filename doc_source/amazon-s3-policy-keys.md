@@ -11,17 +11,13 @@ In the `Condition` element, you build expressions in which you use Boolean oper
     {
       "Sid": "statement1",
       "Effect": "Allow",
-      "Action": [
-        "s3:PutObject"
-      ],
+      "Action": "s3:PutObject",
       "Resource": [
-        "arn:aws:s3:::examplebucket/*"
+        "arn:aws:s3:::awsexamplebucket1/*"
       ],
       "Condition": {
         "StringEquals": {
-          "s3:x-amz-acl": [
-            "public-read"
-          ]
+          "s3:x-amz-acl": "public-read"
         }
       }
     }
@@ -55,8 +51,8 @@ The `IPAddress` and `NotIpAddress` key values specified in the condition uses CI
             "Sid": "statement1",
             "Effect": "Allow",
             "Principal": "*",
-            "Action":["s3:GetObject"]  ,
-            "Resource": "arn:aws:s3:::examplebucket/*",
+            "Action":"s3:GetObject",
+            "Resource": "arn:aws:s3:::awsexamplebucket1/*",
             "Condition" : {
                 "IpAddress" : {
                     "aws:SourceIp": "192.0.2.0/24" 
@@ -88,10 +84,13 @@ The following bucket policy grants the `s3:PutObject` permission for two AWS acc
 	        "Sid":"AddCannedAcl",
             "Effect":"Allow",
 	        "Principal": {
-                "AWS": ["arn:aws:iam::account1-ID:root","arn:aws:iam::account2-ID:root"]
+                "AWS": [
+                "arn:aws:iam::Account1-ID:root",
+				"arn:aws:iam::Account2-ID:root"
+				]
             },
-	        "Action":["s3:PutObject"],
-            "Resource": ["arn:aws:s3:::examplebucket/*"],
+	        "Action":"s3:PutObject",
+            "Resource": ["arn:aws:s3:::awsexamplebucket1/*"],
             "Condition": {
                 "StringEquals": {
                     "s3:x-amz-acl":["public-read"]
@@ -132,7 +131,7 @@ You can require the `x-amz-full-control` header in the request with full control
         "AWS": "arn:aws:iam::AccountB-ID:user/Dave"
       },
       "Action": "s3:PutObject",
-      "Resource": "arn:aws:s3:::examplebucket/*",
+      "Resource": "arn:aws:s3:::awsexamplebucket1/*",
       "Condition": {
         "StringEquals": {
           "s3:x-amz-grant-full-control": "id=AccountA-CanonicalUserID"
@@ -160,7 +159,7 @@ The preceding bucket policy grants conditional permission to user Dave in Accoun
                 "AWS": "arn:aws:iam::AccountB-ID:user/AccountBadmin"
             },
             "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::examplebucket/*",
+            "Resource": "arn:aws:s3:::awsexamplebucket1/*",
             "Condition": {
                 "StringEquals": {
                     "s3:x-amz-grant-full-control": "id=AccountA-CanonicalUserID"
@@ -174,7 +173,7 @@ The preceding bucket policy grants conditional permission to user Dave in Accoun
                 "AWS": "arn:aws:iam::AccountB-ID:user/AccountBadmin"
             },
             "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::examplebucket/*",
+            "Resource": "arn:aws:s3:::awsexamplebucket1/*",
             "Condition": {
                 "StringNotEquals": {
                     "s3:x-amz-grant-full-control": "id=AccountA-CanonicalUserID"
@@ -230,10 +229,10 @@ aws s3api put-object --bucket example1bucket --key HappyFace.jpg --body c:\Happy
 
 In the PUT Object request, when you specify a source object, it is a copy operation \(see [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\)\. Accordingly, the bucket owner can grant a user permission to copy objects with restrictions on the source, for example:
 + Allow copying objects only from the `sourcebucket` bucket\.
-+ Allow copying objects from the `sourcebucket` bucket and only the objects whose key name prefix starts with `public/` f \(for example, `sourcebucket/public/*`\)\.
-+ Allow copying only a specific object from the `sourcebucket` \(for example, `sourcebucket/example.jpg`\)\.
++ Allow copying objects from the source bucket and only the objects whose key name prefix starts with public/ f \(for example, sourcebucket/public/\*\)\.
++ Allow copying only a specific object from the sourcebucket \(for example, sourcebucket/example\.jpg\)\.
 
-The following bucket policy grants user \(Dave\) `s3:PutObject` permission\. It allows him to copy objects only with a condition that the request include the `s3:x-amz-copy-source` header and the header value specify the `/examplebucket/public/*` key name prefix\. 
+The following bucket policy grants user \(Dave\) `s3:PutObject` permission\. It allows him to copy objects only with a condition that the request include the `s3:x-amz-copy-source` header and the header value specify the `/awsexamplebucket1/public/*` key name prefix\. 
 
 ```
 {
@@ -243,22 +242,22 @@ The following bucket policy grants user \(Dave\) `s3:PutObject` permission\. It 
             "Sid": "cross-account permission to user in your own account",
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::AccountA-ID:user/Dave"
+                "AWS": "arn:aws:iam::123456789012:user/Dave"
             },
-            "Action": ["s3:PutObject"],
-            "Resource": "arn:aws:s3:::examplebucket/*"
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::awsexamplebucket1/*"
         },
         {
             "Sid": "Deny your user permission to upload object if copy source is not /bucket/folder",
             "Effect": "Deny",
             "Principal": {
-                "AWS": "arn:aws:iam::AccountA-ID:user/Dave"
+                "AWS": "arn:aws:iam::123456789012:user/Dave"
             },
             "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::examplebucket/*",
+            "Resource": "arn:aws:s3:::awsexamplebucket1/*",
             "Condition": {
                 "StringNotLike": {
-                    "s3:x-amz-copy-source": "examplebucket/public/*"
+                    "s3:x-amz-copy-source": "awsexamplebucket1/public/*"
                 }
             }
         }
@@ -270,7 +269,7 @@ The following bucket policy grants user \(Dave\) `s3:PutObject` permission\. It 
 You can test the permission using the AWS CLI `copy-object` command\. You specify the source by adding the `--copy-source` parameter; the key name prefix must match the prefix allowed in the policy\. You need to provide the user Dave credentials using the `--profile` parameter\. For more information about setting up the AWS CLI, see [Setting up the tools for the example walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
 
 ```
-aws s3api copy-object --bucket examplebucket --key HappyFace.jpg 
+aws s3api copy-object --bucket awsexamplebucket1 --key HappyFace.jpg 
 --copy-source examplebucket/public/PublicHappyFace1.jpg --profile AccountADave
 ```
 
@@ -280,7 +279,7 @@ The preceding policy uses the `StringNotLike` condition\. To grant permission to
 ```
 "Condition": {
        "StringNotEquals": {
-           "s3:x-amz-copy-source": "examplebucket/public/PublicHappyFace1.jpg"
+           "s3:x-amz-copy-source": "awsexamplebucket1/public/PublicHappyFace1.jpg"
        }
 }
 ```
@@ -299,18 +298,18 @@ For more information, see [GetObject](https://docs.aws.amazon.com/AmazonS3/lates
             "Sid": "statement1",
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::AccountA-ID:user/Dave"
+                "AWS": "arn:aws:iam::123456789012:user/Dave"
             },
-            "Action": ["s3:GetObjectVersion"],
+            "Action": "s3:GetObjectVersion",
             "Resource": "arn:aws:s3:::examplebucketversionenabled/HappyFace.jpg"
         },
         {
             "Sid": "statement2",
             "Effect": "Deny",
             "Principal": {
-                "AWS": "arn:aws:iam::AccountA-ID:user/Dave"
+                "AWS": "arn:aws:iam::123456789012:user/Dave"
             },
-            "Action": ["s3:GetObjectVersion"],
+            "Action": "s3:GetObjectVersion",
             "Resource": "arn:aws:s3:::examplebucketversionenabled/HappyFace.jpg",
             "Condition": {
                 "StringNotEquals": {
@@ -331,7 +330,7 @@ aws s3api get-object --bucket examplebucketversionenabled --key HappyFace.jpg Ou
 
 ### Example 5: Restricting Object Uploads to Objects with a Specific Storage Class<a name="example-storage-class-condition-key"></a>
 
-Suppose that Account A owns a bucket\. The account administrator wants to restrict Dave, a user in Account A, to be able to only upload objects to the bucket that are stored with the `STANDARD_IA` storage class\. To restrict object uploads to a specific storage class, the Account A administrator can use the `s3:x-amz-storage-class` condition key, as shown in the following example bucket policy\. 
+Suppose that Account A, represented by account ID 123456789012, owns a bucket\. The account administrator wants to restrict Dave, a user in Account A, to be able to only upload objects to the bucket that are stored with the `STANDARD_IA` storage class\. To restrict object uploads to a specific storage class, the Account A administrator can use the `s3:x-amz-storage-class` condition key,as shown in the following example bucket policy\. 
 
 ```
 {
@@ -341,12 +340,10 @@ Suppose that Account A owns a bucket\. The account administrator wants to restri
       "Sid": "statement1",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::AccountA-ID:user/Dave"
+        "AWS": "arn:aws:iam::123456789012:user/Dave"
       },
       "Action": "s3:PutObject",
-      "Resource": [
-        "arn:aws:s3:::examplebucket/*"
-      ],
+      "Resource": "arn:aws:s3:::awsexamplebucket1/*",
       "Condition": {
         "StringEquals": {
           "s3:x-amz-storage-class": [
@@ -383,12 +380,8 @@ For a list of Amazon S3 Regions, see [Regions and Endpoints](https://docs.aws.am
       {
          "Sid":"statement1",
          "Effect":"Allow",
-         "Action":[
-            "s3:CreateBucket"
-         ],
-         "Resource":[
-            "arn:aws:s3:::*"
-         ],
+         "Action": "s3:CreateBucket",
+         "Resource": "arn:aws:s3:::*",
          "Condition": {
              "StringLike": {
                  "s3:LocationConstraint": "sa-east-1"
@@ -411,12 +404,8 @@ The `Deny` statement uses the `StringNotLike` condition\. That is, a create buck
       {
          "Sid":"statement1",
          "Effect":"Allow",
-         "Action":[
-            "s3:CreateBucket"
-         ],
-         "Resource":[
-            "arn:aws:s3:::*"
-         ],
+         "Action": "s3:CreateBucket",
+         "Resource": "arn:aws:s3:::*",
          "Condition": {
              "StringLike": {
                  "s3:LocationConstraint": "sa-east-1"
@@ -426,12 +415,8 @@ The `Deny` statement uses the `StringNotLike` condition\. That is, a create buck
       {
          "Sid":"statement2",
          "Effect":"Deny",
-         "Action":[
-            "s3:CreateBucket"
-         ],
-         "Resource":[
-            "arn:aws:s3:::*"
-         ],
+         "Action": "s3:CreateBucket",
+         "Resource": "arn:aws:s3:::*",
          "Condition": {
              "StringNotLike": {
                  "s3:LocationConstraint": "sa-east-1"
@@ -473,12 +458,8 @@ The following user policy grants the `s3:ListBucket` permission \(see [GET Bucke
       {
          "Sid":"statement1",
          "Effect":"Allow",
-         "Action":[
-            "s3:ListBucket"
-         ],
-         "Resource":[
-            "arn:aws:s3:::examplebucket"
-         ],
+         "Action": "s3:ListBucket",
+         "Resource":"arn:aws:s3:::awsexamplebucket1",
          "Condition" : {
              "StringEquals" : {
                  "s3:prefix": "projects" 
@@ -488,12 +469,8 @@ The following user policy grants the `s3:ListBucket` permission \(see [GET Bucke
       {
          "Sid":"statement2",
          "Effect":"Deny",
-         "Action":[
-            "s3:ListBucket"
-         ],
-         "Resource":[
-            "arn:aws:s3:::examplebucket"
-         ],
+         "Action": "s3:ListBucket",
+         "Resource": "arn:aws:s3:::awsexamplebucket1",
          "Condition" : {
              "StringNotEquals" : {
                  "s3:prefix": "projects" 
@@ -504,7 +481,7 @@ The following user policy grants the `s3:ListBucket` permission \(see [GET Bucke
 }
 ```
 
-The condition restricts the user to listing object keys with the `projects` prefix\. The added explicit deny denies the user request for listing keys with any other prefix no matter what other permissions the user might have\. For example, it is possible that the user gets permission to list object keys without any restriction, either by updates to the preceding user policy or via a bucket policy\. Because explicit deny always supersedes, the user request to list keys other than the `project` prefix is denied\. 
+The condition restricts the user to listing object keys with the `projects` prefix\. The added explicit deny denies the user request for listing keys with any other prefix no matter what other permissions the user might have\. For example, it is possible that the user gets permission to list object keys without any restriction, either by updates to the preceding user policy or via a bucket policy\. Because explicit deny always supersedes, the user request to list keys other than the `projects` prefix is denied\. 
 
 **Bucket Policy**  
 If you add the `Principal` element to the above user policy, identifying the user, you now have a bucket policy as shown\.
@@ -517,17 +494,13 @@ If you add the `Principal` element to the above user policy, identifying the use
          "Sid":"statement1",
          "Effect":"Allow",
          "Principal": {
-            "AWS": "arn:aws:iam::BucketOwner-accountID:user/user-name"
+            "AWS": "arn:aws:iam::123456789012:user/bucket-owner"
          },  
-         "Action":[
-            "s3:ListBucket"
-         ],
-         "Resource":[
-            "arn:aws:s3:::examplebucket"
-         ],
+         "Action":  "s3:ListBucket",
+         "Resource": "arn:aws:s3:::awsexamplebucket1",
          "Condition" : {
              "StringEquals" : {
-                 "s3:prefix": "examplefolder" 
+                 "s3:prefix": "projects" 
              }
           } 
        },
@@ -535,14 +508,10 @@ If you add the `Principal` element to the above user policy, identifying the use
          "Sid":"statement2",
          "Effect":"Deny",
          "Principal": {
-            "AWS": "arn:aws:iam::BucketOwner-AccountID:user/user-name"
+            "AWS": "arn:aws:iam::123456789012:user/bucket-owner"
          },  
-         "Action":[
-            "s3:ListBucket"
-         ],
-         "Resource":[
-            "arn:aws:s3:::examplebucket"
-         ],
+         "Action": "s3:ListBucket",
+         "Resource": "arn:aws:s3:::awsexamplebucket1",
          "Condition" : {
              "StringNotEquals" : {
                  "s3:prefix": "examplefolder" 
@@ -557,7 +526,7 @@ If you add the `Principal` element to the above user policy, identifying the use
 You can test the policy using the following `list-object` AWS CLI command\. In the command, you provide user credentials using the `--profile` parameter\. For more information about setting up and using the AWS CLI, see [Setting up the tools for the example walkthroughs](policy-eval-walkthrough-download-awscli.md)\.
 
 ```
-aws s3api list-objects --bucket examplebucket --prefix examplefolder --profile AccountADave
+aws s3api list-objects --bucket awsexamplebucket1 --prefix examplefolder --profile AccountADave
 ```
 
 If the bucket is version\-enabled, to list the objects in the bucket, you must grant the `s3:ListBucketVersions` permission in the preceding policy, instead of `s3:ListBucket` permission\. This permission also supports the `s3:prefix` condition key\. 

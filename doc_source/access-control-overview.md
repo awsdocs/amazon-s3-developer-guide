@@ -54,7 +54,7 @@ AWS recommends that you don't use the AWS account root user credentials to make 
 
 ## Resource operations<a name="access-control-resource-operations-basics"></a>
 
-Amazon S3 provides a set of operations to work with the Amazon S3 resources\. For a list of available operations, see [Actions defined by Amazon S3](list_amazons3.md#amazons3-actions-as-permissions)\.
+Amazon S3 provides a set of operations to work with the Amazon S3 resources\. For a list of available operations, see [Actions Defined by Amazon S3](list_amazons3.md#amazons3-actions-as-permissions)\.
 
 ## Managing access to resources<a name="access-control-resources-manage-permissions-basics"></a>
 
@@ -99,10 +99,11 @@ Access policy describes who has access to what\. You can associate an access pol
         "Version":"2012-10-17",
         "Statement": [
             {
+                "Sid":"GrantAnonymousReadPermissions",
                 "Effect":"Allow",
                 "Principal": "*",
                 "Action":["s3:GetObject"],
-                "Resource":["arn:aws:s3:::examplebucket/*"]
+                "Resource":["arn:aws:s3:::awsexamplebucket1/*"]
             }
         ]
     }
@@ -119,7 +120,7 @@ Access policy describes who has access to what\. You can associate an access pol
       "Version": "2012-10-17",
       "Statement": [
           {
-              "Sid": "ExampleStatement1",
+              "Sid": "AssignUserActions",
               "Effect": "Allow",
               "Action": [
                   "s3:PutObject",
@@ -129,8 +130,8 @@ Access policy describes who has access to what\. You can associate an access pol
                   "s3:GetBucketLocation"
               ],
               "Resource": [
-                   "arn:aws:s3:::examplebucket/*",
-                   "arn:aws:s3:::examplebucket"
+                   "arn:aws:s3:::awsexamplebucket1/*",
+                   "arn:aws:s3:::awsexamplebucket1"
               ]
           },
           {

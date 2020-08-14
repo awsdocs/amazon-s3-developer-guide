@@ -1,6 +1,6 @@
 # Initiate restore object<a name="batch-ops-initiate-restore-object"></a>
 
-You can use S3 Batch Operations to perform large\-scale Batch Operations on Amazon S3 objects\. S3 Batch Operations can execute a single operation on a list of Amazon S3 objects that you specify including initiating object restores from Amazon S3 Glacier\. For more information, see [Performing S3 Batch Operations](batch-ops.md)\. 
+You can use S3 Batch Operations to perform large\-scale Batch Operations on Amazon S3 objects\. S3 Batch Operations can run a single operation on a list of Amazon S3 objects that you specify including initiating object restores from Amazon S3 Glacier\. For more information, see [Performing S3 Batch Operations](batch-ops.md)\. 
 
 Objects that you archive to the S3 Glacier or S3 Glacier Deep Archive storage classes are not accessible in real time\. Using the `InitiateRestore` operation in your S3 Batch Operations sends a restore request to S3 Glacier for each object that is specified in the manifest\. To create an Initiate Restore Object job, you must include two elements with your request:
 + **ExpirationInDays**

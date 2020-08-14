@@ -1,6 +1,6 @@
 # Using access points<a name="using-access-points"></a>
 
-You can access the objects in an Amazon S3 bucket with an access point using the AWS Management Console, AWS CLI, AWS SDKs, or the S3 REST APIs\.
+You can access the objects in an Amazon S3 bucket with an *access point* using the AWS Management Console, AWS CLI, AWS SDKs, or the S3 REST APIs\.
 
 Access points have Amazon Resource Names \(ARNs\)\. Access point ARNs are similar to bucket ARNs, but they are explicitly typed and encode the access point's Region and the AWS account ID of the access point's owner\. For more information about ARNs, see [Amazon Resource Names \(ARNs\)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *AWS General Reference*\.
 
@@ -15,19 +15,20 @@ ARNs for objects accessed through an access point use the format `arn:aws:s3:reg
 
 ## Access point compatibility with S3 operations and AWS services<a name="access-points-service-api-support"></a>
 
-S3 access points are compatible with a subset of S3 operations and other AWS services\. The following sections list the compatible services and S3 operations\.
+Access points in Amazon S3 are compatible with a subset of S3 operations and other AWS services\. The following sections list the compatible services and S3 operations\.
 
 **AWS Services**
 
-You can use S3 access points with AWS CloudFormation\.
+You can use S3 Access Points with AWS CloudFormation\.
 
 For more information about AWS CloudFormation, see [What is AWS CloudFormation?](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) in the *AWS CloudFormation User Guide*\.
 
-**S3 Operations**
+**S3 operations**
 
 You can use access points to access a bucket using the following subset of Amazon S3 APIs:
 + `[AbortMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)`
 + `[CompleteMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)`
++ `[CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)` \(same\-region copies only\)
 + `[CreateMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)`
 + `[DeleteObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)`
 + `[DeleteObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html)`
@@ -47,6 +48,7 @@ You can use access points to access a bucket using the following subset of Amazo
 + `[PutObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html)`
 + `[RestoreObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html)`
 + `[UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)`
++ `[UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html)` \(same\-region copies only\)
 
 ## Monitoring and logging<a name="access-points-monitoring-logging"></a>
 
@@ -66,49 +68,51 @@ S3 access points aren't currently compatible with Amazon CloudWatch metrics\.
 
 ## Examples<a name="access-points-usage-examples"></a>
 
+The following examples demonstrate how to use access points with compatible operations in Amazon S3\.
+
 **Example**  
-***Example: Request an Object Through an Access Point***  
-The following example demonstrates how to request the object `my-image.jpg` through the access point `prod` owned by account ID `123456789012` in Region `us-west-2`, and saves the downloaded file as `download.jpg`\.  
+***Example: Request an object through an access point***  
+The following example requests the object `my-image.jpg` through the access point `prod` owned by account ID `123456789012` in Region `us-west-2`, and saves the downloaded file as `download.jpg`\.  
 
 ```
 aws s3api get-object --key my-image.jpg --bucket arn:aws:s3:us-west-2:123456789012:accesspoint/prod download.jpg
 ```
 
 **Example**  
-***Example: Upload an Object Through an Access Point***  
-The following example demonstrates how to upload the object `my-image.jpg` through the access point `prod` owned by account ID `123456789012` in Region `us-west-2`\.  
+***Example: Upload an object through an access point***  
+The following example uploads the object `my-image.jpg` through the access point `prod` owned by account ID `123456789012` in Region `us-west-2`\.  
 
 ```
 aws s3api put-object --bucket arn:aws:s3:us-west-2:123456789012:accesspoint/prod --key my-image.jpg --body my-image.jpg
 ```
 
 **Example**  
-***Example: Delete an Object Through an Access Point***  
-The following example demonstrates how to delete the object `my-image.jpg` through the access point `prod` owned by account ID `123456789012` in Region `us-west-2`\.  
+***Example: Delete an object through an access point***  
+The following example deletes the object `my-image.jpg` through the access point `prod` owned by account ID `123456789012` in Region `us-west-2`\.  
 
 ```
 aws s3api delete-object --bucket arn:aws:s3:us-west-2:123456789012:accesspoint/prod --key my-image.jpg
 ```
 
 **Example**  
-***Example: List Objects Through an Access Point***  
-The following example demonstrates how to list objects through the access point `prod` owned by account ID `123456789012` in Region `us-west-2`\.  
+***Example: List objects through an access point***  
+The following example lists objects through the access point `prod` owned by account ID `123456789012` in Region `us-west-2`\.  
 
 ```
 aws s3api list-objects-v2 --bucket arn:aws:s3:us-west-2:123456789012:accesspoint/prod
 ```
 
 **Example**  
-***Example: Add a Tag Set to an Object Through an Access Point***  
-The following example demonstrates how to add a tag set to the existing object `my-image.jpg` through the access point `prod` owned by account ID `123456789012` in Region `us-west-2`\.  
+***Example: Add a tag set to an object through an access point***  
+The following example adds a tag set to the existing object `my-image.jpg` through the access point `prod` owned by account ID `123456789012` in Region `us-west-2`\.  
 
 ```
 aws s3api put-object-tagging --bucket arn:aws:s3:us-west-2:123456789012:accesspoint/prod --key my-image.jpg --tagging TagSet=[{Key="finance",Value="true"}]
 ```
 
 **Example**  
-***Example: Grant Access Permissions Through an Access Point Using an ACL***  
-The following example demonstrates how to apply an ACL to an existing object `my-image.jpg` through the access point `prod` owned by account ID `123456789012` in Region `us-west-2`\.  
+***Example: Grant access permissions through an access point using an ACL***  
+The following example applies an ACL to an existing object `my-image.jpg` through the access point `prod` owned by account ID `123456789012` in Region `us-west-2`\.  
 
 ```
 aws s3api put-object-acl --bucket arn:aws:s3:us-west-2:123456789012:accesspoint/prod --key my-image.jpg --acl private

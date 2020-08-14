@@ -46,7 +46,7 @@ This section explains the trust policy and minimum required permissions policy\.
               "s3:ListBucket"
            ],
            "Resource":[
-              "arn:aws:s3:::source-bucket"
+              "arn:aws:s3:::SourceBucket"
            ]
         },
         {
@@ -59,7 +59,7 @@ This section explains the trust policy and minimum required permissions policy\.
   
            ],
            "Resource":[
-              "arn:aws:s3:::source-bucket/*"
+              "arn:aws:s3:::SourceBucket/*"
            ]
         },
         {
@@ -69,7 +69,7 @@ This section explains the trust policy and minimum required permissions policy\.
               "s3:ReplicateDelete",
               "s3:ReplicateTags"
            ],
-           "Resource":"arn:aws:s3:::destination-bucket/*"
+           "Resource":"arn:aws:s3:::DestinationBucket/*"
         }
      ]
   }
@@ -95,14 +95,14 @@ When source and destination buckets aren't owned by the same accounts, the owner
 
 ```
 {
-   "Version":"2008-10-17",
+   "Version":"2012-10-17",
    "Id":"PolicyForDestinationBucket",
    "Statement":[
       {
-         "Sid":"1",
+         "Sid":"Permissions on objects",
          "Effect":"Allow",
          "Principal":{
-            "AWS":"SourceBucket-AcctID"
+            "AWS":"arn:aws:iam::SourceBucket-AcctID:root"
          },
          "Action":[
             "s3:ReplicateDelete",
@@ -111,10 +111,10 @@ When source and destination buckets aren't owned by the same accounts, the owner
          "Resource":"arn:aws:s3:::destinationbucket/*"
       },
       {
-         "Sid":"2",
+         "Sid":"Permissions on bucket",
          "Effect":"Allow",
          "Principal":{
-            "AWS":"SourceBucket-AcctID"
+            "AWS":"arn:aws:iam::SourceBucket-AcctID:root"
          },
          "Action": [
             "s3:List*",
@@ -141,8 +141,8 @@ If objects in the source bucket are tagged, note the following:
            "Principal":{
               "AWS":"arn:aws:iam::SourceBucket-AcctID:root"
            },
-           "Action":["s3:ReplicateTags"],
-           "Resource":"arn:aws:s3:::destinationbucket/*"
+           "Action":"s3:ReplicateTags",
+           "Resource":"arn:aws:s3:::DestinationBucket/*"
         }
      ]
   ...

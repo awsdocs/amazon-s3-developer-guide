@@ -17,7 +17,7 @@ In its most basic sense, a policy contains the following elements:
 + [Principal](s3-bucket-user-policy-specifying-principal-intro.md) – The account or user who is allowed access to the actions and resources in the statement\. In a bucket policy, the principal is the user, account, service, or other entity that is the recipient of this permission\. For more information, see [Principals](s3-bucket-user-policy-specifying-principal-intro.md)\.
 + [Condition](amazon-s3-policy-keys.md) – Conditions for when a policy is in effect\. You can use AWS‐wide keys and Amazon S3‐specific keys to specify conditions in an Amazon S3 access policy\. For more information, see [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)\.
 
-The following example bucket policy shows the preceding policy elements\. The policy allows Dave, a user in account *Account\-ID*, `s3:GetObject`, `s3:GetBucketLocation`, and `s3:ListBucket` Amazon S3 permissions on the `examplebucket` bucket\.
+The following example bucket policy shows the preceding policy elements\. The policy allows Dave, a user in account *Account\-ID*, `s3:GetObject`, `s3:GetBucketLocation`, and `s3:ListBucket` Amazon S3 permissions on the `awsexamplebucket1` bucket\.
 
 ```
 {
@@ -28,7 +28,7 @@ The following example bucket policy shows the preceding policy elements\. The po
             "Sid": "ExampleStatement01",
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::Account-ID:user/Dave"
+                "AWS": "arn:aws:iam::123456789012:user/Dave"
             },
             "Action": [
                 "s3:GetObject",
@@ -36,8 +36,8 @@ The following example bucket policy shows the preceding policy elements\. The po
                 "s3:ListBucket"
             ],
             "Resource": [
-                "arn:aws:s3:::examplebucket/*",
-                "arn:aws:s3:::examplebucket"
+                "arn:aws:s3:::awsexamplebucket1/*",
+                "arn:aws:s3:::awsexamplebucket1"
             ]
         }
     ]

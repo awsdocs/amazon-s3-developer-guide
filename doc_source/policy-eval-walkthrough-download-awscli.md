@@ -49,13 +49,13 @@ aws_secret_access_key = Account B secret access key
 region = us-east-1
 ```
 
-To execute a command using these user credentials, you add the `--profile` parameter specifying the profile name\. The following AWS CLI command retrieves a listing of objects in `examplebucket` and specifies the `AccountBadmin` profile\. 
+To run a command using these user credentials, you add the `--profile` parameter specifying the profile name\. The following AWS CLI command retrieves a listing of objects in `examplebucket` and specifies the `AccountBadmin` profile\. 
 
 ```
 aws s3 ls s3://examplebucket --profile AccountBadmin
 ```
 
-Alternatively, you can configure one set of user credentials as the default profile by changing the `AWS_DEFAULT_PROFILE` environment variable from the command prompt\. Once you've done this, whenever you execute AWS CLI commands without the `--profile` parameter, the AWS CLI will use the profile you set in the environment variable as the default profile\.
+Alternatively, you can configure one set of user credentials as the default profile by changing the `AWS_DEFAULT_PROFILE` environment variable from the command prompt\. Once you've done this, whenever you perform AWS CLI commands without the `--profile` parameter, the AWS CLI will use the profile you set in the environment variable as the default profile\.
 
 ```
 $ export AWS_DEFAULT_PROFILE=AccountAadmin
@@ -74,12 +74,12 @@ $ export AWS_DEFAULT_PROFILE=AccountAadmin
    ```
 
 1. Verify the setup\.
-   + Execute the `Get-Command` to retrieve a list of available commands you can use for Amazon S3 operations\. 
+   + Run the `Get-Command` to retrieve a list of available commands you can use for Amazon S3 operations\. 
 
      ```
      Get-Command -module awspowershell -noun s3* -StoredCredentials string
      ```
-   + Execute the `Get-S3Object` command to retrieve a list of objects in a bucket\.
+   + Run the `Get-S3Object` command to retrieve a list of objects in a bucket\.
 
      ```
      Get-S3Object -BucketName bucketname -StoredCredentials string

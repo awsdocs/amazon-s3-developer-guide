@@ -45,13 +45,13 @@ To require server\-side encryption of all objects in a particular Amazon S3 buck
 ```
  1. {
  2.    "Version":"2012-10-17",
- 3.    "Id":"PutObjPolicy",
+ 3.    "Id":"PutObjectPolicy",
  4.    "Statement":[{
  5.          "Sid":"DenyUnEncryptedObjectUploads",
  6.          "Effect":"Deny",
  7.          "Principal":"*",
  8.          "Action":"s3:PutObject",
- 9.          "Resource":"arn:aws:s3:::YourBucket/*",
+ 9.          "Resource":"arn:aws:s3:::awsexamplebucket1/*",
 10.          "Condition":{
 11.             "StringNotEquals":{
 12.                "s3:x-amz-server-side-encryption":"aws:kms"

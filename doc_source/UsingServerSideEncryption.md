@@ -7,14 +7,14 @@ If you need server\-side encryption for all of the objects that are stored in a 
 ```
  1. {
  2.   "Version": "2012-10-17",
- 3.   "Id": "PutObjPolicy",
+ 3.   "Id": "PutObjectPolicy",
  4.   "Statement": [
  5.     {
  6.       "Sid": "DenyIncorrectEncryptionHeader",
  7.       "Effect": "Deny",
  8.       "Principal": "*",
  9.       "Action": "s3:PutObject",
-10.       "Resource": "arn:aws:s3:::YourBucket/*",
+10.       "Resource": "arn:aws:s3:::awsexamplebucket1/*",
 11.       "Condition": {
 12.         "StringNotEquals": {
 13.           "s3:x-amz-server-side-encryption": "AES256"
@@ -22,11 +22,11 @@ If you need server\-side encryption for all of the objects that are stored in a 
 15.       }
 16.     },
 17.     {
-18.       "Sid": "DenyUnEncryptedObjectUploads",
+18.       "Sid": "DenyUnencryptedObjectUploads",
 19.       "Effect": "Deny",
 20.       "Principal": "*",
 21.       "Action": "s3:PutObject",
-22.       "Resource": "arn:aws:s3:::YourBucket/*",
+22.       "Resource": "arn:aws:s3:::awsexamplebucket1/*",
 23.       "Condition": {
 24.         "Null": {
 25.           "s3:x-amz-server-side-encryption": "true"

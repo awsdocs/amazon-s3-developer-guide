@@ -474,7 +474,7 @@ public void createObjectLockRole() {
 
 The following example allows the rule to set S3 Object Lock retention for your objects in the manifest bucket\.
 
- You update the role to include `s3:PutObjectRetention` permissions so you can execute Object Lock retention on the objects in your bucket\.
+ You update the role to include `s3:PutObjectRetention` permissions so you can run Object Lock retention on the objects in your bucket\.
 
 ```
 public void allowPutObjectRetention() {

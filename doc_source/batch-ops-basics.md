@@ -1,6 +1,6 @@
 # The basics: S3 Batch Operations<a name="batch-ops-basics"></a>
 
-You can use S3 Batch Operations to perform large\-scale batch operations on Amazon S3 objects\. S3 Batch Operations can execute a single operation or action on lists of Amazon S3 objects that you specify\. 
+You can use S3 Batch Operations to perform large\-scale batch operations on Amazon S3 objects\. S3 Batch Operations can run a single operation or action on lists of Amazon S3 objects that you specify\. 
 
 **Topics**
 + [How an S3 Batch Operations job works](#batch-ops-basics-how-it-works)
@@ -8,7 +8,7 @@ You can use S3 Batch Operations to perform large\-scale batch operations on Amaz
 
 ## How an S3 Batch Operations job works<a name="batch-ops-basics-how-it-works"></a>
 
-A job is the basic unit of work for S3 Batch Operations\. A job contains all of the information necessary to execute the specified operation on a list of objects\.
+A job is the basic unit of work for S3 Batch Operations\. A job contains all of the information necessary to run the specified operation on a list of objects\.
 
 To create a job, you give S3 Batch Operations a list of objects and specify the action to perform on those objects\. S3 Batch Operations support the following operations:
 + [PUT copy object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)
@@ -19,7 +19,7 @@ To create a job, you give S3 Batch Operations a list of objects and specify the 
 
 The objects that you want a job to act on are listed in a manifest object\. A job performs the specified operation on each object that is included in its manifest\. You can use a CSV\-formatted [ Amazon S3 inventory](storage-inventory.md) report as a manifest, which makes it easy to create large lists of objects located in a bucket\. You can also specify a manifest in a simple CSV format that enables you to perform batch operations on a customized list of objects contained within a single bucket\. 
 
-After you create a job, Amazon S3 processes the list of objects in the manifest and executes the specified operation against each object\. While a job is executing, you can monitor its progress programmatically or through the Amazon S3 console\. You can also configure a job to generate a completion report when it finishes\. The completion report describes the results of each task that was executed by the job\. For more information about monitoring jobs, see [Managing S3 Batch Operations jobs](batch-ops-managing-jobs.md)\.
+After you create a job, Amazon S3 processes the list of objects in the manifest and runs the specified operation against each object\. While a job is executing, you can monitor its progress programmatically or through the Amazon S3 console\. You can also configure a job to generate a completion report when it finishes\. The completion report describes the results of each task that was performed by the job\. For more information about monitoring jobs, see [Managing S3 Batch Operations jobs](batch-ops-managing-jobs.md)\.
 
 ## Specifying a manifest<a name="specify-batchjob-manifest"></a>
 
@@ -27,6 +27,8 @@ After you create a job, Amazon S3 processes the list of objects in the manifest 
 
 You can specify a manifest in a create job request using one of the following two formats\.
 + Amazon S3 inventory report — Must be a CSV\-formatted Amazon S3 inventory report\. You must specify the `manifest.json` file that is associated with the inventory report\. For more information about inventory reports, see [ Amazon S3 inventory](storage-inventory.md)\. If the inventory report includes version IDs, S3 Batch Operations operate on the specific object versions\.
+**Note**  
+S3 Batch Operations supports CSV inventory reports that are AWS KMS\-encrypted\.
 + CSV file — Each row in the file must include the bucket name, object key, and optionally, the object version\. Object keys must be URL\-encoded, as shown in the following examples\. The manifest must either include version IDs for all objects or omit version IDs for all objects\. For more information about the CSV manifest format, see [JobManifestSpec](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobManifestSpec.html) in the *Amazon Simple Storage Service API Reference*\.
 **Note**  
 S3 Batch Operations does not support CSV manifest files that are AWS KMS\-encrypted\.

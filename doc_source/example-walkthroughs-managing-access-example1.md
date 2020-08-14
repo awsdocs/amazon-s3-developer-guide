@@ -78,7 +78,7 @@ Using the credentials of user AccountAadmin in Account A, and the special IAM us
 
    Because the bucket owner and the parent account to which the user belongs are the same, the AWS account can grant user permissions using a bucket policy, a user policy, or both\. In this example, you do both\. If the object is also owned by the same account, the bucket owner can grant object permissions in the bucket policy \(or an IAM policy\)\.
 
-   1. In the Amazon S3 console, attach the following bucket policy to *examplebucket*\. 
+   1. In the Amazon S3 console, attach the following bucket policy to *awsexamplebucket1*\. 
 
       The policy has two statements\. 
       + The first statement grants Dave the bucket operation permissions `s3:GetBucketLocation` and `s3:ListBucket`\.
@@ -101,7 +101,7 @@ Using the credentials of user AccountAadmin in Account A, and the special IAM us
                   "s3:ListBucket"
                ],
                "Resource": [
-                  "arn:aws:s3:::examplebucket"
+                  "arn:aws:s3:::awsexamplebucket1"
                ]
             },
             {
@@ -114,7 +114,7 @@ Using the credentials of user AccountAadmin in Account A, and the special IAM us
                    "s3:GetObject"
                ],
                "Resource": [
-                  "arn:aws:s3:::examplebucket/*"
+                  "arn:aws:s3:::awsexamplebucket1/*"
                ]
             }
          ]
@@ -134,7 +134,7 @@ Using the credentials of user AccountAadmin in Account A, and the special IAM us
                   "s3:PutObject"
                ],
                "Resource": [
-                  "arn:aws:s3:::examplebucket/*"
+                  "arn:aws:s3:::awsexamplebucket1/*"
                ]
             }
          ]
@@ -163,13 +163,13 @@ Using Dave's credentials, verify that the permissions work\. You can use either 
    The `--body` parameter in the command identifies the source file to upload\. For example, if the file is in the root of the C: drive on a Windows machine, you specify `c:\HappyFace.jpg`\. The `--key` parameter provides the key name for the object\.
 
    ```
-   aws s3api put-object --bucket examplebucket --key HappyFace.jpg --body HappyFace.jpg --profile UserDaveAccountA
+   aws s3api put-object --bucket awsexamplebucket1 --key HappyFace.jpg --body HappyFace.jpg --profile UserDaveAccountA
    ```
 
-   Execute the following AWS CLI command to get the object\. 
+   Run the following AWS CLI command to get the object\. 
 
    ```
-   aws s3api get-object --bucket examplebucket --key HappyFace.jpg OutputFile.jpg --profile UserDaveAccountA
+   aws s3api get-object --bucket awsexamplebucket1 --key HappyFace.jpg OutputFile.jpg --profile UserDaveAccountA
    ```
 
 **Test using the AWS Tools for Windows PowerShell**
@@ -183,11 +183,11 @@ Using Dave's credentials, verify that the permissions work\. You can use either 
 1. Upload a sample object using the AWS Tools for Windows PowerShell `Write-S3Object` command using user Dave's stored credentials\. 
 
    ```
-   Write-S3Object -bucketname examplebucket -key HappyFace.jpg -file HappyFace.jpg -StoredCredentials AccountADave
+   Write-S3Object -bucketname awsexamplebucket1 -key HappyFace.jpg -file HappyFace.jpg -StoredCredentials AccountADave
    ```
 
    Download the previously uploaded object\.
 
    ```
-   Read-S3Object -bucketname examplebucket -key HappyFace.jpg -file Output.jpg -StoredCredentials AccountADave
+   Read-S3Object -bucketname awsexamplebucket1 -key HappyFace.jpg -file Output.jpg -StoredCredentials AccountADave
    ```

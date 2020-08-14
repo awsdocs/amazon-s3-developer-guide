@@ -135,7 +135,7 @@ In the Amazon S3 console, do the following:
                    "AWS": "arn:aws:iam::AccountB-ID:user/AccountBadmin"
                },
                "Action": "s3:PutObject",
-               "Resource": "arn:aws:s3:::examplebucket/*"
+               "Resource": "arn:aws:s3:::awsexamplebucket1/*"
            },
            {
                "Sid": "112",
@@ -144,7 +144,7 @@ In the Amazon S3 console, do the following:
                    "AWS": "arn:aws:iam::AccountB-ID:user/AccountBadmin"
                },
                "Action": "s3:PutObject",
-               "Resource": "arn:aws:s3:::examplebucket/*",
+               "Resource": "arn:aws:s3:::awsexamplebucket1/*",
                "Condition": {
                    "StringNotEquals": {
                        "s3:x-amz-grant-full-control": "id=CanonicalUserId-of-AWSaccountA-BucketOwner"
@@ -176,7 +176,7 @@ In the IAM console, create an IAM role \("examplerole"\) that grants Account C p
           {
             "Effect": "Allow",
             "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::examplebucket/*"
+            "Resource": "arn:aws:s3:::awsexamplebucket1/*"
           }
         ]
       }

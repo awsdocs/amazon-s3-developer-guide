@@ -44,16 +44,16 @@ You can set minimum and maximum allowable retention periods for a bucket using a
 ```
 {
     "Version": "2012-10-17",
-    "Id": "<Policy1436912751980>",
+    "Id": "<SetRetentionLimits",
     "Statement": [
         {
-            "Sid": "<Stmt1436912698057>",
+            "Sid": "<SetRetentionPeriod",
             "Effect": "Deny",
             "Principal": "*",
             "Action": [
                 "s3:PutObjectRetention"
             ],
-            "Resource": "arn:aws:s3:::<example-bucket>/*",
+            "Resource": "arn:aws:s3:::<awsexamplebucket1>/*",
             "Condition": {
                 "NumericGreaterThan": {
                     "s3:object-lock-remaining-retention-days": "10"

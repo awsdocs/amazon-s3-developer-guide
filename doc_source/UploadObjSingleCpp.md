@@ -9,56 +9,66 @@ The following C\+\+ code example puts a string into an Amazon S3 object using `P
 #include <aws/s3/model/PutObjectRequest.h>
 #include <iostream>
 #include <fstream>
+#include <awsdoc/s3/s3_examples.h>
 
-bool put_string_into_s3_object(const Aws::String& s3_bucket_name,
-    const Aws::String& s3_object_name,
-    const std::string& object_contents,
-    const Aws::String& region = "")
+bool AwsDoc::S3::PutObjectBuffer(const Aws::String& bucketName,
+    const Aws::String& objectName,
+    const std::string& objectContent,
+    const Aws::String& region)
 {
-    // If an AWS Region is specified, use it.
-    Aws::Client::ClientConfiguration clientConfig;
+    Aws::Client::ClientConfiguration config;
+    
     if (!region.empty())
-        clientConfig.region = region;
+    {
+        config.region = region;
+    }
 
-    Aws::S3::S3Client s3_client(clientConfig);
-    Aws::S3::Model::PutObjectRequest object_request;
+    Aws::S3::S3Client s3_client(config);
 
-    object_request.SetBucket(s3_bucket_name);
-    object_request.SetKey(s3_object_name);
+    Aws::S3::Model::PutObjectRequest request;
+    request.SetBucket(bucketName);
+    request.SetKey(objectName);
+
     const std::shared_ptr<Aws::IOStream> input_data =
         Aws::MakeShared<Aws::StringStream>("");
-    *input_data << object_contents.c_str();
-    object_request.SetBody(input_data);
+    *input_data << objectContent.c_str();
 
-    // Put the string into the S3 object.
-    auto put_object_outcome = s3_client.PutObject(object_request);
-    if (!put_object_outcome.IsSuccess()) {
-        auto error = put_object_outcome.GetError();
-        std::cout << "ERROR: " << error.GetExceptionName() << ": "
-            << error.GetMessage() << std::endl;
+    request.SetBody(input_data);
+
+    Aws::S3::Model::PutObjectOutcome outcome = s3_client.PutObject(request);
+
+    if (!outcome.IsSuccess()) {
+        std::cout << "Error: PutObjectBuffer: " << 
+            outcome.GetError().GetMessage() << std::endl;
+
         return false;
     }
-    return true;
+    else
+    {
+        std::cout << "Success: Object '" << objectName << "' with content '"
+            << objectContent << "' uploaded to bucket '" << bucketName << "'.";
+
+        return true;
+    }
 }
 
-int main(int argc, char** argv)
+int main()
 {
-
     Aws::SDKOptions options;
     Aws::InitAPI(options);
     {
-        // Assign these values before running the program.
-        const Aws::String bucket_name = "BUCKET_NAME";
-        const Aws::String object_name = "OBJECT_NAME";
-        const std::string object_contents = "Put this text into the object.";
-        const Aws::String region = ""; // Optional.
+        const Aws::String bucket_name = "my-bucket";
+        const Aws::String object_name = "my-file.txt";
+        const std::string object_content = "This is my sample text content.";
+        const Aws::String region = "us-east-1";
 
-        // Put the file into the S3 bucket.
-        if (put_string_into_s3_object(bucket_name, object_name, object_contents, region)) {
-            std::cout << "The string was put into the object " << object_name
-                << " in S3 bucket " << bucket_name << std::endl;
+        if (!AwsDoc::S3::PutObjectBuffer(bucket_name, object_name, object_content, region)) 
+        {
+            return 1;
         }
     }
     Aws::ShutdownAPI(options);
+
+    return 0;
 }
 ```

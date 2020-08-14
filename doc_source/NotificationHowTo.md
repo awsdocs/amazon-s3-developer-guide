@@ -1,6 +1,6 @@
 # Configuring Amazon S3 event notifications<a name="NotificationHowTo"></a>
 
-The Amazon S3 notification feature enables you to receive notifications when certain events happen in your bucket\. To enable notifications, you must first add a notification configuration that identifies the events you want Amazon S3 to publish and the destinations where you want Amazon S3 to send the notifications\. You store this configuration in the *notification* subresource that is associated with a bucket\. \(For more information, see [Bucket configuration options](UsingBucket.md#bucket-config-options-intro)\.\) Amazon S3 provides an API for you to manage this subresource\. 
+The Amazon S3 notification feature enables you to receive notifications when certain events happen in your bucket\. To enable notifications, you must first add a notification configuration that identifies the events you want Amazon S3 to publish and the destinations where you want Amazon S3 to send the notifications\. You store this configuration in the *notification* subresource that is associated with a bucket\. For more information, see [Bucket configuration options](UsingBucket.md#bucket-config-options-intro)\. Amazon S3 provides an API for you to manage this subresource\. 
 
 **Important**  
 Amazon S3 event notifications are designed to be delivered at least once\. Typically, event notifications are delivered in seconds but can sometimes take a minute or longer\.  
@@ -41,9 +41,9 @@ Amazon S3 supports the following destinations where it can publish events:
 
   AWS Lambda is a compute service that makes it easy for you to build applications that respond quickly to new information\. AWS Lambda runs your code in response to events such as image uploads, in\-app activity, website clicks, or outputs from connected devices\. 
 
-  You can use AWS Lambda to extend other AWS services with custom logic, or create your own backend that operates at AWS scale, performance, and security\. With AWS Lambda, you can easily create discrete, event\-driven applications that execute only when needed and scale automatically from a few requests per day to thousands per second\. 
+  You can use AWS Lambda to extend other AWS services with custom logic, or create your own backend that operates at AWS scale, performance, and security\. With AWS Lambda, you can easily create discrete, event\-driven applications that run only when needed and scale automatically from a few requests per day to thousands per second\. 
 
-  AWS Lambda can run custom code in response to Amazon S3 bucket events\. You upload your custom code to AWS Lambda and create what is called a Lambda function\. When Amazon S3 detects an event of a specific type \(for example, an object created event\), it can publish the event to AWS Lambda and invoke your function in Lambda\. In response, AWS Lambda executes your function\. 
+  AWS Lambda can run custom code in response to Amazon S3 bucket events\. You upload your custom code to AWS Lambda and create what is called a Lambda function\. When Amazon S3 detects an event of a specific type \(for example, an object created event\), it can publish the event to AWS Lambda and invoke your function in Lambda\. In response, AWS Lambda runs your function\. 
 
 **Warning**  
 If your notification ends up writing to the bucket that triggers the notification, this could cause an execution loop\. For example, if the bucket triggers a Lambda function each time an object is uploaded, and the function uploads an object to the bucket, then the function indirectly triggers itself\. To avoid this, use two buckets, or configure the trigger to only apply to a prefix used for incoming objects\.  
@@ -105,7 +105,7 @@ If you need to, you can also make the Amazon S3 REST API calls directly from you
     <NotificationConfiguration>
       <CloudFunctionConfiguration>   
          <Id>optional-id-string</Id>   
-         <Cloudcode>cloud-function-arn</Cloudcode>        
+         <CloudFunction>cloud-function-arn</CloudFunction>        
          <Event>event-type</Event>      
          <Event>event-type</Event>      
           ...  
@@ -232,7 +232,7 @@ The following notification configuration has multiple non\-overlapping suffixes\
                 </FilterRule>
             </S3Key>
      </Filter>
-     <Cloudcode>arn:aws:lambda:us-west-2:444455556666:cloud-function-A</Cloudcode>
+     <CloudFunction>arn:aws:lambda:us-west-2:444455556666:cloud-function-A</CloudFunction>
      <Event>s3:ObjectCreated:Put</Event>
   </CloudFunctionConfiguration>
   <CloudFunctionConfiguration>
@@ -245,7 +245,7 @@ The following notification configuration has multiple non\-overlapping suffixes\
                 </FilterRule>
             </S3Key>
      </Filter>
-     <Cloudcode>arn:aws:lambda:us-west-2:444455556666:cloud-function-B</Cloudcode>
+     <CloudFunction>arn:aws:lambda:us-west-2:444455556666:cloud-function-B</CloudFunction>
      <Event>s3:ObjectCreated:Put</Event>
   </CloudFunctionConfiguration>
 </NotificationConfiguration>
@@ -269,7 +269,7 @@ Your notification configurations that use `Filter` cannot define filtering rules
                 </FilterRule>
             </S3Key>
      </Filter>
-     <Cloudcode>arn:aws:lambda:us-west-2:444455556666:cloud-function-A</Cloudcode>
+     <CloudFunction>arn:aws:lambda:us-west-2:444455556666:cloud-function-A</CloudFunction>
      <Event>s3:ObjectCreated:Put</Event>
   </CloudFunctionConfiguration>
   <CloudFunctionConfiguration>
@@ -286,7 +286,7 @@ Your notification configurations that use `Filter` cannot define filtering rules
                 </FilterRule>
             </S3Key>
      </Filter>
-     <Cloudcode>arn:aws:lambda:us-west-2:444455556666:cloud-function-B</Cloudcode>
+     <CloudFunction>arn:aws:lambda:us-west-2:444455556666:cloud-function-B</CloudFunction>
      <Event>s3:ObjectCreated:Put</Event>
   </CloudFunctionConfiguration>
 </NotificationConfiguration>
@@ -429,7 +429,7 @@ The following is an example of an IAM policy that you attach to the destination 
    ],
    "Resource": "arn:aws:sns:Region:account-id:topic-name",
    "Condition": {
-      "ArnLike": { "aws:SourceArn": "arn:aws:s3:::bucket-name" },
+      "ArnLike": { "aws:SourceArn": "arn:aws:s3:::awsexamplebucket1" },
       "StringEquals": { "aws:SourceAccount": "bucket-owner-account-id" }
    }
   }
@@ -457,7 +457,7 @@ The following is an example of an IAM policy that you attach to the destination 
    ],
    "Resource": "arn:aws:sqs:Region:account-id:queue-name",
    "Condition": {
-      "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" },
+      "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:awsexamplebucket1" },
       "StringEquals": { "aws:SourceAccount": "bucket-owner-account-id" }
    }
   }

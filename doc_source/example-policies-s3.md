@@ -14,7 +14,7 @@ The following example policies will work if you test them programmatically\. How
 
 ## Allowing an IAM User Access to One of Your Buckets<a name="iam-policy-ex0"></a>
 
-In this example, you want to grant an IAM user in your AWS account access to one of your buckets, `examplebucket`, and allow the user to add, update, and delete objects\. 
+In this example, you want to grant an IAM user in your AWS account access to one of your buckets, `awsexamplebucket1`, and allow the user to add, update, and delete objects\. 
 
 In addition to granting the `s3:PutObject`, `s3:GetObject`, and `s3:DeleteObject` permissions to the user, the policy also grants the `s3:ListAllMyBuckets`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions\. These are the additional permissions required by the console\. Also, the `s3:PutObjectAcl` and the `s3:GetObjectAcl` actions are required to be able to copy, cut, and paste objects in the console\. For an example walkthrough that grants permissions to users and tests them using the console, see [Walkthrough: Controlling access to a bucket with user policies](walkthrough1.md)\. 
 
@@ -24,18 +24,13 @@ In addition to granting the `s3:PutObject`, `s3:GetObject`, and `s3:DeleteObject
    "Statement":[
       {
          "Effect":"Allow",
-         "Action":[
-            "s3:ListAllMyBuckets"
-         ],
+         "Action": "s3:ListAllMyBuckets",
          "Resource":"arn:aws:s3:::*"
       },
       {
          "Effect":"Allow",
-         "Action":[
-            "s3:ListBucket",
-            "s3:GetBucketLocation"
-         ],
-         "Resource":"arn:aws:s3:::examplebucket"
+         "Action":["s3:ListBucket","s3:GetBucketLocation"],
+         "Resource":"arn:aws:s3:::awsexamplebucket1"
       },
       {
          "Effect":"Allow",
@@ -46,7 +41,7 @@ In addition to granting the `s3:PutObject`, `s3:GetObject`, and `s3:DeleteObject
             "s3:GetObjectAcl",
             "s3:DeleteObject"
          ],
-         "Resource":"arn:aws:s3:::examplebucket/*"
+         "Resource":"arn:aws:s3:::awsexamplebucket1/*"
       }
    ]
 }
@@ -57,12 +52,12 @@ In addition to granting the `s3:PutObject`, `s3:GetObject`, and `s3:DeleteObject
 In this example, you want two IAM users, Alice and Bob, to have access to your bucket, `examplebucket`, so that they can add, update, and delete objects\. However, you want to restrict each user’s access to a single folder in the bucket\. You might create folders with names that match the user names\. 
 
 ```
-examplebucket
+awsexamplebucket1
    Alice/
    Bob/
 ```
 
-To grant each user access only to his or her folder, you can write a policy for each user and attach it individually\. For example, you can attach the following policy to user Alice to allow her specific Amazon S3 permissions on the `examplebucket/Alice` folder\.
+To grant each user access only to his or her folder, you can write a policy for each user and attach it individually\. For example, you can attach the following policy to user Alice to allow her specific Amazon S3 permissions on the `awsexamplebucket1/Alice` folder\.
 
 ```
 {
@@ -77,7 +72,7 @@ To grant each user access only to his or her folder, you can write a policy for 
             "s3:DeleteObject",
             "s3:DeleteObjectVersion"
          ],
-         "Resource":"arn:aws:s3:::examplebucket/Alice/*"
+         "Resource":"arn:aws:s3:::awsexamplebucket1/Alice/*"
       }
    ]
 }
@@ -85,7 +80,7 @@ To grant each user access only to his or her folder, you can write a policy for 
 
 You then attach a similar policy to user `Bob`, identifying folder `Bob` in the `Resource` value\. 
 
-Instead of attaching policies to individual users, you can write a single policy that uses a policy variable and attach the policy to a group\. First you must create a group and add both Alice and Bob to the group\. The following example policy allows a set of Amazon S3 permissions in the `examplebucket/${aws:username}` folder\. When the policy is evaluated, the policy variable `${aws:username}` is replaced by the requester's user name\. For example, if Alice sends a request to put an object, the operation is allowed only if Alice is uploading the object to the `examplebucket/Alice` folder\.
+Instead of attaching policies to individual users, you can write a single policy that uses a policy variable and attach the policy to a group\. First you must create a group and add both Alice and Bob to the group\. The following example policy allows a set of Amazon S3 permissions in the `awsexamplebucket1/${aws:username}` folder\. When the policy is evaluated, the policy variable `${aws:username}` is replaced by the requester's user name\. For example, if Alice sends a request to put an object, the operation is allowed only if Alice is uploading the object to the `examplebucket/Alice` folder\.
 
 ```
  1. {
@@ -100,7 +95,7 @@ Instead of attaching policies to individual users, you can write a single policy
 10.             "s3:DeleteObject",
 11.             "s3:DeleteObjectVersion"
 12.          ],
-13.          "Resource":"arn:aws:s3:::examplebucket/${aws:username}/*"
+13.          "Resource":"arn:aws:s3:::awsexamplebucket1/${aws:username}/*"
 14.       }
 15.    ]
 16. }
@@ -117,15 +112,18 @@ When using policy variables, you must explicitly specify version `2012-10-17` in
   "Statement": [
     {
       "Sid": "AllowGroupToSeeBucketListInTheConsole",
-      "Action": [ "s3:ListAllMyBuckets", "s3:GetBucketLocation" ],
+      "Action": [ 
+      	"s3:ListAllMyBuckets", 
+      	"s3:GetBucketLocation" 
+      ],
       "Effect": "Allow",
-      "Resource": [ "arn:aws:s3:::*"  ]
+      "Resource": "arn:aws:s3:::*"  
     },
     {
       "Sid": "AllowRootLevelListingOfTheBucket",
-      "Action": ["s3:ListBucket"],
+      "Action": "s3:ListBucket",
       "Effect": "Allow",
-      "Resource": ["arn:aws:s3:::examplebucket"],
+      "Resource": "arn:aws:s3:::awsexamplebucket1",
       "Condition":{ 
             "StringEquals":{
                     "s3:prefix":[""], "s3:delimiter":["/"]
@@ -134,9 +132,9 @@ When using policy variables, you must explicitly specify version `2012-10-17` in
     },
     {
       "Sid": "AllowListBucketOfASpecificUserPrefix",
-      "Action": ["s3:ListBucket"],
+      "Action": "s3:ListBucket",
       "Effect": "Allow",
-      "Resource": ["arn:aws:s3:::examplebucket"],
+      "Resource": "arn:aws:s3:::awsexamplebucket1",
       "Condition":{  "StringLike":{"s3:prefix":["${aws:username}/*"] }
        }
     },
@@ -150,7 +148,7 @@ When using policy variables, you must explicitly specify version `2012-10-17` in
             "s3:DeleteObject",
             "s3:DeleteObjectVersion"
          ],
-         "Resource":"arn:aws:s3:::examplebucket/${aws:username}/*"
+         "Resource":"arn:aws:s3:::awsexamplebucket1/${aws:username}/*"
       }
   ]
 }
@@ -174,7 +172,7 @@ Although IAM user names are friendly, human\-readable identifiers, they are not 
             "s3:DeleteObject",
             "s3:DeleteObjectVersion"
          ],
-         "Resource":"arn:aws:s3:::my_corporate_bucket/home/${aws:userid}/*"
+         "Resource":"arn:aws:s3:::mycorporatebucket/home/${aws:userid}/*"
       }
    ]
 }
@@ -190,7 +188,7 @@ You can then use web identity federation in AWS Security Token Service to integr
 
 ## Allowing a Group to Have a Shared Folder in Amazon S3<a name="iam-policy-ex2"></a>
 
- Attaching the following policy to the group grants everybody in the group access to the following folder in Amazon S3: `my_corporate_bucket/share/marketing`\. Group members are allowed to access only the specific Amazon S3 permissions shown in the policy and only for objects in the specified folder\. 
+ Attaching the following policy to the group grants everybody in the group access to the following folder in Amazon S3: `mycorporatebucket/share/marketing`\. Group members are allowed to access only the specific Amazon S3 permissions shown in the policy and only for objects in the specified folder\. 
 
 ```
  1. {
@@ -205,7 +203,7 @@ You can then use web identity federation in AWS Security Token Service to integr
 10.             "s3:DeleteObject",
 11.             "s3:DeleteObjectVersion"
 12.          ],
-13.          "Resource":"arn:aws:s3:::my_corporate_bucket/share/marketing/*"
+13.          "Resource":"arn:aws:s3:::mycorporatebucket/share/marketing/*"
 14.       }
 15.    ]
 16. }
@@ -213,7 +211,7 @@ You can then use web identity federation in AWS Security Token Service to integr
 
 ## Allowing All Your Users to Read Objects in a Portion of the Corporate Bucket<a name="iam-policy-ex3"></a>
 
- In this example, you create a group named `AllUsers`, which contains all the IAM users that are owned by the AWS account\. You then attach a policy that gives the group access to `GetObject` and `GetObjectVersion`, but only for objects in the `my_corporate_bucket/readonly` folder\. 
+ In this example, you create a group named `AllUsers`, which contains all the IAM users that are owned by the AWS account\. You then attach a policy that gives the group access to `GetObject` and `GetObjectVersion`, but only for objects in the `mycorporatebucket/readonly` folder\. 
 
 ```
  1. {
@@ -225,7 +223,7 @@ You can then use web identity federation in AWS Security Token Service to integr
  7.             "s3:GetObject",
  8.             "s3:GetObjectVersion"
  9.          ],
-10.          "Resource":"arn:aws:s3:::my_corporate_bucket/readonly/*"
+10.          "Resource":"arn:aws:s3:::MyCorporateBucket/readonly/*"
 11.       }
 12.    ]
 13. }
@@ -235,7 +233,7 @@ You can then use web identity federation in AWS Security Token Service to integr
 
  In this example, you create a group called `WidgetCo` that represents a partner company\. You create an IAM user for the specific person or application at the partner company that needs access, and then you put the user in the group\. 
 
-You then attach a policy that gives the group `PutObject` access to the following folder in the corporate bucket: `my_corporate_bucket/uploads/widgetco`\. 
+You then attach a policy that gives the group `PutObject` access to the following folder in the corporate bucket: `mycorporatebucket/uploads/widgetco`\. 
 
 You want to prevent the `WidgetCo` group from doing anything else with the bucket, so you add a statement that explicitly denies permission to any Amazon S3 permissions except `PutObject` on any Amazon S3 resource in the AWS account\. This step is necessary only if there's a broad policy in use elsewhere in your AWS account that gives users wide access to Amazon S3 resources\.
 
@@ -246,17 +244,17 @@ You want to prevent the `WidgetCo` group from doing anything else with the bucke
  4.       {
  5.          "Effect":"Allow",
  6.          "Action":"s3:PutObject",
- 7.          "Resource":"arn:aws:s3:::my_corporate_bucket/uploads/widgetco/*"
+ 7.          "Resource":"arn:aws:s3:::mycorporatebucket/uploads/widgetco/*"
  8.       },
  9.       {
 10.          "Effect":"Deny",
 11.          "NotAction":"s3:PutObject",
-12.          "Resource":"arn:aws:s3:::my_corporate_bucket/uploads/widgetco/*"
+12.          "Resource":"arn:aws:s3:::mycorporatebucket/uploads/widgetco/*"
 13.       },
 14.       {
 15.          "Effect":"Deny",
 16.          "Action":"s3:*",
-17.          "NotResource":"arn:aws:s3:::my_corporate_bucket/uploads/widgetco/*"
+17.          "NotResource":"arn:aws:s3:::mycorporatebucket/uploads/widgetco/*"
 18.       }
 19.    ]
 20. }

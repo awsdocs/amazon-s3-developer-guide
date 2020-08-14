@@ -26,7 +26,7 @@ To enable CloudTrail data events for all your buckets or for a list of specific 
 The default setting for CloudTrail is to find only management events\. Check to ensure that you have the data events enabled for your account\.
  With an S3 bucket that is generating a high workload, you could quickly generate thousands of logs in a short amount of time\. Be mindful of how long you choose to enable CloudTrail data events for a busy bucket\. 
 
- CloudTrail stores Amazon S3 data event logs in an S3 bucket of your choosing\. You should consider using a bucket in a separate AWS account to better organize events from multiple buckets you might own into a central place for easier querying and analysis\. AWS Organizations makes it easy to create an AWS account that is linked the account owning the bucket you are monitoring\. For more information, see [What Is AWS Organizations?](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html) in the *AWS Organizations User Guide*
+ CloudTrail stores Amazon S3 data event logs in an S3 bucket of your choosing\. You should consider using a bucket in a separate AWS account to better organize events from multiple buckets you might own into a central place for easier querying and analysis\. AWS Organizations makes it easy to create an AWS account that is linked to the account owning the bucket that you are monitoring\. For more information, see [What Is AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html) in the *AWS Organizations User Guide*\.
 
 When you create a trail in CloudTrail, in the data events section, you can select the **Select all S3 buckets in your account** check box to log all object level events\. 
 

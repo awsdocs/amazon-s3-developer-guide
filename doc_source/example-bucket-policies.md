@@ -32,9 +32,9 @@ The following example policy grants the `s3:PutObject` and `s3:PutObjectAcl` per
  4.     {
  5.       "Sid":"AddCannedAcl",
  6.       "Effect":"Allow",
- 7.       "Principal": {"AWS": ["arn:aws:iam::111122223333:root","arn:aws:iam::444455556666:root"]},
+ 7.     "Principal": {"AWS": ["arn:aws:iam::111122223333:root","arn:aws:iam::444455556666:root"]},
  8.       "Action":["s3:PutObject","s3:PutObjectAcl"],
- 9.       "Resource":["arn:aws:s3:::examplebucket/*"],
+ 9.       "Resource":"arn:aws:s3:::awsexamplebucket1/*",
 10.       "Condition":{"StringEquals":{"s3:x-amz-acl":["public-read"]}}
 11.     }
 12.   ]
@@ -53,8 +53,8 @@ The following example policy grants the `s3:GetObject` permission to any public 
  5.       "Sid":"PublicRead",
  6.       "Effect":"Allow",
  7.       "Principal": "*",
- 8.       "Action":["s3:GetObject"],
- 9.       "Resource":["arn:aws:s3:::examplebucket/*"]
+ 8.       "Action":["s3:GetObject","s3:GetObjectVersion"],
+ 9.       "Resource":["arn:aws:s3:::awsexamplebucket1/*"]
 10.     }
 11.   ]
 12. }
@@ -78,25 +78,22 @@ Replace the IP address range in this example with an appropriate value for your 
  1. {
  2.   "Version": "2012-10-17",
  3.   "Id": "S3PolicyId1",
- 4. 
- 5.   "Statement": [
- 6. 
- 7.     {
- 8.       "Sid": "IPAllow",
- 9.       "Effect": "Deny",
-10.       "Principal": "*",
-11.       "Action": "s3:*",
-12.       "Resource": [
-13. 	 "arn:aws:s3:::examplebucket",
-14.          "arn:aws:s3:::examplebucket/*"
-15.       ],
-16.       "Condition": {
-17.          "NotIpAddress": {"aws:SourceIp": "54.240.143.0/24"}
-18. 
-19.       }
-20.     }
-21.   ]
-22. }
+ 4.   "Statement": [
+ 5.     {
+ 6.       "Sid": "IPAllow",
+ 7.       "Effect": "Deny",
+ 8.       "Principal": "*",
+ 9.       "Action": "s3:*",
+10.       "Resource": [
+11. 	 "arn:aws:s3:::awsexamplebucket1",
+12.          "arn:aws:s3:::awsexamplebucket1/*"
+13.       ],
+14.       "Condition": {
+15. 	 "NotIpAddress": {"aws:SourceIp": "54.240.143.0/24"}
+16.       }
+17.     }
+18.   ]
+19. }
 ```
 
 ### Allowing IPv4 and IPv6 Addresses<a name="example-bucket-policies-use-case-ipv6"></a>
@@ -120,18 +117,18 @@ Replace the IP address ranges in this example with appropriate values for your u
  7.       "Effect":"Allow",
  8.       "Principal":"*",
  9.       "Action":"s3:*",
-10.       "Resource":"arn:aws:s3:::examplebucket/*",
+10.       "Resource":"arn:aws:s3:::awsexamplebucket1/*",
 11.       "Condition": {
 12.         "IpAddress": {
 13.           "aws:SourceIp": [
 14.             "54.240.143.0/24",
-15.             "2001:DB8:1234:5678::/64"
+15. 	    "2001:DB8:1234:5678::/64"
 16.           ]
 17.         },
 18.         "NotIpAddress": {
 19.           "aws:SourceIp": [
-20.              "54.240.143.128/30",
-21.              "2001:DB8:1234:5678:ABCD::/80"
+20. 	     "54.240.143.128/30",
+21. 	     "2001:DB8:1234:5678:ABCD::/80"
 22.           ]
 23.         }
 24.       }
@@ -142,7 +139,7 @@ Replace the IP address ranges in this example with appropriate values for your u
 
 ## Restricting Access to a Specific HTTP Referer<a name="example-bucket-policies-use-case-4"></a>
 
-Suppose that you have a website with a domain name \(`www.example.com` or `example.com`\) with links to photos and videos stored in your Amazon S3 bucket, `examplebucket`\. By default, all the Amazon S3 resources are private, so only the AWS account that created the resources can access them\. To allow read access to these objects from your website, you can add a bucket policy that allows `s3:GetObject` permission with a condition, using the `aws:Referer` key, that the get request must originate from specific webpages\. The following policy specifies the `StringLike` condition with the `aws:Referer` condition key\.
+Suppose that you have a website with a domain name \(`www.example.com` or `example.com`\) with links to photos and videos stored in your Amazon S3 bucket, `awsexamplebucket1`\. By default, all the Amazon S3 resources are private, so only the AWS account that created the resources can access them\. To allow read access to these objects from your website, you can add a bucket policy that allows `s3:GetObject` permission with a condition, using the `aws:Referer` key, that the get request must originate from specific webpages\. The following policy specifies the `StringLike` condition with the `aws:Referer` condition key\.
 
 ```
  1. {
@@ -153,8 +150,8 @@ Suppose that you have a website with a domain name \(`www.example.com` or `examp
  6.       "Sid":"Allow get requests originating from www.example.com and example.com.",
  7.       "Effect":"Allow",
  8.       "Principal":"*",
- 9.       "Action":"s3:GetObject",
-10.       "Resource":"arn:aws:s3:::examplebucket/*",
+ 9.       "Action":["s3:GetObject","s3:GetObjectVersion"],
+10.       "Resource":"arn:aws:s3:::awsexamplebucket1/*",
 11.       "Condition":{
 12.         "StringLike":{"aws:Referer":["http://www.example.com/*","http://example.com/*"]}
 13.       }
@@ -173,7 +170,7 @@ The following policy uses the OAI’s ID as the policy’s `Principal`\. For mor
 
 To use this example:
 + Replace *EH1HDMB1FH2TC* with the OAI’s ID\. To find the OAI’s ID, see the [Origin Access Identity page](https://console.aws.amazon.com/cloudfront/home?region=us-east-1#oai:) on the CloudFront console, or use [ListCloudFrontOriginAccessIdentities](https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListCloudFrontOriginAccessIdentities.html) in the CloudFront API\.
-+ Replace *aws\-example\-bucket* with the name of your Amazon S3 bucket\.
++ Replace *awsexamplebucket1* with the name of your Amazon S3 bucket\.
 
 ```
  1. {
@@ -186,7 +183,7 @@ To use this example:
  8.                 "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity EH1HDMB1FH2TC"
  9.             },
 10.             "Action": "s3:GetObject",
-11.             "Resource": "arn:aws:s3:::aws-example-bucket/*"
+11.             "Resource": "arn:aws:s3:::awsexamplebucket1/*"
 12.         }
 13.     ]
 14. }
@@ -198,7 +195,7 @@ Amazon S3 supports MFA\-protected API access, a feature that can enforce multi\-
 
 You can enforce the MFA requirement using the `aws:MultiFactorAuthAge` key in a bucket policy\. AWS Identity and Access Management \(IAM\) users can access Amazon S3 resources by using temporary credentials issued by the AWS Security Token Service \(AWS STS\)\. You provide the MFA code at the time of the AWS STS request\. 
 
-When Amazon S3 receives a request with multi\-factor authentication, the `aws:MultiFactorAuthAge` key provides a numeric value indicating how long ago \(in seconds\) the temporary credential was created\. If the temporary credential provided in the request was not created using an MFA device, this key value is null \(absent\)\. In a bucket policy, you can add a condition to check this value, as shown in the following example bucket policy\. The policy denies any Amazon S3 operation on the `/taxdocuments` folder in the `examplebucket` bucket if the request is not authenticated using MFA\. To learn more about MFA, see [Using Multi\-Factor Authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
+When Amazon S3 receives a request with multi\-factor authentication, the `aws:MultiFactorAuthAge` key provides a numeric value indicating how long ago \(in seconds\) the temporary credential was created\. If the temporary credential provided in the request was not created using an MFA device, this key value is null \(absent\)\. In a bucket policy, you can add a condition to check this value, as shown in the following example bucket policy\. The policy denies any Amazon S3 operation on the `/taxdocuments` folder in the `awsexamplebucket1` bucket if the request is not authenticated using MFA\. To learn more about MFA, see [Using Multi\-Factor Authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
 
 ```
  1. {
@@ -210,7 +207,7 @@ When Amazon S3 receives a request with multi\-factor authentication, the `aws:Mu
  7.         "Effect": "Deny",
  8.         "Principal": "*",
  9.         "Action": "s3:*",
-10.         "Resource": "arn:aws:s3:::examplebucket/taxdocuments/*",
+10.         "Resource": "arn:aws:s3:::awsexamplebucket1/taxdocuments/*",
 11.         "Condition": { "Null": { "aws:MultiFactorAuthAge": true }}
 12.       }
 13.     ]
@@ -219,7 +216,7 @@ When Amazon S3 receives a request with multi\-factor authentication, the `aws:Mu
 
 The `Null` condition in the `Condition` block evaluates to true if the `aws:MultiFactorAuthAge` key value is null, indicating that the temporary security credentials in the request were created without the MFA key\. 
 
-The following bucket policy is an extension of the preceding bucket policy\. It includes two policy statements\. One statement allows the `s3:GetObject` permission on a bucket \(`examplebucket`\) to everyone\. Another statement further restricts access to the `examplebucket/taxdocuments` folder in the bucket by requiring MFA\. 
+The following bucket policy is an extension of the preceding bucket policy\. It includes two policy statements\. One statement allows the `s3:GetObject` permission on a bucket \(`awsexamplebucket1`\) to everyone\. Another statement further restricts access to the `awsexamplebucket1/taxdocuments` folder in the bucket by requiring MFA\. 
 
 ```
  1. {
@@ -231,7 +228,7 @@ The following bucket policy is an extension of the preceding bucket policy\. It 
  7.         "Effect": "Deny",
  8.         "Principal": "*",
  9.         "Action": "s3:*",
-10.         "Resource": "arn:aws:s3:::examplebucket/taxdocuments/*",
+10.         "Resource": "arn:aws:s3:::awsexamplebucket1/taxdocuments/*",
 11.         "Condition": { "Null": { "aws:MultiFactorAuthAge": true } }
 12.       },
 13.       {
@@ -239,7 +236,7 @@ The following bucket policy is an extension of the preceding bucket policy\. It 
 15.         "Effect": "Allow",
 16.         "Principal": "*",
 17.         "Action": ["s3:GetObject"],
-18.         "Resource": "arn:aws:s3:::examplebucket/*"
+18.         "Resource": "arn:aws:s3:::awsexamplebucket1/*"
 19.       }
 20.     ]
 21.  }
@@ -257,7 +254,7 @@ You can optionally use a numeric condition to limit the duration for which the `
  7.         "Effect": "Deny",
  8.         "Principal": "*",
  9.         "Action": "s3:*",
-10.         "Resource": "arn:aws:s3:::examplebucket/taxdocuments/*",
+10.         "Resource": "arn:aws:s3:::awsexamplebucket1/taxdocuments/*",
 11.         "Condition": {"Null": {"aws:MultiFactorAuthAge": true }}
 12.       },
 13.       {
@@ -265,7 +262,7 @@ You can optionally use a numeric condition to limit the duration for which the `
 15.         "Effect": "Deny",
 16.         "Principal": "*",
 17.         "Action": "s3:*",
-18.         "Resource": "arn:aws:s3:::examplebucket/taxdocuments/*",
+18.         "Resource": "arn:aws:s3:::awsexamplebucket1/taxdocuments/*",
 19.         "Condition": {"NumericGreaterThan": {"aws:MultiFactorAuthAge": 3600 }}
 20.        },
 21.        {
@@ -273,7 +270,7 @@ You can optionally use a numeric condition to limit the duration for which the `
 23.          "Effect": "Allow",
 24.          "Principal": "*",
 25.          "Action": ["s3:GetObject"],
-26.          "Resource": "arn:aws:s3:::examplebucket/*"
+26.          "Resource": "arn:aws:s3:::awsexamplebucket1/*"
 27.        }
 28.     ]
 29.  }
@@ -281,7 +278,7 @@ You can optionally use a numeric condition to limit the duration for which the `
 
 ## Granting Cross\-Account Permissions to Upload Objects While Ensuring the Bucket Owner Has Full Control<a name="example-bucket-policies-use-case-8"></a>
 
-You can allow another AWS account to upload objects to your bucket\. However, you might decide that as a bucket owner you must have full control of the objects uploaded to your bucket\. The following policy enforces that a specific AWS account \(`111111111111`\) be denied the ability to upload objects unless that account grants full\-control access to the bucket owner identified by the email address \(`xyz@amazon.com`\)\. The `StringNotEquals` condition in the policy specifies the `s3:x-amz-grant-full-control` condition key to express the requirement \(see [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)\)\. 
+You can allow another AWS account to upload objects to your bucket\. However, you might decide that as a bucket owner you must have full control of the objects uploaded to your bucket\. The following policy enforces that a specific AWS account \(`123456789012`\) be denied the ability to upload objects unless that account grants full\-control access to the bucket owner identified by the email address \(`xyz@amazon.com`\)\. The `StringNotEquals` condition in the policy specifies the `s3:x-amz-grant-full-control` condition key to express the requirement \(see [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)\)\. 
 
 ```
  1. {
@@ -290,16 +287,16 @@ You can allow another AWS account to upload objects to your bucket\. However, yo
  4.      {
  5.        "Sid":"111",
  6.        "Effect":"Allow",
- 7.        "Principal":{"AWS":"1111111111"},
+ 7.        "Principal":{"AWS":"123456789012"},
  8.        "Action":"s3:PutObject",
- 9.        "Resource":"arn:aws:s3:::examplebucket/*"
+ 9.        "Resource":"arn:aws:s3:::awsexamplebucket1/*"
 10.      },
 11.      {
 12.        "Sid":"112",
 13.        "Effect":"Deny",
-14.        "Principal":{"AWS":"1111111111" },
+14.        "Principal":{"AWS":"123456789012" },
 15.        "Action":"s3:PutObject",
-16.        "Resource":"arn:aws:s3:::examplebucket/*",
+16.        "Resource":"arn:aws:s3:::awsexamplebucket1/*",
 17.        "Condition": {
 18.          "StringNotEquals": {"s3:x-amz-grant-full-control":["emailAddress=xyz@amazon.com"]}
 19.        }
@@ -322,11 +319,11 @@ The following example bucket policy grants Amazon S3 permission to write objects
  5.       "Sid":"InventoryAndAnalyticsExamplePolicy",
  6.       "Effect":"Allow",
  7.       "Principal": {"Service": "s3.amazonaws.com"},
- 8.       "Action":["s3:PutObject"],
- 9.       "Resource":["arn:aws:s3:::destination-bucket/*"],
+ 8.       "Action":"s3:PutObject",
+ 9.       "Resource":["arn:aws:s3:::destinationbucket/*"],
 10.       "Condition": {
 11.           "ArnLike": {
-12.               "aws:SourceArn": "arn:aws:s3:::source-bucket"
+12.               "aws:SourceArn": "arn:aws:s3:::sourcebucket"
 13.            },
 14.          "StringEquals": {
 15.              "aws:SourceAccount": "1234567890",

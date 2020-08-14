@@ -68,7 +68,7 @@ aws s3control get-access-point --name example-vpc-ap --account-id 123456789012
 
 To use an access point with a VPC, you must modify the access policy for your VPC endpoint\. VPC endpoints allow traffic to flow from your VPC to Amazon S3\. They have access\-control policies that control how resources within the VPC are allowed to interact with S3\. Requests from your VPC to S3 only succeed through an access point if the VPC endpoint policy grants access to both the access point and the underlying bucket\.
 
-The following example policy statement configures a VPC endpoint to allow calls to `GetObject` for a bucket named `example-bucket` and an access point named `example-vpc-ap`\.
+The following example policy statement configures a VPC endpoint to allow calls to `GetObject` for a bucket named `awsexamplebucket1` and an access point named `example-vpc-ap`\.
 
 ```
 {
@@ -81,7 +81,7 @@ The following example policy statement configures a VPC endpoint to allow calls 
         ],
         "Effect": "Allow",
         "Resource": [
-            "arn:aws:s3:::example-bucket/*",
+            "arn:aws:s3:::awsexamplebucket1/*",
             "arn:aws:s3:us-west-2:123456789012:accesspoint/example-vpc-ap/object/*"
         ]
     }]
@@ -236,7 +236,7 @@ For the access point policy to effectively grant access to `Alice`, the underlyi
             "AWS": "arn:aws:iam::123456789012:user/Alice"
         },
         "Action": ["s3:GetObject", "s3:PutObject"],
-        "Resource": "arn:aws:s3:::example-bucket/Alice/*"
+        "Resource": "arn:aws:s3:::awsexamplebucket1/Alice/*"
     }]    
 }
 ```

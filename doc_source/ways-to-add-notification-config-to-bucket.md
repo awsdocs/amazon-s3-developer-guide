@@ -57,7 +57,7 @@ Follow the steps to create and subscribe to an Amazon Simple Queue Service \(Ama
       ],
       "Resource": "SQS-queue-ARN",
       "Condition": {
-         "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" },
+         "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:awsexamplebucket1" },
          "StringEquals": { "aws:SourceAccount": "bucket-owner-account-id" }
       }
      }

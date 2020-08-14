@@ -23,52 +23,62 @@ For more information, see the [CloudTrail userIdentity Element](https://docs.aws
 
 You can store your log files in your bucket for as long as you want, but you can also define Amazon S3 lifecycle rules to archive or delete log files automatically\. By default, your log files are encrypted by using Amazon S3 server\-side encryption \(SSE\)\.
 
+### Amazon S3 account\-level actions tracked by CloudTrail logging<a name="cloudtrail-account-level-tracking"></a>
+
+CloudTrail logs account\-level actions\. Amazon S3 records are written together with other AWS service records in a log file\. CloudTrail determines when to create and write to a new file based on a time period and file size\. 
+
+The tables in this section list the Amazon S3 account\-level actions that are supported for logging by CloudTrail\.
+
+**Amazon S3 account\-level API actions tracked by CloudTrail logging will show up as the following event names:**
++ [ DeletePublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html)
++ [ GetPublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html)
++ [ PutPublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html)
+
 ### Amazon S3 bucket\-level actions tracked by CloudTrail logging<a name="cloudtrail-bucket-level-tracking"></a>
 
 By default, CloudTrail logs bucket\-level actions\. Amazon S3 records are written together with other AWS service records in a log file\. CloudTrail determines when to create and write to a new file based on a time period and file size\. 
 
 The tables in this section list the Amazon S3 bucket\-level actions that are supported for logging by CloudTrail\.
 
-
-**Amazon S3 bucket\-level actions tracked by CloudTrail logging**  
-
-| REST API name | API event name used in CloudTrail log | 
-| --- | --- | 
-|  [DELETE Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETE.html)  | DeleteBucket | 
-|  [DELETE Bucket cors](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEcors.html)  | DeleteBucketCors | 
-|  [DELETE Bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEencryption.html)  | DeleteBucketEncryption | 
-|  [DELETE Bucket lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html)  | DeleteBucketLifecycle | 
-|  [DELETE Bucket policy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html)  | DeleteBucketPolicy | 
-|  [DELETE Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEreplication.html)  | DeleteBucketReplication  | 
-|  [DELETE Bucket tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html)  | DeleteBucketTagging | 
-|  [DELETE Bucket website](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html)  | DeleteBucketWebsite | 
-|  [GET Bucket acl](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETacl.html)  | GetBucketAcl | 
-|  [GET Bucket cors](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETcors.html)  | GetBucketCors | 
-|  [GET Bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETencryption.html)  | GetBucketEncryption | 
-|  [GET Bucket lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html)  | GetBucketLifecycle  | 
-|  [GET Bucket location](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html)  | GetBucketLocation  | 
-|  [GET Bucket logging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlogging.html)  | GetBucketLogging  | 
-|  [GET Bucket notification](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETnotification.html)  | GetBucketNotification | 
-|  [GET Bucket policy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETpolicy.html)  | GetBucketPolicy | 
-|  [GET Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETreplication.html)  | GetBucketReplication | 
-|  [GET Bucket request payment](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTrequestPaymentGET.html)  | GetBucketRequestPayment | 
-|  [GET Bucket tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETtagging.html)  | GetBucketTagging  | 
-|  [GET Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html)  | GetBucketVersioning  | 
-|  [GET Bucket website](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETwebsite.html)  | GetBucketWebsite  | 
-|  [GET Service \(List all buckets\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html)  | ListBuckets  | 
-|  [PUT Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html)  | CreateBucket  | 
-|  [PUT Bucket acl](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTacl.html)  | PutBucketAcl  | 
-|  [PUT Bucket cors](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTcors.html)  | PutBucketCors  | 
-|  [PUT Bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html)  | PutBucketEncryption | 
-|  [PUT Bucket lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html)  | PutBucketLifecycle  | 
-|  [PUT Bucket logging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html)  | PutBucketLogging | 
-|  [PUT Bucket notification](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTnotification.html)  | PutBucketNotification  | 
-|  [PUT Bucket policy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html)  | PutBucketPolicy  | 
-|  [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html)  | PutBucketReplication  | 
-|  [PUT Bucket request payment](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTrequestPaymentPUT.html)  | PutBucketRequestPayment | 
-|  [PUT Bucket tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTtagging.html)  | PutBucketTagging  | 
-|  [PUT Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)  | PutBucketVersioning | 
-|  [PUT Bucket website](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html)  | PutBucketWebsite  | 
+**Amazon S3 bucket\-level API actions tracked by CloudTrail logging will show up as the following event names:**
++ [CreateBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html) 
++ [DeleteBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETE.html)
++ [DeleteBucketCors](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEcors.html)
++ [DeleteBucketEncryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEencryption.html)
++ [DeleteBucketLifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html)
++ [DeleteBucketPolicy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html)
++ [DeleteBucketReplication ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEreplication.html)
++ [DeleteBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html)
++ [DeleteBucketWebsite](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html)
++ [DeleteBucketWebsite](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html)
++ [ DeletePublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html)
++ [GetBucketCors](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETcors.html)
++ [GetBucketEncryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETencryption.html)
++ [GetBucketLifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETencryption.html) 
++ [GetBucketLocation](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html) 
++ [GetBucketLogging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlogging.html) 
++ [GetBucketNotification](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETnotification.html)
++ [GetBucketPolicy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETpolicy.html)
++ [GetBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETreplication.html)
++ [GetBucketRequestPayment](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTrequestPaymentGET.html)
++ [GetBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETtagging.html)
++ [GetBucketVersioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html) 
++ [GetBucketWebsite](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETwebsite.html) 
++ [ GetPublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html) 
++ [ListBuckets](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html) 
++ [PutBucketAcl](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTacl.html) 
++ [PutBucketCors](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTcors.html) 
++ [PutBucketEncryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html)
++ [PutBucketLifecycle](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html) 
++ [PutBucketLogging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html)
++ [PutBucketNotification ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTnotification.html)
++ [PutBucketPolicy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html) 
++ [PutBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) 
++ [PutBucketRequestPayment](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTrequestPaymentPUT.html)
++ [PutBucketTagging ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTtagging.html) 
++ [PutBucketVersioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)
++ [PutBucketWebsite](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html) 
++ [ PutPublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html) 
 
 In addition to these API operations, you can also use the [OPTIONS object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTOPTIONSobject.html) object\-level action\. This action is treated like a bucket\-level action in CloudTrail logging because the action checks the cors configuration of a bucket\.
 
@@ -76,31 +86,26 @@ In addition to these API operations, you can also use the [OPTIONS object](https
 
 You can also get CloudTrail logs for object\-level Amazon S3 actions\. To do this, specify the Amazon S3 object for your trail\. When an object\-level action occurs in your account, CloudTrail evaluates your trail settings\. If the event matches the object that you specified in a trail, the event is logged\. For more information, see [How Do I Enable Object\-Level Logging for an S3 Bucket with AWS CloudTrail Data Events?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-cloudtrail-events.html) in the *Amazon Simple Storage Service Console User Guide* and [Logging Data Events for Trails](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html) in the *AWS CloudTrail User Guide*\. 
 
-The following table lists the object\-level actions that CloudTrail can log:
-
-
-| REST API name | API event name used in CloudTrail log | 
-| --- | --- | 
-|  [Abort Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadAbort.html)  | AbortMultipartUpload | 
-|  [Complete Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadComplete.html)  | CompleteMultipartUpload | 
-|  [Delete Multiple Objects](https://docs.aws.amazon.com/AmazonS3/latest/API/multiobjectdeleteapi.html)  | DeleteObjects | 
-|  [DELETE Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html)  | DeleteObject | 
-|  [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html)  | GetObject | 
-|  [GET Object ACL](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETacl.html)  | GetObjectAcl | 
-|  [GET Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html)  | GetObjectTagging | 
-|  [GET Object torrent](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtorrent.html)  | GetObjectTorrent | 
-|  [HEAD Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html)  | HeadObject | 
-|  [Initiate Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)  | CreateMultipartUpload | 
-|  [List Parts](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadListParts.html)  | ListParts | 
-|  [POST Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html)  | PostObject | 
-|  [POST Object restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html)  | RestoreObject | 
-|  [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)  | PutObject | 
-|  [PUT Object acl](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html)  | PutObjectAcl | 
-|  [PUT Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html)  | PutObjectTagging | 
-|  [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)  | CopyObject | 
-|  [SELECT Object Content](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html)  | SelectObjectContent | 
-|  [Upload Part](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPart.html)  | UploadPart | 
-|  [Upload Part \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html)  | UploadPartCopy | 
+The following table lists the object\-level API actions that are logged as CloudTrail events:
++ [AbortMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadAbort.html)
++ [CompleteMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadComplete.html)
++ [DeleteObjects](https://docs.aws.amazon.com/AmazonS3/latest/API/multiobjectdeleteapi.html)
++ [DeleteObject](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html)
++ [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html)
++ [GetObjectAcl](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETacl.html)
++ [GetObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html)
++ [GetObjectTorrent](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtorrent.html)
++ [HeadObject](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html)
++ [CreateMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)
++ [ListParts](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadListParts.html)
++ [PostObject](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html)
++ [RestoreObject](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html)
++ [PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)
++ [PutObjectAcl](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html)
++ [PutObjectTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html)
++ [CopyObject](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)
++ [UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPart.html)
++ [UploadPartCopy](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html)
 
 In addition to these operations, you can use the following bucket\-level operations to get CloudTrail logs as object\-level Amazon S3 actions under certain conditions:
 + [GET Bucket \(List Objects\) Version 2](https://docs.aws.amazon.com/AmazonS3/latest/API/v2-RESTBucketGET.html) – Select a prefix specified in the trail\.

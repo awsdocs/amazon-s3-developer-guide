@@ -126,7 +126,7 @@ The bucket policy grants the `s3:GetBucketLocation` and `s3:ListBucket` permissi
                "s3:ListBucket"
             ],
             "Resource": [
-               "arn:aws:s3:::examplebucket"
+               "arn:aws:s3:::awsexamplebucket1"
             ]
          }
       ]
@@ -178,7 +178,7 @@ It is assumed you are signed in to the console using AccountBadmin user credenti
             "s3:ListBucket"
          ],
          "Resource": [
-            "arn:aws:s3:::examplebucket"
+            "arn:aws:s3:::awsexamplebucket1"
          ]
       }
    ]
@@ -255,7 +255,7 @@ You can have permissions granted via an ACL, a bucket policy, and a user policy\
                "s3:ListBucket"
             ],
             "Resource": [
-               "arn:aws:s3:::examplebucket"
+               "arn:aws:s3:::awsexamplebucket1"
             ]
          },
          {
@@ -268,7 +268,7 @@ You can have permissions granted via an ACL, a bucket policy, and a user policy\
                "s3:ListBucket"
             ],
             "Resource": [
-               "arn:aws:s3:::examplebucket"
+               "arn:aws:s3:::awsexamplebucket1"
             ]
          }
       ]

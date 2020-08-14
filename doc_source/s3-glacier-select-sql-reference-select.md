@@ -221,7 +221,7 @@ The following examples are either 1\) Amazon S3 or S3 Glacier objects in CSV for
 
 ## Using Reserved Keywords as User\-Defined Terms<a name="s3-glacier-select-sql-reference-using-keywords"></a>
 
-Amazon S3 Select and S3 Glacier Select have a set of reserved keywords that are needed to execute the SQL expressions used to query object content\. Reserved keywords include function names, data types, operators, and so on\. In some cases, user\-defined terms like the column headers \(for CSV files\) or attributes \(for JSON object\) may clash with a reserved keyword\. When this happens, you must use double quotation marks to indicate that you are intentionally using a user\-defined term that clashes with a reserved keyword\. Otherwise a 400 parse error will result\.
+Amazon S3 Select and S3 Glacier Select have a set of reserved keywords that are needed to run the SQL expressions used to query object content\. Reserved keywords include function names, data types, operators, and so on\. In some cases, user\-defined terms like the column headers \(for CSV files\) or attributes \(for JSON object\) may clash with a reserved keyword\. When this happens, you must use double quotation marks to indicate that you are intentionally using a user\-defined term that clashes with a reserved keyword\. Otherwise a 400 parse error will result\.
 
 For the full list of reserved keywords see [Reserved Keywords](s3-glacier-select-sql-reference-keyword-list.md)\.
 

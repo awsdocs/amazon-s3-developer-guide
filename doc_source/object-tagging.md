@@ -133,7 +133,7 @@ Note that the policy uses the Amazon S3 condition key, `s3:ExistingObjectTag/<ta
  4.     {
  5.       "Effect":     "Allow",
  6.       "Action":     "s3:GetObject",
- 7.       "Resource":    "arn:aws:s3:::examplebucket/*",
+ 7.       "Resource":    "arn:aws:s3:::awsexamplebucket1/*",
  8.       "Principal":   "*",
  9.       "Condition": {  "StringEquals": {"s3:ExistingObjectTag/security": "public" } }
 10.     }
@@ -154,7 +154,7 @@ The following permissions policy grants a user permissions to perform the `s3:Pu
  7.         "s3:PutObjectTagging"
  8.       ],
  9.       "Resource": [
-10.         "arn:aws:s3:::examplebucket/*"
+10.         "arn:aws:s3:::awsexamplebucket1/*"
 11.       ],
 12.       "Principal":{
 13.         "CanonicalUser":[
@@ -186,7 +186,7 @@ The policy ensures that the tag set, if specified in the request, has the specif
  8.         "s3:PutObjectTagging"
  9.       ],
 10.       "Resource": [
-11.         "arn:aws:s3:::examplebucket/*"
+11.         "arn:aws:s3:::awsexamplebucket1/*"
 12.       ],
 13.       "Principal":{
 14.         "AWS":[
@@ -226,7 +226,7 @@ The following user policy grants a user permissions to perform the `s3:PutObject
  7.         "s3:PutObjectTagging"
  8.       ],
  9.       "Resource": [
-10.         "arn:aws:s3:::examplebucket/*"
+10.         "arn:aws:s3:::awsexamplebucket1/*"
 11.       ],
 12.       "Principal":{
 13.         "AWS":[

@@ -127,7 +127,7 @@ Amazon's trademarks and trade dress may not be used in
             + [Using the AWS SDK for .NET for multipart upload (high-level API)](usingHLmpuDotNet.md)
                + [Upload a file to an S3 bucket using the AWS SDK for .NET (high-level API)](HLuploadFileDotNet.md)
                + [Upload a directory](HLuploadDirDotNet.md)
-               + [Abort multipart uploads to an S3 Bucket using the AWS SDK for .NET (high-level API)](HLAbortDotNet.md)
+               + [Stop multipart uploads to an S3 Bucket using the AWS SDK for .NET (high-level API)](HLAbortDotNet.md)
                + [Track the progress of a multipart upload to an S3 Bucket using the AWS SDK for .NET (high-level API)](HLTrackProgressMPUDotNet.md)
             + [Using the AWS SDK for .NET for multipart upload (low-level API)](usingLLmpuDotNet.md)
                + [Upload a file to an S3 Bucket using the AWS SDK for .NET (low-level API)](LLuploadFileDotNet.md)

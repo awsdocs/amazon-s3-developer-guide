@@ -95,8 +95,8 @@ Using the IAM user sign\-in URL for Account A first sign in to the AWS Managemen
                "s3:ListBucket"
             ],
             "Resource": [
-            "arn:aws:s3:::examplebucket/*"
-     	"arn:aws:s3:::examplebucket"
+            "arn:aws:s3:::awsexamplebucket1/*"
+     	"arn:aws:s3:::awsexamplebucket1"
             ]
          },
          {
@@ -109,7 +109,7 @@ Using the IAM user sign\-in URL for Account A first sign in to the AWS Managemen
                "s3:GetObject"
             ],
             "Resource": [
-               "arn:aws:s3:::examplebucket/*"
+               "arn:aws:s3:::awsexamplebucket1/*"
             ]
          }  
       ]

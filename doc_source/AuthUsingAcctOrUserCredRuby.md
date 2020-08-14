@@ -35,7 +35,7 @@ bucket = s3.bucket('example_bucket').objects.collect(&:key)
 puts bucket
 ```
 
-If you don't have a local AWS credentials file, you can still create the `Aws::S3::Resource` resource and execute code against Amazon S3 buckets and objects\. Requests that are sent using version 3 of the SDK for Ruby are anonymous, with no signature by default\. Amazon S3 returns an error if you send anonymous requests for a resource that's not publicly available\.
+If you don't have a local AWS credentials file, you can still create the `Aws::S3::Resource` resource and run code against Amazon S3 buckets and objects\. Requests that are sent using version 3 of the SDK for Ruby are anonymous, with no signature by default\. Amazon S3 returns an error if you send anonymous requests for a resource that's not publicly available\.
 
 You can use and expand the previous code snippet for SDK for Ruby applications, as in the following more robust example\. The credentials that are used for this example come from a local AWS credentials file on the computer that is running this application\. The credentials are for an IAM user who can list objects in the bucket that the user specifies when they run the application\.
 

@@ -2,7 +2,7 @@
 
 Amazon S3 defines a set of permissions that you can specify in a policy\. These are keywords, each of which maps to a specific Amazon S3 operation\. For more information about Amazon S3 operations, see [Actions](https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations.html) in the *Amazon Simple Storage Service API Reference*\. 
 
-To see how to specify permissions in an Amazon S3 in a policy, review the following example policies\. For a list of Amazon S3 actions, resources, and condition keys for use in policies, see [Actions, resources, and condition keys for Amazon S3](list_amazons3.md)\. For a complete list of Amazon S3 actions, see [Actions](https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations.html)\.
+To see how to specify permissions in an Amazon S3 policy, review the following example policies\. For a list of Amazon S3 actions, resources, and condition keys for use in policies, see [Actions, resources, and condition keys for Amazon S3](list_amazons3.md)\. For a complete list of Amazon S3 actions, see [Actions](https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations.html)\.
 
 **Topics**
 + [Example — Object Operations](#using-with-s3-actions-related-to-objects)
@@ -12,7 +12,7 @@ To see how to specify permissions in an Amazon S3 in a policy, review the follow
 
 ## Example — Object Operations<a name="using-with-s3-actions-related-to-objects"></a>
 
-The following example bucket policy grants the `s3:PutObject` and the `s3:PutObjectAcl` permissions to a user \(Dave\)\. If you remove the `Principal` element, you can attach the policy to a user\. These are object operations\. Accordingly, the `relative-id` portion of the `Resource` ARN identifies objects \(`examplebucket/*`\)\. For more information, see [Amazon S3 Resources](s3-arn-format.md)\.
+The following example bucket policy grants the `s3:PutObject` and the `s3:PutObjectAcl` permissions to a user \(Dave\)\. If you remove the `Principal` element, you can attach the policy to a user\. These are object operations\. Accordingly, the `relative-id` portion of the `Resource` ARN identifies objects \(`awsexamplebucket1/*`\)\. For more information, see [Amazon S3 Resources](s3-arn-format.md)\.
 
 ```
 {
@@ -22,10 +22,13 @@ The following example bucket policy grants the `s3:PutObject` and the `s3:PutObj
             "Sid": "statement1",
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::AccountB-ID:user/Dave"
+                "AWS": "arn:aws:iam::12345678901:user/Dave"
             },
-            "Action":   ["s3:PutObject","s3:PutObjectAcl"],
-            "Resource": "arn:aws:s3:::examplebucket/*"
+            "Action": [
+            "s3:PutObject",
+            "s3:PutObjectAcl"
+            ],
+            "Resource": "arn:aws:s3:::awsexamplebucket1/*"
         }
     ]
 }
@@ -77,13 +80,13 @@ The following user policy grants the `s3:GetBucketAcl` permission on the `exampl
       "Sid": "statement1",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::Account-ID:user/Dave"
+        "AWS": "arn:aws:iam::123456789012:user/Dave"
       },
       "Action": [
         "s3:GetObjectVersion",
         "s3:GetBucketAcl"
       ],
-      "Resource": "arn:aws:s3:::examplebucket"
+      "Resource": "arn:aws:s3:::awsexamplebucket1"
     }
   ]
 }
