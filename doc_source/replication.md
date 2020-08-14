@@ -45,7 +45,7 @@ Same\-Region replication can help you do the following:
 + **Aggregate logs into a single bucket** — If you store logs in multiple buckets or across multiple accounts, you can easily replicate logs into a single, in\-Region bucket\. This allows for simpler processing of logs in a single location\.
 
    
-+ **Configure live replication between production and test accounts** — If you or your customers have production and test accounts that use the same data, you can replicate objects between those multiple accounts, while maintaining  object metadata, by implementing SRR rules\.
++ **Configure live replication between production and test accounts** — If you or your customers have production and test accounts that use the same data, you can replicate objects between those multiple accounts, while maintaining object metadata, by implementing SRR rules\.
 
    
 + **Abide by data sovereignty laws** — You might be required to store multiple copies of your data in separate AWS accounts within a certain Region\. Same\-Region replication can help you automatically replicate critical data when compliance regulations don't allow the data to leave your country\.
