@@ -514,7 +514,7 @@ If you add the `Principal` element to the above user policy, identifying the use
          "Resource": "arn:aws:s3:::awsexamplebucket1",
          "Condition" : {
              "StringNotEquals" : {
-                 "s3:prefix": "examplefolder" 
+                 "s3:prefix": "projects" 
              }
           } 
        }         
