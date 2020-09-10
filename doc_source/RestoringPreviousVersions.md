@@ -19,3 +19,5 @@ The following figure shows how deleting the current version \(121212\) of an obj
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/versioning_COPY_delete2.png)
 
 A subsequent `GET` will retrieve version 111111\.
+
+For more information on retrieving previous versions of an object, see [Retrieving object versions](RetrievingObjectVersions.md)\.

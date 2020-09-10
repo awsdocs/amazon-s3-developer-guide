@@ -6,7 +6,7 @@ Once you complete this walkthrough, you can optionally use Amazon CloudFront to 
 
 **Note**  
 Amazon S3 does not support HTTPS access to the website\. If you want to use HTTPS, you can use Amazon CloudFront to serve a static website hosted on Amazon S3\.  
-For more information, see [How do I use CloudFront to serve a static website hosted on Amazon S3?](http://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/) and [Requiring HTTPS for communication between viewers and AWS CloudFormation](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html)\.
+For more information, see [How do I use CloudFront to serve a static website hosted on Amazon S3?](http://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/) and [Requiring HTTPS for communication between viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html)\.
 
 **Automating static website set up with an AWS CloudFormation template**  
 You can use an AWS CloudFormation template to automate your static website setup\. The AWS CloudFormation template sets up the components that you need to host a secure static website so that you can focus more on your website’s content and less on configuring components\.
@@ -368,7 +368,7 @@ If you don't already use Route 53, see [Step 1: Register a Domain](https://docs
 
 **To add an alias record for your subdomain \(`www.example.com`\)**
 
-1. In the hosted zone for your root domain \(`example.com`\), choose **Create Record Set**\.
+1. In the hosted zone for your root domain \(`example.com`\), choose **Create record**\.
 
 1. In **Record name** for your subdomain, type `www`\.
 

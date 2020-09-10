@@ -2,7 +2,7 @@
 
 To send authenticated requests to Amazon S3 using your AWS account or IAM user credentials, do the following: 
 + Use the `AmazonS3ClientBuilder` class to create an `AmazonS3Client` instance\.
-+ Execute one of the `AmazonS3Client` methods to send requests to Amazon S3\. The client generates the necessary signature from the credentials that you provide and includes it in the request\.
++ Run one of the `AmazonS3Client` methods to send requests to Amazon S3\. The client generates the necessary signature from the credentials that you provide and includes it in the request\.
 
  The following example performs the preceding tasks\. For information on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\. 
 

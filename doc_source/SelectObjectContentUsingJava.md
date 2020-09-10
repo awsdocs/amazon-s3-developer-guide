@@ -2,7 +2,7 @@
 
 You use Amazon S3 Select to select contents of an object with Java using the `selectObjectContent` method, which on success returns the results of the SQL expression\. The specified bucket and object key must exist, or an error results\.
 
-**Example Example**  
+**Example**  
 The following Java code returns the value of the first column for each record that is stored in an object that contains data stored in CSV format\. It also requests `Progress` and `Stats` messages to be returned\. You must provide a valid bucket name and an object that contains data in CSV format\.  
 For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 

@@ -5,7 +5,7 @@ Multipart upload allows you to upload a single object as a set of parts\. Each p
 Using multipart upload provides the following advantages:
 +  Improved throughput \- You can upload parts in parallel to improve throughput\. 
 + Quick recovery from any network issues \- Smaller part size minimizes the impact of restarting a failed upload due to a network error\.
-+ Pause and resume object uploads \- You can upload object parts over time\. Once you initiate a multipart upload there is no expiry; you must explicitly complete or abort the multipart upload\. 
++ Pause and resume object uploads \- You can upload object parts over time\. Once you initiate a multipart upload there is no expiry; you must explicitly complete or stop the multipart upload\.
 + Begin an upload before you know the final object size \- You can upload an object as you are creating it\. 
 
 **Topics**

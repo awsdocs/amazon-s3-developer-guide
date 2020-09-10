@@ -244,7 +244,7 @@ The following AWS CLI example creates an S3 Batch Operations `S3PutObjectCopy` j
    EOF
    ```
 
-1. Execute the`create-job` action to create your Batch Operations job with inputs set in the preceding steps\.
+1. Run the`create-job` action to create your Batch Operations job with inputs set in the preceding steps\.
 
    ```
    aws \
@@ -413,7 +413,7 @@ In this section, you perform two steps:
 
 The following example allows the rule to set S3 Object Lock retention for your objects in the manifest bucket\.
 
- You update the role to include `s3:PutObjectRetention` permissions so that you can execute Object Lock retention on the objects in your bucket\.
+ You update the role to include `s3:PutObjectRetention` permissions so that you can run Object Lock retention on the objects in your bucket\.
 
 ```
 export AWS_PROFILE='aws-user'

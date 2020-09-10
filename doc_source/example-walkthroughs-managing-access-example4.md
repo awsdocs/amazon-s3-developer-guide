@@ -310,7 +310,7 @@ Now Dave can access objects in the bucket owned by Account A as follows:
 + Dave first assumes the `examplerole` using his own credentials\. This will return temporary credentials\.
 + Using the temporary credentials, Dave will then access objects in Account A's bucket\.
 
-1. At the command prompt, execute the following AWS CLI `assume-role` command using the AccountCDave profile\. 
+1. At the command prompt, run the following AWS CLI `assume-role` command using the AccountCDave profile\. 
 
    You will need to update the ARN value in the command by providing the Account A ID where `examplerole` is defined\.
 
@@ -330,7 +330,7 @@ Now Dave can access objects in the bucket owned by Account A as follows:
    region = us-west-2
    ```
 
-1. At the command prompt, execute the following AWS CLI command to access objects using the temporary credentials\. For example, the command specifies the head\-object API to retrieve object metadata for the `HappyFace.jpg` object\.
+1. At the command prompt, run the following AWS CLI command to access objects using the temporary credentials\. For example, the command specifies the head\-object API to retrieve object metadata for the `HappyFace.jpg` object\.
 
    ```
    aws s3api get-object --bucket examplebucket --key HappyFace.jpg SaveFileAs.jpg --profile TempCred

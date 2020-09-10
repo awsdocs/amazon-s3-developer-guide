@@ -14,7 +14,7 @@ The following tasks guide you through using PHP classes to make multiple copies 
 |  |  | 
 | --- |--- |
 |  1  |  Create an instance of an Amazon S3 client by using the `Aws\S3\S3Client` class constructor\.  | 
-|  2  |  To make multiple copies of an object, you execute a batch of calls to the Amazon S3 client [getCommand\(\)](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.AwsClientInterface.html#_getCommand) method, which is inherited from the [Aws\\CommandInterface](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.CommandInterface.html) class\. You provide the `CopyObject` command as the first argument and an array containing the source bucket, source key name, target bucket, and target key name as the second argument\.   | 
+|  2  |  To make multiple copies of an object, you run a batch of calls to the Amazon S3 client [getCommand\(\)](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.AwsClientInterface.html#_getCommand) method, which is inherited from the [Aws\\CommandInterface](https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.CommandInterface.html) class\. You provide the `CopyObject` command as the first argument and an array containing the source bucket, source key name, target bucket, and target key name as the second argument\.   | 
 
 **Example of Copying Objects within Amazon S3**  
 The following PHP example illustrates the use of the `copyObject()` method to copy a single object within Amazon S3 and using a batch of calls to `CopyObject` using the `getcommand()` method to make multiple copies of an object\.  

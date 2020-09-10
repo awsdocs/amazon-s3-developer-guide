@@ -59,7 +59,7 @@ Europe \(Ireland\)
 South America \(São Paulo\)
 For a list of all the Amazon S3 supported regions and endpoints, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the *AWS General Reference*\.
 
-**Example Example: Email Address**  
+**Example: Email Address**  
 For example, the following `x-amz-grant-read` header grants the AWS accounts identified by email addresses permissions to read object data and its metadata:  
 
 ```

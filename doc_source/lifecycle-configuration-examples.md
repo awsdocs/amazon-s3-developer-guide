@@ -468,12 +468,12 @@ When specifying the `ExpiredObjectDeleteMarker` Lifecycle action, the rule canno
 
 You can use the multipart upload API to upload large objects in parts\. For more information about multipart uploads, see [Multipart upload overview](mpuoverview.md)\. 
 
-Using S3 Lifecycle configuration, you can direct Amazon S3 to abort incomplete multipart uploads \(identified by the key name prefix specified in the rule\) if they don't complete within a specified number of days after initiation\. When Amazon S3 aborts a multipart upload, it deletes all parts associated with the multipart upload\. This ensures that you don't have incomplete multipart uploads with parts that are stored in Amazon S3 and, therefore, you don't have to pay any storage costs for these parts\. 
+Using S3 Lifecycle configuration, you can direct Amazon S3 to stop incomplete multipart uploads \(identified by the key name prefix specified in the rule\) if they don't complete within a specified number of days after initiation\. When Amazon S3 aborts a multipart upload, it deletes all parts associated with the multipart upload\. This ensures that you don't have incomplete multipart uploads with parts that are stored in Amazon S3 and, therefore, you don't have to pay any storage costs for these parts\. 
 
 **Note**  
 When specifying the `AbortIncompleteMultipartUpload` Lifecycle action, the rule cannot specify a tag\-based filter\.
 
-The following is an example S3 Lifecycle configuration that specifies a rule with the `AbortIncompleteMultipartUpload` action\. This action requests Amazon S3 to abort incomplete multipart uploads seven days after initiation\.
+The following is an example S3 Lifecycle configuration that specifies a rule with the `AbortIncompleteMultipartUpload` action\. This action requests Amazon S3 to stop incomplete multipart uploads seven days after initiation\.
 
 ```
 <LifecycleConfiguration>

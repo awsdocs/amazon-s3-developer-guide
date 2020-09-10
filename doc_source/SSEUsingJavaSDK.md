@@ -8,7 +8,7 @@ You can also request server\-side encryption when uploading objects with the mul
 
 You can't directly change the encryption state of an object \(encrypting an unencrypted object or decrypting an encrypted object\)\. To change an object's encryption state, you make a copy of the object, specifying the desired encryption state for the copy, and then delete the original object\. Amazon S3 encrypts the copied object only if you explicitly request server\-side encryption\. To request encryption of the copied object through the Java API, use the `ObjectMetadata` property to specify server\-side encryption in the `CopyObjectRequest`\.
 
-**Example Example**  
+**Example**  
 The following example shows how to set server\-side encryption using the AWS SDK for Java\. It shows how to perform the following tasks:  
 + Upload a new object using server\-side encryption\.
 + Change an object's encryption state \(in this example, encrypting a previously unencrypted object\) by making a copy of the object\.

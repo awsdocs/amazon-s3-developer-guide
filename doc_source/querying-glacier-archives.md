@@ -17,7 +17,7 @@ You can use the select type of restore with the AWS SDKs, the S3 Glacier REST AP
 
 The following are requirements for using select:
 + Archive objects that are queried by select must be formatted as uncompressed comma\-separated values \(CSV\)\. 
-+ An S3 bucket for output\. The AWS account that you use to initiate a S3 Glacier select job must have write permissions for the S3 bucket\. The Amazon S3 bucket must be in the same AWS Region as the bucket that contains the archived object that is being queried\.
++ A S3 bucket for output\. The AWS account that you use to initiate a S3 Glacier select job must have write permissions for the S3 bucket\. The Amazon S3 bucket must be in the same AWS Region as the bucket that contains the archived object that is being queried\.
 + The requesting AWS account must have permissions to perform the `s3:RestoreObject` and `s3:GetObject` actions\. For more information about these permissions, see [Example — Bucket Subresource Operations](using-with-s3-actions.md#using-with-s3-actions-related-to-bucket-subresources)\. 
 + The archive must not be encrypted with SSE\-C or client\-side encryption\. 
 
@@ -73,7 +73,7 @@ The length of an Amazon S3 object name, also referred to as the *key*, can be no
 
 Select notifies you of two kinds of errors\. The first set of errors is sent to you synchronously when you submit the query in [POST Object restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html)\. These errors are sent to you as part of the HTTP response\. Another set of errors can occur after the query has been accepted successfully, but they happen during query execution\. In this case, the errors are written to the specified output location under the `errors` prefix\.
 
-Select stops executing the query after encountering an error\. To execute the query successfully, you must resolve all errors\. You can check the logs to identify which records caused a failure\. 
+Select stops executing the query after encountering an error\. To run the query successfully, you must resolve all errors\. You can check the logs to identify which records caused a failure\. 
 
 Because queries run in parallel across multiple compute nodes, the errors that you get are not in sequential order\. For example, if your query fails with an error in row 6,234, it does not mean that all rows before row 6,234 were successfully processed\. The next run of the query might show an error in a different row\. 
 

@@ -3,8 +3,8 @@
 When you download an object through the AWS SDK for Java, Amazon S3 returns all of the object's metadata and an input stream from which to read the object's contents\.
 
 To retrieve an object, you do the following:
-+ Execute the `AmazonS3Client.getObject()` method, providing the bucket name and object key in the request\.
-+ Execute one of the `S3Object` instance methods to process the input stream\.
++ Run the `AmazonS3Client.getObject()` method, providing the bucket name and object key in the request\.
++ Run one of the `S3Object` instance methods to process the input stream\.
 
 **Note**  
 Your network connection remains open until you read all of the data or close the input stream\. We recommend that you read the content of the stream as quickly as possible\.

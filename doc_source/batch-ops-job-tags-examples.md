@@ -81,7 +81,7 @@ The policy in this example includes three policy statements:
 
 ## Tagging Batch Operations jobs by stage and enforcing limits on job priority<a name="tagging-jobs-by-stage-and-enforcing-limits-on-job-priority"></a>
 
-All S3 Batch Operations jobs have a numeric priority, which Amazon S3 uses to decide in what order to execute the jobs\. For this example, you restrict the maximum priority that most users can assign to jobs, with higher priority ranges reserved for a limited set of privileged users, as follows:
+All S3 Batch Operations jobs have a numeric priority, which Amazon S3 uses to decide in what order to run the jobs\. For this example, you restrict the maximum priority that most users can assign to jobs, with higher priority ranges reserved for a limited set of privileged users, as follows:
 + QA stage priority range \(low\): 1\-100
 + Production stage priority range \(high\): 1\-300
 

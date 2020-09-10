@@ -137,4 +137,4 @@ public class Main {
 }
 ```
 
-For more information, see [Replicating Objects Using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\. 
+For more information, see [Meet compliance requirements using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\. 

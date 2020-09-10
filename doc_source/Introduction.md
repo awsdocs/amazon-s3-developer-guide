@@ -185,7 +185,7 @@ You can use *versioning* to keep multiple versions of an object in the same buck
 
 ### Operations<a name="BasicsOperations"></a>
 
-Following are the most common operations that you'll execute through the API\.
+Following are the most common operations that you'll run through the API\.
 
 **Common operations**
 + **Create a bucket** – Create and name your own bucket in which to store your objects\.

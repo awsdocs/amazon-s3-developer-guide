@@ -6,7 +6,7 @@ You can delete an object from a bucket\. If you have S3 Versioning enabled on th
 
 For more information about S3 Versioning, see [Object Versioning](ObjectVersioning.md)\. 
 
-**Example Example 1: Deleting an object \(non\-versioned bucket\)**  
+**Example 1: Deleting an object \(non\-versioned bucket\)**  
 The following example deletes an object from a bucket\. The example assumes that the bucket is not versioning\-enabled and the object doesn't have any version IDs\. In the delete request, you specify only the object key and not a version ID\. For instructions on creating and testing a working sample, see [Testing the Amazon S3 Java Code Examples](UsingTheMPJavaAPI.md#TestingJavaSamples)\.  
 
 ```
@@ -47,7 +47,7 @@ public class DeleteObjectNonVersionedBucket {
 }
 ```
 
-**Example Example 2: Deleting an object \(versioned bucket\)**  
+**Example 2: Deleting an object \(versioned bucket\)**  
 The following example deletes an object from a versioned bucket\. The example deletes a specific object version by specifying the object key name and version ID\. The example does the following:  
 
 1. Adds a sample object to the bucket\. Amazon S3 returns the version ID of the newly added object\. The example uses this version ID in the delete request\.

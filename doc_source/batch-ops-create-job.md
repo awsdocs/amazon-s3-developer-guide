@@ -12,10 +12,10 @@ For step\-by\-step instructions for creating a job using the Amazon S3 console, 
 To create an S3 Batch Operations job, you must provide the following information:
 
 **Operation**  
-Specify the operation that you want S3 Batch Operations to execute against the objects in the manifest\. Each operation type accepts parameters that are specific to that operation\. This enables you to perform the same tasks as if you performed the operation one\-by\-one on each object\.
+Specify the operation that you want S3 Batch Operations to run against the objects in the manifest\. Each operation type accepts parameters that are specific to that operation\. This enables you to perform the same tasks as if you performed the operation one\-by\-one on each object\.
 
 **Manifest**  
-The manifest is a list of all of the objects that you want S3 Batch Operations to execute the specified action on\. You can use a CSV\-formatted [ Amazon S3 inventory](storage-inventory.md) report as a manifest or use your own customized CSV list of objects\.   
+The manifest is a list of all of the objects that you want S3 Batch Operations to run the specified action on\. You can use a CSV\-formatted [ Amazon S3 inventory](storage-inventory.md) report as a manifest or use your own customized CSV list of objects\.   
 For more information about manifests, see [Specifying a manifest](batch-ops-basics.md#specify-batchjob-manifest)\.
 
 **Priority**  

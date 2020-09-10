@@ -6,4 +6,4 @@ The AWS SDK for \.NET exposes a low\-level API that closely resembles the Amazon
 + [Upload a file to an S3 Bucket using the AWS SDK for \.NET \(low\-level API\)](LLuploadFileDotNet.md)
 + [List multipart uploads to an S3 Bucket using the AWS SDK for \.NET \(low\-level\)](LLlistMPuploadsDotNet.md)
 + [Track the progress of a multipart upload to an S3 Bucket using the AWS SDK for \.NET \(low\-level\)](LLTrackProgressMPUNet.md)
-+ [Abort multipart uploads to an S3 Bucket using the AWS SDK for \.NET \(low\-level\)](LLAbortMPUnet.md)
++ [Stop multipart uploads to an S3 Bucket using the AWS SDK for \.NET \(low\-level\)](LLAbortMPUnet.md)

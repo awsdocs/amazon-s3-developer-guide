@@ -281,7 +281,7 @@ The following example shows a CloudTrail log entry that demonstrates the [GET Se
           "host": [
               "s3.us-west-2.amazonaws.com"
           ],
-          "bucketName": "AWSDOC-EXAMPLE-BUCKET1",
+          "bucketName": "DOC-EXAMPLE-BUCKET1",
           "versioning": [
               ""
           ]

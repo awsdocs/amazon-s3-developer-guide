@@ -165,7 +165,7 @@ Now verify user Dave in Account A can access the object owned by Account B\.
    region = us-east-1
    ```
 
-1. Execute the `get-object` AWS CLI command to download `HappyFace.jpg` and save it locally\. You provide user Dave credentials by adding the `--profile` parameter\.
+1. Run the `get-object` AWS CLI command to download `HappyFace.jpg` and save it locally\. You provide user Dave credentials by adding the `--profile` parameter\.
 
    ```
    aws s3api get-object --bucket examplebucket --key HappyFace.jpg Outputfile.jpg --profile UserDaveAccountA
@@ -179,7 +179,7 @@ Now verify user Dave in Account A can access the object owned by Account B\.
    Set-AWSCredentials -AccessKey UserDave-AccessKey -SecretKey UserDave-SecretAccessKey -storeas UserDaveAccountA
    ```
 
-1. Execute the Read\-S3Object command to download the `HappyFace.jpg` object and save it locally\. You provide user Dave credentials by adding the `-StoredCredentials` parameter\. 
+1. Run the Read\-S3Object command to download the `HappyFace.jpg` object and save it locally\. You provide user Dave credentials by adding the `-StoredCredentials` parameter\. 
 
    ```
    Read-S3Object -BucketName examplebucket -Key HappyFace.jpg -file HappyFace.jpg  -StoredCredentials UserDaveAccountA

@@ -78,7 +78,7 @@ Also consider implementing on\-going detective controls using the [s3\-bucket\-r
 
 **Consider VPC endpoints for Amazon S3 access**  
 A VPC endpoint for Amazon S3 is a logical entity within an Amazon Virtual Private Cloud \(Amazon VPC\) that allows connectivity only to Amazon S3\. You can use Amazon S3 bucket policies to control access to buckets from specific Amazon VPC endpoints, or specific VPCs\. A VPC endpoint can help prevent traffic from potentially traversing the open internet and being subject to open internet environment\.  
-VPC endpoints for Amazon S3 provide two ways to control access to your Amazon S3 data:  
+VPC endpoints for Amazon S3 provide multiple ways to control access to your Amazon S3 data:  
 + You can control the requests, users, or groups that are allowed through a specific VPC endpoint\.
 + You can control which VPCs or VPC endpoints have access to your S3 buckets by using S3 bucket policies\.
 + You can help prevent data exfiltration by using a VPC that does not have an internet gateway\.

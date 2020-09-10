@@ -53,7 +53,7 @@ Amazon S3 Select scan range requests are available to use on the Amazon S3 CLI, 
 
 ## Errors<a name="selecting-content-from-objects-errors"></a>
 
-Amazon S3 Select returns an error code and associated error message when an issue is encountered while attempting to execute a query\. For a list of error codes and descriptions, see the [List of SELECT Object Content Error Codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#SelectObjectContentErrorCodeList) section of the *Error Responses* page in the *Amazon Simple Storage Service API Reference*\.
+Amazon S3 Select returns an error code and associated error message when an issue is encountered while attempting to run a query\. For a list of error codes and descriptions, see the [List of SELECT Object Content Error Codes](https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#SelectObjectContentErrorCodeList) section of the *Error Responses* page in the *Amazon Simple Storage Service API Reference*\.
 
 **Topics**
 + [Requirements and limits](#selecting-content-from-objects-requirements-and-limits)

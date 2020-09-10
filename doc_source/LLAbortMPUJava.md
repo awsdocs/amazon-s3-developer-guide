@@ -1,9 +1,9 @@
 # Abort a multipart upload<a name="LLAbortMPUJava"></a>
 
-You can abort an in\-progress multipart upload by calling the `AmazonS3Client.abortMultipartUpload()` method\. This method deletes all parts that were uploaded to Amazon S3 and frees the resources\. You provide the upload ID, bucket name, and key name\.
+You can stop an in\-progress multipart upload by calling the `AmazonS3Client.abortMultipartUpload()` method\. This method deletes all parts that were uploaded to Amazon S3 and frees the resources\. You provide the upload ID, bucket name, and key name\.
 
 **Example**  
-The following example shows how to abort multipart uploads using the low\-level Java API\.  
+The following example shows how to stop multipart uploads using the low\-level Java API\.  
 
 ```
 import com.amazonaws.AmazonServiceException;
@@ -63,4 +63,4 @@ public class LowLevelAbortMultipartUpload {
 ```
 
 **Note**  
-Instead of aborting multipart uploads individually, you can abort all of your in\-progress multipart uploads that were initiated before a specific time\. This clean\-up operation is useful for aborting multipart uploads that you initiated but that didn't complete or were aborted\. For more information, see [Abort multipart uploads](HLAbortMPUploadsJava.md)\.
+Instead of stopping multipart uploads individually, you can stop all of your in\-progress multipart uploads that were initiated before a specific time\. This clean\-up operation is useful for aborting multipart uploads that you initiated but that didn't complete or were aborted\. For more information, see [Stop multipart uploads](HLAbortMPUploadsJava.md)\.

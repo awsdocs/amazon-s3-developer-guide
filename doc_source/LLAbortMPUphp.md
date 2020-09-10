@@ -1,8 +1,8 @@
 # Abort a multipart upload<a name="LLAbortMPUphp"></a>
 
-This topic describes how to use a class from version 3 of the AWS SDK for PHP to abort a multipart upload that is in progress\. It assumes that you are already following the instructions for [Using the AWS SDK for PHP and Running PHP Examples](UsingTheMPphpAPI.md) and have the AWS SDK for PHP properly installed\.
+This topic describes how to use a class from version 3 of the AWS SDK for PHP to stop a multipart upload that is in progress\. It assumes that you are already following the instructions for [Using the AWS SDK for PHP and Running PHP Examples](UsingTheMPphpAPI.md) and have the AWS SDK for PHP properly installed\.
 
-The following PHP example shows how to abort an in\-progress multipart upload using the `abortMultipartUpload()` method\. For information about running the PHP examples in this guide, see [Running PHP Examples](UsingTheMPphpAPI.md#running-php-samples)\.
+The following PHP example shows how to stop an in\-progress multipart upload using the `abortMultipartUpload()` method\. For information about running the PHP examples in this guide, see [Running PHP Examples](UsingTheMPphpAPI.md#running-php-samples)\.
 
 ```
  require 'vendor/autoload.php';

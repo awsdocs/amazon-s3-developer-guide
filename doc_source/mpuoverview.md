@@ -3,7 +3,7 @@
 **Topics**
 + [Concurrent multipart upload operations](#distributedmpupload)
 + [Multipart upload and pricing](#mpuploadpricing)
-+ [Aborting incomplete multipart uploads using a bucket lifecycle policy](#mpu-abort-incomplete-mpu-lifecycle-config)
++ [Stopping incomplete multipart uploads using a bucket lifecycle policy](#mpu-stop-incomplete-mpu-lifecycle-config)
 + [Amazon S3 multipart upload limits](qfacts.md)
 + [API support for multipart upload](sdksupportformpu.md)
 + [Multipart upload API and permissions](mpuAndPermissions.md)
@@ -15,19 +15,19 @@ Multipart uploading is a three\-step process: You initiate the upload, you uploa
 You can list all of your in\-progress multipart uploads or get a list of the parts that you have uploaded for a specific multipart upload\. Each of these operations is explained in this section\.
 
 **Multipart upload initiation**  
-When you send a request to initiate a multipart upload, Amazon S3 returns a response with an upload ID, which is a unique identifier for your multipart upload\. You must include this upload ID whenever you upload parts, list the parts, complete an upload, or abort an upload\. If you want to provide any metadata describing the object being uploaded, you must provide it in the request to initiate multipart upload\.
+When you send a request to initiate a multipart upload, Amazon S3 returns a response with an upload ID, which is a unique identifier for your multipart upload\. You must include this upload ID whenever you upload parts, list the parts, complete an upload, or stop an upload\. If you want to provide any metadata describing the object being uploaded, you must provide it in the request to initiate multipart upload\.
 
 **Parts upload**  
  When uploading a part, in addition to the upload ID, you must specify a part number\. You can choose any part number between 1 and 10,000\. A part number uniquely identifies a part and its position in the object you are uploading\. The part number that you choose doesn’t need to be in a consecutive sequence \(for example, it can be 1, 5, and 14\)\. If you upload a new part using the same part number as a previously uploaded part, the previously uploaded part is overwritten\. Whenever you upload a part, Amazon S3 returns an *ETag* header in its response\. For each part upload, you must record the part number and the ETag value\. You need to include these values in the subsequent request to complete the multipart upload\.
 
 **Note**  
-After you initiate a multipart upload and upload one or more parts, you must either complete or abort the multipart upload in order to stop getting charged for storage of the uploaded parts\. Only *after* you either complete or abort a multipart upload will Amazon S3 free up the parts storage and stop charging you for the parts storage\.
+After you initiate a multipart upload and upload one or more parts, you must either complete or stop the multipart upload in order to stop getting charged for storage of the uploaded parts\. Only *after* you either complete or stop a multipart upload will Amazon S3 free up the parts storage and stop charging you for the parts storage\.
 
-**Multipart upload completion \(or abort\)**  
-When you complete a multipart upload, Amazon S3 creates an object by concatenating the parts in ascending order based on the part number\. If any object metadata was provided in the *initiate multipart upload* request, Amazon S3 associates that metadata with the object\. After a successful *complete* request, the parts no longer exist\. Your *complete multipart upload* request must include the upload ID and a list of both part numbers and corresponding ETag values\. Amazon S3 response includes an ETag that uniquely identifies the combined object data\. This ETag will not necessarily be an MD5 hash of the object data\. You can optionally abort the multipart upload\. After aborting a multipart upload, you cannot upload any part using that upload ID again\. All storage that any parts from the aborted multipart upload consumed is then freed\. If any part uploads were in\-progress, they can still succeed or fail even after you aborted\. To free all storage consumed by all parts, you must abort a multipart upload only after all part uploads have completed\.
+**Multipart upload completion**  
+When you complete a multipart upload, Amazon S3 creates an object by concatenating the parts in ascending order based on the part number\. If any object metadata was provided in the *initiate multipart upload* request, Amazon S3 associates that metadata with the object\. After a successful *complete* request, the parts no longer exist\. Your *complete multipart upload* request must include the upload ID and a list of both part numbers and corresponding ETag values\. Amazon S3 response includes an ETag that uniquely identifies the combined object data\. This ETag will not necessarily be an MD5 hash of the object data\. You can optionally stop the multipart upload\. After stopping a multipart upload, you cannot upload any part using that upload ID again\. All storage from any part of the cancelled multipart upload is then freed\. If any part uploads were in\-progress, they can still succeed or fail even after you stop\. To free all storage consumed by all parts, you must stop a multipart upload only after all part uploads have completed\.
 
 **Multipart upload listings**  
-You can list the parts of a specific multipart upload or all in\-progress multipart uploads\. The list parts operation returns the parts information that you have uploaded for a specific multipart upload\. For each list parts request, Amazon S3 returns the parts information for the specified multipart upload, up to a maximum of 1,000 parts\. If there are more than 1,000 parts in the multipart upload, you must send a series of list part requests to retrieve all the parts\. Note that the returned list of parts doesn't include parts that haven't completed uploading\. Using the *list multipart uploads* operation, you can obtain a list of multipart uploads in progress\. An in\-progress multipart upload is an upload that you have initiated, but have not yet completed or aborted\. Each request returns at most 1000 multipart uploads\. If there are more than 1,000 multipart uploads in progress, you need to send additional requests to retrieve the remaining multipart uploads\. Only use the returned listing for verification\. You should not use the result of this listing when sending a *complete multipart upload* request\. Instead, maintain your own list of the part numbers you specified when uploading parts and the corresponding ETag values that Amazon S3 returns\.
+You can list the parts of a specific multipart upload or all in\-progress multipart uploads\. The list parts operation returns the parts information that you have uploaded for a specific multipart upload\. For each list parts request, Amazon S3 returns the parts information for the specified multipart upload, up to a maximum of 1,000 parts\. If there are more than 1,000 parts in the multipart upload, you must send a series of list part requests to retrieve all the parts\. Note that the returned list of parts doesn't include parts that haven't completed uploading\. Using the *list multipart uploads* operation, you can obtain a list of multipart uploads in progress\. An in\-progress multipart upload is an upload that you have initiated, but have not yet completed or stopped\. Each request returns at most 1000 multipart uploads\. If there are more than 1,000 multipart uploads in progress, you need to send additional requests to retrieve the remaining multipart uploads\. Only use the returned listing for verification\. You should not use the result of this listing when sending a *complete multipart upload* request\. Instead, maintain your own list of the part numbers you specified when uploading parts and the corresponding ETag values that Amazon S3 returns\.
 
 ## Concurrent multipart upload operations<a name="distributedmpupload"></a>
 
@@ -38,17 +38,17 @@ It is possible for some other request received between the time you initiated a 
 
 ## Multipart upload and pricing<a name="mpuploadpricing"></a>
 
-Once you initiate a multipart upload, Amazon S3 retains all the parts until you either complete or abort the upload\. Throughout its lifetime, you are billed for all storage, bandwidth, and requests for this multipart upload and its associated parts\. If you abort the multipart upload, Amazon S3 deletes upload artifacts and any parts that you have uploaded, and you are no longer billed for them\. For more information about pricing, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
+Once you initiate a multipart upload, Amazon S3 retains all the parts until you either complete or stop the upload\. Throughout its lifetime, you are billed for all storage, bandwidth, and requests for this multipart upload and its associated parts\. If you stop the multipart upload, Amazon S3 deletes upload artifacts and any parts that you have uploaded, and you are no longer billed for them\. For more information about pricing, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
 
-## Aborting incomplete multipart uploads using a bucket lifecycle policy<a name="mpu-abort-incomplete-mpu-lifecycle-config"></a>
+## Stopping incomplete multipart uploads using a bucket lifecycle policy<a name="mpu-stop-incomplete-mpu-lifecycle-config"></a>
 
 After you initiate a multipart upload, you begin uploading parts\. Amazon S3 stores these parts, but it creates the object from the parts only after you upload all of them and send a `successful` request to complete the multipart upload \(you should verify that your request to complete multipart upload is successful\)\. Upon receiving the complete multipart upload request, Amazon S3 assembles the parts and creates an object\.
 
 If you don't send the complete multipart upload request successfully, Amazon S3 will not assemble the parts and will not create any object\. Therefore, the parts remain in Amazon S3 and you pay for the parts that are stored in Amazon S3\. As a best practice, we recommend you configure a lifecycle rule \(using the `AbortIncompleteMultipartUpload` action\) to minimize your storage costs\.
 
-Amazon S3 supports a bucket lifecycle rule that you can use to direct Amazon S3 to abort multipart uploads that don't complete within a specified number of days after being initiated\. When a multipart upload is not completed within the time frame, it becomes eligible for an abort operation and Amazon S3 aborts the multipart upload \(and deletes the parts associated with the multipart upload\)\.
+Amazon S3 supports a bucket lifecycle rule that you can use to direct Amazon S3 to stop multipart uploads that don't complete within a specified number of days after being initiated\. When a multipart upload is not completed within the time frame, it becomes eligible for stoppage and Amazon S3 stops the multipart upload \(and deletes the parts associated with the multipart upload\)\.
 
- The following is an example lifecycle configuration that specifies a rule with the `AbortIncompleteMultipartUpload` action\. 
+ The following is an example lifecycle configuration that specifies a rule with the `AbortIncompleteMultipartUpload` action\.
 
 ```
 <LifecycleConfiguration>
@@ -63,7 +63,7 @@ Amazon S3 supports a bucket lifecycle rule that you can use to direct Amazon S3 
 </LifecycleConfiguration>
 ```
 
-In the example, the rule does not specify a value for the `Prefix` element \([object key name prefix](https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#keyprefix)\)\. Therefore, it applies to all objects in the bucket for which you initiated multipart uploads\. Any multipart uploads that were initiated and did not complete within seven days become eligible for an abort operation\. The abort action has no effect on completed multipart uploads\.
+In the example, the rule does not specify a value for the `Prefix` element \([object key name prefix](https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#keyprefix)\)\. Therefore, it applies to all objects in the bucket for which you initiated multipart uploads\. Any multipart uploads that were initiated and did not complete within seven days become eligible for stoppage\. This action has no effect on completed multipart uploads\.
 
 For more information about the bucket lifecycle configuration, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
 

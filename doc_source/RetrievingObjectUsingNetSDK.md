@@ -1,8 +1,8 @@
 # Get an object Using the AWS SDK for \.NET<a name="RetrievingObjectUsingNetSDK"></a>
 
 When you download an object, you get all of the object's metadata and a stream from which to read the contents\. You should read the content of the stream as quickly as possible because the data is streamed directly from Amazon S3 and your network connection will remain open until you read all the data or close the input stream\. You do the following to get an object:
-+ Execute the `getObject` method by providing bucket name and object key in the request\.
-+ Execute one of the `GetObjectResponse` methods to process the stream\.
++ Run the `getObject` method by providing bucket name and object key in the request\.
++ Run one of the `GetObjectResponse` methods to process the stream\.
 
 The following are some variations you might use:
 + Instead of reading the entire object, you can read only the portion of the object data by specifying the byte range in the request, as shown in the following C\# example:  
