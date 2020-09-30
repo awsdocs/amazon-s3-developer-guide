@@ -68,7 +68,10 @@ The profiles you use for this exercise must have the necessary permissions\. For
             },
             "Action": [
               "s3:ReplicateObject",
-              "s3:ReplicateDelete"
+              "s3:ReplicateDelete",
+              "s3:ObjectOwnerOverrideToBucketOwner",
+              "s3:ReplicateTags",
+              "s3:GetObjectVersionTagging"
             ],
             "Effect": "Allow",
             "Resource": [
