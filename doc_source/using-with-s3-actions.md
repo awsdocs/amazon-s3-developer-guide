@@ -70,7 +70,7 @@ If a user wants to use the AWS Management Console to view buckets and the conten
 
 ## Example — Bucket Subresource Operations<a name="using-with-s3-actions-related-to-bucket-subresources"></a>
 
-The following user policy grants the `s3:GetBucketAcl` permission on the `examplebucket` bucket to user Dave\.
+The following user policy grants the `s3:GetBucketAcl` permission on the `DOC-EXAMPLE-BUCKET1` bucket to user Dave\.
 
 ```
 {
@@ -86,7 +86,10 @@ The following user policy grants the `s3:GetBucketAcl` permission on the `exampl
         "s3:GetObjectVersion",
         "s3:GetBucketAcl"
       ],
-      "Resource": "arn:aws:s3:::awsexamplebucket1"
+      "Resource": [
+        "arn:aws:s3:::DOC-EXAMPLE-BUCKET1",
+	 "arn:aws:s3:::DOC-EXAMPLE-BUCKET1/*"
+      ]
     }
   ]
 }

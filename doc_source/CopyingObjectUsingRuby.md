@@ -17,18 +17,42 @@ The following tasks guide you through using the Ruby classes to copy an object i
 ```
 require 'aws-sdk-s3'
 
-source_bucket_name = '*** Provide bucket name ***'
-target_bucket_name = '*** Provide bucket name ***'
-source_key = '*** Provide source key ***'
-target_key = '*** Provide target key ***'
+# Copies an object from one Amazon S3 bucket to another.
+#
+# Prerequisites:
+#
+# - Two S3 buckets (a source bucket and a target bucket).
+# - An object in the source bucket to be copied.
+#
+# @param s3_client [Aws::S3::Client] An initialized Amazon S3 client.
+# @param source_bucket_name [String] The source bucket's name.
+# @param source_key [String] The name of the object
+#   in the source bucket to be copied.
+# @param target_bucket_name [String] The target bucket's name.
+# @param target_key [String] The name of the copied object.
+# @return [Boolean] true if the object was copied; otherwise, false.
+# @example
+#   s3_client = Aws::S3::Client.new(region: 'us-east-1')
+#   exit 1 unless object_copied?(
+#     s3_client,
+#     'doc-example-bucket1',
+#     'my-source-file.txt',
+#     'doc-example-bucket2',
+#     'my-target-file.txt'
+#   )
+def object_copied?(
+  s3_client,
+  source_bucket_name,
+  source_key,
+  target_bucket_name,
+  target_key)
 
-begin
-  s3 = Aws::S3::Client.new(region: 'us-west-2')
-  s3.copy_object(bucket: target_bucket_name, copy_source: source_bucket_name + '/' + source_key, key: target_key)
-rescue StandardError => ex
-  puts 'Caught exception copying object ' + source_key + ' from bucket ' + source_bucket_name + ' to bucket ' + target_bucket_name + ' as ' + target_key + ':'
-  puts ex.message
+  return true if s3_client.copy_object(
+    bucket: target_bucket_name,
+    copy_source: source_bucket_name + '/' + source_key,
+    key: target_key
+  )
+rescue StandardError => e
+  puts "Error while copying object: #{e.message}"
 end
-
-puts 'Copied ' +  source_key + ' from bucket ' + source_bucket_name + ' to bucket ' + target_bucket_name + ' as ' + target_key
 ```

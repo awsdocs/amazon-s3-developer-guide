@@ -17,7 +17,8 @@ In Amazon Web Services \(AWS\), a resource is an entity that you can work with\.
 + `website` – Stores website configuration information if you configure your bucket for website hosting \(see [Hosting a static website on Amazon S3](WebsiteHosting.md)\)\. 
 + `versioning` – Stores versioning configuration \(see [PUT Bucket versioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)\)\. 
 + `policy` and `acl` \(access control list\) – Store access permission information for the bucket\. 
-+ `cors` \(cross\-origin resource sharing\) – Supports configuring your bucket to allow cross\-origin requests \(see [Cross\-origin resource sharing \(CORS\)](cors.md)\)\. 
++ `cors` \(cross\-origin resource sharing\) – Supports configuring your bucket to allow cross\-origin requests \(see [Cross\-origin resource sharing \(CORS\)](cors.md)\)\.
++ `object ownership` – Enables the bucket owner to take ownership of new objects in the bucket, regardless of who uploads them \(see [Controlling ownership of uploaded objects using S3 Object Ownership](about-object-ownership.md)\)\.
 + `logging` – Enables you to request Amazon S3 to save bucket access logs\.
 
 Object subresources include the following:
@@ -28,11 +29,7 @@ Object subresources include the following:
 
 Buckets and objects are Amazon S3 resources\. By default, only the resource owner can access these resources\. The resource owner refers to the AWS account that creates the resource\. For example: 
 + The AWS account that you use to create buckets and upload objects owns those resources\. 
-
-   
 +  If you upload an object using AWS Identity and Access Management \(IAM\) user or role credentials, the AWS account that the user or role belongs to owns the object\. 
-
-   
 + A bucket owner can grant cross\-account permissions to another AWS account \(or users in another account\) to upload objects\. In this case, the AWS account that uploads objects owns those objects\. The bucket owner does not have permissions on the objects that other accounts own, with the following exceptions:
   + The bucket owner pays the bills\. The bucket owner can deny access to any objects, or delete any objects in the bucket, regardless of who owns them\. 
   + The bucket owner can archive any objects or restore archived objects regardless of who owns them\. Archival refers to the storage class used to store the objects\. For more information, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
@@ -54,7 +51,7 @@ AWS recommends that you don't use the AWS account root user credentials to make 
 
 ## Resource operations<a name="access-control-resource-operations-basics"></a>
 
-Amazon S3 provides a set of operations to work with the Amazon S3 resources\. For a list of available operations, see [Actions Defined by Amazon S3](list_amazons3.md#amazons3-actions-as-permissions)\.
+Amazon S3 provides a set of operations to work with the Amazon S3 resources\. For a list of available operations, see [Actions defined by Amazon S3](list_amazons3.md#amazons3-actions-as-permissions)\.
 
 ## Managing access to resources<a name="access-control-resources-manage-permissions-basics"></a>
 
@@ -169,6 +166,7 @@ For more information about Access Analyzer for S3, see [Using Access Analyzer fo
 +  [How Amazon S3 Authorizes a Request](how-s3-evaluates-access-control.md) 
 +  [Guidelines for using the available access policy options](access-policy-alternatives-guidelines.md) 
 +  [Example walkthroughs: Managing access to your Amazon S3 resources ](example-walkthroughs-managing-access.md) 
++  [ Access control best practices](https://docs.aws.amazon.com/AmazonS3/latest/gsg/access-control-best-practices.html) in the *Amazon Simple Storage Service Getting Started Guide* 
 
 ## More info<a name="access-control-overview-related-topics"></a>
 

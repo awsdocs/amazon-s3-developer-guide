@@ -4,6 +4,8 @@ A bucket is owned by the AWS account that created it\. Bucket ownership is not t
 
 When you create a bucket, you choose its name and the Region to create it in\. After you create a bucket, you can't change its name or Region\.
 
+When naming a bucket you should choose a name that is relevant to you or your business\. Avoid using names associated with others\. For example, you should avoid using AWS or Amazon in your bucket name\.
+
 By default, you can create up to 100 buckets in each of your AWS accounts\. If you need additional buckets, you can increase your account bucket limit to a maximum of 1,000 buckets by submitting a service limit increase\. There is no difference in performance whether you use many buckets or just a few\. For information about how to increase your bucket limit, see [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) in the *AWS General Reference*\. 
 
 **Reusing bucket names**  
@@ -38,14 +40,14 @@ Before March 1, 2018, buckets created in the US East \(N\. Virginia\) Region cou
 
 **Example Bucket names**  
 The following example bucket names are valid and follow the recommended naming guidelines:  
-+ `awsexamplebucket1`
++ `docexamplebucket`
 + `log-delivery-march-2020`
 + `my-hosted-content`
 The following example bucket names are valid but not recommended for uses other than static website hosting:  
-+ `awsexamplewebsite.com`
-+ `www.awsexamplewebsite.com`
++ `docexamplewebsite.com`
++ `www.docexamplewebsite.com`
 + `my.example.s3.bucket`
 The following example bucket names are *not* valid:  
-+ `aws_example_bucket` \(contains underscores\)
-+ `AwsExampleBucket` \(contains uppercase letters\)
-+ `aws-example-bucket-` \(ends with a hyphen\)
++ `doc_example_bucket` \(contains underscores\)
++ `DocExampleBucket` \(contains uppercase letters\)
++ `doc-example-bucket-` \(ends with a hyphen\)

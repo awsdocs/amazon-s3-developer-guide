@@ -1,6 +1,6 @@
 # S3 Batch Operations examples using the AWS CLI<a name="batch-ops-examples-cli"></a>
 
-S3 Batch Operations track progress, send notifications, and store a detailed completion report of all actions, providing a fully managed, auditable, serverless experience\. You can use S3 Batch Operations through the AWS Management Console, AWS CLI, AWS SDKs, or REST API\. For more information, see [The basics: S3 Batch Operations](batch-ops-basics.md)\.
+S3 Batch Operations track progress, send notifications, and store a detailed completion report of all actions, providing a fully managed, auditable, serverless experience\. You can use S3 Batch Operations through the AWS Management Console, AWS CLI, AWS SDKs, or REST API\. For more information, see [S3 Batch Operations basics](batch-ops-basics.md)\.
 
 The following examples show how you can use S3 Batch Operations with the AWS Command Line Interface \(AWS CLI\)\.
 

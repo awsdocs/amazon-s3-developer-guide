@@ -6,7 +6,7 @@ Use S3 Batch Operations to copy objects and set object tags or access control li
 
 **Topics**
 + [Terminology](#batch-ops-terminology)
-+ [The basics: S3 Batch Operations](batch-ops-basics.md)
++ [S3 Batch Operations basics](batch-ops-basics.md)
 + [Creating an S3 Batch Operations job](batch-ops-create-job.md)
 + [Operations](batch-ops-operations.md)
 + [Managing S3 Batch Operations jobs](batch-ops-managing-jobs.md)

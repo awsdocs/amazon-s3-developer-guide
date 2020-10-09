@@ -74,3 +74,4 @@ We recommend you first review all introductory topics that explain how you manag
 + [Using Bucket Policies and User Policies](using-iam-policies.md)
 + [Access Control List \(ACL\) Overview](acl-overview.md)
 + [Managing Access with ACLs](S3_ACLs_UsingACLs.md)
++ [Controlling ownership of uploaded objects using S3 Object Ownership](about-object-ownership.md)

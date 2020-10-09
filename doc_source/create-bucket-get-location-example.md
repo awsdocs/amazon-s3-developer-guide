@@ -19,7 +19,7 @@ If you explicitly specify an AWS Region in your create bucket request that is di
 
 ## Using the Amazon S3 Console<a name="create-bucket-get-location-console"></a>
 
-To create a bucket using the Amazon S3 console, see [How Do I Create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
+To create a bucket using the Amazon S3 console, see [How do I create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Using the AWS SDK for Java<a name="create-bucket-get-location-java"></a>
 
@@ -150,8 +150,19 @@ For information about how to create and test a working sample, see [Using the AW
 ```
 require 'aws-sdk-s3'
 
-s3 = Aws::S3::Client.new(region: 'us-west-2')
-s3.create_bucket(bucket: 'bucket-name')
+# Creates a bucket in Amazon S3.
+#
+# @param s3_client [Aws::S3::Client] An initialized Amazon S3 client.
+# @param bucket_name [String] The bucket's name.
+# @return [Boolean] true if the bucket was created; otherwise, false.
+# @example
+#   s3_client = Aws::S3::Client.new(region: 'us-east-1')
+#   exit 1 unless bucket_created?(s3_client, 'doc-example-bucket')
+def bucket_created?(s3_client, bucket_name)
+  s3_client.create_bucket(bucket: bucket_name)
+rescue StandardError => e
+  puts "Error while creating the bucket named '#{bucket_name}': #{e.message}"
+end
 ```
 
 ## Using Other AWS SDKs<a name="create-bucket-using-other-sdks"></a>

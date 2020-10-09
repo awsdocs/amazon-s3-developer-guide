@@ -66,7 +66,7 @@ Using the IAM user sign\-in URL for Account A first sign in to the AWS Managemen
 
 ### Step 1\.2: Create a bucket, a user, and add a bucket policy granting user permissions<a name="access-policies-walkthrough-cross-account-acl-create-bucket"></a>
 
-1. In the Amazon S3 console, create a bucket\. This exercise assumes the bucket is created in the US East \(N\. Virginia\) region and the name is `examplebucket`\.
+1. In the Amazon S3 console, create a bucket\. This exercise assumes the bucket is created in the US East \(N\. Virginia\) region and the name is `DOC-EXAMPLE-BUCKET1`\.
 
    For instructions, see [How Do I Create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
@@ -76,7 +76,7 @@ Using the IAM user sign\-in URL for Account A first sign in to the AWS Managemen
 
 1. Note down the Dave credentials\. 
 
-1. In the Amazon S3 console, attach the following bucket policy to `examplebucket` bucket\. For instructions, see [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) in the *Amazon Simple Storage Service Console User Guide*\. Follow the steps to add a bucket policy\. For information about how to find account IDs, see [Finding Your AWS Account ID](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingYourAccountIdentifiers)\. 
+1. In the Amazon S3 console, attach the following bucket policy to `DOC-EXAMPLE-BUCKET1` bucket\. For instructions, see [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html) in the *Amazon Simple Storage Service Console User Guide*\. Follow the steps to add a bucket policy\. For information about how to find account IDs, see [Finding Your AWS Account ID](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingYourAccountIdentifiers)\. 
 
    The policy grants Account B the `s3:PutObject` and `s3:ListBucket` permissions\. The policy also grants user Dave the `s3:GetObject` permission\. 
 
@@ -95,8 +95,8 @@ Using the IAM user sign\-in URL for Account A first sign in to the AWS Managemen
                "s3:ListBucket"
             ],
             "Resource": [
-            "arn:aws:s3:::awsexamplebucket1/*"
-     	"arn:aws:s3:::awsexamplebucket1"
+               "arn:aws:s3:::DOC-EXAMPLE-BUCKET1/*",
+               "arn:aws:s3:::DOC-EXAMPLE-BUCKET1"
             ]
          },
          {
@@ -109,7 +109,7 @@ Using the IAM user sign\-in URL for Account A first sign in to the AWS Managemen
                "s3:GetObject"
             ],
             "Resource": [
-               "arn:aws:s3:::awsexamplebucket1/*"
+               "arn:aws:s3:::DOC-EXAMPLE-BUCKET1/*"
             ]
          }  
       ]
@@ -127,13 +127,13 @@ Now that Account B has permissions to perform operations on Account A's bucket, 
 1. Using the `put-object` AWS CLI command, upload an object\. The \-`-body` parameter in the command identifies the source file to upload\. For example, if the file is on `C:` drive of a Windows machine, you would specify `c:\HappyFace.jpg`\. The `--key` parameter provides the key name for the object\. 
 
    ```
-   aws s3api put-object --bucket examplebucket --key HappyFace.jpg --body HappyFace.jpg --profile AccountBadmin
+   aws s3api put-object --bucket DOC-EXAMPLE-BUCKET1 --key HappyFace.jpg --body HappyFace.jpg --profile AccountBadmin
    ```
 
 1. Add a grant to the object ACL to allow the bucket owner full control of the object\. For information about how to find a canonical user ID, see [Finding Your Account Canonical User ID](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)\.
 
    ```
-   aws s3api put-object-acl --bucket examplebucket --key HappyFace.jpg --grant-full-control id="AccountA-CanonicalUserID" --profile AccountBadmin
+   aws s3api put-object-acl --bucket DOC-EXAMPLE-BUCKET1 --key HappyFace.jpg --grant-full-control id="AccountA-CanonicalUserID" --profile AccountBadmin
    ```
 
 **Using the AWS Tools for Windows PowerShell**
@@ -141,13 +141,13 @@ Now that Account B has permissions to perform operations on Account A's bucket, 
 1. Using the `Write-S3Object` AWS Tools for Windows PowerShell command, upload an object\. 
 
    ```
-   Write-S3Object -BucketName examplebucket -key HappyFace.jpg -file HappyFace.jpg -StoredCredentials AccountBadmin
+   Write-S3Object -BucketName DOC-EXAMPLE-BUCKET1 -key HappyFace.jpg -file HappyFace.jpg -StoredCredentials AccountBadmin
    ```
 
 1. Add a grant to the object ACL to allow the bucket owner full control of the object\.
 
    ```
-   Set-S3ACL -BucketName examplebucket -Key HappyFace.jpg -CannedACLName "bucket-owner-full-control" -StoredCreden
+   Set-S3ACL -BucketName DOC-EXAMPLE-BUCKET1 -Key HappyFace.jpg -CannedACLName "bucket-owner-full-control" -StoredCreden
    ```
 
 ## Step 3: Test permissions<a name="access-policies-walkthrough-cross-account-acl-verify"></a>
@@ -168,7 +168,7 @@ Now verify user Dave in Account A can access the object owned by Account B\.
 1. Run the `get-object` AWS CLI command to download `HappyFace.jpg` and save it locally\. You provide user Dave credentials by adding the `--profile` parameter\.
 
    ```
-   aws s3api get-object --bucket examplebucket --key HappyFace.jpg Outputfile.jpg --profile UserDaveAccountA
+   aws s3api get-object --bucket DOC-EXAMPLE-BUCKET1 --key HappyFace.jpg Outputfile.jpg --profile UserDaveAccountA
    ```
 
 **Using the AWS Tools for Windows PowerShell**
@@ -182,7 +182,7 @@ Now verify user Dave in Account A can access the object owned by Account B\.
 1. Run the Read\-S3Object command to download the `HappyFace.jpg` object and save it locally\. You provide user Dave credentials by adding the `-StoredCredentials` parameter\. 
 
    ```
-   Read-S3Object -BucketName examplebucket -Key HappyFace.jpg -file HappyFace.jpg  -StoredCredentials UserDaveAccountA
+   Read-S3Object -BucketName DOC-EXAMPLE-BUCKET1 -Key HappyFace.jpg -file HappyFace.jpg  -StoredCredentials UserDaveAccountA
    ```
 
 ## Step 4: Clean up<a name="access-policies-walkthrough-cross-account-acl-cleanup"></a>
@@ -190,7 +190,7 @@ Now verify user Dave in Account A can access the object owned by Account B\.
 1. After you are done testing, you can do the following to clean up\.
 
    1. Sign in to the AWS Management Console \([AWS Management Console](https://console.aws.amazon.com/)\) using Account A credentials, and do the following:
-     + In the Amazon S3 console, remove the bucket policy attached to *examplebucket*\. In the bucket **Properties**, delete the policy in the **Permissions** section\. 
+     + In the Amazon S3 console, remove the bucket policy attached to *DOC\-EXAMPLE\-BUCKET1*\. In the bucket **Properties**, delete the policy in the **Permissions** section\. 
      + If the bucket is created for this exercise, in the Amazon S3 console, delete the objects and then delete the bucket\. 
      + In the IAM console, remove the AccountAadmin user\.
 

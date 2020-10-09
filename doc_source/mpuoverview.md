@@ -8,9 +8,9 @@
 + [API support for multipart upload](sdksupportformpu.md)
 + [Multipart upload API and permissions](mpuAndPermissions.md)
 
-The Multipart upload API enables you to upload large objects in parts\. You can use this API to upload new large objects or make a copy of an existing object \(see [Operations on objects](ObjectOperations.md)\)\. 
+The multipart upload API enables you to upload large objects in parts\. You can use this API to upload new large objects or make a copy of an existing object \(see [Operations on objects](ObjectOperations.md)\)\. 
 
-Multipart uploading is a three\-step process: You initiate the upload, you upload the object parts, and after you have uploaded all the parts, you complete the multipart upload\. Upon receiving the complete multipart upload request, Amazon S3 constructs the object from the uploaded parts, and you can then access the object just as you would any other object in your bucket\. 
+Multipart upload is a three\-step process: You initiate the upload, you upload the object parts, and after you have uploaded all the parts, you complete the multipart upload\. Upon receiving the complete multipart upload request, Amazon S3 constructs the object from the uploaded parts, and you can then access the object just as you would any other object in your bucket\. 
 
 You can list all of your in\-progress multipart uploads or get a list of the parts that you have uploaded for a specific multipart upload\. Each of these operations is explained in this section\.
 

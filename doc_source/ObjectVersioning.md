@@ -32,7 +32,9 @@ The delete marker becomes the current version of the object\. By default, `GET` 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/versioning_DELETE_NoObjectFound2.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
 
-However, you can `GET` a noncurrent version of an object by specifying its version ID\. In the following figure, you `GET` a specific object version, 111111\. Amazon S3 returns that object version even though it's not the current version\.
+However, you can `GET` a noncurrent version of an object by specifying its version ID\. In the following figure, you `GET` a specific object version, 111111\. Amazon S3 returns that object version even though it's not the current version\. 
+
+For more information, see [ Retrieving object versions](https://docs.aws.amazon.com/AmazonS3/latest/dev/RetrievingObjectVersions.html)\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/versioning_GET_Versioned3.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
 

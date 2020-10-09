@@ -142,7 +142,7 @@ For more information, see [Amazon S3 storage classes](storage-class-intro.md)\.
 
 ### Bucket policies<a name="BucketPolicies"></a>
 
-Bucket policies provide centralized access control to buckets and objects based on a variety of conditions, including Amazon S3 operations, requesters, resources, and aspects of the request \(for example, IP address\)\. The policies are expressed in the *access policy language* and enable centralized management of permissions\. The permissions attached to a bucket apply to all of the objects in that bucket\. 
+Bucket policies provide centralized access control to buckets and objects based on a variety of conditions, including Amazon S3 operations, requesters, resources, and aspects of the request \(for example, IP address\)\. The policies are expressed in the *access policy language* and enable centralized management of permissions\. The permissions attached to a bucket apply to all of the bucket's objects that are owned by the bucket owner account\.
 
 Both individuals and companies can use bucket policies\. When companies register with Amazon S3, they create an *account*\. Thereafter, the company becomes synonymous with the account\. Accounts are financially responsible for the AWS resources that they \(and their employees\) create\. Accounts have the power to grant bucket policy permissions and assign employees permissions based on a variety of conditions\. For example, an account could create a policy that gives a user write access:
 + To a particular S3 bucket

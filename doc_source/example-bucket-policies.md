@@ -278,31 +278,24 @@ You can optionally use a numeric condition to limit the duration for which the `
 
 ## Granting Cross\-Account Permissions to Upload Objects While Ensuring the Bucket Owner Has Full Control<a name="example-bucket-policies-use-case-8"></a>
 
-You can allow another AWS account to upload objects to your bucket\. However, you might decide that as a bucket owner you must have full control of the objects uploaded to your bucket\. The following policy enforces that a specific AWS account \(`123456789012`\) be denied the ability to upload objects unless that account grants full\-control access to the bucket owner identified by the email address \(`xyz@amazon.com`\)\. The `StringNotEquals` condition in the policy specifies the `s3:x-amz-grant-full-control` condition key to express the requirement \(see [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)\)\. 
+The following example shows how to allow another AWS account to upload objects to your bucket while taking full control of the uploaded objects\. This policy enforces that a specific AWS account \(`123456789012`\) be granted the ability to upload objects only if that account includes the bucket\-owner\-full\-control canned ACL on upload\. The StringEquals condition in the policy specifies the s3:x\-amz\-acl condition key to express the requirement \(see [Amazon S3 Condition Keys](amazon-s3-policy-keys.md)\)\. 
 
 ```
  1. {
  2.    "Version":"2012-10-17",
  3.    "Statement":[
  4.      {
- 5.        "Sid":"111",
+ 5.        "Sid":"PolicyForAllowUploadWithACL",
  6.        "Effect":"Allow",
  7.        "Principal":{"AWS":"123456789012"},
  8.        "Action":"s3:PutObject",
- 9.        "Resource":"arn:aws:s3:::awsexamplebucket1/*"
-10.      },
-11.      {
-12.        "Sid":"112",
-13.        "Effect":"Deny",
-14.        "Principal":{"AWS":"123456789012" },
-15.        "Action":"s3:PutObject",
-16.        "Resource":"arn:aws:s3:::awsexamplebucket1/*",
-17.        "Condition": {
-18.          "StringNotEquals": {"s3:x-amz-grant-full-control":["emailAddress=xyz@amazon.com"]}
-19.        }
-20.      }
-21.    ]
-22. }
+ 9.        "Resource":"arn:aws:s3:::DOC-EXAMPLE-BUCKET/*",
+10.        "Condition": {
+11.          "StringEquals": {"s3:x-amz-acl":"bucket-owner-full-control"}
+12.        }
+13.      }
+14.    ]
+15. }
 ```
 
 ## Granting Permissions for Amazon S3 Inventory and Amazon S3 Analytics<a name="example-bucket-policies-use-case-9"></a>

@@ -260,8 +260,7 @@ Some toolkits silently insert headers that you do not know about beforehand, suc
 
 You can authenticate certain types of requests by passing the required information as query\-string parameters instead of using the `Authorization` HTTP header\. This is useful for enabling direct third\-party browser access to your private Amazon S3 data without proxying the request\. The idea is to construct a "presigned" request and encode it as a URL that an end\-user's browser can retrieve\. Additionally, you can limit a presigned request by specifying an expiration time\. 
 
-**Note**  
-For examples of using the AWS SDKs to generating presigned URLs, see [Share an object with others](ShareObjectPreSignedURL.md)\. 
+For more information on using query parameters to authenticate requests , see [Authenticating Requests: Using Query Parameters \(AWS Signature Version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html) in the *Amazon Simple Storage Service API Reference*\. For examples of using the AWS SDKs to generating presigned URLs, see [Share an object with others](ShareObjectPreSignedURL.md)\. 
 
 ### Creating a signature<a name="CreatingASignature"></a>
 

@@ -65,5 +65,6 @@ For more information, see [Overview of setting up replication](replication-how-s
 
 If you are setting the replication configuration in a *cross\-account scenario*, where source and destination buckets are owned by different AWS accounts, the following additional requirement applies:
 + The owner of the destination bucket must grant the owner of the source bucket permissions to replicate objects with a bucket policy\. For more information, see [Granting permissions when source and destination buckets are owned by different AWS accounts](setting-repl-config-perm-overview.md#setting-repl-config-crossacct)\.
++ The destination bucket cannot be configured as a Requester Pays bucket\. For more information, see [Requester Pays buckets](RequesterPaysBuckets.md)\.
 
    

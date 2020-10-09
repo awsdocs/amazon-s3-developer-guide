@@ -25,4 +25,5 @@ Several security best practices also address access control, including:
 After you've reviewed introductory topics about managing access to Amazon S3 resources, you can then use the following topics to get more information about specific access policy options:
 + [Using Bucket Policies and User Policies](using-iam-policies.md)
 + [Managing Access with ACLs](S3_ACLs_UsingACLs.md)
++ [Controlling ownership of uploaded objects using S3 Object Ownership](about-object-ownership.md)
 + [Using Amazon S3 block public access](access-control-block-public-access.md)

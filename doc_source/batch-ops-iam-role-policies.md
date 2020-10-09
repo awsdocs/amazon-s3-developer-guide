@@ -302,6 +302,6 @@ If you are running S3 Batch Operations on encrypted objects, the IAM role must a
   ```
 
 ### Related resources<a name="batch-ops-create-job-related-resources"></a>
-+ [The basics: S3 Batch Operations](batch-ops-basics.md)
++ [S3 Batch Operations basics](batch-ops-basics.md)
 + [Operations](batch-ops-operations.md)
 + [Managing S3 Batch Operations jobs](batch-ops-managing-jobs.md)

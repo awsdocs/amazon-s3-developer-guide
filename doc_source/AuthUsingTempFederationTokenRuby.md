@@ -56,7 +56,7 @@ end
 #         'Sid' => 'Stmt1',
 #         'Effect' => 'Allow',
 #         'Action' => 's3:ListBucket',
-#         'Resource' => 'arn:aws:s3:::my-bucket'
+#         'Resource' => 'arn:aws:s3:::doc-example-bucket'
 #       ]
 #     }
 #   )
@@ -80,7 +80,7 @@ end
 # @return [Boolean] true if the objects were listed; otherwise, false.
 # @example
 #   s3_client = Aws::S3::Client.new(region: 'us-east-1')
-#   exit 1 unless list_objects_in_bucket?(s3_client, 'my-bucket')
+#   exit 1 unless list_objects_in_bucket?(s3_client, 'doc-example-bucket')
 def list_objects_in_bucket?(s3_client, bucket_name)
   puts "Accessing the contents of the bucket named '#{bucket_name}'..."
   response = s3_client.list_objects_v2(

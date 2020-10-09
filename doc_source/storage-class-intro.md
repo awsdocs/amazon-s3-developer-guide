@@ -11,6 +11,7 @@ Amazon S3 offers a range of storage classes for the objects that you store\. You
 + [Storage class for automatically optimizing frequently and infrequently accessed objects](#sc-dynamic-data-access)
 + [Storage classes for infrequently accessed objects](#sc-infreq-data-access)
 + [Storage classes for archiving objects](#sc-glacier)
++ [Storage class for Amazon S3 on Outposts](#s3-outposts)
 + [Comparing the Amazon S3 storage classes](#sc-compare)
 + [Setting the storage class of an object](#sc-howtoset)
 
@@ -75,6 +76,10 @@ You can set the storage class of an object to S3 Glacier or S3 Glacier Deep Arch
 When you choose the S3 Glacier or S3 Glacier Deep Archive storage class, your objects remain in Amazon S3\. You cannot access them directly through the separate Amazon S3 Glacier service\. 
 
 To learn more about the Amazon S3 Glacier service, see the [Amazon S3 Glacier Developer Guide](https://docs.aws.amazon.com/amazonglacier/latest/dev/)\.
+
+## Storage class for Amazon S3 on Outposts<a name="s3-outposts"></a>
+
+With Amazon S3 on Outposts, you can create S3 buckets on your AWS Outposts and easily store and retrieve objects on\-premises for applications that require local data access, local data processing, and data residency\. S3 on Outposts provides a new storage class, \[OUTPOSTS\], and allows you to use the same APIs and features on Outposts as you do on Amazon S3 such as access policies, encryption, and tagging\. You can use S3 on Outposts through the AWS Management Console, AWS CLI, AWS SDKs, or REST API\. For more information, see [Using Amazon S3 on Outposts](https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html)\. 
 
 ## Comparing the Amazon S3 storage classes<a name="sc-compare"></a>
 

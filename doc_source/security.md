@@ -16,4 +16,5 @@ This documentation will help you understand how to apply the shared responsibili
 + [Resilience in Amazon S3](disaster-recovery-resiliency.md)
 + [Infrastructure security in Amazon S3](network-isolation.md)
 + [Configuration and vulnerability analysis in Amazon S3](vulnerability-analysis-and-management.md)
++ [Bucket owner condition](bucket-owner-condition.md)
 + [Security Best Practices for Amazon S3](security-best-practices.md)

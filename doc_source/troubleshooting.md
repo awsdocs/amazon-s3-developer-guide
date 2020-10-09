@@ -88,14 +88,14 @@ You can configure logging using PHP\. For more information, see [How can I see w
 
 #### Using the SDK for Java to Obtain Request IDs<a name="java-request-id"></a>
 
-You can enable logging for specific requests or responses, allowing you to catch and return only the relevant headers\. To do this, import the `com.amazonaws.services.s3.s3ResponseMetadata` class\. Afterwards, you can store the request in a variable before performing the actual request\. Call `getCachedResponseMetadata(AmazonWebServiceRequest request).getRequestID()` to get the logged request or response\.
+You can enable logging for specific requests or responses, allowing you to catch and return only the relevant headers\. To do this, import the `com.amazonaws.services.s3.S3ResponseMetadata` class\. Afterwards, you can store the request in a variable before performing the actual request\. Call `getCachedResponseMetadata(AmazonWebServiceRequest request).getRequestID()` to get the logged request or response\.
 
 **Example**  
 
 ```
 PutObjectRequest req = new PutObjectRequest(bucketName, key, createSampleFile());
 s3.putObject(req);
-s3ResponseMetadata md = s3.getCachedResponseMetadata(req);
+S3ResponseMetadata md = s3.getCachedResponseMetadata(req);
 System.out.println("Host ID: " + md.getHostId() + " RequestID: " + md.getRequestId());
 ```
 
@@ -108,16 +108,33 @@ You can configure logging in AWS SDK for \.NET using the built\-in `System.Diagn
 **Note**  
 By default, the returned log contains only error information\. The config file needs to have `AWSLogMetrics` \(and optionally, `AWSResponseLogging`\) added to get the request IDs\.
 
-#### Using the SDK for Python to Obtain Request IDs<a name="python-request-id"></a>
+#### Using the SDK for Python \(Boto3\) to Obtain Request IDs<a name="python-request-id"></a>
 
-You can configure logging in Python by adding the following lines to your code to output debug information to a file\.
+With SDK for Python \(Boto3\), you can log specific responses, which enables you to capture only the relevant headers\. The following code shows you how to log parts of the response to a file:
 
 ```
-import logging 
-logging.basicConfig(filename="mylog.log", level=logging.DEBUG)
+import logging
+import boto3
+logging.basicConfig(filename='logfile.txt', level=logging.INFO)
+logger = logging.getLogger(__name__)
+s3 = boto3.resource('s3')
+response = s3.Bucket(bucket_name).Object(object_key).put()
+logger.info("HTTPStatusCode: %s", response['ResponseMetadata']['HTTPStatusCode'])
+logger.info("RequestId: %s", response['ResponseMetadata']['RequestId'])
+logger.info("HostId: %s", response['ResponseMetadata']['HostId'])
+logger.info("Date: %s", response['ResponseMetadata']['HTTPHeaders']['date'])
 ```
 
-If you’re using the Boto Python interface for AWS, you can set the debug level to two as per the Boto docs, [here](http://docs.pythonboto.org/en/latest/boto_config_tut.html#boto)\.
+You can also catch exceptions and log relevant information when an exception is raised\. For details, see [Discerning useful information from error responses](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/error-handling.html#discerning-useful-information-from-error-responses) in the *Boto3 developer guide*
+
+Additionally, you can configure Boto3 to output verbose debugging logs using the following code:
+
+```
+import boto3
+boto3.set_stream_logger('', logging.DEBUG)
+```
+
+For more information, see [https://boto3.amazonaws.com/v1/documentation/api/latest/reference/core/boto3.html#boto3.set_stream_logger](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/core/boto3.html#boto3.set_stream_logger) in the *Boto3 reference*\.
 
 #### Using the SDK for Ruby to Obtain Request IDs<a name="ruby-request-id"></a>
 

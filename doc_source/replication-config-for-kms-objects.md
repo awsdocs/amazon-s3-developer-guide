@@ -84,7 +84,7 @@ To replicate objects that are encrypted at rest under AWS Key Management Service
 **Note**  
 We recommend that you use the `s3:GetObjectVersionForReplication` action instead of the `s3:GetObjectVersion` action because it provides Amazon S3 with only the minimum permissions necessary for replication\. In addition, permission for the `s3:GetObjectVersion` action allows replication of unencrypted and SSE\-S3\-encrypted objects, but not of objects created using a CMK stored in AWS KMS\. 
 + Permissions for the following AWS KMS actions:
-  + `kms:Decrypt` permissions for the AWS KMS CMK that was used to encrypt the source object
+  + `kms:Decrypt` permissions for the AWS KMS CMK used to decrypt the source object
   + `kms:Encrypt` permissions for the AWS KMS CMK used to encrypt the object replica
 
   We recommend that you restrict these permissions to specific buckets and objects using AWS KMS condition keys, as shown in the following example policy statements\.

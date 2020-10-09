@@ -32,6 +32,7 @@ The `s3-dg.pdf` key does not have a prefix, so its object appears directly at th
 
 **Note**  
 Amazon S3 supports buckets and objects, and there is no hierarchy\. However, by using prefixes and delimiters in an object key name, the Amazon S3 console and the AWS SDKs can infer hierarchy and introduce the concept of folders\.
+The Amazon S3 console implements folder object creation by creating a zero\-byte objects with the folder *prefix and delimiter* value as the key\. These folder objects don't appear in the console, but otherwise behave like any other objects and can be viewed and manipulated through the API, AWS CLI and SDKs\.
 
 ### Object key naming guidelines<a name="object-key-guidelines"></a>
 

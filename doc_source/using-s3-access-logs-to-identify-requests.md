@@ -117,7 +117,7 @@ Amazon S3 stores server access logs as objects in an S3 bucket\. It is often eas
 
 **Example**  
 The following example shows how you can query Amazon S3 server access logs in Amazon Athena\.   
-To specify the Amazon S3 location in an Athena query, you need the source bucket name and the source prefix, as follows: `s3://awsexamplebucket1-logs/prefix/` 
+To specify an Amazon S3 location in an Athena query, you need to format the *target* bucket name and *target* prefix where your logs are delivered as an S3 URI, as follows: `s3://DOC-EXAMPLE-BUCKET1-logs/prefix/` 
 
 1. Open the Athena console at [https://console\.aws\.amazon\.com/athena/](https://console.aws.amazon.com/athena/home)\.
 

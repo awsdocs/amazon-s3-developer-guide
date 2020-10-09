@@ -1,13 +1,13 @@
 # Example Bucket Policies for VPC Endpoints for Amazon S3<a name="example-bucket-policies-vpc-endpoint"></a>
 
-You can use Amazon S3 bucket policies to control access to buckets from specific Amazon Virtual Private Cloud \(Amazon VPC\) endpoints, or specific VPCs\. This section contains example bucket policies that can be used to control Amazon S3 bucket access from VPC endpoints\. To learn how to set up VPC endpoints, see [VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html) in the *Amazon VPC User Guide*\. 
+You can use Amazon S3 bucket policies to control access to buckets from specific virtual private cloud \(VPC\) \(VPC\) endpoints, or specific VPCs\. This section contains example bucket policies that can be used to control Amazon S3 bucket access from VPC endpoints\. To learn how to set up VPC endpoints, see [VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html) in the *VPC User Guide*\. 
 
-Amazon VPC enables you to launch AWS resources into a virtual network that you define\. A VPC endpoint enables you to create a private connection between your VPC and another AWS service without requiring access over the internet, through a VPN connection, through a NAT instance, or through AWS Direct Connect\. 
+VPC enables you to launch AWS resources into a virtual network that you define\. A VPC endpoint enables you to create a private connection between your VPC and another AWS service without requiring access over the internet, through a VPN connection, through a NAT instance, or through AWS Direct Connect\. 
 
-A VPC endpoint for Amazon S3 is a logical entity within a VPC that allows connectivity only to Amazon S3\. The VPC endpoint routes requests to Amazon S3 and routes responses back to the VPC\. VPC endpoints change only how requests are routed\. Amazon S3 public endpoints and DNS names will continue to work with VPC endpoints\. For important information about using Amazon VPC endpoints with Amazon S3, see [Gateway VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-gateway.html) and [Endpoints for Amazon S3](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-s3.html) in the *Amazon VPC User Guide*\. 
+A VPC endpoint for Amazon S3 is a logical entity within a VPC that allows connectivity only to Amazon S3\. The VPC endpoint routes requests to Amazon S3 and routes responses back to the VPC\. VPC endpoints change only how requests are routed\. Amazon S3 public endpoints and DNS names will continue to work with VPC endpoints\. For important information about using VPC endpoints with Amazon S3, see [Gateway VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-gateway.html) and [Endpoints for Amazon S3](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-s3.html) in the *VPC User Guide*\. 
 
 VPC endpoints for Amazon S3 provide two ways to control access to your Amazon S3 data: 
-+ You can control the requests, users, or groups that are allowed through a specific VPC endpoint\. For information about this type of access control, see [Controlling Access to Services with VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-access.html) in the *Amazon VPC User Guide*\.
++ You can control the requests, users, or groups that are allowed through a specific VPC endpoint\. For information about this type of access control, see [Controlling Access to Services with VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-access.html) in the *VPC User Guide*\.
 + You can control which VPCs or VPC endpoints have access to your buckets by using Amazon S3 bucket policies\. For examples of this type of bucket policy access control, see the following topics on restricting access\.
 
 **Topics**
@@ -80,4 +80,4 @@ This policy disables console access to the specified bucket, because console req
 
 ## Related Resources<a name="example-bucket-policies-restrict-access-vpc-related-resources"></a>
 + [Bucket Policy Examples](example-bucket-policies.md)
-+ [VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html) in the *Amazon VPC User Guide*
++ [VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html) in the *VPC User Guide*

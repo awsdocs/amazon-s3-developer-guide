@@ -3,7 +3,7 @@
 S3 Batch Operations supports several different operations\. The topics in this section describe each of these operations\.
 
 **Topics**
-+ [PUT object copy](batch-ops-copy-object.md)
++ [Put object copy](batch-ops-copy-object.md)
 + [Initiate restore object](batch-ops-initiate-restore-object.md)
 + [Invoking a Lambda function from Amazon S3 batch operations](batch-ops-invoke-lambda.md)
 + [Put object ACL](batch-ops-put-object-acl.md)

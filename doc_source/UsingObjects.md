@@ -1,6 +1,6 @@
 # Working with Amazon S3 Objects<a name="UsingObjects"></a>
 
-Amazon S3 is a simple key\-value store designed to store as many objects as you want\. You store these objects in one or more buckets, and each object can be up to 5 TB in size\. An object consists of the following:
+Amazon S3 is an object store that uses unique key\-values to store as many objects as you want\. You store these objects in one or more buckets, and each object can be up to 5 TB in size\. An object consists of the following:
 + ****Key**** – The name that you assign to an object\. You use the object key to retrieve the object\.
 
   For more information, see [Object Key and Metadata](UsingMetadata.md)\.

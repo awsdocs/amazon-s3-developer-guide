@@ -2,7 +2,7 @@
 
 Amazon S3 provides functionality for creating and managing access points\. By default, you can create up to 1,000 access points per Region for each of your AWS accounts\. If you need more than 1,000 access points for a single account in a single Region, you can request a service quota increase\. For more information about service quotas and requesting an increase, see [AWS Service Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) in the *AWS General Reference*\.
 
-You can create S3 access points using the AWS Management Console, AWS Command Line Interface \(AWS CLI\), AWS SDKs, or Amazon S3 REST API\. The following examples demonstrate how to create an access point with the AWS CLI and AWS SDK for Java\.
+You can create S3 access points using the AWS Management Console, AWS Command Line Interface \(AWS CLI\), AWS SDKs, or Amazon S3 REST API\. The following examples demonstrate how to create an access point using the AWS CLI\.
 
 For information about how to create access points using the AWS Management Console, see [Introduction to Amazon S3 Access Points](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/access-points.html) in the *Amazon Simple Storage Service Console User Guide*\. For more information about how to create access points using the REST API, see [CreateAccessPoint](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html) in the *Amazon Simple Storage Service API Reference*\.
 
@@ -91,7 +91,7 @@ The following example policy statement configures a VPC endpoint to allow calls 
 **Note**  
 The `"Resource"` declaration in this example uses an Amazon Resource Name \(ARN\) to specify the access point\. For more information about access point ARNs, see [Using access points](using-access-points.md)\. 
 
-For more information about VPC endpoint policies, see [Using Endpoint Policies for Amazon S3](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-s3.html#vpc-endpoints-policies-s3) in the *Amazon Virtual Private Cloud User Guide*\.
+For more information about VPC endpoint policies, see [Using Endpoint Policies for Amazon S3](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-s3.html#vpc-endpoints-policies-s3) in the *virtual private cloud \(VPC\) User Guide*\.
 
 ## Managing public access to access points<a name="access-points-bpa-settings"></a>
 

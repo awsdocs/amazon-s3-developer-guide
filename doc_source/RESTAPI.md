@@ -50,7 +50,7 @@ Following is an example of a path\-style version of the same request\.
 ```
 Currently Amazon S3 supports virtual hosted\-style and path\-style access in all Regions, but this will be changing \(see the following **Important** note\.  
 For more information about path\-style requests, see [Path\-Style Requests](VirtualHosting.md#path-style-access)\.  
-Buckets created after September 30, 2020, will support only virtual hosted\-style requests\. Path\-style requests will continue to be supported for buckets created on or before this date\. For more information, see [ Amazon S3 Path Deprecation Plan – The Rest of the Story](https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)\.
+Update \(September 23, 2020\) – We have decided to delay the deprecation of path\-style URLs to ensure that customers have the time that they need to transition to virtual hosted\-style URLs\. For more information, see [Amazon S3 Path Deprecation Plan – The Rest of the Story](https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)\.
 
 ## Making requests to dual\-stack endpoints by using the REST API<a name="rest-api-dual-stack"></a>
 

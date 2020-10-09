@@ -22,7 +22,7 @@ The `AWS/S3` namespace includes the following daily storage metrics for buckets\
 
 | Metric | Description | 
 | --- | --- | 
-| BucketSizeBytes |  The amount of data in bytes stored in a bucket in the STANDARD storage class, INTELLIGENT\_TIERING storage class, Standard \- Infrequent Access \(STANDARD\_IA\) storage class, OneZone \- Infrequent Access \(ONEZONE\_IA\), Reduced Redundancy Storage \(RRS\) class, Deep Archive Storage \(S3 Glacier Deep Archive\) class or, Glacier \(GLACIER\) storage class\. This value is calculated by summing the size of all objects in the bucket \(both current and noncurrent objects\), including the size of all parts for all incomplete multipart uploads to the bucket\.  Valid storage type filters: `StandardStorage`, `IntelligentTieringStorage`, `StandardIAStorage`, `StandardIASizeOverhead`, `StandardIAObjectOverhead`, `OneZoneIAStorage`, `OneZoneIASizeOverhead`, `ReducedRedundancyStorage`, `GlacierStorage`, `GlacierStagingStorage`, `GlacierObjectOverhead`, `GlacierS3ObjectOverhead`, `DeepArchiveStorage`, `DeepArchiveObjectOverhead`, `DeepArchiveS3ObjectOverhead` and, `DeepArchiveStagingStorage` \(see the `StorageType` dimension\)  Units: Bytes Valid statistics: Average  | 
+| BucketSizeBytes |  The amount of data in bytes stored in a bucket in the STANDARD storage class, INTELLIGENT\_TIERING storage class, Standard \- Infrequent Access \(STANDARD\_IA\) storage class, OneZone \- Infrequent Access \(ONEZONE\_IA\), Reduced Redundancy Storage \(RRS\) class, Deep Archive Storage \(S3 Glacier Deep Archive\) class or, Glacier \(GLACIER\) storage class\. This value is calculated by summing the size of all objects in the bucket \(both current and noncurrent objects\), including the size of all parts for all incomplete multipart uploads to the bucket\.  Valid storage type filters: `StandardStorage`, `IntelligentTieringFAStorage`, `StandardIAStorage`, `StandardIASizeOverhead`, `StandardIAObjectOverhead`, `OneZoneIAStorage`, `OneZoneIASizeOverhead`, `ReducedRedundancyStorage`, `GlacierStorage`, `GlacierStagingStorage`, `GlacierObjectOverhead`, `GlacierS3ObjectOverhead`, `DeepArchiveStorage`, `DeepArchiveObjectOverhead`, `DeepArchiveS3ObjectOverhead` and, `DeepArchiveStagingStorage` \(see the `StorageType` dimension\)  Units: Bytes Valid statistics: Average  | 
 | NumberOfObjects |  The total number of objects stored in a bucket for all storage classes except for the GLACIER storage class\. This value is calculated by counting all objects in the bucket \(both current and noncurrent objects\) and the total number of parts for all incomplete multipart uploads to the bucket\. Valid storage type filters: `AllStorageTypes` \(see the `StorageType` dimension\) Units: Count Valid statistics: Average  | 
 
 ## Amazon S3 CloudWatch Request Metrics<a name="s3-request-cloudwatch-metrics"></a>
@@ -64,6 +64,20 @@ You can enable alarms for your replication metrics on Amazon CloudWatch\. When y
 | ReplicationLatency |  The maximum number of seconds by which the replication destination Region is behind the source Region for a given replication rule\.  Units: Seconds Valid statistics: Max  | 
 | BytesPendingReplication |  The total number of bytes of objects pending replication for a given replication rule\. Units: Bytes Valid statistics: Max  | 
 | OperationsPendingReplication |  The number of operations pending replication for a given replication rule\. Units: Counts Valid statistics: Max  | 
+
+## Amazon S3 on Outposts CloudWatch metrics<a name="s3-outposts-cloudwatch-metrics"></a>
+
+The `S3Outposts` namespace includes the following metrics for Amazon S3 on Outposts buckets\. You can monitor the total number of S3 on Outposts bytes provisioned, the total free bytes available for objects, and the total size of all objects for a given bucket\. 
+
+**Note**  
+S3 on Outposts only supports the following metrics and not other Amazon S3 metrics\.
+
+
+| Metric | Description | 
+| --- | --- | 
+| OutpostTotalBytes |  The total provisioned capacity in bytes for an outpost  Units: bytes Period: 5 minutes  | 
+| OutpostFreeBytes |  The count of free bytes available on outposts to store customer data\. Units: Bytes Period: 5 minutes  | 
+| BucketUsedBytes |  The total size of all objects for the given bucket\. Units: Counts Period: 5 minutes  | 
 
 ## Amazon S3 CloudWatch Dimensions<a name="s3-cloudwatch-dimensions"></a>
 

@@ -6,8 +6,8 @@ If you use CMKs, you use AWS KMS via the [AWS Management Console](https://consol
 
 There are additional charges for using AWS KMS CMKs\. For more information, see [AWS Key Management Service Concepts \- Customer Master Keys \(CMKs\) ](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys) and [AWS Key Management Service Pricing](https://aws.amazon.com/kms/pricing) in the *AWS Key Management Service Developer Guide*\.
 
-**Note**  
-You need the `kms:Decrypt` permission when you upload or download an Amazon S3 object encrypted with an AWS KMS CMK\., This is in addition to the `kms:ReEncrypt`, `kms:GenerateDataKey`, and `kms:DescribeKey` permissions\. For more information, see [Failure to upload a large file to Amazon S3 with encryption using an AWS KMS CMK](https://aws.amazon.com/premiumsupport/knowledge-center/s3-large-file-encryption-kms-key/)\.
+**Important**  
+You need the `kms:Decrypt` permission when you upload or download an Amazon S3 object encrypted with an AWS KMS CMK\. This is in addition to the `kms:ReEncrypt`, `kms:GenerateDataKey`, and `kms:DescribeKey` permissions\. For more information, see [Failure to upload a large file to Amazon S3 with encryption using an AWS KMS CMK](https://aws.amazon.com/premiumsupport/knowledge-center/s3-large-file-encryption-kms-key/)\.
 
 ## AWS Managed CMKs and Customer Managed CMKs<a name="aws-managed-customer-managed-cmks"></a>
 
