@@ -65,3 +65,24 @@ awsexamplebucket1,image_17775,,succeeded,200,,"{u'CopySourceVersionId': 'xVR78ha
 awsexamplebucket1,image_17763,,succeeded,200,,"{u'CopySourceVersionId': '6HjOUSim4Wj6BTcbxToXW44pSZ.40pwq', u'CopyObjectResult': {u'LastModified': datetime.datetime(2019, 4, 5, 17, 35, 39, tzinfo=tzlocal()), u'ETag': '""fe66f4390c50f29798f040d7aae72784""'}, 'ResponseMetadata': {'HTTPStatusCode': 200, 'RetryAttempts': 0, 'HostId': 'GiCZNYr8LHd/Thyk6beTRP96IGZk2sYxujLe13TuuLpq6U2RD3we0YoluuIdm1PRvkMwnEW1aFc=', 'RequestId': '1BC9F5B1B95D7000', 'HTTPHeaders': {'content-length': '234', 'x-amz-id-2': 'GiCZNYr8LHd/Thyk6beTRP96IGZk2sYxujLe13TuuLpq6U2RD3we0YoluuIdm1PRvkMwnEW1aFc=', 'x-amz-copy-source-version-id': '6HjOUSim4Wj6BTcbxToXW44pSZ.40pwq', 'server': 'AmazonS3', 'x-amz-request-id': '1BC9F5B1B95D7000', 'date': 'Fri, 05 Apr 2019 17:35:39 GMT', 'content-type': 'application/xml'}}}"
 awsexamplebucket1,image_17860,,succeeded,200,,"{u'CopySourceVersionId': 'm.MDD0g_QsUnYZ8TBzVFrp.TmjN8PJyX', u'CopyObjectResult': {u'LastModified': datetime.datetime(2019, 4, 5, 17, 35, 40, tzinfo=tzlocal()), u'ETag': '""fe66f4390c50f29798f040d7aae72784""'}, 'ResponseMetadata': {'HTTPStatusCode': 200, 'RetryAttempts': 0, 'HostId': 'F9ooZOgpE5g9sNgBZxjdiPHqB4+0DNWgj3qbsir+sKai4fv7rQEcF2fBN1VeeFc2WH45a9ygb2g=', 'RequestId': '8D9CA56A56813DF3', 'HTTPHeaders': {'content-length': '234', 'x-amz-id-2': 'F9ooZOgpE5g9sNgBZxjdiPHqB4+0DNWgj3qbsir+sKai4fv7rQEcF2fBN1VeeFc2WH45a9ygb2g=', 'x-amz-copy-source-version-id': 'm.MDD0g_QsUnYZ8TBzVFrp.TmjN8PJyX', 'server': 'AmazonS3', 'x-amz-request-id': '8D9CA56A56813DF3', 'date': 'Fri, 05 Apr 2019 17:35:40 GMT', 'content-type': 'application/xml'}}}"
 ```
+
+
+**Analyzing the results can be easily done using Athena**   
+Use the following SQL to create the table, while replacing the location of the results file to the directory that contains the different csv result files of your latest batch operation
+```
+CREATE EXTERNAL TABLE IF NOT EXISTS default.batch_operation_results (
+  `bucket` string,
+  `key` string,
+  `versionid` string,
+  `taskstatus` string,
+  `errorcode` string,
+  `httpstatuscode` string,
+  `resultmessage` string 
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES (
+  'serialization.format' = ',',
+  'field.delim' = ','
+) LOCATION 's3://YOUR-BATCH-OPERATIONS-RESULT-DIRECTORY'
+TBLPROPERTIES ('has_encrypted_data'='false');
+```
