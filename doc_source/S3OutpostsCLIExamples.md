@@ -237,10 +237,10 @@ You can use the AWS CLI to put and manage your S3 on Outposts objects\. From the
 
 ### Put an object in to an S3 on Outposts bucket<a name="S3OutpostsPutObjectCLI"></a>
 
-The following example put an S3 on Outposts `s3-outposts:PutObeject` using the AWS CLI\. 
+The following example put an S3 on Outposts `s3-outposts:PutObject` using the AWS CLI\. 
 
 ```
-aws s3api put-object --bucket arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/accesspoint/example-access-point --key testkey body sample-object.xml
+aws s3api put-object --bucket arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/accesspoint/example-access-point --key testkey --body sample-object.xml
 ```
 
 ### Get the S3 on Outposts bucket<a name="S3OutpostsGetObjectCLI"></a>
@@ -248,7 +248,7 @@ aws s3api put-object --bucket arn:aws:s3-outposts:<your-region>:123456789012:out
 The following S3 on Outposts example gets a bucket using the AWS CLI\. 
 
 ```
-aws s3api get-object --bucket arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/accesspoint/example-access-point key testkey sample-object.xml
+aws s3api get-object --bucket arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/accesspoint/example-access-point --key testkey sample-object.xml
 ```
 
 ### List objects in an S3 on Outposts bucket<a name="S3OutpostsListObjectsCLI"></a>
