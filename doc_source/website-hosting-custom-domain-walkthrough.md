@@ -30,7 +30,7 @@ This AWS CloudFormation template is available for you to download and use\. For 
 + [Step 8: Attach a bucket policy](#add-bucket-policy-root-domain)
 + [Step 9: Test your domain endpoint](#root-domain-walkthrough-test-website)
 + [Step 10: Add alias records for your domain and subdomain](#root-domain-walkthrough-add-record-to-hostedzone)
-+ [Step 11: Test the website](#root-domain-testing)
++ [Step 11: Test the website](#root-domain-testing
 + [Speeding up your website with Amazon CloudFront](website-hosting-cloudfront-walkthrough.md)
 + [Cleaning up your example resources](getting-started-cleanup.md)
 
@@ -353,12 +353,12 @@ If you don't already use Route 53, see [Step 1: Register a Domain](https://docs
 
 1. Choose the S3 bucket\.
 
-   The bucket name should match the name that appears in the **Name** box\. In the **Alias Target** listing, the bucket name is followed by the Amazon S3 website endpoint for the Region where the bucket was created, for example `example.com (s3-website-us-west-2)`\. **Alias Target** lists a bucket if:
+   The bucket name should match the name that appears in the **Name** box\. In the **Alias Target** listing, the bucket name is followed by the Amazon S3 website endpoint for the Region where the bucket was created, for example `example.com (s3-website-us-west-2.amazonaws.com)`\. **Alias Target** lists a bucket if:
    + You configured the bucket as a static website\.
    + The bucket name is the same as the name of the record that you're creating\.
    + The current AWS account created the bucket\.
 
-   If your bucket does not appear in the **Alias Target** listing, enter the Amazon S3 website endpoint for the Region where the bucket was created, for example, `s3-website-us-west-2`\. For a complete list of Amazon S3 website endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints)\. For more information about the alias target, see [Alias Target](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values-alias.html#rrsets-values-alias-alias-target) in the *Amazon Route 53 Developer Guide*\.
+   If your bucket does not appear in the **Alias Target** listing, enter the Amazon S3 website endpoint for the Region where the bucket was created, for example, `s3-website-us-west-2.amazonaws.com`\. For a complete list of Amazon S3 website endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints)\. For more information about the alias target, see [Alias Target](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values-alias.html#rrsets-values-alias-alias-target) in the *Amazon Route 53 Developer Guide*\.
 
 1. In **Record type**, choose **A ‐ Routes traffic to an IPv4 address and some AWS resources**\.
 
@@ -376,7 +376,7 @@ If you don't already use Route 53, see [Step 1: Register a Domain](https://docs
 
 1. Choose the Region\.
 
-1. Choose the S3 bucket, for example `example.com (s3-website-us-west-2)`\.
+1. Choose the S3 bucket, for example `example.com (s3-website-us-west-2.amazonaws.com)`\.
 
 1. In **Record type**, choose **A ‐ Routes traffic to an IPv4 address and some AWS resources**\.
 
@@ -413,11 +413,11 @@ Choose **A – IPv4 address**\.
 Choose **Yes**\.  
 **Alias Target**  
 In the **S3 website endpoints** section of the list, choose your bucket name\.   
-The bucket name should match the name that appears in the **Name** box\. In the **Alias Target** listing, the bucket name is followed by the Amazon S3 website endpoint for the Region where the bucket was created, for example `example.com (s3-website-us-west-2)`\. **Alias Target** lists a bucket if:  
+The bucket name should match the name that appears in the **Name** box\. In the **Alias Target** listing, the bucket name is followed by the Amazon S3 website endpoint for the Region where the bucket was created, for example `example.com (s3-website-us-west-2.amazonaws.com)`\. **Alias Target** lists a bucket if:  
    + You configured the bucket as a static website\.
    + The bucket name is the same as the name of the record that you're creating\.
    + The current AWS account created the bucket\.
-If your bucket does not appear in the **Alias Target** listing, enter the Amazon S3 website endpoint for the Region where the bucket was created, for example, `s3-website-us-west-2`\. For a complete list of Amazon S3 website endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints)\. For more information about the alias target, see [Alias Target](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values-alias.html#rrsets-values-alias-alias-target) in the *Amazon Route 53 Developer Guide*\.  
+If your bucket does not appear in the **Alias Target** listing, enter the Amazon S3 website endpoint for the Region where the bucket was created, for example, `s3-website-us-west-2.amazonaws.com`\. For a complete list of Amazon S3 website endpoints, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints)\. For more information about the alias target, see [Alias Target](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values-alias.html#rrsets-values-alias-alias-target) in the *Amazon Route 53 Developer Guide*\.  
 **Routing Policy**  
 Accept the default value of **Simple**\.  
 **Evaluate Target Health**  
@@ -437,7 +437,7 @@ Choose **A – IPv4 address**\.
 **Alias**  
 Choose **Yes**\.  
 **Alias Target**  
-In the **S3 website endpoints** section of the list, choose the same bucket name that appears in the **Name** field—for example, `www.example.com (s3-website-us-west-2)`\.  
+In the **S3 website endpoints** section of the list, choose the same bucket name that appears in the **Name** field—for example, `www.example.com (s3-website-us-west-2.amazonaws.com)`\.  
 **Routing Policy**  
 Accept the default value of **Simple**\.  
 **Evaluate Target Health**  
