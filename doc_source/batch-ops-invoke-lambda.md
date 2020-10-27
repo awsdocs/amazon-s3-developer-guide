@@ -39,6 +39,13 @@ This section provides example AWS Identity and Access Management \(IAM\) permiss
 
 You must create Lambda functions specifically for use with S3 Batch Operations\. You can't reuse existing Amazon S3 event\-based Lambda functions\. This is because Lambda functions that are used for S3 Batch Operations must accept and return special data fields\. 
 
+**Note**  
+AWS Lambda functions written in Java accept either [RequestHandler](https://github.com/aws/aws-lambda-java-libs/blob/master/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/RequestHandler.java) or [RequestStreamHandler](https://github.com/aws/aws-lambda-java-libs/blob/master/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/RequestStreamHandler.java) handler interfaces. However, to support S3 Batch Operations request and response format, AWS Lambda requires the `RequestStreamHandler` interface for custom serialization and deserialization of a request and response. This interface allows Lambda to pass an InputStream and OutputStream to the Java `handleRequest` method.
+
+Be sure to use the `RequestStreamHandler` interface when using Lambda functions with S3 Batch Operations. If you use a `RequestHandler` interface, the batch job will fail with "Invalid JSON returned in Lambda payload" in the completion report.
+
+For more information, see [Handler interfaces](https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html#java-handler-interfaces) in the _AWS Lambda User Guide_.
+
 ### Example IAM permissions<a name="batch-ops-invoke-lambda-custom-functions-iam"></a>
 
 The following are examples of the IAM permissions that are necessary to use a Lambda function with S3 Batch Operations\. 
