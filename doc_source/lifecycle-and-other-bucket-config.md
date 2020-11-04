@@ -29,7 +29,7 @@ If you have logging enabled on your bucket, Amazon S3 server access logs report 
 |  `S3.TRANSITION_ZIA.OBJECT`  |  Amazon S3 transitions the object to the S3 One Zone\-IA storage class\.  | 
 |  `S3.TRANSITION_INT.OBJECT`  |  Amazon S3 transitions the object to the Intelligent\-Tiering storage class\.  | 
 |  `S3.TRANSITION.OBJECT`  |  Amazon S3 initiates the transition of object to the S3 Glacier storage class\.  | 
-|  `S3.TRANSITION_GDA.OBJECT`  |  Amazon S3 initiates the transition of object to the S3 Glacier S3 Glacier Deep Archive storage class\.  | 
+|  `S3.TRANSITION_GDA.OBJECT`  |  Amazon S3 initiates the transition of object to the S3 Glacier Deep Archive storage class\.  | 
 |  `S3.DELETE.UPLOAD`  |  Amazon S3 aborts incomplete multipart upload\.  | 
 
 **Note**  

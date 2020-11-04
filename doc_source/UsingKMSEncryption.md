@@ -27,7 +27,7 @@ When you use an AWS KMS CMK for server\-side encryption in Amazon S3, you must c
 If you are uploading or accessing objects encrypted by SSE\-KMS, you need to use AWS Signature Version 4 for added security\. For more information on how to do this using an AWS SDK, see [Specifying Signature Version in Request Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version)\.
 
 **Important**  
-All GET and PUT requests for an object protected by AWS KMS will fail if they are not made via SSL or if they are not made using SigV4\.
+All GET and PUT requests for an object protected by AWS KMS will fail if they are not made via SSL or TLS, or if they are not made using SigV4\.
 
 ## SSE\-KMS Highlights<a name="sse-kms-highlights"></a>
 

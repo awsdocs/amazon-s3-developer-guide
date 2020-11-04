@@ -6,7 +6,9 @@ The following figure shows how a simple `DELETE` on a delete marker removes noth
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/versioning_DELETE_deleteMarker.png)
 
-In a versioning\-enabled bucket, this new delete marker would have a unique version ID\. So, it's possible to have multiple delete markers of the same object in one bucket\.
+In a versioning\-enabled bucket, this new delete marker would have a unique version ID\. So, it's possible to have multiple delete markers of the same object in one bucket\. 
+
+If the current object version is the only object version and it is also a delete marker \(also referred as an *expired object delete marker*, where all object versions are deleted and you only have a delete marker remaining\), Amazon S3 removes the expired object delete marker\. You can also use the expiration action to direct Amazon S3 to remove any expired object delete markers\. For an example, see [Example 7: Removing expired object delete markers](lifecycle-configuration-examples.md#lifecycle-config-conceptual-ex7)\. 
 
 To permanently delete a delete marker, you must include its version ID in a `DELETE Object versionId` request\. The following figure shows how a `DELETE Object versionId` request permanently removes a delete marker\. Only the owner of a bucket can permanently remove a delete marker\.
 

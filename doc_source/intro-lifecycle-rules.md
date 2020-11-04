@@ -119,7 +119,7 @@ You can filter objects by key prefix, object tags, or a combination of both \(in
 
   The Lifecycle rule applies to objects that have both of the tags specified\. Amazon S3 performs a logical AND\. Note the following:
   + Each tag must match both key and value exactly\.
-  + The rule applies to a subset of objects that has tags specified in the rule\. If an object has additional tags specified, it doesn't matter\.
+  + The rule applies to a subset of objects that has all the tags specified in the rule\. If an object has additional tags specified, the rule will still apply\.
 **Note**  
 When you specify multiple tags in a filter, each tag key must be unique\.
 + **Specifying a filter based on both prefix and one or more tags** – In a Lifecycle rule, you can specify a filter based on both the key prefix and one or more tags\. Again, you must wrap all of these in the <And> element as shown following\.

@@ -1,4 +1,4 @@
-# \(Optional\) configuring a custom error document<a name="CustomErrorDocSupport"></a>
+# \(Optional\) Configuring a custom error document<a name="CustomErrorDocSupport"></a>
 
 After you configure your bucket as a static website, when an error occurs, Amazon S3 returns an HTML error document\. You can optionally configure your bucket with a custom error document so that Amazon S3 returns that document when an error occurs\. 
 
@@ -33,6 +33,11 @@ The following table lists the subset of HTTP response codes that Amazon S3 retur
 
 When you configure your bucket as a static website, you can optionally provide a custom error document that contains a user\-friendly error message and additional help\. Amazon S3 returns your custom error document for only the HTTP 4XX class of error codes\. 
 
+To configure a custom error document using the S3 console, follow the steps below\. You can also configure an error document using the REST API, the AWS SDKs, the AWS CLI, or AWS CloudFormation\. For more information, see the following:
++ [Configuring a static website using the REST API and AWS SDKs](https://docs.aws.amazon.com/AmazonS3/latest/dev/ManagingBucketWebsiteConfig.html)
++ [AWS::S3::Bucket WebsiteConfiguration](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration.html) in the *AWS CloudFormation User Guide*
++ [put\-bucket\-website](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-website.html) in the *AWS CLI Command Reference*
+
 **To configure a custom error document**
 
 1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
@@ -41,12 +46,14 @@ When you configure your bucket as a static website, you can optionally provide a
 
 1. Choose **Properties**\.
 
-1. Choose **Static website hosting**\.
+1. Under **Static website hosting**, choose **Edit**\.
 
    If your bucket is already configured as a static website, you can follow the next step to update or add error document information\. If you have not configured your bucket as a static website, you must first set up the required configuration\. For more information, see [Enabling website hosting](EnableWebsiteHosting.md)\.
 
 1. In the **Error document** box, enter your error document name\.
 
-1. Choose **Save**\.
+   The error document name is case sensitive and must exactly match the file name of the HTML error document that you plan to upload to your S3 bucket\. If you don't specify a custom error document and an error occurs, Amazon S3 returns a default HTML error document\.
+
+1. Choose **Save changes**\.
 
 For more information about using the REST API to configure your bucket as a static website with a custom error document, see [PutBucketWebsite](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketWebsite.html) in the *Amazon Simple Storage Service API Reference*\.

@@ -218,7 +218,7 @@ bucket-name.s3.amazonaws.com
 In your server access logs or CloudTrail logs, you might see requests that use the legacy global endpoint\. In this example, the bucket name is `my-bucket` and the legacy global endpoint is shown: 
 
 ```
-https://my-bucket.amazonaws.com
+https://my-bucket.s3.amazonaws.com
 ```
 
 **Virtual Hosted\-Style Requests for US East \(N\. Virginia\)**  

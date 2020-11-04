@@ -16,7 +16,7 @@ For information on the REST API support for managing ACLs, see the following sec
 
 ## Access Control List \(ACL\)\-Specific Request Headers<a name="acl-headers-rest-api"></a>
 
-You can use headers to grant access control list \(ACL\) based permissons\. By default, all objects are private\. Only the owner has full access control\. When adding a new object, you can grant permissions to individual AWS accounts or to predefined groups defined by Amazon S3\. These permissions are then added to the Access Control List \(ACL\) on the object\. For more information, see [Using ACLs](https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html)\. 
+You can use headers to grant access control list \(ACL\)\-based permissions\. By default, all objects are private\. Only the owner has full access control\. When adding a new object, you can grant permissions to individual AWS accounts or to predefined groups defined by Amazon S3\. These permissions are then added to the Access Control List \(ACL\) on the object\. For more information, see [Using ACLs](https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html)\. 
 
 With this operation, you can grant access permissions using one these two methods:
 + **Canned ACL \(`x-amz-acl`\)** — Amazon S3 supports a set of predefined ACLs, known as canned ACLs\. Each canned ACL has a predefined set of grantees and permissions\. For more information, see [Canned ACL](acl-overview.md#canned-acl)\.

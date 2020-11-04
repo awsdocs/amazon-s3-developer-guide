@@ -19,14 +19,14 @@ Requester Pays buckets  do not allow access through the website endpoint\. Any r
 **Topics**
 + [Website endpoint examples](#website-endpoint-examples)
 + [Adding a DNS CNAME](#website-endpoint-dns-cname)
-+ [Using a custom Domain with Route 53](#custom-domain-s3-endpoint)
++ [Using a custom domain with Route 53](#custom-domain-s3-endpoint)
 + [Key differences between a website endpoint and a REST API endpoint](#WebsiteRestEndpointDiff)
 
 ## Website endpoint examples<a name="website-endpoint-examples"></a>
 
 The following examples show how you can access an Amazon S3 bucket that is configured as a static website\.
 
-**Example — requesting an object at the root level**  
+**Example — Requesting an object at the root level**  
 To request a specific object that is stored at the root level in the bucket, use the following URL structure\.  
 
 ```
@@ -38,7 +38,7 @@ For example, the following URL requests the `photo.jpg` object that is stored at
 http://example-bucket.s3-website.us-west-2.amazonaws.com/photo.jpg
 ```
 
-**Example — requesting an object in a prefix**  
+**Example — Requesting an object in a prefix**  
 To request an object that is stored in a folder in your bucket, use this URL structure\.  
 
 ```
@@ -56,7 +56,7 @@ If you have a registered domain, you can add a DNS CNAME entry to point to the A
 
 For more information, see [Customizing Amazon S3 URLs with CNAMEs](VirtualHosting.md#VirtualHostingCustomURLs)\. 
 
-## Using a custom Domain with Route 53<a name="custom-domain-s3-endpoint"></a>
+## Using a custom domain with Route 53<a name="custom-domain-s3-endpoint"></a>
 
 Instead of accessing the website using an Amazon S3 website endpoint, you can use your own domain registered with Amazon Route 53 to serve your content—for example, `example.com`\. You can use Amazon S3 with Route 53 to host a website at the root domain\. For example, if you have the root domain `example.com` and you host your website on Amazon S3, your website visitors can access the site from their browser by entering either `http://www.example.com` or `http://example.com`\. 
 

@@ -32,7 +32,12 @@ If you create a folder structure in your bucket, you must have an index document
 
 However, if you exclude the trailing slash from the preceding URL, Amazon S3 first looks for an object `photos` in the bucket\. If the `photos` object is not found, it searches for an index document, `photos/index.html`\. If that document is found, Amazon S3 returns a `302 Found` message and points to the `photos/` key\. For subsequent requests to `photos/`, Amazon S3 returns `photos/index.html`\. If the index document is not found, Amazon S3 returns an error\.
 
-## Configuring an index document<a name="configuring-index-document"></a>
+## Configure an index document<a name="configuring-index-document"></a>
+
+To configure an index document using the S3 console, follow the steps below\. You can also configure an index document using the REST API, the AWS SDKs, the AWS CLI, or AWS CloudFormation\. For more information, see the following:
++ [Configuring a static website using the REST API and AWS SDKs](https://docs.aws.amazon.com/AmazonS3/latest/dev/ManagingBucketWebsiteConfig.html)
++ [AWS::S3::Bucket WebsiteConfiguration](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration.html) in the *AWS CloudFormation User Guide*
++ [put\-bucket\-website](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-website.html) in the *AWS CLI Command Reference*
 
 When you enable static website hosting for your bucket, you enter the name of the index document \(for example, **index\.html**\)\. After you enable static website hosting for the bucket, you upload an HTML file with this index document name to your bucket\.
 

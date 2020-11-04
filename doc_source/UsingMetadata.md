@@ -10,29 +10,11 @@ Each Amazon S3 object has data, a key, and metadata\. The *object key* \(or key 
 
 When you create an object, you specify the key name, which uniquely identifies the object in the bucket\. For example, on the [Amazon S3 console](https://console.aws.amazon.com/s3/home), when you highlight a bucket, a list of objects in your bucket appears\. These names are the *object keys*\. The name for a key is a sequence of Unicode characters whose UTF\-8 encoding is at most 1,024 bytes long\. 
 
-The Amazon S3 data model is a flat structure: You create a bucket, and the bucket stores objects\. There is no hierarchy of subbuckets or subfolders\. However, you can infer logical hierarchy using key name prefixes and delimiters as the Amazon S3 console does\. The Amazon S3 console supports a concept of folders\. 
-
-Suppose that your bucket \(`admin-created`\) has four objects with the following object keys:
-
-`Development/Projects.xls`
-
-`Finance/statement1.pdf`
-
-`Private/taxdocument.pdf`
-
-`s3-dg.pdf`
-
-The console uses the key name prefixes \(`Development/`, `Finance/`, and `Private/`\) and delimiter \('/'\) to present a folder structure as shown\.
-
-![\[Screenshot of Amazon S3 console with Development, Finance, and Private folders.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/ui-folder.png)![\[Screenshot of Amazon S3 console with Development, Finance, and Private folders.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screenshot of Amazon S3 console with Development, Finance, and Private folders.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
-
-The `s3-dg.pdf` key does not have a prefix, so its object appears directly at the root level of the bucket\. If you open the `Development/` folder, you see the `Projects.xlsx` object in it\. 
-
-![\[Screenshot of Amazon S3 console with Projects.xlsx file selected in the Development folder.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/ui-file-in-folder.png)![\[Screenshot of Amazon S3 console with Projects.xlsx file selected in the Development folder.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screenshot of Amazon S3 console with Projects.xlsx file selected in the Development folder.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
+The Amazon S3 data model is a flat structure: You create a bucket, and the bucket stores objects\. There is no hierarchy of subbuckets or subfolders\. However, you can infer logical hierarchy using key name prefixes and delimiters as the Amazon S3 console does\. The Amazon S3 console supports a concept of folders\. For more information about how to edit metadata from the Amazon S3 console, see [Editing object metadata](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-object-metadata.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 **Note**  
 Amazon S3 supports buckets and objects, and there is no hierarchy\. However, by using prefixes and delimiters in an object key name, the Amazon S3 console and the AWS SDKs can infer hierarchy and introduce the concept of folders\.
-The Amazon S3 console implements folder object creation by creating a zero\-byte objects with the folder *prefix and delimiter* value as the key\. These folder objects don't appear in the console, but otherwise behave like any other objects and can be viewed and manipulated through the API, AWS CLI and SDKs\.
+The Amazon S3 console implements folder object creation by creating a zero\-byte object with the folder *prefix and delimiter* value as the key\. These folder objects don't appear in the console\. Otherwise they behave like any other objects and can be viewed and manipulated through the REST API, AWS CLI, and AWS SDKs\.
 
 ### Object key naming guidelines<a name="object-key-guidelines"></a>
 
@@ -122,7 +104,7 @@ The following table provides a list of system\-defined metadata and whether you 
 | x\-amz\-version\-id | Object version\. When you enable versioning on a bucket, Amazon S3 assigns a version number to objects added to the bucket\. For more information, see [Using versioning](Versioning.md)\. | No | 
 | x\-amz\-delete\-marker | In a bucket that has versioning enabled, this Boolean marker indicates whether the object is a delete marker\.  | No | 
 | x\-amz\-storage\-class | Storage class used for storing the object\. For more information, see [Amazon S3 storage classes](storage-class-intro.md)\. | Yes | 
-| x\-amz\-website\-redirect\-location |  Redirects requests for the associated object to another object in the same bucket or an external URL\. For more information, see [\(Optional\) configuring a webpage redirect](how-to-page-redirect.md)\. | Yes | 
+| x\-amz\-website\-redirect\-location |  Redirects requests for the associated object to another object in the same bucket or an external URL\. For more information, see [\(Optional\) Configuring a webpage redirect](how-to-page-redirect.md)\. | Yes | 
 | x\-amz\-server\-side\-encryption\-aws\-kms\-key\-id | If x\-amz\-server\-side\-encryption is present and has the value of aws:kms, this indicates the ID of the AWS KMS symmetric customer master key \(CMK\) that was used for the object\. | Yes | 
 | x\-amz\-server\-side\-encryption\-customer\-algorithm | Indicates whether server\-side encryption with customer\-provided encryption keys \(SSE\-C\) is enabled\. For more information, see [Protecting data using server\-side encryption with customer\-provided encryption keys \(SSE\-C\)](ServerSideEncryptionCustomerKeys.md)\.  | Yes | 
 

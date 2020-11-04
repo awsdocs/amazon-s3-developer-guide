@@ -7,8 +7,8 @@ The Put object copy operation copies each object specified in the manifest\. You
 + All destination objects must be in one bucket\.
 + You must have read permissions for the source bucket and write permissions for the destination bucket\.
 + Objects to be copied can be up to 5 GB in size\.
-+ Put object copy jobs must be created in the destination region, i\.e\. the region you intend to copy the objects to\.
-+ All Put object copy options are supported except for conditional checks on ETags and server\-side encryption with customer\-provided encryption keys\.
++ Put object copy jobs must be created in the destination region, which is the region you intend to copy the objects to\.
++ All Put object copy options are supported except for conditional checks on ETags and server\-side encryption with customer\-provided encryption keys \(SSE\-C\)\.
 + If the buckets are unversioned, you will overwrite objects with the same key names\.
 + Objects are not necessarily copied in the same order as they are listed in the manifest\. So for versioned buckets, if preserving current/non\-current version order is important, you should copy all non\-current versions first and later copy the current versions in a subsequent job after the first job is complete\.
 + Copying objects to the Reduced Redundancy Storage \(RRS\) class is not supported\.

@@ -6,7 +6,6 @@ You can enable or disable logging programmatically by using either the Amazon S3
 + [Enabling logging](#enabling-logging-general)
 + [Granting the log delivery group WRITE and READ\_ACP permissions](#grant-log-delivery-permissions-general)
 + [Example: AWS SDK for \.NET](#enable-logging-dotnetsdk-exmaple)
-+ [Related resources](#enable-logging-programming-more-info)
 
 ## Enabling logging<a name="enabling-logging-general"></a>
 
@@ -143,6 +142,6 @@ The following C\# example enables logging on a bucket\. You need to create two b
 75. }
 ```
 
-## Related resources<a name="enable-logging-programming-more-info"></a>
-+ [Amazon S3 server access logging](ServerLogs.md)
-+ [AWS::S3::Bucket](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html) in the *AWS CloudFormation User Guide*
+For more information about logging basics, see [Amazon S3 server access logging](ServerLogs.md)\.
+
+For an example CloudFormation template, see [Log Access Requests for a Specific S3 Bucket](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--examples--Log_Access_Requests_for_a_Specific_S3_Bucket) in the *AWS CloudFormation User Guide*

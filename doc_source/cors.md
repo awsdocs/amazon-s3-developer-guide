@@ -29,11 +29,17 @@ Suppose that you want to host a web font from your S3 bucket\. Again, browsers r
 
 ## How do I configure CORS on my bucket?<a name="how-do-i-enable-cors"></a>
 
-To configure your bucket to allow cross\-origin requests, you create a CORS configuration, which is an XML document with rules that identify the origins that you will allow to access your bucket, the operations \(HTTP methods\) that will support for each origin, and other operation\-specific information\. 
+To configure your bucket to allow cross\-origin requests, you create a CORS configuration\. The CORS configuration is a document with rules that identify the origins that you will allow to access your bucket, the operations \(HTTP methods\) that will support for each origin, and other operation\-specific information\. You can add up to 100 rules to the configuration\. You can add the CORS configuration as the `cors` subresource to the bucket\.
 
-You can add up to 100 rules to the configuration\. You add the XML document as the `cors` subresource to the bucket  either programmatically or by using the Amazon S3 console\. For more information, see [Enabling cross\-origin resource sharing \(CORS\)](ManageCorsUsing.md)\.
+If you are configuring CORS in the S3 console, you must use JSON to create a CORS configuration\. The new S3 console only supports JSON CORS configurations\. 
 
-Instead of accessing a website by using an Amazon S3 website endpoint, you can use your own domain, such as `example1.com` to serve your content\. For information about using your own domain, see [Configuring a static website using a custom domain registered with Route 53](website-hosting-custom-domain-walkthrough.md)\. The following example `cors` configuration has three rules, which are specified as `CORSRule` elements:
+**Important**  
+In the new S3 console, the CORS configuration must be JSON\.
+
+Instead of accessing a website by using an Amazon S3 website endpoint, you can use your own domain, such as `example1.com` to serve your content\. For information about using your own domain, see [Configuring a static website using a custom domain registered with Route 53](website-hosting-custom-domain-walkthrough.md)\. 
+
+**Example 1**  
+The following example `cors` configuration has three rules, which are specified as `CORSRule` elements:  
 + The first rule allows cross\-origin PUT, POST, and DELETE requests from the `http://www.example1.com` origin\. The rule also allows all headers in a preflight OPTIONS request through the `Access-Control-Request-Headers` header\. In response to preflight OPTIONS requests, Amazon S3 returns requested headers\.
 + The second rule allows the same cross\-origin requests as the first rule, but the rule applies to another origin, `http://www.example2.com`\. 
 + The third rule allows cross\-origin GET requests from all origins\. The `*` wildcard character refers to all origins\. 
@@ -65,7 +71,51 @@ Instead of accessing a website by using an Amazon S3 website endpoint, you can u
 </CORSConfiguration>
 ```
 
-The CORS configuration also allows optional configuration parameters, as shown in the following CORS configuration\. In this example, the CORS configuration allows cross\-origin PUT, POST, and DELETE requests from the `http://www.example.com` origin\. 
+```
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "PUT",
+            "POST",
+            "DELETE"
+        ],
+        "AllowedOrigins": [
+            "http://www.example1.com"
+        ],
+        "ExposeHeaders": []
+    },
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "PUT",
+            "POST",
+            "DELETE"
+        ],
+        "AllowedOrigins": [
+            "http://www.example2.com"
+        ],
+        "ExposeHeaders": []
+    },
+    {
+        "AllowedHeaders": [],
+        "AllowedMethods": [
+            "GET"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": []
+    }
+]
+```
+
+**Example 2**  
+The CORS configuration also allows optional configuration parameters, as shown in the following CORS configuration\. In this example, the CORS configuration allows cross\-origin PUT, POST, and DELETE requests from the `http://www.example.com` origin\.  
 
 ```
 <CORSConfiguration>
@@ -83,7 +133,30 @@ The CORS configuration also allows optional configuration parameters, as shown i
 </CORSConfiguration>
 ```
 
-The `CORSRule` element in the preceding configuration includes the following optional elements:
+```
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "PUT",
+            "POST",
+            "DELETE"
+        ],
+        "AllowedOrigins": [
+            "http://www.example.com"
+        ],
+        "ExposeHeaders": [
+            "x-amz-server-side-encryption",
+            "x-amz-request-id",
+            "x-amz-id-2"
+        ],
+        "MaxAgeSeconds": 3000
+    }
+]
+```
+The `CORSRule` element in the preceding configuration includes the following optional elements:  
 + `MaxAgeSeconds`—Specifies the amount of time in seconds \(in this example, 3000\) that the browser caches an Amazon S3 response to a preflight OPTIONS request for the specified resource\. By caching the response, the browser does not have to send preflight requests to Amazon S3 if the original request will be repeated\. 
 + `ExposeHeader`—Identifies the response headers \(in this example, `x-amz-server-side-encryption`, `x-amz-request-id`, and `x-amz-id-2`\) that customers are able to access from their applications \(for example, from a JavaScript `XMLHttpRequest` object\)\.
 

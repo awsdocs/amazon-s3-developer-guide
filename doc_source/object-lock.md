@@ -2,7 +2,7 @@
 
 With S3 Object Lock, you can store objects using a *write\-once\-read\-many* \(WORM\) model\. You can use it to prevent an object from being deleted or overwritten for a fixed amount of time or indefinitely\. Object Lock helps you meet regulatory requirements that require WORM storage, or simply add another layer of protection against object changes and deletion\.
 
-S3 Object Lock has been assessed by Cohasset Associates for use in environments that are subject to SEC 17a\-4, CTCC, and FINRA regulations\. For more information about how Object Lock relates to these regulations, see the [Cohasset Associates Compliance Assessment](https://d1.awsstatic.com/r2018/b/S3-Object-Lock/Amazon-S3-Compliance-Assessment.pdf)\.
+S3 Object Lock has been assessed by Cohasset Associates for use in environments that are subject to SEC 17a\-4, CFTC, and FINRA regulations\. For more information about how Object Lock relates to these regulations, see the [Cohasset Associates Compliance Assessment](https://d1.awsstatic.com/r2018/b/S3-Object-Lock/Amazon-S3-Compliance-Assessment.pdf)\.
 
 Object Lock provides two ways to manage object retention: retention periods and legal holds\.
 + A *retention period* specifies a fixed period of time during which an object remains locked\. During this period, your object is WORM\-protected and can't be overwritten or deleted\.

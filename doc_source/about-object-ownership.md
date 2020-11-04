@@ -1,7 +1,7 @@
 # Controlling ownership of uploaded objects using S3 Object Ownership<a name="about-object-ownership"></a>
 
 ****  
-***S3 Object Ownership is currently under preview and can be configured through the AWS Management Console, AWS Command Line Interface, AWS SDKs, or Amazon S3 REST APIs\. AWS CloudFormation support is planned for general availability\.***
+***S3 Object Ownership can be configured through the AWS Management Console, AWS Command Line Interface, AWS SDKs, or Amazon S3 REST APIs\. AWS CloudFormation support is planned but not yet available\.***
 
  S3 Object Ownership is an Amazon S3 bucket setting that you can use to control ownership of new objects that are uploaded to your buckets\. By default, when other AWS accounts upload objects to your bucket, the objects remain owned by the uploading account\. With S3 Object Ownership, any new objects that are written by other accounts with the `bucket-owner-full-control` canned access control list \(ACL\) automatically become owned by the bucket owner, who will have full control of the objects\. You can create shared data stores that multiple users and teams in different accounts can write to and read from, and standardize ownership of new objects in your bucket, allowing you as the bucket owner to share and manage access to these objects via resource\-based policies such as a bucket policy\. S3 Object Ownership does not affect existing objects\. 
 

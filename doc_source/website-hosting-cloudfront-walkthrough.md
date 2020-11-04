@@ -9,7 +9,7 @@ For more information about using an AWS CloudFormation template to configure a s
 
 **Topics**
 + [Step 1: Create a CloudFront distribution](#create-distribution)
-+ [Step 2: Update the record sets for your Domain and subdomain](#update-record-sets)
++ [Step 2: Update the record sets for your domain and subdomain](#update-record-sets)
 + [\(Optional\) step 3: Check the log files](#check-log-files)
 
 ## Step 1: Create a CloudFront distribution<a name="create-distribution"></a>
@@ -30,15 +30,19 @@ First, you create a CloudFront distribution\. This makes your website available 
 
 1. For **Default Cache Behavior Settings**, keep the values set to the defaults\. 
 
-   For more information about these configuration options, see [Values that You Specify When You Create or Update a Web Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/WorkingWithDownloadDistributions.html#DownloadDistValuesYouSpecify) in the *Amazon CloudFront Developer Guide*\.
+   With the default settings for **Viewer Protocol Polcy**, you can use HTTPS for your static website\. For more information these configuration options, see [Values that You Specify When You Create or Update a Web Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/WorkingWithDownloadDistributions.html#DownloadDistValuesYouSpecify) in the *Amazon CloudFront Developer Guide*\.
 
 1. For **Distribution Settings**, do the following:
 
    1. Leave **Price Class** set to **Use All Edge Locations \(Best Performance\)**\.
 
-   1. Set **Alternate Domain Names \(CNAMEs\)** to the root domain and `www` subdomain; in this tutorial, these are `example.com` and `www.example.com`\.  
+   1. Set **Alternate Domain Names \(CNAMEs\)** to the root domain and `www` subdomain, for example, `example.com` and `www.example.com`\.  
 **Important**  
 Prior to performing this step, note the [requirements for using alternate domain names](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-requirements), in particular the need for a valid SSL/TLS certificate\. 
+
+   1. For **SSL Certificate**, choose **Custom SSL Certificate \(example\.com\)**, and choose the custom certificate that covers the domain and subdomain names\.
+
+      For more information, see [SSL Certificate](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesSSLCertificate) in the *Amazon CloudFront Developer Guide*\.
 
    1. In **Default Root Object**, enter the name of your index document, for example, `index.html`\. 
 
@@ -68,7 +72,7 @@ Prior to performing this step, note the [requirements for using alternate domain
 
    If your website is visible, the CloudFront distribution works\. If your website has a custom domain registered with Amazon Route 53, you will need the CloudFront domain name to update the record set in the next step\.
 
-## Step 2: Update the record sets for your Domain and subdomain<a name="update-record-sets"></a>
+## Step 2: Update the record sets for your domain and subdomain<a name="update-record-sets"></a>
 
 Now that you have successfully created a CloudFront distribution, update the alias record in Route 53 to point to the new CloudFront distribution\.
 
@@ -106,7 +110,7 @@ CloudFront logs are stored in the bucket and folder that you choose when you cre
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. Choose the logging bucket for your website\.
+1. Choose the name of the logging bucket for your website\.
 
 1. Choose the CloudFront logs folder\.
 

@@ -13,9 +13,33 @@ The AWS SDK for Ruby \- Version 3 has two ways of uploading an object to Amazon 
 ```
 require 'aws-sdk-s3'
 
-s3 = Aws::S3::Resource.new(region:'us-west-2')
-obj = s3.bucket('bucket-name').object('key')
-obj.upload_file('/path/to/source/file')
+# Uploads an object to a bucket in Amazon Simple Storage Service (Amazon S3).
+#
+# Prerequisites:
+#
+# - An S3 bucket.
+# - An object to upload to the bucket.
+#
+# @param s3_client [Aws::S3::Resource] An initialized S3 resource.
+# @param bucket_name [String] The name of the bucket.
+# @param object_key [String] The name of the object.
+# @param file_path [String] The path and file name of the object to upload.
+# @return [Boolean] true if the object was uploaded; otherwise, false.
+# @example
+#   exit 1 unless object_uploaded?(
+#     Aws::S3::Resource.new(region: 'us-east-1'),
+#     'doc-example-bucket',
+#     'my-file.txt',
+#     './my-file.txt'
+#   )
+def object_uploaded?(s3_resource, bucket_name, object_key, file_path)
+  object = s3_resource.bucket(bucket_name).object(object_key)
+  object.upload_file(file_path)
+  return true
+rescue StandardError => e
+  puts "Error uploading object: #{e.message}"
+  return false
+end
 ```
 
 The second way that AWS SDK for Ruby \- Version 3 can upload an object uses the `#put` method of `Aws::S3::Object`\. This is useful if the object is a string or an I/O object that is not a file on disk\. To use this method:
@@ -31,11 +55,33 @@ The second way that AWS SDK for Ruby \- Version 3 can upload an object uses the 
 ```
 require 'aws-sdk-s3'
 
-s3 = Aws::S3::Resource.new(region:'us-west-2')
-obj = s3.bucket('bucket-name').object('key')
-
-# I/O object
-File.open('/path/to/source.file', 'rb') do |file|
-  obj.put(body: file)
+# Uploads an object to a bucket in Amazon Simple Storage Service (Amazon S3).
+#
+# Prerequisites:
+#
+# - An S3 bucket.
+# - An object to upload to the bucket.
+#
+# @param s3_client [Aws::S3::Resource] An initialized S3 resource.
+# @param bucket_name [String] The name of the bucket.
+# @param object_key [String] The name of the object.
+# @param file_path [String] The path and file name of the object to upload.
+# @return [Boolean] true if the object was uploaded; otherwise, false.
+# @example
+#   exit 1 unless object_uploaded?(
+#     Aws::S3::Resource.new(region: 'us-east-1'),
+#     'doc-example-bucket',
+#     'my-file.txt',
+#     './my-file.txt'
+#   )
+def object_uploaded?(s3_resource, bucket_name, object_key, file_path)
+  object = s3_resource.bucket(bucket_name).object(object_key)
+  File.open(file_path, 'rb') do |file|
+    object.put(body: file)
+  end
+  return true
+rescue StandardError => e
+  puts "Error uploading object: #{e.message}"
+  return false
 end
 ```

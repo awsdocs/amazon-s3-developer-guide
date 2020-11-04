@@ -2,13 +2,16 @@
 
  You can configure a bucket for Requester Pays by using the Amazon S3 console\.
 
-**To configure a bucket for Requester Pays**
+**To enable Requester Pays for an S3 bucket**
 
 1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. In the **Buckets** list, click the details icon on the left of the bucket name and then click **Properties** to display bucket properties\.
+1. In the **Buckets** list, choose the name of the bucket that you want to enable Requester Pays for\.
 
-1. In the **Properties** pane, click **Requester Pays**\.
+1. Choose **Properties**\.
 
-1. Select the **Enabled** check box\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/RequesterPaysConsole.png)
+1. Under **Requester pays**, choose **Edit**\.
+
+1. Choose **Enable**, and choose **Save changes**\.
+
+   Amazon S3 enables Requester Pays for your bucket and displays your **Bucket overview**\. Under **Requester pays**, you see **Enabled**

@@ -26,11 +26,11 @@ This AWS CloudFormation template is available for you to download and use\. For 
 + [Step 4: Configure your subdomain bucket for website redirect](#root-domain-walkthrough-configure-redirect)
 + [Step 5: Configure logging for website traffic](#root-domain-walkthrough-configure-logging)
 + [Step 6: Upload index and website content](#upload-website-content)
-+ [Step 7: Edit block public access settings](#root-domain-walkthrough-configure-bucket-permissions)
++ [Step 7: Edit S3 Block Public Access settings](#root-domain-walkthrough-configure-bucket-permissions)
 + [Step 8: Attach a bucket policy](#add-bucket-policy-root-domain)
 + [Step 9: Test your domain endpoint](#root-domain-walkthrough-test-website)
 + [Step 10: Add alias records for your domain and subdomain](#root-domain-walkthrough-add-record-to-hostedzone)
-+ [Step 11: Test the website](#root-domain-testing
++ [Step 11: Test the website](#root-domain-testing)
 + [Speeding up your website with Amazon CloudFront](website-hosting-cloudfront-walkthrough.md)
 + [Cleaning up your example resources](getting-started-cleanup.md)
 
@@ -94,31 +94,35 @@ In this step, you configure your root domain bucket \(`example.com`\) as a websi
 
 1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. In the **Bucket name** list, choose the bucket that you want to use for your static website\.
+1. In the **Buckets** list, choose the name of the bucket that you want to enable static website hosting for\.
 
 1. Choose **Properties**\.
 
-1. Choose **Static website hosting**\.
+1. Under **Static website hosting**, choose **Edit**\.
 
-1. Choose **Use this bucket to host a website**\.
+1. Choose **Use this bucket to host a website**\. 
 
-1. Enter the name of your index document\. 
+1. Under **Static website hosting**, choose **Enable**\.
 
-   The index document name is typically `index.html`\. The index document name is case sensitive and must exactly match the file name of the HTML index document that you plan to upload to your S3 bucket\. For more information, see [Configuring an index document](IndexDocumentSupport.md)\.
+1. In **Index document**, enter the file name of the index document, typically `index.html`\. 
 
-1. \(Optional\) If you want to add a custom error document, in the **Error document** box, enter the key name for the error document \(for example, **error\.html**\)\. 
+   The index document name is case sensitive and must exactly match the file name of the HTML index document that you plan to upload to your S3 bucket\. When you configure a bucket for website hosting, you must specify an index document\. Amazon S3 returns this index document when requests are made to the root domain or any of the subfolders\. For more information, see [Configuring an index document](https://docs.aws.amazon.com/AmazonS3/latest/dev/IndexDocumentSupport.html)\.
 
-   The error document name is case sensitive and must exactly match the file name of the HTML error document that you plan to upload to your S3 bucket\. For more information, see [\(Optional\) configuring a custom error document](CustomErrorDocSupport.md)\.
+1. \(Optional\) If you want to provide your own custom error document for 4XX class errors, in **Error document**, enter the custom error document file name\. 
 
-1. \(Optional\) If you want to specify advanced redirection rules, in **Edit redirection rules**, use XML to describe the rules\.
+   The error document name is case sensitive and must exactly match the file name of the HTML error document that you plan to upload to your S3 bucket\. If you don't specify a custom error document and an error occurs, Amazon S3 returns a default HTML error document\. For more information, see [Configuring a custom error document](https://docs.aws.amazon.com/AmazonS3/latest/dev/CustomErrorDocSupport.html)\.
 
-   For more information, see [Configuring advanced conditional redirects](how-to-page-redirect.md#advanced-conditional-redirects)\.
+1. \(Optional\) If you want to specify advanced redirection rules, in **Redirection rules**, enter XML to describe the rules\.
+
+   For example, you can conditionally route requests according to specific object key names or prefixes in the request\. For more information, see [Configuring advanced conditional redirects](https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html#advanced-conditional-redirects)\.
+
+1. Choose **Save changes**\.
+
+   Amazon S3 enables static website hosting for your bucket\. At the bottom of the page, under **Static website hosting**, you see the website endpoint for your bucket\.
 
 1. Under **Static website hosting**, note the **Endpoint**\.
 
    The **Endpoint** is the Amazon S3 website endpoint for your bucket\. After you finish configuring your bucket as a static website, you can use this endpoint to test your website\.
-
-1. Choose **Save**\.
 
 In the next step, you configure your subdomain \(`www.example.com`\) to redirect requests to your domain \(`example.com`\)\. 
 
@@ -128,19 +132,19 @@ After you configure your root domain bucket for website hosting, you can configu
 
 **To configure a redirect request**
 
-1. On the Amazon S3 console, in the **Buckets** list, choose your subdomain bucket \( `www.example.com` in this example\)\.
+1. On the Amazon S3 console, in the **Buckets** list, choose your subdomain bucket name \(`www.example.com` in this example\)\.
 
 1. Choose **Properties**\.
 
-1. Choose **Static website hosting**\.
+1. Under **Static website hosting**, choose **Edit**\.
 
-1. Choose **Redirect requests**\. 
+1. Choose **Redirect requests for an object**\. 
 
-1. In the **Target bucket or domain** box, enter your domain \(for example, **example\.com**\)\.
+1. In the **Target bucket** box, enter your root domain, for example, **example\.com**\.
 
-1. In the **Protocol** box, enter **http**\.
+1. For **Protocol**, choose **http**\.
 
-1. Choose **Save**\.
+1. Choose **Save changes**\.
 
 ## Step 5: Configure logging for website traffic<a name="root-domain-walkthrough-configure-logging"></a>
 
@@ -156,25 +160,27 @@ If you want to track the number of visitors accessing your website, you can opti
 
 1. \(Optional\) If you want to use CloudFront to improve your website performance, create a folder for the CloudFront log files \(for example, `cdn`\)\.
 
-1. In the **Bucket** list, choose your root domain bucket\.
+1. In the **Buckets** list, choose your root domain bucket\.
 
 1. Choose **Properties**\.
 
-1. Choose **Server access logging**\.
+1. Under **Server access logging**, choose **Edit**\.
 
-1. Choose **Enable logging**\.
+1. Choose **Enable**\.
 
-1. For **Target bucket**, choose the bucket that you created for the log files, for example `logs.example.com`\.
+1. Under the **Target bucket**, choose the bucket and folder destination for the server access logs:
+   + Browse to the folder and bucket location:
 
-1. For **Target prefix**, enter the name of the folder that you created for the log files followed by the delimiter \(/\), for example **logs/**\.
+     1. Choose **Browse S3**\.
 
-   When you set the **Target prefix**, you group your log data files in a folder so that they are easy to locate\.
+     1. Choose the bucket name, and then choose the logs folder\. 
 
-1. Choose **Save**\.
+     1. Choose **Choose path**\.
+   + Enter the S3 bucket path, for example, `s3://logs.example.com/logs/`\.
+
+1. Choose **Save changes**\.
 
    In your log bucket, you can now access your logs\. Amazon S3 writes website access logs to your log bucket every 2 hours\.
-
-1. To view the logs, choose **Overview**, and choose the folder\. 
 
 ## Step 6: Upload index and website content<a name="upload-website-content"></a>
 
@@ -220,7 +226,7 @@ When you enable static website hosting for your bucket, you enter the name of th
 
 1. \(Optional\) Upload other website content to your bucket\.
 
-## Step 7: Edit block public access settings<a name="root-domain-walkthrough-configure-bucket-permissions"></a>
+## Step 7: Edit S3 Block Public Access settings<a name="root-domain-walkthrough-configure-bucket-permissions"></a>
 
 In this example, you edit block public access settings for the domain bucket \(`example.com`\) to allow public access\.
 
@@ -235,17 +241,14 @@ Before you complete this step, review [Using Amazon S3 Block Public Access](http
 
 1. Choose **Permissions**\.
 
-1. Choose **Edit**\.
+1. Under **Block public access \(bucket settings\)**, choose **Edit**\.
 
-1. Clear **Block *all* public access**, and choose **Save**\.
+1. Clear **Block *all* public access**, and choose **Save changes**\.
 **Warning**  
 Before you complete this step, review [Using Amazon S3 Block Public Access](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html) to ensure you understand and accept the risks involved with allowing public access\. When you turn off block public access settings to make your bucket public, anyone on the internet can access your bucket\. We recommend that you block all public access to your buckets\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/edit-public-access-clear.png)
 
-1. In the confirmation box, enter **confirm**, and then choose **Confirm**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/edit-public-access-confirm.png)
-
-   Under **S3 buckets**, the **Access** for your bucket updates to **Objects can be public**\. You can now add a bucket policy to make the objects in the bucket publicly readable\. If the **Access** still displays as **Bucket and objects not public**, you might have to [edit the block public access settings](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/block-public-access-account.html) for your account before adding a bucket policy\.
+   Amazon S3 turns off Block Public Access settings for your bucket\. To create a public, static website, you might also have to [edit the Block Public Access settings](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/block-public-access-account.html) for your account before adding a bucket policy\. If account settings for Block Public Access are currently turned on, you see a note under **Block public access \(bucket settings\)**\.
 
 ## Step 8: Attach a bucket policy<a name="add-bucket-policy-root-domain"></a>
 
@@ -258,7 +261,7 @@ The following policy is an example only and allows full access to the contents o
 
 1. Choose **Permissions**\.
 
-1. Choose **Bucket Policy**\.
+1. Under **Bucket Policy**, choose **Edit**\.
 
 1. To grant public read access for your website, copy the following bucket policy, and paste it in the **Bucket policy editor**\.
 
@@ -281,17 +284,17 @@ The following policy is an example only and allows full access to the contents o
    }
    ```
 
-1. Update the `Resource` to include your bucket name\.
+1. Update the `Resource` to your bucket name\.
 
    In the preceding example bucket policy, *example\.com* is the bucket name\. To use this bucket policy with your own bucket, you must update this name to match your bucket name\.
 
-1. Choose **Save**\.
+1. Choose **Save changes**\.
 
-   A warning appears indicating that the bucket has public access\. In **Bucket Policy**, a **Public** label appears\.
+   A message appears indicating that the bucket policy has been successfully added\.
 
-   If you see an error that says `Policy has invalid resource`, confirm that the bucket name in the bucket policy matches your bucket name\. For information about adding a bucket policy, see [How Do I Add an S3 Bucket Policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html)
+   If you see an error that says `Policy has invalid resource`, confirm that the bucket name in the bucket policy matches your bucket name\. For information about adding a bucket policy, see [How do I add an S3 bucket policy?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-bucket-policy.html)
 
-   If you get an **Error \- Access denied** warning and the **Bucket policy editor** does not allow you to save the bucket policy, check your account\-level and bucket\-level block public access settings to confirm that you allow public access to the bucket\.
+   If you get an error message and cannot save the bucket policy, check your account and bucket Block Public Access settings to confirm that you allow public access to the bucket\.
 
 In the next step, you can figure out your website endpoints and test your domain endpoint\.
 
@@ -303,23 +306,13 @@ After you configure your domain bucket to host a public website, you can test yo
 Amazon S3 does not support HTTPS access to the website\. If you want to use HTTPS, you can use Amazon CloudFront to serve a static website hosted on Amazon S3\.  
 For more information, see [How do I use CloudFront to serve a static website hosted on Amazon S3?](http://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/) and [Requiring HTTPS for communication between viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html)\.
 
-**To test your website endpoint**
-
-If you noted your website endpoint when you enabled static website hosting, to test your website, enter the website endpoint in your browser\. If your browser displays your `index.html` page, the website was successfully deployed\. For more information, see [Amazon S3 Website Endpoints](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteEndpoints.html)\.
-
-If you need to get your website endpoint before testing, follow these steps:
-
-1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
-
-1. In **Buckets** list, choose the name of the bucket that you want to use to host a static website\.
+1. Under **Buckets**, choose the name of your bucket\.
 
 1. Choose **Properties**\.
 
-1. Choose **Static website hosting**\.
+1. At the bottom of the page, under **Static website hosting**, choose your **Bucket website endpoint**\.
 
-1. To test your website endpoint, next to **Endpoint**, choose your website endpoint\.
-
-   If your browser displays your `index.html` page, the website was successfully deployed\.
+   Your index document opens in a separate browser window\.
 
 In the next step, you use Amazon Route 53 to enable customers to use both of your custom URLs to navigate to your site\. 
 

@@ -1,14 +1,14 @@
-# \(Optional\) configuring a webpage redirect<a name="how-to-page-redirect"></a>
+# \(Optional\) Configuring a webpage redirect<a name="how-to-page-redirect"></a>
 
 If your Amazon S3 bucket is configured for website hosting, you can configure a webpage redirect\. You have the following options for configuring a redirect\.
 
 **Topics**
-+ [Setting a page redirect in the Amazon S3 console](#page-redirect-using-console)
-+ [Setting a page redirect from the REST API](#page-redirect-using-rest-api)
++ [Setting an object redirect using the Amazon S3 console](#page-redirect-using-console)
++ [Setting an object redirect using the REST API](#page-redirect-using-rest-api)
 + [Redirecting requests for a bucket's website endpoint to another host](#redirect-endpoint-host)
 + [Configuring advanced conditional redirects](#advanced-conditional-redirects)
 
-## Setting a page redirect in the Amazon S3 console<a name="page-redirect-using-console"></a>
+## Setting an object redirect using the Amazon S3 console<a name="page-redirect-using-console"></a>
 
 You can redirect requests for an object to another object or URL by setting the website redirect location in the metadata of the object\. You set the redirect by adding the `x-amz-website-redirect-location` property to the object metadata\. On the Amazon S3 console, you set the **Website Redirect Location** in the metadata of the object\. If you use the [Amazon S3 API](#page-redirect-using-rest-api), you set `x-amz-website-redirect-location`\. The website then interprets the object as a 301 redirect\. 
 
@@ -22,25 +22,27 @@ When you set a page redirect, you can either keep or delete the source object co
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. Choose the name of the bucket that you have configured as a static website \(for example, `example.com`\)\.
+1. In the **Buckets** list, choose the name of the bucket that you have configured as a static website \(for example, `example.com`\)\.
 
-1. On the **Overview** tab for your bucket, choose the object that you want to create a redirect for\.
+1. Under **Objects**, select your object\.
 
-1. Choose **Properties**\.
+1. Choose **Actions**, and choose **Edit metadata**\.
 
 1. Choose **Metadata**\.
 
-1. Choose **\+ Add Metadata**\.
+1. Choose **Add Metadata**\.
 
-1. In **Key**, choose **Website\-Redirect\-Location**\.
+1. Under **Type**, choose **System Defined**\.
+
+1. In **Key**, choose **x\-amz\-website\-redirect\-location**\.
 
 1. In **Value**, enter the key name of the object that you want to redirect to, for example, `/page2.html`\.
 
    For another object in the same bucket, the `/` prefix in the value is required\. You can also set the value to an external URL, for example, `http://www.example.com`\.
 
-1. Choose **Save**\.
+1. Choose **Edit metadata**\.
 
-## Setting a page redirect from the REST API<a name="page-redirect-using-rest-api"></a>
+## Setting an object redirect using the REST API<a name="page-redirect-using-rest-api"></a>
 
 The following Amazon S3 API actions support the `x-amz-website-redirect-location` header in the request\. Amazon S3 stores the header value in the object metadata as `x-amz-website-redirect-location`\. 
 + [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html)
@@ -70,29 +72,32 @@ For example, if your root domain is `example.com`, and you want to serve request
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. Choose the name of the bucket that you have configured as a static website \(for example, `example.com`\)\.
+1. Under **Buckets**, choose the name of the bucket that you want to redirect requests from \(for example, `www.example.com`\)\.
 
 1. Choose **Properties**\.
 
-1. Choose **Static website hosting**\.
+1. Under **Static website hosting**, choose **Edit**\.
 
-1. Choose **Redirect requests**\. 
+1. Choose **Redirect requests for an object**\. 
 
-1. In the **Target bucket or domain** box, enter the bucket or domain that you want to redirect to\.
+1. In the **Host name** box, enter the website endpoint for your bucket or your custom domain\.
 
    For example, if you are redirecting to a root domain address, you would enter **example\.com**\.
 
-1. In the **Protocol** box, enter the protocol for the redirected requests \(**http** or **https**\)\.
+1. For **Protocol**, choose the protocol for the redirected requests \(**none**,**http**, or **https**\)\.
 
-   If you do not specify a protocol, the protocol of the original request is used\.
+   If you do not specify a protocol, the default option is **none**\.
 
-1. Choose **Save**\.
+1. Choose **Save changes**\.
 
 ## Configuring advanced conditional redirects<a name="advanced-conditional-redirects"></a>
 
 Using advanced redirection rules, you can route requests conditionally according to specific object key names, prefixes in the request, or response codes\. For example, suppose that you delete or rename an object in your bucket\. You can add a routing rule that redirects the request to another object\. If you want to make a folder unavailable, you can add a routing rule to redirect the request to another webpage\. You can also add a routing rule to handle error conditions by routing requests that return the error to another domain when the error is processed\.
 
-When configuring a bucket for website hosting, you have the option of specifying advanced redirection rules\. Amazon S3 has a limitation of 50 routing rules per website configuration\. If you require more than 50 routing rules, you can use object redirect\. For more information, see [\(Optional\) configuring a webpage redirect](#how-to-page-redirect)\.
+When configuring a bucket for website hosting, you have the option of specifying advanced redirection rules\. Amazon S3 has a limitation of 50 routing rules per website configuration\. If you require more than 50 routing rules, you can use object redirect\. For more information, see [Setting an object redirect using the Amazon S3 console](#page-redirect-using-console)\.
+
+**Important**  
+To create redirection rules in the new Amazon S3 console, you must use JSON\. For more information about configuring routing rules using the REST API, see [PutBucketWebsite](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketWebsite.html) in the *Amazon Simple Storage Service API Reference*\.
 
 **To configure redirection rules for a static website**
 
@@ -104,17 +109,19 @@ To add redirection rules for a bucket that already has static website hosting en
 
 1. Choose **Properties**\.
 
-1. Choose **Static website hosting**\.
+1. Under **Static website hosting**, choose **Edit**\.
 
-1. In **Redirection rules**, enter your redirection rules\. 
+1. In **Redirection rules** box, enter your redirection rules in JSON\. 
 
-   You describe the rules using XML\. For general syntax and examples for specifying redirection rules, see [Syntax for specifying routing rules](#configure-bucket-as-website-routing-rule-syntax)\. Amazon S3 has a limitation of 50 routing rules per website configuration\. If you require more than 50 routing rules, you can use object redirect\. For more information, see [Setting a page redirect in the Amazon S3 console](#page-redirect-using-console)\.
+   In the S3 console you describe the rules using JSON\. For general syntax and examples for specifying redirection rules, see [Routing rule elements](#configure-bucket-as-website-routing-rule-syntax)\. Amazon S3 has a limitation of 50 routing rules per website configuration\.
 
-1. Choose **Save**\.
+1. Choose **Save changes**\.
 
-### Syntax for specifying routing rules<a name="configure-bucket-as-website-routing-rule-syntax"></a>
+### Routing rule elements<a name="configure-bucket-as-website-routing-rule-syntax"></a>
 
 The following is general syntax for defining the routing rules in a website configuration\.
+
+You must use JSON to configure redirection rules in the new S3 console\.
 
 ```
 <RoutingRules> =
@@ -171,6 +178,9 @@ The following table describes the elements in the routing rule\.
 
 The following examples explain common redirection tasks:
 
+**Important**  
+To create redirection rules in the new Amazon S3 console, you must use JSON\.
+
 **Example 1: Redirect after renaming a key prefix**  
 Suppose that your bucket contains the following objects:  
 + index\.html
@@ -192,6 +202,19 @@ In this case, you add the following routing rule to the website configuration\.
   </RoutingRules>
 ```
 
+```
+[
+    {
+        "Condition": {
+            "KeyPrefixEquals": "docs/"
+        },
+        "Redirect": {
+            "ReplaceKeyPrefixWith": "documents/"
+        }
+    }
+]
+```
+
 **Example 2: Redirect requests for a deleted folder to a page**  
 Suppose that you delete the `images/` folder \(that is, you delete all objects with the key prefix `images/`\)\. You can add a routing rule that redirects requests for any object with the key prefix `images/` to a page named `folderdeleted.html`\.  
 
@@ -206,6 +229,19 @@ Suppose that you delete the `images/` folder \(that is, you delete all objects w
     </Redirect>
     </RoutingRule>
   </RoutingRules>
+```
+
+```
+[
+    {
+        "Condition": {
+            "KeyPrefixEquals": "images/"
+        },
+        "Redirect": {
+            "ReplaceKeyWith": "folderdeleted.html"
+        }
+    }
+]
 ```
 
 **Example 3: Redirect for an HTTP error**  
@@ -224,4 +260,18 @@ The following example also inserts the object key prefix `report-404/` in the re
     </Redirect>
     </RoutingRule>
   </RoutingRules>
+```
+
+```
+[
+    {
+        "Condition": {
+            "HttpErrorCodeReturnedEquals": "404"
+        },
+        "Redirect": {
+            "HostName": "ec2-11-22-333-44.compute-1.amazonaws.com",
+            "ReplaceKeyPrefixWith": "report-404/"
+        }
+    }
+]
 ```

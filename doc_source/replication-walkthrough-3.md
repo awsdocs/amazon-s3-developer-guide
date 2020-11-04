@@ -6,7 +6,7 @@ When the *source* and *destination* buckets in a replication configuration are o
 
 ## Change the replica owner when buckets are owned by different accounts \(console\)<a name="replication-ex3-console"></a>
 
-For step\-by\-step instructions, see [Configuring a Replication Rule When the Destination Bucket is in a Different AWS Account](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-replication.html#enable-replication-cross-account-destination) in the *Amazon Simple Storage Service Console User Guide*\. 
+For step\-by\-step instructions, see [Configuring a Replication Rule When the Destination Bucket is in a Different AWS Account](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-replication.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
 ## Change the replica owner when buckets are owned by different accounts \(AWS CLI\)<a name="replication-ex3-cli"></a>
 

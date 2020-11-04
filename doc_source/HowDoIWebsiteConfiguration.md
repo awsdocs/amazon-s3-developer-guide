@@ -8,6 +8,6 @@ Using the AWS Management Console, you can configure your Amazon S3 bucket as a s
 + [Setting permissions for website access](WebsiteAccessPermissionsReqd.md)
 
 **Optional configurations:**
-+ [\(Optional\) configuring a custom error document](CustomErrorDocSupport.md)
-+ [\(Optional\) configuring a webpage redirect](how-to-page-redirect.md)
++ [\(Optional\) Configuring a custom error document](CustomErrorDocSupport.md)
++ [\(Optional\) Configuring a webpage redirect](how-to-page-redirect.md)
 + [\(Optional\) Logging web traffic](LoggingWebsiteTraffic.md)

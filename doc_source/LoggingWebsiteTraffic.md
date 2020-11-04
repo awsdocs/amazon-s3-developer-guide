@@ -10,24 +10,28 @@ You can optionally enable Amazon S3 server access logging for a bucket that is c
 
 1. Create a folder for the server access logging log files \(for example, `logs`\)\.
 
+   When you group your log data files in a folder, they are easier to locate\.
+
 1. \(Optional\) If you want to use CloudFront to improve your website performance, create a folder for the CloudFront log files \(for example, `cdn`\)\.
 
-1. In the **Bucket** list, choose your bucket\.
+1. In the **Buckets** list, choose your bucket\.
 
 1. Choose **Properties**\.
 
-1. Choose **Server access logging**\.
+1. Under **Server access logging**, choose **Edit**\.
 
-1. Choose **Enable logging**\.
+1. Choose **Enable**\.
 
-1. For **Target bucket**, choose the bucket that you created for the log files, for example `logs.example.com`\.
+1. Under the **Target bucket**, choose the bucket and folder destination for the server access logs:
+   + Browse to the folder and bucket location:
 
-1. For **Target prefix**, enter the name of the folder that you created for the log files followed by the delimiter \(/\), for example **logs/**\.
+     1. Choose **Browse S3**\.
 
-   When you set the **Target prefix**, you group your log data files in a folder so that they are easy to locate\.
+     1. Choose the bucket name, and then choose the logs folder\. 
 
-1. Choose **Save**\.
+     1. Choose **Choose path**\.
+   + Enter the S3 bucket path, for example, **s3://logs\.example\.com/logs/**\.
+
+1. Choose **Save changes**\.
 
    In your log bucket, you can now access your logs\. Amazon S3 writes website access logs to your log bucket every 2 hours\.
-
-1. To view the logs, choose **Overview**, and choose the folder\. 

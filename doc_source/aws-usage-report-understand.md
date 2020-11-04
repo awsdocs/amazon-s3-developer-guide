@@ -95,7 +95,7 @@ The first column in the following table lists usage types that appear in your bi
 |  *region*\-TimedStorage\-GDA\-Staging  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in S3 Glacier Deep Archive staging storage  | 
 |  *region*\-TimedStorage\-INT\-FA\-ByteHrs  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in the frequent access tier of INTELLIGENT\_TIERING storage  | 
 |  *region*\-TimedStorage\-INT\-IA\-ByteHrs  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in the infrequent access tier of INTELLIGENT\_TIERING storage  | 
-|  *region*\-TimedStorage\-RRS\-ByteHrsb  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in Reduced Redundancy Storage \(RRS\) storage  | 
+|  *region*\-TimedStorage\-RRS\-ByteHrs  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in Reduced Redundancy Storage \(RRS\) storage  | 
 |  *region*\-TimedStorage\-SIA\-ByteHrs  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in STANDARD\_IA storage  | 
 |  *region*\-TimedStorage\-ZIA\-ByteHrs  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that data was stored in ONEZONE\_IA storage  | 
 |  *region*\-TimedStorage\-SIA\-SmObjects  |  Byte\-Hours  |  Daily  |  The number of byte\-hours that small objects \(smaller than 128 KB\) were stored in STANDARD\_IA storage  | 

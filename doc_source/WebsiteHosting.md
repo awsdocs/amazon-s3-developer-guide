@@ -19,4 +19,4 @@ For more information about hosting a static website on Amazon S3, including inst
 + [Website endpoints](WebsiteEndpoints.md)
 + [Configuring a bucket as a static website using the AWS Management Console](HowDoIWebsiteConfiguration.md)
 + [Programmatically configuring a bucket as a static website](ManagingBucketWebsiteConfig.md)
-+ [Example walkthroughs \- hosting websites on Amazon S3](hosting-websites-on-s3-examples.md)
++ [Example walkthroughs \- Hosting websites on Amazon S3](hosting-websites-on-s3-examples.md)

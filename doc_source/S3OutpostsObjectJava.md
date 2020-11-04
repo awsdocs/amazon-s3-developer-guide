@@ -584,7 +584,7 @@ public class ListParts {
 The following S3 on Outposts example The following example shows how to retrieve a list of in\-progress multipart uploads using the SDK for Java from an Outposts bucket\. This is an example adapted from the [ List multipart uploads](https://docs.aws.amazon.com/AmazonS3/latest/dev/LLlistMPuploadsJava.html) example for Amazon S3\.
 
 ```
-import com.amazoaws.AmazonServiceException;
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -633,7 +633,7 @@ public class ListMultipartUploads {
 The following S3 on Outposts example The following example shows how to abort the multipart upload for an object using SDK for Java from an Outposts bucket\. This is an example adapted from the [ Abort a multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/dev/LLAbortMPUJava.html) example for Amazon S3\.
 
 ```
-import com.amazoaws.AmazonServiceException;
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
