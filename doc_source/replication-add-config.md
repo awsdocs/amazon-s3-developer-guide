@@ -39,7 +39,6 @@ The following sections provide additional information\.
 Each rule must include the rule's status and priority, and indicate whether to replicate delete markers\. 
 + `Status` indicates whether the rule is enabled or disabled\. If a rule is disabled, Amazon S3 doesn't perform the actions specified in the rule\. 
 + `Priority` indicates which rule has priority when multiple rules apply to an object\. The higher the number, the higher the priority\.
-+ Currently, delete markers aren't replicated, so you must set `DeleteMarkerReplication` to `Disabled`\.
 
 In the destination configuration, you must provide the name of the bucket where you want Amazon S3 to replicate objects\. 
 
@@ -192,7 +191,7 @@ Only a valid value of `<Minutes>15</Minutes>` is accepted for `EventThreshold` a
   ...
   ```
 
-  For more information, see [Meet compliance requirements using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\. For API examples, see [PutBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html) in the *Amazon Simple Storage Service API Reference*\.
+  For more information, see [Meeting compliance requirements using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\. For API examples, see [PutBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html) in the *Amazon Simple Storage Service API Reference*\.
 + Your source bucket might contain objects that were created with server\-side encryption using keys stored in AWS KMS\. By default, Amazon S3 doesn't replicate these objects\. You can optionally direct Amazon S3 to replicate these objects\. First, explicitly opt into this feature by adding the `SourceSelectionCriteria` element, and then provide the AWS KMS CMK \(for the AWS Region of the destination bucket\) to use for encrypting object replicas\. 
 
   ```
@@ -407,7 +406,11 @@ For more information about the XML structure of replication configuration, see [
 
 ## Backward compatibility<a name="replication-backward-compat-considerations"></a>
 
-The latest version of the replication configuration XML is V2\. XML V2 replication configurations are those that contain the `Filter` element for rules, and rules that specify S3 Replication Time Control \(S3 RTC\)\. In V2 replication configurations, Amazon S3 doesn't replicate delete markers\. Therefore, you must set the `DeleteMarkerReplication` element to `Disabled`\. For backward compatibility, Amazon S3 continues to support the XML V1 replication configuration\. If you have used XML V1 replication configuration, consider the following issues that affect backward compatibility:
+The latest version of the replication configuration XML is V2\. XML V2 replication configurations are those that contain the `Filter` element for rules, and rules that specify S3 Replication Time Control \(S3 RTC\)\. In V2 replication configurations, Amazon S3 doesn't replicate delete markers for tag\-based rules\. Therefore, you must set the `DeleteMarkerReplication` element to `Disabled` if using a tag\-based V2 rule\.
+
+To see your replication configuration version you can use the `GetBucketReplication` API\. For more information see, [GetBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html) in the *Amazon Simple Storage Service API Reference*\. 
+
+ For backward compatibility, Amazon S3 continues to support the XML V1 replication configuration\. If you have used XML V1 replication configuration, consider the following issues that affect backward compatibility:
 + Replication configuration XML V2 includes the `Filter` element for rules\. With the `Filter` element, you can specify object filters based on the object key prefix, tags, or both to scope the objects that the rule applies to\. Replication configuration XML V1 supported filtering based only on the key prefix\. In that case, you add the `Prefix` directly as a child element of the `Rule` element, as in the following example\.
 
   ```
@@ -424,7 +427,7 @@ The latest version of the replication configuration XML is V2\. XML V2 replicati
   ```
 
   For backward compatibility, `Amazon S3 ` continues to support the V1 configuration\. 
-+ When you delete an object from your source bucket without specifying an object version ID, Amazon S3 adds a delete marker\. If you use V1 of the replication configuration XML, Amazon S3 replicates delete markers that resulted from user actions\. In other words, if the user deleted the object, and not if Amazon S3 deleted it because the object expired as part of lifecycle action\. In V2, Amazon S3 doesn't replicate delete markers\. Therefore, you must set the `DeleteMarkerReplication` element to `Disabled`\. 
++ When you delete an object from your source bucket without specifying an object version ID, Amazon S3 adds a delete marker\. If you use V1 of the replication configuration XML, Amazon S3 replicates delete markers that resulted from user actions\. In other words, if the user deleted the object, and not if Amazon S3 deleted it because the object expired as part of lifecycle action\.
 
   ```
   ...

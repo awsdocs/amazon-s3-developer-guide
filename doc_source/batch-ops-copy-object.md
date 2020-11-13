@@ -1,6 +1,6 @@
 # Put object copy<a name="batch-ops-copy-object"></a>
 
-The Put object copy operation copies each object specified in the manifest\. You can copy objects to a different bucket in the same AWS Region or to a bucket in a different Region\. S3 Batch Operations support most options available through Amazon S3 for copying objects\. These options include setting object metadata, setting permissions, and changing an object's storage class\. For more information about the functionality available through Amazon S3 for copying objects, see [Copying objects](CopyingObjectsExamples.md)\. 
+The Put object copy operation copies each object specified in the manifest\. You can copy objects to a different bucket in the same AWS Region or to a bucket in a different Region\. S3 Batch Operations supports most options available through Amazon S3 for copying objects\. These options include setting object metadata, setting permissions, and changing an object's storage class\. For more information about the functionality available through Amazon S3 for copying objects, see [Copying objects](CopyingObjectsExamples.md)\. 
 
 ## Restrictions and limitations<a name="batch-ops-copy-object-restrictions"></a>
 + All source objects must be in one bucket\.
@@ -10,5 +10,5 @@ The Put object copy operation copies each object specified in the manifest\. You
 + Put object copy jobs must be created in the destination region, which is the region you intend to copy the objects to\.
 + All Put object copy options are supported except for conditional checks on ETags and server\-side encryption with customer\-provided encryption keys \(SSE\-C\)\.
 + If the buckets are unversioned, you will overwrite objects with the same key names\.
-+ Objects are not necessarily copied in the same order as they are listed in the manifest\. So for versioned buckets, if preserving current/non\-current version order is important, you should copy all non\-current versions first and later copy the current versions in a subsequent job after the first job is complete\.
++ Objects are not necessarily copied in the same order as they are listed in the manifest\. For versioned buckets, if preserving current/non\-current version order is important, you should copy all non\-current versions first\. Then, after the first job is complete, copy the current versions in a subsequent job\. 
 + Copying objects to the Reduced Redundancy Storage \(RRS\) class is not supported\.

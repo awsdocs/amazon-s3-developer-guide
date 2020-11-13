@@ -6,7 +6,7 @@ Amazon S3 offers a range of storage classes for the objects that you store\. You
 
 **Topics**
 + [Storage classes for frequently accessed objects](#sc-freq-data-access)
-+ [Storage class for automatically optimizing frequently and infrequently accessed objects](#sc-dynamic-data-access)
++ [Storage class for automatically optimizing data with changing or unknown access patterns](#sc-dynamic-data-access)
 + [Storage classes for infrequently accessed objects](#sc-infreq-data-access)
 + [Storage classes for archiving objects](#sc-glacier)
 + [Storage class for Amazon S3 on Outposts](#s3-outposts)
@@ -23,21 +23,23 @@ We recommend that you not use this storage class\. The S3 Standard storage class
 
   For durability, RRS objects have an average annual expected loss of 0\.01 percent of objects\. If an RRS object is lost, when requests are made to that object, Amazon S3 returns a 405 error\.
 
-## Storage class for automatically optimizing frequently and infrequently accessed objects<a name="sc-dynamic-data-access"></a>
+## Storage class for automatically optimizing data with changing or unknown access patterns<a name="sc-dynamic-data-access"></a>
 
-The **S3 Intelligent\-Tiering** storage class is designed to optimize storage costs by automatically moving data to the most cost\-effective storage access tier, without performance impact or operational overhead\. S3 Intelligent\-Tiering delivers automatic cost savings by moving data on a granular object level between two access tiers, a frequent access tier and a lower\-cost infrequent access tier, when access patterns change\. The Intelligent\-Tiering storage class is ideal if you want to optimize storage costs automatically for long\-lived data when access patterns are unknown or unpredictable\.
+S3 Intelligent\-Tiering is an Amazon S3 storage class designed to optimize storage costs by automatically moving data to the most cost\-effective access tier, without operational overhead\. It is the only cloud storage that delivers automatic cost savings by moving data on a granular object level between access tiers when access patterns change\. S3 Intelligent\-Tiering is the perfect storage class when you want to optimize storage costs for data that has unknown or changing access patterns\. There are no retrieval fees for S3 Intelligent\-Tiering\. 
 
-The S3 Intelligent\-Tiering storage class stores objects in two access tiers: one tier that is optimized for frequent access and another lower\-cost tier that is optimized for infrequently accessed data\. For a small monthly monitoring and automation fee per object, Amazon S3 monitors access patterns of the objects in the S3 Intelligent\-Tiering storage class and moves objects that have not been accessed for 30 consecutive days to the infrequent access tier\. 
+For a small monthly object monitoring and automation fee, S3 Intelligent\-Tiering monitors the access patterns and moves the objects automatically from one tier to another\. It works by storing objects in four access tiers: two low latency access tiers optimized for frequent and infrequent access, and two opt\-in archive access tiers designed for asynchronous access that are optimized for rare access\. 
 
-There are no retrieval fees when using the S3 Intelligent\-Tiering storage class\. If an object in the infrequent access tier is accessed, it is automatically moved back to the frequent access tier\. No additional tiering fees apply when objects are moved between access tiers within the S3 Intelligent\-Tiering storage class\. 
+Objects that are uploaded or transitioned to S3 Intelligent\-Tiering are automatically stored in the *Frequent Access* tier\. S3 Intelligent\-Tiering works by monitoring access patterns and then moving the objects that have not been accessed in 30 consecutive days to the *Infrequent Access* tier\. After you activate one or both of the archive access tiers, S3 Intelligent\-Tiering automatically moves objects that haven’t been accessed for 90 consecutive days to the *Archive Access* tier, and after 180 consecutive days of no access, to the *Deep Archive Access* tier\. 
+
+If the objects are accessed later, the objects are moved back to the *Frequent Access* tier\. There are no retrieval fees, so you won’t see unexpected increases in storage bills when access patterns change\.
 
 **Note**  
-The S3 Intelligent\-Tiering storage class is suitable for objects larger than 128 KB that you plan to store for at least 30 days\. If the size of an object is less than 128 KB, it is not eligible for auto\-tiering\. Smaller objects can be stored, but they are always charged at the frequent access tier rates in the S3 Intelligent\-Tiering storage class\.   
+The S3 Intelligent\-Tiering storage class is suitable for objects larger than 128 KB that you plan to store for at least 30 days\. If the size of an object is less than 128 KB, it is not eligible for automatic tiering\. Smaller objects can be stored, but they are always charged at the frequent access tier rates in the S3 Intelligent\-Tiering storage class\.   
 If you delete an object before the end of the 30\-day minimum storage duration period, you are charged for 30 days\. For pricing information, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)\.
 
 ## Storage classes for infrequently accessed objects<a name="sc-infreq-data-access"></a>
 
-The **S3 Standard\-IA** and **S3 One Zone\-IA** storage classes are designed for long\-lived and infrequently accessed data\. \(IA stands for *infrequent access*\.\) S3 Standard\-IA and S3 One Zone\-IA objects are available for millisecond access \(same as the S3 Standard storage class\)\. Amazon S3 charges a retrieval fee for these objects, so they are most suitable for infrequently accessed data\. For pricing information, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\. 
+The **S3 Standard\-IA** and **S3 One Zone\-IA** storage classes are designed for long\-lived and infrequently accessed data\. \(IA stands for *infrequent access*\.\) S3 Standard\-IA and S3 One Zone\-IA objects are available for millisecond access \(same as the S3 Standard storage class\)\. Amazon S3 charges a retrieval fee for these objects, so they are most suitable for infrequently accessed data\. For pricing information, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)\. 
 
 For example, you might choose the S3 Standard\-IA and S3 One Zone\-IA storage classes:
 + For storing backups\. 
@@ -68,7 +70,7 @@ These storage classes differ as follows:
 
 ### Retrieving archived objects<a name="sc-glacier-restore"></a>
 
-You can set the storage class of an object to S3 Glacier or S3 Glacier Deep Archive in the same ways that you do for the other storage classes as described in the section [Setting the storage class of an object](#sc-howtoset)\. However, the S3 Glacier and S3 Glacier Deep Archive objects are not available for real\-time access\. You must first restore the S3 Glacier and S3 Glacier Deep Archive objects before you can access them\. \(S3 Standard, RRS, S3 Standard\-IA, S3 One Zone\-IA, and S3 Intelligent\-Tiering objects are available for anytime access\.\) For more information about retrieving archived objects, see [Restoring Archived Objects](restoring-objects.md)\.
+You can set the storage class of an object to S3 Glacier or S3 Glacier Deep Archive in the same ways that you do for the other storage classes as described in the section [Setting the storage class of an object](#sc-howtoset)\. However, the S3 Glacier and S3 Glacier Deep Archive objects are not available for real\-time access\. You must first restore the S3 Glacier and S3 Glacier Deep Archive objects before you can access them\. \(S3 Standard, RRS, S3 Standard\-IA, S3 One Zone\-IA, and S3 Intelligent\-Tiering objects are available for anytime access\.\) For more information about retrieving archived objects, see [Restoring archived objects](restoring-objects.md)\.
 
 **Important**  
 When you choose the S3 Glacier or S3 Glacier Deep Archive storage class, your objects remain in Amazon S3\. You cannot access them directly through the separate Amazon S3 Glacier service\. 
@@ -77,7 +79,9 @@ To learn more about the Amazon S3 Glacier service, see the [Amazon S3 Glacier De
 
 ## Storage class for Amazon S3 on Outposts<a name="s3-outposts"></a>
 
-With Amazon S3 on Outposts, you can create S3 buckets on your AWS Outposts and easily store and retrieve objects on\-premises for applications that require local data access, local data processing, and data residency\. S3 on Outposts provides a new storage class, \[OUTPOSTS\], and allows you to use the same APIs and features on Outposts as you do on Amazon S3 such as access policies, encryption, and tagging\. You can use S3 on Outposts through the AWS Management Console, AWS CLI, AWS SDKs, or REST API\. For more information, see [Using Amazon S3 on Outposts](https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html)\. 
+With Amazon S3 on Outposts, you can create S3 buckets on your AWS Outposts and easily store and retrieve objects on\-premises for applications that require local data access, local data processing, and data residency\. S3 on Outposts provides a new storage class, S3 Outposts \[OUTPOSTS\], and allows you to use the same APIs and features on Outposts as you do on Amazon S3 such as access policies, encryption, and tagging\. The S3 Outposts storage class is only available for objects stored in buckets on Outposts, and attempting to use this storage class with an S3 bucket in an AWS Region will result in an `InvalidStorageClass` error\. Conversely, attempting to use other S3 storage classes with S3 on Outposts will result in this same error response\. You can use S3 on Outposts through the AWS Management Console, AWS CLI, AWS SDKs, or REST API\.
+
+ Ojects stores in the S3 Outposts \[OUTPOSTS\] storage class will always be encrypted using [server\-side encryption with Amazon S3\-managed encryption keys \(SSE\-S3\) ](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\. You can also explicity choose to encrypt objects stored in S3 Outposts storage class using [server\-side encryption with customer\-provided encryption keys \(SSE\-C\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html)\. For more information, see [Using Amazon S3 on Outposts](https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html)\. 
 
 ## Comparing the Amazon S3 storage classes<a name="sc-compare"></a>
 
@@ -94,13 +98,13 @@ The following table compares the storage classes\.
 |  S3 Standard\-IA  |  Long\-lived, infrequently accessed data  |  99\.999999999%   |  99\.9%  |  >= 3  |  30 days  |  128 KB  |  Per GB retrieval fees apply\.   | 
 |  S3 Intelligent\-Tiering  |  Long\-lived data with changing or unknown access patterns  |  99\.999999999%  |  99\.9%  |  >= 3  |  30 days  |  None  |  Monitoring and automation fees per object apply\. No retrieval fees\.  | 
 |  S3 One Zone\-IA  |  Long\-lived, infrequently accessed, non\-critical data  |  99\.999999999%   |  99\.5%  |  1  |  30 days  |  128 KB  |  Per GB retrieval fees apply\. Not resilient to the loss of the Availability Zone\.  | 
-|  S3 Glacier  | Long\-term data archiving with retrieval times ranging from minutes to hours | 99\.999999999%  |  99\.99% \(after you restore objects\)  |  >= 3  |  90 days  |  40 KB  | Per GB retrieval fees apply\. You must first restore archived objects before you can access them\. For more information, see [Restoring Archived Objects](restoring-objects.md)\. | 
-|  S3 Glacier Deep Archive  | Archiving rarely accessed data with a default retrieval time of 12 hours | 99\.999999999%  |  99\.99% \(after you restore objects\)  |  >= 3  |  180 days  |  40 KB  | Per GB retrieval fees apply\. You must first restore archived objects before you can access them\. For more information, see [Restoring Archived Objects](restoring-objects.md)\. | 
+|  S3 Glacier  | Long\-term data archiving with retrieval times ranging from minutes to hours | 99\.999999999%  |  99\.99% \(after you restore objects\)  |  >= 3  |  90 days  |  40 KB  | Per GB retrieval fees apply\. You must first restore archived objects before you can access them\. For more information, see [Restoring archived objects](restoring-objects.md)\. | 
+|  S3 Glacier Deep Archive  | Archiving rarely accessed data with a default retrieval time of 12 hours | 99\.999999999%  |  99\.99% \(after you restore objects\)  |  >= 3  |  180 days  |  40 KB  | Per GB retrieval fees apply\. You must first restore archived objects before you can access them\. For more information, see [Restoring archived objects](restoring-objects.md)\. | 
 |  RRS \(Not recommended\)  |  Frequently accessed, non\-critical data  |  99\.99%   |  99\.99%  |  >= 3  |  None  |  None  |  None  | 
 
 All of the storage classes except for S3 One Zone\-IA are designed to be resilient to simultaneous complete data loss in a single Availability Zone and partial loss in another Availability Zone\. 
 
-In addition to the performance requirements of your application scenario, consider price\. For storage class pricing, see [Amazon S3 Pricing](https://aws.amazon.com/s3/pricing/)\.
+In addition to the performance requirements of your application scenario, consider price\. For storage class pricing, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)\.
 
 ## Setting the storage class of an object<a name="sc-howtoset"></a>
 
@@ -118,7 +122,7 @@ Amazon S3 APIs support setting \(or updating\) the storage class of objects as f
 
 To create and update object storage classes, you can use the Amazon S3 console, AWS SDKs, or the AWS Command Line Interface \(AWS CLI\)\. Each uses the Amazon S3 APIs to send requests to Amazon S3\.
 
-### Restricting Access Policy Permissions to a Specific Storage Class<a name="restricting-storage-class"></a>
+### Restricting access policy permissions to a specific storage class<a name="restricting-storage-class"></a>
 
 When you grant access policy permissions for Amazon S3 operations, you can use the `s3:x-amz-storage-class` condition key to restrict which storage class to use when storing uploaded objects\. For example, when you grant `s3:PUTObject` permission, you can restrict object uploads to a specific storage class\. For an example policy, see [Example 5: Restricting Object Uploads to Objects with a Specific Storage Class](amazon-s3-policy-keys.md#example-storage-class-condition-key)\. For more information about using conditions in policies and a complete list of Amazon S3 condition keys, see the following:
 + [Actions, resources, and condition keys for Amazon S3](list_amazons3.md)

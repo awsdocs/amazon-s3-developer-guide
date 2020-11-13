@@ -119,9 +119,7 @@ To add redirection rules for a bucket that already has static website hosting en
 
 ### Routing rule elements<a name="configure-bucket-as-website-routing-rule-syntax"></a>
 
-The following is general syntax for defining the routing rules in a website configuration\.
-
-You must use JSON to configure redirection rules in the new S3 console\.
+The following is general syntax for defining the routing rules in a website configuration in XML To configure redirection rules in the new S3 console, you must use JSON\. For JSON examples, see [Redirection rules examples](#redirect-rule-examples)\.
 
 ```
 <RoutingRules> =
@@ -174,7 +172,7 @@ The following table describes the elements in the routing rule\.
 | ReplaceKeyWith |  The object key to be used in the `Location` header that is returned in the response\.  If one of its siblings is supplied, `ReplaceKeyWith` is not required\. It can be supplied only if `ReplaceKeyPrefixWith` is not supplied\.  | 
 | HttpRedirectCode |  The HTTP redirect code to be used in the `Location` header that is returned in the response\. If one of its siblings is supplied, `HttpRedirectCode` is not required\.  | 
 
-#### Examples<a name="redirect-rule-examples"></a>
+#### Redirection rules examples<a name="redirect-rule-examples"></a>
 
 The following examples explain common redirection tasks:
 

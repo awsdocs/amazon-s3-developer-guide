@@ -30,7 +30,7 @@ First, you create a CloudFront distribution\. This makes your website available 
 
 1. For **Default Cache Behavior Settings**, keep the values set to the defaults\. 
 
-   With the default settings for **Viewer Protocol Polcy**, you can use HTTPS for your static website\. For more information these configuration options, see [Values that You Specify When You Create or Update a Web Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/WorkingWithDownloadDistributions.html#DownloadDistValuesYouSpecify) in the *Amazon CloudFront Developer Guide*\.
+   With the default settings for **Viewer Protocol Policy**, you can use HTTPS for your static website\. For more information these configuration options, see [Values that You Specify When You Create or Update a Web Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/WorkingWithDownloadDistributions.html#DownloadDistValuesYouSpecify) in the *Amazon CloudFront Developer Guide*\.
 
 1. For **Distribution Settings**, do the following:
 

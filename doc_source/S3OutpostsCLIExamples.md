@@ -182,7 +182,7 @@ The following AWS CLI example puts policy for an Outposts bucket\.
                "AWS":"123456789012"
             },
             "Action":"s3-outposts:*",
-            "Resource":"arn:aws:s3-outposts:<your-region>:123456789012:outpost/ec2/bucket/example-outpost-bucket"
+            "Resource":"arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/bucket/example-outpost-bucket"
          }
       ]
    }

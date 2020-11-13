@@ -2,8 +2,6 @@
 
 You can use S3 Batch Operations to create a PUT copy job to copy objects to a different AWS account \(the *destination account*\)\. The following sections explain how to store and use a manifest that is in a different AWS account\. In the first section, you can use Amazon S3 Inventory to deliver the inventory report to the destination account for use during job creation or, you can use a comma\-separated values \(CSV\) manifest in the source or destination account as shown in the second section\. 
 
- \.
-
 **Topics**
 + [Using an inventory report delivered to the destination account to copy objects across AWS accounts](#specify-batchjob-manifest-xaccount-inventory)
 + [Using a CSV manifest stored in the source account to copy objects across AWS accounts](#specify-batchjob-manifest-xaccount-csv)

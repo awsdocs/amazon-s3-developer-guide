@@ -4,7 +4,7 @@ To upload your data \(photos, videos, documents etc\.\) to Amazon S3, you must f
 
 In terms of implementation, buckets and objects are resources, and Amazon S3 provides APIs for you to manage them\. For example, you can create a bucket and upload objects using the Amazon S3 API\. You can also use the Amazon S3 console to perform these operations\. The console uses the Amazon S3 APIs to send requests to Amazon S3\. 
 
-This section explains how to work with buckets\. For information about working with objects, see [Working with Amazon S3 Objects](UsingObjects.md)\.
+This section explains how to work with buckets\. For information about working with objects, see [Working with Amazon S3 objects](UsingObjects.md)\.
 
 An Amazon S3 bucket name is globally unique, and the namespace is shared by all AWS accounts\. This means that after a bucket is created, the name of that bucket cannot be used by another AWS account in any AWS Region until the bucket is deleted\. You should not depend on specific bucket naming conventions for availability or security verification purposes\. For bucket naming guidelines, see [Bucket restrictions and limitations](BucketRestrictions.md)\.
 

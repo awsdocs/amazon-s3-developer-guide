@@ -109,9 +109,9 @@ To construct the CanonicalizedAmzHeaders part of `StringToSign`, select all HTTP
 | --- |--- |
 | 1 | Convert each HTTP header name to lowercase\. For example, 'X\-Amz\-Date' becomes 'x\-amz\-date'\. | 
 | 2 | Sort the collection of headers lexicographically by header name\. | 
-| 3 | Combine header fields with the same name into one "header\-name:comma\-separated\-value\-list" pair as prescribed by RFC 2616, section 4\.2, without any whitespace between values\. For example, the two metadata headers 'x\-amz\-meta\-username: fred' and 'x\-amz\-meta\-username: barney' would be combined into the single header 'x\-amz\-meta\-username: fred,barney'\. | 
-| 4 | "Unfold" long headers that span multiple lines \(as allowed by RFC 2616, section 4\.2\) by replacing the folding whitespace \(including new\-line\) by a single space\. | 
-| 5 | Trim any whitespace around the colon in the header\. For example, the header 'x\-amz\-meta\-username: fred,barney' would become 'x\-amz\-meta\-username:fred,barney'  | 
+| 3 | Combine header fields with the same name into one "header\-name:comma\-separated\-value\-list" pair as prescribed by RFC 2616, section 4\.2, without any spaces between values\. For example, the two metadata headers 'x\-amz\-meta\-username: fred' and 'x\-amz\-meta\-username: barney' would be combined into the single header 'x\-amz\-meta\-username: fred,barney'\. | 
+| 4 | "Unfold" long headers that span multiple lines \(as allowed by RFC 2616, section 4\.2\) by replacing the folding spaces \(including new\-line\) by a single space\. | 
+| 5 | Trim any spaces around the colon in the header\. For example, the header 'x\-amz\-meta\-username: fred,barney' would become 'x\-amz\-meta\-username:fred,barney'  | 
 | 6 |  Finally, append a newline character \(U\+000A\) to each canonicalized header in the resulting list\. Construct the CanonicalizedResource element by concatenating all headers in this list into a single string\. | 
 
 ## Positional versus named HTTP header StringToSign elements<a name="RESTAuthenticationStringToSign"></a>
@@ -227,7 +227,7 @@ This example uploads an object to a CNAME style virtual hosted bucket with metad
 | --- | --- | 
 |  <pre>PUT /db-backup.dat.gz HTTP/1.1<br />User-Agent: curl/7.15.5<br />Host: static.awsexamplebucket1.net:8080<br />Date: Tue, 27 Mar 2007 21:06:08 +0000<br /><br />x-amz-acl: public-read<br />content-type: application/x-download<br />Content-MD5: 4gJE4saaMU4BqNR0kLY+lw==<br />X-Amz-Meta-ReviewedBy: joe@awsexamplebucket1.net<br />X-Amz-Meta-ReviewedBy: jane@awsexamplebucket1.net<br />X-Amz-Meta-FileChecksum: 0x02661779<br />X-Amz-Meta-ChecksumAlgorithm: crc32<br />Content-Disposition: attachment; filename=database.dat<br />Content-Encoding: gzip<br />Content-Length: 5913339<br /><br />Authorization: AWS AKIAIOSFODNN7EXAMPLE:<br />dKZcB+bz2EPXgSdXZp9ozGeOM4I=</pre>  |  <pre>PUT\n<br />4gJE4saaMU4BqNR0kLY+lw==\n<br />application/x-download\n<br />Tue, 27 Mar 2007 21:06:08 +0000\n<br /><br />x-amz-acl:public-read\n<br />x-amz-meta-checksumalgorithm:crc32\n<br />x-amz-meta-filechecksum:0x02661779\n<br />x-amz-meta-reviewedby:<br />joe@awsexamplebucket1.net,jane@awsexamplebucket1.net\n<br />/static.awsexamplebucket1.net/db-backup.dat.gz</pre>  | 
 
- Notice how the 'x\-amz\-' headers are sorted, trimmed of whitespace, and converted to lowercase\. Note also that multiple headers with the same name have been joined using commas to separate values\. 
+ Notice how the 'x\-amz\-' headers are sorted, trimmed of extra spaces, and converted to lowercase\. Note also that multiple headers with the same name have been joined using commas to separate values\. 
 
  Note how only the `Content-Type` and `Content-MD5` HTTP entity headers appear in the `StringToSign`\. The other `Content-*` entity headers do not\. 
 

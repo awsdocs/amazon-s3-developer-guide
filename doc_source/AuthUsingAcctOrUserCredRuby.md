@@ -4,9 +4,9 @@ Before you can use version 3 of the AWS SDK for Ruby to make calls to Amazon S3,
 
 The following Ruby code snippet uses the credentials in a shared AWS credentials file on a local computer to authenticate a request to get all of the object key names in a specific bucket\. It does the following:
 
-1. Creates an instance of the `Aws::S3::Resource` class\. 
+1. Creates an instance of the `Aws::S3::Client` class\. 
 
-1. Makes a request to Amazon S3 by enumerating objects in a bucket using the `bucket` method of `Aws::S3::Resource`\. The client generates the necessary signature value from the credentials in the AWS credentials file on your computer, and includes it in the request it sends to Amazon S3\.
+1. Makes a request to Amazon S3 by enumerating objects in a bucket using the `list_objects_v2` method of `Aws::S3::Client`\. The client generates the necessary signature value from the credentials in the AWS credentials file on your computer, and includes it in the request it sends to Amazon S3\.
 
 1. Prints the array of object key names to the terminal\.
 
@@ -46,9 +46,9 @@ rescue StandardError => e
 end
 ```
 
-If you don't have a local AWS credentials file, you can still create the `Aws::S3::Resource` resource and run code against Amazon S3 buckets and objects\. Requests that are sent using version 3 of the SDK for Ruby are anonymous, with no signature by default\. Amazon S3 returns an error if you send anonymous requests for a resource that's not publicly available\.
+If you don't have a local AWS credentials file, you can still create the `Aws::S3::Client` resource and run code against Amazon S3 buckets and objects\. Requests that are sent using version 3 of the SDK for Ruby are anonymous, with no signature by default\. Amazon S3 returns an error if you send anonymous requests for a resource that's not publicly available\.
 
-You can use and expand the previous code snippet for SDK for Ruby applications, as in the following more robust example\. The credentials that are used for this example come from a local AWS credentials file on the computer that is running this application\. The credentials are for an IAM user who can list objects in the bucket that the user specifies when they run the application\.
+You can use and expand the previous code snippet for SDK for Ruby applications, as in the following more robust example\.
 
 ```
 require 'aws-sdk-s3'

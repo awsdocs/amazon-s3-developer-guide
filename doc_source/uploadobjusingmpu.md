@@ -19,4 +19,4 @@ Using multipart upload provides the following advantages:
 + [Using the AWS SDK for Ruby for Multipart Upload](uploadobjusingmpu-ruby-sdk.md)
 + [Using the REST API for multipart upload](UsingRESTAPImpUpload.md)
 + [Using the AWS Command Line Interface for multipart upload](UsingCLImpUpload.md)
-+ [ Using the AWS SDK for JavaScript in Node\.js for Multipart Upload](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#createMultipartUpload-property)
++ [ Using the AWS SDK for JavaScript for Multipart Upload](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#createMultipartUpload-property)

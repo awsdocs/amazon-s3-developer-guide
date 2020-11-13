@@ -2,6 +2,12 @@
 
 Replication enables automatic, asynchronous copying of objects across Amazon S3 buckets\. Buckets that are configured for object replication can be owned by the same AWS account or by different accounts\. You can copy objects between different AWS Regions or within the same Region\.
 
+By default, replication only supports copying new Amazon S3 objects after it is enabled\. You can use replication to copy existing objects and clone them to a different bucket, but in order to do so, you must contact [AWS Support Center](https://console.aws.amazon.com/support/home#/)\. When you contact support, give your AWS Support case the subject “Replication for Existing Objects” and include the following information: 
++ Source bucket
++ Destination bucket
++ Estimated storage volume to replicate \(in terabytes\)
++ Estimated storage object count to replicate
+
 To enable object replication, you add a replication configuration to your source bucket\. The minimum configuration must provide the following:
 + The destination bucket where you want Amazon S3 to replicate objects 
 + An AWS Identity and Access Management \(IAM\)  role that Amazon S3 can assume to replicate objects on your behalf 
@@ -26,7 +32,7 @@ Replication can help you do the following:
 + **Maintain object copies under different ownership** — Regardless of who owns the source object, you can tell Amazon S3 to change replica ownership to the AWS account that owns the destination bucket\. This is referred to as the *owner override* option\. You can use this option to restrict access to object replicas\.
 
    
-+ **Replicate objects within 15 minutes** — You can use S3 Replication Time Control \(S3 RTC\) to replicate your data in the same AWS Region or across different Regions in a predictable time frame\. S3 RTC replicates 99\.99 percent of new objects stored in Amazon S3 within 15 minutes \(backed by a service level agreement\)\. For more information, see [Meet compliance requirements using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
++ **Replicate objects within 15 minutes** — You can use S3 Replication Time Control \(S3 RTC\) to replicate your data in the same AWS Region or across different Regions in a predictable time frame\. S3 RTC replicates 99\.99 percent of new objects stored in Amazon S3 within 15 minutes \(backed by a service level agreement\)\. For more information, see [Meeting compliance requirements using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
 
 ## When to use CRR<a name="crr-scenario"></a>
 

@@ -12,7 +12,7 @@ To create an Amazon S3 Batch Operations job, the `s3:CreateJob` permission is re
 
 ## Creating an S3 Batch Operations IAM role<a name="batch-ops-iam-role-policies-create"></a>
 
-Amazon S3 must have your permissions to perform S3 Batch Operations on your behalf\. You grant these permissions through an AWS Identity and Access Management \(IAM\) role\. This section provides examples of the trust and permissions policies you use when creating an IAM role\. For more information, see [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)\. For examples, see [Example: Using job tags to control permissions for S3 Batch Operations](batch-ops-job-tags-examples.md)\.
+Amazon S3 must have your permissions to perform S3 Batch Operations on your behalf\. You grant these permissions through an AWS Identity and Access Management \(IAM\) role\. This section provides examples of the trust and permissions policies you use when creating an IAM role\. For more information, see [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)\. For examples, see [Example: Using job tags to control permissions for S3 Batch Operations](batch-ops-job-tags-examples.md) and [Example: Copying objects across AWS accounts using S3 Batch Operations](batch-ops-examples-xcopy.md)\.
 
 In your IAM policies, you can also use condition keys to filter access permissions for S3 Batch Operations jobs\. For more information and a complete list of Amazon S3‐specific condition keys, see [Actions, resources, and condition keys for Amazon S3](list_amazons3.md)\.
 
@@ -303,5 +303,5 @@ If you are running S3 Batch Operations on encrypted objects, the IAM role must a
 
 ### Related resources<a name="batch-ops-create-job-related-resources"></a>
 + [S3 Batch Operations basics](batch-ops-basics.md)
-+ [Operations](batch-ops-operations.md)
++ [Example: Copying objects across AWS accounts](batch-ops-examples-xcopy.md)
 + [Managing S3 Batch Operations jobs](batch-ops-managing-jobs.md)

@@ -93,7 +93,7 @@ There are two categories of system metadata:
 The following table provides a list of system\-defined metadata and whether you can update it\.
 
 
-| Name | Description | Can User Modify the Value? | 
+| Name | Description | Can user modify the value? | 
 | --- | --- | --- | 
 | Date | Current date and time\. | No | 
 | Content\-Length | Object size in bytes\. | No | 

@@ -5,9 +5,9 @@ Amazon CloudWatch metrics for Amazon S3 can help you understand and improve the 
 + **Request metrics** ‐ Monitor Amazon S3 requests to quickly identify and act on operational issues\. The metrics are available at 1\-minute intervals after some latency to process\. These CloudWatch metrics are billed at the same rate as the Amazon CloudWatch custom metrics\. For information about CloudWatch pricing, see [Amazon CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/)\. To learn how to opt in to getting these metrics, see [Metrics configurations for buckets](metrics-configurations.md)\.
 
   When enabled, request metrics are reported for all object operations\. By default, these 1\-minute metrics are available at the Amazon S3 bucket level\. You can also define a filter for the metrics collected using a shared prefix or object tag\. This allows you to align metrics filters to specific business applications, workflows, or internal organizations\.
-+ **Replication metrics** ‐ Monitor the total number of S3 API operations that are pending replication, the total size of objects pending replication, and the maximum replication time to the destination Region\. Only replication rules that have S3 Replication Time Control \(S3 RTC\) enabled will publish replication metrics\. 
++ **Replication metrics** ‐ Monitor the total number of S3 API operations that are pending replication, the total size of objects pending replication, and the maximum replication time to the destination Region\. Replication rules that have S3 Replication Time Control \(S3 RTC\) or S3 replication metrics enabled will publish replication metrics\. 
 
-  Unlike request metrics, you can't filter replication metrics by prefixes and tags\. However, you can set up a replication rule based on prefixes and tags\. Your replication metrics will then monitor replication for the prefixes and tags that you specified\. For more information, see [Meet compliance requirements using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
+  For more information, see [Monitoring progress with replication metrics and Amazon S3 event notifications](replication-metrics.md) or [Meeting compliance requirements using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
 
 All CloudWatch statistics are retained for a period of 15 months so that you can access historical information and gain a better perspective on how your web application or service is performing\. For more information, see [What Is Amazon CloudWatch?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
 
@@ -22,7 +22,7 @@ The `AWS/S3` namespace includes the following daily storage metrics for buckets\
 
 | Metric | Description | 
 | --- | --- | 
-| BucketSizeBytes |  The amount of data in bytes stored in a bucket in the STANDARD storage class, INTELLIGENT\_TIERING storage class, Standard \- Infrequent Access \(STANDARD\_IA\) storage class, OneZone \- Infrequent Access \(ONEZONE\_IA\), Reduced Redundancy Storage \(RRS\) class, Deep Archive Storage \(S3 Glacier Deep Archive\) class or, Glacier \(GLACIER\) storage class\. This value is calculated by summing the size of all objects in the bucket \(both current and noncurrent objects\), including the size of all parts for all incomplete multipart uploads to the bucket\.  Valid storage type filters: `StandardStorage`, `IntelligentTieringFAStorage`, `StandardIAStorage`, `StandardIASizeOverhead`, `StandardIAObjectOverhead`, `OneZoneIAStorage`, `OneZoneIASizeOverhead`, `ReducedRedundancyStorage`, `GlacierStorage`, `GlacierStagingStorage`, `GlacierObjectOverhead`, `GlacierS3ObjectOverhead`, `DeepArchiveStorage`, `DeepArchiveObjectOverhead`, `DeepArchiveS3ObjectOverhead` and, `DeepArchiveStagingStorage` \(see the `StorageType` dimension\)  Units: Bytes Valid statistics: Average  | 
+| BucketSizeBytes |  The amount of data in bytes stored in a bucket in the STANDARD storage class, INTELLIGENT\_TIERING storage class, Standard \- Infrequent Access \(STANDARD\_IA\) storage class, OneZone \- Infrequent Access \(ONEZONE\_IA\), Reduced Redundancy Storage \(RRS\) class, Deep Archive Storage \(S3 Glacier Deep Archive\) class or, Glacier \(GLACIER\) storage class\. This value is calculated by summing the size of all objects in the bucket \(both current and noncurrent objects\), including the size of all parts for all incomplete multipart uploads to the bucket\.  Valid storage type filters: `StandardStorage`, `IntelligentTieringFAStorage`, `IntelligentTieringIAStorage`, `IntelligentTieringAAStorage`, `IntelligentTieringDAAStorage`, `StandardIAStorage`, `StandardIASizeOverhead`, `StandardIAObjectOverhead`, `OneZoneIAStorage`, `OneZoneIASizeOverhead`, `ReducedRedundancyStorage`, `GlacierStorage`, `GlacierStagingStorage`, `GlacierObjectOverhead`, `GlacierS3ObjectOverhead`, `DeepArchiveStorage`, `DeepArchiveObjectOverhead`, `DeepArchiveS3ObjectOverhead` and, `DeepArchiveStagingStorage` \(see the `StorageType` dimension\)  Units: Bytes Valid statistics: Average  | 
 | NumberOfObjects |  The total number of objects stored in a bucket for all storage classes except for the GLACIER storage class\. This value is calculated by counting all objects in the bucket \(both current and noncurrent objects\) and the total number of parts for all incomplete multipart uploads to the bucket\. Valid storage type filters: `AllStorageTypes` \(see the `StorageType` dimension\) Units: Count Valid statistics: Average  | 
 
 ## Amazon S3 CloudWatch Request Metrics<a name="s3-request-cloudwatch-metrics"></a>
@@ -51,9 +51,7 @@ The `AWS/S3` namespace includes the following request metrics\.
 
 ## Amazon S3 CloudWatch replication metrics<a name="s3-cloudwatch-replication-metrics"></a>
 
-Monitor the total number of S3 API operations that are pending replication, the total size of objects pending replication, and the maximum replication time to the destination Region\. Only replication rules that have S3 Replication Time Control \(S3 RTC\) enabled can publish replication metrics\.
-
-Unlike CloudWatch request metrics, you can't filter replication metrics by prefixes or tags\. However, you can set up a replication rule based on prefixes and tags\. Your replication metrics then monitor replication for the prefixes and tags that you specified\. For more information, see [Meet compliance requirements using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\.
+You can monitor the progress of replication with S3 replication metrics by tracking bytes pending, operations pending, and replication latency\. For more information, see [Monitoring progress with replication metrics](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-metrics.html)
 
 **Note**  
 You can enable alarms for your replication metrics on Amazon CloudWatch\. When you set up alarms for your replication metrics, set the **Missing data treatment** field to **Treat missing data as ignore \(maintain the alarm state\)**\.
@@ -70,7 +68,8 @@ You can enable alarms for your replication metrics on Amazon CloudWatch\. When y
 The `S3Outposts` namespace includes the following metrics for Amazon S3 on Outposts buckets\. You can monitor the total number of S3 on Outposts bytes provisioned, the total free bytes available for objects, and the total size of all objects for a given bucket\. 
 
 **Note**  
-S3 on Outposts only supports the following metrics and not other Amazon S3 metrics\.
+S3 on Outposts only supports the following metrics and not other Amazon S3 metrics\.  
+Since S3 on Outposts have limited capcity, you can create CloudWatch alerts that alert you when storage utilization exceeds a threshold\.
 
 
 | Metric | Description | 

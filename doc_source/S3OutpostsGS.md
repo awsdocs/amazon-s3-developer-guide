@@ -3,7 +3,7 @@
 With Amazon S3 on Outposts, you can use the Amazon S3 APIs and features, such as object storage, access policies, encryption, and tagging, on AWS Outposts as you do on Amazon S3\. For information about AWS Outposts, see [ What is AWS Outposts?](https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html) in the *AWS Outposts User Guide*\. 
 
 **Topics**
-+ [Ordering your AWS Outpost](#OrderOutposts)
++ [Order an Outpost](#OrderOutposts)
 + [Setting up S3 on Outposts](#SettingUpS3Outposts)
 
 ## Ordering your AWS Outpost<a name="OrderOutposts"></a>
@@ -18,7 +18,7 @@ After you select your configuration, follow the steps in [Create an Outpost and 
 
 ### Do you already have an AWS Outpost?<a name="SettingUpS3OutpostsExistingOutpost"></a>
 
-If your Outpost is already on your site, work with your account team to identify Amazon S3 capacity that is compatible with your current configuration, or order additional hardware\.
+If AWS Outposts is already on your site, depending on your current Outpost configuration and storage capacity, you may be able to add Amazon S3 storage to an existing Outpost, or you may need to work with your AWS account team to add additional hardware to support Amazon S3 on Outposts\.
 
 ## Setting up S3 on Outposts<a name="SettingUpS3Outposts"></a>
 
@@ -26,4 +26,4 @@ After your S3 on Outposts capacity is provisioned, you can create buckets and S3
 
 You can manage your Amazon S3 storage on Outposts using the same services that you use in\-Region today\. These include AWS Identity and Access Management \(IAM\) and Amazon S3 Access Points to control access to objects and buckets, Amazon CloudWatch to monitor operational health, and AWS CloudTrail to track and report on object\-level and bucket\-level activity\.
 
-After AWS enables your S3 on Outposts capacity, you can access your Outpost using the AWS Outposts console, the Amazon S3 REST API, the AWS CLI, or the AWS SDKs\.
+After AWS enables your S3 on Outposts capacity, you can access S3 on Outposts using the AWS Outposts or Amazon S3 consoles, the Amazon S3 REST API, the AWS CLI, or the AWS SDKs\.

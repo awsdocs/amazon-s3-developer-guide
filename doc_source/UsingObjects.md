@@ -1,9 +1,9 @@
-# Working with Amazon S3 Objects<a name="UsingObjects"></a>
+# Working with Amazon S3 objects<a name="UsingObjects"></a>
 
 Amazon S3 is an object store that uses unique key\-values to store as many objects as you want\. You store these objects in one or more buckets, and each object can be up to 5 TB in size\. An object consists of the following:
 + ****Key**** – The name that you assign to an object\. You use the object key to retrieve the object\.
 
-  For more information, see [Object Key and Metadata](UsingMetadata.md)\.
+  For more information, see [Object key and metadata](UsingMetadata.md)\.
 + ****Version ID** **– Within a bucket, a key and version ID uniquely identify an object\. 
 
   The version ID is a string that Amazon S3 generates when you add an object to a bucket\. For more information, see [Object Versioning](ObjectVersioning.md)\.
@@ -16,7 +16,7 @@ Amazon S3 is an object store that uses unique key\-values to store as many objec
 + ****Subresources** **– Amazon S3 uses the subresource mechanism to store object\-specific additional information\. 
 
   Because subresources are subordinates to objects, they are always associated with some other entity such as an object or a bucket\. For more information, see [Object subresources](ObjectAndSubResource.md)\.
-+ ****Access Control Information** **– You can control access to the objects you store in Amazon S3\.
++ ****Access control information** **– You can control access to the objects you store in Amazon S3\.
 
   Amazon S3 supports both the resource\-based access control, such as an access control list \(ACL\) and bucket policies, and user\-based access control\. For more information, see [Identity and access management in Amazon S3](s3-access-control.md)\.
 

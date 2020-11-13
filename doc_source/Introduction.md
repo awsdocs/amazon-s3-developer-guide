@@ -172,7 +172,7 @@ For example, you can use IAM with Amazon S3 to control the type of access a user
 
 For more information about IAM, see the following:
 + [AWS Identity and Access Management \(IAM\)](https://aws.amazon.com/iam/)
-+ [Getting Started](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started.html)
++ [Getting started](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started.html)
 + [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/)
 
 ### Access control lists<a name="S3_ACLs"></a>

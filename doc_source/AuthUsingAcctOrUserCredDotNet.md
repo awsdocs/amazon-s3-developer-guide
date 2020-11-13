@@ -80,7 +80,7 @@ namespace Amazon.DocSamples.S3
 **Note**  
 You can create the `AmazonS3Client` client without providing your security credentials\. Requests sent using this client are anonymous requests, without a signature\. Amazon S3 returns an error if you send anonymous requests for a resource that is not publicly available\.
 
-For working examples, see [Working with Amazon S3 Objects](UsingObjects.md) and [Working with Amazon S3 Buckets](UsingBucket.md)\. You can test these examples using your AWS Account or an IAM user credentials\. 
+For working examples, see [Working with Amazon S3 objects](UsingObjects.md) and [Working with Amazon S3 Buckets](UsingBucket.md)\. You can test these examples using your AWS Account or an IAM user credentials\. 
 
 For example, to list all the object keys in your bucket, see [Listing Keys Using the AWS SDK for \.NET](ListingObjectKeysUsingNetSDK.md)\. 
 

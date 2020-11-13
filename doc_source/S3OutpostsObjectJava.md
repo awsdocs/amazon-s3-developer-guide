@@ -351,7 +351,7 @@ public class ListObjectsV2 {
 
 ## This initiates a multipart upload objects in an Amazon S3 on Outposts bucket<a name="S3OutpostsInitiateMultipartUploadJava"></a>
 
-The following S3 on Outposts example initiate, uploads, and completes a multipart upload using the SDK for Java in the Outposts bucket\. For more information, see [Upload a File](https://docs.aws.amazon.com/https://docs.aws.amazon.com/AmazonS3/latest/dev/llJavaUploadFile.html)\.
+The following S3 on Outposts example initiate, uploads, and completes a multipart upload using the SDK for Java in the Outposts bucket\. For more information, see [Upload a File](https://docs.aws.amazon.com/AmazonS3/latest/dev/llJavaUploadFile.html)\.
 
 **Important**  
 This section describes the latest revision of the API\. We recommend that you use this revised API for application development\. For backward compatibility, Amazon S3 continues to support the prior version of this API, [ListObjects](http://amazonaws.com/AmazonS3/latest/API/API_ListObjectsV2.html)\. 
