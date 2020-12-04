@@ -85,7 +85,7 @@ The owner of the destination bucket must grant the owner of the source bucket pe
 {
     "Sid":"1",
     "Effect":"Allow",
-    "Principal":{"AWS":"source-bucket-account-id"},
+    "Principal":{"AWS":"source-bucket-account-id/source-account-IAM-role"},
     "Action":["s3:ObjectOwnerOverrideToBucketOwner"],
     "Resource":"arn:aws:s3:::destination-bucket/*"
 }
