@@ -570,7 +570,7 @@ read -d '' OPERATION <<EOF
 {
   "S3PutObjectRetention": {
     "Retention": {
-      "RetainUntilDate":"Jan 30 00:00:00 PDT 2020",
+      "RetainUntilDate":"2020-01-30T00:00:00",
       "Mode":"GOVERNANCE"
     }
   }
