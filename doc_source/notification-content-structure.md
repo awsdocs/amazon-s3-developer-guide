@@ -34,7 +34,7 @@ The following example shows version 2\.2 of the event message JSON structure, wh
          "eventVersion":"2.2",
          "eventSource":"aws:s3",
          "awsRegion":"us-west-2",
-         "eventTime":The time, in ISO-8601 format, for example, 1970-01-01T00:00:00.000Z, when Amazon S3 finished processing the request,
+         "eventTime":"The time, in ISO-8601 format, for example, 1970-01-01T00:00:00.000Z, when Amazon S3 finished processing the request",
          "eventName":"event-type",
          "userIdentity":{  
             "principalId":"Amazon-customer-ID-of-the-user-who-caused-the-event"
@@ -58,11 +58,10 @@ The following example shows version 2\.2 of the event message JSON structure, wh
             },
             "object":{  
                "key":"object-key",
-               "size":object-size,
+               "size":"object-size",
                "eTag":"object eTag",
                "versionId":"object version if bucket is versioning-enabled, otherwise null",
-               "sequencer": "a string representation of a hexadecimal value used to determine event sequence, 
-                   only used with PUTs and DELETEs"
+               "sequencer": "a string representation of a hexadecimal value used to determine event sequence, only used with PUTs and DELETEs"
             }
          },
          "glacierEventData": {
@@ -85,7 +84,7 @@ The following example shows version 2\.0 of the event message structure, which i
          "eventVersion":"2.0",
          "eventSource":"aws:s3",
          "awsRegion":"us-west-2",
-         "eventTime":The time, in ISO-8601 format, for example, 1970-01-01T00:00:00.000Z, when S3 finished processing the request,
+         "eventTime":"The time, in ISO-8601 format, for example, 1970-01-01T00:00:00.000Z, when S3 finished processing the request",
          "eventName":"event-type",
          "userIdentity":{  
             "principalId":"Amazon-customer-ID-of-the-user-who-caused-the-event"
@@ -109,11 +108,10 @@ The following example shows version 2\.0 of the event message structure, which i
             },
             "object":{  
                "key":"object-key",
-               "size":object-size,
+               "size":"object-size",
                "eTag":"object eTag",
                "versionId":"object version if bucket is versioning-enabled, otherwise null",
-               "sequencer": "a string representation of a hexadecimal value used to determine event sequence, 
-                   only used with PUTs and DELETEs"
+               "sequencer": "a string representation of a hexadecimal value used to determine event sequence, only used with PUTs and DELETEs"
             }
          }
       }
