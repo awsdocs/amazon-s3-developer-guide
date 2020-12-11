@@ -469,7 +469,7 @@ read -d '' MANIFEST <<EOF
     ]
   },
   "Location": {
-    "ObjectArn": "arn:aws:s3:::ManifestBucket/complaince-objects-manifest.csv",
+    "ObjectArn": "arn:aws:s3:::ManifestBucket/compliance-objects-manifest.csv",
     "ETag": "Your-manifest-ETag"
   }
 }
@@ -570,7 +570,7 @@ read -d '' OPERATION <<EOF
 {
   "S3PutObjectRetention": {
     "Retention": {
-      "RetainUntilDate":"Jan 30 00:00:00 PDT 2020",
+      "RetainUntilDate":"2020-01-30T00:00:00",
       "Mode":"GOVERNANCE"
     }
   }
