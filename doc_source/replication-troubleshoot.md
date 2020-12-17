@@ -30,6 +30,7 @@ If object replicas don't appear in the destination bucket after you configure re
   2.            "s3:ReplicateDelete",
   3.            "s3:ReplicateTags"
   ```
++ Verify that versioning has not been suspended on either bucket. Both source and destination buckets must have versioning enabled.
 
 ## Related topics<a name="replication-troubleshoot-related-topics"></a>
 
