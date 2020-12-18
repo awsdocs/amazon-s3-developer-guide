@@ -29,6 +29,7 @@ The top\-level `manifest.json` file contains the locations of each succeeded rep
 }
 ```
 
+
 **Example — failed tasks reports**  
 Failed tasks reports contain the following information for all *failed* tasks:  
 + `Bucket`
@@ -48,6 +49,7 @@ awsexamplebucket1,image_15930,,failed,200,PermanentFailure,"Lambda returned func
 awsexamplebucket1,image_17644,,failed,200,PermanentFailure,"Lambda returned function error: {""errorMessage"":""2019-04-05T17:35:46.025Z 10a764e4-2b26-4d8c-9056-1e1072b4723f Task timed out after 3.00 seconds""}"
 awsexamplebucket1,image_17398,,failed,200,PermanentFailure,"Lambda returned function error: {""errorMessage"":""2019-04-05T17:35:44.661Z 1e306352-4c54-4eba-aee8-4d02f8c0235c Task timed out after 3.00 seconds""}"
 ```
+
 
 **Example — succeeded tasks report**  
 Succeeded tasks reports contain the following for the *completed* tasks:  

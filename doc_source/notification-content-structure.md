@@ -2,6 +2,8 @@
 
 The notification message that Amazon S3 sends to publish an event is in the JSON format\. The following example shows the structure of the JSON message\. 
 
+For general information about configuring event notifications, see [ Configuring Amazon S3 event notifications](NotificationHowTo.md)\.
+
 Note the following about the example:
 + The `eventVersion` key value contains a major and minor version in the form `<major>`\.`<minor>`\.
 

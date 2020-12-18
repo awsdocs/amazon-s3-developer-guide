@@ -17,6 +17,8 @@ If you explicitly specify an AWS Region in your create bucket request that is di
     The SDK libraries send the PUT bucket request to Amazon S3 to create the bucket\. For more information, see [PUT Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html)\.
 + Retrieve information about the location of the bucket—Amazon S3 stores bucket location information in the *location* subresource that is associated with the bucket\. The SDK libraries send the GET Bucket location request \(see [GET Bucket location](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html)\) to retrieve this information\.
 
+  
+
 ## Using the Amazon S3 Console<a name="create-bucket-get-location-console"></a>
 
 To create a bucket using the Amazon S3 console, see [How do I create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.

@@ -109,6 +109,8 @@ The Amazon S3 product detail page provides pricing information and example calcu
 +  [ How much does it cost to retrieve data from Amazon S3 Glacier?](https://aws.amazon.com/s3/faqs/#How_much_does_it_cost_to_retrieve_data_from_Amazon_S3_Glacier) 
 +  [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/) for storage costs for the different storage classes\. 
 
+
+
 ### Restoring archived objects<a name="restore-glacier-objects-concepts"></a>
 
 Archived objects are not accessible in real time\. You must first initiate a restore request and then wait until a temporary copy of the object is available for the duration that you specify in the request\. After you receive a temporary copy of the restored object, the object's storage class remains S3 Glacier or S3 Glacier Deep Archive\. \(A [HEAD Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectHEAD.html) or [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html) API operation request will return S3 Glacier or S3 Glacier Deep Archive as the storage class\.\) 

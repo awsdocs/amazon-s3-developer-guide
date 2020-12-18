@@ -40,13 +40,9 @@ You can use the Amazon S3 console, the REST API, or the AWS CLI or AWS SDKs to c
 
 You use storage class analysis to observe your data access patterns over time to gather information to help you improve the lifecycle management of your STANDARD\_IA storage\. After you configure a filter, you'll start seeing data analysis based on the filter in the Amazon S3 console in 24 to 48 hours\. However, storage class analysis observes the access patterns of a filtered data set for 30 days or longer to gather information for analysis before giving a result\. The analysis continues to run after the initial result and updates the result as the access patterns change
 
-When you first configure a filter the Amazon S3 console shows a message similar to the following\.
+When you first configure a filter, the Amazon S3 console may take a moment to analyze the your data\.
 
-![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/storage-class-analysis-observe-bar-start-observe.png)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
-
-Storage class analysis observes the access patterns of a filtered object data set for 30 days or longer to gather enough information for the analysis\. After storage class analysis has gathered sufficient information, you'll see a message in the Amazon S3 console similar to the following\.
-
-![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/storage-class-analysis-observe-bar.png)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
+Storage class analysis observes the access patterns of a filtered object data set for 30 days or longer to gather enough information for the analysis\. After storage class analysis has gathered sufficient information, you'll see a message in the Amazon S3 console that analysis is complete\.
 
 When performing the analysis for infrequently accessed objects storage class analysis looks at the filtered set of objects grouped together based on age since they were uploaded to Amazon S3\. Storage class analysis determines if the age group is infrequently accessed by looking at the following factors for the filtered data set:
 + Objects in the STANDARD storage class that are larger than 128 KB\.
@@ -57,15 +53,11 @@ When performing the analysis for infrequently accessed objects storage class ana
 
 **How Much of My Storage did I Retrieve?**
 
-The Amazon S3 console graphs how much of the storage in the filtered data set has been retrieved for the observation period as shown in the following example\.
-
-![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/storage-class-analysis-how-much-retrieved.png)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
+The Amazon S3 console graphs how much of the storage in the filtered data set has been retrieved for the observation period\.
 
 **What Percentage of My Storage did I Retrieve?**
 
-The Amazon S3 console also graphs what percentage of the storage in the filtered data set has been retrieved for the observation period as shown in the following example\.
-
-![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/storage-class-analysis-percentage-retrieved.png)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
+The Amazon S3 console also graphs what percentage of the storage in the filtered data set has been retrieved for the observation period\.
 
 As stated earlier in this topic, when you are performing the analysis for infrequently accessed objects, storage class analysis looks at the filtered set of objects grouped together based on the age since they were uploaded to Amazon S3\. The storage class analysis uses the following predefined object age groups: 
 + Amazon S3 Objects less than 15 days old
@@ -85,11 +77,7 @@ Usually it takes about 30 days of observing access patterns to gather enough inf
 
 **How Much of My Storage is Infrequently Accessed?**
 
-The Amazon S3 console shows the access patterns grouped by the predefined object age groups as shown in the following example\.
-
-![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/storage-class-analysis-infrequently-accesses.png)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)![\[Screen shot.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/)
-
-The **Frequently accessed** or **Infrequently accessed** text shown is meant as a visual aid to help you in the lifecycle creation process\.
+The Amazon S3 console shows the access patterns grouped by the predefined object age groups\. The **Frequently accessed** or **Infrequently accessed** text shown is meant as a visual aid to help you in the lifecycle creation process\.
 
 ## How can I export storage class analysis data?<a name="analytics-storage-class-export-to-file"></a>
 

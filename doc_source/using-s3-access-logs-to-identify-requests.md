@@ -32,7 +32,7 @@ In this example, you have the following five buckets:
 1. Then enable the Amazon S3 access logs as follows:
    + `1-awsexamplebucket1-us-east-1` logs to the S3 bucket `awsexamplebucket1-logs-us-east-1` with prefix `1-awsexamplebucket1-us-east-1`
    + `2-awsexamplebucket1-us-east-1` logs to the S3 bucket `awsexamplebucket1-logs-us-east-1` with prefix `2-awsexamplebucket1-us-east-1`
-   + `1-awsexamplebucket1-us-east-1` logs to the S3 bucket `awsexamplebucket1-logs-us-east-1` with prefix `3-awsexamplebucket1-us-east-1`
+   + `3-awsexamplebucket1-us-east-1` logs to the S3 bucket `awsexamplebucket1-logs-us-east-1` with prefix `3-awsexamplebucket1-us-east-1`
    + `1-awsexamplebucket1-us-west-2` logs to the S3 bucket `awsexamplebucket1-logs-us-west-2` with prefix `1-awsexamplebucket1-us-west-2`
    + `2-awsexamplebucket1-us-west-2` logs to the S3 bucket `awsexamplebucket1-logs-us-west-2` with prefix `2-awsexamplebucket1-us-west-2`
 

@@ -1,11 +1,11 @@
 # Changing the replica owner<a name="replication-change-owner"></a>
 
-In replication, the owner of the source object also owns the replica by default\. When source and destination buckets are owned by different AWS accounts, you can add optional configuration settings to change replica ownership to the AWS account that owns the destination bucket\. You might do this, for example, to restrict access to object replicas\. This is referred to as the *owner override* option of the replication configuration\. This section explains only the relevant additional configuration settings\. For information about setting the replication configuration, see [Replication](replication.md)\. 
+In replication, the owner of the source object also owns the replica by default\. When source and destination buckets are owned by different AWS accounts, you can add optional configuration settings to change replica ownership to the AWS account that owns the destination buckets\. You might do this, for example, to restrict access to object replicas\. This is referred to as the *owner override* option of the replication configuration\. This section explains only the relevant additional configuration settings\. For information about setting the replication configuration, see [Replication](replication.md)\. 
 
 To configure the owner override, you do the following:
 + Add the owner override option to the replication configuration to tell Amazon S3 to change replica ownership\. 
 + Grant Amazon S3 permissions to change replica ownership\. 
-+ Add permission in the destination bucket policy to allow changing replica ownership\. This allows the owner of the destination bucket to accept the ownership of object replicas\.
++ Add permission in the destination buckets policy to allow changing replica ownership\. This allows the owner of the destination buckets to accept the ownership of object replicas\.
 
 The following sections describe how to perform these tasks\. For a working example with step\-by\-step instructions, see [Example 3: Changing the replica owner when the source and destination buckets are owned by different accounts](replication-walkthrough-3.md)\.
 
@@ -14,7 +14,7 @@ The following sections describe how to perform these tasks\. For a working examp
 **Warning**  
 Add the owner override option only when the source and destination buckets are owned by different AWS accounts\. Amazon S3 doesn't check if the buckets are owned by same or different accounts\. If you add the owner override when both buckets are owned by same AWS account, Amazon S3 applies the owner override\. It grants full permissions to the owner of the destination bucket and doesn't replicate subsequent updates to the source object access control list \(ACL\)\. The replica owner can directly change the ACL associated with a replica with a `PUT ACL` request, but not through replication\.
 
-To specify the owner override option, add the following to the `Destination` element: 
+To specify the owner override option, add the following to each `Destination` element: 
 + The `AccessControlTranslation` element, which tells Amazon S3 to change replica ownership
 + The `Account` element, which specifies the AWS account of the destination bucket owner 
 
@@ -116,4 +116,4 @@ When you configure the ownership override option, the following considerations a
 
      
 
-    Amazon S3 replicates new objects that appear in the source bucket and the associated ACLs to the destination bucket\. For objects that were replicated before you removed the owner override, Amazon S3 doesn't replicate the ACLs because the object ownership change that Amazon S3 made remains in effect\. That is, ACLs put on the object version that were replicated when the owner override was set continue to be not replicated\.
+    Amazon S3 replicates new objects that appear in the source bucket and the associated ACLs to the destination buckets\. For objects that were replicated before you removed the owner override, Amazon S3 doesn't replicate the ACLs because the object ownership change that Amazon S3 made remains in effect\. That is, ACLs put on the object version that were replicated when the owner override was set continue to be not replicated\.

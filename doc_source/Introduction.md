@@ -76,51 +76,45 @@ You can only access Amazon S3 and its features in AWS Regions that are enabled f
 
 ### Amazon S3 data consistency model<a name="ConsistencyModel"></a>
 
-Amazon S3 provides read\-after\-write consistency for PUTS of new objects in your S3 bucket in all Regions with one caveat\. The caveat is that if you make a HEAD or GET request to a key name before the object is created, then create the object shortly after that, a subsequent GET might not return the object due to eventual consistency\. 
+Amazon S3 provides strong read\-after\-write consistency for PUTs and DELETEs of objects in your Amazon S3 bucket in all AWS Regions\. This applies to both writes to new objects as well as PUTs that overwrite existing objects and DELETEs\. In addition, read operations on Amazon S3 Select, Amazon S3 Access Control Lists, Amazon S3 Object Tags, and object metadata \(e\.g\. HEAD object\) are strongly consistent\. 
 
-Amazon S3 offers eventual consistency for overwrite PUTS and DELETES in all Regions\. 
+Updates to a single key are atomic\. For example, if you PUT to an existing key from one thread and perform a GET on the same key from a second thread concurrently, you will get either the old data or the new data, but never partial or corrupt data\.
 
- Updates to a single key are atomic\. For example, if you PUT to an existing key, a subsequent read might return the old data or the updated data, but it never returns corrupted or partial data\. 
-
-Amazon S3 achieves high availability by replicating data across multiple servers within AWS data centers\. If a PUT request is successful, your data is safely stored\. However, information about the changes must replicate across Amazon S3, which can take some time, and so you might observe the following behaviors:
-+  A process writes a new object to Amazon S3 and immediately lists keys within its bucket\. Until the change is fully propagated, the object might not appear in the list\. 
-+  A process replaces an existing object and immediately tries to read it\. Until the change is fully propagated, Amazon S3 might return the previous data\. 
-+  A process deletes an existing object and immediately tries to read it\. Until the deletion is fully propagated, Amazon S3 might return the deleted data\. 
-+  A process deletes an existing object and immediately lists keys within its bucket\. Until the deletion is fully propagated, Amazon S3 might list the deleted object\. 
+Amazon S3 achieves high availability by replicating data across multiple servers within AWS data centers\. If a PUT request is successful, your data is safely stored\. Any read \(GET or LIST\) that is initiated following the receipt of a successful PUT response will return the data written by the PUT\. Here are examples of this behavior: 
++ A process writes a new object to Amazon S3 and immediately lists keys within its bucket\. The new object will appear in the list\.
++ A process replaces an existing object and immediately tries to read it\. Amazon S3 will return the new data\. 
++  A process deletes an existing object and immediately tries to read it\. Amazon S3 will not return any data as the object has been deleted\. 
++  A process deletes an existing object and immediately lists keys within its bucket\. The object will not appear in the listing\. 
 
 **Note**  
-Amazon S3 does not currently support object locking for concurrent updates\. If two PUT requests are simultaneously made to the same key, the request with the latest timestamp wins\. If this is an issue, you will need to build an object\-locking mechanism into your application\.   
-Object locking is different from the S3 Object Lock feature\. With S3 Object Lock, you can store objects using a write\-once\-read\-many \(WORM\) model and prevent an object from being deleted or overwritten for a fixed amount of time or indefinitely\. For more information, see [Locking objects using S3 Object Lock](object-lock.md)\. 
+Amazon S3 does not support object locking for concurrent writers\. If two PUT requests are simultaneously made to the same key, the request with the latest timestamp wins\. If this is an issue, you will need to build an object\-locking mechanism into your application 
 Updates are key\-based\. There is no way to make atomic updates across keys\. For example, you cannot make the update of one key dependent on the update of another key unless you design this functionality into your application\.
 
-Bucket configurations have a similar eventual consistency model, with the same caveats\. For example, if you delete a bucket and immediately list all buckets, the deleted bucket might still appear in the list\.
-
-The following table describes the characteristics of an *eventually consistent read* and a *consistent read*\.
-
-
-| Eventually consistent read | Consistent read | 
-| --- | --- | 
-| Stale reads possible | No stale reads | 
-| Lowest read latency | Potential higher read latency | 
-| Highest read throughput | Potential lower read throughput | 
+Bucket configurations have an eventual consistency model\. Specifically:
++ If you delete a bucket and immediately list all buckets, the deleted bucket might still appear in the list\.
++ If you enable versioning on a bucket for the first time, it might take a short amount of time for the change to be fully propagated\. We recommend that you wait for 15 minutes after enabling versioning before issuing write operations \(PUT or DELETE\) on objects in the bucket\.
 
 #### Concurrent applications<a name="ApplicationConcurrency"></a>
 
-This section provides examples of eventually consistent and consistent read requests when multiple clients are writing to the same items\.
+This section provides examples of behavior to be expected from Amazon S3 when multiple clients are writing to the same items\.
 
-In this example, both W1 \(write 1\) and W2 \(write 2\) complete before the start of R1 \(read 1\) and R2 \(read 2\)\. For a consistent read, R1 and R2 both return `color = ruby`\. For an eventually consistent read, R1 and R2 might return `color = red` or `color = ruby` depending on the amount of time that has elapsed\. 
+In this example, both W1 \(write 1\) and W2 \(write 2\) complete before the start of R1 \(read 1\) and R2 \(read 2\)\. Because S3 is strongly consistent, R1 and R2 both return `color = ruby`\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/consistency1.png)
 
-In the next example, W2 does not complete before the start of R1\. Therefore, R1 might return `color = ruby` or `color = garnet` for either a consistent read or an eventually consistent read\. Also, depending on the amount of time that has elapsed, an eventually consistent read might return no results\.
 
-For a consistent read, R2 returns `color = garnet`\. For an eventually consistent read, R2 might return `color = ruby` or `color = garnet` depending on the amount of time that has elapsed\. 
+
+In the next example, W2 does not complete before the start of R1\. Therefore, R1 might return `color = ruby` or `color = garnet`\. However, since W1 and W2 finish before the start of R2, R2 returns `color = garnet`\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/consistency2.png)
 
-In the last example, Client 2 performs W2 before Amazon S3 returns a success for W1, so the outcome of the final value is unknown \(`color = garnet` or `color = brick`\)\. Any subsequent reads \(consistent read or eventually consistent\) might return either value\. Also, depending on the amount of time that has elapsed, an eventually consistent read might return no results\. 
+
+
+In the last example, W2 begins before W1 has received an acknowledgement\. Therefore, these writes are considered concurrent\. Amazon S3 internally uses last\-writer\-wins semantics to determine which write takes precedence\. However, the order in which Amazon S3 receives the requests and the order in which applications receive acknowledgements cannot be predicted due to factors such as network latency\. For example, W2 might be initiated by an Amazon EC2 instance in the same region while W1 might be initiated by a host that is further away\. The best way to determine the final value is to perform a read after both writes have been acknowledged\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/consistency3.png)
+
+
 
 ## Amazon S3 features<a name="S3Features"></a>
 

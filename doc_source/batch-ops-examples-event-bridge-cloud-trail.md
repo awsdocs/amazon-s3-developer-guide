@@ -11,6 +11,8 @@ Amazon EventBridge is the preferred way to manage your events\. Amazon CloudWatc
 
 ## S3 Batch Operations events emitted to CloudTrail<a name="batch-ops-examples-cloud-trail-events"></a>
 
+
+
 When a Batch Operations job is created, it is recorded as a `JobCreated` event in CloudTrail\. As the job runs, it changes state during processing, and other `JobStatusChanged` events are recorded in CloudTrail\. You can view these events on the [CloudTrail console](https://console.aws.amazon.com/cloudtrail)\. For more information about CloudTrail, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/how-cloudtrail-works.html)\.
 
 **Note**  
@@ -75,6 +77,8 @@ To do this, you create a rule by following all the steps in [Creating an EventBr
     }
 }
 ```
+
+
 
  The following examples are two Batch Operations events that were sent to Amazon Simple Queue Service \(Amazon SQS\) from an EventBridge event rule\. A Batch Operations job goes through many different states while processing \(`New`, `Preparing`, `Active`, etc\.\), so you can expect to receive several messages for each job\.
 

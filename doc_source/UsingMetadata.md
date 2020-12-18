@@ -90,6 +90,9 @@ There are two categories of system metadata:
 
    For more information about server\-side encryption, see [Protecting data using encryption](UsingEncryption.md)\. 
 
+**Note**  
+The PUT request header is limited to 8 KB in size\. Within the PUT request header, the system\-defined metadata is limited to 2 KB in size\. The size of system\-defined metadata is measured by taking the sum of the number of bytes in the US\-ASCII encoding of each key and value\. 
+
 The following table provides a list of system\-defined metadata and whether you can update it\.
 
 

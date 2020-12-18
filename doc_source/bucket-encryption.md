@@ -1,6 +1,8 @@
-# Amazon S3 default encryption for S3 buckets<a name="bucket-encryption"></a>
+# Setting default server\-side encryption behavior for Amazon S3 buckets<a name="bucket-encryption"></a>
 
 Amazon S3 default encryption provides a way to set the default encryption behavior for an S3 bucket\. You can set default encryption on a bucket so that all new objects are encrypted when they are stored in the bucket\. The objects are encrypted using server\-side encryption with either Amazon S3\-managed keys \(SSE\-S3\) or customer master keys \(CMKs\) stored in AWS Key Management Service \(AWS KMS\)\. 
+
+When you configure your bucket to use default encryption with SSE\-KMS, you can also enable an S3 Bucket Key to decrease request traffic from Amazon S3 to AWS Key Management Service \(AWS KMS\) and reduce the cost of encryption\. For more information, see [Reducing the cost of SSE\-KMS with Amazon S3 Bucket Keys](bucket-key.md)\.
 
 When you use server\-side encryption, Amazon S3 encrypts an object before saving it to disk and decrypts it when you download the objects\. For more information about protecting data using server\-side encryption and encryption key management, see [Protecting data using server\-side encryption](serv-side-encryption.md)\.
 
@@ -8,10 +10,11 @@ For more information about permissions required for default encryption, see [Put
 
 **Topics**
 + [How do I set up Amazon S3 default encryption for an S3 bucket?](#bucket-encryption-how-to-set-up)
-+ [Using encryption for cross\-account operations](#bucket-encryption-update-bucket-policy)
++ [Using an S3 Bucket Key with default encryption](#bucket-key-default-encryption)
++ [Using encryption for cross\-account operations](#bucket-encryption-cross-account-operations)
 + [Using default encryption with replication](#bucket-encryption-update-bucket-policy)
 + [Monitoring default encryption with CloudTrail and CloudWatch](#bucket-encryption-tracking)
-+ [More Info](#bucket-encryption-related-resources)
++ [More info](#bucket-encryption-related-resources)
 
 ## How do I set up Amazon S3 default encryption for an S3 bucket?<a name="bucket-encryption-how-to-set-up"></a>
 
@@ -36,16 +39,22 @@ You can also encrypt existing objects using the Copy Object API\. For more infor
 **Note**  
 Amazon S3 buckets with default bucket encryption using SSE\-KMS cannot be used as destination buckets for [Amazon S3 server access logging](ServerLogs.md)\. Only SSE\-S3 default encryption is supported for server access log destination buckets\.
 
-## Using encryption for cross\-account operations<a name="bucket-encryption-update-bucket-policy"></a>
+## Using an S3 Bucket Key with default encryption<a name="bucket-key-default-encryption"></a>
+
+When you configure your bucket to use default encryption for SSE\-KMS on new objects, you can also configure an S3 Bucket Key\. S3 Bucket Keys decrease the number of transactions from Amazon S3 to AWS KMS to reduce the cost of server\-side encryption using AWS Key Management Service \(SSE\-KMS\)\. 
+
+When you configure your bucket to use an S3 Bucket Key for SSE\-KMS on new objects, AWS KMS generates a bucket\-level key that is used to create a unique [data key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys) for objects in the bucket\. This bucket key is used for a time\-limited period within Amazon S3, reducing the need for Amazon S3 to make requests to AWS KMS to complete encryption operations\. For more information about using an S3 Bucket Key, see [Reducing the cost of SSE\-KMS with Amazon S3 Bucket Keys](bucket-key.md)\.
+
+## Using encryption for cross\-account operations<a name="bucket-encryption-cross-account-operations"></a>
 
 Be aware of the following when using encryption for cross\-account operations:
-+ The AWS managed CMK \(aws/s3\) is used when a CMK ARN or alias is not provided at request\-time, nor via the bucket's default encryption configuration\.
-+ If you're uploading or accessing S3 objects using AWS Identity and Access Management \(IAM\) principals that are in the same AWS account as your CMK, you can use the AWS managed CMK \(aws/s3\)\. 
++ The AWS managed CMK \(`aws/s3`\) is used when a CMK ARN or alias is not provided at request\-time, nor via the bucket's default encryption configuration\.
++ If you're uploading or accessing S3 objects using AWS Identity and Access Management \(IAM\) principals that are in the same AWS account as your CMK, you can use the AWS managed CMK \(`aws/s3`\)\. 
 + Use a customer managed CMK if you want to grant cross\-account access to your S3 objects\. You can configure the policy of a customer managed CMK to allow access from another account\.
-+ If specifying your own CMK, you should use a fully qualified CMK key ARN\. When using a CMK alias, be aware that KMS will resolve the key within the requester’s account\. This may result in data encrypted with a CMK that belongs to the requester, and not the bucket administrator\.
-+ You must specify a key that you \(the requester\) has been granted `Encrypt` permission to\. For more information, see [Allows Key Users to Use a CMK for Cryptographic Operations](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-users-crypto)\.
++ If you specify your own CMK, you should use a fully qualified CMK key ARN\. When using a CMK alias, be aware that AWS KMS will resolve the key within the requester’s account\. This might result in data encrypted with a CMK that belongs to the requester, and not the bucket administrator\.
++ You must specify a key that you \(the requester\) have been granted `Encrypt` permission to\. For more information, see [Allows key users to use a CMK for cryptographic operations](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-users-crypto) in the *AWS Key Management Service Developer Guide*\.
 
-For more information about when to use customer managed CMKs and the AWS managed CMK, see [Should I use an AWS AWS KMS\-managed key or a custom AWS AWS KMS key to encrypt my objects on Amazon S3](http://aws.amazon.com/premiumsupport/knowledge-center/s3-object-encrpytion-keys/)\.
+For more information about when to use customer managed CMKs and the AWS managed CMK, see [Should I use an AWS AWS KMS\-managed key or a custom AWS AWS KMS key to encrypt my objects on Amazon S3?](http://aws.amazon.com/premiumsupport/knowledge-center/s3-object-encrpytion-keys/)
 
 ## Using default encryption with replication<a name="bucket-encryption-update-bucket-policy"></a>
 
@@ -65,7 +74,7 @@ When Amazon S3 encrypts an object using the default encryption settings, the log
 
 When Amazon S3 encrypts an object using the `PUT` encryption headers, the log includes the following field as the name/value pair: `"SSEApplied":"SSE_S3", "SSEApplied":"SSE_KMS`, or `"SSEApplied":"SSE_C"`\. For multipart uploads, this information is included in the `InitiateMultipartUpload` API requests\. For more information about using CloudTrail and CloudWatch, see [Monitoring Amazon S3](monitoring-overview.md)\.
 
-## More Info<a name="bucket-encryption-related-resources"></a>
+## More info<a name="bucket-encryption-related-resources"></a>
 +  [PUT Bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html) 
 +  [DELETE Bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEencryption.html) 
 +  [GET Bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETencryption.html) 

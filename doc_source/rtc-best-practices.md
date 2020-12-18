@@ -18,7 +18,7 @@ The S3 RTC SLA also doesn’t apply during time periods where your replication d
 
 ## Estimating your replication request rates<a name="estimating-replication-request-rates"></a>
 
-Your total request rate including the requests that Amazon S3 replication makes on your behalf should be within the Amazon S3 request rate guidelines for both the replication source and destination buckets\. For each object replicated, Amazon S3 replication makes up to five GET/HEAD requests and one PUT request to the source bucket, and one PUT request to the destination bucket\.
+Your total request rate including the requests that Amazon S3 replication makes on your behalf should be within the Amazon S3 request rate guidelines for both the replication source and destination buckets\. For each object replicated, Amazon S3 replication makes up to five GET/HEAD requests and one PUT request to the source bucket, and one PUT request to each destination bucket\.
 
 For example, if you expect to replicate 100 objects per second, Amazon S3 replication might perform an additional 100 PUT requests on your behalf for a total of 200 PUTs per second to the source S3 bucket\. Amazon S3 replication also might perform up to 500 GET/HEAD \(5 GET/HEAD requests for each object replicated\.\) 
 

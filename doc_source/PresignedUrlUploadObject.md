@@ -44,5 +44,4 @@ The following IAM policy statement requires the principal to access AWS from onl
 + [Upload an object using a presigned URL \(AWS SDK for Java\)](PresignedUrlUploadObjectJavaSDK.md)
 + [Upload an object using a presigned URL \(AWS SDK for \.NET\)](UploadObjectPreSignedURLDotNetSDK.md)
 + [Upload an object using a presigned URL \(AWS SDK for Ruby\)](UploadObjectPreSignedURLRubySDK.md)
-+ [Upload an object using a presigned URL \(AWS SDK for PHP\)](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/s3-presigned-url.html)
 + [Upload an object using a presigned URL \(AWS SDK for JavaScript\)](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-creating-buckets.html#s3-create-presigendurl)

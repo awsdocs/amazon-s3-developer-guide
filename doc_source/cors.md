@@ -16,7 +16,7 @@ This section provides an overview of CORS\. The subtopics describe how you can e
 The following are example scenarios for using CORS\.
 
 **Scenario 1**  
-Suppose that you are hosting a website in an Amazon S3 bucket named `website` as described in [Hosting a static website on Amazon S3](WebsiteHosting.md)\. Your users load the website endpoint:
+Suppose that you are hosting a website in an Amazon S3 bucket named `website` as described in [Hosting a static website using Amazon S3](WebsiteHosting.md)\. Your users load the website endpoint:
 
 ```
 http://website.s3-website.us-east-1.amazonaws.com

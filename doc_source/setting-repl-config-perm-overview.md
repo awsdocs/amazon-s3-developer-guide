@@ -10,9 +10,13 @@ When setting up replication, you must acquire necessary permissions as follows:
 
 ## Creating an IAM role<a name="setting-repl-config-same-acctowner"></a>
 
-By default, all Amazon S3 resources—buckets, objects, and related subresources—are private: Only the resource owner can access the resource\. To read objects from the source bucket and replicate them to the destination bucket, Amazon S3 needs permissions to perform these tasks\. You grant these permissions by creating an IAM role and specifying the role in your replication configuration\. 
+
+
+By default, all Amazon S3 resources—buckets, objects, and related subresources—are private and only the resource owner can access the resource\. Amazon S3 needs permissions read and replicate objects from the source bucket\. You grant these permissions by creating an IAM role and specifying the role in your replication configuration\. 
 
 This section explains the trust policy and minimum required permissions policy\. The example walkthroughs provide step\-by\-step instructions to create an IAM role\. For more information, see [Replication walkthroughs](replication-example-walkthroughs.md)\.
+
+
 + The following shows a *trust policy*, where you identify Amazon S3 as the service principal who can assume the role\.
 
   ```
@@ -69,7 +73,8 @@ This section explains the trust policy and minimum required permissions policy\.
               "s3:ReplicateDelete",
               "s3:ReplicateTags"
            ],
-           "Resource":"arn:aws:s3:::DestinationBucket/*"
+           "Resource":"arn:aws:s3:::DestinationBucket/*",
+           "Resource":"arn:aws:s3:::DestinationBucket-2/*"
         }
      ]
   }
@@ -78,9 +83,9 @@ This section explains the trust policy and minimum required permissions policy\.
   The access policy grants permissions for the following actions:
   +  `s3:GetReplicationConfiguration` and `s3:ListBucket`—Permissions for these actions on the *source* bucket allow Amazon S3 to retrieve the replication configuration and list bucket content \(the current permissions model requires the `s3:ListBucket` permission for accessing delete markers\)\.
   + `s3:GetObjectVersion` and `s3:GetObjectVersionAcl`— Permissions for these actions granted on all objects allow Amazon S3 to get a specific object version and access control list \(ACL\) associated with objects\. 
-  + `s3:ReplicateObject` and `s3:ReplicateDelete`—Permissions for these actions on objects in the *destination* bucket allow Amazon S3 to replicate objects or delete markers to the destination bucket\. For information about delete markers, see [How delete operations affect replication](replication-what-is-isnot-replicated.md#replication-delete-op)\. 
+  + `s3:ReplicateObject` and `s3:ReplicateDelete`—Permissions for these actions on objects in all *destination* buckets allow Amazon S3 to replicate objects or delete markers to the destination buckets\. For information about delete markers, see [How delete operations affect replication](replication-what-is-isnot-replicated.md#replication-delete-op)\. 
 **Note**  
-Permissions for the `s3:ReplicateObject` action on the *destination* bucket also allow replication of object tags, so you don't need to explicitly grant permission for the `s3:ReplicateTags` action\.
+Permissions for the `s3:ReplicateObject` action on the *destination* buckets also allow replication of object tags, so you don't need to explicitly grant permission for the `s3:ReplicateTags` action\.
   + `s3:GetObjectVersionTagging`—Permissions for this action on objects in the *source* bucket allow Amazon S3 to read object tags for replication \(see [Object tagging](object-tagging.md)\)\. If Amazon S3 doesn't have these permissions, it replicates the objects, but not the object tags\.
 
   For a list of Amazon S3 actions, see [Amazon S3 Actions](using-with-s3-actions.md)\.

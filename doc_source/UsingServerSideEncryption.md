@@ -1,4 +1,4 @@
-# Protecting Data Using Server\-Side Encryption with Amazon S3\-Managed Encryption Keys \(SSE\-S3\)<a name="UsingServerSideEncryption"></a>
+# Protecting data using server\-side encryption with Amazon S3\-managed encryption keys \(SSE\-S3\)<a name="UsingServerSideEncryption"></a>
 
 Server\-side encryption protects data at rest\. Amazon S3 encrypts each object with a unique key\. As an additional safeguard, it encrypts the key itself with a master key that it rotates regularly\. Amazon S3 server\-side encryption uses one of the strongest block ciphers available to encrypt your data, 256\-bit Advanced Encryption Standard \(AES\-256\)\.
 
@@ -55,4 +55,4 @@ When using a POST operation to upload an object, instead of providing the reques
 The AWS SDKs also provide wrapper APIs that you can use to request server\-side encryption\. You can also use the AWS Management Console to upload objects and request server\-side encryption\.
 
 ## More Info<a name="encryption-server-side-more-info"></a>
-+  [ Amazon S3 default encryption for S3 buckets](bucket-encryption.md) 
++  [ Setting default server\-side encryption behavior for Amazon S3 buckets](bucket-encryption.md) 

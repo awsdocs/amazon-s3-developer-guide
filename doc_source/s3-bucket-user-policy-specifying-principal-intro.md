@@ -35,7 +35,8 @@ The following is an example\.
 For information about how to find the canonical user ID for your account, see [Finding Your Account Canonical User ID](https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)\.
 
 **Important**  
-When you use a canonical user ID in a policy, Amazon S3 might change the canonical ID to the corresponding AWS account ID\. This does not impact the policy because both of these IDs identify the same account\. 
+When you use a canonical user ID in a policy, Amazon S3 might change the canonical ID to the corresponding AWS account ID\. This does not impact the policy because both of these IDs identify the same account\.   
+ 
 
 ## Grant Permissions to an IAM User<a name="s3-aws-user-permissions"></a>
 

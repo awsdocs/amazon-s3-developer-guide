@@ -12,7 +12,7 @@ For information about how to use this operation with the REST API, see `S3PutObj
 
 For an AWS Command Line Interface example of using this operation, see [Use S3 Batch Operations with S3 Object Lock legal hold](batch-ops-examples-java.md#batch-ops-examples-java-object-lock-legalhold)\. 
 
-For an AWS SDK for Java example, see [Use S3 Batch Operations to turn off S3 Object Lock legal hold](batch-ops-examples-cli.md#batch-ops-cli-object-lock-legalhold-example)\.
+For an AWS SDK for Java example, see [S3 Batch Operations examples using the AWS SDK for Java](batch-ops-examples-java.md)\.
 
 ## Restrictions and limitations<a name="batch-ops-legal-hold-restrictions"></a>
 + S3 Batch Operations does not make any bucket level changes\.

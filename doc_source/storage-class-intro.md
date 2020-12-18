@@ -1,5 +1,7 @@
 # Amazon S3 storage classes<a name="storage-class-intro"></a>
 
+
+
 Each object in Amazon S3 has a storage class associated with it\. For example, if you list the objects in an S3 bucket, the console shows the storage class for all the objects in the list\.
 
 Amazon S3 offers a range of storage classes for the objects that you store\. You choose a class depending on your use case scenario and performance access requirements\. All of these storage classes offer high durability\. 

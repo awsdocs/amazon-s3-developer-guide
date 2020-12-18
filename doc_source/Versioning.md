@@ -95,4 +95,4 @@ For more information, see the following topics:
 + [Examples of enabling bucket versioning](manage-versioning-examples.md)
 + [Managing objects in a versioning\-enabled bucket](manage-objects-versioned-bucket.md)
 + [Managing objects in a versioning\-suspended bucket](VersionSuspendedBehavior.md)
-+ [Significant Increases in HTTP 503 Responses to Amazon S3 Requests to Buckets with Versioning Enabled](troubleshooting.md#troubleshooting-by-symptom-increase-503-reponses) 
++ [Significant Increases in HTTP 503 Responses to Amazon S3 Requests to Buckets with Versioning Enabled](troubleshooting-by-symptom.md#troubleshooting-by-symptom-increase-503-reponses) 

@@ -3,11 +3,15 @@
 Amazon S3 Select and S3 Glacier Select support the following operators\.
 
 ## Logical Operators<a name="s3-glacier-select-sql-reference-loical-ops"></a>
+
+
 + `AND`
 + `NOT`
 + `OR`
 
 ## Comparison Operators<a name="s3-glacier-select-sql-reference-compare-ops"></a>
+
+
 + `<` 
 + `>` 
 + `<=`
@@ -17,6 +21,8 @@ Amazon S3 Select and S3 Glacier Select support the following operators\.
 + `!=`
 + `BETWEEN`
 + `IN` – For example: `IN ('a', 'b', 'c')`
+
+  
 
 ## Pattern Matching Operators<a name="s3-glacier-select-sql-reference-pattern"></a>
 + `LIKE`

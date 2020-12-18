@@ -168,10 +168,6 @@ For request routing reasons, the CNAME record must be defined exactly as shown i
 
 ## Limitations<a name="VirtualHostingLimitations"></a>
 
-**SSL**  
- Virtual hosted URLs are supported for non\-SSL \(HTTP\) requests only\.
-
-**SOAP**  
  SOAP support over HTTP is deprecated, but it is still available over HTTPS\. New Amazon S3 features will not be supported for SOAP\. We recommend that you use either the REST API or the AWS SDKs\. 
 
 ## Backward Compatibility<a name="VirtualHostingBackwardsCompatibility"></a>

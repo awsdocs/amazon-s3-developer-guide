@@ -187,6 +187,8 @@ This example puts an object into the awsexamplebucket1 bucket\.
 
 ### List<a name="RESTAuthenticationExamples-3"></a>
 
+
+
 This example lists the content of the awsexamplebucket1 bucket\.
 
 

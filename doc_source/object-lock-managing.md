@@ -37,6 +37,8 @@ You can use Amazon S3 event notifications to track access and changes to your Ob
 
 You can also use Amazon CloudWatch to generate alerts based on this data\. For information about CloudWatch, see the [Amazon CloudWatch Documentation](https://docs.aws.amazon.com/cloudwatch/index.html)\.
 
+
+
 ## Setting retention limits<a name="object-lock-managing-retention-limits"></a>
 
 You can set minimum and maximum allowable retention periods for a bucket using a bucket policy\. You do this using the `s3:object-lock-remaining-retention-days` condition key\. The following example shows a bucket policy that uses the `s3:object-lock-remaining-retention-days` condition key to set a maximum retention period of 10 days\.

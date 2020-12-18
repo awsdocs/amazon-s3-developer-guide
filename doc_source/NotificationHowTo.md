@@ -51,7 +51,7 @@ For more information and an example of using Amazon S3 notifications with AWS La
 
 ## How to enable event notifications<a name="how-to-enable-disable-notification-intro"></a>
 
-Enabling notifications is a bucket\-level operation; that is, you store notification configuration information in the *notification* subresource associated with a bucket\. You can use any of the following methods to manage notification configuration:
+Enabling notifications is a bucket\-level operation; that is, you store notification configuration information in the *notification* subresource associated with a bucket\. After creating or changing the bucket notification configuration, typically you need to wait 5 minutes for the changes to take effect\. You can use any of the following methods to manage notification configuration:
 + **Using the Amazon S3 console**
 
   The console UI enables you to set a notification configuration on a bucket without having to write any code\. For more information, see [How Do I Enable and Configure Event Notifications for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\.

@@ -33,6 +33,8 @@ The following are some variations you might use:
   11. request.ResponseHeaderOverrides = responseHeaders;
   ```
 
+
+
 **Example**  
 The following C\# code example retrieves an object from an Amazon S3 bucket\. From the response, the example reads the object data using the `GetObjectResponse.ResponseStream` property\. The example also shows how you can use the `GetObjectResponse.Metadata` collection to read object metadata\. If the object you retrieve has the `x-amz-meta-title` metadata, the code prints the metadata value\.  
 For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.  

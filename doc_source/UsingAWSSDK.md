@@ -1,5 +1,7 @@
 # Using the AWS SDKs, CLI, and Explorers<a name="UsingAWSSDK"></a>
 
+
+
 You can use the AWS SDKs when developing applications with Amazon S3\. The AWS SDKs simplify your programming tasks by wrapping the underlying REST API\. The AWS Mobile SDKs and the AWS Amplify JavaScript library are also available for building connected mobile and web applications using AWS\. 
 
 This section provides an overview of using AWS SDKs for developing Amazon S3 applications\. This section also describes how you can test the AWS SDK code examples provided in this guide\. 
@@ -133,6 +135,8 @@ To get the version information, use the `Get-Module` cmdlet:
           Get-Module –Name AWSPowershell
           Get-Module –Name AWSPowershell.NetCore
 ```
+
+
 
 To update the 3\.3\.0\.0 version, use the `Update-Module` cmdlet: 
 

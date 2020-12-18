@@ -33,6 +33,8 @@ In order to determine whether the requester has permission to perform the specif
 
    1. **Object context** – If the request is for an object, Amazon S3 evaluates the subset of policies owned by the object owner\. 
 
+      
+
  The following sections describe in detail and provide examples:
 + [How Amazon S3 Authorizes a Request for a Bucket Operation ](access-control-auth-workflow-bucket-operation.md)
 + [How Amazon S3 Authorizes a Request for an Object Operation ](access-control-auth-workflow-object-operation.md)

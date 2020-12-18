@@ -20,6 +20,8 @@ The following are some things you should know before trying to access a bucket o
 **Note**  
 If you experience issues related to the presence of IPv6 addresses in log files, contact [AWS Support](https://aws.amazon.com/premiumsupport/)\.
 
+
+
 ### Making requests over IPv6 by using dual\-stack endpoints<a name="ipv6-access-api"></a>
 
 You make requests with Amazon S3 API calls over IPv6 by using dual\-stack endpoints\. The Amazon S3 API operations work the same way whether you're accessing Amazon S3 over IPv6 or over IPv4\. Performance should be the same too\.
