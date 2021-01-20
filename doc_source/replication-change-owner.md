@@ -85,7 +85,7 @@ The owner of the destination bucket must grant the owner of the source bucket pe
 {
     "Sid":"1",
     "Effect":"Allow",
-    "Principal":{"AWS":"source-bucket-account-id"},
+    "Principal":{"AWS":"source-bucket-account-id/source-account-IAM-role"},
     "Action":["s3:ObjectOwnerOverrideToBucketOwner"],
     "Resource":"arn:aws:s3:::destination-bucket/*"
 }
@@ -116,4 +116,6 @@ When you configure the ownership override option, the following considerations a
 
      
 
+
     Amazon S3 replicates new objects that appear in the source bucket and the associated ACLs to the destination buckets\. For objects that were replicated before you removed the owner override, Amazon S3 doesn't replicate the ACLs because the object ownership change that Amazon S3 made remains in effect\. That is, ACLs put on the object version that were replicated when the owner override was set continue to be not replicated\.
+
