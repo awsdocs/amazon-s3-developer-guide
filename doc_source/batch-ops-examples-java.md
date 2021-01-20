@@ -513,7 +513,7 @@ The following example builds on the previous examples of creating a trust policy
 
 ```
 public String createComplianceRetentionJob(final AWSS3ControlClient awss3ControlClient) throws ParseException {
-    final String manifestObjectArn = "arn:aws:s3:::ManifestBucket/complaince-objects-manifest.csv";
+    final String manifestObjectArn = "arn:aws:s3:::ManifestBucket/compliance-objects-manifest.csv";
     final String manifestObjectVersionId = "your-object-version-Id";
 
     final JobManifestLocation manifestLocation = new JobManifestLocation()
@@ -568,11 +568,13 @@ public String createComplianceRetentionJob(final AWSS3ControlClient awss3Control
 }
 ```
 
+
+
 The following example extends the `COMPLIANCE` mode's `retain until date` to January 15, 2020\.
 
 ```
 public String createExtendComplianceRetentionJob(final AWSS3ControlClient awss3ControlClient) throws ParseException {
-    final String manifestObjectArn = "arn:aws:s3:::ManifestBucket/complaince-objects-manifest.csv";
+    final String manifestObjectArn = "arn:aws:s3:::ManifestBucket/compliance-objects-manifest.csv";
     final String manifestObjectVersionId = "15ad5ba069e6bbc465c77bf83d541385";
 
     final JobManifestLocation manifestLocation = new JobManifestLocation()
@@ -631,6 +633,8 @@ public String createExtendComplianceRetentionJob(final AWSS3ControlClient awss3C
 
 The following example builds on the previous example of creating a trust policy, and setting S3 Batch Operations and S3 Object Lock configuration permissions\. It shows how to apply S3 Object Lock retention governance with the `retain until date` set to January 30, 2020 across multiple objects\. It creates a Batch Operations job that uses the manifest bucket and reports the results in the reports bucket\.
 
+
+
 ```
 public String createGovernanceRetentionJob(final AWSS3ControlClient awss3ControlClient) throws ParseException {
     final String manifestObjectArn = "arn:aws:s3:::ManifestBucket/governance-objects-manifest.csv";
@@ -687,6 +691,8 @@ public String createGovernanceRetentionJob(final AWSS3ControlClient awss3Control
     return result.getJobId();
 }
 ```
+
+
 
 The following example builds on the previous example of creating a trust policy, and setting S3 Batch Operations and S3 Object Lock configuration permissions\. It shows how to bypass retention governance across multiple objects and creates a Batch Operations job that uses the manifest bucket and reports the results in the reports bucket\.
 

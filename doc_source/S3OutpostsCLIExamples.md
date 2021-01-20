@@ -45,6 +45,8 @@ The following S3 on Outposts example gets a bucket using the AWS CLI\.
 aws s3control get-bucket --account-id 123456789012 --bucket "arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/bucket/example-outpost-bucket"
 ```
 
+
+
 ### Get a list of S3 on Outposts buckets<a name="S3OutpostsListRegionalBucketCLI"></a>
 
 The following AWS CLI example gets a list of buckets in an Outpost\. 
@@ -52,6 +54,8 @@ The following AWS CLI example gets a list of buckets in an Outpost\.
 ```
 aws s3control list-regional-buckets --account-id 123456789012 --outpost-id op-01ac5d28a6a232904
 ```
+
+
 
 ### Create an access point for an S3 on Outposts bucket<a name="S3OutpostsCreateAccessPointCLI"></a>
 
@@ -61,6 +65,8 @@ The following AWS CLI example creates an access point for an Outposts bucket\.
 aws s3control create-access-point --account-id 123456789012 --name example-access-point --bucket "arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/bucket/example-outpost-bucket" --vpc-configuration VpcId=example-vpc-12345
 ```
 
+
+
 ### Get an access point for an S3 on Outposts bucket<a name="S3OutpostsGetAccessPointCLI"></a>
 
 The following AWS CLI example gets an access point for an Outposts bucket\.
@@ -69,6 +75,8 @@ The following AWS CLI example gets an access point for an Outposts bucket\.
 aws s3control get-access-point --account-id 123456789012 --name arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/accesspoint/example-access-point
 ```
 
+
+
 ### List access points for an Outpost<a name="S3OutpostsListAccessPointCLI"></a>
 
 The following AWS CLI example List access points for an Outposts bucket\.
@@ -76,6 +84,8 @@ The following AWS CLI example List access points for an Outposts bucket\.
 ```
 aws s3control list-access-points --account-id 123456789012 --bucket arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/bucket/example-outpost-bucket
 ```
+
+
 
 ### Put a lifecycle configuration for an S3 on Outposts bucket<a name="S3OutpostsPutBucketLifecycleConfigurationCLI"></a>
 
@@ -118,6 +128,8 @@ The following AWS CLI example puts an lifecycle configruations for an Outposts b
    aws s3control put-bucket-lifecycle-configuration --account-id 123456789012 --bucket arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/bucket/example-outpost-bucket --lifecycle-configuration file://lifecycle1.json
    ```
 
+
+
 ### Get a lifecycle configuration for an S3 on Outposts bucket<a name="S3OutpostsGetBucketLifecycleConfigurationCLI"></a>
 
 The following AWS CLI example gets an access point for an Outposts bucket\.
@@ -125,6 +137,8 @@ The following AWS CLI example gets an access point for an Outposts bucket\.
 ```
 aws s3control get-bucket-lifecycle-configuration --account-id 123456789012 --bucket arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/bucket/example-outpost-bucket
 ```
+
+
 
 ### Put a policy on an S3 on Outposts bucket<a name="S3OutpostsPutBucketPolicyCLI"></a>
 
@@ -156,9 +170,13 @@ The following AWS CLI example puts policy for an Outposts bucket\.
    aws s3control put-bucket-policy --account-id 123456789012 --bucket arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/bucket/example-outpost-bucket --policy file://policy1.json
    ```
 
+
+
 ### Get a policy for an S3 on Outposts bucket<a name="S3OutpostsGetBucketPolicyCLI"></a>
 
 The following AWS CLI example gets a policy for an Outposts bucket\.
+
+
 
 ```
 aws s3control get-bucket-policy --account-id 123456789012 --bucket arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/bucket/example-outpost-bucket
@@ -194,9 +212,13 @@ The following AWS CLI example puts policy for an Outposts bucket\.
    aws s3control put-access-point-policy --account-id 123456789012 --name arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/accesspoint/example-access-point --policy file://appolicy1.json
    ```
 
+
+
 ### Get a policy for an S3 on Outposts access point<a name="S3OutpostsGetAccessPointPolicyCLI"></a>
 
 The following AWS CLI example gets a policy for an Outposts bucket\.
+
+
 
 ```
 aws s3control get-access-point-policy --account-id 123456789012 --name arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/accesspoint/example-access-point
@@ -217,6 +239,8 @@ The following AWS CLI example lists endpoints for an Outpost\.
 ```
 aws s3outposts list-endpoints 
 ```
+
+
 
 ### Delete an endpoint on an Outpost<a name="S3OutpostsDeleteEndpointCLI"></a>
 
@@ -248,8 +272,10 @@ aws s3api put-object --bucket arn:aws:s3-outposts:<your-region>:123456789012:out
 The following S3 on Outposts example gets a bucket using the AWS CLI\. 
 
 ```
-aws s3api get-object --bucket arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/accesspoint/example-access-point key testkey sample-object.xml
+aws s3api get-object --bucket arn:aws:s3-outposts:<your-region>:123456789012:outpost/op-01ac5d28a6a232904/accesspoint/example-access-point --key testkey sample-object.xml
 ```
+
+
 
 ### List objects in an S3 on Outposts bucket<a name="S3OutpostsListObjectsCLI"></a>
 

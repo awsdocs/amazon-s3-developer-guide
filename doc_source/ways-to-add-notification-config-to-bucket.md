@@ -23,7 +23,7 @@ You can do the following with this walkthrough:
 
    Using the Amazon SQS console, you create an SQS queue\. You can access any messages Amazon S3 sends to the queue programmatically\. But for this walkthrough, you verify notification messages in the console\. 
 
-   You attach an access policy to the topic to grant Amazon S3 permission to post messages\.
+   You attach an access policy to the queue to grant Amazon S3 permission to post messages\.
 
 1. Create an Amazon SNS topic\.
 

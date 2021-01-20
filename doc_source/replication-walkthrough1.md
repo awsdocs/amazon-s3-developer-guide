@@ -20,6 +20,8 @@ The profile you use for this exercise must have the necessary permissions\. For 
 
 1. Create a *source* bucket and enable versioning on it\. The following code creates a *source* bucket in the US East \(N\. Virginia\) \(us\-east\-1\) Region\.
 
+   
+
    ```
    aws s3api create-bucket \
    --bucket source \
@@ -37,6 +39,8 @@ The profile you use for this exercise must have the necessary permissions\. For 
 1. Create a *destination* bucket and enable versioning on it\. The following code creates a *destination* bucket in the US West \(Oregon\) \(us\-west\-2\) Region\. 
 **Note**  
 To set up replication configuration when both source and destination buckets are in the same AWS account, you use the same profile\. This example uses `acctA`\. To test replication configuration when the buckets are owned by different AWS accounts, you specify different profiles for each\. This example uses the `acctB` profile for the destination bucket\.
+
+   
 
    ```
    aws s3api create-bucket \
@@ -193,6 +197,8 @@ The amount of time it takes for Amazon S3 to replicate an object depends on the 
       + In object **properties**, that the **Replication Status** is set to `Replica` \(identifying this as a replica object\)\.
       + In object **properties**, that the permission section shows no permissions\. This means that the replica is still owned by the *source* bucket owner, and the *destination* bucket owner has no permission on the object replica\. You can add optional configuration to tell Amazon S3 to change the replica ownership\. For an example, see [Example 3: Changing the replica owner when the source and destination buckets are owned by different accounts](replication-walkthrough-3.md)\.   
 ![\[Screen shot of object properties showing the replication status and permissions.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/crr-wt2-10.png)
+
+       
 
    1. Update an object's ACL in the *source* bucket and verify that changes appear in the *destination* bucket\.
 

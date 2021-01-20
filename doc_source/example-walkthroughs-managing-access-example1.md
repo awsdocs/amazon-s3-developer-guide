@@ -24,6 +24,8 @@ For this example, you will need an AWS account\. Instead of using the root crede
 | --- | --- | --- | 
 |  *1111\-1111\-1111*  |  Account A  |  AccountAadmin  | 
 
+
+
 All the tasks of creating users and granting permissions are done in the AWS Management Console\. To verify permissions, the walkthrough uses the command line tools, AWS Command Line Interface \(CLI\) and AWS Tools for Windows PowerShell, to verify the permissions, so you don't need to write any code\.
 
 ## Step 0: Preparing for the walkthrough<a name="grant-permissions-to-user-in-your-account-step0"></a>

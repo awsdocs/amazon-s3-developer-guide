@@ -6,14 +6,14 @@ When enabled, S3 replication metrics publish the following metrics to Amazon Clo
 
 **Bytes Pending Replication**—The total number of bytes of objects pending replication for a given replication rule\.
 
-**Replication Latency**—The maximum number of seconds by which the replication destination bucket is behind the source bucket for a given replication rule\.
+**Replication Latency**—The maximum number of seconds by which the replication destination buckets are behind the source bucket for a given replication rule\.
 
 **Operations Pending Replication**—The number of operations pending replication for a given replication rule\. Operations include objects, delete markers, tags, ACLs, and Object Lock operations\.
 
 **Note**  
 S3 replication metrics are billed at the same rate as Amazon CloudWatch custom metrics\. For information, see [Amazon CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/)\.
 
-S3 replication metrics are turned on automatically when you enable S3 Replication Time Control \(S3 RTC\)\. S3 RTC includes other features such as a service level agreement \(SLA\) and notifications for missed thresholds\. For more information, see [Meet compliance requirements using S3 RTC](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-time-control.html)
+S3 replication metrics are turned on automatically when you enable S3 Replication Time Control \(S3 RTC\)\. S3 RTC includes other features such as a service level agreement \(SLA\) and notifications for missed thresholds\. For more information, see [Meet compliance requirements using S3 RTC](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-time-control.html)\.
 
 **Topics**
 + [Enabling S3 replication metrics](#enabling-replication-metrics)
@@ -57,4 +57,4 @@ For instructions on viewing metrics, see [How do I view replication metrics?](ht
 
 ## Receiving replication failure events with Amazon S3 event notifications<a name="replication-metrics-events"></a>
 
-Amazon Amazon S3 event notifications can notify you in the rare instance when objects do not replicate to their destination Region\. Amazon S3 events are available through Amazon Simple Queue Service \(Amazon SQS\), Amazon Simple Notification Service \(Amazon SNS\), or AWS Lambda\. For more information, see [Configuring Amazon S3 event notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)\.
+Amazon S3 event notifications can notify you in the rare instance when objects do not replicate to their destination Region\. Amazon S3 events are available through Amazon Simple Queue Service \(Amazon SQS\), Amazon Simple Notification Service \(Amazon SNS\), or AWS Lambda\. For more information, see [Configuring Amazon S3 event notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)\.

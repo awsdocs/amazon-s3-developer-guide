@@ -152,6 +152,7 @@ LIMIT 10;
 ```
 
 **Example — select all requesters that are sending signature version 2 traffic**  
+   
 
 ```
 SELECT useridentity.arn, Count(requestid) as RequestCount

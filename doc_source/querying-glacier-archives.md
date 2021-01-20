@@ -1,4 +1,4 @@
-# Querying Archived Objects<a name="querying-glacier-archives"></a>
+# Querying archived objects programmatically<a name="querying-glacier-archives"></a>
 
 With the select type of [POST Object restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html), you can perform filtering operations using simple Structured Query Language \(SQL\) statements directly on your data that is archived by Amazon S3 to S3 Glacier\. When you provide an SQL query for an archived object, select runs the query in place and writes the output results to an S3 bucket\. You can run queries and custom analytics on your data that is stored in S3 Glacier, without having to restore your entire object to Amazon S3\.
 
@@ -39,6 +39,8 @@ SELECT * FROM object
 ```
 
 S3 Glacier Select supports a subset of the ANSI SQL language\. It supports common filtering SQL clauses like `SELECT`, `FROM`, and `WHERE`\. It does not support `SUM`, `COUNT`, `GROUP BY`, `JOINS`, `DISTINCT`, `UNION`, `ORDER BY`, and `LIMIT`\. For more information about support for SQL, see [SQL Reference for Amazon S3 Select and S3 Glacier Select](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html) in the *Amazon Simple Storage Service Developer Guide*\.
+
+
 
 ### Select Output<a name="glacier-select-output"></a>
 
@@ -85,6 +87,8 @@ You can specify one of the following data access tiers when querying an archived
 + **`Bulk`** – The lowest\-cost data access option in S3 Glacier, enabling you to retrieve large amounts, even petabytes, of data inexpensively in a day\. `Bulk` access typically finishes within 5–12 hours\. 
 
 To make an `Expedited`, `Standard`, or `Bulk` request, set the `Tier` request element in the [POST Object restore](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html) REST API request to the option you want, or the equivalent in the AWS CLI or AWS SDKs\. For `Expedited` access, there is no need to designate whether an expedited retrieval is On\-Demand or Provisioned\. If you purchased provisioned capacity, all `Expedited` retrievals are automatically served through your provisioned capacity\. For information about tier pricing, see [S3 Glacier Pricing](http://aws.amazon.com/glacier/pricing/)\.
+
+
 
 ### Provisioned Capacity<a name="querying-glacier-archives-expedited-capacity"></a>
 

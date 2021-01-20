@@ -3,33 +3,16 @@
 This section describes how to troubleshoot Amazon S3 and explains how to get request IDs that you'll need when you contact AWS Support\.
 
 **Topics**
-+ [Troubleshooting Amazon S3 by Symptom](#troubleshooting-by-symptom)
++ [Troubleshooting Amazon S3 by Symptom](troubleshooting-by-symptom.md)
 + [Getting Amazon S3 Request IDs for AWS Support](#get-request-ids)
 + [Related Topics](#related-troubleshooting-topics)
 
-## Troubleshooting Amazon S3 by Symptom<a name="troubleshooting-by-symptom"></a>
+For other troubleshooting and support topics, see the following:
++ [Troubleshooting CORS issues](cors-troubleshooting.md)
++ [Handling REST and SOAP errors](HandlingErrors.md)
++ [AWS Support Documentation](https://aws.amazon.com/documentation/aws-support/)
 
-The following topics list symptoms to help you troubleshoot some of the issues that you might encounter when working with Amazon S3\.
-
-**Topics**
-+ [Significant Increases in HTTP 503 Responses to Requests to Buckets with Versioning Enabled](#troubleshooting-by-symptom-increase-503-reponses)
-+ [Unexpected Behavior When Accessing Buckets Set with CORS](#troubleshooting-by-symptom-increase)
-
-### Significant Increases in HTTP 503 Responses to Amazon S3 Requests to Buckets with Versioning Enabled<a name="troubleshooting-by-symptom-increase-503-reponses"></a>
-
-If you notice a significant increase in the number of HTTP 503\-slow down responses received for Amazon S3 PUT or DELETE object requests to a bucket that has versioning enabled, you might have one or more objects in the bucket for which there are millions of versions\. When you have objects with millions of versions, Amazon S3 automatically throttles requests to the bucket to protect the customer from an excessive amount of request traffic, which could potentially impede other requests made to the same bucket\. 
-
-To determine which S3 objects have millions of versions, use the Amazon S3 inventory tool\. The inventory tool generates a report that provides a flat file list of the objects in a bucket\. For more information, see [ Amazon S3 inventory](storage-inventory.md)\.
-
-The Amazon S3 team encourages customers to investigate applications that repeatedly overwrite the same S3 object, potentially creating millions of versions for that object, to determine whether the application is working as intended\. If you have a use case that requires millions of versions for one or more S3 objects, contact the AWS Support team at [AWS Support](https://console.aws.amazon.com/support/home) to discuss your use case and to help us assist you in determining the optimal solution for your use case scenario\.
-
-To help prevent this issue, consider the following best practices:
-+ Enable a lifecycle management "NonCurrentVersion" expiration policy and an "ExpiredObjectDeleteMarker" policy to expire the previous versions of objects and delete markers without associated data objects in the bucket\. 
-+ Keep your directory structure as flat as possible and make each directory name unique\.
-
-### Unexpected Behavior When Accessing Buckets Set with CORS<a name="troubleshooting-by-symptom-increase"></a>
-
- If you encounter unexpected behavior when accessing buckets set with the cross\-origin resource sharing \(CORS\) configuration, see [Troubleshooting CORS issues](cors-troubleshooting.md)\.
+For troubleshooting information regarding third\-party tools, see [Getting Amazon S3 request IDs](https://forums.aws.amazon.com/thread.jspa?threadID=182409) in the AWS Developer Forums\.
 
 ## Getting Amazon S3 Request IDs for AWS Support<a name="get-request-ids"></a>
 
@@ -99,7 +82,7 @@ S3ResponseMetadata md = s3.getCachedResponseMetadata(req);
 System.out.println("Host ID: " + md.getHostId() + " RequestID: " + md.getRequestId());
 ```
 
-Alternatively, you can use verbose logging of every Java request and response\. For more information, see [Verbose Wire Logging](https://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/java-dg-logging.html#sdk-net-logging-verbose) in the Logging AWS SDK for Java Calls topic in the *AWS SDK for Java Developer Guide*\.
+Alternatively, you can use verbose logging of every Java request and response\. For more information, see [Verbose Wire Logging](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/java-dg-logging.html#sdk-net-logging-verbose) in the Logging AWS SDK for Java Calls topic in the *AWS SDK for Java Developer Guide*\.
 
 #### Using the AWS SDK for \.NET to Obtain Request IDs<a name="net-request-id"></a>
 

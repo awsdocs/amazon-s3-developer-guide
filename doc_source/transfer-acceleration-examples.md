@@ -134,6 +134,8 @@ public class TransferAcceleration {
 
 ## Using Transfer Acceleration from the AWS SDK for \.NET<a name="transfer-acceleration-examples-dotnet"></a>
 
+
+
 The following example shows how to use the AWS SDK for \.NET to enable Transfer Acceleration on a bucket\. For instructions on how to create and test a working sample, see [Running the Amazon S3 \.NET Code Examples](UsingTheMPDotNetAPI.md#TestingDotNetApiSamples)\.
 
 **Example**  
@@ -194,6 +196,8 @@ namespace Amazon.DocSamples.S3
 
 When uploading an object to a bucket that has Transfer Acceleration enabled, you specify using acceleration endpoint at the time of creating a client as shown:
 
+
+
 ```
 var client = new AmazonS3Client(new AmazonS3Config
             {
@@ -201,6 +205,8 @@ var client = new AmazonS3Client(new AmazonS3Config
                 UseAccelerateEndpoint = true
             }
 ```
+
+
 
 ## Using Transfer Acceleration from the AWS SDK for JavaScript<a name="transfer-acceleration-examples-javascript"></a>
 

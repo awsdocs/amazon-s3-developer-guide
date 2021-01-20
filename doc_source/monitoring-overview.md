@@ -15,3 +15,4 @@ Monitoring is an important part of maintaining the reliability, availability, an
 + [Logging with Amazon S3](logging-with-S3.md)
 + [Logging Amazon S3 API calls using AWS CloudTrail](cloudtrail-logging.md)
 + [Using AWS CloudTrail to identify Amazon S3 requests](cloudtrail-request-identification.md)
++ [Tracing Amazon S3 requests using AWS X\-Ray](tracing_requests_using_xray.md)

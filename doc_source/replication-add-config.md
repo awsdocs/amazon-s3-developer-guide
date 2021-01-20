@@ -38,9 +38,9 @@ The following sections provide additional information\.
 
 Each rule must include the rule's status and priority, and indicate whether to replicate delete markers\. 
 + `Status` indicates whether the rule is enabled or disabled\. If a rule is disabled, Amazon S3 doesn't perform the actions specified in the rule\. 
-+ `Priority` indicates which rule has priority when multiple rules apply to an object\. The higher the number, the higher the priority\.
++ `Priority` indicates which rule has precedence whenever two or more replication rules conflict\. Amazon S3 will attempt to replicate objects according to all replication rules\. However, if there are two or more rules with the same destination bucket, then objects will be replicated according to the rule with the highest priority\. The higher the number, the higher the priority\.
 
-In the destination configuration, you must provide the name of the bucket where you want Amazon S3 to replicate objects\. 
+In the destination configuration, you must provide the name of the bucket or buckets where you want Amazon S3 to replicate objects\. 
 
 The following code shows the minimum requirements for a rule\.
 
@@ -131,7 +131,7 @@ To specify a rule filter with a combination of a key prefix and object tags, use
 
 ## Additional destination configurations<a name="replication-config-optional-dest-config"></a>
 
-In the destination configuration, you specify the bucket where you want Amazon S3 to replicate objects\. You can set configurations to replicate objects from one source bucket to one destination bucket\. If you add multiple rules in a replication configuration, all of the rules must identify the same destination bucket\. 
+In the destination configuration, you specify the bucket or buckets where you want Amazon S3 to replicate objects\. You can set configurations to replicate objects from one source bucket to one or more destination buckets\. 
 
 ```
 ...
@@ -150,6 +150,80 @@ You can add the following options in the `<Destination>` element:
          <Bucket>arn:aws:s3:::destinationbucket</Bucket>
          <StorageClass>storage-class</StorageClass>
   </Destination>
+  ...
+  ```
++ You can add multiple destination buckets in a single replication configuration, as follows\.
+
+  ```
+  ...
+  <Rule>
+      <ID>Rule-1</ID>
+      <Status>rule-Enabled-or-Disabled</Status>
+      <Priority>integer</Priority>
+      <DeleteMarkerReplication>
+         <Status>Enabled-or-Disabled</Status>
+      </DeleteMarkerReplication>
+      <Destination>        
+         <Bucket>arn:aws:s3:::DOC-EXAMPLE-BUCKET1</Bucket> 
+      </Destination>    
+  </Rule>
+  <Rule>
+      <ID>Rule-2</ID>
+      <Status>rule-Enabled-or-Disabled</Status>
+      <Priority>integer</Priority>
+      <DeleteMarkerReplication>
+         <Status>Enabled-or-Disabled</Status>
+      </DeleteMarkerReplication>
+      <Destination>        
+         <Bucket>arn:aws:s3:::DOC-EXAMPLE-BUCKET2</Bucket> 
+      </Destination>    
+  </Rule>
+  ...
+  ```
++ When adding multiple destination buckets in a single replication configuration, you can specify different parameters for each replication rule, as follows\.
+
+  ```
+  ...
+  <Rule>
+      <ID>Rule-1</ID>
+      <Status>rule-Enabled-or-Disabled</Status>
+      <Priority>integer</Priority>
+      <DeleteMarkerReplication>
+         <Status>Disabled</Status>
+      </DeleteMarkerReplication>
+        <Metrics>
+      <Status>Enabled</Status>
+      <EventThreshold>
+        <Minutes>15</Minutes> 
+      </EventThreshold>
+    </Metrics>
+      <Destination>        
+         <Bucket>arn:aws:s3:::DOC-EXAMPLE-BUCKET1</Bucket> 
+      </Destination>    
+  </Rule>
+  <Rule>
+      <ID>Rule-2</ID>
+      <Status>rule-Enabled-or-Disabled</Status>
+      <Priority>integer</Priority>
+      <DeleteMarkerReplication>
+         <Status>Enabled</Status>
+      </DeleteMarkerReplication>
+        <Metrics>
+      <Status>Enabled</Status>
+      <EventThreshold>
+        <Minutes>15</Minutes> 
+      </EventThreshold>
+    </Metrics>
+    <ReplicationTime>
+      <Status>Enabled</Status>
+      <Time>
+        <Minutes>15</Minutes>
+      </Time>
+    </ReplicationTime>
+      <Destination>        
+         <Bucket>arn:aws:s3:::DOC-EXAMPLE-BUCKET2</Bucket> 
+      </Destination>    
+  </Rule>
   ...
   ```
 + When source and destination buckets aren't owned by the same accounts, you can change the ownership of the replica to the AWS account that owns the destination bucket by adding the `AccessControlTranslation` element\.
@@ -186,12 +260,14 @@ Only a valid value of `<Minutes>15</Minutes>` is accepted for `EventThreshold` a
       <Time>
         <Minutes>15</Minutes>
       </Time>
-    <ReplicationTime>
+    </ReplicationTime>
   </Destination>
   ...
   ```
 
   For more information, see [Meeting compliance requirements using S3 Replication Time Control \(S3 RTC\)](replication-time-control.md)\. For API examples, see [PutBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html) in the *Amazon Simple Storage Service API Reference*\.
+
+  
 + Your source bucket might contain objects that were created with server\-side encryption using keys stored in AWS KMS\. By default, Amazon S3 doesn't replicate these objects\. You can optionally direct Amazon S3 to replicate these objects\. First, explicitly opt into this feature by adding the `SourceSelectionCriteria` element, and then provide the AWS KMS CMK \(for the AWS Region of the destination bucket\) to use for encrypting object replicas\. 
 
   ```
@@ -220,7 +296,7 @@ To get started, you can add the following example replication configurations to 
 To add a replication configuration to a bucket, you must have the `iam:PassRole` permission\. This permission allows you to pass the IAM role that grants Amazon S3 replication permissions\. You specify the IAM role by providing the Amazon Resource Name \(ARN\) that is used in the `Role` element in the replication configuration XML\. For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\.
 
 **Example 1: Replication configuration with one rule**  
-The following basic replication configuration specifies one rule\. The rule specifies an IAM role that Amazon S3 can assume and a destination bucket for object replicas\. The rule `Status` indicates that the rule is in effect\.  
+The following basic replication configuration specifies one rule\. The rule specifies an IAM role that Amazon S3 can assume and a single destination bucket for object replicas\. The rule `Status` indicates that the rule is in effect\.  
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -310,7 +386,8 @@ You can specify a storage class for the object replicas as follows\.
   </Rule>
 </ReplicationConfiguration>
 ```
-You can specify any storage class that Amazon S3 supports\.
+You can specify any storage class that Amazon S3 supports\.  
+ 
 
 **Example 2: Replication configuration with two rules**  
 
@@ -319,7 +396,7 @@ In the following replication configuration:
 + Each rule filters on a different key prefix so that each rule applies to a distinct subset of objects\. Amazon S3 replicates objects with key names `Tax/doc1.pdf` and `Project/project1.txt`, but it doesn't replicate objects with the key name `PersonalDoc/documentA`\. 
 +  Rule priority is irrelevant because the rules apply to two distinct sets of objects\. The next example shows what happens when rule priority is applied\. 
 + The second rule specifies a storage class for object replicas\. Amazon S3 uses the specified storage class for those object replicas\.
-+ Both rules specify the same destination bucket\. You can specify only one destination bucket, regardless of how many rules you specify\.
+   
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -337,7 +414,7 @@ In the following replication configuration:
     </Filter>
     <Status>Enabled</Status>
     <Destination>
-      <Bucket>arn:aws:s3:::destinationbucket</Bucket>
+      <Bucket>arn:aws:s3:::DOC-EXAMPLE-BUCKET1</Bucket>
     </Destination>
      ...
   </Rule>
@@ -352,7 +429,7 @@ In the following replication configuration:
     </Filter>
     <Status>Enabled</Status>
     <Destination>
-      <Bucket>arn:aws:s3:::destinationbucket</Bucket>
+      <Bucket>arn:aws:s3:::DOC-EXAMPLE-BUCKET1</Bucket>
      <StorageClass>STANDARD_IA</StorageClass>
     </Destination>
      ...
@@ -380,7 +457,7 @@ In this configuration, the two rules specify filters with overlapping key prefix
         <Prefix>star</Prefix>
     </Filter>
     <Destination>
-      <Bucket>arn:aws:s3:::destinationbucket</Bucket>
+      <Bucket>arn:aws:s3:::DOC-EXAMPLE-BUCKET1</Bucket>
     </Destination>
   </Rule>
   <Rule>
@@ -393,7 +470,7 @@ In this configuration, the two rules specify filters with overlapping key prefix
         <Prefix>starship</Prefix>
     </Filter>    
     <Destination>
-      <Bucket>arn:aws:s3:::destinationbucket</Bucket>
+      <Bucket>arn:aws:s3:::DOC-EXAMPLE-BUCKET1</Bucket>
     </Destination>
   </Rule>
 </ReplicationConfiguration>
@@ -408,7 +485,7 @@ For more information about the XML structure of replication configuration, see [
 
 The latest version of the replication configuration XML is V2\. XML V2 replication configurations are those that contain the `Filter` element for rules, and rules that specify S3 Replication Time Control \(S3 RTC\)\. In V2 replication configurations, Amazon S3 doesn't replicate delete markers for tag\-based rules\. Therefore, you must set the `DeleteMarkerReplication` element to `Disabled` if using a tag\-based V2 rule\.
 
-To see your replication configuration version you can use the `GetBucketReplication` API\. For more information see, [GetBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html) in the *Amazon Simple Storage Service API Reference*\. 
+To see your replication configuration version, you can use the `GetBucketReplication` API\. For more information see, [GetBucketReplication](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html) in the *Amazon Simple Storage Service API Reference*\. 
 
  For backward compatibility, Amazon S3 continues to support the XML V1 replication configuration\. If you have used XML V1 replication configuration, consider the following issues that affect backward compatibility:
 + Replication configuration XML V2 includes the `Filter` element for rules\. With the `Filter` element, you can specify object filters based on the object key prefix, tags, or both to scope the objects that the rule applies to\. Replication configuration XML V1 supported filtering based only on the key prefix\. In that case, you add the `Prefix` directly as a child element of the `Rule` element, as in the following example\.
@@ -420,13 +497,13 @@ To see your replication configuration version you can use the `GetBucketReplicat
     <Rule>
       <Status>Enabled</Status>
       <Prefix>key-prefix</Prefix>
-      <Destination><Bucket>arn:aws:s3:::destinationbucket</Bucket></Destination>
+      <Destination><Bucket>arn:aws:s3:::DOC-EXAMPLE-BUCKET1</Bucket></Destination>
   
     </Rule>
   </ReplicationConfiguration>
   ```
 
-  For backward compatibility, `Amazon S3 ` continues to support the V1 configuration\. 
+  For backward compatibility, `Amazon S3` continues to support the V1 configuration\. 
 + When you delete an object from your source bucket without specifying an object version ID, Amazon S3 adds a delete marker\. If you use V1 of the replication configuration XML, Amazon S3 replicates delete markers that resulted from user actions\. In other words, if the user deleted the object, and not if Amazon S3 deleted it because the object expired as part of lifecycle action\.
 
   ```
@@ -439,8 +516,10 @@ To see your replication configuration version you can use the `GetBucketReplicat
              <Status>Disabled</Status>
           </DeleteMarkerReplication>        
           <Destination>        
-             <Bucket>arn:aws:s3:::bucket-name</Bucket> 
+             <Bucket>arn:aws:s3:::DOC-EXAMPLE-BUCKET1</Bucket> 
           </Destination>    
       </Rule>
   ...
   ```
+
+ 

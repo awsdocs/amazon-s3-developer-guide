@@ -8,6 +8,8 @@ You can use S3 Batch Operations to create a PUT copy job to copy objects to a di
 
 ## Using an inventory report delivered to the destination account to copy objects across AWS accounts<a name="specify-batchjob-manifest-xaccount-inventory"></a>
 
+
+
 You can use Amazon S3 Inventory to deliver the inventory report to the destination account for use during job creation\. For using a CSV manifest in the source or destination account, see [Using a CSV manifest stored in the source account to copy objects across AWS accounts](#specify-batchjob-manifest-xaccount-csv)\.
 
 Amazon S3 Inventory generates inventories of the objects in a bucket\. The resulting list is published to an output file\. The bucket that is inventoried is called the *source bucket*, and the bucket where the inventory report file is stored is called the *destination bucket*\. 
@@ -51,6 +53,8 @@ The following console procedure contains the high\-level steps for setting up pe
 1. Create a role in the destination account that is based on the S3 Batch Operations trust policy\. For more information about the trust policy, see [Trust policy](batch-ops-iam-role-policies.md#batch-ops-iam-role-policies-trust)\. 
 
    For more information about creating a role, see [ Creating a Role to Delegate Permissions to an AWS Service ](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
+
+   
 
    Enter a name for the role \(the example role uses the name `BatchOperationsDestinationRoleCOPY`\)\. Choose the **S3** service, and then choose the **S3 bucket Batch Operations** use case, which applies the trust policy to the role\. 
 

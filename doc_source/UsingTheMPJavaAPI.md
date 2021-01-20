@@ -32,4 +32,4 @@ For more information about the AWS SDK for Java API, see [AWS SDK for Java API R
 
 ## Testing the Amazon S3 Java Code Examples<a name="TestingJavaSamples"></a>
 
-The Java examples in this guide are compatible with the AWS SDK for Java version 1\.11\.321\. For instructions on setting up and running code samples, see [Getting Started with the AWS SDK for Java](https://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/java-dg-setup.html) in the AWS SDK for Java Developer Guide\. 
+The Java examples in this guide are compatible with the AWS SDK for Java version 1\.11\.321\. For instructions on setting up and running code samples, see [Getting Started](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/getting-started.html) in the AWS SDK for Java Developer Guide\. 

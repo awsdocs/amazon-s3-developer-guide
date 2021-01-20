@@ -122,6 +122,7 @@ For instructions on creating and testing a working example, see [Testing the Ama
         s3Encryption.shutdown();
 ```
 
+
 **Example**  
 The following code example shows how to do these tasks:  
 + Generate a 2048\-bit RSA key pair for testing purposes\.

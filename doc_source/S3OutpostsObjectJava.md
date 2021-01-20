@@ -154,6 +154,8 @@ public class GetObject {
 }
 ```
 
+
+
 ## Copy the object on Amazon S3 on Outposts<a name="S3OutpostsCopyObjectJava"></a>
 
 The following S3 on Outposts example gets a bucket using the SDK for Java\. 
@@ -193,6 +195,8 @@ public class CopyObject {
 }
 ```
 
+
+
 ## Delete the object on Amazon S3 on Outposts<a name="S3OutpostsDeleteObjectJava"></a>
 
 The following S3 on Outposts example deletes an object using the SDK for Java\. 
@@ -229,6 +233,8 @@ public class DeleteObject {
     }
 }
 ```
+
+
 
 ## Deletes objects on Amazon S3 on Outposts<a name="S3OutpostsDeleteObjectsJava"></a>
 
@@ -289,12 +295,14 @@ public class DeleteObjects {
 }
 ```
 
+
+
 ## Lists objects in an Amazon S3 on Outposts bucket<a name="S3OutpostsListObjectsJava"></a>
 
 The following S3 on Outposts example lists objects using the SDK for Java in the Outposts bucket\. 
 
 **Important**  
-This section describes the latest revision of the API\. We recommend that you use this revised API for application development\. For backward compatibility, Amazon S3 continues to support the prior version of this API, [ListObjects](http://amazonaws.com/AmazonS3/latest/API/API_ListObjectsV2.html)\. 
+This section describes the latest revision of the API\. We recommend that you use this revised API for application development\. For backward compatibility, Amazon S3 continues to support the prior version of this API, [ListObjects](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)\. 
 
 ```
 import com.amazonaws.AmazonServiceException;
@@ -349,12 +357,14 @@ public class ListObjectsV2 {
 }
 ```
 
+
+
 ## This initiates a multipart upload objects in an Amazon S3 on Outposts bucket<a name="S3OutpostsInitiateMultipartUploadJava"></a>
 
 The following S3 on Outposts example initiate, uploads, and completes a multipart upload using the SDK for Java in the Outposts bucket\. For more information, see [Upload a File](https://docs.aws.amazon.com/AmazonS3/latest/dev/llJavaUploadFile.html)\.
 
 **Important**  
-This section describes the latest revision of the API\. We recommend that you use this revised API for application development\. For backward compatibility, Amazon S3 continues to support the prior version of this API, [ListObjects](http://amazonaws.com/AmazonS3/latest/API/API_ListObjectsV2.html)\. 
+This section describes the latest revision of the API\. We recommend that you use this revised API for application development\. For backward compatibility, Amazon S3 continues to support the prior version of this API, [ListObjects](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)\. 
 
 ```
 import com.amazonaws.AmazonServiceException;
@@ -440,6 +450,8 @@ public class MultipartUploadCopy {
         return etags;
     }
 ```
+
+
 
 ## Copy an object in an Amazon S3 on Outposts bucket<a name="S3OutpostsCopyPartJava"></a>
 
@@ -531,6 +543,8 @@ public class MultipartUploadCopy {
 }
 ```
 
+
+
 ## List parts of an object in an Amazon S3 on Outposts bucket<a name="S3OutpostsListPartsJava"></a>
 
 The following S3 on Outposts example lists the parts of an object using the SDK for Java from the Outposts bucket\. 
@@ -578,6 +592,8 @@ public class ListParts {
     }
 }
 ```
+
+
 
 ## Retrieve a list of in\-progress multipart uploads in an Amazon S3 on Outposts bucket<a name="S3OutpostsListMultipartUploadsJava"></a>
 
@@ -628,6 +644,8 @@ public class ListMultipartUploads {
 }
 ```
 
+
+
 ## Abort a multipart upload of an object in an Amazon S3 on Outposts bucket<a name="S3OutpostsAbortMultipartUploadJava"></a>
 
 The following S3 on Outposts example The following example shows how to abort the multipart upload for an object using SDK for Java from an Outposts bucket\. This is an example adapted from the [ Abort a multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/dev/LLAbortMPUJava.html) example for Amazon S3\.
@@ -677,6 +695,8 @@ public class ListMultipartUploads {
 }
 ```
 
+
+
 ## Using Head Bucket operation for an Amazon S3 on Outposts bucket<a name="S3OutpostsHeadBucketJava"></a>
 
 The following S3 on Outposts example shows how to determine if a bucket exists and you have permission to access it\. 
@@ -712,3 +732,4 @@ public class HeadBucket {
     }
 }
 ```
+

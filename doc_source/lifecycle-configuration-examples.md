@@ -60,6 +60,8 @@ Each S3 Lifecycle rule includes a filter that you can use to identify a subset o
   ```
 + You can specify zero or one key name prefix and zero or more object tags in a filter\. The following example code applies the Lifecycle rule to a subset of objects with the `tax/` key prefix and to objects that have two tags with specific key and value\. Note that when you specify more than one filter, you must include the AND as shown \(Amazon S3 applies a logical AND to combine the specified filter conditions\)\.
 
+  
+
   ```
   ...
   <Filter>
@@ -77,6 +79,8 @@ Each S3 Lifecycle rule includes a filter that you can use to identify a subset o
   </Filter>
   ...
   ```
+
+  
 + You can filter objects based only on tags\. For example, the following Lifecycle rule applies to objects that have the two specified tags \(it does not specify any prefix\)\.
 
   ```
@@ -96,12 +100,16 @@ Each S3 Lifecycle rule includes a filter that you can use to identify a subset o
   ...
   ```
 
+  
+
 **Important**  
 When you have multiple rules in an S3 Lifecycle configuration, an object can become eligible for multiple Lifecycle actions\. In such cases, Amazon S3 follows these general rules:  
 Permanent deletion takes precedence over transition\.
 Transition takes precedence over creation of delete markers\.
 When an object is eligible for both a S3 Glacier and S3 Standard\-IA \(or S3 One Zone\-IA\) transition, Amazon S3 chooses the S3 Glacier transition\.
  For examples, see [Example 5: Overlapping filters, conflicting lifecycle actions, and what Amazon S3 does ](#lifecycle-config-conceptual-ex5)\. 
+
+
 
 ## Example 2: Disabling a lifecycle rule<a name="lifecycle-config-conceptual-ex2"></a>
 
@@ -173,6 +181,8 @@ The following S3 Lifecycle configuration specifies a rule that applies to object
 You can use one rule to describe all Lifecycle actions if all actions apply to the same set of objects \(identified by the filter\)\. Otherwise, you can add multiple rules with each specifying a different filter\.
 
 ## Example 4: Specifying multiple rules<a name="lifecycle-config-conceptual-ex4"></a>
+
+
 
 You can specify multiple rules if you want different Lifecycle actions of different objects\. The following Lifecycle configuration has two rules:
 + Rule 1 applies to objects with the key name prefix `classA/`\. It directs Amazon S3 to transition objects to the S3 Glacier storage class one year after creation and expire these objects 10 years after creation\.
@@ -358,6 +368,10 @@ The Lifecycle configuration is shown following\.
 ```
 The policy is fine, but if there is an object with both tags, then S3 has to decide what to do\. That is, both rules apply to an object, and in effect you are directing Amazon S3 to perform conflicting actions\. In this case, Amazon S3 expires the object 14 days after creation\. The object is removed, and therefore the transition action does not come into play\.
 
+
+
+
+
 ## Example 6: Specifying a lifecycle rule for a versioning\-enabled bucket<a name="lifecycle-config-conceptual-ex6"></a>
 
 Suppose that you have a versioning\-enabled bucket, which means that for each object you have a current version and zero or more noncurrent versions\. You want to maintain one year's worth of history and then delete the noncurrent versions\. For more information about S3 Versioning, see [Object Versioning](ObjectVersioning.md)\. 
@@ -388,6 +402,8 @@ Also, you want to save storage costs by moving noncurrent versions to S3 Glacier
 ```
 
 ## Example 7: Removing expired object delete markers<a name="lifecycle-config-conceptual-ex7"></a>
+
+
 
 A versioning\-enabled bucket has one current version and zero or more noncurrent versions for each object\. When you delete an object, note the following:
 + If you don't specify a version ID in your delete request, Amazon S3 adds a delete marker instead of deleting the object\. The current object version becomes noncurrent, and then the delete marker becomes the current version\. 
@@ -440,6 +456,8 @@ This rule will automatically perform `ExpiredObjectDeleteMarker` cleanup in a ve
   In this case you might remove the objects manually when you don't need them, creating a delete marker with one or more noncurrent versions\. If Lifecycle configuration with `NoncurrentVersionExpiration` action removes all the noncurrent versions, you now have expired object delete markers\.
 
   Specifically for this scenario, Amazon S3 Lifecycle configuration provides an `Expiration` action where you can request Amazon S3 to remove the expired object delete markers\.
+
+  
 
   ```
   <LifecycleConfiguration>

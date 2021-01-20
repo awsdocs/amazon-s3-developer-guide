@@ -50,7 +50,6 @@ The tables in this section list the Amazon S3 bucket\-level actions that are sup
 + [DeleteBucketReplication ](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEreplication.html)
 + [DeleteBucketTagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html)
 + [DeleteBucketWebsite](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html)
-+ [DeleteBucketWebsite](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html)
 + [ DeletePublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html)
 + [GetBucketCors](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETcors.html)
 + [GetBucketEncryption](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETencryption.html)
@@ -79,6 +78,8 @@ The tables in this section list the Amazon S3 bucket\-level actions that are sup
 + [PutBucketVersioning](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)
 + [PutBucketWebsite](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html) 
 + [ PutPublicAccessBlock](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html) 
+
+
 
 In addition to these API operations, you can also use the [OPTIONS object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTOPTIONSobject.html) object\-level action\. This action is treated like a bucket\-level action in CloudTrail logging because the action checks the cors configuration of a bucket\.
 

@@ -53,6 +53,8 @@ To add object tag sets to more than one Amazon S3 object with a single request, 
 
 The S3 Batch Operations feature tracks progress, sends notifications, and stores a detailed completion report of all actions, providing a fully managed, auditable, serverless experience\. You can use S3 Batch Operations through the AWS Management Console, AWS CLI, AWS SDKs, or REST API\. For more information, see [S3 Batch Operations basics](batch-ops-basics.md)\.
 
+
+
 ## API operations related to object tagging<a name="tagging-apis"></a>
 
 Amazon S3 supports the following API operations that are specifically for object tagging:
@@ -67,6 +69,8 @@ The [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/REST
 +  [GET Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html) – Returns the tag set associated with an object\. Amazon S3 returns object tags in the response body\.
 + [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETEtagging.html) – Deletes the tag set associated with an object\. 
 
+
+
 **Other API Operations That Support Tagging**
 +  [PUT Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html) and [Initiate Multipart Upload](https://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html)– You can specify tags when you create objects\. You specify tags using the `x-amz-tagging` request header\. 
 +  [GET Object](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html) – Instead of returning the tag set, Amazon S3 returns the object tag count in the `x-amz-tag-count` header \(only if the requester has permissions to read tags\) because the header response size is limited to 8 K bytes\. If you want to view the tags, you make another request for the [GET Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGETtagging.html) API operation\.
@@ -77,7 +81,7 @@ The [DELETE Object tagging](https://docs.aws.amazon.com/AmazonS3/latest/API/REST
    [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html) – You can specify the `x-amz-tagging-directive` in your request to direct Amazon S3 to either copy \(default behavior\) the tags or replace tags by a new set of tags provided in the request\. 
 
 Note the following:
-+ Tagging follows the eventual consistency model\. That is, soon after adding tags to an object, if you try to retrieve the tags, you might get old tags, if any, on the objects\. However, a subsequent call will likely provide the updated tags\.
++ S3 Object Tagging is strongly consistent\. For more information, see [Amazon S3 data consistency model](Introduction.md#ConsistencyModel)\. 
 
 ## Object tagging and additional information<a name="tagging-other-configs"></a>
 
@@ -242,6 +246,9 @@ The following user policy grants a user permissions to perform the `s3:PutObject
 23.   ]
 24. }
 ```
+
+
+
 
 **Related Topics**  
 [Managing object tags](tagging-managing.md)

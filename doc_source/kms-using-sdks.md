@@ -1,15 +1,19 @@
-# Specifying the AWS Key Management Service in Amazon S3 Using the AWS SDKs<a name="kms-using-sdks"></a>
+# Specifying AWS KMS in Amazon S3 using the AWS SDKs<a name="kms-using-sdks"></a>
 
-When using AWS SDKs, you can request Amazon S3 to use AWS Key Management Service \(AWS KMS\) customer master keys \(CMKs\)\. This section provides examples of using the AWS SDKs for Java and \.NET\. For information about other SDKs, go to [Sample Code and Libraries](https://aws.amazon.com/code)\.
+When using AWS SDKs, you can request Amazon S3 to use AWS Key Management Service \(AWS KMS\) customer master keys \(CMKs\)\. This section provides examples of using the AWS SDKs for Java and \.NET\. For information about other SDKs, see [Sample Code and Libraries](https://aws.amazon.com/code)\.
 
 **Important**  
 When you use an AWS KMS CMK for server\-side encryption in Amazon S3, you must choose a symmetric CMK\. Amazon S3 only supports symmetric CMKs and not asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
+
+**Topics**
++ [AWS SDK for Java](#kms-using-sdks-java)
++ [AWS SDK for \.NET](#kms-using-sdks-dotnet)
 
 ## AWS SDK for Java<a name="kms-using-sdks-java"></a>
 
 This section explains various Amazon S3 operations using the AWS SDK for Java and how you use the AWS KMS CMKs\.
 
-### Put Operation<a name="kms-using-sdks-java-put"></a>
+### Put operation<a name="kms-using-sdks-java-put"></a>
 
 When uploading an object using the AWS SDK for Java, you can request Amazon S3 to use an AWS KMS CMK by adding the `SSEAwsKeyManagementParams` property as shown in the following request\.
 
@@ -18,7 +22,7 @@ PutObjectRequest putRequest = new PutObjectRequest(bucketName,
    keyName, file).withSSEAwsKeyManagementParams(new SSEAwsKeyManagementParams());
 ```
 
-In this case, Amazon S3 uses the AWS managed CMK \(see [Using Server\-Side Encryption with CMKs Stored in AWS KMS ](UsingKMSEncryption.md)\)\. You can optionally create a symmetric customer managed CMK and specify that in the request\.
+In this case, Amazon S3 uses the AWS managed CMK \(see [Protecting data with server\-side encryption using AWS KMS CMKs](UsingKMSEncryption.md)\)\. You can optionally create a symmetric customer managed CMK and specify that in the request\.
 
 ```
 PutObjectRequest putRequest = new PutObjectRequest(bucketName,
@@ -33,7 +37,7 @@ For working code examples of uploading an object, see the following topics\. You
   + Using high\-level multipart upload API, see [Upload a file](HLuploadFileJava.md)\. 
   + If you are using the low\-level multipart upload API, see [Upload a file](llJavaUploadFile.md)\.
 
-### Copy Operation<a name="kms-using-sdks-java-copy"></a>
+### Copy operation<a name="kms-using-sdks-java-copy"></a>
 
 When copying objects, you add the same request properties \(`ServerSideEncryptionMethod` and `ServerSideEncryptionKeyManagementServiceKeyId`\) to request Amazon S3 to use an AWS KMS CMK\. For more information about copying objects, see [Copying objects](CopyingObjectsExamples.md)\.
 
@@ -55,7 +59,7 @@ For a code example, see [Generate a presigned object URL using the AWS SDK for J
 
 This section explains various Amazon S3 operations using the AWS SDK for \.NET and how you use the AWS KMS CMKs\.
 
-### Put Operation<a name="kms-using-sdks-dotnet-put"></a>
+### Put operation<a name="kms-using-sdks-dotnet-put"></a>
 
 When uploading an object using the AWS SDK for \.NET, you can request Amazon S3 to use an AWS KMS CMK by adding the `ServerSideEncryptionMethod` property as shown in the following request\.
 
@@ -69,7 +73,7 @@ PutObjectRequest putRequest = new PutObjectRequest
    };
 ```
 
-In this case, Amazon S3 uses the AWS managed CMK\. For more information, see [Protecting Data Using Server\-Side Encryption with CMKs Stored in AWS Key Management Service \(SSE\-KMS\)](UsingKMSEncryption.md)\. You can optionally create your own symmetric customer managed CMK and specify that in the request\. 
+In this case, Amazon S3 uses the AWS managed CMK\. For more information, see [Protecting data with server\-side encryption using AWS KMS CMKs \(SSE\-KMS\)](UsingKMSEncryption.md)\. You can optionally create your own symmetric customer managed CMK and specify that in the request\. 
 
 ```
 PutObjectRequest putRequest1 = new PutObjectRequest
@@ -90,7 +94,7 @@ For working code examples of uploading an object, see the following topics\. You
   + Using high\-level multipart upload API, see [Upload a file to an S3 bucket using the AWS SDK for \.NET \(high\-level API\)](HLuploadFileDotNet.md)\. 
   + Using low\-level multipart upload API, see [Upload a file to an S3 Bucket using the AWS SDK for \.NET \(low\-level API\)](LLuploadFileDotNet.md)\.
 
-### Copy Operation<a name="kms-using-sdks-dotnet-copy"></a>
+### Copy operation<a name="kms-using-sdks-dotnet-copy"></a>
 
 When copying objects, you add the same request properties \(`ServerSideEncryptionMethod` and `ServerSideEncryptionKeyManagementServiceKeyId`\) to request Amazon S3 to use an AWS KMS CMK\. For more information about copying objects, see [Copying objects](CopyingObjectsExamples.md)\.
 

@@ -9,6 +9,8 @@ You can enable or disable logging programmatically by using either the Amazon S3
 
 ## Enabling logging<a name="enabling-logging-general"></a>
 
+
+
 To enable logging, you submit a [PUT Bucket logging](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html) request to add the logging configuration on the source bucket\. The request specifies the target bucket and, optionally, the prefix to be used with all log object keys\. The following example identifies `logbucket` as the target bucket and `logs/` as the prefix\. 
 
 ```
@@ -32,6 +34,8 @@ Amazon S3 also provides the [GET Bucket logging](https://docs.aws.amazon.com/Ama
 You can use either the Amazon S3 API or the AWS SDK wrapper libraries to enable logging on a bucket\.
 
 ## Granting the log delivery group WRITE and READ\_ACP permissions<a name="grant-log-delivery-permissions-general"></a>
+
+
 
 Amazon S3 writes the log files to the target bucket as a member of the predefined Amazon S3 group Log Delivery\. These writes are subject to the usual access control restrictions\. You must grant `s3:GetObjectAcl` and `s3:PutObject` permissions to this group by adding grants to the access control list \(ACL\) of the target bucket\. The Log Delivery group is represented by the following URL\. 
 

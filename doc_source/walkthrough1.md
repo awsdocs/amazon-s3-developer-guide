@@ -20,6 +20,8 @@ This walkthrough explains how user permissions work with Amazon S3\. In this exa
 
 The Amazon S3 data model is a flat structure: You create a bucket, and the bucket stores objects\. There is no hierarchy of subbuckets or subfolders, but you can emulate a folder hierarchy\. Tools like the Amazon S3 console can present a view of these logical folders and subfolders in your bucket, as shown in the following image\.
 
+
+
 ![\[Console screenshot showing a hierarchy of buckets, folders, and objects.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/walkthrough-10.png)
 
 The console shows that a bucket named `companybucket` has three folders, `Private`, `Development`, and `Finance`, and an object, `s3-dg.pdf`\. The console uses the object names \(keys\) to create a logical hierarchy with folders and subfolders\. Consider the following examples:
@@ -49,6 +51,8 @@ Before you start, be sure that you are familiar with the concept of the *root\-l
 These object keys create a logical hierarchy with `Private`, `Development`, and the `Finance` as root\-level folders and `s3-dg.pdf` as a root\-level object\. When you choose the bucket name on the Amazon S3 console, the root\-level items appear as shown in the following image\. The console shows the top\-level prefixes \(`Private/`, `Development/`, and `Finance/`\) as root\-level folders\. The object key `s3-dg.pdf` has no prefix, and so it appears as a root\-level item\.
 
 ![\[Console screenshot of the objects tab with the s3-dg.pdf object in the list.\]](http://docs.aws.amazon.com/AmazonS3/latest/dev/images/walkthrough-10.png)
+
+
 
 ## Walkthrough summary<a name="walkthrough-scenario"></a>
 
@@ -106,6 +110,8 @@ In this step, you sign in to the Amazon S3 console with your AWS account credent
    + `Finance/Tax2011/document2.pdf`
    + `s3-dg.pdf`
 
+   
+
    For step\-by\-step instructions, see [How Do I Upload Files and Folders to an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html) in the *Amazon Simple Storage Service Console User Guide*\. 
 
 ## Step 2: Create IAM users and a group<a name="walkthrough1-add-users"></a>
@@ -118,6 +124,8 @@ When you add users and a group, do not attach any policies that grant permission
 For step\-by\-step instructions for creating a new IAM user, see [Creating an IAM User in Your AWS Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *IAM User Guide*\. When you create the users for this walkthrough, select **AWS Management Console access** and clear **Programmatic access**\.
 
 For step\-by\-step instructions for creating an administrative group, see [Creating Your First IAM Admin User and Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\.
+
+
 
 ## Step 3: Verify that IAM users have no permissions<a name="walkthrough1-verify-no-user-permissions"></a>
 
@@ -423,6 +431,8 @@ For Alice to get and put objects in the `Development` folder, she needs permissi
  }
 ```
 
+
+
 1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
    Use your AWS account credentials, not the credentials of an IAM user, to sign in to the console\.
@@ -476,6 +486,8 @@ For Alice to get and put objects in the `Development` folder, she needs permissi
 User Alice can now list the root\-level content in the `companybucket` bucket\. She can also get and put objects in the `Development` folder\. If you really want to tighten the access permissions, you could explicitly deny Alice access to any other folders in the bucket\. If there is any other policy \(bucket policy or ACL\) that grants Alice access to any other folders in the bucket, this explicit deny overrides those permissions\. 
 
 You can add the following statement to the user Alice policy that requires all requests that Alice sends to Amazon S3 to include the `prefix` parameter, whose value can be either `Development/*` or an empty string\. 
+
+
 
 ```
 {
@@ -623,6 +635,8 @@ Replace the `Consultants` group policy with an updated policy that includes the 
      ]
    }
    ```
+
+
 
 ## Step 8: Clean up<a name="walkthrough-cleanup"></a>
 

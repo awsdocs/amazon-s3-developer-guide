@@ -57,6 +57,8 @@ You can monitor the progress of replication with S3 replication metrics by track
 You can enable alarms for your replication metrics on Amazon CloudWatch\. When you set up alarms for your replication metrics, set the **Missing data treatment** field to **Treat missing data as ignore \(maintain the alarm state\)**\.
 
 
+
+
 | Metric | Description | 
 | --- | --- | 
 | ReplicationLatency |  The maximum number of seconds by which the replication destination Region is behind the source Region for a given replication rule\.  Units: Seconds Valid statistics: Max  | 
@@ -70,6 +72,8 @@ The `S3Outposts` namespace includes the following metrics for Amazon S3 on Outpo
 **Note**  
 S3 on Outposts only supports the following metrics and not other Amazon S3 metrics\.  
 Since S3 on Outposts have limited capcity, you can create CloudWatch alerts that alert you when storage utilization exceeds a threshold\.
+
+
 
 
 | Metric | Description | 

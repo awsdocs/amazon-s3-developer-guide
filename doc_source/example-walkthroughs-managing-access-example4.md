@@ -52,6 +52,8 @@ For this example, you need three accounts\. The following table shows how we ref
 |  *2222\-2222\-2222*  |  Account B  |  AccountBadmin  | 
 |  *3333\-3333\-3333*  |  Account C  |  AccountCadmin  | 
 
+
+
 ## Step 0: Preparing for the walkthrough<a name="access-policies-walkthrough-example4-step0"></a>
 
 **Note**  
@@ -196,7 +198,9 @@ In the IAM console, create an IAM role \("examplerole"\) that grants Account C p
 
 1. Click **Next Step** to set the permissions that will be associated with the role\.
 
-1. Select the box next to the `access-accountA-bucket` policy that you created and then click **Next Step**\.
+1. 
+
+   Select the box next to the `access-accountA-bucket` policy that you created and then click **Next Step**\.
 
    The Review page appears so you can confirm the settings for the role before it's created\. One very important item to note on this page is the link that you can send to your users who need to use this role\. Users who click the link go straight to the Switch Role page with the Account ID and Role Name fields already filled in\. You can also see this link later on the Role Summary page for any cross\-account role\.
 
@@ -255,6 +259,8 @@ In the preceding steps, Account A has already created a role, `examplerole`, est
 ### Step 3\.1: Create a user in account C and delegate permission to assume `examplerole`<a name="cross-acct-access-using-role-step3-1"></a>
 
 1. Using the IAM user sign\-in URL for Account C, first sign in to the AWS Management Console as AccountCadmin user\. 
+
+   
 
 1. In the IAM console, create a user Dave\. 
 

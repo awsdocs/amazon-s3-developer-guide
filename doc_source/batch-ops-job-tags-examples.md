@@ -4,6 +4,8 @@ To help you manage your S3 Batch Operations jobs, you can add *job tags*\. With 
 
 You can apply up to 50 job tags to each Batch Operations job\. This allows you to set very granular policies restricting the set of users that can edit the job\. Job tags can grant or limit a user’s ability to cancel a job, activate a job in the confirmation state, or change a job’s priority level\. In addition, you can enforce that tags be applied to all new jobs, and specify the allowed key\-value pairs for the tags\. You can express all of these conditions using the same [IAM policy language](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html)\. For more information, see [Actions, resources, and condition keys for Amazon S3](list_amazons3.md)\.
 
+
+
 The following example shows how you can use S3 Batch Operations job tags to grant users permission to create and edit only the jobs that are run within a specific *department* \(for example, the *Finance* or *Compliance* department\)\. You can also assign jobs based on the stage of *development* that they are related to, such as *QA* or *Production*\.
 
 In this example, you use S3 Batch Operations job tags in AWS Identity and Access Management \(IAM\) policies to grant users permission to create and edit only the jobs being run within their department\. You assign jobs based on the stage of development that they are related to, such as *QA* or *Production*\. 
@@ -81,6 +83,8 @@ The policy in this example includes three policy statements:
 
 ## Tagging Batch Operations jobs by stage and enforcing limits on job priority<a name="tagging-jobs-by-stage-and-enforcing-limits-on-job-priority"></a>
 
+
+
 All S3 Batch Operations jobs have a numeric priority, which Amazon S3 uses to decide in what order to run the jobs\. For this example, you restrict the maximum priority that most users can assign to jobs, with higher priority ranges reserved for a limited set of privileged users, as follows:
 + QA stage priority range \(low\): 1\-100
 + Production stage priority range \(high\): 1\-300
@@ -92,6 +96,8 @@ To do this, introduce a new tag set representing the *stage* of the job:
 + `stage : Production`
 
 ### Creating and updating low\-priority jobs within a department<a name="creating-and-updating-low-priority-jobs"></a>
+
+
 
 This policy introduces two new restrictions on S3 Batch Operations job creation and update, in addition to the department\-based restriction:
 + It allows users to create or update jobs in their department with a new condition that requires the job to include the tag `stage=QA`\.
@@ -164,6 +170,8 @@ This policy introduces two new restrictions on S3 Batch Operations job creation 
 ```
 
 ### Creating and updating high\-priority jobs within a department<a name="creating-and-updating-high-priority-jobs"></a>
+
+
 
 A small number of users might require the ability to create high priority jobs in either *QA* or *Production*\. To support this need, you create a managed policy that’s adapted from the low\-priority policy in the previous section\. 
 

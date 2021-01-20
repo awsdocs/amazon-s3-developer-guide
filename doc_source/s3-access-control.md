@@ -27,3 +27,4 @@ After you've reviewed introductory topics about managing access to Amazon S3 res
 + [Managing Access with ACLs](S3_ACLs_UsingACLs.md)
 + [Controlling ownership of uploaded objects using S3 Object Ownership](about-object-ownership.md)
 + [Using Amazon S3 block public access](access-control-block-public-access.md)
++ [Using Service\-Linked Roles for Amazon S3 Storage Lens](using-service-linked-roles.md)

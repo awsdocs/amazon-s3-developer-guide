@@ -4,6 +4,7 @@ Consider the following restrictions and limitations as you set up Amazon S3 on O
 
 **Topics**
 + [Specifications](#S3OnOutpostsSpecifications)
++ [Data consistency model](#S3OnOutpostsDataConsistency)
 + [Supported API operations](#S3OnOutpostsAPILimitations)
 + [Unsupported Amazon S3 features](#S3OnOutpostsFeatureLimitations)
 + [Network restrictions](#S3OnOutpostsConnectivityRestrictions)
@@ -20,6 +21,18 @@ Consider the following restrictions and limitations as you set up Amazon S3 on O
 + All objects stored on S3 on Outposts are stored in the `OUTPOSTS` storage class\.
 + All objects stored in the `OUTPOSTS` storage class are stored using server\-side encryption with Amazon S3\-managed encryption keys \(SSE\-S3\) by default\. You can also explicity choose to store objects using server\-side encryption with customer\-provided encryption keys \(SSE\-C\)\.
 + If there is not enough space to store an object on your Outpost, the API will return an insufficient capacity exception \(ICE\)\. 
+
+## Amazon S3 on Outposts data consistency model<a name="S3OnOutpostsDataConsistency"></a>
+
+Amazon S3 on Outposts provides read\-after\-write consistency for PUTS of new objects in your Amazon S3 bucket with one caveat\. The caveat is that if you make a HEAD or GET request to a key name before the object is created, then create the object shortly after that, a subsequent GET might not return the object due to eventual consistency\.
+
+Amazon S3 on Outposts offers eventual consistency for overwrite PUTS and DELETES in all Regions\.
+
+Updates to a single key are atomic\. For example, if you PUT to an existing key, a subsequent read might return the old data or the updated data, but it never returns corrupted or partial data\. With the eventual consistency model, you might observe the following behaviors:
++ A process writes a new object to S3OutpostsLong; and immediately lists keys within its bucket\. Until the change is fully propagated, the object might not appear in the list\.
++ A process replaces an existing object and immediately tries to read it\. Until the change is fully propagated, Amazon S3 on Outposts might return the previous data\.
++ A process deletes an existing object and immediately tries to read it\. Until the deletion is fully propagated, Amazon S3 on Outposts might return the deleted data\.
++ A process deletes an existing object and immediately lists keys within its bucket\. Until the deletion is fully propagated, Amazon S3 on Outposts might list the deleted object\.
 
 ## API operations supported by Amazon S3 on Outposts<a name="S3OnOutpostsAPILimitations"></a>
 

@@ -36,6 +36,8 @@ To replicate encrypted objects with the AWS CLI, you create buckets, enable vers
 **Note**  
 To set up replication configuration when both *source* and *destination* buckets are in the same AWS account, you use the same profile\. In this example, we use `acctA`\. To test replication configuration when the buckets are owned by different AWS accounts, you specify different profiles for each\. 
 
+   
+
    ```
    aws s3api create-bucket \
    --bucket destination \

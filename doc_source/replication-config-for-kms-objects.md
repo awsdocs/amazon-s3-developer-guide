@@ -19,6 +19,8 @@ In the replication configuration, you do the following:
 + In the `Destination` configuration, add the symmetric customer managed AWS KMS CMK that you want Amazon S3 to use to encrypt object replicas\. 
 + Explicitly opt in by enabling replication of objects encrypted using AWS KMS CMKs by adding the `SourceSelectionCriteria` element\.
 
+ 
+
 ```
 <ReplicationConfiguration>
    <Rule>
@@ -41,7 +43,7 @@ In the replication configuration, you do the following:
 ```
 
 **Important**  
-The AWS KMS CMK must have been created in the same AWS Region as the destination bucket\.   
+The AWS KMS CMK must have been created in the same AWS Region as the destination buckets\.   
 The AWS KMS CMK *must* be valid\. The `PUT` Bucket replication API doesn't check the validity of AWS KMS CMKs\. If you use an invalid CMK, you will receive the 200 OK status code in response, but replication fails\.
 
 The following example shows a replication configuration, which includes optional configuration elements\.
@@ -63,7 +65,7 @@ The following example shows a replication configuration, which includes optional
       <Destination>
          <Bucket>arn:aws:s3:::destination-bucket</Bucket>
          <EncryptionConfiguration>
-            <ReplicaKmsKeyID>The AWS KMS key ID for the AWS region of the destination bucket (S3 uses it to encrypt object replicas).</ReplicaKmsKeyID>
+            <ReplicaKmsKeyID>The AWS KMS key ID for the AWS region of the destination buckets (S3 uses it to encrypt object replicas).</ReplicaKmsKeyID>
          </EncryptionConfiguration>
       </Destination>
       <SourceSelectionCriteria>
@@ -87,7 +89,7 @@ We recommend that you use the `s3:GetObjectVersionForReplication` action instead
   + `kms:Decrypt` permissions for the AWS KMS CMK used to decrypt the source object
   + `kms:Encrypt` permissions for the AWS KMS CMK used to encrypt the object replica
 
-  We recommend that you restrict these permissions to specific buckets and objects using AWS KMS condition keys, as shown in the following example policy statements\.
+  We recommend that you restrict these permissions only to the destination buckets and objects using AWS KMS condition keys\. The following example policy shows statements for using AWS KMS with separate destination buckets\. 
 
   ```
   {
@@ -110,14 +112,29 @@ We recommend that you use the `s3:GetObjectVersionForReplication` action instead
       "Effect": "Allow",
       "Condition": {
           "StringLike": {
-              "kms:ViaService": "s3.destination-bucket-region.amazonaws.com",
+              "kms:ViaService": "s3.destination-bucket-1-region.amazonaws.com",
               "kms:EncryptionContext:aws:s3:arn": [
-                  "arn:aws:s3:::destination-bucket-name/key-prefix1*",
+                  "arn:aws:s3:::destination-bucket-name-1/key-prefix1*",
               ]
           }
       },
       "Resource": [
-           "AWS KMS key ARNs (for the AWS Region of the destination bucket). S3 uses it to encrypt object replicas", 
+           "AWS KMS key ARNs (for the AWS Region of the destination bucket 1). Used to encrypt object replicas created in destination bucket 1.", 
+      ]
+  },
+  {
+      "Action": ["kms:Encrypt"],
+      "Effect": "Allow",
+      "Condition": {
+          "StringLike": {
+              "kms:ViaService": "s3.destination-bucket-2-region.amazonaws.com",
+              "kms:EncryptionContext:aws:s3:arn": [
+                  "arn:aws:s3:::destination-bucket-2-name/key-prefix1*",
+              ]
+          }
+      },
+      "Resource": [
+           "AWS KMS key ARNs (for the AWS Region of destination bucket 2). Used to encrypt object replicas created in destination bucket 2.",
       ]
   }
   ```
@@ -191,7 +208,7 @@ Objects created with server\-side encryption using customer\-provided \(SSE\-C\)
             }
          },
          "Resource":[
-            "AWS KMS key ARNs (for the AWS Region of the destination bucket) to use for encrypting object replicas"
+            "AWS KMS key ARNs (for the AWS Region of the destination buckets) to use for encrypting object replicas"
          ]
       }
    ]

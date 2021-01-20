@@ -11,6 +11,8 @@ The existing bucket management APIs do not support the concept of location beyon
 
 The reason to pass ARNs for the API is to Amazon S3 to determine if the request is for S3 \(s3\-control\.<region>\.amazonaws\.com\) or S3 on Outposts \(s3\-outposts\.<region>\.amazonaws\.com\) allowing it sign and route the request appropriately\. Whenever the request is sent to the Amazon S3 control plane, the SDK will extract the components from the ARN and include an additional header “x\-amz\-outpost\-id” with the value of the “outpost\-id” extracted from the ARN\. The service name from the ARN will be used to sign the request before it is routed to the S3 on Outposts endpoint\. This is applicable for all APIs handled by the s3control client\. 
 
+
+
 The list of extended APIs for Amazon S3 on Outposts and their changes relative to S3 is in the table below\.
 
 
@@ -36,6 +38,8 @@ The list of extended APIs for Amazon S3 on Outposts and their changes relative t
 |  *PutAccessPointPolicy*  |  *access point name*  |  *access point name as ARN*  | 
 |  *GetAccessPointPolicy*  |  *access point name*  |  *access point name as ARN*  | 
 |  *DeleteAccessPointPolicy*  |  *access point name*  |  *access point name as ARN*  | 
+
+
 
 ## Accessing Amazon S3 on Outposts<a name="AccessingS3Outposts"></a>
 

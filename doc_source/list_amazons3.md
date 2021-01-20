@@ -35,6 +35,7 @@ The following resource types are defined by this service and can be used in the 
 |   [ bucket ](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html)  |  arn:$\{Partition\}:s3:::$\{BucketName\}  |  | 
 |   [ object ](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html)  |  arn:$\{Partition\}:s3:::$\{BucketName\}/$\{ObjectName\}  |  | 
 |   [ job ](https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html)  |  arn:$\{Partition\}:s3:$\{Region\}:$\{Account\}:job/$\{JobId\}  |  | 
+|   [ storagelensconfiguration ](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html)  |  arn:$\{Partition\}:s3:$\{Region\}:$\{Account\}:storage\-lens/$\{ConfigId\}  |   [ aws:ResourceTag/$\{TagKey\} ](#amazons3-aws_ResourceTag___TagKey_)   | 
 
 ## Condition keys for Amazon S3<a name="amazons3-policy-keys"></a>
 

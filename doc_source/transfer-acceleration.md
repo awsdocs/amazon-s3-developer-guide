@@ -58,6 +58,8 @@ You can continue to use the regular endpoint in addition to the accelerate endpo
 
 You can use all of the Amazon S3 operations through the transfer acceleration endpoints, except for the following operations: [GET Service \(list buckets\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTServiceGET.html), [PUT Bucket \(create bucket\)](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUT.html), and [DELETE Bucket](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETE.html)\. Also, Amazon S3 Transfer Acceleration does not support cross region copies using [PUT Object \- Copy](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)\. 
 
+
+
 ## Requirements for using Amazon S3 Transfer Acceleration<a name="transfer-acceleration-requirements"></a>
 
 The following are the requirements for using Transfer Acceleration on an S3 bucket:

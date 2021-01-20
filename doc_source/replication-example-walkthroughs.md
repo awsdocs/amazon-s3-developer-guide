@@ -6,6 +6,8 @@ The following examples show how to configure replication for common use cases\. 
 
 For information about AWS SDKs, see [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/) and [AWS SDK for \.NET](https://aws.amazon.com/sdk-for-net/)\.
 
+
+
 **Topics**
 + [Example 1: Configuring for buckets in the same account](replication-walkthrough1.md)
 + [Example 2: Configuring for buckets in different accounts](replication-walkthrough-2.md)

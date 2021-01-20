@@ -91,6 +91,8 @@ The following example creates an S3 Batch Operations `S3PutObjectTagging` job us
       }'
       ```
 
+      
+
 1. Create an `S3PutObjectTagging` job\. 
 
    The `manifest.csv` file provides a list of bucket and object key values\. The job applies the specified tags to objects identified in the manifest\. The `ETag` is the ETag of the `manifest.csv` object, which you can get from the Amazon S3 console\. The request specifies the `no-confirmation-required` parameter\. Therefore, Amazon S3 makes the job eligible for execution without you having to confirm it using the `udpate-job-status` command\.
@@ -122,6 +124,8 @@ aws s3control describe-job \
     --job-id 00e123a4-c0d8-41f4-a0eb-b46f9ba5b07c
 ```
 
+
+
 ### Get a list of Active and Complete jobs<a name="batch-ops-example-cli-active-jobs"></a>
 
 The following AWS CLI example gets a list of `Active` and `Complete` jobs\. 
@@ -133,6 +137,8 @@ aws s3control list-jobs \
     --job-statuses '["Active","Complete"]' \
     --max-results 20
 ```
+
+
 
 ### Update the job priority<a name="batch-ops-example-cli-update-job-priority"></a>
 
@@ -146,6 +152,8 @@ aws s3control update-job-priority \
     --job-id 00e123a4-c0d8-41f4-a0eb-b46f9ba5b07c
 ```
 
+
+
 ### Update the job status<a name="batch-ops-example-cli-update-job-status"></a>
 + If you didn't specify the `--no-confirmation-required` parameter in the previous `create-job` example, the job remains in a suspended state until you confirm the job by setting its status to `Ready`\. Amazon S3 then makes the job eligible for execution\.
 
@@ -156,6 +164,8 @@ aws s3control update-job-priority \
       --job-id 00e123a4-c0d8-41f4-a0eb-b46f9ba5b07c \
       --requested-job-status 'Ready'
   ```
+
+  
 + Cancel the job by setting the job status to `Cancelled`\.
 
   ```
@@ -166,6 +176,8 @@ aws s3control update-job-priority \
        --status-update-reason "No longer needed" \
        --requested-job-status Cancelled
   ```
+
+  
 
 ## Managing tags on S3 Batch Operations jobs<a name="batch-ops-example-cli-job-tags"></a>
 
@@ -440,7 +452,7 @@ aws iam put-role-policy --role-name bops-objectlock --policy-name retention-perm
 
 #### Use S3 Batch Operations with S3 Object Lock retention compliance mode<a name="batch-ops-cli-object-lock-compliance-example"></a>
 
-The following example builds on the previous examples of creating a trust policy, and setting S3 Batch Operations and S3 Object Lock configuration permissions on your objects\. This example sets the retention mode to `COMPLIANCE` and the `retain until date` to January 1, 2020\. It creates a job that targets objects in the manifest bucket and reports the results in the reports bucket that you identified\.
+The following example builds on the previous examples of creating a trust policy, and setting S3 Batch Operations and S3 Object Lock configuration permissions on your objects\. This example sets the retention mode to `COMPLIANCE` and the `retain until date` to January 1, 2025\. It creates a job that targets objects in the manifest bucket and reports the results in the reports bucket that you identified\.
 
 ```
 export AWS_PROFILE='aws-user'
@@ -452,7 +464,7 @@ read -d '' OPERATION <<EOF
 {
   "S3PutObjectRetention": {
     "Retention": {
-      "RetainUntilDate":"Jan 1 00:00:00 PDT 2020",
+      "RetainUntilDate":"2025-01-01T00:00:00",
       "Mode":"COMPLIANCE"
     }
   }
@@ -469,7 +481,7 @@ read -d '' MANIFEST <<EOF
     ]
   },
   "Location": {
-    "ObjectArn": "arn:aws:s3:::ManifestBucket/complaince-objects-manifest.csv",
+    "ObjectArn": "arn:aws:s3:::ManifestBucket/compliance-objects-manifest.csv",
     "ETag": "Your-manifest-ETag"
   }
 }
@@ -498,7 +510,9 @@ aws \
     --description "Set compliance retain-until to 1 Jul 2030";
 ```
 
-The following example extends the `COMPLIANCE` mode's `retain until date` to January 15, 2020\.
+
+
+The following example extends the `COMPLIANCE` mode's `retain until date` to January 15, 2025\.
 
 ```
 export AWS_PROFILE='aws-user'
@@ -510,7 +524,7 @@ read -d '' OPERATION <<EOF
 {
   "S3PutObjectRetention": {
     "Retention": {
-      "RetainUntilDate":"Jan 15 00:00:00 PDT 2020",
+      "RetainUntilDate":"2025-01-15T00:00:00",
       "Mode":"COMPLIANCE"
     }
   }
@@ -527,7 +541,7 @@ read -d '' MANIFEST <<EOF
     ]
   },
   "Location": {
-    "ObjectArn": "arn:aws:s3:::ManifestBucket/complaince-objects-manifest.csv",
+    "ObjectArn": "arn:aws:s3:::ManifestBucket/compliance-objects-manifest.csv",
     "ETag": "Your-manifest-ETag"
   }
 }
@@ -558,7 +572,9 @@ aws \
 
 #### Use S3 Batch Operations with S3 Object Lock retention governance mode<a name="batch-ops-cli-object-lock-governance-example"></a>
 
-The following example builds on the previous example of creating a trust policy, and setting S3 Batch Operations and S3 Object Lock configuration permissions\. It shows how to apply S3 Object Lock retention governance with the `retain until date` of January 30, 2020, across multiple objects\. It creates a Batch Operations job that uses the manifest bucket and reports the results in the reports bucket\.
+The following example builds on the previous example of creating a trust policy, and setting S3 Batch Operations and S3 Object Lock configuration permissions\. It shows how to apply S3 Object Lock retention governance with the `retain until date` of January 30, 2025, across multiple objects\. It creates a Batch Operations job that uses the manifest bucket and reports the results in the reports bucket\.
+
+
 
 ```
 export AWS_PROFILE='aws-user'
@@ -570,7 +586,7 @@ read -d '' OPERATION <<EOF
 {
   "S3PutObjectRetention": {
     "Retention": {
-      "RetainUntilDate":"Jan 30 00:00:00 PDT 2020",
+      "RetainUntilDate":"2025-01-30T00:00:00",
       "Mode":"GOVERNANCE"
     }
   }
@@ -615,6 +631,8 @@ aws \
     --region "${AWS_DEFAULT_REGION}" \
     --description "Put governance retention";
 ```
+
+
 
 The following example builds on the previous example of creating a trust policy, and setting S3 Batch Operations and S3 Object Lock configuration permissions\. It shows how to bypass retention governance across multiple objects and creates a Batch Operations job that uses the manifest bucket and reports the results in the reports bucket\.
 

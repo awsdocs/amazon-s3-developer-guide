@@ -1,6 +1,8 @@
 # SELECT Command<a name="s3-glacier-select-sql-reference-select"></a>
 
 Amazon S3 Select and S3 Glacier Select support only the `SELECT` SQL command\. The following ANSI standard clauses are supported for `SELECT`: 
+
+
 + `SELECT` list
 + `FROM` clause 
 + `WHERE` clause
@@ -257,5 +259,11 @@ Within the `WHERE` clause and the `SELECT` list, you can have SQL *scalar expres
 + **func\_name** 
 
    Where **func\_name** is the name of a scalar function to invoke\. 
+
+  
 + ***expression*** `[ NOT ] BETWEEN` ***expression*** `AND` ***expression***
+
+  
 + ***expression*** `LIKE` ***expression*** \[ `ESCAPE` ***expression*** \]
+
+  

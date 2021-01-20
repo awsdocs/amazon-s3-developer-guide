@@ -65,10 +65,14 @@ Amazon S3 supports a bucket lifecycle rule that you can use to direct Amazon S3 
 
 In the example, the rule does not specify a value for the `Prefix` element \([object key name prefix](https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#keyprefix)\)\. Therefore, it applies to all objects in the bucket for which you initiated multipart uploads\. Any multipart uploads that were initiated and did not complete within seven days become eligible for stoppage\. This action has no effect on completed multipart uploads\.
 
+
+
 For more information about the bucket lifecycle configuration, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
 
 **Note**  
 If the multipart upload is completed within the number of days specified in the rule, the `AbortIncompleteMultipartUpload` lifecycle action does not apply \(that is, Amazon S3 will not take any action\)\. Also, this action does not apply to objects, no objects are deleted by this lifecycle action\.
+
+
 
 The following `put-bucket-lifecycle-configuration` CLI command adds the lifecycle configuration for the specified bucket\. 
 
@@ -79,6 +83,8 @@ $ aws s3api put-bucket-lifecycle-configuration  \
 ```
 
 To test the CLI command, do the following:
+
+
 
 1.  Set up the AWS CLI\. For instructions, see [Setting Up the AWS CLI](setup-aws-cli.md)\. 
 
@@ -122,3 +128,6 @@ To test the CLI command, do the following:
    aws s3api delete-bucket-lifecycle \
    --bucket bucketname
    ```
+
+
+

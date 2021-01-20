@@ -21,7 +21,7 @@ Objects that belong to a bucket that you create in a specific AWS Region never l
 + [Bucket restrictions and limitations](BucketRestrictions.md)
 + [Examples of creating a bucket](create-bucket-get-location-example.md)
 + [Deleting or emptying a bucket](delete-or-empty-bucket.md)
-+ [Amazon S3 default encryption for S3 buckets](bucket-encryption.md)
++ [Setting default server\-side encryption behavior for Amazon S3 buckets](bucket-encryption.md)
 + [Amazon S3 Transfer Acceleration](transfer-acceleration.md)
 + [Requester Pays buckets](RequesterPaysBuckets.md)
 + [Buckets and access control](BucketAccess.md)
@@ -83,7 +83,7 @@ Public access is granted to buckets and objects through access control lists \(A
 
 To help ensure that all of your Amazon S3 buckets and objects have their public access blocked, we recommend that you turn on all four settings for block public access for your account\. These settings block public access for all current and future buckets\.
 
-Before applying these settings, verify that your applications will work correctly without public access\. If you require some level of public access to your buckets or objects, for example to host a static website as described at [Hosting a static website on Amazon S3](WebsiteHosting.md), you can customize the individual settings to suit your storage use cases\. For more information, see [Using Amazon S3 block public access](access-control-block-public-access.md)\.
+Before applying these settings, verify that your applications will work correctly without public access\. If you require some level of public access to your buckets or objects, for example to host a static website as described at [Hosting a static website using Amazon S3](WebsiteHosting.md), you can customize the individual settings to suit your storage use cases\. For more information, see [Using Amazon S3 block public access](access-control-block-public-access.md)\.
 
 ## Accessing a bucket<a name="access-bucket-intro"></a>
 

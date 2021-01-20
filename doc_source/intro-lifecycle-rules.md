@@ -76,6 +76,8 @@ You can filter objects by key prefix, object tags, or a combination of both \(in
   </LifecycleConfiguration>
   ```
 
+  
+
   For more information about object keys, see [Object keys](UsingMetadata.md#object-keys)\. 
 + **Specifying a filter based on object tags** – In the following example, the Lifecycle rule specifies a filter based on a tag \(*key*\) and value \(*value*\)\. The rule then applies only to a subset of objects with the specific tag\.
 
@@ -196,20 +198,22 @@ In addition to the transition and expiration actions, you can use the following 
 + **AbortIncompleteMultipartUpload** action element – Use this element to set a maximum time \(in days\) that you want to allow multipart uploads to remain in progress\. If the applicable multipart uploads \(determined by the key name `prefix` specified in the Lifecycle rule\) are not successfully completed within the predefined time period, Amazon S3 stops the incomplete multipart uploads\. For more information, see [Stopping incomplete multipart uploads using a bucket lifecycle policy](mpuoverview.md#mpu-stop-incomplete-mpu-lifecycle-config)\. 
 **Note**  
 You cannot specify this Lifecycle action in a rule that specifies a filter based on object tags\. 
+
+  
 + **ExpiredObjectDeleteMarker** action element – In a versioning\-enabled bucket, a delete marker with zero noncurrent versions is referred to as the expired object delete marker\. You can use this Lifecycle action to direct S3 to remove the expired object delete markers\. For an example, see [Example 7: Removing expired object delete markers](lifecycle-configuration-examples.md#lifecycle-config-conceptual-ex7)\.
 **Note**  
 You cannot specify this Lifecycle action in a rule that specifies a filter based on object tags\. 
 
 ### How Amazon S3 calculates how long an object has been noncurrent<a name="non-current-days-calculations"></a>
 
- In a versioning\-enabled bucket, you can have multiple versions of an object, there is always one current version, and zero or more noncurrent versions\. Each time you upload an object, the current version is retained as the noncurrent version and the newly added version, the successor, becomes the current version\. To determine the number of days an object is noncurrent, Amazon S3 looks at when its successor was created\. Amazon S3 uses the number of days since its successor was created as the number of days an object is noncurrent\. 
+In a versioning\-enabled bucket, you can have multiple versions of an object, there is always one current version, and zero or more noncurrent versions\. Each time you upload an object, the current version is retained as the noncurrent version and the newly added version, the successor, becomes the current version\. To determine the number of days an object is noncurrent, Amazon S3 looks at when its successor was created\. Amazon S3 uses the number of days since its successor was created as the number of days an object is noncurrent\.
 
 **Restoring previous versions of an object when using lifecycle configurations**  
  As explained in detail in the topic [Restoring previous versions](RestoringPreviousVersions.md), you can use either of the following two methods to retrieve previous versions of an object:  
 By copying a noncurrent version of the object into the same bucket\. The copied object becomes the current version of that object, and all object versions are preserved\.
-By permanently deleting the current version of the object\. When you delete the current object version, you, in effect, turn the noncurrent version into the current version of that object\.
+By permanently deleting the current version of the object\. When you delete the current object version, you, in effect, turn the noncurrent version into the current version of that object\. 
 When you are using S3 Lifecycle configuration rules with versioning\-enabled buckets, we recommend as a best practice that you use the first method\.   
- Because of the Amazon S3 eventual consistency semantics, a current version that you permanently deleted might not disappear until the changes propagate \(Amazon S3 might be unaware of this deletion\)\. In the meantime, the Lifecycle rule that you configured to expire noncurrent objects might permanently remove noncurrent objects, including the one you want to restore\. So, copying the old version, as recommended in the first method, is the safer alternative\.
+Lifecycle operates under an eventually consistent model\. A current version that you permanently deleted may not disappear until the changes propagate \(Amazon S3 may be unaware of this deletion\)\. In the meantime, the lifecycle rule that you configured to expire noncurrent objects may permanently remove noncurrent objects, including the one you want to restore\. So, copying the old version, as recommended in the first method, is the safer alternative\.
 
 The following table summarizes the behavior of the S3 Lifecycle configuration rule actions on objects in relation to the versioning state of the bucket containing the object\.
 

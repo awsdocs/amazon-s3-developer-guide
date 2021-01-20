@@ -33,7 +33,7 @@ The following rules apply for naming S3 buckets:
 
 For best compatibility, we recommend that you avoid using dots \(\.\) in bucket names, except for buckets that are used only for static website hosting\. If you include dots in a bucket's name, you can't use virtual\-host\-style addressing over HTTPS, unless you perform your own certificate validation\. This is because the security certificates used for virtual hosting of buckets don't work for buckets with dots in their names\. 
 
-This limitation doesn't affect buckets used for static website hosting, because static website hosting is only available over HTTP\. For more information about virtual\-host\-style addressing, see [Virtual hosting of buckets](VirtualHosting.md)\. For more information about static website hosting, see [Hosting a static website on Amazon S3](WebsiteHosting.md)\.
+This limitation doesn't affect buckets used for static website hosting, because static website hosting is only available over HTTP\. For more information about virtual\-host\-style addressing, see [Virtual hosting of buckets](VirtualHosting.md)\. For more information about static website hosting, see [Hosting a static website using Amazon S3](WebsiteHosting.md)\.
 
 **Note**  
 Before March 1, 2018, buckets created in the US East \(N\. Virginia\) Region could have names that were up to 255 characters long and included uppercase letters and underscores\. Beginning March 1, 2018, new buckets in US East \(N\. Virginia\) must conform to the same rules applied in all other Regions\.

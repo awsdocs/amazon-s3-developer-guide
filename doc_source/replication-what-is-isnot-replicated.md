@@ -14,7 +14,7 @@ By default Amazon S3 replicates the following:
 + Objects encrypted at rest under Amazon S3 managed keys \(SSE\-S3\) or customer master keys \(CMKs\) stored in AWS Key Management Service \(SSE\-KMS\)\. To replicate objects encrypted with CMKs stored in AWS KMS, you must explicitly enable the option\. The replicated copy of the object is encrypted using the same type of server\-side encryption that was used for the source object\. For more information about server\-side encryption, see [Protecting data using server\-side encryption](serv-side-encryption.md)\.
 
    
-+ Object metadata\.
++ Object metadata from the source objects to the replicas\. For information about replicating metadata from the replicas to the source objects, see [Replicating metadata changes with Amazon S3 replica modification sync](replication-for-metadata-changes.md)\.
 
    
 + Only objects in the source bucket for which the bucket owner has permissions to read objects and access control lists \(ACLs\)\. For more information about resource ownership, see [Amazon S3 bucket and object ownership](access-control-overview.md#about-resource-owner)\.
@@ -22,23 +22,21 @@ By default Amazon S3 replicates the following:
    
 + Object ACL updates, unless you direct Amazon S3 to change the replica ownership when source and destination buckets aren't owned by the same accounts\. For more information, see [Changing the replica owner](replication-change-owner.md)\. 
 
-   
-
   It can take a while until Amazon S3 can bring the two ACLs in sync\. This applies only to objects created after you add a replication configuration to the bucket\.
 
    
 +  Object tags, if there are any\.
 
    
-+ S3 Object Lock retention information, if there is any\. When Amazon S3 replicates objects that have retention information applied, it applies those same retention controls to your replicas, overriding the default retention period configured on your destination bucket\. If you don't have retention controls applied to the objects in your source bucket, and you replicate into a destination bucket that has a default retention period set, the destination bucket's default retention period is applied to your object replicas\. For more information, see [Locking objects using S3 Object Lock](object-lock.md)\.
++ S3 Object Lock retention information, if there is any\. When Amazon S3 replicates objects that have retention information applied, it applies those same retention controls to your replicas, overriding the default retention period configured on your destination buckets\. If you don't have retention controls applied to the objects in your source bucket, and you replicate into destination buckets that have a default retention period set, the destination bucket's default retention period is applied to your object replicas\. For more information, see [Locking objects using S3 Object Lock](object-lock.md)\.
 
 ### How delete operations affect replication<a name="replication-delete-op"></a>
 
 If you delete an object from the source bucket, the following actions occur by default:
 + If you make a DELETE request without specifying an object version ID, Amazon S3 adds a delete marker\. Amazon S3 deals with the delete marker as follows:
-  + If you are using the latest version of the replication configuration \(that is, you specify the `Filter` element in a replication configuration rule\), Amazon S3 does not replicate the delete marker by default\. However you can add *delete marker replication* to non\-tag\-based rules, for more information see [Keeping source bucket deletes in sync using delete marker replication](https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html)\.
-  + If you don't specify the `Filter` element, Amazon S3 assumes that the replication configuration is version V1, and it replicates delete markers that resulted from user actions\. However, if Amazon S3 deletes an object due to a lifecycle action, the delete marker is not replicated to the destination bucket\.
-+ If you specify an object version ID to delete in a DELETE request, Amazon S3 deletes that object version in the source bucket\. But it doesn't replicate the deletion in the destination bucket\. In other words, it doesn't delete the same object version from the destination bucket\. This protects data from malicious deletions\. 
+  + If you are using the latest version of the replication configuration \(that is, you specify the `Filter` element in a replication configuration rule\), Amazon S3 does not replicate the delete marker by default\. However you can add *delete marker replication* to non\-tag\-based rules, for more information see [Replicating delete markers between buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html)\.
+  + If you don't specify the `Filter` element, Amazon S3 assumes that the replication configuration is version V1, and it replicates delete markers that resulted from user actions\. However, if Amazon S3 deletes an object due to a lifecycle action, the delete marker is not replicated to the destination buckets\.
++ If you specify an object version ID to delete in a DELETE request, Amazon S3 deletes that object version in the source bucket\. But it doesn't replicate the deletion in the destination buckets\. In other words, it doesn't delete the same object version from the destination buckets\. This protects data from malicious deletions\. 
 
 ## What isn't replicated?<a name="replication-what-is-not-replicated"></a>
 
@@ -68,18 +66,16 @@ By default Amazon S3 doesn't replicate the following:
 
   For more information about lifecycle configuration, see [Object lifecycle management](object-lifecycle-mgmt.md)\.
 **Note**  
-If using the latest version of the replication configuration \(the XML specifies `Filter` as the child of `Rule`\), delete markers created either by a user action or by Amazon S3 as part of the lifecycle action are not replicated by default\. However, if you are using an earlier version of the replication configuration \(the XML specifies `Prefix` as the child of `Rule`\), delete markers resulting from user actions are replicated\. For more information, see [Backward compatibility](replication-add-config.md#replication-backward-compat-considerations)\.
-+ Objects in the source bucket that are replicas that were created by another replication rule\.
-
-  You can replicate objects from a source bucket to *only one* destination bucket\. After Amazon S3 replicates an object, the object can't be replicated again\. For example, if you change the destination bucket in an existing replication configuration, Amazon S3 won't replicate the object again\.
-
-  Another example: Suppose that you configure replication where bucket A is the source and bucket B is the destination\. Now suppose that you add another replication configuration where bucket B is the source and bucket C is the destination\. In this case, objects in bucket B that are replicas of objects in bucket A are not replicated to bucket C\. 
+If using the latest version of the replication configuration \(the XML specifies `Filter` as the child of `Rule`\), delete markers created either by a user action or by Amazon S3 as part of the lifecycle action are not replicated by default\. Delete markers created from user actions can be replicated using delete marker replication, see [Replicating delete markers between buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html)\. If you are using an earlier version of the replication configuration \(the XML specifies `Prefix` as the child of `Rule`\), delete markers resulting from user actions are replicated by default\. For more information, see [Backward compatibility](replication-add-config.md#replication-backward-compat-considerations)\.
++ Objects in the source bucket that are replicas that were created by another replication rule\. After Amazon S3 replicates an object, the object can't be replicated again\. 
+  + If you change the destination bucket in an existing replication configuration, Amazon S3 won't replicate the object again\.
+  + If you configure replication where bucket A is the source and bucket B is the destination\. Now suppose that you add another replication configuration where bucket B is the source and bucket C is the destination\. In this case, objects in bucket B that are replicas of objects in bucket A are not replicated to bucket C\. 
 
 ## Replicating existing objects<a name="existing-object-replication"></a>
 
  To enable existing object replication for your account, you must contact [AWS Support](https://console.aws.amazon.com/support/home#/case/create?issueType=customer-service&serviceCode=general-info&getting-started&categoryCode=using-aws&services)\. To prevent your request from being delayed, title your AWS Support case "Replication for Existing Objects" and be sure to include the following information:
 + Source bucket
-+ Destination bucket
++ Destination buckets
 + Estimated storage volume to replicate \(in terabytes\) 
 + Estimated storage object count to replicate
 

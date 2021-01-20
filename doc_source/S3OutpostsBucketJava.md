@@ -84,6 +84,8 @@ public void getBucket(String bucketArn) {
 }
 ```
 
+
+
 ## Get a list of buckets in an Outpost<a name="S3OutpostsListRegionalBucketJava"></a>
 
 The following SDK for Java example gets a list of buckets in an Outpost\. 
@@ -102,6 +104,8 @@ public void listRegionalBuckets() {
 
 }
 ```
+
+
 
 ## Create an access point for an Amazon S3 on Outposts bucket<a name="S3OutpostsCreateAccessPointJava"></a>
 
@@ -126,6 +130,8 @@ public String createAccessPoint(String bucketArn, String accessPointName) {
 }
 ```
 
+
+
 ## Gets an access point for an Amazon S3 on Outposts bucket<a name="S3OutpostsGetAccessPointJava"></a>
 
 The following SDK for Java example gets an access point for an Outposts bucket\.
@@ -145,6 +151,8 @@ public void getAccessPoint(String accessPointArn) {
 }
 ```
 
+
+
 ## :List access points for an AWS Outpost<a name="S3OutpostsListAccessPointJava"></a>
 
 The following SDK for Java example List access points for an Outposts bucket\.
@@ -163,6 +171,8 @@ public void listAccessPoints(String bucketArn) {
 
 }
 ```
+
+
 
 ## Add a lifecycle configuration for your Outposts bucket<a name="S3OutpostsPutBucketLifecycleConfigurationJava"></a>
 
@@ -207,6 +217,8 @@ public void putBucketLifecycleConfiguration(String bucketArn) {
 }
 ```
 
+
+
 ## Gets a lifecycle configuration for an Amazon S3 on Outposts bucket<a name="S3OutpostsGetBucketLifecycleConfigurationJava"></a>
 
 The following SDK for Java example gets an access point for an Outposts bucket\.
@@ -225,6 +237,8 @@ public void getBucketLifecycleConfiguration(String bucketArn) {
 
 }
 ```
+
+
 
 ## Put a policy on your Outposts bucket<a name="S3OutpostsPutBucketPolicyJava"></a>
 
@@ -248,9 +262,13 @@ public void putBucketPolicy(String bucketArn) {
 }
 ```
 
+
+
 ## Gets a policy for an Amazon S3 on Outposts bucket<a name="S3OutpostsGetBucketPolicyJava"></a>
 
 The following SDK for Java example gets a policy for an Outposts bucket\.
+
+
 
 ```
 import com.amazonaws.services.s3control.model.*;
@@ -290,9 +308,13 @@ public void putAccessPointPolicy(String accessPointArn) {
 }
 ```
 
+
+
 ## Gets a policy for an Amazon S3 on Outposts access point<a name="S3OutpostsGetAccessPointPolicyJava"></a>
 
 The following SDK for Java example gets a policy for an Outposts bucket\.
+
+
 
 ```
 import com.amazonaws.services.s3control.model.*;
@@ -378,3 +400,4 @@ public void listEndpoints() {
     System.out.println("List endpoints result is " + listEndpointsResult);
 }
 ```
+
