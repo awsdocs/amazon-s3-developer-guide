@@ -440,7 +440,7 @@ In the following replication configuration:
 ```
 
 **Example 3: Replication configuration with two rules with overlapping prefixes**  <a name="overlap-rule-example"></a>
-In this configuration, the two rules specify filters with overlapping key prefixes, `star/` and `starship`\. Both rules apply to objects with the key name `starship-x`\. In this case, Amazon S3 uses the rule priority to determine which rule to apply\. The higher the number, the higher the priority\.  
+In this configuration, the two rules specify filters with overlapping key prefixes, `star` and `starship`\. Both rules apply to objects with the key name `starship-x`\. In this case, Amazon S3 uses the rule priority to determine which rule to apply\. The higher the number, the higher the priority\.  
 
 ```
 <ReplicationConfiguration>
