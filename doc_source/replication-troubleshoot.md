@@ -33,6 +33,16 @@ If object replicas don't appear in the destination bucket after you configure re
   3.            "s3:ReplicateTags"
   ```
 
++ If you are restricting access via IAM for replication you need to ensure both the STS and IAM forms of the replication role are allowed as principals within the policy. The IAM role will need to both be assumed by S3 and run within the full context in order to execute the replication tasks. If these are not set appropriately, S3 will show a replication failure error.
+
+  Role Definitions:
+
+  ```
+  1.            "arn:aws:iam::123456789012:role/path/role-name/*",
+  2.            "arn:aws:sts::123456789012:assumed-role/path/role-name/*"
+  "
+  ```
+
 ## Related topics<a name="replication-troubleshoot-related-topics"></a>
 
 [Replication](replication.md)
